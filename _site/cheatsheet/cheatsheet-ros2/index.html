@@ -1,0 +1,917 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>ROS2 Cheatsheet - Pharath Palesuvaran</title>
+<meta name="description" content="Install     Über apt install installieren (wie hier beschrieben)   Dann, wie in binary installation unter            “Installing and initializing rosdep” und       “Installing the missing dependencies”           beschrieben, die restlichen dependencies installieren (ohne 2. funktioniert ROS2 nicht!).  Uninstall     sudo apt remove ~nros-galactic-* &amp;&amp; sudo apt autoremove   Create Package  $ mkdir -p ~/dev_ws/src $ cd ~/dev_ws/src $ source /opt/ros/eloquent/setup.bash $ ros2 pkg create --build-type ament_cmake --node-name my_node my_package   package.xml     make sure to fill in the &lt;description&gt;, &lt;maintainer&gt; and &lt;license&gt; tags in package.xml   Add a new line after the ament_cmake buildtool dependency and paste the following dependencies corresponding to your node’s include statements:   &lt;depend&gt;rclcpp&lt;/depend&gt; &lt;depend&gt;std_msgs&lt;/depend&gt;   CMakeLists.txt  # Now open the CMakeLists.txt file. Below the existing dependency find_package(ament_cmake REQUIRED), add the lines:  find_package(rclcpp REQUIRED) find_package(std_msgs REQUIRED)  # After that, add the executable and name it talker so you can run your node using ros2 run:  add_executable(talker src/publisher_member_function.cpp) ament_target_dependencies(talker rclcpp std_msgs)  # Finally, add the install(TARGETS…) section so ros2 run can find your executable:  install(TARGETS   talker   DESTINATION lib/${PROJECT_NAME})   Adding a node to CMakeLists.txt  E.g. in order to add the node listener write:  add_executable(listener src/subscriber_member_function.cpp) ament_target_dependencies(listener rclcpp std_msgs)  install(TARGETS   talker   listener   DESTINATION lib/${PROJECT_NAME})   Build  $ rosdep install -i --from-path src --rosdistro eloquent -y # check output of resdep install: &quot;#All required rosdeps installed successfully&quot; # in root of ws, here: &quot;dev_ws&quot;:  $ cd ~/dev_ws $ colcon build --packages-select my_package   Run     Important: open a new terminal, separate from the one where you built the workspace (for both, underlay and overlay) !   # source underlay:  $ source /opt/ros/eloquent/setup.bash $ cd ~/dev_ws # source overlay:  $ . install/local_setup.bash      Note: sourcing your main ROS 2 installation’s setup and then the dev_ws overlay’s local_setup, is the same as just sourcing dev_ws’s setup, because that includes the environment of the underlay it was created in.   $ ros2 run turtlesim turtlesim_node   rosdep  Packages declare their dependencies in the package.xml file. This command walks through those declarations and installs the ones that are missing.  colcon  build  arguments     --packages-up-to builds the package you want, plus all its dependencies, but not the whole workspace (saves time)   --symlink-install saves you from having to rebuild every time you tweak python scripts   --event-handlers console_direct+ shows console output while building (can otherwise be found in the log directory)   ros2 pkg  create  arguments     --build-type: ament_cmake   --dependencies will automatically add the necessary dependency lines to package.xml and CMakeLists.txt   Publisher-Subscriber  Queue Size  from: source  A real life example can be a scenario of a waiter and a kitchen to wash dishes. Suppose the costumers ends its meals and the waiter takes their dirty dishes to wash in the kitchen. He puts in a table. Whenever the dishwasher can, he goes to table and gets dishes and take to wash. In normal operation the table is never filled. But if someone else give another task to the dishwasher guy, the table will start to get full. Until some time the waiter can’t place dishes anymore and leave tables dirty (problem in the system). But if table is artificially large there (let’s say 1000 square units) the waiter will likely fulfill its job even if dishwasher is busy, considering that after some time he will be able to return to clean dishes.  Gazebo  reopen the GUI window  from: source     When you launch gazebo, there are two programs that are run: gzserver and gzclient. The program gzserver does all the simulation, even rendering for camera simulation. The interactive window is opened by gzclient. To open a specific world, type gzserver specific.world.   I.e. simply reopen the GUI by entering the command gzclient.  adding models     wget -q -R *index.html*,*.tar.gz --no-parent -r -x -nH http://models.gazebosim.org/cardboard_box/ download model cardboard_box   Xacro Macros (.xacro)     s. http://wiki.ros.org/xacro#Macros   nicht vergessen: *origin in param=&quot;suffix *origin&quot; ist kein Parameter und muss ein separates Element sein (s. Link oben)!   Components of SDF Models  Source: http://gazebosim.org/tutorials?tut=build_model   Links: A link contains the physical properties of one body of the model. This can be a wheel, or a link in a joint chain. Each link may contain many collision and visual elements. Try to reduce the number of links in your models in order to improve performance and stability. For example, a table model could consist of 5 links (4 for the legs and 1 for the top) connected via joints. However, this is overly complex, especially since the joints will never move. Instead, create the table with 1 link and 5 collision elements.   Collision: A collision element encapsulates a geometry that is used for collision checking. This can be a simple shape (which is preferred), or a triangle mesh (which consumes greater resources). A link may contain many collision elements.  Visual: A visual element is used to visualize parts of a link. A link may contain 0 or more visual elements.  Inertial: The inertial element describes the dynamic properties of the link, such as mass and rotational inertia matrix.  Sensor: A sensor collects data from the world for use in plugins. A link may contain 0 or more sensors.  Light: A light element describes a light source attached to a link. A link may contain 0 or more lights.   Joints: A joint connects two links. A parent and child relationship is established along with other parameters such as axis of rotation, and joint limits.  Plugins: A plugin is a shared library created by a third party to control a model.   Troubleshooting     rosnode kill -a; killall -9 rosmaster; killall -9 roscore, if nodes do not stop automatically   Fiese Fehler  /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o: In function `_start&#39;: (.text+0x20): undefined reference to `main&#39; collect2: error: ld returned 1 exit status make[2]: *** [HoughLinesNode] Error 1 make[1]: *** [CMakeFiles/HoughLinesNode.dir/all] Error 2 make: *** [all] Error 2 --- Failed   &lt;&lt;&lt; galaxis_HoughLines_pkg [12.8s, exited with code 2]      this simply means you forgot to write a main.cpp or a main() function for your ROS node">
+
+
+  <meta name="author" content="Pharath Palesuvaran">
+  
+  <meta property="article:author" content="Pharath Palesuvaran">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Pharath Palesuvaran">
+<meta property="og:title" content="ROS2 Cheatsheet">
+<meta property="og:url" content="http://localhost:4000/cheatsheet/cheatsheet-ros2/">
+
+
+  <meta property="og:description" content="Install     Über apt install installieren (wie hier beschrieben)   Dann, wie in binary installation unter            “Installing and initializing rosdep” und       “Installing the missing dependencies”           beschrieben, die restlichen dependencies installieren (ohne 2. funktioniert ROS2 nicht!).  Uninstall     sudo apt remove ~nros-galactic-* &amp;&amp; sudo apt autoremove   Create Package  $ mkdir -p ~/dev_ws/src $ cd ~/dev_ws/src $ source /opt/ros/eloquent/setup.bash $ ros2 pkg create --build-type ament_cmake --node-name my_node my_package   package.xml     make sure to fill in the &lt;description&gt;, &lt;maintainer&gt; and &lt;license&gt; tags in package.xml   Add a new line after the ament_cmake buildtool dependency and paste the following dependencies corresponding to your node’s include statements:   &lt;depend&gt;rclcpp&lt;/depend&gt; &lt;depend&gt;std_msgs&lt;/depend&gt;   CMakeLists.txt  # Now open the CMakeLists.txt file. Below the existing dependency find_package(ament_cmake REQUIRED), add the lines:  find_package(rclcpp REQUIRED) find_package(std_msgs REQUIRED)  # After that, add the executable and name it talker so you can run your node using ros2 run:  add_executable(talker src/publisher_member_function.cpp) ament_target_dependencies(talker rclcpp std_msgs)  # Finally, add the install(TARGETS…) section so ros2 run can find your executable:  install(TARGETS   talker   DESTINATION lib/${PROJECT_NAME})   Adding a node to CMakeLists.txt  E.g. in order to add the node listener write:  add_executable(listener src/subscriber_member_function.cpp) ament_target_dependencies(listener rclcpp std_msgs)  install(TARGETS   talker   listener   DESTINATION lib/${PROJECT_NAME})   Build  $ rosdep install -i --from-path src --rosdistro eloquent -y # check output of resdep install: &quot;#All required rosdeps installed successfully&quot; # in root of ws, here: &quot;dev_ws&quot;:  $ cd ~/dev_ws $ colcon build --packages-select my_package   Run     Important: open a new terminal, separate from the one where you built the workspace (for both, underlay and overlay) !   # source underlay:  $ source /opt/ros/eloquent/setup.bash $ cd ~/dev_ws # source overlay:  $ . install/local_setup.bash      Note: sourcing your main ROS 2 installation’s setup and then the dev_ws overlay’s local_setup, is the same as just sourcing dev_ws’s setup, because that includes the environment of the underlay it was created in.   $ ros2 run turtlesim turtlesim_node   rosdep  Packages declare their dependencies in the package.xml file. This command walks through those declarations and installs the ones that are missing.  colcon  build  arguments     --packages-up-to builds the package you want, plus all its dependencies, but not the whole workspace (saves time)   --symlink-install saves you from having to rebuild every time you tweak python scripts   --event-handlers console_direct+ shows console output while building (can otherwise be found in the log directory)   ros2 pkg  create  arguments     --build-type: ament_cmake   --dependencies will automatically add the necessary dependency lines to package.xml and CMakeLists.txt   Publisher-Subscriber  Queue Size  from: source  A real life example can be a scenario of a waiter and a kitchen to wash dishes. Suppose the costumers ends its meals and the waiter takes their dirty dishes to wash in the kitchen. He puts in a table. Whenever the dishwasher can, he goes to table and gets dishes and take to wash. In normal operation the table is never filled. But if someone else give another task to the dishwasher guy, the table will start to get full. Until some time the waiter can’t place dishes anymore and leave tables dirty (problem in the system). But if table is artificially large there (let’s say 1000 square units) the waiter will likely fulfill its job even if dishwasher is busy, considering that after some time he will be able to return to clean dishes.  Gazebo  reopen the GUI window  from: source     When you launch gazebo, there are two programs that are run: gzserver and gzclient. The program gzserver does all the simulation, even rendering for camera simulation. The interactive window is opened by gzclient. To open a specific world, type gzserver specific.world.   I.e. simply reopen the GUI by entering the command gzclient.  adding models     wget -q -R *index.html*,*.tar.gz --no-parent -r -x -nH http://models.gazebosim.org/cardboard_box/ download model cardboard_box   Xacro Macros (.xacro)     s. http://wiki.ros.org/xacro#Macros   nicht vergessen: *origin in param=&quot;suffix *origin&quot; ist kein Parameter und muss ein separates Element sein (s. Link oben)!   Components of SDF Models  Source: http://gazebosim.org/tutorials?tut=build_model   Links: A link contains the physical properties of one body of the model. This can be a wheel, or a link in a joint chain. Each link may contain many collision and visual elements. Try to reduce the number of links in your models in order to improve performance and stability. For example, a table model could consist of 5 links (4 for the legs and 1 for the top) connected via joints. However, this is overly complex, especially since the joints will never move. Instead, create the table with 1 link and 5 collision elements.   Collision: A collision element encapsulates a geometry that is used for collision checking. This can be a simple shape (which is preferred), or a triangle mesh (which consumes greater resources). A link may contain many collision elements.  Visual: A visual element is used to visualize parts of a link. A link may contain 0 or more visual elements.  Inertial: The inertial element describes the dynamic properties of the link, such as mass and rotational inertia matrix.  Sensor: A sensor collects data from the world for use in plugins. A link may contain 0 or more sensors.  Light: A light element describes a light source attached to a link. A link may contain 0 or more lights.   Joints: A joint connects two links. A parent and child relationship is established along with other parameters such as axis of rotation, and joint limits.  Plugins: A plugin is a shared library created by a third party to control a model.   Troubleshooting     rosnode kill -a; killall -9 rosmaster; killall -9 roscore, if nodes do not stop automatically   Fiese Fehler  /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o: In function `_start&#39;: (.text+0x20): undefined reference to `main&#39; collect2: error: ld returned 1 exit status make[2]: *** [HoughLinesNode] Error 1 make[1]: *** [CMakeFiles/HoughLinesNode.dir/all] Error 2 make: *** [all] Error 2 --- Failed   &lt;&lt;&lt; galaxis_HoughLines_pkg [12.8s, exited with code 2]      this simply means you forgot to write a main.cpp or a main() function for your ROS node">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2021-10-20T00:00:00+02:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/cheatsheet/cheatsheet-ros2/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Pharath Palesuvaran Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://raw.githubusercontent.com/pharath/home/master/assets/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/pharath/home/master/assets/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://raw.githubusercontent.com/pharath/home/master/assets/favicons/favicon-16x16.png">
+<link rel="manifest" href="https://raw.githubusercontent.com/pharath/home/master/assets/favicons/site.webmanifest">
+<link rel="shortcut icon" href="https://raw.githubusercontent.com/pharath/home/master/assets/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="https://raw.githubusercontent.com/pharath/home/master/assets/favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      displayMath: [ ['$$','$$'], ["\\(","\\)"] ],
+    },
+		TeX: {
+    	Macros: {
+				bra: ["\\langle{#1}|", 1],
+				ket: ["|{#1}\\rangle", 1],
+        braket: ["\\langle{#1}\\rangle", 1],
+				bk: ["\\langle{#1}|{#2}|{#3}\\rangle", 3]
+    	}
+  	}
+	});
+
+</script>
+<!--
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML' async></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML' async></script>
+-->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/pytorch-logo.png" alt="Pharath Palesuvaran"></a>
+        
+        <a class="site-title" href="/">
+          Pharath Palesuvaran
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/posts/">Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button" accesskey="s">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/profile_pic.jpg" alt="Pharath Palesuvaran" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Pharath Palesuvaran</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Machine Learning, Computer Vision, Self-driving cars and a very rusty first degree in Physics</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Aachen (Germany)</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:phrth2@gmail.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://twitter.com/pharath_one" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/pharath" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="/_pages/404.md" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i><span class="label">Instagram</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="ROS2 Cheatsheet">
+    <meta itemprop="description" content="Install  Über apt install installieren (wie hier beschrieben)  Dann, wie in binary installation unter          “Installing and initializing rosdep” und      “Installing the missing dependencies”      beschrieben, die restlichen dependencies installieren (ohne 2. funktioniert ROS2 nicht!).Uninstall  sudo apt remove ~nros-galactic-* &amp;&amp; sudo apt autoremoveCreate Package$ mkdir -p ~/dev_ws/src$ cd ~/dev_ws/src$ source /opt/ros/eloquent/setup.bash$ ros2 pkg create --build-type ament_cmake --node-name my_node my_packagepackage.xml  make sure to fill in the &lt;description&gt;, &lt;maintainer&gt; and &lt;license&gt; tags in package.xml  Add a new line after the ament_cmake buildtool dependency and paste the following dependencies corresponding to your node’s include statements:&lt;depend&gt;rclcpp&lt;/depend&gt;&lt;depend&gt;std_msgs&lt;/depend&gt;CMakeLists.txt# Now open the CMakeLists.txt file. Below the existing dependency find_package(ament_cmake REQUIRED), add the lines:find_package(rclcpp REQUIRED)find_package(std_msgs REQUIRED)# After that, add the executable and name it talker so you can run your node using ros2 run:add_executable(talker src/publisher_member_function.cpp)ament_target_dependencies(talker rclcpp std_msgs)# Finally, add the install(TARGETS…) section so ros2 run can find your executable:install(TARGETS  talker  DESTINATION lib/${PROJECT_NAME})Adding a node to CMakeLists.txtE.g. in order to add the node listener write:add_executable(listener src/subscriber_member_function.cpp)ament_target_dependencies(listener rclcpp std_msgs)install(TARGETS  talker  listener  DESTINATION lib/${PROJECT_NAME})Build$ rosdep install -i --from-path src --rosdistro eloquent -y# check output of resdep install: &quot;#All required rosdeps installed successfully&quot;# in root of ws, here: &quot;dev_ws&quot;: $ cd ~/dev_ws$ colcon build --packages-select my_packageRun  Important: open a new terminal, separate from the one where you built the workspace (for both, underlay and overlay) !# source underlay: $ source /opt/ros/eloquent/setup.bash$ cd ~/dev_ws# source overlay: $ . install/local_setup.bash  Note: sourcing your main ROS 2 installation’s setup and then the dev_ws overlay’s local_setup, is the same as just sourcing dev_ws’s setup, because that includes the environment of the underlay it was created in.$ ros2 run turtlesim turtlesim_noderosdepPackages declare their dependencies in the package.xml file. This command walks through those declarations and installs the ones that are missing.colconbuildarguments  --packages-up-to builds the package you want, plus all its dependencies, but not the whole workspace (saves time)  --symlink-install saves you from having to rebuild every time you tweak python scripts  --event-handlers console_direct+ shows console output while building (can otherwise be found in the log directory)ros2 pkgcreatearguments  --build-type: ament_cmake  --dependencies will automatically add the necessary dependency lines to package.xml and CMakeLists.txtPublisher-SubscriberQueue Sizefrom: sourceA real life example can be a scenario of a waiter and a kitchen to wash dishes. Suppose the costumers ends its meals and the waiter takes their dirty dishes to wash in the kitchen. He puts in a table. Whenever the dishwasher can, he goes to table and gets dishes and take to wash. In normal operation the table is never filled. But if someone else give another task to the dishwasher guy, the table will start to get full. Until some time the waiter can’t place dishes anymore and leave tables dirty (problem in the system). But if table is artificially large there (let’s say 1000 square units) the waiter will likely fulfill its job even if dishwasher is busy, considering that after some time he will be able to return to clean dishes.Gazeboreopen the GUI windowfrom: source  When you launch gazebo, there are two programs that are run: gzserver and gzclient. The program gzserver does all the simulation, even rendering for camera simulation. The interactive window is opened by gzclient.To open a specific world, type gzserver specific.world.I.e. simply reopen the GUI by entering the command gzclient.adding models  wget -q -R *index.html*,*.tar.gz --no-parent -r -x -nH http://models.gazebosim.org/cardboard_box/ download model cardboard_boxXacro Macros (.xacro)  s. http://wiki.ros.org/xacro#Macros  nicht vergessen: *origin in param=&quot;suffix *origin&quot; ist kein Parameter und muss ein separates Element sein (s. Link oben)!Components of SDF ModelsSource: http://gazebosim.org/tutorials?tut=build_modelLinks: A link contains the physical properties of one body of the model. This can be a wheel, or a link in a joint chain. Each link may contain many collision and visual elements. Try to reduce the number of links in your models in order to improve performance and stability. For example, a table model could consist of 5 links (4 for the legs and 1 for the top) connected via joints. However, this is overly complex, especially since the joints will never move. Instead, create the table with 1 link and 5 collision elements.Collision: A collision element encapsulates a geometry that is used for collision checking. This can be a simple shape (which is preferred), or a triangle mesh (which consumes greater resources). A link may contain many collision elements.Visual: A visual element is used to visualize parts of a link. A link may contain 0 or more visual elements.Inertial: The inertial element describes the dynamic properties of the link, such as mass and rotational inertia matrix.Sensor: A sensor collects data from the world for use in plugins. A link may contain 0 or more sensors.Light: A light element describes a light source attached to a link. A link may contain 0 or more lights.Joints: A joint connects two links. A parent and child relationship is established along with other parameters such as axis of rotation, and joint limits.Plugins: A plugin is a shared library created by a third party to control a model.Troubleshooting  rosnode kill -a; killall -9 rosmaster; killall -9 roscore, if nodes do not stop automaticallyFiese Fehler/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o: In function `_start&#39;:(.text+0x20): undefined reference to `main&#39;collect2: error: ld returned 1 exit statusmake[2]: *** [HoughLinesNode] Error 1make[1]: *** [CMakeFiles/HoughLinesNode.dir/all] Error 2make: *** [all] Error 2---Failed   &lt;&lt;&lt; galaxis_HoughLines_pkg [12.8s, exited with code 2]  this simply means you forgot to write a main.cpp or a main() function for your ROS node">
+    <meta itemprop="datePublished" content="2021-10-20T00:00:00+02:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/cheatsheet/cheatsheet-ros2/" class="u-url" itemprop="url">ROS2 Cheatsheet
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-10-20T00:00:00+02:00">October 20, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#install">Install</a></li><li><a href="#uninstall">Uninstall</a></li><li><a href="#create-package">Create Package</a><ul><li><a href="#packagexml">package.xml</a></li><li><a href="#cmakeliststxt">CMakeLists.txt</a></li><li><a href="#adding-a-node-to-cmakeliststxt">Adding a node to CMakeLists.txt</a></li><li><a href="#build">Build</a></li><li><a href="#run">Run</a></li></ul></li><li><a href="#rosdep">rosdep</a></li><li><a href="#colcon">colcon</a><ul><li><a href="#build-1">build</a><ul><li><a href="#arguments">arguments</a></li></ul></li></ul></li><li><a href="#ros2-pkg">ros2 pkg</a><ul><li><a href="#create">create</a><ul><li><a href="#arguments-1">arguments</a></li></ul></li></ul></li><li><a href="#publisher-subscriber">Publisher-Subscriber</a><ul><li><a href="#queue-size">Queue Size</a></li></ul></li><li><a href="#gazebo">Gazebo</a><ul><li><a href="#reopen-the-gui-window">reopen the GUI window</a></li><li><a href="#adding-models">adding models</a></li><li><a href="#xacro-macros-xacro">Xacro Macros (.xacro)</a></li><li><a href="#components-of-sdf-models">Components of SDF Models</a></li></ul></li><li><a href="#troubleshooting">Troubleshooting</a><ul><li><a href="#fiese-fehler">Fiese Fehler</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h1 id="install">Install</h1>
+
+<ol>
+  <li>Über <code class="language-plaintext highlighter-rouge">apt install</code> installieren (wie <a href="https://docs.ros.org/en/galactic/Installation/Ubuntu-Install-Debians.html">hier</a> beschrieben)</li>
+  <li>Dann, wie in <a href="https://docs.ros.org/en/galactic/Installation/Ubuntu-Install-Binary.html">binary installation</a> unter
+    <ul>
+      <li>“Installing and initializing rosdep” und</li>
+      <li>“Installing the missing dependencies”</li>
+    </ul>
+  </li>
+</ol>
+
+<p>beschrieben, die restlichen dependencies installieren (ohne 2. funktioniert ROS2 nicht!).</p>
+
+<h1 id="uninstall">Uninstall</h1>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">sudo apt remove ~nros-galactic-* &amp;&amp; sudo apt autoremove</code></li>
+</ul>
+
+<h1 id="create-package">Create Package</h1>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir</span> <span class="nt">-p</span> ~/dev_ws/src
+<span class="nv">$ </span><span class="nb">cd</span> ~/dev_ws/src
+<span class="nv">$ </span><span class="nb">source</span> /opt/ros/eloquent/setup.bash
+<span class="nv">$ </span>ros2 pkg create <span class="nt">--build-type</span> ament_cmake <span class="nt">--node-name</span> my_node my_package
+</code></pre></div></div>
+
+<h2 id="packagexml">package.xml</h2>
+
+<ul>
+  <li>make sure to fill in the <code class="language-plaintext highlighter-rouge">&lt;description&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;maintainer&gt;</code> and <code class="language-plaintext highlighter-rouge">&lt;license&gt;</code> tags in package.xml</li>
+  <li>Add a new line after the <code class="language-plaintext highlighter-rouge">ament_cmake</code> buildtool dependency and paste the following dependencies corresponding to your node’s include statements:</li>
+</ul>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;depend&gt;</span>rclcpp<span class="nt">&lt;/depend&gt;</span>
+<span class="nt">&lt;depend&gt;</span>std_msgs<span class="nt">&lt;/depend&gt;</span>
+</code></pre></div></div>
+
+<h2 id="cmakeliststxt">CMakeLists.txt</h2>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Now open the CMakeLists.txt file. Below the existing dependency find_package(ament_cmake REQUIRED), add the lines:</span>
+
+<span class="nb">find_package</span><span class="p">(</span>rclcpp REQUIRED<span class="p">)</span>
+<span class="nb">find_package</span><span class="p">(</span>std_msgs REQUIRED<span class="p">)</span>
+
+<span class="c1"># After that, add the executable and name it talker so you can run your node using ros2 run:</span>
+
+<span class="nb">add_executable</span><span class="p">(</span>talker src/publisher_member_function.cpp<span class="p">)</span>
+<span class="nf">ament_target_dependencies</span><span class="p">(</span>talker rclcpp std_msgs<span class="p">)</span>
+
+<span class="c1"># Finally, add the install(TARGETS…) section so ros2 run can find your executable:</span>
+
+<span class="nb">install</span><span class="p">(</span>TARGETS
+  talker
+  DESTINATION lib/<span class="si">${</span><span class="nv">PROJECT_NAME</span><span class="si">}</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="adding-a-node-to-cmakeliststxt">Adding a node to CMakeLists.txt</h2>
+
+<p>E.g. in order to add the node <code class="language-plaintext highlighter-rouge">listener</code> write:</p>
+
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">add_executable</span><span class="p">(</span>listener src/subscriber_member_function.cpp<span class="p">)</span>
+<span class="nf">ament_target_dependencies</span><span class="p">(</span>listener rclcpp std_msgs<span class="p">)</span>
+
+<span class="nb">install</span><span class="p">(</span>TARGETS
+  talker
+  listener
+  DESTINATION lib/<span class="si">${</span><span class="nv">PROJECT_NAME</span><span class="si">}</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="build">Build</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>rosdep <span class="nb">install</span> <span class="nt">-i</span> <span class="nt">--from-path</span> src <span class="nt">--rosdistro</span> eloquent <span class="nt">-y</span>
+<span class="c"># check output of resdep install: "#All required rosdeps installed successfully"</span>
+<span class="c"># in root of ws, here: "dev_ws": </span>
+<span class="nv">$ </span><span class="nb">cd</span> ~/dev_ws
+<span class="nv">$ </span>colcon build <span class="nt">--packages-select</span> my_package
+</code></pre></div></div>
+
+<h2 id="run">Run</h2>
+
+<blockquote>
+  <p><strong>Important</strong>: open a new terminal, separate from the one where you built the workspace (for <strong>both</strong>, underlay and overlay) !</p>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># source underlay: </span>
+<span class="nv">$ </span><span class="nb">source</span> /opt/ros/eloquent/setup.bash
+<span class="nv">$ </span><span class="nb">cd</span> ~/dev_ws
+<span class="c"># source overlay: </span>
+<span class="nv">$ </span><span class="nb">.</span> <span class="nb">install</span>/local_setup.bash
+</code></pre></div></div>
+
+<blockquote>
+  <p>Note: sourcing your main ROS 2 installation’s <code class="language-plaintext highlighter-rouge">setup</code> and then the <code class="language-plaintext highlighter-rouge">dev_ws</code> overlay’s <code class="language-plaintext highlighter-rouge">local_setup</code>, is the same as just sourcing <code class="language-plaintext highlighter-rouge">dev_ws</code>’s <code class="language-plaintext highlighter-rouge">setup</code>, because that includes the environment of the underlay it was created in.</p>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ros2 run turtlesim turtlesim_node
+</code></pre></div></div>
+
+<h1 id="rosdep">rosdep</h1>
+
+<p>Packages declare their dependencies in the <strong>package.xml</strong> file. This command walks through those declarations and installs the ones that are missing.</p>
+
+<h1 id="colcon">colcon</h1>
+
+<h2 id="build-1">build</h2>
+
+<h3 id="arguments">arguments</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">--packages-up-to</code> builds the package you want, plus all its dependencies, but not the whole workspace (saves time)</li>
+  <li><code class="language-plaintext highlighter-rouge">--symlink-install</code> saves you from having to rebuild every time you tweak python scripts</li>
+  <li><code class="language-plaintext highlighter-rouge">--event-handlers console_direct+</code> shows console output while building (can otherwise be found in the log directory)</li>
+</ul>
+
+<h1 id="ros2-pkg">ros2 pkg</h1>
+
+<h2 id="create">create</h2>
+
+<h3 id="arguments-1">arguments</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">--build-type</code>: <code class="language-plaintext highlighter-rouge">ament_cmake</code></li>
+  <li><code class="language-plaintext highlighter-rouge">--dependencies</code> will automatically add the necessary dependency lines to <code class="language-plaintext highlighter-rouge">package.xml</code> and <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code></li>
+</ul>
+
+<h1 id="publisher-subscriber">Publisher-Subscriber</h1>
+
+<h2 id="queue-size">Queue Size</h2>
+
+<p>from: <a href="https://stackoverflow.com/a/60554760/12282296">source</a></p>
+
+<p>A real life example can be a scenario of a waiter and a kitchen to wash dishes. Suppose the costumers ends its meals and the waiter takes their dirty dishes to wash in the kitchen. He puts in a table. Whenever the dishwasher can, he goes to table and gets dishes and take to wash. In normal operation the table is never filled. But if someone else give another task to the dishwasher guy, the table will start to get full. Until some time the waiter can’t place dishes anymore and leave tables dirty (problem in the system). But if table is artificially large there (let’s say 1000 square units) the waiter will likely fulfill its job even if dishwasher is busy, considering that after some time he will be able to return to clean dishes.</p>
+
+<h1 id="gazebo">Gazebo</h1>
+
+<h2 id="reopen-the-gui-window">reopen the GUI window</h2>
+
+<p>from: <a href="https://answers.gazebosim.org/question/541/what-is-a-simple-way-to-run-gazebo-with-no-graphics/?answer=544#post-id-544">source</a></p>
+
+<blockquote>
+  <p>When you launch gazebo, there are two programs that are run: gzserver and gzclient. The program gzserver does all the simulation, even rendering for camera simulation. The interactive window is opened by gzclient.
+To open a specific world, type gzserver specific.world.</p>
+</blockquote>
+
+<p>I.e. simply reopen the GUI by entering the command <code class="language-plaintext highlighter-rouge">gzclient</code>.</p>
+
+<h2 id="adding-models">adding models</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">wget -q -R *index.html*,*.tar.gz --no-parent -r -x -nH http://models.gazebosim.org/cardboard_box/</code> download model cardboard_box</li>
+</ul>
+
+<h2 id="xacro-macros-xacro">Xacro Macros (.xacro)</h2>
+
+<ul>
+  <li>s. <a href="http://wiki.ros.org/xacro#Macros">http://wiki.ros.org/xacro#Macros</a></li>
+  <li>nicht vergessen: <code class="language-plaintext highlighter-rouge">*origin</code> in <code class="language-plaintext highlighter-rouge">param="suffix *origin"</code> ist <strong>kein</strong> Parameter und muss ein separates Element sein (s. <a href="http://wiki.ros.org/xacro#Macros">Link</a> oben)!</li>
+</ul>
+
+<h2 id="components-of-sdf-models">Components of SDF Models</h2>
+
+<p>Source: <a href="http://gazebosim.org/tutorials?tut=build_model">http://gazebosim.org/tutorials?tut=build_model</a></p>
+
+<blockquote>
+<p><strong>Links:</strong> A link contains the physical properties of one body of the model. This can be a wheel, or a link in a joint chain. Each link may contain many collision and visual elements. Try to reduce the number of links in your models in order to improve performance and stability. For example, a table model could consist of 5 links (4 for the legs and 1 for the top) connected via joints. However, this is overly complex, especially since the joints will never move. Instead, create the table with 1 link and 5 collision elements.</p>
+
+<blockquote>
+<p><strong>Collision:</strong> A collision element encapsulates a geometry that is used for collision checking. This can be a simple shape (which is preferred), or a triangle mesh (which consumes greater resources). A link may contain many collision elements.</p>
+
+<p><strong>Visual:</strong> A visual element is used to visualize parts of a link. A link may contain 0 or more visual elements.</p>
+
+<p><strong>Inertial:</strong> The inertial element describes the dynamic properties of the link, such as mass and rotational inertia matrix.</p>
+
+<p><strong>Sensor:</strong> A sensor collects data from the world for use in plugins. A link may contain 0 or more sensors.</p>
+
+<p><strong>Light:</strong> A light element describes a light source attached to a link. A link may contain 0 or more lights.</p>
+</blockquote>
+
+<p><strong>Joints:</strong> A joint connects two links. A parent and child relationship is established along with other parameters such as axis of rotation, and joint limits.</p>
+
+<p><strong>Plugins:</strong> A plugin is a shared library created by a third party to control a model.</p>
+</blockquote>
+
+<h1 id="troubleshooting">Troubleshooting</h1>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">rosnode kill -a; killall -9 rosmaster; killall -9 roscore</code>, if nodes do not stop automatically</li>
+</ul>
+
+<h2 id="fiese-fehler">Fiese Fehler</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o: In <span class="k">function</span> <span class="sb">`</span>_start<span class="s1">':
+(.text+0x20): undefined reference to `main'</span>
+collect2: error: ld returned 1 <span class="nb">exit </span>status
+make[2]: <span class="k">***</span> <span class="o">[</span>HoughLinesNode] Error 1
+make[1]: <span class="k">***</span> <span class="o">[</span>CMakeFiles/HoughLinesNode.dir/all] Error 2
+make: <span class="k">***</span> <span class="o">[</span>all] Error 2
+<span class="nt">---</span>
+Failed   <span class="o">&lt;&lt;&lt;</span> galaxis_HoughLines_pkg <span class="o">[</span>12.8s, exited with code 2]
+</code></pre></div></div>
+
+<ul>
+  <li>this simply means you forgot to write a <code class="language-plaintext highlighter-rouge">main.cpp</code> or a <code class="language-plaintext highlighter-rouge">main()</code> function for your ROS node</li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#cheatsheet" class="page__taxonomy-item p-category" rel="tag">cheatsheet</a><span class="sep">, </span>
+    
+      <a href="/tags/#ros" class="page__taxonomy-item p-category" rel="tag">ros</a><span class="sep">, </span>
+    
+      <a href="/tags/#ros2" class="page__taxonomy-item p-category" rel="tag">ros2</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#cheatsheet" class="page__taxonomy-item p-category" rel="tag">Cheatsheet</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2021-10-20T00:00:00+02:00">October 20, 2021</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?text=ROS2+Cheatsheet%20http%3A%2F%2Flocalhost%3A4000%2Fcheatsheet%2Fcheatsheet-ros2%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fcheatsheet%2Fcheatsheet-ros2%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fcheatsheet%2Fcheatsheet-ros2%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/cheatsheet/cheatsheet-qt/" class="pagination--pager" title="Python Cheatsheet
+">Previous</a>
+    
+    
+      <a href="/self%20driving/Karpathy-CVPR-2021/" class="pagination--pager" title="Andrej Karpathy (Tesla): CVPR 2021 Workshop on Autonomous Vehicles
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You May Also Enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/lenet.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/lecture_notes/machine_learning/lecture-notes-ML-part2-old/" rel="permalink">Machine Learning (Part 2) [OLD VERSION]
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-03-09T00:00:00+01:00">March 9, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          14 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">[OLD VERSION!] Notes on Machine Learning theory. Based on C. M. Bishop, “Pattern Recognition and Machine Learning” (2011) and Goodfellow, Bengio, Courville, ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/lenet.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/notes/machine_learning/notes-Neuroscience/" rel="permalink">New Inspirations for Machine Learning Methods
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-02-26T00:00:00+01:00">February 26, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Notes on some inspirations for Machine Learning methods. Based on opinions from leading scientists and also some of my own opinions.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/lenet.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/carla/simulator/self_driving/notes-Carla/" rel="permalink">Carla Simulator
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-02-17T00:00:00+01:00">February 17, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Notes on the Carla Simulator
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/lenet.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/lecture_notes/machine_learning/computer_vision/lecture-notes-ML-part3/" rel="permalink">Machine Learning (Part 3)
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-01-27T00:00:00+01:00">January 27, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          56 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Notes on Computer Vision theory and NLP. Based on Goodfellow, Bengio “Deep Learning”, Stanford CS231n and RWTH Aachen University Machine Learning
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/pharath_one" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://github.com/pharath" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="/_pages/404.md" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 Pharath Palesuvaran. </div>
+
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

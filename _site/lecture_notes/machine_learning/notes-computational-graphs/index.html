@@ -1,0 +1,1145 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Computational Graphs in PyTorch - Pharath Palesuvaran</title>
+<meta name="description" content="Notes on PyTorch.">
+
+
+  <meta name="author" content="Pharath Palesuvaran">
+  
+  <meta property="article:author" content="Pharath Palesuvaran">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Pharath Palesuvaran">
+<meta property="og:title" content="Computational Graphs in PyTorch">
+<meta property="og:url" content="http://localhost:4000/lecture_notes/machine_learning/notes-computational-graphs/">
+
+
+  <meta property="og:description" content="Notes on PyTorch.">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/lenet.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2021-12-19T00:00:00+01:00">
+
+
+
+  <meta property="article:modified_time" content="2021-09-23T22:00:52+02:00">
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/lecture_notes/machine_learning/notes-computational-graphs/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Pharath Palesuvaran Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://raw.githubusercontent.com/pharath/home/master/assets/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/pharath/home/master/assets/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://raw.githubusercontent.com/pharath/home/master/assets/favicons/favicon-16x16.png">
+<link rel="manifest" href="https://raw.githubusercontent.com/pharath/home/master/assets/favicons/site.webmanifest">
+<link rel="shortcut icon" href="https://raw.githubusercontent.com/pharath/home/master/assets/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="https://raw.githubusercontent.com/pharath/home/master/assets/favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      displayMath: [ ['$$','$$'], ["\\(","\\)"] ],
+    },
+		TeX: {
+    	Macros: {
+				bra: ["\\langle{#1}|", 1],
+				ket: ["|{#1}\\rangle", 1],
+        braket: ["\\langle{#1}\\rangle", 1],
+				bk: ["\\langle{#1}|{#2}|{#3}\\rangle", 3]
+    	}
+  	}
+	});
+
+</script>
+<!--
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML' async></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML' async></script>
+-->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/pytorch-logo.png" alt="Pharath Palesuvaran"></a>
+        
+        <a class="site-title" href="/">
+          Pharath Palesuvaran
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/posts/">Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button" accesskey="s">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/assets/images/lenet.png');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Computational Graphs in PyTorch
+
+        
+      </h1>
+      
+        <p class="page__lead">Notes on PyTorch.
+</p>
+      
+      
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-12-19T00:00:00+01:00">December 19, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          15 minute read
+        
+      </span>
+    
+  </p>
+
+
+      
+      
+        <p>
+        
+          <a href="" class="btn btn--light-outline btn--large">Some Content</a>
+        
+      
+    </div>
+  
+  
+    <span class="page__hero-caption">Photo credit: <a href="http://yann.lecun.com/"><strong>Yann LeCun</strong></a>
+</span>
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/profile_pic.jpg" alt="Pharath Palesuvaran" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Pharath Palesuvaran</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Machine Learning, Computer Vision, Self-driving cars and a very rusty first degree in Physics</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Aachen (Germany)</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:phrth2@gmail.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://twitter.com/pharath_one" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/pharath" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="/_pages/404.md" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i><span class="label">Instagram</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Computational Graphs in PyTorch">
+    <meta itemprop="description" content="Notes on PyTorch.">
+    <meta itemprop="datePublished" content="2021-12-19T00:00:00+01:00">
+    <meta itemprop="dateModified" content="2021-09-23T22:00:52+02:00">
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header>
+              <ul class="toc__menu"><li><a href="#pytorch-101-part-1-understanding-graphs-automatic-differentiation-and-autograd">PyTorch 101, Part 1: Understanding Graphs, Automatic Differentiation and Autograd</a><ul><li><a href="#prerequisites">Prerequisites</a></li><li><a href="#automatic-differentiation">Automatic Differentiation</a></li><li><a href="#a-toy-example">A toy example</a></li><li><a href="#computation-graphs">Computation Graphs</a></li><li><a href="#computing-the-gradients">Computing the gradients</a></li><li><a href="#pytorch-autograd">PyTorch Autograd</a><ul><li><a href="#tensor">Tensor</a></li><li><a href="#function">Function</a></li></ul></li><li><a href="#how-are-pytorchs-graphs-different-from-tensorflow-graphs">How are PyTorch’s graphs different from TensorFlow graphs</a><ul><li><a href="#pytorch">PyTorch</a></li><li><a href="#tensorflow">TensorFlow</a></li></ul></li><li><a href="#some-tricks-of-trade">Some Tricks of Trade</a><ul><li><a href="#requires_grad">requires_grad</a></li></ul></li><li><a href="#torchno_grad">torch.no_grad()</a></li><li><a href="#conclusion">Conclusion</a></li><li><a href="#further-reading">Further Reading</a></li></ul></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h1 id="pytorch-101-part-1-understanding-graphs-automatic-differentiation-and-autograd">PyTorch 101, Part 1: Understanding Graphs, Automatic Differentiation and Autograd</h1>
+
+<p>In this article, we dive into how PyTorch’s Autograd engine performs automatic differentiation.</p>
+
+<p>3 years ago   •   13 min read</p>
+
+<p><a href="https://blog.paperspace.com/author/ayoosh/"></a> By <a href="https://blog.paperspace.com/author/ayoosh/">Ayoosh Kathuria</a></p>
+
+<p>MathJax.Hub.Config({ tex2jax: { inlineMath: [[”$”, “$”], [”\(”, “\)”]], processEscapes: true } });</p>
+
+<p>PyTorch is one of the foremost python deep learning libraries out there. It’s the go to choice for deep learning research, and as each days passes by, more and more companies and research labs are adopting this library.</p>
+
+<p>In this series of tutorials, we will be introducing you to PyTorch, and how to make the best use of the libraries as well the ecosystem of tools built around it. We’ll first cover the basic building blocks, and then move onto how you can quickly prototype custom architectures. We will finally conclude with a couple of posts on how to scale your code, and how to debug your code if things go awry.</p>
+
+<p>This is Part 1 of our PyTorch 101 series.</p>
+
+<ol>
+  <li><a href="https://blog.paperspace.com/pytorch-101-understanding-graphs-and-automatic-differentiation/">Understanding Graphs, Automatic Differentiation and Autograd</a></li>
+  <li><a href="https://blog.paperspace.com/pytorch-101-building-neural-networks/">Building Your First Neural Network</a></li>
+  <li><a href="blog.paperspace.com/pytorch-101-advanced/">Going Deep with PyTorch</a></li>
+  <li><a href="blog.paperspace.com/pytorch-memory-multi-gpu-debugging/">Memory Management and Using Multiple GPUs</a></li>
+  <li><a href="blog.paperspace.com/pytorch-hooks-gradient-clipping-debugging/">Understanding Hooks</a></li>
+</ol>
+
+<p>You can get all the code in this post, (and other posts as well) in the Github repo <a href="https://github.com/Paperspace/PyTorch-101-Tutorial-Series">here</a>.</p>
+
+<hr />
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ol>
+  <li>Chain rule</li>
+  <li>Basic Understanding of Deep Learning</li>
+  <li>PyTorch 1.0</li>
+</ol>
+
+<hr />
+
+<p>You can get all the code in this post, (and other posts as well) in the Github repo <a href="https://github.com/Paperspace/PyTorch-101-Tutorial-Series">here</a>.</p>
+
+<h2 id="automatic-differentiation"><strong>Automatic</strong> Differentiation</h2>
+
+<p>A lot of tutorial series on PyTorch would start begin with a rudimentary discussion of what the basic structures are. However, I’d like to instead start by discussing automatic differentiation first.</p>
+
+<p>Automatic Differentiation is a building block of not only PyTorch, but every DL library out there. In my opinion, PyTorch’s automatic differentiation engine, called <em>Autograd</em> is a brilliant tool to understand how automatic differentiation works. This will not only help you understand PyTorch better, but also other DL libraries.</p>
+
+<p>Modern neural network architectures can have millions of learnable parameters. From a computational point of view, training a neural network consists of two phases:</p>
+
+<ol>
+  <li>A forward pass to compute the value of the loss function.</li>
+  <li>A backward pass to compute the gradients of the learnable parameters.</li>
+</ol>
+
+<p>The forward pass is pretty straight forward. The output of one layer is the input to the next and so forth.</p>
+
+<p>Backward pass is a bit more complicated since it requires us to use the chain rule to compute the gradients of weights w.r.t to the loss function.</p>
+
+<h2 id="a-toy-example">A toy example</h2>
+
+<p>Let us take an very simple neural network consisting of just 5 neurons. Our neural network looks like the following.</p>
+
+<p><img src="https://blog.paperspace.com/content/images/2019/03/computation_graph_forward.png" alt="" /></p>
+
+<p>A Very Simple Neural Network</p>
+
+<p>The following equations describe our neural network.</p>
+
+<p>\(b = w\_1 * a\) \(c = w\_2 * a\) \(d = w\_3 * b + w\_4 * c\) \(L = 10 - d\)</p>
+
+<p>Let us compute the gradients for each of the learnable parameters $w$.</p>
+
+<p>\(\\frac{\\partial{L}}{\\partial{w\_4}} = \\frac{\\partial{L}}{\\partial{d}} * \\frac{\\partial{d}}{\\partial{w\_4}}\) \(\\frac{\\partial{L}}{\\partial{w\_3}} = \\frac{\\partial{L}}{\\partial{d}} * \\frac{\\partial{d}}{\\partial{w\_3}}\) \(\\frac{\\partial{L}}{\\partial{w\_2}} = \\frac{\\partial{L}}{\\partial{d}} * \\frac{\\partial{d}}{\\partial{c}} * \\frac{\\partial{c}}{\\partial{w\_2}}\) \(\\frac{\\partial{L}}{\\partial{w\_1}} = \\frac{\\partial{L}}{\\partial{d}} * \\frac{\\partial{d}}{\\partial{b}} * \\frac{\\partial{b}}{\\partial{w\_1}}\)</p>
+
+<p>All these gradients have been computed by applying the chain rule. Note that all the individual gradients on the right hand side of the equations mentioned above can be computed directly since the <em>numerators</em> of the gradients are explicit functions of the <em>denominators.</em></p>
+
+<hr />
+
+<h2 id="computation-graphs">Computation Graphs</h2>
+
+<p>We could manually compute the gradients of our network as it was very simple. Imagine, what if you had a network with 152 layers. Or, if the network had multiple branches.</p>
+
+<p>When we design software to implement neural networks, we want to come up with a way that can allow us to seamlessly compute the gradients, regardless of the architecture type so that the programmer doesn’t have to manually compute gradients when changes are made to the network.</p>
+
+<p>We galvanise this idea in form of a data structure called a <strong>Computation graph</strong>. A computation graph looks very similar to the diagram of the graph that we made in the image above. However, the nodes in a computation graph are basically <strong>operators</strong>. These operators are basically the mathematical operators except for one case, where we need to represent creation of a user-defined variable.</p>
+
+<p>Notice that we have also denoted the leaf variables $ a, w_1, w_2, w_3, w_4$ in the graph for sake of clarity. However, it should noted that they are not a part of the computation graph. What they represent in our graph is the special case for user-defined variables which we just covered as an exception.</p>
+
+<p><img src="https://blog.paperspace.com/content/images/2019/03/computation_graph.png" alt="" /></p>
+
+<p>Computation Graph for our very simple Neural Network</p>
+
+<p>The variables, <em>b,c</em> and <em>d</em> are created as a result of mathematical operations, whereas variables <em>a, w1, w2, w3</em> and <em>w4</em> are initialised by the user itself. Since, they are not created by any mathematical operator, nodes corresponding to their creation is represented by their name itself. This is true for all the <em>leaf</em> nodes in the graph.</p>
+
+<hr />
+
+<h2 id="computing-the-gradients">Computing the gradients</h2>
+
+<p>Now, we are ready to describe how we will compute gradients using a computation graph.</p>
+
+<p>Each node of the computation graph, with the exception of leaf nodes, can be considered as a function which takes some inputs and produces an output. Consider the node of the graph which produces variable <em>d</em> from $ w_4c$ and $w_3b$. Therefore we can write,</p>
+
+\[d = f(w\_3b , w\_4c)\]
+
+<p><img src="https://blog.paperspace.com/content/images/2019/03/d_mini.png" alt="" /></p>
+
+<p>d is output of function f(x,y) = x + y</p>
+
+<p>Now, we can easily compute the gradient of the $f$ with respect to it’s inputs, $\frac{\partial{f}}{\partial{w_3b}}$ and $\frac{\partial{f}}{\partial{w_4c}}$ (which are both <em>1</em>). Now, <strong>label the edges coming into the nodes</strong> with their respective gradients like the following image.</p>
+
+<p><img src="https://blog.paperspace.com/content/images/2019/03/d_mini_grad.png" alt="" /></p>
+
+<p>Local Gradients</p>
+
+<p>We do it for the entire graph. The graph looks like this.</p>
+
+<p><img src="https://blog.paperspace.com/content/images/2019/03/full_graph.png" alt="" /></p>
+
+<p>Backpropagation in a Computational Graph</p>
+
+<p>Following we describe the algorithm for computing derivative of any node in this graph with respect to the loss, $L$. Let’s say we want to compute the derivative, $\frac{\partial{f}}{\partial{w_4}}$.</p>
+
+<ol>
+  <li>We first trace down all possible paths from <em>d</em> to $ w_4 $.</li>
+  <li>There is only one such path.</li>
+  <li>We multiply all the edges along this path.</li>
+</ol>
+
+<p>If you see, the product is precisely the same expression we derived using chain rule. If there is more than one path to a variable from <em>L</em> then, we multiply the edges along each path and then add them together. For example, $\frac{\partial{L}}{\partial{a}}$ is computed as</p>
+
+\[\\frac{\\partial{f}}{\\partial{w_4}} = \\frac{\\partial{L}}{\\partial{d}}*\\frac{\\partial{d}}{\\partial{b}}*\\frac{\\partial{b}}{\\partial{a}} + \\frac{\\partial{L}}{\\partial{d}}*\\frac{\\partial{d}}{\\partial{c}}*\\frac{\\partial{c}}{\\partial{a}}\]
+
+<h2 id="pytorch-autograd">PyTorch Autograd</h2>
+
+<p>Now we get what a computational graph is, let’s get back to PyTorch and understand how the above is implemented in PyTorch.</p>
+
+<h3 id="tensor">Tensor</h3>
+
+<p><code class="language-plaintext highlighter-rouge">Tensor</code> is a data structure which is a fundamental building block of PyTorch. <code class="language-plaintext highlighter-rouge">Tensor</code>s are pretty much like numpy arrays, except that unlike numpy, tensors are designed to take advantage of parallel computation capabilities of a GPU. A lot of Tensor syntax is similar to that of numpy arrays.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In [1]:  import torch
+
+In [2]: tsr = torch.Tensor(3,5)
+
+In [3]: tsr
+Out[3]: 
+tensor([[ 0.0000e+00,  0.0000e+00,  8.4452e-29, -1.0842e-19,  1.2413e-35],
+        [ 1.4013e-45,  1.2416e-35,  1.4013e-45,  2.3331e-35,  1.4013e-45],
+        [ 1.0108e-36,  1.4013e-45,  8.3641e-37,  1.4013e-45,  1.0040e-36]])
+</code></pre></div></div>
+
+<p>One it’s own, <code class="language-plaintext highlighter-rouge">Tensor</code> is just like a numpy <code class="language-plaintext highlighter-rouge">ndarray</code>. A data structure that can let you do fast linear algebra options. If you want PyTorch to create a graph corresponding to these operations, you will have to set the <code class="language-plaintext highlighter-rouge">requires_grad</code> attribute of the <code class="language-plaintext highlighter-rouge">Tensor</code> to True.</p>
+
+<p>The API can be a bit confusing here. There are multiple ways to initialise tensors in PyTorch. While some ways can let you explicitly define that the <code class="language-plaintext highlighter-rouge">requires_grad</code> in the constructor itself, others require you to set it manually after creation of the Tensor.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;&gt; t1 = torch.randn((3,3), requires_grad = True) 
+
+&gt;&gt; t2 = torch.FloatTensor(3,3) # No way to specify requires_grad while initiating 
+&gt;&gt; t2.requires_grad = True
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">requires_grad</code> is contagious. It means that when a <code class="language-plaintext highlighter-rouge">Tensor</code> is created by operating on other <code class="language-plaintext highlighter-rouge">Tensor</code>s, the <code class="language-plaintext highlighter-rouge">requires_grad</code> of the resultant <code class="language-plaintext highlighter-rouge">Tensor</code> would be set <code class="language-plaintext highlighter-rouge">True</code> given at least one of the tensors used for creation has it’s <code class="language-plaintext highlighter-rouge">requires_grad</code> set to <code class="language-plaintext highlighter-rouge">True</code>.</p>
+
+<p>Each <code class="language-plaintext highlighter-rouge">Tensor</code> has a something an attribute called <code class="language-plaintext highlighter-rouge">grad_fn</code><em>,</em> which refers to the mathematical operator that create the variable. If <code class="language-plaintext highlighter-rouge">requires_grad</code> is set to False, <code class="language-plaintext highlighter-rouge">grad_fn</code> would be None.</p>
+
+<p>In our example where, $ d = f(w_3b , w_4c) $, <em>d</em>’s grad function would be the addition operator, since <em>f</em> adds it’s to input together. Notice, addition operator is also the node in our graph that output’s <em>d</em>. If our <code class="language-plaintext highlighter-rouge">Tensor</code> is a leaf node (initialised by the user), then the <code class="language-plaintext highlighter-rouge">grad_fn</code> is also None.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import torch 
+
+a = torch.randn((3,3), requires_grad = True)
+
+w1 = torch.randn((3,3), requires_grad = True)
+w2 = torch.randn((3,3), requires_grad = True)
+w3 = torch.randn((3,3), requires_grad = True)
+w4 = torch.randn((3,3), requires_grad = True)
+
+b = w1*a 
+c = w2*a
+
+d = w3*b + w4*c 
+
+L = 10 - d
+
+print("The grad fn for a is", a.grad_fn)
+print("The grad fn for d is", d.grad_fn)
+</code></pre></div></div>
+
+<p>If you run the code above, you get the following output.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The grad fn for a is None
+The grad fn for d is &lt;AddBackward0 object at 0x1033afe48&gt;
+</code></pre></div></div>
+
+<p>One can use the member function <code class="language-plaintext highlighter-rouge">is_leaf</code> to determine whether a variable is a leaf <code class="language-plaintext highlighter-rouge">Tensor</code> or not.</p>
+
+<h3 id="function">Function</h3>
+
+<p>All mathematical operations in PyTorch are implemented by the <em>torch.nn.Autograd.Function</em> class. This class has two important member functions we need to look at.</p>
+
+<p>The first is it’s <em>forward</em> function, which simply computes the output using it’s inputs.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">backward</code>  function takes the incoming gradient coming from the the part of the network in front of it. As you can see, the gradient to be backpropagated from a function <em>f</em> is basically the <strong>gradient that is backpropagated to <em>f</em> from the layers in front of it</strong> multiplied by <strong>the local gradient of the output of f with respect to it’s inputs</strong>. This is exactly what the <code class="language-plaintext highlighter-rouge">backward</code> function does.</p>
+
+<p>Let’s again understand with our example of \(d = f(w\_3b , w\_4c)\)</p>
+
+<ol>
+  <li><em>d</em> is our <code class="language-plaintext highlighter-rouge">Tensor</code> here. It’s <code class="language-plaintext highlighter-rouge">grad_fn</code>  is <code class="language-plaintext highlighter-rouge">&lt;ThAddBackward&gt;</code><em>.</em> This is basically the addition operation since the function that creates <em>d</em> adds inputs.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">forward</code> function of the it’s <code class="language-plaintext highlighter-rouge">grad_fn</code>  receives the inputs $w_3b$ <em>and</em> $w_4c$ and adds them. This value is basically stored in the <em>d</em></li>
+  <li>The <code class="language-plaintext highlighter-rouge">backward</code> function of the <code class="language-plaintext highlighter-rouge">&lt;ThAddBackward&gt;</code>  basically takes the the <strong>incoming gradient</strong> from the further layers as the input. This is basically $\frac{\partial{L}}{\partial{d}}$ coming along the edge leading from <em>L</em> to <em>d.</em> This gradient is also the gradient of <em>L</em> w.r.t to <em>d</em> and is stored in <code class="language-plaintext highlighter-rouge">grad</code>  attribute of the <code class="language-plaintext highlighter-rouge">d</code>. It can be accessed by calling <code class="language-plaintext highlighter-rouge">d.grad</code><em>.</em></li>
+  <li>It then takes computes the local gradients $\frac{\partial{d}}{\partial{w_4c}}$ and $\frac{\partial{d}}{\partial{w_3b}}$.</li>
+  <li>Then the backward function multiplies the incoming gradient with the <strong>locally computed gradients</strong> respectively and <em><strong>“</strong>_sends</em><strong>“</strong>_ the gradients to it’s inputs by invoking the backward method of the <code class="language-plaintext highlighter-rouge">grad_fn</code> of their inputs.</li>
+  <li>For example, the <code class="language-plaintext highlighter-rouge">backward</code> function of  <code class="language-plaintext highlighter-rouge">&lt;ThAddBackward&gt;</code>  associated with <em>d</em> invokes backward function of the <em>grad_fn</em> of the $w_4*c$ (Here, $w_4*c$ is a intermediate Tensor, and it’s <em>grad_fn</em> is <code class="language-plaintext highlighter-rouge">&lt;ThMulBackward&gt;</code>. At time of invocation of the <code class="language-plaintext highlighter-rouge">backward</code> function, the gradient $\frac{\partial{L}}{\partial{d}} * \frac{\partial{d}}{\partial{w_4c}} $ is passed as the input.</li>
+  <li>Now, for the variable $w_4*c$, $\frac{\partial{L}}{\partial{d}} * \frac{\partial{d}}{\partial{w_4c}} $ becomes the incoming gradient, like $\frac{\partial{L}}{\partial{d}} $ was for <em>$_d</em>$_ in step 3 and the process repeats.</li>
+</ol>
+
+<p>Algorithmically, here’s how backpropagation happens with a computation graph. (Not the actual implementation, only representative)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def backward (incoming_gradients):
+	self.Tensor.grad = incoming_gradients
+
+	for inp in self.inputs:
+		if inp.grad_fn is not None:
+			new_incoming_gradients = //
+			  incoming_gradient * local_grad(self.Tensor, inp)
+			
+			inp.grad_fn.backward(new_incoming_gradients)
+		else:
+			pass
+</code></pre></div></div>
+
+<p>Here, <code class="language-plaintext highlighter-rouge">self.Tensor</code> is basically the <code class="language-plaintext highlighter-rouge">Tensor</code> created by Autograd.Function, which was <em>d</em> in our example.</p>
+
+<p>Incoming gradients and local gradients have been described above.</p>
+
+<hr />
+
+<p>In order to compute derivatives in our neural network, we generally call <code class="language-plaintext highlighter-rouge">backward</code> on the <code class="language-plaintext highlighter-rouge">Tensor</code> representing our loss. Then, we backtrack through the graph starting from node representing the <code class="language-plaintext highlighter-rouge">grad_fn</code> of our loss.</p>
+
+<p>As described above, the <code class="language-plaintext highlighter-rouge">backward</code> function is recursively called through out the graph as we backtrack. Once, we reach a leaf node, since the <code class="language-plaintext highlighter-rouge">grad_fn</code>  is None, but stop backtracking through that path.</p>
+
+<p>One thing to note here is that PyTorch gives an error if you call <code class="language-plaintext highlighter-rouge">backward()</code> on vector-valued Tensor. This means you can only call <code class="language-plaintext highlighter-rouge">backward</code> on a scalar valued Tensor. In our example, if we assume <code class="language-plaintext highlighter-rouge">a</code> to be a vector valued Tensor, and call <code class="language-plaintext highlighter-rouge">backward</code> on L, it will throw up an error.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import torch 
+
+a = torch.randn((3,3), requires_grad = True)
+
+w1 = torch.randn((3,3), requires_grad = True)
+w2 = torch.randn((3,3), requires_grad = True)
+w3 = torch.randn((3,3), requires_grad = True)
+w4 = torch.randn((3,3), requires_grad = True)
+
+b = w1*a 
+c = w2*a
+
+d = w3*b + w4*c 
+
+L = (10 - d)
+
+L.backward()
+</code></pre></div></div>
+
+<p>Running the above snippet results in the following error.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RuntimeError: grad can be implicitly created only for scalar outputs
+</code></pre></div></div>
+
+<p>This is because gradients can be computed with respect to scalar values by definition. You can’t exactly differentiate a vector with respect to another vector. The mathematical entity used for such cases is called a <strong>Jacobian,</strong> the discussion of which is beyond the scope of this article.</p>
+
+<p>There are two ways to overcome this.</p>
+
+<p>If you just make a small change in the above code setting <code class="language-plaintext highlighter-rouge">L</code> to be the sum of all the errors, our problem will be solved.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import torch 
+
+a = torch.randn((3,3), requires_grad = True)
+
+w1 = torch.randn((3,3), requires_grad = True)
+w2 = torch.randn((3,3), requires_grad = True)
+w3 = torch.randn((3,3), requires_grad = True)
+w4 = torch.randn((3,3), requires_grad = True)
+
+b = w1*a 
+c = w2*a
+
+d = w3*b + w4*c 
+
+# Replace L = (10 - d) by 
+L = (10 -d).sum()
+
+L.backward()
+</code></pre></div></div>
+
+<p>Once that’s done, you can access the gradients by calling the <code class="language-plaintext highlighter-rouge">grad</code> attribute of <code class="language-plaintext highlighter-rouge">Tensor</code>.</p>
+
+<p>Second way is, for some reason have to absolutely call <code class="language-plaintext highlighter-rouge">backward</code> on a vector function, you can pass a <code class="language-plaintext highlighter-rouge">torch.ones</code> of size of shape of the tensor you are trying to call backward with.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Replace L.backward() with 
+L.backward(torch.ones(L.shape))
+</code></pre></div></div>
+
+<p>Notice how <code class="language-plaintext highlighter-rouge">backward</code> used to take incoming gradients as it’s input. Doing the above makes the <code class="language-plaintext highlighter-rouge">backward</code> think that incoming gradient are just Tensor of ones of same size as L, and it’s able to backpropagate.</p>
+
+<p>In this way, we can have gradients for every <code class="language-plaintext highlighter-rouge">Tensor</code> , and we can update them using Optimisation algorithm of our choice.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>w1 = w1 - learning_rate * w1.grad
+</code></pre></div></div>
+
+<p>And so on.</p>
+
+<h2 id="how-are-pytorchs-graphs-different-from-tensorflow-graphs">How are PyTorch’s graphs different from TensorFlow graphs</h2>
+
+<h3 id="pytorch">PyTorch</h3>
+
+<p>PyTorch creates something called a <strong>Dynamic Computation Graph</strong>, which means that the graph is generated on the fly.</p>
+
+<p>Until the <code class="language-plaintext highlighter-rouge">forward</code> function of a Variable is called, there exists no node for the <code class="language-plaintext highlighter-rouge">Tensor</code> (it’s <code class="language-plaintext highlighter-rouge">grad_fn</code>) in the graph.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">a</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">randn</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">requires_grad</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>   <span class="c1">#No graph yet, as a is a leaf
+</span>    
+    <span class="n">w1</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">randn</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">requires_grad</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>  <span class="c1">#Same logic as above
+</span>    
+    <span class="n">b</span> <span class="o">=</span> <span class="n">w1</span><span class="o">*</span><span class="n">a</span>   <span class="c1">#Graph with node `mulBackward` is created.
+</span></code></pre></div></div>
+
+<p>The graph is created as a result of <code class="language-plaintext highlighter-rouge">forward</code> function of many <em>Tensors</em> being invoked. Only then, the buffers for the non-leaf nodes are allocated for the graph and intermediate values (used for computing gradients later). When you call <code class="language-plaintext highlighter-rouge">backward</code>, as the gradients are computed, these buffers (for non-leaf variables) are essentially freed, and the graph is <em>destroyed</em> (In a sense, you can't backpropagate through it, since the buffers holding values to compute the gradients are gone).</p>
+
+<p>Next time, you will call <code class="language-plaintext highlighter-rouge">forward</code> on the same set of tensors, <strong>the leaf node buffers from the previous run will be shared, while the non-leaf nodes buffers will be created again.</strong></p>
+
+<p>If you call <code class="language-plaintext highlighter-rouge">backward</code> more than once on a graph with non-leaf nodes, you'll be met with the following error.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RuntimeError: Trying to backward through the graph a second time, but the buffers have already been freed. Specify retain_graph=True when calling backward the first time.
+</code></pre></div></div>
+
+<p>This is because the non-leaf buffers gets destroyed the first time <code class="language-plaintext highlighter-rouge">backward()</code> is called and hence, there’s no path to navigate to the leaves when <code class="language-plaintext highlighter-rouge">backward</code> is invoked the second time. You can undo this non-leaf buffer destroying behaviour by adding <code class="language-plaintext highlighter-rouge">retain_graph = True</code> argument to the <code class="language-plaintext highlighter-rouge">backward</code> function.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">loss</span><span class="p">.</span><span class="n">backward</span><span class="p">(</span><span class="n">retain_graph</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>If you do the above, you will be able to backpropagate again through the same graph and the gradients will be accumulated, i.e. the next time you backpropagate, the gradients will be added to those already stored in the previous back pass.</p>
+
+<h3 id="tensorflow">TensorFlow</h3>
+
+<p>This is in contrast to the <strong>Static Computation Graphs</strong>, used by TensorFlow where the graph is declared <em><strong>before</strong></em> running the program. Then the graph is “run” by feeding values to the predefined graph.</p>
+
+<p>The dynamic graph paradigm allows you to make changes to your network architecture <em>during</em> runtime, as a graph is created only when a piece of code is run.</p>
+
+<p>This means a graph may be redefined during the lifetime for a program since you don’t have to define it beforehand.</p>
+
+<p>This, however, is not possible with static graphs where graphs are created before running the program, and merely executed later.</p>
+
+<p>Dynamic graphs also make debugging way easier since it’s easier to locate the source of your error.</p>
+
+<h2 id="some-tricks-of-trade">Some Tricks of Trade</h2>
+
+<h4 id="requires_grad">requires_grad</h4>
+
+<p>This is an attribute of the <code class="language-plaintext highlighter-rouge">Tensor</code> class. By default, it’s False. It comes handy when you have to freeze some layers, and stop them from updating parameters while training. You can simply set the <code class="language-plaintext highlighter-rouge">requires_grad</code> to False, and these <code class="language-plaintext highlighter-rouge">Tensors</code> won’t participate in the computation graph.</p>
+
+<p><img src="https://blog.paperspace.com/content/images/2019/03/image-4.png" alt="" /></p>
+
+<p>Thus, no gradient would be propagated to them, or to those layers which depend upon these layers for gradient flow <code class="language-plaintext highlighter-rouge">requires_grad</code>. When set to True, <code class="language-plaintext highlighter-rouge">requires_grad</code> is contagious meaning even if one operand of an operation has <code class="language-plaintext highlighter-rouge">requires_grad</code> set to True, so will the result.</p>
+
+<h3 id="torchno_grad">torch.no_grad()</h3>
+
+<p>When we are computing gradients, we need to cache input values, and intermediate features as they maybe required to compute the gradient later.</p>
+
+<p>The gradient of $ b = w_1*a $ w.r.t it’s inputs $w_1$ and $a$ is $a$ and $w_1$ respectively. We need to store these values for gradient computation during the backward pass. This affects the memory footprint of the network.</p>
+
+<p>While, we are performing inference, we don’t compute gradients, and thus, don’t need to store these values. Infact, no graph needs to be create during inference as it will lead to useless consumption of memory.</p>
+
+<p>PyTorch offers a context manager, called <code class="language-plaintext highlighter-rouge">torch.no_grad</code> for this purpose.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>with torch.no_grad:
+	inference code goes here 
+</code></pre></div></div>
+
+<p>No graph is defined for operations executed under this context manager.</p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>Understanding how <em>Autograd</em> and computation graphs works can make life with PyTorch a whole lot easier. With our foundations rock solid, the next posts will detail how to create custom complex architectures, how to create custom data pipelines and more interesting stuff.</p>
+
+<h3 id="further-reading">Further Reading</h3>
+
+<ol>
+  <li><a href="https://www.khanacademy.org/math/differential-calculus/dc-chain">Chain Rule</a></li>
+  <li><a href="http://neuralnetworksanddeeplearning.com/chap2.html">Backpropagation</a></li>
+</ol>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#lecture-notes" class="page__taxonomy-item p-category" rel="tag">lecture_notes</a><span class="sep">, </span>
+    
+      <a href="/tags/#ml" class="page__taxonomy-item p-category" rel="tag">ml</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#lecture-notes" class="page__taxonomy-item p-category" rel="tag">Lecture_Notes</a><span class="sep">, </span>
+    
+      <a href="/categories/#machine-learning" class="page__taxonomy-item p-category" rel="tag">Machine_Learning</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2021-09-23">September 23, 2021</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Computational+Graphs+in+PyTorch%20http%3A%2F%2Flocalhost%3A4000%2Flecture_notes%2Fmachine_learning%2Fnotes-computational-graphs%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Flecture_notes%2Fmachine_learning%2Fnotes-computational-graphs%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Flecture_notes%2Fmachine_learning%2Fnotes-computational-graphs%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/test/blabla/" class="pagination--pager" title="test latex
+">Previous</a>
+    
+    
+      <a href="/pytorch/machine_learning/notes-pytorch/" class="pagination--pager" title="PyTorch
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You May Also Enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/lenet.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/lecture_notes/machine_learning/lecture-notes-ML-part2-old/" rel="permalink">Machine Learning (Part 2) [OLD VERSION]
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-03-09T00:00:00+01:00">March 9, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          14 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">[OLD VERSION!] Notes on Machine Learning theory. Based on C. M. Bishop, “Pattern Recognition and Machine Learning” (2011) and Goodfellow, Bengio, Courville, ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/lenet.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/notes/machine_learning/notes-Neuroscience/" rel="permalink">New Inspirations for Machine Learning Methods
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-02-26T00:00:00+01:00">February 26, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Notes on some inspirations for Machine Learning methods. Based on opinions from leading scientists and also some of my own opinions.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/lenet.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/carla/simulator/self_driving/notes-Carla/" rel="permalink">Carla Simulator
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-02-17T00:00:00+01:00">February 17, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Notes on the Carla Simulator
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/lenet.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/lecture_notes/machine_learning/computer_vision/lecture-notes-ML-part3/" rel="permalink">Machine Learning (Part 3)
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-01-27T00:00:00+01:00">January 27, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          56 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Notes on Computer Vision theory and NLP. Based on Goodfellow, Bengio “Deep Learning”, Stanford CS231n and RWTH Aachen University Machine Learning
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/pharath_one" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://github.com/pharath" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="/_pages/404.md" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 Pharath Palesuvaran. </div>
+
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

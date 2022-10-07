@@ -1,0 +1,759 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>ROS Cheatsheet - Pharath Palesuvaran</title>
+<meta name="description" content="roslaunch  roslaunch --ros-args /path/to/launchfile.launch    Display command-line arguments for this launch file   &lt;launch&gt;   &lt;!-- ros_args.launch --&gt;   &lt;arg name=&quot;foo&quot; default=&quot;true&quot; doc=&quot;I pity the foo&#39;.&quot;/&gt;   &lt;arg name=&quot;bar&quot; doc=&quot;Someone walks into this.&quot;/&gt;   &lt;arg name=&quot;baz&quot; default=&quot;false&quot;/&gt;   &lt;arg name=&quot;nop&quot;/&gt;   &lt;arg name=&quot;fix&quot; value=&quot;true&quot;/&gt; &lt;/launch&gt;   $&gt; roslaunch --ros-args ros_args.launch Required Arguments:   bar: Someone walks into this.   nop: undocumented Optional Arguments:   baz (default &quot;false&quot;): undocumented   foo (default &quot;true&quot;): I pity the foo&#39;.   image_view     Display the images of an image topic:   rosrun image_view image_view image:=/sensor/camera1/image_raw   some open source packages  opencv_apps     sudo apt install ros-noetic-opencv-apps   roslaunch opencv_apps hough_lines.launch image:=/sensor/camera1/image_raw # view all arguments of a node in the launch file roslaunch --args hough_lines /opt/ros/noetic/share/opencv_apps/launch/hough_lines.launch # view all arguments of the launch file roslaunch --ros-args /opt/ros/noetic/share/opencv_apps/launch/hough_lines.launch">
+
+
+  <meta name="author" content="Pharath Palesuvaran">
+  
+  <meta property="article:author" content="Pharath Palesuvaran">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Pharath Palesuvaran">
+<meta property="og:title" content="ROS Cheatsheet">
+<meta property="og:url" content="http://localhost:4000/cheatsheet/cheatsheet-ros/">
+
+
+  <meta property="og:description" content="roslaunch  roslaunch --ros-args /path/to/launchfile.launch    Display command-line arguments for this launch file   &lt;launch&gt;   &lt;!-- ros_args.launch --&gt;   &lt;arg name=&quot;foo&quot; default=&quot;true&quot; doc=&quot;I pity the foo&#39;.&quot;/&gt;   &lt;arg name=&quot;bar&quot; doc=&quot;Someone walks into this.&quot;/&gt;   &lt;arg name=&quot;baz&quot; default=&quot;false&quot;/&gt;   &lt;arg name=&quot;nop&quot;/&gt;   &lt;arg name=&quot;fix&quot; value=&quot;true&quot;/&gt; &lt;/launch&gt;   $&gt; roslaunch --ros-args ros_args.launch Required Arguments:   bar: Someone walks into this.   nop: undocumented Optional Arguments:   baz (default &quot;false&quot;): undocumented   foo (default &quot;true&quot;): I pity the foo&#39;.   image_view     Display the images of an image topic:   rosrun image_view image_view image:=/sensor/camera1/image_raw   some open source packages  opencv_apps     sudo apt install ros-noetic-opencv-apps   roslaunch opencv_apps hough_lines.launch image:=/sensor/camera1/image_raw # view all arguments of a node in the launch file roslaunch --args hough_lines /opt/ros/noetic/share/opencv_apps/launch/hough_lines.launch # view all arguments of the launch file roslaunch --ros-args /opt/ros/noetic/share/opencv_apps/launch/hough_lines.launch">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-01-22T00:00:00+01:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/cheatsheet/cheatsheet-ros/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Pharath Palesuvaran Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://raw.githubusercontent.com/pharath/home/master/assets/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/pharath/home/master/assets/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://raw.githubusercontent.com/pharath/home/master/assets/favicons/favicon-16x16.png">
+<link rel="manifest" href="https://raw.githubusercontent.com/pharath/home/master/assets/favicons/site.webmanifest">
+<link rel="shortcut icon" href="https://raw.githubusercontent.com/pharath/home/master/assets/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="https://raw.githubusercontent.com/pharath/home/master/assets/favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      displayMath: [ ['$$','$$'], ["\\(","\\)"] ],
+    },
+		TeX: {
+    	Macros: {
+				bra: ["\\langle{#1}|", 1],
+				ket: ["|{#1}\\rangle", 1],
+        braket: ["\\langle{#1}\\rangle", 1],
+				bk: ["\\langle{#1}|{#2}|{#3}\\rangle", 3]
+    	}
+  	}
+	});
+
+</script>
+<!--
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML' async></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML' async></script>
+-->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/pytorch-logo.png" alt="Pharath Palesuvaran"></a>
+        
+        <a class="site-title" href="/">
+          Pharath Palesuvaran
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/posts/">Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button" accesskey="s">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/profile_pic.jpg" alt="Pharath Palesuvaran" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Pharath Palesuvaran</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Machine Learning, Computer Vision, Self-driving cars and a very rusty first degree in Physics</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Aachen (Germany)</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:phrth2@gmail.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://twitter.com/pharath_one" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/pharath" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="/_pages/404.md" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i><span class="label">Instagram</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="ROS Cheatsheet">
+    <meta itemprop="description" content="roslaunchroslaunch --ros-args /path/to/launchfile.launch  Display command-line arguments for this launch file&lt;launch&gt;  &lt;!-- ros_args.launch --&gt;  &lt;arg name=&quot;foo&quot; default=&quot;true&quot; doc=&quot;I pity the foo&#39;.&quot;/&gt;  &lt;arg name=&quot;bar&quot; doc=&quot;Someone walks into this.&quot;/&gt;  &lt;arg name=&quot;baz&quot; default=&quot;false&quot;/&gt;  &lt;arg name=&quot;nop&quot;/&gt;  &lt;arg name=&quot;fix&quot; value=&quot;true&quot;/&gt;&lt;/launch&gt;$&gt; roslaunch --ros-args ros_args.launchRequired Arguments:  bar: Someone walks into this.  nop: undocumentedOptional Arguments:  baz (default &quot;false&quot;): undocumented  foo (default &quot;true&quot;): I pity the foo&#39;.image_view  Display the images of an image topic:rosrun image_view image_view image:=/sensor/camera1/image_rawsome open source packagesopencv_apps  sudo apt install ros-noetic-opencv-appsroslaunch opencv_apps hough_lines.launch image:=/sensor/camera1/image_raw# view all arguments of a node in the launch fileroslaunch --args hough_lines /opt/ros/noetic/share/opencv_apps/launch/hough_lines.launch# view all arguments of the launch fileroslaunch --ros-args /opt/ros/noetic/share/opencv_apps/launch/hough_lines.launch">
+    <meta itemprop="datePublished" content="2022-01-22T00:00:00+01:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/cheatsheet/cheatsheet-ros/" class="u-url" itemprop="url">ROS Cheatsheet
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-01-22T00:00:00+01:00">January 22, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#roslaunch">roslaunch</a></li><li><a href="#image_view">image_view</a></li><li><a href="#some-open-source-packages">some open source packages</a><ul><li><a href="#opencv_apps">opencv_apps</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h1 id="roslaunch">roslaunch</h1>
+
+<p><code class="language-plaintext highlighter-rouge">roslaunch --ros-args /path/to/launchfile.launch</code></p>
+<ul>
+  <li>Display command-line arguments for this launch file</li>
+</ul>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;launch&gt;</span>
+  <span class="c">&lt;!-- ros_args.launch --&gt;</span>
+  <span class="nt">&lt;arg</span> <span class="na">name=</span><span class="s">"foo"</span> <span class="na">default=</span><span class="s">"true"</span> <span class="na">doc=</span><span class="s">"I pity the foo'."</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;arg</span> <span class="na">name=</span><span class="s">"bar"</span> <span class="na">doc=</span><span class="s">"Someone walks into this."</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;arg</span> <span class="na">name=</span><span class="s">"baz"</span> <span class="na">default=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;arg</span> <span class="na">name=</span><span class="s">"nop"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;arg</span> <span class="na">name=</span><span class="s">"fix"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/launch&gt;</span>
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$&gt;</span> roslaunch <span class="nt">--ros-args</span> ros_args.launch
+Required Arguments:
+  bar: Someone walks into this.
+  nop: undocumented
+Optional Arguments:
+  baz <span class="o">(</span>default <span class="s2">"false"</span><span class="o">)</span>: undocumented
+  foo <span class="o">(</span>default <span class="s2">"true"</span><span class="o">)</span>: I pity the foo<span class="s1">'.
+</span></code></pre></div></div>
+
+<h1 id="image_view">image_view</h1>
+
+<ul>
+  <li>Display the images of an image topic:</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rosrun image_view image_view image:<span class="o">=</span>/sensor/camera1/image_raw
+</code></pre></div></div>
+
+<h1 id="some-open-source-packages">some open source packages</h1>
+
+<h2 id="opencv_apps">opencv_apps</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">sudo apt install ros-noetic-opencv-apps</code></li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>roslaunch opencv_apps hough_lines.launch image:<span class="o">=</span>/sensor/camera1/image_raw
+<span class="c"># view all arguments of a node in the launch file</span>
+roslaunch <span class="nt">--args</span> hough_lines /opt/ros/noetic/share/opencv_apps/launch/hough_lines.launch
+<span class="c"># view all arguments of the launch file</span>
+roslaunch <span class="nt">--ros-args</span> /opt/ros/noetic/share/opencv_apps/launch/hough_lines.launch
+</code></pre></div></div>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#cheatsheet" class="page__taxonomy-item p-category" rel="tag">cheatsheet</a><span class="sep">, </span>
+    
+      <a href="/tags/#ros" class="page__taxonomy-item p-category" rel="tag">ros</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#cheatsheet" class="page__taxonomy-item p-category" rel="tag">Cheatsheet</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2022-01-22T00:00:00+01:00">January 22, 2022</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?text=ROS+Cheatsheet%20http%3A%2F%2Flocalhost%3A4000%2Fcheatsheet%2Fcheatsheet-ros%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fcheatsheet%2Fcheatsheet-ros%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fcheatsheet%2Fcheatsheet-ros%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/lecture_notes/machine_learning/lecture-notes-ML-part2/" class="pagination--pager" title="Machine Learning (Part 2)
+">Previous</a>
+    
+    
+      <a href="/lecture_notes/machine_learning/computer_vision/lecture-notes-ML-part3/" class="pagination--pager" title="Machine Learning (Part 3)
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You May Also Enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/lenet.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/lecture_notes/machine_learning/lecture-notes-ML-part2-old/" rel="permalink">Machine Learning (Part 2) [OLD VERSION]
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-03-09T00:00:00+01:00">March 9, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          14 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">[OLD VERSION!] Notes on Machine Learning theory. Based on C. M. Bishop, “Pattern Recognition and Machine Learning” (2011) and Goodfellow, Bengio, Courville, ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/lenet.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/notes/machine_learning/notes-Neuroscience/" rel="permalink">New Inspirations for Machine Learning Methods
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-02-26T00:00:00+01:00">February 26, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Notes on some inspirations for Machine Learning methods. Based on opinions from leading scientists and also some of my own opinions.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/lenet.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/carla/simulator/self_driving/notes-Carla/" rel="permalink">Carla Simulator
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-02-17T00:00:00+01:00">February 17, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Notes on the Carla Simulator
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/lenet.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/lecture_notes/machine_learning/computer_vision/lecture-notes-ML-part3/" rel="permalink">Machine Learning (Part 3)
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-01-27T00:00:00+01:00">January 27, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          56 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Notes on Computer Vision theory and NLP. Based on Goodfellow, Bengio “Deep Learning”, Stanford CS231n and RWTH Aachen University Machine Learning
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/pharath_one" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://github.com/pharath" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="/_pages/404.md" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 Pharath Palesuvaran. </div>
+
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

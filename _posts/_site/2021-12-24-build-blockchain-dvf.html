@@ -1,0 +1,125 @@
+<h1 id="postman-settings">Postman Settings</h1>
+
+<p>To interact with the built <code class="language-plaintext highlighter-rouge">blockchain.py</code> API over a network via the Postman App:</p>
+
+<ul>
+  <li>Select Authorization Type “No Auth” !</li>
+  <li>select “raw”</li>
+  <li>select “JSON” instead of “Text”</li>
+</ul>
+
+<h1 id="set-up-python-environment">Set up python environment</h1>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># create a python environment</span>
+python3 <span class="nt">-m</span> venv <span class="nb">env</span>
+
+<span class="c"># activate the python environment</span>
+<span class="nb">source env</span>/bin/activate
+
+<span class="c"># install necessary packages in this environment</span>
+<span class="c"># Note: try newer version of Flask (I used version 2.0.2), if something does not work in the following)</span>
+pip <span class="nb">install </span><span class="nv">Flask</span><span class="o">==</span>0.12.2 <span class="nv">requests</span><span class="o">==</span>2.18.4 
+</code></pre></div></div>
+
+<h1 id="modify-old-blockchainpy">Modify old blockchain.py</h1>
+
+<ul>
+  <li>add the following <code class="language-plaintext highlighter-rouge">app.config</code> line:</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Instantiate the Node
+</span><span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+<span class="n">app</span><span class="p">.</span><span class="n">config</span><span class="p">[</span><span class="s">'JSONIFY_PRETTYPRINT_REGULAR'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+</code></pre></div></div>
+
+<h1 id="start-the-server">Start the server</h1>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 blockchain.py <span class="nt">-p</span> 5001
+</code></pre></div></div>
+
+<h1 id="http-requests">http requests</h1>
+
+<h2 id="general-structure">General structure</h2>
+
+<h3 id="examples">Examples</h3>
+
+<ul>
+  <li>GET <code class="language-plaintext highlighter-rouge">http://localhost:5000/chain</code></li>
+  <li>POST <code class="language-plaintext highlighter-rouge">http://localhost:5001/transactions/new</code></li>
+</ul>
+
+<h2 id="examples-1">Examples</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">GET /chain</td>
+      <td style="text-align: center">zeigt die gesamte Blockchain</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">GET /mine</td>
+      <td style="text-align: center">erzeugt einen neuen Block</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">POST /transactions/new</td>
+      <td style="text-align: center">fügt eine Transaktion zum nächsten Block (der noch nicht in der <code class="language-plaintext highlighter-rouge">GET /chain</code> Liste ist) hinzu, der geminet wird. Der nächste <code class="language-plaintext highlighter-rouge">GET /mine</code> Call erzeugt dann den Block, in dem diese transaction ist. Beispieltransaktion:</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">{</span>
+    <span class="s2">"</span><span class="s">sender"</span><span class="pi">:</span> <span class="s2">"</span><span class="s">d4ee26eee15148ee92c6cd394edd974e"</span><span class="pi">,</span>
+    <span class="s2">"</span><span class="s">recipient"</span><span class="pi">:</span> <span class="s2">"</span><span class="s">someone-other-address"</span><span class="pi">,</span>
+    <span class="s2">"</span><span class="s">amount"</span><span class="pi">:</span> <span class="nv">5</span>
+<span class="pi">}</span>
+</code></pre></div></div>
+
+<p>Spin up another node on machine, on a different port [port 5001], and register it with current node [on port 5000]:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">POST nodes/register</td>
+      <td style="text-align: center"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">{</span>
+    <span class="s2">"</span><span class="s">nodes"</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">http://127.0.0.1:5001/"</span><span class="pi">]</span>
+<span class="pi">}</span>
+</code></pre></div></div>
+
+<p>oder alternativ:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">{</span>
+    <span class="s2">"</span><span class="s">nodes"</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">http://192.168.2.126:5001/"</span><span class="pi">]</span>
+<span class="pi">}</span>
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">GET /nodes/resolve</td>
+      <td style="text-align: center">replace shorter chains with the longest chain by the Consensus Algorithm</td>
+    </tr>
+  </tbody>
+</table>

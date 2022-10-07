@@ -1,0 +1,33 @@
+<ol>
+  <li>docker starten mit <code class="language-plaintext highlighter-rouge">./scripts/start_docker.sh</code></li>
+  <li>mehrmals compilen mit <code class="language-plaintext highlighter-rouge">./compile.sh</code></li>
+  <li><code class="language-plaintext highlighter-rouge">source /opt/ros/eloquent/setup.bash</code> (check, ob alles stimmt: <code class="language-plaintext highlighter-rouge">ros2 run demo_nodes_cpp talker</code> und in anderem terminal (hier ohne docker) <code class="language-plaintext highlighter-rouge">ros2 run demo_nodes_cpp listener</code>)
+4.-8. ist optional:</li>
+  <li><code class="language-plaintext highlighter-rouge">sudo rosdep init</code></li>
+  <li><code class="language-plaintext highlighter-rouge">rosdep update</code></li>
+  <li><code class="language-plaintext highlighter-rouge">echo $ROS_DISTRO</code> um ros distro rauszufinden</li>
+  <li>Resolve dependencies <code class="language-plaintext highlighter-rouge">rosdep install -i --from-path src --rosdistro eloquent -y</code></li>
+  <li>follow <a href="https://docs.ros.org/en/galactic/Tutorials/Workspace/Creating-A-Workspace.html#tasks">Tutorial</a></li>
+  <li><code class="language-plaintext highlighter-rouge">source ./install/setup.bash</code> (check, ob alles stimmt: <code class="language-plaintext highlighter-rouge">ros2 pkg executables | vim -</code> zeigt jetzt neben den ROS2 standard packages u.a. verschiedene <code class="language-plaintext highlighter-rouge">galaxis_</code> packages an)
+(Statt 3. und 9. kann man auch ein script <code class="language-plaintext highlighter-rouge">phth_script.sh</code> erstellen, das dieselben commands enthält und dann in jedem tmux über <code class="language-plaintext highlighter-rouge">. ./phth_script.sh</code> oder <code class="language-plaintext highlighter-rouge">source ./phth_script.sh</code> sourcen <strong>oder</strong> über <code class="language-plaintext highlighter-rouge">tmux set-option -g default-command "bash --rcfile phth_script.sh"</code> (command muss in einer tmux session eingegeben werden!) in allen <em>weiteren</em> tmux panes und windows automatisch sourcen (dh. im aktuellen pane muss das script noch gesourct werden, aber alle neu geöffneten panes sourcen das script automatisch). Achtung: <code class="language-plaintext highlighter-rouge">bash ./phth_script.sh</code> funktioniert nicht, weil s. <a href="https://stackoverflow.com/questions/14744904/how-to-execute-script-in-the-current-shell-on-linux/14745127">hier</a> oder <a href="https://stackoverflow.com/questions/50156206/source-bash-profile-do-not-works-inside-a-bash-script/50156308">hier</a>)</li>
+  <li><code class="language-plaintext highlighter-rouge">ros2 run &lt;package&gt; &lt;executable&gt;</code> zB <code class="language-plaintext highlighter-rouge">ros2 run gal&lt;tab1&gt; &lt;tab2&gt;</code>, wobei <code class="language-plaintext highlighter-rouge">&lt;tab1&gt;</code> um package zu vervollständigen und <code class="language-plaintext highlighter-rouge">&lt;tab2&gt;</code> um executable auszuwählen.</li>
+  <li>Start simulation: auf local machine: <code class="language-plaintext highlighter-rouge">cd ~/git/galaxis-simulation/simulation</code> und hier <code class="language-plaintext highlighter-rouge">./start_container.sh</code>. Dann im container <code class="language-plaintext highlighter-rouge">./start_simulation.sh</code>.</li>
+  <li>Start bridge to simulation: auf local machine: <code class="language-plaintext highlighter-rouge">cd ~/git/galaxis-simulation/bridge</code> und hier <code class="language-plaintext highlighter-rouge">./start_container.sh</code>. Dann im container <code class="language-plaintext highlighter-rouge">./start_bridge.sh</code>.</li>
+  <li>Start control terminal: auf local machine: <code class="language-plaintext highlighter-rouge">cd ~/git/onboarding</code> und hier <code class="language-plaintext highlighter-rouge">./scripts/start_docker.sh</code>. Dann im container <code class="language-plaintext highlighter-rouge">tmux</code>.</li>
+  <li>in tmux: ROS2 control Beispiele:</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ros2 topic pub <span class="nt">--once</span> /galaxis/simulation/remotecontrol messages/msg/SimulationVehicleControl <span class="s2">"car_speed: 0.0
+turnangle_front: 0.0
+reset: true
+remote_control: -1"</span> 
+
+ros2 topic pub /simulation/gazebo/model/dr_drift/set_pose gazebo_simulation/msg/SetModelPose <span class="s2">"keys: [0,1]
+values: [0.4,-0.2]"</span>
+</code></pre></div></div>
+
+<h1 id="tmux">tmux</h1>
+
+<h2 id="send-keys">send-keys</h2>
+
+<p><code class="language-plaintext highlighter-rouge">C-m</code> ist dasselbe wie <code class="language-plaintext highlighter-rouge">Enter</code>.</p>

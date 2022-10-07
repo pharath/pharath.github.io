@@ -1,0 +1,2228 @@
+<h1 id="general-remarks">General Remarks</h1>
+
+<ul>
+  <li>Don’t lose sight of the bigger picture ! Only learn stuff when you need it !</li>
+</ul>
+
+<blockquote>
+  <p>As Feynman said: don’t read everything about a topic before starting to work on it. Think about the problem for yourself, figure out what’s important, then read the literature. This will allow you to interpret the literature and tell what’s good from what’s bad. - Y. LeCun</p>
+</blockquote>
+
+<h1 id="overfitting-problem">Overfitting problem</h1>
+
+<h2 id="why-important">Why important</h2>
+
+<p>TODO</p>
+
+<h2 id="paradoxes-related-to-the-overfitting-problem">Paradoxes (related to the overfitting problem)</h2>
+
+<p><img src="/assets/images/sine-taylor.png" alt="sine-taylor" /></p>
+
+<ol>
+  <li>higher order polynomial contains all lower order polynomials as special cases
+    <ul>
+      <li>hence, the higher order polynomial <strong>is capable of</strong> generating a result at least as good as the lower order polynomial
+        <ul>
+          <li>d.h. das Polynom mit höherer Ordnung <strong>kann</strong> potentiell mindestens genauso gute Ergebnisse liefern ! Wieso passiert das nicht?</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Sinus-Potenzreihe konvergiert für alle x in R und enthält Terme mit allen Potenzen von x (die geraden Potenzen haben Vorfaktor 0)</li>
+</ol>
+
+<p>Aus 1. und 2. folgt, dass das Ergebnis mit jedem weiteren höheren x-Term <strong>prinzipiell</strong> umso genauer (d.h. näher an der ursprünglichen Sinusfunktion) werden <strong>könnte</strong> (weil die Potenzreihe ja auch mit jedem höheren x-Term genauer wird). Warum passiert das nicht?</p>
+
+<p><strong>Antwort</strong>:</p>
+
+<ol>
+  <li>
+    <p>Taylorreihe und linear model sind nicht vergleichbar: <mark>Die Taylor Reihe approximiert $\sin{x}$ und nicht die Datenpunkte.</mark> D.h. $E &gt; 0$ für die Taylor Reihe, egal wie hoch die Ordnung des Taylor Polynoms ist! Aber das linear model kann mit hinreichend vielen $w_i$ stets einen perfekten Fit, i.e. $E=0$, erzielen.</p>
+  </li>
+  <li>
+    <p>Bei der Potenzreihe (Maclaurin Series) bleiben die weights der ersten N Terme fix, wenn man den Term der Ordnung N+1 hinzufügt, aber beim Fitten nicht ! Die Weights werden beim overfitting zu groß und sorgen für eine schlechtere representation der Targetfunktion als die Potenzreihenrepresentation der Targetfunktion, die die gleiche Ordnung hat!</p>
+
+    <p>Deshalb muss man große weights “bestrafen” (d.h. einen penalty term einfügen aka regularizen), um die weights beim Fitten klein zu halten.</p>
+
+    <p>Wir geben ja den weights völlige Freiheit, aber genau das ist das Problem: die weights fangen beim overfitting an auch den <strong>Noise</strong> in den Daten zu fitten, was für die hohen weight Werte sorgt!</p>
+
+    <ul>
+      <li><strong>Note</strong>: This happens with decision trees as well: the strongest variables are at the top of the tree, but at the very end, the split that the tree is making, might not be fitting signal but rather noise!</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="possible-solutions-to-the-overfitting-problem">Possible Solutions (to the overfitting problem)</h2>
+
+<ul>
+  <li>reduce number of model parameters</li>
+  <li>increase number of data points $N$</li>
+  <li>increase regularization parameter $\lambda$ (in statistics: shrinkage methods)
+    <ul>
+      <li><strong>Note: Do not include the bias term $w_0$ in the penalty term! Otherwise the procedure would depend on the origin chosen for the target.</strong>
+        <blockquote>
+          <p>Note that often the coefficient $w_0$ is omitted from the regularizer because its inclusion causes the results to depend on the choice of origin for the target variable (Hastie et al., 2001), or it may be included but with its own regularization coefficient - <a href="#Bishop_2006">Bishop_2006</a></p>
+        </blockquote>
+        <ul>
+          <li>see also <a href="https://stats.stackexchange.com/a/161689">here</a></li>
+        </ul>
+      </li>
+      <li>$q=2$ in 3.29: quadratic regularization:
+        <ul>
+          <li><strong>advantage</strong>: error function remains a quadratic function of $\mathbf{w}$ $\Rightarrow$ exact minimum can be found in closed form</li>
+          <li><strong>terminology</strong>:
+            <ul>
+              <li>weight decay (in Deep Learning because in sequential learning algorithms, it encourages weight values to decay towards zero, unless supported by the data)</li>
+              <li>L2 regularization = parameter shrinkage = ridge regression (in statistics)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>$q=1$ in 3.29: “lasso”
+        <ul>
+          <li>if $\lambda$ is sufficiently large, some of the coefficients are driven to $0$
+            <ul>
+              <li>leads to a <strong>sparse</strong> model in which the corresponding basis functions play no role
+                <ul>
+                  <li>the origin of this sparsity can be seen <a href="/assets/images/bishop_ml/origin_of_sparsity.png">here</a>
+                    <ul>
+                      <li>increasing $\lambda$ corresponds to shrinking the yellow “constraint area”. The optimal parameter $\mathbf{w}^*$ corresponds to the point in the yellow area which is closest to the center of the blue circles (center = minimum of unregularized error function)
+                        <ul>
+                          <li>[Note: More generally, if the error function does not have circular contours, $\mathbf{w}^*$ would not necessarily be the “closest-to-center” point. In that case we would have to choose the point in the yellow area that minimizes the error function.]</li>
+                        </ul>
+                      </li>
+                      <li>the shape of these yellow “constraint areas” depends on $q$, but their size depends on $\lambda$</li>
+                      <li>the blue circles only depend on the <strong>unregularized</strong> error function, i.e. changing $\lambda$ does not change the blue circles!</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>use suitable heuristics (cf. overfitting MoGs)</li>
+  <li>include a prior and find a MAP solution (equivalent to adding a regularization term to the error) [see below “Logistic Regression”]</li>
+</ul>
+
+<h2 id="related-problems">Related Problems</h2>
+
+<h3 id="in-maximum-likelihood">In Maximum Likelihood</h3>
+
+<h4 id="bias">Bias</h4>
+
+<ul>
+  <li>maximum likelihood approach systematically underestimates the <strong>true</strong> variance of the univariate Gaussian distribution (<em>bias</em>)
+    <ul>
+      <li>this is related to the problem of over-fitting (e.g. too many parameters in polynomial curve fitting):
+        <blockquote>
+          <ul>
+            <li>$\mu_{ML}$ and $\sigma_{ML}^2$ are functions of $x_1, \ldots, x_N$
+              <ul>
+                <li>$\mu_{ML}=\frac{1}{N}\sum_{n=1}^N x_n$ and $\sigma^2<em>{ML}=\frac{1}{N}\sum</em>{n=1}^N (x_n - \mu_{ML})^2$</li>
+              </ul>
+            </li>
+            <li>$x_1, \ldots, x_N$ come from a Gaussian distribution with (separate) $\mu$ and $\sigma^2$
+              <ul>
+                <li>see rules for sums of i.i.d. random variables (for $\mu$) and <a href="https://en.wikipedia.org/wiki/Bias_of_an_estimator#Sample_variance">here</a> (for $\sigma^2$)</li>
+              </ul>
+            </li>
+            <li>one can show that the expectations of $\mu_{ML}$ and $\sigma_{ML}^2$ wrt this distribution are $\mathbb{E}[\mu_{ML}]=\mu$ and $\mathbb{E}[\sigma_{ML}^2]=\frac{N-1}{N}\sigma^2$, i.e. $\sigma_{ML}$ is biased and underestimates the <strong>true sample variance</strong> $\sigma$</li>
+            <li>Correcting for this bias yields the <strong>unbiased sample variance</strong> $\tilde{\sigma}^2=\frac{N}{N-1}\sigma_{ML}^2$</li>
+          </ul>
+        </blockquote>
+      </li>
+    </ul>
+  </li>
+  <li>increasing data size $N$ alleviates this problem (and reduces over-fitting [see above])</li>
+  <li>this bias lies at the root of the over-fitting problem</li>
+  <li>for anything other than small $N$ this bias is not a problem, in practice</li>
+  <li>may become a problem for more complex models with many parameters, though</li>
+</ul>
+
+<h4 id="mog">MoG<a name="MoG_overfitting"></a></h4>
+
+<ul>
+  <li>singularities in the MoG likelihood will always be present (this is another example of overfitting in maximum likelihood)
+    <ul>
+      <li><strong>Solution</strong>: use suitable heuristics
+        <ul>
+          <li>e.g. detect when a Gaussian component is collapsing and reset mean to a random value and reset covariance to some large value and then continue with the optimization</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="logistic-regression">Logistic Regression</h4>
+
+<ul>
+  <li>if the data set is linearly separable, ML can overfit
+    <ul>
+      <li>magnitude of $\mathbf{w}$ (which corresponds to the “slope” of the sigmoid in the feature space) goes to $\infty$
+        <ul>
+          <li>$\Rightarrow$ logistic sigmoid $\to$ Heaviside function</li>
+          <li>$\Rightarrow$ <strong>every</strong> point from each class $k$ is assigned posterior $P(C_k\vert\mathbf{x})=1$ (i.e. all posteriors are either $0$ or $1$ and there are no points with posteriors <strong>in between</strong> $0$ and $1$)</li>
+        </ul>
+      </li>
+      <li>there is a continuum of such solutions
+        <ul>
+          <li>ML does not provide a way to favor one specific solution</li>
+          <li>which solution is found will depend on:
+            <ul>
+              <li>parameter initialization</li>
+              <li>choice of optimization algorithm</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>Solution</strong>:
+    <ul>
+      <li>use a prior and find a MAP solution for $\mathbf{w}$</li>
+      <li>or equivalently: add a regularization term to the error function</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="probability-theory">Probability Theory</h1>
+
+<h2 id="why-important-1">Why important?</h2>
+
+<ul>
+  <li>
+    <p><mark>**[Bayesian Inference](https://en.wikipedia.org/wiki/Bayesian_inference):**</mark> We have to understand the concepts of <strong>posterior</strong> and <strong>prior</strong> probabilities, as well as <strong>likelihood</strong> because e.g. both generative and discriminative linear models model the posterior probabilities $P(C_k\vert\mathbf{x})$ of the classes $C_k$ given the input $\mathbf{x}$.</p>
+
+    <blockquote>
+      <p>“Bayesian inference is a method of statistical inference in which Bayes’ theorem is used to update the probability for a hypothesis as more evidence or information becomes available.” - <a href="https://en.wikipedia.org/wiki/Bayesian_inference">Wikipedia</a></p>
+    </blockquote>
+  </li>
+  <li><mark>**Probability distributions:**</mark>
+    <ul>
+      <li>Terminology:
+        <ul>
+          <li>probability distribution: overall <strong>shape</strong> of the probability density</li>
+          <li>probability density function, or PDF: probabilities for specific outcomes of a random variable</li>
+        </ul>
+      </li>
+      <li>these are useful for:
+        <ul>
+          <li><strong>Outlier detection</strong>: It is useful to know the PDF for a sample of data in order to know whether a given observation is unlikely, or so unlikely as to be considered an <strong>outlier or anomaly</strong> and whether it should be removed.</li>
+          <li><strong>in order to choose appropriate learning methods</strong> that require input data to have a specific probability distribution.</li>
+          <li>for  <strong>probability density estimation</strong> (see below).</li>
+          <li>distributions can form building blocks <strong>for more complex models</strong> (e.g. MoG)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><mark>**Density estimation:**</mark> Sometimes we want to model the probability distribution $P(\mathbf{x})$ of a random variable $\mathbf{x}$, given a finite set $\mathbf{x}_1, \ldots, \mathbf{x}_N$ of observations (= <strong>density estimation</strong>).
+    <ul>
+      <li>there are infinitely many probability distributions that could have given rise to the observed data, i.e. the density estimation problem is <strong>fundamentally ill-posed</strong></li>
+      <li><mark>important because</mark> e.g. naive Bayes classifiers coupled with kernel density estimation (see below) can achieve higher accuracy levels.</li>
+      <li>2 density estimation methods:
+        <ul>
+          <li><strong>parametric density estimation</strong>:<a name="parametric_density"></a>
+            <ol>
+              <li>choose <strong>parametric distribution</strong>:
+                <ul>
+                  <li>discrete random variables:
+                    <ul>
+                      <li>Binomial distribution</li>
+                      <li>Multinomial distribution</li>
+                    </ul>
+                  </li>
+                  <li>continuous random variables:
+                    <ul>
+                      <li>Gaussian distribution</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li><strong><mark>Learning</mark></strong>: estimate parameters of the chosen distribution given the observed data set
+                <ul>
+                  <li>frequentist:
+                    <ul>
+                      <li>via Maximum Likelihood</li>
+                    </ul>
+                  </li>
+                  <li>Bayesian:
+                    <ol>
+                      <li>introduce prior distributions over the parameters</li>
+                      <li>use Bayes’ theorem to compute the corresponding posterior over the parameters given the observed data
+                        <ul>
+                          <li>Note: This approach is simplified by <a href="https://en.wikipedia.org/wiki/Conjugate_prior"><strong>conjugate priors</strong></a>. These lead to posteriors which have the same functional form as the prior. Examples:</li>
+                        </ul>
+                        <ul>
+                          <li>conjugate prior for the parameters of the multinomial distribution: <strong>Dirichlet distribution</strong></li>
+                          <li>conjugate prior for the mean of the Gaussian: Gaussian</li>
+                        </ul>
+                      </li>
+                    </ol>
+                  </li>
+                </ul>
+              </li>
+            </ol>
+          </li>
+          <li><strong>nonparametric density estimation</strong>:
+            <ul>
+              <li>size of the data set $N$ determines the <strong>form of the distribution</strong>, parameters determine the <strong>model complexity</strong> (i.e. “flexibility”, similar to the order of the polynomial in the polynomial curve fitting example) (but not the form of the distribution!)</li>
+              <li>histograms</li>
+              <li>nearest-neighbours (e.g. K-NN)</li>
+              <li>kernels (e.g. KDE)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>Hence, understanding the basic concepts of probability theory is crucial for understanding linear models.</p>
+
+<h2 id="sum-rule-product-rule-bayes-theorem">Sum rule, Product rule, Bayes’ Theorem</h2>
+
+<h3 id="example-fruits-in-boxes">Example: Fruits in Boxes</h3>
+
+<ul>
+  <li>Let $P(B=r) = 0.4$ and $P(B=b) = 0.6$ (<strong>frequentist view</strong>: this is how many times the guy who picked the fruit picked each box [in the limit of infinitely many pickings], i.e. the picker had a tendency to pick the blue one more often).
+    <ul>
+      <li>Suppose that we pick a box at random, and it turns out to be the blue box. What’s the probability of picking an apple?</li>
+      <li>What’s the (overall) probability of choosing an apple?</li>
+      <li>Suppose we picked an orange. Which box did it come from?</li>
+    </ul>
+  </li>
+  <li><strong>prior</strong> vs <strong>posterior</strong> explain intuitively (e.g. “evidence favouring the red box”)</li>
+  <li><strong>independence</strong> intuitively (e.g. “independent of which box is chosen”)</li>
+</ul>
+
+<h2 id="likelihood">Likelihood</h2>
+
+<ul>
+  <li>$P(\mathbf{x}\vert\vec{\theta})=L_{\mathbf{x}}(\vec{\theta})$ expresses how probable the observed data point $\mathbf{x}$ is (as a function of the parameter vector $\vec{\theta}$)
+    <ul>
+      <li>the likelihood is not a probability distribution <strong><mark>over w</mark></strong>, and its integral <strong><mark>with respect to w</mark></strong> does not (necessarily) equal one.
+        <ul>
+          <li>however, it <strong>is</strong> a probability distribution <strong><mark>over x</mark></strong> because integral w.r.t. $\mathbf{x}$ <strong>is</strong> $1$.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>MoGs</strong>: Similarly, in MoGs $P(\mathbf{x}\vert k)$ expresses the likelihood of $\mathbf{x}$ given mixture component $k$
+    <ul>
+      <li>i.e. the MoG likelihood itself is composed of several individual Gaussian likelihoods</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="frequentist-vs-bayesian-approach">Frequentist vs Bayesian approach</h2>
+
+<ul>
+  <li>there is no unique frequentist or Bayesian viewpoint</li>
+</ul>
+
+<h3 id="frequentist">Frequentist</h3>
+
+<ul>
+  <li>Maximum Likelihood views true parameter vector $\theta$ to be unknown, but <mark>fixed</mark> (i.e. $\theta$ is <strong>not</strong> a random variable!).</li>
+</ul>
+
+<h3 id="bayesian">Bayesian</h3>
+
+<ul>
+  <li>In Bayesian learning <mark>$\theta$ is a random variable</mark>.</li>
+  <li>prior encodes knowledge we have about the type of distribution we expect to see for $\theta$
+    <ul>
+      <li>(e.g. from calculations how fast the polar ice is melting)</li>
+    </ul>
+  </li>
+  <li>history:
+    <ul>
+      <li>Bayesian framework has its origins in the 18th century, but the practical application was <mark style="color: white; background-color: red; opacity: 1">limited by</mark> “the difficulties in carrying through the full Bayesian procedure, particularly <mark style="color: white; background-color: red; opacity: 1">the need to marginalize (sum or integrate) over the whole of parameter space</mark>, which […] is required in order to make predictions or to compare different models” (Bishop)
+        <ul>
+          <li><a href="/assets/images/bishop_ml/history_development_bayes_approach.png">technical developments</a> changed this!</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>critics:
+    <ul>
+      <li>prior distribution is often selected on the basis of mathematical convenience rather than as a reflection of any prior beliefs $\Rightarrow$ subjective conclusions
+        <ul>
+          <li>one motivation for so-called <strong>noninformative priors</strong></li>
+          <li>Bayesian methods based on poor choices of prior can give poor results with high
+confidence</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>advantages (compared to frequentist methods):
+    <ul>
+      <li>inclusion of prior knowledge
+        <ul>
+          <li>cf. example “tossing a coin three times and landing heads three times”:
+            <ul>
+              <li>Bayesian approach gives a better estimate of the probability of landing heads (whereas Maximum Likelihood would give probability 1)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="the-uniform-distribution">The Uniform Distribution</h2>
+
+<ul>
+  <li>Mean: $\frac{(a+b)}{2}$ <a href="https://de.wikipedia.org/wiki/Stetige_Gleichverteilung#Erwartungswert_und_Median">[derivation]</a></li>
+  <li>Variance: $\frac{1}{12}(b-a)^2$ <a href="https://de.wikipedia.org/wiki/Stetige_Gleichverteilung#Varianz">[derivation]</a></li>
+</ul>
+
+<h2 id="the-gaussian-distribution">The Gaussian Distribution</h2>
+
+<blockquote>
+  <p>“Of all probability distributions over the reals with a specified mean $\mu$ and variance $\sigma^2$, the normal distribution $N(\mu,\sigma^2)$ is the one with <strong>maximum entropy</strong>.” - <a href="https://en.wikipedia.org/wiki/Normal_distribution#Maximum_entropy">Wikipedia</a></p>
+</blockquote>
+
+<ul>
+  <li>this also holds for the <strong>multivariate</strong> Gaussian (i.e. the multivariate distribution with maximum entropy, for a given mean and covariance, is a Gaussian)
+    <ul>
+      <li>Proof:
+        <ul>
+          <li>maximize the (differential) entropy of a distribution $p(x)$ $H[x]$ over all distributions $p(x)$ (likelihoods) subject to the constraints that $p(x)$ be normalized and that it has a specific mean and covariance</li>
+          <li>the maximum likelihood distribution is given by the multivariate Gaussian</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="central-limit-theorem-clt">Central Limit Theorem (CLT)</h3>
+
+<p>Subject to certain mild conditions, the sum of a set of random variables (which is itself a random variable) has a distribution that becomes increasingly Gaussian as the number of terms in the sum increases.</p>
+
+<ul>
+  <li>Let $X_1+\ldots+X_n$ be i.i.d. random variables. The expectation of $S_n=X_1+\ldots+X_n$ is $n\mu$ and the variance is $n\sigma^2$. <a href="https://de.wikipedia.org/wiki/Zentraler_Grenzwertsatz#Der_Zentrale_Grenzwertsatz_der_Statistik_bei_identischer_Verteilung">[source]</a></li>
+</ul>
+
+<h4 id="example-sum-of-uniformly-distributed-iid-random-variables-eg-distribution-of-the-average-of-random-variables">Example: Sum of uniformly distributed i.i.d. random variables (e.g. distribution of the average of random variables)</h4>
+
+<p>$x_1,\ldots,x_N\sim \mathcal{U}[0,1]\xrightarrow[]{N \to \infty} \frac{1}{N}(x_1+\ldots +x_N)\sim\mathcal{N}(\frac{1}{2},\frac{1}{12N})$</p>
+
+<ul>
+  <li><a href="/assets/images/proofs/variance_of_sum_of_Uniformly_distributed_iid_RV.png">[Proof]</a> for the mean $\frac{1}{2}$ and the variance $\frac{1}{12N}$, where $\bar{X}=\frac{1}{N}(x_1+\ldots +x_N)$ <a href="https://www.math.umd.edu/~millson/teaching/STAT400fall18/slides/article21.pdf">[source]</a>
+    <ul>
+      <li>Recall the rules for expectations and variances.</li>
+    </ul>
+  </li>
+  <li>Notation: The $[0,1]$ in $\mathcal{U}[0,1]$ denotes an interval, whereas the $(\frac{1}{2},\frac{1}{12N})$ in $\mathcal{N}(\frac{1}{2},\frac{1}{12N})$ denotes the mean and the variance of the Gaussian (specifying an interval for the Gaussian does not make sense)</li>
+</ul>
+
+<h3 id="relation-to-other-distributions">Relation to other distributions</h3>
+
+<ul>
+  <li>Binomial distribution $\xrightarrow[]{N\to\infty}$ Gaussian distribution</li>
+</ul>
+
+<p><img src="/assets/images/binomial_gaussian_poisson.jpg" alt="Binomial_Gaussian_Poisson" /></p>
+
+<h3 id="well-defined">Well-defined</h3>
+
+<ul>
+  <li>the Gaussian is <strong>well-defined</strong> in all dimensions only if $\Sigma$ is <strong>positive definite</strong> (ie all Eigenvalues are strictly positive)
+    <ul>
+      <li>if at least one of the Eigenvalues is zero, then the distribution is singular and confined to a subspace of lower dimensionality</li>
+      <li><strong>Definiteness</strong> is commonly (i.e. for most authors) only defined for <strong>symmetric matrices</strong> (see <a href="https://en.wikipedia.org/wiki/Definite_matrix">Definiteness</a>)</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="intuition-for-multivariate-gaussians">Intuition for Multivariate Gaussians</h3>
+
+<ul>
+  <li>apply <strong>spectral decomposition</strong> of the covariance $\Sigma$
+    <ul>
+      <li>Note: spectral decomposition is the <strong>Eigendecomposition</strong> of a normal or real symmetric matrix (see <a href="https://en.wikipedia.org/wiki/Eigendecomposition_of_a_matrix">Eigendecomposition</a>)</li>
+      <li>Under which conditions is a spectral decomposition possible?
+        <ul>
+          <li><strong>spectral theorem</strong>: “If $A$ is Hermitian, then there exists an orthonormal basis of $V$ consisting of eigenvectors of $A$. Each eigenvalue is real.”
+            <ul>
+              <li>“Hermitian” is a generalization of “symmetric” for complex matrices</li>
+              <li>since $\Sigma$ is symmetric w.l.o.g. (see below), we can apply the spectral theorem</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Shape of the Gaussian:
+    <ul>
+      <li>scaling given by $\lambda_i$,</li>
+      <li>shifted by $\mathbf{\mu}$,</li>
+      <li>rotation given by the eigenvectors $\mathbf{u}_i$</li>
+    </ul>
+  </li>
+  <li>new coordinate system defined by eigenvectors $\mathbf{u}_i$ with axes $y_i=\mathbf{u}_i^T(\mathbf{x}-\mathbf{\mu})$ for $i=1,\ldots,D$
+    <blockquote>
+      <p>“In linear algebra, <strong>eigendecomposition</strong> is the factorization of a matrix into a canonical form, whereby the matrix is represented in terms of its eigenvalues and eigenvectors. Only diagonalizable matrices can be factorized in this way. When the matrix being factorized is a normal or real symmetric matrix, the decomposition is called <strong>“spectral decomposition”</strong>, derived from the spectral theorem.” - <a href="https://en.wikipedia.org/wiki/Eigendecomposition_of_a_matrix">Wikipedia</a></p>
+    </blockquote>
+    <ul>
+      <li>origin of new coordinate system is at $\mathbf{y}=\mathbf{0}$, i.e. at $\mathbf{x}=\mathbf{\mu}$ in the old coordinate system!</li>
+    </ul>
+  </li>
+  <li><strong>Normalization:</strong> one can show that <img src="/home/assets/images/equations/eq_2_56.png" alt="eq_2_56" />
+  i.e. in the EV coordinate system the joint PDF factorizes into $D$ independent <strong>univariate</strong> Gaussians! The integral is then $\int{p(\mathbf{y})d\mathbf{y}}=1$, which shows that the multivariate Gaussian is normalized.</li>
+  <li><strong>1st order and 2nd order moments</strong>:
+    <ul>
+      <li>Note: 2nd order moment (i.e. $\mu\mu^T+\Sigma$) $\neq$ covariance of $\mathbf{x}$ (i.e. $\Sigma$)</li>
+    </ul>
+  </li>
+  <li><strong>Number of independent parameters</strong>: $\Sigma$ has in general $D(D+1)/2$ independent parameters
+    <blockquote>
+      <ul>
+        <li>$D^2-D$ non-diagonal elements of which $(D^2-D)/2$ are unique</li>
+        <li>$D$ diagonal elements</li>
+        <li>i.e. in total $(D^2-D)/2+D=D(D+1)/2$ independent parameters in $\Sigma$</li>
+      </ul>
+    </blockquote>
+    <ul>
+      <li><mark style="color: white; background-color: red; opacity: 1">grows quadratically with $D$</mark> $\Rightarrow$ manipulating/inverting $\Sigma$ can become computationally infeasible for large $D$</li>
+      <li>$\Sigma$ and $\mu$ together have $D(D+3)/2$ independent parameters</li>
+    </ul>
+  </li>
+  <li><strong>special cases of covariance matrices</strong>:
+    <ul>
+      <li>general $\qquad\qquad\qquad\qquad\Rightarrow D(D+3)/2$ independent parameters (shape: hyperellipsoids)</li>
+      <li>diagonal $\Sigma=\mathop{\mathrm{diag}}(\sigma_i)$ $\qquad\Rightarrow 2D$ independent parameters (shape: axis-aligned hyperellipsoids)</li>
+      <li>isotropic $\Sigma=\sigma^2\mathbf{I}$ $\qquad\qquad\Rightarrow D+1$ independent parameters (shape: hyperspheres)</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="conditionals-and-marginals-of-gaussians">Conditionals and Marginals of Gaussians</h3>
+
+<ul>
+  <li>Conditionals and Marginals of Gaussians are again Gaussians</li>
+</ul>
+
+<p><img src="/assets/images/joint_marginal_conditional_of_Gaussian.gif" alt="joint_marginal_conditional_of_Gaussian.gif" /></p>
+
+<h3 id="limitations-of-gaussians">Limitations of Gaussians</h3>
+
+<h4 id="problem">Problem</h4>
+
+<ul>
+  <li>as discussed above, the Gaussian can be both
+    <ul>
+      <li>too flexible (too many parameters) and</li>
+      <li>too limited in the distributions that it can represent
+        <ul>
+          <li>Gaussian is unimodal, i.e. it has a single maximum, but we want to approximate multimodal distributions!</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="solution-latent-variable-models">Solution: Latent variable models</h4>
+
+<ul>
+  <li>use latent (hidden, unobserved) variables
+    <ul>
+      <li>discrete latent variables $\Rightarrow$ MoGs (which are multimodal!)</li>
+      <li>continuous latent variables $\Rightarrow$ <a href="/assets/images/bishop_ml/probabilistic_PCA.png">“probabilistic PCA”</a>, <a href="/assets/images/bishop_ml/factor_analysis.png">factor analysis</a>
+        <blockquote>
+          <p>“<mark>Probabilistic PCA represents</mark> a constrained form of <mark>the Gaussian distribution</mark> in which the number of free parameters can be restricted while still allowing the model to capture the dominant correlations in a data set.” - Bishop, “Pattern Recognition and Machine Learning”</p>
+        </blockquote>
+        <ul>
+          <li>i.e., like MoGs, probabilistic PCA is a parametric density estimation method (see <a href="#parametric_density">above</a>)</li>
+          <li>see also <a href="/assets/images/bishop_ml/simplest_contin_latent_var_model_1.png">here</a> and <a href="/assets/images/bishop_ml/simplest_contin_latent_var_model_2.png">here</a></li>
+          <li>probabilistic PCA and factor analysis are related</li>
+          <li>formulation of PCA as a probabilistic model was proposed independently by
+Tipping and Bishop (1997, 1999b) and by <a href="http://www.stat.columbia.edu/~liam/teaching/neurostat-fall20/papers/hmm/roweis-ghahramani-lds.pdf">Roweis (1998)</a> $\rightarrow$ see “Linear Gaussian Models”
+            <ul>
+              <li>also important <a href="https://adam2392.github.io/blog/2019/06/gaussian-generative-models/">applications in control theory</a></li>
+            </ul>
+          </li>
+          <li><a href="https://publications.idiap.ch/attachments/reports/2000/rr00-25.pdf">[paper: GMMs vs Mixtures of Latent Variable Models]</a>
+            <blockquote>
+              <p>“One of the most popular density estimation methods is the Gaussian mixture model (GMM). <mark>A promising alternative to GMMs [= MoGs] are the recently proposed mixtures of latent variable models. Examples of the latter are principal component analysis and factor analysis.</mark> The advantage of these models is that they are capable of representing the covariance structure with less parameters by choosing the dimension of a subspace in a suitable way. An empirical evaluation on a large number of data sets shows that mixtures of latent variable models almost always outperform various GMMs both in density estimation and Bayes classifiers.” - from <a href="https://publications.idiap.ch/attachments/reports/2000/rr00-25.pdf">[paper: GMMs vs Mixtures of Latent Variable Models]</a></p>
+            </blockquote>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Latent variable models:
+    <ul>
+      <li>discrete latent variables
+        <ul>
+          <li>continuous $\mathbf{x}$:
+            <ul>
+              <li>MoG/GMM</li>
+            </ul>
+          </li>
+          <li>discrete $\mathbf{x}$:
+            <ul>
+              <li>Mixture of Bernoulli distributions</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>continuous latent variables
+        <ul>
+          <li>probabilistic PCA</li>
+          <li>factor analysis</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="proof-covariance-sigma-symmetric-wlog">Proof: Covariance $\Sigma$ symmetric w.l.o.g.</h3>
+
+<p>see [<a href="https://github.com/pharath/home/blob/master/assets/images/proofs/Gaussian_cov_symmetric_wlog.png">proof-Gaussian-cov-symmetric-wlog</a>]</p>
+
+<ul>
+  <li><strong><mark>Key point:</mark></strong> If $\mathbf{A}=\mathbf{\Sigma}^{-1}$ is not symmetric, then there is another symmetric matrix $\mathbf{B}$ so that $\Delta^2=(\mathbf{x}-\mathbf{\mu})^T\mathbf{\Sigma}^{-1}(\mathbf{x}-\mathbf{\mu})$ is equal to $\Delta^2=(\mathbf{x}-\mathbf{\mu})^T\mathbf{B}(\mathbf{x}-\mathbf{\mu})$.</li>
+  <li><strong>Why is this important?</strong>
+    <ul>
+      <li>If $\Sigma$ was not symmetric, its eigenvectors would not necessarily form an orthonormal basis. Hence, the above intuition for the Gaussians would not hold.</li>
+      <li>If $\Sigma$ is a real, symmetric matrix its eigenvalues are real and its eigenvectors can be chosen to form an orthonormal basis (<a href="https://de.wikipedia.org/wiki/Symmetrische_Matrix#Diagonalisierbarkeit">symmetric matrices/diagonalizable</a> and <a href="https://de.wikipedia.org/wiki/Symmetrische_Matrix#Orthogonale_Diagonalisierbarkeit">symmetric matrices/orthoganally diagonalizable</a>)
+        <ul>
+          <li>in other words, it’s important in order to apply the spectral theorem:
+            <blockquote>
+              <p>“The finite-dimensional <strong>spectral theorem says</strong> that any symmetric matrix whose entries are real can be diagonalized by an orthogonal matrix. More explicitly: For every real symmetric matrix $A$ there exists a real orthogonal matrix $Q$ such that $D = Q^{\mathrm{T}} A Q$ is a diagonal matrix. Every real symmetric matrix is thus, up to choice of an orthonormal basis, a diagonal matrix.” - Wikipedia</p>
+            </blockquote>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="moggmm">MoG/GMM</h2>
+
+<ul>
+  <li><strong>Motivation</strong>:
+    <ul>
+      <li>The K-means (hard-assignments) and the EM algorithm (soft-assignments) result from Maximum Likelihood estimation of the parameters of MoGs.</li>
+    </ul>
+  </li>
+  <li>MoGs are <strong>probabilistic generative models</strong> (see below), if we view each mixture component $k$ as a class</li>
+  <li>parameters are determined by:
+    <ul>
+      <li>Frequentist:
+        <ul>
+          <li>Maximum Likelihood:
+            <ul>
+              <li><strong>problem 1</strong>: no closed-form analytical solution
+                <ul>
+                  <li><strong>solutions</strong>:
+                    <ul>
+                      <li>iterative numerical optimization
+                        <ul>
+                          <li>gradient-based optimization</li>
+                        </ul>
+                      </li>
+                      <li>EM algorithm</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li><strong>problem 2</strong>: maximization of MoG likelihood is not a well posed problem because “<strong>singularities</strong>” will always be present (for both the univariate and the multivariate case, but not for a <strong>single</strong> Gaussian!)
+                <ul>
+                  <li><strong>solution</strong>:
+                    <ul>
+                      <li>see section <a href="#MoG_overfitting">Overfitting in Maximum Likelihood</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li><strong>problem 3</strong>: “<strong>identifiability</strong>”: $K!$ equivalent solutions
+                <ul>
+                  <li>important issue when we want to interpret the parameter values</li>
+                  <li>however, not relevant for density estimation</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Bayesian:
+        <ul>
+          <li>Variational Inference
+            <ul>
+              <li>little additional computation compared with EM algorithm</li>
+              <li>resolves the principle difficulties of maximum likelihood</li>
+              <li>allows the number of components to be inferred <strong>automatically</strong> from the data</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>can be written in two ways:
+    <ul>
+      <li>standard formulation</li>
+      <li>latent variable formulation <a href="/home/assets/images/equations/eq_9_10_to_12.png">[9.10-12]</a> (see section [<a href="#MoG_latent_var">MoG_latent_var</a>])
+        <ul>
+          <li><strong>why useful?</strong>
+            <ul>
+              <li>for ancestral sampling</li>
+              <li><strong>simplifications of the ML solution of MoG</strong><a name="MoG_ML_lat_var_form"></a>: we can work with the joint distribution $P(\mathbf{x},\mathbf{z})$ instead of the marginal $P(\mathbf{x})$ $\Rightarrow$ we can write the <strong>complete-data</strong> log-likelihood in the form <a href="/home/assets/images/equations/eq_9_35.png">[9.35]</a>
+                <ul>
+                  <li>simplifies maximum likelihood solution of MoG
+                    <ul>
+                      <li>using latent variables the complete-data log-likelihood can be written as <a href="/home/assets/images/equations/eq_9_35.png">[9.35]</a>, which is basically $p(\mathbf{X},\mathbf{Z})=\prod_{n=1}^N p(\mathbf{z}_n)p(\mathbf{x}_n\vert\mathbf{z}_n)$ (recall: there is one $\mathbf{z}_n$ for each $\mathbf{x}_n$)
+                        <ul>
+                          <li>do not sum over $\mathbf{z}$ as in <a href="/home/assets/images/equations/eq_9_10_to_12.png">[9.12]</a>! 9.12 is $p(\mathbf{x})$ and not $p(\mathbf{x},\mathbf{z})$! Simply insert <a href="/home/assets/images/equations/eq_9_10_to_12.png">[9.10]</a> and <a href="/home/assets/images/equations/eq_9_10_to_12.png">[9.11]</a> in $p(\mathbf{X},\mathbf{Z})$.</li>
+                          <li>this leads to a <strong>closed form</strong> solution for the MoG maximum likelihood (which is useless in practice, though)
+                            <ul>
+                              <li>maximization w.r.t. mean and covariance is exactly as for the single Gaussian, except that it involves only the data points that are assigned to each component. The mixing coefficients are equal to the fractions of data points assigned to the corresponding components.
+                                <ul>
+                                  <li>this simplification would not be possible <strong>without</strong> the introduction of latent variables!</li>
+                                </ul>
+                              </li>
+                              <li>however, the latent variables are not known, in practice
+                                <ul>
+                                  <li>but we can maximize the <strong>expectation of the complete-data log likelihood function</strong> (w.r.t. the posterior distribution of the latent variables) <a href="/home/assets/images/equations/eq_9_40.png">[9.40]</a>
+                                    <ul>
+                                      <li>we can calculate this expectation by choosing some initial parameters in order to calculate $\gamma(z_{nk})$ and then maximizing <a href="/home/assets/images/equations/eq_9_40.png">[9.40]</a> w.r.t. the parameters (while keeping the responsibilities fixed)</li>
+                                      <li>$\Rightarrow$ EM algorithm</li>
+                                    </ul>
+                                  </li>
+                                </ul>
+                              </li>
+                            </ul>
+                          </li>
+                          <li>Note: the MoG likelihood <strong>without</strong> latent variables (see 9.14) <strong>cannot</strong> be maximized in closed form, <del>but the EM algorithm gives closed form expressions for $\mu_k$, $\Sigma_k$ and $\pi_k$.</del>
+                            <ul>
+                              <li>(<a href="https://en.wikipedia.org/wiki/Closed-form_expression">“closed form expression”</a> only means “a mathematical expression that uses a <strong>finite</strong> number of standard operations” and hence, $\mu_k$, $\Sigma_k$ and $\pi_k$ are in closed form)</li>
+                            </ul>
+                          </li>
+                          <li>Interpreting <a href="/home/assets/images/equations/eq_9_36.png">[9.36]</a> is much easier than interpreting 9.14!
+                            <ul>
+                              <li>maximization <strong>wrt a mean</strong> or a <strong>covariance</strong>:
+                                <ul>
+                                  <li>in 9.36: $z_{nk}$ “filtert” die Punkte, die zu Component $\mathcal{N}_k$ assigned wurden, ansonsten <strong>alles wie bei ML bei einem single Gaussian</strong></li>
+                                </ul>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="mixture-models-in-general">Mixture Models in general</h3>
+
+<ul>
+  <li>use cases:
+    <ul>
+      <li>framework for building more complex probability distributions</li>
+      <li>clustering data
+        <ul>
+          <li>clustering with hard assignments (K-means algorithm)</li>
+          <li>clustering with soft assignments (EM algorithm)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="applications-of-mixture-models">Applications of Mixture Models</h4>
+
+<ul>
+  <li>applications typically model the distribution of pixel colors and learn a MoG to represent the class-conditional densities:
+    <ul>
+      <li>image segmentation
+        <ul>
+          <li>mark two regions to learn MoGs and classify background VS foreground</li>
+        </ul>
+      </li>
+      <li>tracking
+        <ul>
+          <li>train background MoG model with an <strong>empty</strong> scene (i.e. the object to be tracked is not in this scene at first) in order to model common appearance variations for each pixel</li>
+          <li>anything that cannot be explained by this model will be labeled as foreground, i.e. the object to be tracked</li>
+          <li>Note: in order to adapt to e.g. lighting changes the MoG can be updated over time</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="non-parametric-methods">Non-parametric methods</h2>
+
+<ul>
+  <li>Aus <a href="#Bishop_2006">Bishop_2006</a>:
+    <ul>
+      <li>“It can be shown that both the K-nearest-neighbour density estimator and the kernel density estimator converge to the true probability density in the limit $N\to\infty$”
+        <ul>
+          <li>Aus <a href="">Duda, Hart 1973</a>:
+            <ul>
+              <li>$p_n$ ist das n-th estimate für die wahre PDF $p$
+                <ul>
+                  <li>$\mathcal{R}_n$ ist eine Folge von Regionen, die das $\mathbf{x}$ enthalten</li>
+                  <li>$V_n$ ist das Volumen von $\mathcal{R}_n$</li>
+                  <li>$k_n$ ist die Anz. an Samples, die in $\mathcal{R}_n$ fallen</li>
+                  <li><strong>Achtung</strong>: $n$ ist sowohl Folgenindex als auch die Gesamtzahl der i.i.d. drawn Samples!</li>
+                </ul>
+              </li>
+              <li>die $\mathcal{R}_n$ bilden eine <strong>Folge</strong></li>
+              <li>zu jedem $\mathcal{R}_n$ gibt es ein $p_n$</li>
+              <li>man kann zeigen, dass $p_n$ gegen das wahre $p$ konvergiert, wenn: 
+  <img src="/home/assets/images/non_param_methods_Duda_Hart.png" alt="non_param_methods_Duda_Hart.png" /></li>
+              <li>“There are two common ways of obtaining sequences of regions that satisfy these conditions” - <a href="">Duda, Hart 1973</a>
+                <ul>
+                  <li>Parzen window (KDE)</li>
+                  <li>K-NN</li>
+                </ul>
+              </li>
+              <li>d.h. KDE und K-NN sind beides Methoden, um solche $p_n$ zu konstruieren, die diesen Bedingungen genügen</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="k-nn">K-NN</h3>
+
+<p><img src="/home/assets/images/bishop_ml/knn.png" alt="knn.png" /></p>
+
+<ul>
+  <li>$k=1$: decision boundary = hyperplanes that form perpendicular bisectors of pairs of points from different classes</li>
+  <li>Ties can be broken at random</li>
+</ul>
+
+<h1 id="outlier-removal">Outlier removal</h1>
+
+<ul>
+  <li>by choosing a suitable nonlinearity (e.g. sigmoid, tanh)
+    <ul>
+      <li>cf. <a href="#least_squares_discriminant">least-squares discriminant</a> example</li>
+    </ul>
+  </li>
+  <li>remove outlier data point completely from the data set</li>
+</ul>
+
+<h1 id="model-selection--comparison">Model Selection / Comparison</h1>
+
+<ul>
+  <li>TODO</li>
+</ul>
+
+<h1 id="the-curse-of-dimensionality">The Curse of Dimensionality</h1>
+
+<h2 id="why-important-2">Why important?</h2>
+
+<ul>
+  <li>For all classifiers, the more dimensions we have in the input space (= <strong>feature space</strong>), the more training data we need.
+    <ul>
+      <li>Consider the simple classifier described in Bishop, Chapter 1.4 “The Curse of Dimensionality”.
+        <ul>
+          <li>The problem with an exponentially large number of cells in the input space is that we would need an exponentially large number of training data points in order to ensure that the cells are not empty. Therefore, applying this classifier to more input variables (here: only two input variables (= <strong>features</strong>): $x_6$ and $x_7$) becomes infeasible.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<blockquote>
+  <p>“In machine learning problems […] typically an enormous amount of training data is required to ensure that there are several samples with each combination of values. A typical rule of thumb is that there should be at least 5 training examples for each dimension in the representation. […] This [“Curse of Dimensionality”] phenomenon states that with a fixed number of training samples, <mark>the average (expected) predictive power of a classifier</mark> or regressor <mark>first increases</mark> as the number of dimensions or features used is increased but <mark>beyond a certain dimensionality it starts deteriorating</mark> instead of improving steadily.” - <a href="https://en.wikipedia.org/wiki/Curse_of_dimensionality#Machine_Learning">Wikipedia</a></p>
+</blockquote>
+
+<ul>
+  <li>TODO</li>
+</ul>
+
+<h1 id="decision-theory">Decision Theory</h1>
+
+<h2 id="why-important-3">Why important?</h2>
+
+<p>The <strong>classification problem</strong> can be broken down into two stages:</p>
+<ul>
+  <li><strong>Inference Stage</strong>: use training data to learn a model for $P(C_k\vert\mathbf{x})$</li>
+  <li><strong>Decision Stage</strong>: use these $P(C_k\vert\mathbf{x})$ to make optimal class assignments</li>
+</ul>
+
+<p>Generative and discriminative models use this “two stage” approach. Discriminant functions do <strong>not</strong> have access to the posteriors $P(C_k\vert\mathbf{x})$!</p>
+
+<h1 id="ml-for-mixture-models">ML for Mixture Models</h1>
+
+<h2 id="k-means-algorithm">K-means algorithm</h2>
+
+<ul>
+  <li>corresponds to a particular nonprobabilistic limit of EM applied to MoGs (see EM algorithm)</li>
+  <li><strong>goal</strong>: find values for all $r_{nk}$ and $\pmb{\mu}_k$ so as to minimize $J$ (= “sum of all distances”)</li>
+</ul>
+
+<h3 id="k-means-intuitively">K-means intuitively</h3>
+
+<ul>
+  <li>E step: determine all $r_{nk}$ (“assign $\mathbf{x}_n$ to closest cluster center”)</li>
+  <li>M step: determine all $\pmb{\mu}_k$ (“set $\pmb{\mu}_k$ equal to the mean of all $\mathbf{x}_n$ assigned to cluster $k$”)</li>
+  <li>Note: this algorithm is guaranteed to reduce the value of the objective function $J$ in each phase and hence, is <strong>guaranteed to converge after a finite number of iterations</strong>
+    <ul>
+      <li>$J$ corresponds to the negative expectation of the complete-data log likelihood in the EM algorithm, see 9.43 and disussion of general EM algorithm</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="initialization-of-k-means">Initialization of K-means</h3>
+
+<ul>
+  <li>choose the initial $\pmb{\mu}_k$ to be equal to a random subset of $K$ data points</li>
+</ul>
+
+<h3 id="advantages">Advantages</h3>
+
+<ul>
+  <li>simple and fast to compute</li>
+  <li>guaranteed convergence in finite number of iterations
+    <ul>
+      <li>convergence faster than for standard EM algorithm</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="issues-in-practice">Issues in practice</h3>
+
+<ul>
+  <li>may converge to a local rather than global minimum (like the EM algorithm)
+    <ul>
+      <li>i.e. the final result <strong>depends on initialization</strong></li>
+    </ul>
+  </li>
+  <li>E step may be slow because it requires computing all distances
+    <ul>
+      <li><strong>solution</strong>: speed up by
+        <ul>
+          <li>precompute a data structure (e.g. a tree, where nearby points are in same subtree)</li>
+          <li>avoid unnecessary distance calculations (e.g. using the triangle inequality)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>detects spherical clusters only</li>
+  <li>sensitive to outliers</li>
+  <li>choosing $K$</li>
+</ul>
+
+<h3 id="online-version">Online version</h3>
+
+<ul>
+  <li>above a batch version of K-means is described, but there is also a sequential update online version</li>
+  <li>via Robbins-Monro procedure (<a href="https://projecteuclid.org/ebooks/berkeley-symposium-on-mathematical-statistics-and-probability/Some-methods-for-classification-and-analysis-of-multivariate-observations/chapter/Some-methods-for-classification-and-analysis-of-multivariate-observations/bsmsp/1200512992">MacQueen, 1967</a>)
+    <ul>
+      <li>see Bishop, 2.3.5 “Sequential estimation”</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="k-medoids-algorithm">K-medoids algorithm</h3>
+
+<ul>
+  <li>uses other dissimilarity measure $J$
+    <ul>
+      <li>hence, its M step is potentially more complex
+        <ul>
+          <li><strong>solution</strong>: restrict each cluster prototype to be equal to one of the $\mathbf{x}_n$ assigned to that cluster</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>advantages compared to K-means</strong>:
+    <ul>
+      <li>cluster means are more robust to outliers</li>
+      <li>limits the data types that can be considered
+        <ul>
+          <li>e.g. for categorical inputs a Euclidean distance cannot be calculated</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="complexity">Complexity</h3>
+
+<ul>
+  <li>E step: $\mathcal{O}(KN)$ (for both K-means and K-medoids)</li>
+  <li>M step: $\mathcal{O}(N_k^2)$ for each cluster $k$</li>
+</ul>
+
+<h3 id="elliptical-k-means">Elliptical K-means</h3>
+
+<ul>
+  <li><strong>idea</strong>: EM gives an estimate for $\Sigma$, however, standard K-means (which is a special case of an EM algorithm) does not estimate $\Sigma$
+    <ul>
+      <li>$\Rightarrow$ hard assignments with general $\Sigma$ instead of $\Sigma=\epsilon\mathbf{I}$ for $\epsilon\to 0$ (Sung, Poggio, 1994)</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="applications-of-k-means">Applications of K-means</h3>
+
+<ul>
+  <li>Image Segmentation</li>
+  <li>Image Compression
+    <ul>
+      <li>using <strong>vector quantization</strong></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="latent-variable-formulation-of-mixture-distributions">Latent variable formulation of Mixture Distributions<a name="MoG_latent_var"></a></h2>
+
+<ul>
+  <li>this is basically an alternative (i.e. equivalent) formulation of mixture models (e.g. MoGs) that simplifies certain calculations (see e.g. “latent variable view of EM algorithm”)</li>
+  <li>Merke: <mark>"For every observed data point $\mathbf{x}_n$ there is a corresponding latent variable $\mathbf{z}_n$."</mark>
+    <ul>
+      <li>i.e. there are $N$ latent variables $\mathbf{z}_n$, so to speak</li>
+      <li>$\mathbf{z}_n$ is not known
+        <ul>
+          <li>in ancestral sampling $\mathbf{z}$ is known because we sample from $P(\mathbf{z})$ first, so we know the value of $\mathbf{z}$
+            <ul>
+              <li>and, therefore, we know the component that generates $\mathbf{x}$
+                <ul>
+                  <li>corresponding to the $z_k$ which is equal to $1$</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>$\mathbf{z}_n$ encodes which mixture component $\mathbf{x}_n$ belongs to</li>
+    </ul>
+  </li>
+  <li>${\mathbf{X},\mathbf{Z}}$ is called <strong>complete</strong> data set
+    <ul>
+      <li>the corresponding log-likelihood is $\ln P(\mathbf{X},\mathbf{Z}\vert\mathbf{\vec{\theta}})$, where $P(\mathbf{X},\mathbf{Z}\vert\mathbf{\vec{\theta}})=\prod_{n=1}^N P(\mathbf{z}_n)P(\mathbf{x}_n\vert\mathbf{z}_n)$
+        <ul>
+          <li>this is basically a generalization of $\ln P(\mathbf{X}\vert\mathbf{\vec{\theta}})$ <mark>which simplifies the Maximum Likelihood treatment for MoGs</mark> (in theory, not in practice, see <a href="#MoG_ML_lat_var_form">theoretical ML for MoG</a>)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>actual observed data $\mathbf{X}$ is called <strong>incomplete</strong></li>
+  <li>can be interpreted as defining assignments of data points to specific components of the mixture</li>
+</ul>
+
+<h2 id="em-algorithm">EM algorithm</h2>
+
+<ul>
+  <li><strong>goal</strong>: find maximum likelihood solutions for <mark>models having latent variables</mark></li>
+  <li>use cases:
+    <ul>
+      <li>find MAP solutions for models in which a prior $P(\mathbf{\vec{\theta}})$ is defined</li>
+      <li><strong>Handling missing values</strong>: the EM algorithm can also be applied when the unobserved variables $\mathbf{z}$ correspond to missing values in the data set
+        <ul>
+          <li>only applicable, if values are missing at random (MAR)
+            <blockquote>
+              <p>“Under the classical missing at random mechanism (MAR) assumption, the parameters can thus be estimated by maximizing the observed likelihood. To do so, it is possible to use an Expectation-Maximization (EM) algorithm (Dempster, Laird, and Rubin, 1977) […].” - <a href="https://julierennes.github.io/MAP573/handling-missing-values.html">source: section 11.1.1.3 Two recommended methods: EM / Multiple imputation</a></p>
+            </blockquote>
+          </li>
+          <li>see probabilistic PCA
+            <blockquote>
+              <p>“Because we now have a fully probabilistic model for PCA, we can deal with missing data, provided that it is missing at random, by marginalizing over the distribution of the unobserved variables. Again these missing values can be treated using the EM algorithm. We give an example of the use of this approach for data visualization in Figure 12.11.” - <a href="#Bishop_2006">Bishop_2006</a></p>
+            </blockquote>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="general-em-algorithm">General EM Algorithm</h3>
+
+<ul>
+  <li><strong>E step</strong>:
+    <ul>
+      <li>find $P(\mathbf{Z}\vert\mathbf{X},\pmb{\theta}^{old})$
+        <ul>
+          <li>in the standard EM algorithm this corresponding to: find $\gamma(z_{nk})$</li>
+        </ul>
+      </li>
+      <li>find the expectation (w.r.t this $P(\mathbf{Z}\vert\mathbf{X},\pmb{\theta}^{old})$) of the complete-data log likelihood $Q(\pmb{\theta},\pmb{\theta}^{old})$</li>
+    </ul>
+  </li>
+  <li><strong>M step</strong>: update $\pmb{\theta}^{new}=\text{arg max}_{\pmb{\theta}}Q(\pmb{\theta},\pmb{\theta}^{old})$</li>
+  <li>Note: this algorithm is guaranteed to increase the incomplete-data log likelihood in each cycle</li>
+</ul>
+
+<h3 id="initialization-of-em">Initialization of EM</h3>
+
+<ol>
+  <li>Run K-means (e.g. M times)</li>
+  <li>pick the best result (i.e. lowest error $J$)</li>
+  <li>initialize EM parameters:
+    <ul>
+      <li>initialize $\Sigma_k$ to $\Sigma$ of clusters found by K-means</li>
+      <li>initialize $\pi_k$ to fraction of $\mathbf{x}$ assigned to clusters found by K-means</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="issues-in-practice-1">Issues in practice</h3>
+
+<ul>
+  <li><strong>MoG singularities</strong>: employ techniques to avoid singularities (see <a href="#MoG_overfitting">overfitting MoGs</a>)</li>
+  <li><strong>multiple local maxima</strong>: the log likelihood has in general multiple local maxima
+    <ul>
+      <li>the EM algorithm is not guaranteed to converge to the largest maximum!</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="credit-assignment-problem">Credit Assignment problem</h3>
+
+<ul>
+  <li><strong>problem</strong>: when we are given $\mathbf{x}_n$, we don’t know which component generated this point</li>
+  <li><strong>solution</strong>: we can calculate the responsibilities of each component for explaining $\mathbf{x}<em>n$ $\gamma_k(\mathbf{x}_n)=\gamma(z</em>{kn})=p(z_k=1\vert\mathbf{x}_n)$
+    <ul>
+      <li>corresponds to a <strong>soft assignment</strong> of each sample $\mathbf{x}_n$ to a mixture component $\Rightarrow$ this is why the EM algorithm is sometimes referred to as “<strong>Clustering with soft assignments</strong>”
+        <ul>
+          <li>$\mathbf{x}_n$ is assigned to <strong>all</strong> mixture components (with some probability $\gamma_k(\mathbf{x}_n)$ for each component) instead of only one component (cf. hard assignments of the K-means algorithm)</li>
+        </ul>
+      </li>
+      <li><mark>This is what the E-step of the EM algorithm does!</mark></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="relation-to-k-means">Relation to K-means</h3>
+
+<ul>
+  <li>corresponds to a particular nonprobabilistic limit of EM applied to MoGs
+    <ul>
+      <li>consider a MoG where each mixture component has covariance $\epsilon\mathbf{I}$ and thus looks like <a href="/home/assets/images/equations/eq_9_41.png">[9.41]</a>
+        <ul>
+          <li>then the responsibilities $\gamma(z_{nk})$ for a data point $\mathbf{x}$ all go to zero except for one which will go to unity (in other words: $\gamma(z_{nk})\to r_{nk}$)
+            <ul>
+              <li>this corresponds to a hard assignment of the data point $\mathbf{x}_n$</li>
+            </ul>
+          </li>
+          <li>the $\pmb{\mu}_k$ will go to the K-means $\pmb{\mu}_k$</li>
+          <li>the $\pi_k$ will be reset to the fraction of data points assigned to cluster $k$ (as usual in the EM algorithm)
+            <ul>
+              <li>however, the $\pi_k$ are irrelevant for the algorithm now</li>
+            </ul>
+          </li>
+          <li>the expected complete-data log likelihood $Q(\pmb{\theta},\pmb{\theta}^{old})$ will go to the negative of the distortion measure $J$ for the K-means algorithm</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="linear-models-for-regression">Linear models for regression</h1>
+
+<ul>
+  <li>the polynomial is one example of a broad class of functions called <strong>linear regression models</strong></li>
+  <li>linear regression models:
+    <ul>
+      <li>are always <strong><mark>linear functions of the parameters</mark></strong></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="linear-models-for-classification">Linear models for classification</h1>
+
+<p><strong>Difference to DNNs/MLPs</strong>: linear models use <strong>fixed</strong> basis functions, whereas DNNs/MLPs use <strong>learned</strong> basis functions [via hidden layers]</p>
+
+<blockquote>
+  <p>Note:</p>
+  <ul>
+    <li>linear models (i.e. <mark>WITHOUT</mark> activation function)
+      <ul>
+        <li>these models are linear in the parameters!</li>
+        <li>the decision surfaces are <strong>linear</strong> functions of the input vector $\mathbf{x}$ (or of the feature vector $\pmb{\phi}(\mathbf{x})$, see <a href="#LBF">LBFs</a>)
+          <ul>
+            <li>($D-1$-dimenstional hyperplanes)</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>generalized linear models (i.e. <mark>WITH</mark> activation function)
+      <ul>
+        <li>these models are <strong>not</strong> linear in the parameters!
+          <ul>
+            <li>(in cotrast to the linear models for regression discussed in <a href="#Bishop_2006">Bishop_2006</a>)</li>
+          </ul>
+        </li>
+        <li>the decision surfaces are <strong>linear</strong> functions of the input vector $\mathbf{x}$ (or of the feature vector $\pmb{\phi}(\mathbf{x})$, see <a href="#LBF">LBFs</a>)
+          <ul>
+            <li>($D-1$-dimenstional hyperplanes)</li>
+            <li>because decision surfaces correspond to $y(\mathbf{x})=\text{const}$, which implies $\mathbf{w}^\top\mathbf{x}+w_0=\text{const}$</li>
+          </ul>
+        </li>
+        <li>Open Questions:
+          <ul>
+            <li>lecture slides: if the activation function is not monotonous, the decision surface is not a linear function of $\mathbf{x}$, why?</li>
+          </ul>
+        </li>
+        <li>why decision surface<strong>s</strong> plural and not singular?</li>
+      </ul>
+    </li>
+  </ul>
+</blockquote>
+
+<h2 id="discriminant-functions">discriminant functions</h2>
+
+<blockquote>
+  <p>Note: <a href="#Bishop_2006">Bishop_2006</a> only discusses <strong>linear</strong> discriminants in chapter 4.1 (i.e. the decision surfaces are $D-1$-dimensional hyper<strong>planes</strong>) which does not mean that discriminant functions must always be linear! In particular,</p>
+  <ul>
+    <li>the introduction to chapter 4 <a href="/home/assets/images/bishop_ml/discriminant_functions_intro.png">mentions</a> that all algorithms discussed in this chapter are equally applicable using nonlinear transformations $\pmb{\phi}$.</li>
+    <li>this is also mentioned in chapter “4.3.1 Fixed basis functions”</li>
+  </ul>
+</blockquote>
+
+<ul>
+  <li>2 classes
+    <ul>
+      <li>single 2-class discriminant $y(\mathbf{x})=\mathbf{w}^\top\mathbf{x}+w_{0}$</li>
+      <li>equivalently: single 2-class discriminant comprising $2$ linear functions $y_k(\mathbf{x})=\mathbf{w}^\top_k\mathbf{x}+w_{k0}$</li>
+      <li>Rosenblatt’s perceptron</li>
+    </ul>
+  </li>
+  <li>K classes
+    <ul>
+      <li>one-vs-rest</li>
+      <li>one-vs-one</li>
+      <li>single K-class discriminant comprising $K$ linear functions $y_k(\mathbf{x})=\mathbf{w}^\top_k\mathbf{x}+w_{k0}$
+        <ul>
+          <li>decision regions are convex (proof in <a href="#Bishop_2006">Bishop_2006</a>)
+            <ul>
+              <li>“Every convex subset of $\mathbb{R}^n$ is simply [= singly] connected.” - <a href="https://en.wikipedia.org/wiki/Simply_connected_space">Wikipedia</a>
+                <ul>
+                  <li>$\Rightarrow$ decision regions are also singly connected</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>learning the parameters
+    <ul>
+      <li>least squares<a name="least_squares_discriminant"></a>
+        <ul>
+          <li>wrong tool for binary (i.e. 1-of-K coded) targets because binary targets do not have a Gaussian distribution and least squares corresponds to ML under the assumption of a Gaussian target distribution (see <a href="#Bishop_2006">Bishop_2006</a>, 1.2.5)</li>
+        </ul>
+      </li>
+      <li>Fisher’s linear discriminant</li>
+      <li>perceptron algorithm</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="probabilistic-generative-models-indirect-modeling-of-posterior">probabilistic generative models (indirect modeling of posterior)</h2>
+
+<ul>
+  <li>Examples:
+    <ul>
+      <li>MoGs</li>
+    </ul>
+  </li>
+  <li>$P(C_k\vert\mathbf{x})$ can be written as logistic sigmoid <a href="/home/assets/images/equations/eq_4_57.png">4.57</a>
+    <ul>
+      <li>i.e. $P(C_k\vert\mathbf{x})$ has a sigmoidal shape (when viewed as function of $\mathbf{x}$), <strong>if</strong> “$a$” <a href="/home/assets/images/equations/eq_4_58.png">4.58</a> is linear in $\mathbf{x}$!</li>
+    </ul>
+  </li>
+  <li>first model $P(\mathbf{x}\vert C_k)$ and $P(C_k)$, then use <a href="/home/assets/images/equations/eq_4_57.png">4.57</a>-<a href="/home/assets/images/equations/eq_4_58.png">4.58</a> to find $P(C_k\vert\mathbf{x})$ (or use equivalently Bayes’ theorem <a href="/home/assets/images/equations/eq_1_82.png">1.82</a> and <a href="/home/assets/images/equations/eq_1_83.png">1.83</a>)
+    <ul>
+      <li>Examples:
+        <ul>
+          <li><strong>Continuous Inputs</strong>: (Gaussian distribution)
+            <ul>
+              <li>model each $P(\mathbf{x}\vert C_k)$ as a Gaussian <a href="/home/assets/images/equations/eq_4_64.png">4.64</a>, <mark>where all classes share the same $\pmb{\Sigma}$</mark> $\Rightarrow$ posterior $P(C_k\vert\mathbf{x})$ is the logistic sigmoid <a href="/home/assets/images/equations/eq_4_65.png">4.65</a> (2 classses) or the softmax <a href="">4.62</a> ($K\geq2$ classes) where $a_k$ is given by <a href="">4.68</a>, i.e. a <strong>generalized linear model</strong>
+                <ul>
+                  <li>(i.e. linear decision boundaries, but not linear in parameters!)</li>
+                  <li>decision boundaries are where (the 2 largest) posteriors are equal</li>
+                  <li>use Maximum Likelihood to determine parameters of Gaussian 4.64 and priors $P(C_k)$ (requires data set)</li>
+                  <li>priors enter only through $w_0$ <a href="/home/assets/images/equations/eq_4_67.png">4.67</a>
+                    <ul>
+                      <li>i.e. priors shift the decision boundary parallelly (vgl. <a href="/home/assets/images/equations/eq_4_65.png">4.65</a> mit distance from the origin to the decision surface <a href="/home/assets/images/equations/eq_4_5.png">4.5</a>)</li>
+                      <li>i.e. priors shift the parallel contours of constant posterior probability</li>
+                    </ul>
+                  </li>
+                  <li>the argument of the sigmoid (2 classes) or the $a_k(\mathbf{x})$ of the softmax ($K\geq2$ classes) are linear functions of the inputs $\mathbf{x}$</li>
+                  <li>Note: if the classes do <strong>not</strong> share the same $\pmb{\Sigma}$, the decision boundaries will be <strong>quadratic</strong>, i.e. the $P(C_k\vert\mathbf{x})$ are <strong>not</strong> governed by a generalized linear model!</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><strong>Discrete Inputs</strong>: (Bernoulli distribution)
+            <ul>
+              <li>model $P(\mathbf{x}\vert C_k)$ as <a href="#https://en.wikipedia.org/wiki/Naive_Bayes_classifier#Bernoulli_na%C3%AFve_Bayes">Bernoulli naive Bayes</a> model $P(\mathbf{x}\vert C_k)=\prod_{i=1}^Dp_{ki}^{x_i}(1-p_{ki})^{(1-x_i)}$ $\Rightarrow$ posterior $P(C_k\vert\mathbf{x})$ a logistic sigmoid (2 classses) or the softmax <a href="">4.62</a> ($K\geq2$ classes) where $a_k$ is given by <a href="">4.82</a>, i.e. again a <strong>generalized linear model</strong>
+                <ul>
+                  <li>$x_i\in{0,1}$ (e.g. “spam or ham”)</li>
+                  <li>$p_{ki}$ is the probability of class $C_k$ generating the term $x_i$</li>
+                  <li>$a_k(\mathbf{x})$ are again linear functions of the inputs $x_i$</li>
+                  <li>also holds for discrete variables with $M&gt;2$ states</li>
+                  <li>App: popular for document classification tasks</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><strong>Exponential Family</strong>:
+            <ul>
+              <li>above results are special cases: If class-conditional densities are members of the exponential family, the posterior $P(C_k\vert\mathbf{x})$ is a logistic sigmoid (2 classses) with argument <a href="">4.85</a> or the softmax <a href="">4.62</a> ($K\geq2$ classes) where $a_k$ is given by <a href="">4.86</a>, i.e. again a <strong>generalized linear model</strong></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="probabilistic-discriminative-models-direct-modeling-of-posterior">probabilistic discriminative models (direct modeling of posterior)</h2>
+
+<ul>
+  <li>maximize likelihood function defined through $P(C_k\vert\mathbf{x})$
+    <ul>
+      <li>fewer adaptive parameters to be determined than for generative models
+        <ul>
+          <li>zB. $M$ parameters for logistic regression vs. $M (M + 5) / 2 + 1$ for Gaussian generative model approach as described above, which grows quadratically with $M$</li>
+        </ul>
+      </li>
+      <li>may lead to better predictive performance than generative models, particularly when the $P(\mathbf{x}\vert C_k)$ assumptions of the generative models are not accurate</li>
+      <li>Examples:
+        <ul>
+          <li>logistic regression (2 classes)</li>
+          <li>softmax regression/multiclass logistic regression (multiple classes)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="generative-vs-discriminative-models">generative vs discriminative models</h2>
+
+<ul>
+  <li>Generative models:
+    <ul>
+      <li>can deal naturally with missing data</li>
+      <li>can handle sequences of varying length (hidden Markov models)</li>
+    </ul>
+  </li>
+  <li>Discriminative models:
+    <ul>
+      <li>generally give better performance on discriminative tasks than generative models</li>
+    </ul>
+  </li>
+  <li>Combining both:
+    <ul>
+      <li>using kernels: <a href="#Bishop_2006">Bishop_2006</a> (6.28) ff.
+        <ol>
+          <li>use generative model to define a kernel</li>
+          <li>use this kernel in a discriminative approach</li>
+        </ol>
+      </li>
+      <li><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=1640745">Laserre_2006</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="linear-basis-function-models">Linear Basis Function Models<a name="LBF"></a></h1>
+
+<ul>
+  <li>decision boundaries are linear in feature space ($\pmb{\phi}$ space), but nonlinear in input space ($\mathbf{x}$ space)</li>
+  <li>Note: nonlinear transformations $\pmb{\phi}$:
+    <ul>
+      <li>cannot remove class conditional densities’ overlap (i.e. region where posteriors are not $0$ or $1$) !</li>
+      <li>they can even increase the level of overlap !</li>
+      <li>they can also create overlap where none existed !</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="least-squares-and-maximum-likelihood">Least Squares and Maximum Likelihood</h1>
+
+<ul>
+  <li>S. 141: maximization of likelihood function under a conditional Gaussian (target vector 3.7) noise distribution 3.8 for a linear model is equivalent to minimizing a sum-of-squares error function</li>
+</ul>
+
+<h1 id="relation-of-gradient-descent-to-taylor-expansion">Relation of Gradient Descent to Taylor Expansion</h1>
+
+<ul>
+  <li>see <a href="https://www.cs.princeton.edu/courses/archive/fall18/cos597G/lecnotes/lecture3.pdf">chapter 3.1-3.2</a></li>
+</ul>
+
+<h1 id="newtons-method-newton-raphson-gradient-descent">Newton’s method (Newton-Raphson gradient descent)</h1>
+
+<h2 id="update-formula">Update Formula</h2>
+
+<p>$\mathbf{w}^{\tau+1}=\mathbf{w}^{\tau}-\eta\mathbf{H}^{-1}\vec{\nabla}E(\mathbf{w})\vert_{\mathbf{w}^\tau}\text{, where }\mathbf{H}=\nabla\nabla E(\mathbf{w})$</p>
+
+<h2 id="local-quadratic-approximation">“local quadratic approximation”</h2>
+
+<p>… weil die Newton update Formel $w^{(\tau+1)}=w^{(\tau)}-\ldots$ sich aus der 2nd order Taylor expansion (AKA quadratic approximation) am Punkt $w^\tau$ ergibt, wenn man den 2nd order Polynom nimmt (mit Entwicklungspunkt $w^\tau$), diesen nach $x$ ableitet, $f’(x)=0$ setzt und nach $x$ auflöst. In anderen Worten: Wir suchen die Minimalstelle des 2nd order Taylor Polynoms am Entwicklungspunkt $w^\tau$.</p>
+
+<ul>
+  <li><strong>Achtung</strong>: die Newton-Raphson method update Formel $w^{(\tau+1)}=w^{(\tau)}-\ldots$ nähert die Nullstelle der 1. Ableitung an und nicht den Funktions<strong>wert</strong>! Letzterer wird über die 2nd order Taylor expansion angenähert!</li>
+</ul>
+
+<h3 id="2nd-order-taylor-polynomial-anschaulich">2nd order Taylor polynomial anschaulich</h3>
+
+<p>GeoGebra <a href="https://www.geogebra.org/m/tbyAnqAK">https://www.geogebra.org/m/tbyAnqAK</a></p>
+<ul>
+  <li>beachte: rote Scheitelstelle (vertex Stelle) ist bei -b/(2a), d.h. <strong>nicht</strong> unbedingt bei (0,0) und abhängig von a und b!</li>
+</ul>
+
+<p>Die 2nd order Taylor expansion ist ein Polynom zweiten Grades am Punkt wtau (Parabel, die sich an Stelle wtau an log-likelihood anschmiegt)</p>
+<ul>
+  <li>Entwicklungspunkt wtau muss <strong>nicht</strong> mit Parabel-Scheitelstelle übereinstimmen (s. <a href="https://www.geogebra.org/m/tbyAnqAK">Geogebra</a>)! Diese dürfen auch gar nicht übereinstimmen: Wenn diese übereinstimmen, wäre w(tau) = w(tau + 1), d.h. wtau würde sich nicht verändern beim update: <img src="https://i.ibb.co/qk7TNH2/Quadratic-approximation.jpg" alt="Quadratic_approximation" /></li>
+  <li>in 3D: vgl. Bild ganz unten in <a href="https://suzyahyah.github.io/calculus/optimization/2018/04/06/Taylor-Series-Newtons-Method.html">Link</a></li>
+</ul>
+
+<h2 id="gd-vs-newton-raphson">GD vs Newton-Raphson</h2>
+
+<ul>
+  <li>Newton’s method fails to converge on problems that have <strong>non-differentiable</strong> kinks.  <a href="https://en.wikipedia.org/wiki/Subgradient_method">[Wiki: subgradient methods]</a></li>
+  <li>For non-differentiable functions use subgradient methods. (see below)</li>
+</ul>
+
+<p>source: <a href="https://www.baeldung.com/cs/gradient-descent-vs-newtons-gradient-descent#newtons-method">https://www.baeldung.com/cs/gradient-descent-vs-newtons-gradient-descent#newtons-method</a></p>
+
+<h3 data-id="1-description-of-newtons-method">Description of Newton&#8217;s Method</h3>
+<div class="bd-anchor" id="1-description-of-newtons-method"></div>
+<p>Newton&#8217;s method works in a different manner [than gradient descent]. <strong>This is because it&#8217;s a method for finding the root of a function, rather than its maxima or minima</strong>.</p>
+<p>This means that, if the problem satisfies the constraints of Newton&#8217;s method, we can find <img loading="lazy" src="https://www.baeldung.com/wp-content/ql-cache/quicklatex.com-ede05c264bba0eda080918aaa09c4658_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&#120;" title="Rendered by QuickLaTeX.com" height="8" width="10" style="vertical-align: 0px;" /> for which <img loading="lazy" src="https://www.baeldung.com/wp-content/ql-cache/quicklatex.com-0bce6c022ed0fc63f4659af75888f96c_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&#102;&#40;&#120;&#41;&#61;&#48;" title="Rendered by QuickLaTeX.com" height="19" width="67" style="vertical-align: -5px;" />. Not <img loading="lazy" src="https://www.baeldung.com/wp-content/ql-cache/quicklatex.com-36700780d306ccf4975387990b1949fb_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&#102;&#39;&#40;&#120;&#41;&#61;&#48;" title="Rendered by QuickLaTeX.com" height="19" width="72" style="vertical-align: -5px;" />, as was the case for gradient descent.</p>
+<p><strong>We, therefore, apply Newton&#8217;s method on the derivative <img loading="lazy" src="https://www.baeldung.com/wp-content/ql-cache/quicklatex.com-c66e6c51bc42c02f7cfc7a01ce7bdb58_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&#92;&#116;&#101;&#120;&#116;&#98;&#102;&#123;&#102;&#39;&#40;&#120;&#41;&#125;" title="Rendered by QuickLaTeX.com" height="19" width="39" style="vertical-align: -5px;" /> of the cost function, not on the cost function itself</strong>. This is important because Newton&#8217;s method requires the analytical form of the derivative of any input function we use, as we&#8217;ll see shortly. Therefore, <strong>this means that the cost function we use must be differentiable twice</strong>, not just once, as was the case for gradient descent.</p>
+<h3 data-id="2-definition">Definition</h3>
+<div class="bd-anchor" id="2-definition"></div>
+<p>Let&#8217;s define <img loading="lazy" src="https://www.baeldung.com/wp-content/ql-cache/quicklatex.com-a7ee323bc5a3f73ad5e066b13bed5504_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&#102;&#40;&#120;&#41;" title="Rendered by QuickLaTeX.com" height="19" width="34" style="vertical-align: -5px;" /> as the cost function of a model on which we apply Newton&#8217;s method. The terms <img loading="lazy" src="https://www.baeldung.com/wp-content/ql-cache/quicklatex.com-b4caaf19541a3bc05129a71ac72b0bd0_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&#102;&#39;&#40;&#120;&#41;" title="Rendered by QuickLaTeX.com" height="19" width="38" style="vertical-align: -5px;" /> and <img loading="lazy" src="https://www.baeldung.com/wp-content/ql-cache/quicklatex.com-4c8cfa363454f830de83c5485c0f8de0_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&#102;&#39;&#39;&#40;&#120;&#41;" title="Rendered by QuickLaTeX.com" height="19" width="42" style="vertical-align: -5px;" /> thus indicate, respectively, the first and second-order derivatives of <img loading="lazy" src="https://www.baeldung.com/wp-content/ql-cache/quicklatex.com-a7ee323bc5a3f73ad5e066b13bed5504_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&#102;&#40;&#120;&#41;" title="Rendered by QuickLaTeX.com" height="19" width="34" style="vertical-align: -5px;" />. If we start from a point <img loading="lazy" src="https://www.baeldung.com/wp-content/ql-cache/quicklatex.com-2c83758b12d1eb192c053e5f0ac1a434_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&#120;&#95;&#110;" title="Rendered by QuickLaTeX.com" height="11" width="18" style="vertical-align: -3px;" /> that&#8217;s sufficiently close to the minimum of <img loading="lazy" src="https://www.baeldung.com/wp-content/ql-cache/quicklatex.com-9c09a708375fde2676da319bcdfe8b24_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&#102;" title="Rendered by QuickLaTeX.com" height="16" width="10" style="vertical-align: -4px;" />, we can then get a better approximation by computing this formula:</p>
+<p style="text-align: center"><img loading="lazy" src="https://www.baeldung.com/wp-content/ql-cache/quicklatex.com-b27a1fd79b3b8caf4ca68b859a4a510f_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&#120;&#95;&#123;&#110;&#43;&#49;&#125;&#32;&#61;&#32;&#120;&#95;&#110;&#32;&#43;&#32;&#92;&#102;&#114;&#97;&#99;&#32;&#123;&#102;&#39;&#40;&#120;&#95;&#110;&#41;&#125;&#32;&#123;&#102;&#39;&#39;&#40;&#120;&#95;&#110;&#41;&#125;" title="Rendered by QuickLaTeX.com" height="29" width="146" style="vertical-align: -10px;" /></p>
+<p>The term <img loading="lazy" src="https://www.baeldung.com/wp-content/ql-cache/quicklatex.com-4f53a422f42b582f3c4262da7fc2348c_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&#92;&#102;&#114;&#97;&#99;&#32;&#123;&#102;&#39;&#40;&#120;&#41;&#125;&#32;&#123;&#102;&#39;&#39;&#40;&#120;&#41;&#125;" title="Rendered by QuickLaTeX.com" height="29" width="35" style="vertical-align: -10px;" />, here, indicates that we&#8217;re approximating the function <img loading="lazy" src="https://www.baeldung.com/wp-content/ql-cache/quicklatex.com-b4caaf19541a3bc05129a71ac72b0bd0_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&#102;&#39;&#40;&#120;&#41;" title="Rendered by QuickLaTeX.com" height="19" width="38" style="vertical-align: -5px;" /> with a linear model, in proximity of <img loading="lazy" src="https://www.baeldung.com/wp-content/ql-cache/quicklatex.com-2c83758b12d1eb192c053e5f0ac1a434_l3.png" class="ql-img-inline-formula quicklatex-auto-format" alt="&#120;&#95;&#110;" title="Rendered by QuickLaTeX.com" height="11" width="18" style="vertical-align: -3px;" />.</p>
+
+<h1 id="subgradient-methods">Subgradient Methods</h1>
+
+<ul>
+  <li>“subgradient methods are convergent when applied even to a <strong>non-differentiable</strong> objective function.” <a href="https://en.wikipedia.org/wiki/Subgradient_method">Wiki:Subgradient method</a></li>
+  <li>Examples:
+    <ul>
+      <li>Stochastic Subgradient Descent</li>
+    </ul>
+  </li>
+  <li>use cases:
+    <ul>
+      <li>SVMs (objective: hinge loss)</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="kernel-functions">Kernel functions</h1>
+
+<ul>
+  <li>$k(\mathbf{x},\mathbf{x}^\prime)=\pmb{\phi}(\mathbf{x})^\top\pmb{\phi}(\mathbf{x}^\prime)$</li>
+  <li>symmetric function of its arguments $k(\mathbf{x},\mathbf{x}^\prime)=k(\mathbf{x}^\prime,\mathbf{x})$</li>
+  <li>Examples:
+    <ul>
+      <li><strong>linear kernels</strong> $k(\mathbf{x},\mathbf{x}^\prime)=\mathbf{x}^\top\mathbf{x}^\prime$</li>
+      <li><strong>polynomial kernels</strong> $k(\mathbf{x},\mathbf{x}^\prime)=(\mathbf{x}^\top\mathbf{x}^\prime+c)^M$</li>
+      <li><strong>stationary kernels</strong> $k(\mathbf{x},\mathbf{x}^\prime)=k(\mathbf{x}-\mathbf{x}^\prime)$
+        <ul>
+          <li>function only of the difference between the arguments</li>
+          <li>invariant to translations (hence, “stationary”)</li>
+          <li>Examples:
+            <ul>
+              <li><strong>homogeneous kernels</strong> = <strong>radial basis functions</strong> $k(\mathbf{x},\mathbf{x}^\prime)=k(\lVert\mathbf{x}-\mathbf{x}^\prime\rVert)$
+                <ul>
+                  <li>depend only on the magnitude of the distance</li>
+                  <li>Examples:
+                    <ul>
+                      <li><strong>Gaussian kernels</strong> $k(\mathbf{x},\mathbf{x}^\prime)=\exp(-\lVert\mathbf{x}-\mathbf{x}^\prime\rVert^2/2\sigma^2)$
+                        <ul>
+                          <li>the feature vector $\pmb{\phi}(\mathbf{x})$ corresponding to the Gaussian kernel has infinite dimensionality!</li>
+                          <li>not restricted to the use of Euclidean distance</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><strong>sigmoidal kernel/hyperbolic tangent kernel</strong> $k(\mathbf{x},\mathbf{x}^\prime)=\tanh(a\mathbf{x}^\top\mathbf{x}^\prime+b)$
+        <ul>
+          <li><strong><mark>not a valid kernel!</mark></strong>
+            <ul>
+              <li>Gramian in general is not positive semidefinite.</li>
+            </ul>
+          </li>
+          <li>However, it has been used in practice (Vapnik, 1995).</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>idea</strong>: if an algorithm is formulated in such a way that the input vector only enters through scalar products, then this scalar product can be replaced with some (other) kernel.</li>
+  <li><strong>necessary and sufficient condition for $k$ to be a valid kernel</strong>: Gram matrix with elements $k(\mathbf{x}_n,\mathbf{x}_m)$ must be positive semidefinite for all possible choices of the set ${\mathbf{x}_n}$
+    <ul>
+      <li>Note: Not only the Gram matrix but also the kernel itself can be positive-definite, see <a href="https://en.wikipedia.org/wiki/Positive-definite_kernel">Wikipedia</a></li>
+    </ul>
+  </li>
+  <li>one can <strong>construct new kernels</strong> by building them out of simpler kernels, see <a href="#Bishop_2006">Bishop_2006</a>, kernel combination rules (6.13)-(6.22)</li>
+  <li>kernel functions can be defined over:
+    <ul>
+      <li>graphs</li>
+      <li>sets</li>
+      <li>strings</li>
+      <li>text documents</li>
+      <li>sequences</li>
+      <li>relational data</li>
+      <li>genomic data</li>
+      <li>etc.</li>
+    </ul>
+  </li>
+  <li><strong>use cases</strong>:
+    <ul>
+      <li>SVMs</li>
+      <li>Kernel PCA</li>
+      <li>Kernel FLD (kernel Fisher discriminant analysis, <a href="https://en.wikipedia.org/wiki/Kernel_Fisher_discriminant_analysis">KFD</a>)
+        <ul>
+          <li>“kernelized version of linear discriminant analysis (LDA)” - <a href="https://en.wikipedia.org/wiki/Kernel_Fisher_discriminant_analysis">Wikipedia</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="linearly-separable">Linearly separable</h1>
+
+<ul>
+  <li>By <strong><mark>definition</mark></strong>, the two sets of points ${\mathbf{x}_n}$ and ${\mathbf{y}_n}$ will be linearly separable if there exists a vector $\mathbf{w}$ and a scalar $w_0$ such that $\mathbf{w}^\top \mathbf{x}_n + w_0 \gt 0$ for all $\mathbf{x}_n$, and $\mathbf{w}^\top \mathbf{y}_n + w_0 \lt 0$ for all $\mathbf{y}_n$. - <a href="#Bishop_2006">Bishop_2006</a>, Exercise 4.1</li>
+</ul>
+
+<h1 id="svms">SVMs</h1>
+
+<ul>
+  <li><strong>motivation 1</strong>:
+    <ul>
+      <li><strong>Problem</strong>:
+        <ul>
+          <li>kernel-based algorithms must evaluate the kernel function for all possible pairs of data points
+            <ol>
+              <li>can be computationally infeasible during training</li>
+              <li>can lead to slow predictions (because of long computing times) at test time</li>
+            </ol>
+          </li>
+        </ul>
+      </li>
+      <li><strong>Solution (for ii.)</strong>:
+        <ul>
+          <li><strong>SVMs</strong> only need to evaluate the kernel function at a subset of the training data points (SVMs are kernel-based algorithms that have <strong>sparse</strong> solutions)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>motivation 2</strong>:
+    <ul>
+      <li><strong>Problem</strong>:
+        <ul>
+          <li>overfitting is often a problem with linearly separable data
+            <ul>
+              <li>multiple decision boundaries that have zero error</li>
+              <li>however, they will most likely result in different predictions on the test set, i.e. they will have different generalization performance
+                <ul>
+                  <li>which one has the <strong>best generalization performance</strong> ?</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><strong>Solution</strong>:
+        <ul>
+          <li>it can be shown that <mark>"the larger the classifier's margin the lower its VC dimension (= capacity for overfitting)"</mark>
+            <ul>
+              <li>$\Rightarrow$ the classifier that has the maximal margin will find the desired decision boundary that has the best generalization performance
+                <ul>
+                  <li>$\Rightarrow$ the SVM will find the decision boundary with the best generalization performance</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>hence, SVMs are robust to “too correct” points !</li>
+</ul>
+
+<h2 id="canonical-representation-of-the-decision-hyperplane">Canonical representation of the decision hyperplane</h2>
+
+<p><img src="/assets/images/SVM_canonical_form.png" alt="SVM_canonical_form" /></p>
+
+<p><a href="https://ufal.mff.cuni.cz/~hladka/jsmath/test/svm.pdf">source</a></p>
+
+<h2 id="soft-margin-svm">Soft-margin SVM</h2>
+
+<ul>
+  <li>points <strong>inside</strong> the margin are also support vectors! <img src="/assets/images/bishop_ml/slack_variables_SVM.png" alt="slack_variables_SVM" /> <a href="#Bishop_2006">[source]</a></li>
+  <li>for overlapping class distributions</li>
+  <li>still sensitive to outliers because the penalty for misclassification increases linearly with $\xi$</li>
+  <li>misclassified points have $\xi_n&gt;1$</li>
+  <li>$C$ controls the trade-off between the $\xi_n$ penalty and the margin</li>
+  <li>$\sum_n\xi_n$ is an <strong>upper bound</strong> on the number of misclassified points
+    <ul>
+      <li>because $\xi_n&gt;1$</li>
+    </ul>
+  </li>
+  <li>Note: kernel trick does <strong>not</strong> avoid curse of dimensionality
+    <ul>
+      <li>because any set of points in the original, say, two-dimensional input space $\mathbf{x}$ would be <strong>constrained</strong> to lie exactly on a two-dimensional <strong>nonlinear manifold</strong> (depending on the kernel) embedded in the higher-dimensional feature space
+        <ul>
+          <li>Note: there are <strong>elliptic</strong> and <strong>hyperbolic</strong> paraboloids</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Note: choose monotonically decreasing error function (if the objective is to minimize the misclassification rate)</li>
+</ul>
+
+<h2 id="limitations-of-svms">Limitations of SVMs</h2>
+
+<ul>
+  <li>do not provide posterior probabilistic outputs
+    <ul>
+      <li>in contrast, <strong>relevance vector machines (RVM)</strong> do
+        <ul>
+          <li>RVMs are based on a Bayesian formulation</li>
+          <li>they have typically <strong>much sparser solutions</strong> than SVMs!</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="trainingsolving-the-quadratic-programming-problem">Training/Solving the Quadratic Programming Problem</h2>
+
+<ul>
+  <li><strong>Training phase</strong> (i.e., the determination of the parameters $\mathbf{a}$ and $b$) makes use of the <strong>whole</strong> data set, as opposed to the test phase, which only makes use of the support vectors
+    <ul>
+      <li><strong>Problem:</strong> Direct solution is often infeasible (demanding computation and memory requirements)</li>
+    </ul>
+  </li>
+  <li>$\tilde{L}(\mathbf{a})$ is quadratic
+    <ul>
+      <li>linear constraints $\Rightarrow$ constraints define a convex region $\Rightarrow$ any local optimum will be a global optimum</li>
+    </ul>
+  </li>
+  <li>Most popular approach to training SVMs: <strong>Sequential minimal optimization (SMO)</strong>
+    <ul>
+      <li>SMO uses an extreme form of the <strong>chunking</strong> method</li>
+      <li>standard chunking method:
+        <ul>
+          <li>i.e., identifies <mark>**all**</mark> of the nonzero Lagrange multipliers and discards the others
+            <ul>
+              <li>works because Lagrangian does not change, if the rows and columns of the kernel matrix corresponding to Lagrange multipliers that have value zero are removed
+                <ul>
+                  <li>$\Rightarrow$ size of the matrix in the quadratic function is reduced from $N^2$ to $\left(#(\text{nonzero Lagrange multipliers})\right)^2$, where $N$ is the number of data points
+                    <ul>
+                      <li><strong>Problem:</strong> still needs too much memory for large-scale applications</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>SMO considers just <mark>**two**</mark> Lagrange multipliers at a time, so that the subproblem can be solved analytically instead of numerically
+        <ul>
+          <li>those two Lagrange multipliers are chosen using heuristics at each step</li>
+        </ul>
+      </li>
+      <li>SMO scaling in practice: between $\mathcal{O}(N)$ and $\mathcal{O}(N^2)$</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="probabilistic-outputs">Probabilistic Outputs</h2>
+
+<ul>
+  <li>SVM does not provide probabilistic outputs</li>
+  <li><a href="https://www.researchgate.net/publication/2594015_Probabilistic_Outputs_for_Support_Vector_Machines_and_Comparisons_to_Regularized_Likelihood_Methods">Platt_2000</a> has proposed fitting a logistic sigmoid to the outputs of a <strong>trained</strong> SVM
+    <ul>
+      <li><strong>Problem:</strong> SVM training process is not geared towards this
+        <ul>
+          <li>therefore, the SVM can give poor approximations to the posteriors</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="apps">Apps</h2>
+
+<ul>
+  <li>Text Classification
+    <ul>
+      <li>“Spam or Ham”, spam filter
+        <ul>
+          <li>“Bag-of-words” approach</li>
+          <li>Histogram of word counts
+            <ul>
+              <li>very <strong>high-dimensional</strong> feature space ($\approx 10000$ dimensions)</li>
+              <li>few irrelevant features</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>OCR, Handwritten digit recognition
+    <ul>
+      <li>Virtual SVM (V-SVM), Schölkopf, <strong>0.8% error rate on MNIST</strong>
+        <ul>
+          <li>LeNet-1, 1.7% error rate</li>
+          <li>LeNet-5, 0.95% error rate</li>
+        </ul>
+      </li>
+      <li>comparison: <a href="/assets/images/LeNetvsSVM.png">overview</a>, see <a href="http://yann.lecun.com/exdb/publis/pdf/lecun-01a.pdf">LeNet-5 paper</a></li>
+      <li>Note: LeNet in general refers to LeNet-5</li>
+      <li><mark>SVMs show **almost no overfitting** with higher-degree kernels!</mark></li>
+    </ul>
+  </li>
+  <li>Object Detection
+    <ul>
+      <li>SVMs are <strong>real-time capable</strong>
+        <ul>
+          <li>sliding-window approach
+            <ul>
+              <li><strong>idea</strong>: classify “object vs non-object” for each window
+                <ul>
+                  <li>e.g. pedestrian vs non-pedestrian</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>High-energy physics</li>
+  <li>protein secondary structure prediction</li>
+  <li>etc.</li>
+</ul>
+
+<h1 id="neural-networks">Neural Networks</h1>
+
+<h2 id="perceptrons-rosenblatt-1962">Perceptrons (Rosenblatt 1962)</h2>
+
+<ul>
+  <li>perceptrons are <strong>generalized linear models</strong> (“generalized” because of the activation function)
+    <ul>
+      <li><strong>BUT</strong>: Deep Neural Networks are <strong>nonlinear parametric models</strong>.</li>
+    </ul>
+  </li>
+  <li>more specifically: perceptrons are <strong>generalized linear discriminants</strong> (because they map the input <strong>x</strong> directly to a class label t in {-1,+1} [see above: “Linear models for classification”: approach 1.])</li>
+  <li>original version:
+    <ul>
+      <li>2-class linear discriminant</li>
+      <li>with fixed [i.e. not learned!] nonlinear transformation $\vec{\phi}(\pmb{x})$</li>
+      <li>activation function: step function</li>
+      <li>learned via minimization of “<strong>perceptron criterion</strong>” $\Rightarrow$ SGD</li>
+      <li>exact solution guaranteed for linearly separable data set (<strong>Perceptron Convergence Theorem</strong>)
+        <ul>
+          <li><strong>BUT:</strong> in practice, convergence can be slow
+            <ul>
+              <li>it’s hard to decide, if a problem is not linearly separable or just slowly converging!</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="terminology">Terminology</h2>
+
+<ul>
+  <li>
+    <p><strong>Input layer</strong> is a layer, it’s not wrong to say that. <a href="https://datascience.stackexchange.com/a/14033/115254">source</a></p>
+  </li>
+  <li>
+    <p>However, when calculating the <strong>depth</strong> of a deep neural network, we only consider the layers that have tunable weights. <a href="https://datascience.stackexchange.com/a/14033/115254">source</a></p>
+  </li>
+</ul>
+
+<h2 id="automatic-differentiation">Automatic Differentiation</h2>
+
+<h3 id="forward-mode-vs-reverse-mode-differentiation">Forward-mode vs Reverse-mode differentiation</h3>
+
+<ul>
+  <li>read <a href="https://colah.github.io/posts/2015-08-Backprop/">Olah</a></li>
+</ul>
+
+<blockquote>
+  <p><strong>Forward-mode differentiation</strong> starts at an input to the graph and moves towards the end. At every node, it sums all the paths feeding in. Each of those paths represents one way in which the input affects that node. By adding them up, we get the total way in which the node is affected by the input, it’s derivative. […]</p>
+</blockquote>
+
+<blockquote>
+  <p><strong>Reverse-mode differentiation</strong>, on the other hand, starts at an output of the graph and moves towards the beginning. At each node, it merges all paths which originated at that node. […]</p>
+</blockquote>
+
+<blockquote>
+  <p>When I say that reverse-mode differentiation gives us the derivative of e with respect to every node, I really do mean <strong>every node</strong>. We get both $\frac{\partial e}{\partial a}$ and $\frac{\partial e}{\partial b}$, the derivatives of $e$ with respect to both inputs. Forward-mode differentiation gave us the derivative of our output with respect to a single input, but reverse-mode differentiation gives us all of them. […]</p>
+</blockquote>
+
+<blockquote>
+  <p>When training neural networks, we think of the cost (a value describing how bad a neural network performs) as a function of the parameters (numbers describing how the network behaves). We want to calculate the derivatives of the <strong>cost with respect to all the parameters</strong>, for use in gradient descent. Now, there’s often millions, or even tens of millions of parameters in a neural network. So, <strong>reverse-mode differentiation, <mark>called</mark> backpropagation</strong> [<a href="#reverse_mode_accumulation">more precise: reverse_mode_accumulation</a>] in the context of neural networks, gives us a massive speed up!</p>
+</blockquote>
+
+<blockquote>
+  <p>(Are there any cases <strong>where forward-mode differentiation makes more sense</strong>? Yes, there are! Where the reverse-mode gives the derivatives of one output with respect to all inputs, the forward-mode gives us the derivatives of all outputs with respect to one input. If one has a function with lots of outputs, forward-mode differentiation can be much, much, much faster.)</p>
+</blockquote>
+
+<ul>
+  <li>both are algorithms for efficiently computing the sum by factoring the paths. Instead of summing over all of the paths explicitly, they compute the same sum more efficiently by <mark>**merging paths back together at every node**</mark>. In fact, <strong>both</strong> algorithms touch each edge exactly once!
+    <ul>
+      <li>At each node, reverse-mode differentiation merges all paths which <strong>originated</strong> at that node (starting at an output of the graph and moving towards the beginning)</li>
+      <li>At each node, forward-mode differentiation sums all the paths <strong>feeding into</strong> that node (starting at the beginning and moving towards an output of the graph)</li>
+    </ul>
+  </li>
+  <li>forward-mode: apply operator $\frac{\partial}{\partial X}$</li>
+  <li>reverse-mode: apply operator $\frac{\partial Z}{\partial}$</li>
+  <li>if we have e.g. a hundred inputs, but only one output, reverse-mode differentiation gives a speed up in $\mathcal{O}(\text{# Inputs})$ compared to forward-mode differentiation</li>
+</ul>
+
+<h3 id="pytorch-autograd">PyTorch autograd</h3>
+
+<p><a href="https://pytorch.org/tutorials/beginner/pytorch_with_examples.html">source: Justin Johnson</a></p>
+
+<ul>
+  <li>In the above examples, we had to <strong>manually</strong> implement both the forward and backward passes of our neural network. Manually implementing the backward pass is not a big deal for a small two-layer (?: siehe Stichpunkt) network, but can quickly get very hairy for large complex networks.
+    <ul>
+      <li>?: Why “two-layer”:
+        <ul>
+          <li>The previous polynomial regression examples correspond to a <strong>single</strong> layer perceptron with a fixed nonlinear transformation of the inputs (here: using polynomial basis functions), so why does Johnson say <strong>two</strong>-layer perceptron?
+            <ul>
+              <li>What Johnson probably means here is that, basically, implementing backprop <strong>manually</strong> (like in the previous polynomial regression examples) for a two-layer NN would be possible without autograd. This “two-layer network”, however, does not refer to the previous polynomial regression models!</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">autograd</code> computes <strong>all</strong> gradients with only one line <code class="language-plaintext highlighter-rouge">loss.backward()</code>.
+    <ul>
+      <li>in polynomial regression example <strong>without</strong> <code class="language-plaintext highlighter-rouge">autograd</code>:
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">grad_a</span> <span class="o">=</span> <span class="n">grad_y_pred</span><span class="p">.</span><span class="nb">sum</span><span class="p">()</span>
+  <span class="n">grad_b</span> <span class="o">=</span> <span class="p">(</span><span class="n">grad_y_pred</span> <span class="o">*</span> <span class="n">x</span><span class="p">).</span><span class="nb">sum</span><span class="p">()</span>
+  <span class="n">grad_c</span> <span class="o">=</span> <span class="p">(</span><span class="n">grad_y_pred</span> <span class="o">*</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span><span class="p">).</span><span class="nb">sum</span><span class="p">()</span>
+  <span class="n">grad_d</span> <span class="o">=</span> <span class="p">(</span><span class="n">grad_y_pred</span> <span class="o">*</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">3</span><span class="p">).</span><span class="nb">sum</span><span class="p">()</span>
+</code></pre></div>        </div>
+      </li>
+      <li>the same <strong>with</strong> <code class="language-plaintext highlighter-rouge">autograd</code>:
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">loss</span><span class="p">.</span><span class="n">backward</span><span class="p">()</span>
+</code></pre></div>        </div>
+        <p>where all parameter tensors must have <code class="language-plaintext highlighter-rouge">requires_grad = True</code> (otherwise <code class="language-plaintext highlighter-rouge">autograd</code> does not know wrt which parameters <code class="language-plaintext highlighter-rouge">loss</code> must be differentiated).</p>
+      </li>
+    </ul>
+  </li>
+  <li>Thankfully, we can use <strong>automatic differentiation</strong> to automate the computation of backward passes in neural networks. The <strong>autograd</strong> package in PyTorch provides exactly this functionality. When using autograd, the forward pass of your network will define a <strong>computational graph</strong>; nodes in the graph will be Tensors, and edges will be functions that produce output Tensors from input Tensors. Backpropagating through this graph then allows you to easily compute gradients.
+    <ul>
+      <li>auf Folie:
+        <ol>
+          <li>Convert NN to a computational graph
+            <ul>
+              <li>explanations:
+                <ul>
+                  <li><a href="https://blog.paperspace.com/pytorch-101-understanding-graphs-and-automatic-differentiation/">PyTorch 101, Part 1: Understanding Graphs, Automatic Differentiation and Autograd</a>
+                    <ul>
+                      <li><a href="/pytorch/machine_learning/notes-pytorch/#how-does-pytorch-create-a-computational-graph">important points from this blog post</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="https://towardsdatascience.com/computational-graphs-in-pytorch-and-tensorflow-c25cc40bdcd1">Computational graphs in PyTorch and TensorFlow</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>Each new layer/module specifies how it affects the forward and backward passes
+            <ul>
+              <li>auf nächster Folie: “Each module is defined by
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">module.fprop(</code>$x$<code class="language-plaintext highlighter-rouge">)</code></li>
+                  <li><code class="language-plaintext highlighter-rouge">module.bprop(</code>$\frac{\partial E}{\partial y}$<code class="language-plaintext highlighter-rouge">)</code>
+                    <ul>
+                      <li>computes the gradients of the cost wrt. the inputs $x$ given the gradient wrt. the outputs $y$</li>
+                      <li><code class="language-plaintext highlighter-rouge">module.bprop()</code> ist in PyTorch wegen dem Autograd System nicht notwendig (vgl. <a href="/pytorch/machine_learning/notes-pytorch/#modules">aus PyTorch Doc</a>)</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>e.g. <code class="language-plaintext highlighter-rouge">torch.nn.Linear</code> specifies that it will apply a linear transformation $y=xA^T+b$ to the incoming data during the forward pass (each module has a <code class="language-plaintext highlighter-rouge">forward()</code> method, see e.g. <a href="https://pytorch.org/docs/stable/_modules/torch/nn/modules/linear.html#Linear">source nn.Linear</a>)</li>
+            </ul>
+          </li>
+          <li>Apply reverse-mode differentiation
+            <ul>
+              <li>i.e. call <code class="language-plaintext highlighter-rouge">loss.backward()</code></li>
+            </ul>
+          </li>
+        </ol>
+      </li>
+    </ul>
+  </li>
+  <li>This sounds complicated, it’s pretty simple to use in practice. Each Tensor represents a node in a computational graph. If <code class="language-plaintext highlighter-rouge">x</code> is a Tensor that has <code class="language-plaintext highlighter-rouge">x.requires_grad=True</code> then <code class="language-plaintext highlighter-rouge">x.grad</code> is another Tensor holding the gradient of <code class="language-plaintext highlighter-rouge">x</code> with respect to some scalar value.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># -*- coding: utf-8 -*-
+</span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+
+<span class="c1"># Create Tensors to hold input and outputs.
+</span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">math</span><span class="p">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">math</span><span class="p">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># For this example, the output y is a linear function of (x, x^2, x^3), so
+# we can consider it as a linear layer neural network. Let's prepare the
+# tensor (x, x^2, x^3).
+</span><span class="n">p</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">xx</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">).</span><span class="nb">pow</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+
+<span class="c1"># In the above code, x.unsqueeze(-1) has shape (2000, 1), and p has shape
+# (3,), for this case, broadcasting semantics will apply to obtain a tensor
+# of shape (2000, 3)
+</span>
+<span class="c1"># Use the nn package to define our model as a sequence of layers. nn.Sequential
+# is a Module which contains other Modules, and applies them in sequence to
+# produce its output. The Linear Module computes output from input using a
+# linear function, and holds internal Tensors for its weight and bias.
+# The Flatten layer flatens the output of the linear layer to a 1D tensor,
+# to match the shape of `y`.
+</span><span class="n">model</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">Sequential</span><span class="p">(</span>
+    <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">Flatten</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># The nn package also contains definitions of popular loss functions; in this
+# case we will use Mean Squared Error (MSE) as our loss function.
+</span><span class="n">loss_fn</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">MSELoss</span><span class="p">(</span><span class="n">reduction</span><span class="o">=</span><span class="s">'sum'</span><span class="p">)</span>
+
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">1e-6</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2000</span><span class="p">):</span>
+
+    <span class="c1"># Forward pass: compute predicted y by passing x to the model. Module objects
+</span>    <span class="c1"># override the __call__ operator so you can call them like functions. When
+</span>    <span class="c1"># doing so you pass a Tensor of input data to the Module and it produces
+</span>    <span class="c1"># a Tensor of output data.
+</span>    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">xx</span><span class="p">)</span>
+
+    <span class="c1"># Compute and print loss. We pass Tensors containing the predicted and true
+</span>    <span class="c1"># values of y, and the loss function returns a Tensor containing the
+</span>    <span class="c1"># loss.
+</span>    <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">t</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">99</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">loss</span><span class="p">.</span><span class="n">item</span><span class="p">())</span>
+
+    <span class="c1"># Zero the gradients before running the backward pass.
+</span>    <span class="n">model</span><span class="p">.</span><span class="n">zero_grad</span><span class="p">()</span>
+
+    <span class="c1"># Backward pass: compute gradient of the loss with respect to all the learnable
+</span>    <span class="c1"># parameters of the model. Internally, the parameters of each Module are stored
+</span>    <span class="c1"># in Tensors with requires_grad=True, so this call will compute gradients for
+</span>    <span class="c1"># all learnable parameters in the model.
+</span>    <span class="n">loss</span><span class="p">.</span><span class="n">backward</span><span class="p">()</span>
+
+    <span class="c1"># Update the weights using gradient descent. Each parameter is a Tensor, so
+</span>    <span class="c1"># we can access its gradients like we did before.
+</span>    <span class="k">with</span> <span class="n">torch</span><span class="p">.</span><span class="n">no_grad</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">model</span><span class="p">.</span><span class="n">parameters</span><span class="p">():</span>
+            <span class="n">param</span> <span class="o">-=</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">param</span><span class="p">.</span><span class="n">grad</span>
+
+<span class="c1"># You can access the first layer of `model` like accessing the first item of a list
+</span><span class="n">linear_layer</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># For linear layer, its parameters are stored as `weight` and `bias`.
+</span><span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'Result: y = </span><span class="si">{</span><span class="n">linear_layer</span><span class="p">.</span><span class="n">bias</span><span class="p">.</span><span class="n">item</span><span class="p">()</span><span class="si">}</span><span class="s"> + </span><span class="si">{</span><span class="n">linear_layer</span><span class="p">.</span><span class="n">weight</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">].</span><span class="n">item</span><span class="p">()</span><span class="si">}</span><span class="s"> x + </span><span class="si">{</span><span class="n">linear_layer</span><span class="p">.</span><span class="n">weight</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">].</span><span class="n">item</span><span class="p">()</span><span class="si">}</span><span class="s"> x^2 + </span><span class="si">{</span><span class="n">linear_layer</span><span class="p">.</span><span class="n">weight</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">].</span><span class="n">item</span><span class="p">()</span><span class="si">}</span><span class="s"> x^3'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="forward-propagation">Forward Propagation</h2>
+
+<ul>
+  <li>inputs:
+    <ul>
+      <li>depth $l$</li>
+      <li>$l$ weight matrices of the model $\mathbf{W}^{(i)}$</li>
+      <li>$l$ biases of the model $\mathbf{b}^{(i)}$</li>
+      <li>input $\mathbf{x}$ (here: only one for simplicity)</li>
+      <li>target $\mathbf{y}$</li>
+    </ul>
+  </li>
+  <li>outputs:
+    <ul>
+      <li>output $\hat{\mathbf{y}}$</li>
+      <li>cost function $J$</li>
+      <li>input of unit $j$: $\mathbf{a}_j^{(k)}$ for all $j$</li>
+      <li>output of unit $j$: $\mathbf{h}_j^{(k)}$ for all $j$</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="backprop">Backprop</h2>
+
+<ul>
+  <li>inputs:
+    <ul>
+      <li>depth l</li>
+      <li>l weight matrices of the model $\mathbf{W}^{(i)}$</li>
+      <li>l biases of the model $\mathbf{b}^{(i)}$</li>
+      <li>outputs of Forward Propagation</li>
+    </ul>
+  </li>
+  <li>outputs:
+    <ul>
+      <li>gradients w.r.t. all weights and biases $\nabla_{\mathbf{W}^{(k)}}J$ and $\nabla_{\mathbf{b}^{(k)}}J$
+        <ul>
+          <li>also computes all $\nabla_{\mathbf{a}^{(k)}}J$ and $\nabla_{\mathbf{h}^{(k)}}J$ in the process
+            <ul>
+              <li>$\nabla_{\mathbf{a}^{(k)}}J$ can be interpreted as an indication of how each layer’s output should change to reduce error
+                <ul>
+                  <li>es gibt ein $\nabla_{\mathbf{a}^{(k)}}J$ pro layer k: jede unit in layer k entspricht einer Komponente von $\nabla_{\mathbf{a}^{(k)}}J$</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>refers only to the <strong>method used to compute all necessary gradients</strong>, whereas another algorithm (e.g. SGD) is used to perform <strong>learning</strong> using these gradients!
+    <ul>
+      <li>“however, the term is often used loosely to refer to the entire learning algorithm, including how the gradient is used, such as by stochastic gradient descent” <a href="https://en.wikipedia.org/wiki/Backpropagation">source</a>
+ 	&gt; <a name="reverse_mode_accumulation"></a>“More generally, the field of <strong>automatic differentiation</strong> is concerned with how to compute derivatives algorithmically. The back-propagation algorithm described here is only one approach to automatic differentiation. It is a special case of a broader class of techniques called <strong>reverse mode accumulation</strong>.” (Goodfellow, Bengio)</li>
+    </ul>
+  </li>
+  <li>“layer below builds upon (gradient) result of layer above” (basically, chain rule)
+    <ul>
+      <li>this is why it’s called “backprop”</li>
+      <li>“propagates the gradient backwards through the layers”</li>
+    </ul>
+  </li>
+  <li>“performs on the order of one <strong>Jacobian product</strong> per node in the graph” (Goodfellow, Bengio)
+    <ul>
+      <li>This can be seen from the fact that Backprop visits each edge (of the computational graph for this problem) only once</li>
+    </ul>
+  </li>
+  <li>“[…] the amount of computation required for performing the back-propagation <strong>scales linearly with the number of edges</strong> in $\mathcal{G}$, where the computation <strong>for each edge</strong> corresponds to computing
+    <ul>
+      <li>a partial derivative (of one node with respect to one of its parents) as well as performing</li>
+      <li>one multiplication and</li>
+      <li>one addition.” (Goodfellow, Bengio)</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="computational-graphs">Computational Graphs</h3>
+
+<ul>
+  <li>the following texts from <a href="#Goodfellow_2016">Goodfellow_2016</a> describe the same graphs as Olah is describing in his <a href="https://colah.github.io/posts/2015-08-Backprop/">blog post</a>
+    <ul>
+      <li>“That algorithm specifies the <strong>forward propagation</strong> computation, which we could put in a graph $\mathcal{G}$. In order to perform <strong>back-propagation</strong>, we can construct a computational graph that depends on $\mathcal{G}$ and adds to it an extra set of nodes. These form a <strong>subgraph</strong> $\mathcal{B}$ with one node per node of $\mathcal{G}$. Computation in $\mathcal{B}$ proceeds in exactly the reverse of the order of computation in $\mathcal{B}$, and each node of $\mathcal{B}$ computes the derivative $\frac{\partial u^{(n)}}{\partial u^{(i)}}$ associated with the <strong>forward graph</strong> node $u^{(i)}$.” (Goodfellow, Bengio)</li>
+      <li>“The subgraph $\mathcal{B}$ contains exactly one edge for each edge from node $u^{(j)}$ to node $u^{(i)}$ of $\mathcal{G}$.” (Goodfellow, Bengio)</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="dynamic-programming">Dynamic Programming</h3>
+
+<ul>
+  <li>a computer programming method
+    <ul>
+      <li>though, in literature one often finds the plural form “dynamic programming methods”</li>
+    </ul>
+  </li>
+  <li>refers to simplifying a complicated problem by breaking it down into simpler sub-problems in a recursive manner
+    <ul>
+      <li>if this “breaking down” is possible for a problem, then the problem is said to have <strong>optimal substructure</strong></li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="example-fibonacci-sequence">Example: Fibonacci sequence</h4>
+
+<p>source: <a href="https://en.wikipedia.org/wiki/Dynamic_programming#Fibonacci_sequence">https://en.wikipedia.org/wiki/Dynamic_programming#Fibonacci_sequence</a></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">var</span> <span class="n">m</span> <span class="p">:</span><span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="mi">0</span> <span class="err">→</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span> <span class="err">→</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">function</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="n">n</span> <span class="ow">is</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">map</span> <span class="n">m</span>
+        <span class="n">m</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="p">:</span><span class="o">=</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span> <span class="err">−</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span> <span class="err">−</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">m</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+</code></pre></div></div>
+
+<ul>
+  <li>This technique of saving values that have already been calculated is called <strong>memoization</strong></li>
+  <li>The function requires only $\mathcal{O}(n)$ time instead of <strong>exponential time</strong> (but requires $\mathcal{O}(n)$ space)
+    <ul>
+      <li>i.e. the number of common subexpressions is reduced <strong>without regard to memory</strong>!</li>
+      <li>note: sometimes recalculating instead of storing can be a good decision, <strong>if memory is limited</strong>!</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="relation-to-backprop">Relation to Backprop</h4>
+
+<ul>
+  <li>Backprop stores the $y_i^{(k-1)}$ during the forward pass and re-uses it during the backward pass to calculate $\frac{\partial E}{\partial w_{ji}^{(k-1)}}=y_i^{(k-1)}\frac{\partial E}{\partial w_{ji}^{(k-1)}}$ (memoization, Dynamic Programming)</li>
+  <li>During the backward pass Backprop visits each edge only once (see above) and gradients that have already been calculated are saved in memory (cf. <code class="language-plaintext highlighter-rouge">grad_table[u[i]]</code> in Algo 6.2 or <code class="language-plaintext highlighter-rouge">g</code> in Algo 6.4 Goodfellow, Bengio)! (memoization, Dynamic Programming)
+    <ul>
+      <li>this is analogous to the Fibonacci Sequence Algo’s map <code class="language-plaintext highlighter-rouge">m</code> (see above) which saves the <code class="language-plaintext highlighter-rouge">fib(n − 1) + fib(n − 2)</code> that have already been calculated in memory</li>
+    </ul>
+  </li>
+  <li>(cf. Figure 6.9 in Goodfellow, Bengio) Back-propagation avoids the exponential explosion in <strong>repeated subexpressions</strong></li>
+  <li>similar to the Fibonacci example “the back-propagation algorithm is designed to reduce the number of common subexpressions <strong>without regard to memory</strong>.” (Goodfellow, Bengio)</li>
+  <li>“When the memory required to store the value of these expressions is low, the back-propagation approach of equation 6.52 <img src="/assets/images/goodfellow_ml/Goodf_6_50-6_53.png" alt="6.52" /> is clearly preferable because of its reduced runtime. However, equation 6.53 is also a valid implementation of the chain rule, and is useful <strong>when memory is limited</strong>.” (Goodfellow, Bengio)</li>
+</ul>
+
+<h2 id="implementing-softmax-correctly">Implementing Softmax Correctly</h2>
+
+<ul>
+  <li>Problem: Exponentials get very big and can have very different magnitudes
+    <ul>
+      <li>Solution:
+        <ul>
+          <li>Evaluate $\ln{(\sum_{j=1}^K\exp{(\mathbf{w}_j^\top\mathbf{x})})}$ in the denominator <strong>before</strong> calculating the fraction</li>
+          <li>since $\text{softmax}(\mathbf{a} + \mathbf{b}) = \text{softmax}(\mathbf{a})$ for all $\mathbf{b}\in\mathbb{R}^D$, one can subtract the largest $\mathbf{w}_j$ from the others
+            <ul>
+              <li>(entspricht $\mathbf{a}=\mathbf{w}_j^\top\mathbf{x}$ und $\mathbf{b}=\mathbf{w}_M^\top\mathbf{x}$ bzw. Kürzen des Bruches mit $\exp{(\mathbf{w}_M^\top\mathbf{x})}$, wobei $\mathbf{w}_M$ das größte weight ist)</li>
+              <li>(egal, ob $\mathbf{b}$ von $\mathbf{x}$ abhängt oder nicht!)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="mlp-in-numpy-from-scratch">MLP in numpy from scratch</h2>
+
+<ul>
+  <li>see <a href="https://htmlpreview.github.io/?https://github.com/pharath/home/blob/master/_posts_html/notebooks_in_html/Expl_NN_in_numpy_copy.html">here</a></li>
+</ul>
+
+<h2 id="stochastic-learning-vs-batch-learning">Stochastic Learning vs Batch Learning</h2>
+
+<p>source: LeCun et al. “Efficient BackProp”</p>
+
+<h3 id="sgd">SGD</h3>
+
+<ul>
+  <li>Pros:
+    <ul>
+      <li>is usually much faster than batch learning
+        <ul>
+          <li>consider large redundant data set
+            <ul>
+              <li>example: training set of size 1000 is inadvertently composed of 10 identical copies of a set with 100 samples</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>also often results in better solutions because of the noise in the updates
+        <ul>
+          <li>because the noise present in the updates can result in the weights jumping into the basin of another, possibly deeper, local minimum. This has been demonstrated in certain simplified cases</li>
+        </ul>
+      </li>
+      <li>can be used for tracking changes
+        <ul>
+          <li>useful when the function being modeled is changing over time</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Cons:
+    <ul>
+      <li>noise also prevents full convergence to the minimum
+        <ul>
+          <li>Instead of converging to the exact minimum, the convergence stalls out due to the <strong>weight fluctuations</strong></li>
+          <li>size of the fluctuations depend on the degree of noise of the stochastic updates:
+            <ul>
+              <li>The variance of the fluctuations around the local minimum is proportional to the learning rate $\eta$</li>
+              <li>So in order <strong>to reduce the fluctuations</strong> we can either
+                <ul>
+                  <li>decrease (anneal) the learning rate or</li>
+                  <li>have an adaptive batch size.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="batch-gd">Batch GD</h3>
+
+<ul>
+  <li>Pros:
+    <ul>
+      <li>Conditions of convergence are well understood.</li>
+      <li>Many acceleration techniques (e.g. conjugate gradient) only operate in batch learning.
+   	- Theoretical analysis of the weight dynamics and convergence rates are simpler</li>
+      <li>one is able to use second order methods to speed the learning process
+        <ul>
+          <li>Second order methods speed learning by estimating not just the gradient but also the curvature of the cost surface. Given the curvature, one can estimate the approximate location of the actual minimum.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Cons:
+    <ul>
+      <li>redundancy can make batch learning much slower than on-line</li>
+      <li>often results in worse solutions because of the absence of noise in the updates
+        <ul>
+          <li>will discover the minimum of whatever basin the weights are initially placed</li>
+        </ul>
+      </li>
+      <li>changes go undetected and we obtain rather bad results since we are likely to average over several rules</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="mini-batch-gd">Mini-batch GD</h3>
+
+<ul>
+  <li>Another method to remove noise [in SGD] is to use “mini-batches”, that is, start with a small batch size and increase the size as training proceeds.
+    <ul>
+      <li>However, deciding the rate at which to increase the batch size and which inputs to include in the small batches is as difficult as determining the proper learning rate. <strong>Effectively the size of the learning rate in stochastic learning corresponds to the respective size of the mini batch.</strong></li>
+    </ul>
+  </li>
+  <li>Note also that the problem of removing the noise in the data may be less critical than one thinks because of generalization. <strong>Overtraining may occur long before the noise regime is even reached.</strong></li>
+</ul>
+
+<h3 id="shuffling-the-examples">Shuffling the Examples</h3>
+
+<ul>
+  <li><a href="https://nbviewer.org/github/pharath/home/blob/master/assets/notebooks/Expl_NN_in_numpy.ipynb">Expl_NN_in_numpy</a></li>
+  <li><a href="https://nbviewer.org/github/pharath/home/blob/master/assets/notebooks/MLP_in_numpy.ipynb">MLP_in_numpy</a></li>
+  <li><a href="https://nbviewer.org/github/pharath/home/blob/master/assets/notebooks/MLP_selbst_versucht.ipynb">MLP_selbst_versucht</a></li>
+  <li><a href="https://nbviewer.org/github/pharath/home/blob/master/assets/notebooks/WofuerIst__name__gut.ipynb">WofuerIst__name__gut</a></li>
+</ul>
+
+<h1 id="references">REFERENCES</h1>
+
+<ul>
+  <li><a name="Bishop_2006"></a> <a href="https://www.amazon.de/Pattern-Recognition-Learning-Information-Statistics/dp/0387310738">Bishop, Christopher M., <em>Pattern Recognition and Machine Learning (Information Science and Statistics)</em> (2006), Springer-Verlag, Berlin, Heidelberg, 0387310738.</a></li>
+  <li><a name="Goodfellow_2016"></a> <a href="http://www.deeplearningbook.org">Ian J. Goodfellow and Yoshua Bengio and Aaron Courville, <em>Deep Learning</em> (2016), MIT Press, Cambridge, MA, USA</a></li>
+</ul>
+

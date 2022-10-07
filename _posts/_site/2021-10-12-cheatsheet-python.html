@@ -1,0 +1,215 @@
+<h1 id="pyenv">pyenv</h1>
+
+<ul>
+  <li>For Python version management, e.g.
+    <ul>
+      <li>if you want to use multiple python versions on the same machine</li>
+      <li>if a project requires an older python version</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">pipenv install</code> (see below) will automatically install a python version using <code class="language-plaintext highlighter-rouge">pyenv</code>, if the project requires it</li>
+</ul>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get update<span class="p">;</span> <span class="nb">sudo </span>apt-get <span class="nb">install </span>make build-essential libssl-dev zlib1g-dev <span class="se">\</span>
+libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm <span class="se">\</span>
+libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+</code></pre></div></div>
+
+<h2 id="install">Install</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl https://pyenv.run | bash
+</code></pre></div></div>
+
+<h1 id="pip">pip</h1>
+
+<ul>
+  <li>use <code class="language-plaintext highlighter-rouge">pipenv</code> (see subsection below) instead of <code class="language-plaintext highlighter-rouge">venv</code> and <code class="language-plaintext highlighter-rouge">pip</code></li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">pip install pip-autoremove</td>
+      <td style="text-align: center">utility to remove a package plus unused dependencies</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="venv">venv</h2>
+
+<p><strong>Warning:</strong> Do not move or copy the <code class="language-plaintext highlighter-rouge">env</code> folder to other locations! Always re-create environments by using <code class="language-plaintext highlighter-rouge">python3 -m venv env</code> and re-installing all packages from a <code class="language-plaintext highlighter-rouge">requirements.txt</code> file.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">python3 -m venv env</td>
+      <td style="text-align: center">create the environment <code class="language-plaintext highlighter-rouge">env</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">source env/bin/activate</td>
+      <td style="text-align: center">activate the environment <code class="language-plaintext highlighter-rouge">env</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">deactivate</td>
+      <td style="text-align: center">deactivate the environment that is currently activated</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="requirementstxt-files">requirements.txt files</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">pip install -r requirements.txt</td>
+      <td style="text-align: center">install all packages from a <code class="language-plaintext highlighter-rouge">requirements.txt</code> file</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">pip freeze &gt; requirements.txt</td>
+      <td style="text-align: center">write all packages in the current environment to a <code class="language-plaintext highlighter-rouge">requirements.txt</code> file</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="pipenv">pipenv</h2>
+
+<ul>
+  <li><strong>Warning</strong>: not much development here, i.e. maybe official support ends soon? Use <code class="language-plaintext highlighter-rouge">poetry</code> instead !</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">pip install –user pipenv</td>
+      <td style="text-align: center">Python’s officially recommended packaging tool</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">pipenv install</td>
+      <td style="text-align: center">install right python version, environment and all dependencies</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">pipenv lock –clear</td>
+      <td style="text-align: center">if <code class="language-plaintext highlighter-rouge">ERROR: No matching distribution found for markupsafe==1.0 ERROR: Couldn't install package: MarkupSafe Package installation failed...</code> (and after this command run <code class="language-plaintext highlighter-rouge">pipenv install</code> again)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">pipenv</td>
+      <td style="text-align: center">shows help</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">pipenv shell</td>
+      <td style="text-align: center">activates env (similar to <code class="language-plaintext highlighter-rouge">source /env/bin/activate</code> for <code class="language-plaintext highlighter-rouge">pip</code>)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">pipenv run python blockchain.py</td>
+      <td style="text-align: center">Spawns a command installed into the virtualenv.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">pipenv graph</td>
+      <td style="text-align: center">shows installed dependencies</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="poetry">poetry</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">curl -sSL https://install.python-poetry.org | python3 -</td>
+      <td style="text-align: center">install poetry (check the installation with <code class="language-plaintext highlighter-rouge">poetry</code> or <code class="language-plaintext highlighter-rouge">poetry --version</code>)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="conda">conda</h1>
+
+<p>Vorinstallierte modules: <a href="https://docs.anaconda.com/anaconda/packages/py3.8_linux-64/">List</a></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">conda config –set auto_activate_base False</td>
+      <td style="text-align: center">conda base environment nicht mit shell starten</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="repl">repl</h1>
+
+<h2 id="start-flags">Start flags</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">python3 -v</td>
+      <td style="text-align: center">zeige Details der ausgeführten Befehle (eg. automatische imports, andere getriggerte Befehle, Konstruktor calls, etc.)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="jupyter">jupyter</h1>
+
+<h2 id="convert-notebooks-to-other-formats">Convert notebooks to other formats</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">jupyter nbconvert –to html notebook.ipynb</td>
+      <td style="text-align: center">pass –execute flag, if cells should be run before converting</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">jupyter nbconvert –to pdf notebook.ipynb</td>
+      <td style="text-align: center"> </td>
+    </tr>
+  </tbody>
+</table>

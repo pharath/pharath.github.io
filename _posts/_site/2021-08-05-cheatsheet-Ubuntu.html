@@ -1,0 +1,140 @@
+<h1 id="general-shortcuts">General Shortcuts</h1>
+
+<h2 id="for-bluetooth">For Bluetooth</h2>
+
+<ul>
+  <li>Create .desktop file (“.desktop” ending required!) with this content</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>Desktop Entry]
+<span class="nv">Name</span><span class="o">=</span>open_bluetooth_settings
+<span class="nv">Exec</span><span class="o">=</span>gnome-control-center bluetooth
+<span class="nv">Terminal</span><span class="o">=</span><span class="nb">false
+</span><span class="nv">Type</span><span class="o">=</span>Application
+</code></pre></div></div>
+<ul>
+  <li>Make sure that your script is executable, like this:</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo chmod</span> +x /path/to/script.sh  
+</code></pre></div></div>
+
+<p>(if it does not execute, copy it to ~/Desktop/. There right-click on it and select “Allow Launching”.)</p>
+
+<p><img src="https://i.ibb.co/2ZQfnGY/allow-launching.png" alt="allow launching pic" /></p>
+
+<ul>
+  <li>
+    <p>Move .desktop file to <code class="language-plaintext highlighter-rouge">/usr/share/applications/</code>. Press <code class="language-plaintext highlighter-rouge">Super</code> to open Activities and in the application grid view select “All” (instead of “Frequent”) and search the created .desktop file there. Right-click on it and select “Add to Favorites”. Now the .desktop file should be in the dock and can be accessed via shortcut <code class="language-plaintext highlighter-rouge">Super + &lt;position_in_dock&gt;</code>.</p>
+  </li>
+  <li>
+    <p>It also won’t work with if your script uses the sudo command, or anything else that requires user input.</p>
+  </li>
+</ul>
+
+<p>If you want it to open a terminal window when you run it (if you needed to add input or watch the output) set Terminal to true.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">Terminal</span><span class="o">=</span><span class="nb">true</span>
+</code></pre></div></div>
+<h1 id="network">Network</h1>
+
+<h2 id="on-the-server-computer">On the server computer:</h2>
+
+<ol>
+  <li>Connect server and client via Ethernet cable.</li>
+  <li>On the computer, which is connected to the Internet, click the network icon in the panel and go to “Settings” at the bottom of the menu. [der Schieberegler von “Wired” beim Server sollte bereits aktiv sein, der Schieberegler beim Client sollte inaktiv sein (auch nachdem Kabel eingesteckt wurde)]</li>
+  <li>Click on the “Settings symbol” of your Wired Connection (Leave your wireless connection untouched).</li>
+  <li>On the “IPv4 Settings tab”, select Method: “Shared to other computers”. Click on “Apply” and close this window.</li>
+  <li>On the server reconnect by clicking on the Wired Network’s toggle switch [dh. einmal aus und an], so it gets a new IP address. (The two computers must be connected by an ethernet cable for this step, so connect them now if you haven’t already.) [Toggle Switch auf Client sollte noch inactive sein]</li>
+  <li><strong>Do not change IP settings. Leave everything as it is.</strong></li>
+</ol>
+
+<h2 id="on-the-client-computer">On the client computer:</h2>
+
+<ol>
+  <li>Connect simply via toggle switch of Wired Connection. <strong>IP settings are configured automatically!</strong></li>
+</ol>
+
+<p>Mostly from: <a href="https://askubuntu.com/questions/359856/share-wireless-internet-connection-through-ethernet">Instructions</a></p>
+
+<h1 id="power">Power</h1>
+
+<ul>
+  <li><a href="https://unix.stackexchange.com/a/317933">source</a> The Settings which determine what happens, when the Battery Level is critically low are in <code class="language-plaintext highlighter-rouge">/etc/UPower/UPower.conf</code>. There, the relevant entries are:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">PercentageAction</span><span class="o">=</span>2
+<span class="nv">CriticalPowerAction</span><span class="o">=</span>HybridSleep
+</code></pre></div>    </div>
+  </li>
+  <li>for laptops: <a href="https://www.kernel.org/doc/Documentation/ABI/testing/sysfs-class-power">source</a>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">cat /sys/class/power_supply/BAT0/capacity</code> outputs laptop battery level (in percent)</li>
+      <li><code class="language-plaintext highlighter-rouge">cat /sys/class/power_supply/BAT0/status</code> outputs laptop battery status (values: “Unknown”, “Charging”, “Discharging”, “Not charging”, “Full”)</li>
+      <li><code class="language-plaintext highlighter-rouge">cat /sys/class/power_supply/BAT0/capacity_level</code> outputs laptop battery level description (values: “Unknown”, “Critical”, “Low”, “Normal”, “High”, “Full”). From doc: “Coarse representation of battery capacity.”</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="appearance">Appearance</h1>
+
+<h2 id="restart-gui">Restart GUI</h2>
+
+<p>Press Alt + F2, then type <code class="language-plaintext highlighter-rouge">r</code> and press Enter.</p>
+
+<p>other methods: <a href="https://linuxconfig.org/how-to-restart-gui-on-ubuntu-20-04-focal-fossa">https://linuxconfig.org/how-to-restart-gui-on-ubuntu-20-04-focal-fossa</a></p>
+
+<h2 id="dock-like-macos">Dock like MacOS</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gsettings <span class="nb">set </span>org.gnome.shell.extensions.dash-to-dock extend-height <span class="nb">false
+
+</span>gsettings <span class="nb">set </span>org.gnome.shell.extensions.dash-to-dock show-show-apps-button <span class="nb">false 
+
+</span>gsettings <span class="nb">set </span>org.gnome.shell.extensions.dash-to-dock show-trash <span class="nb">true</span>
+</code></pre></div></div>
+
+<ul>
+  <li>add Launcher icon to dock: via .desktop icon to favorites using “<a href="https://www.reddit.com/r/gnome/comments/emkaxp/invoking_gnome_show_applications_from_command_line/">launch show-apps from command line</a>”</li>
+</ul>
+
+<h2 id="hide-dock-permanently">Hide Dock permanently</h2>
+
+<p>see <a href="https://www.linuxuprising.com/2018/08/how-to-remove-or-disable-ubuntu-dock.html">source</a> Option 3</p>
+
+<p>Hide:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gsettings <span class="nb">set </span>org.gnome.shell.extensions.dash-to-dock autohide <span class="nb">false
+
+</span>gsettings <span class="nb">set </span>org.gnome.shell.extensions.dash-to-dock dock-fixed <span class="nb">false
+
+</span>gsettings <span class="nb">set </span>org.gnome.shell.extensions.dash-to-dock intellihide <span class="nb">false</span>
+</code></pre></div></div>
+
+<p>Show:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gsettings <span class="nb">set </span>org.gnome.shell.extensions.dash-to-dock autohide <span class="nb">true
+
+</span>gsettings <span class="nb">set </span>org.gnome.shell.extensions.dash-to-dock dock-fixed <span class="nb">true
+
+</span>gsettings <span class="nb">set </span>org.gnome.shell.extensions.dash-to-dock intellihide <span class="nb">true</span>
+</code></pre></div></div>
+<h1 id="default-applications">Default Applications</h1>
+
+<h2 id="change-default-mail-client">Change default mail client</h2>
+
+<p>If not already present, add</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">MimeType</span><span class="o">=</span>x-scheme-handler/mailto<span class="p">;</span>x-scheme-handler/mailspring<span class="p">;</span>
+</code></pre></div></div>
+
+<p>to <code class="language-plaintext highlighter-rouge">~/.local/share/applications/mailspring_mailspring.desktop</code> and run</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>update-desktop-database ~/.local/share/applications
+</code></pre></div></div>
+
+<p>There should be a new line <code class="language-plaintext highlighter-rouge">x-scheme-handler/mailto=mailspring_mailspring.desktop</code> in <code class="language-plaintext highlighter-rouge">~/.config/mimeapps.list</code> now.</p>
+
+<h1 id="converter">Converter</h1>
+
+<h2 id="pptx-or-ppt-to-pdf">pptx (or ppt) to pdf</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>libreoffice <span class="nt">--headless</span> <span class="nt">--invisible</span> <span class="nt">--convert-to</span> pdf <span class="k">*</span>.ppt
+</code></pre></div></div>

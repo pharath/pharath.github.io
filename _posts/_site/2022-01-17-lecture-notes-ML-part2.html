@@ -1,0 +1,1347 @@
+<h1 id="neural-networks">Neural Networks</h1>
+
+<h2 id="perceptrons-rosenblatt-1962">Perceptrons (Rosenblatt 1962)</h2>
+
+<ul>
+  <li>perceptrons (SLPs) are <strong>generalized linear models</strong> (“generalized” because of the activation function)
+    <ul>
+      <li><strong>BUT</strong>: Deep Neural Networks (MLPs) are <strong>nonlinear parametric models</strong>.</li>
+    </ul>
+  </li>
+  <li>more specifically: perceptrons are <strong>generalized linear discriminants</strong> (because they map the input <strong>x</strong> directly to a class label t in {-1,+1} [see above: “Linear models for classification”: approach 1.])</li>
+  <li>original version:
+    <ul>
+      <li>2-class linear discriminant
+        <ul>
+          <li>special case: SLP</li>
+        </ul>
+      </li>
+      <li>with <mark>fixed [= not learned]</mark> nonlinear transformation $\vec{\phi}(\pmb{x})$
+        <ul>
+          <li>for MLPs: learning the $w_{kj}$ to the hidden units corresponds to learning $\vec{\phi}(\pmb{x})$</li>
+          <li>Note: with a suitable $\vec{\phi}(\pmb{x})$ this perceptron <strong>can</strong> learn an XOR function!</li>
+        </ul>
+      </li>
+      <li>activation function: step function</li>
+      <li>learned via minimization of “<strong>perceptron criterion</strong>” $\Rightarrow$ SGD <strong>of quadratic error</strong></li>
+      <li><strong>Perceptron Convergence Theorem</strong>: exact solution in a finite number of steps guaranteed for linearly separable data set
+        <ul>
+          <li><strong>BUT:</strong> in practice, convergence can be slow
+            <ul>
+              <li>it’s hard to decide, if a problem is not linearly separable or just slowly converging!</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="terminology">Terminology</h2>
+
+<ul>
+  <li>
+    <p><strong>Input layer</strong> is a layer, it’s not wrong to say that. <a href="https://datascience.stackexchange.com/a/14033/115254">source</a></p>
+  </li>
+  <li>
+    <p>However, when calculating the <strong>depth</strong> of a deep neural network, we only consider the layers that have tunable weights. <a href="https://datascience.stackexchange.com/a/14033/115254">source</a></p>
+  </li>
+</ul>
+
+<h2 id="automatic-differentiation">Automatic Differentiation</h2>
+
+<h3 id="forward-mode-vs-reverse-mode-differentiation">Forward-mode vs Reverse-mode differentiation</h3>
+
+<ul>
+  <li>read <a href="https://colah.github.io/posts/2015-08-Backprop/">Olah</a></li>
+</ul>
+
+<blockquote>
+  <p><strong>Forward-mode differentiation</strong> starts at an input to the graph and moves towards the end. At every node, it sums all the paths feeding in. Each of those paths represents one way in which the input affects that node. By adding them up, we get the total way in which the node is affected by the input, it’s derivative. […]</p>
+</blockquote>
+
+<blockquote>
+  <p><strong>Reverse-mode differentiation</strong>, on the other hand, starts at an output of the graph and moves towards the beginning. At each node, it merges all paths which originated at that node. […]</p>
+</blockquote>
+
+<blockquote>
+  <p>When I say that reverse-mode differentiation gives us the derivative of e with respect to every node, I really do mean <strong>every node</strong>. We get both $\frac{\partial e}{\partial a}$ and $\frac{\partial e}{\partial b}$, the derivatives of $e$ with respect to both inputs. Forward-mode differentiation gave us the derivative of our output with respect to a single input, but reverse-mode differentiation gives us all of them. […]</p>
+</blockquote>
+
+<blockquote>
+  <p>When training neural networks, we think of the cost (a value describing how bad a neural network performs) as a function of the parameters (numbers describing how the network behaves). We want to calculate the derivatives of the <strong>cost with respect to all the parameters</strong>, for use in gradient descent. Now, there’s often millions, or even tens of millions of parameters in a neural network. So, <strong>reverse-mode differentiation, <mark>called</mark> backpropagation</strong> [<a href="#reverse_mode_accumulation">more precise: reverse_mode_accumulation</a>] in the context of neural networks, gives us a massive speed up!</p>
+</blockquote>
+
+<blockquote>
+  <p>(Are there any cases <strong>where forward-mode differentiation makes more sense</strong>? Yes, there are! Where the reverse-mode gives the derivatives of one output with respect to all inputs, the forward-mode gives us the derivatives of all outputs with respect to one input. If one has a function with lots of outputs, forward-mode differentiation can be much, much, much faster.)</p>
+</blockquote>
+
+<ul>
+  <li>both are algorithms for efficiently computing the sum by factoring the paths. Instead of summing over all of the paths explicitly, they compute the same sum more efficiently by <mark>**merging paths back together at every node**</mark>. In fact, <strong>both</strong> algorithms touch each edge exactly once!
+    <ul>
+      <li>At each node, reverse-mode differentiation merges all paths which <strong>originated</strong> at that node (starting at an output of the graph and moving towards the beginning)</li>
+      <li>At each node, forward-mode differentiation sums all the paths <strong>feeding into</strong> that node (starting at the beginning and moving towards an output of the graph)</li>
+    </ul>
+  </li>
+  <li>forward-mode: apply operator $\frac{\partial}{\partial X}$</li>
+  <li>reverse-mode: apply operator $\frac{\partial Z}{\partial}$</li>
+  <li>if we have e.g. a hundred inputs, but only one output, reverse-mode differentiation gives a speed up in $\mathcal{O}(\text{# Inputs})$ compared to forward-mode differentiation</li>
+</ul>
+
+<h3 id="pytorch-autograd">PyTorch autograd</h3>
+
+<p><a href="https://pytorch.org/tutorials/beginner/pytorch_with_examples.html">source: Justin Johnson</a></p>
+
+<ul>
+  <li>In the above examples, we had to <strong>manually</strong> implement both the forward and backward passes of our neural network. Manually implementing the backward pass is not a big deal for a small two-layer (?: siehe Stichpunkt) network, but can quickly get very hairy for large complex networks.
+    <ul>
+      <li>?: Why “two-layer”:
+        <ul>
+          <li>The previous polynomial regression examples correspond to a <strong>single</strong> layer perceptron with a fixed nonlinear transformation of the inputs (here: using polynomial basis functions), so why does Johnson say <strong>two</strong>-layer perceptron?
+            <ul>
+              <li>What Johnson probably means here is that, basically, implementing backprop <strong>manually</strong> (like in the previous polynomial regression examples) for a two-layer NN would be possible without autograd. This “two-layer network”, however, does not refer to the previous polynomial regression models!</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">autograd</code> computes <strong>all</strong> gradients with only one line <code class="language-plaintext highlighter-rouge">loss.backward()</code>.
+    <ul>
+      <li>in polynomial regression example <strong>without</strong> <code class="language-plaintext highlighter-rouge">autograd</code>:
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">grad_a</span> <span class="o">=</span> <span class="n">grad_y_pred</span><span class="p">.</span><span class="nb">sum</span><span class="p">()</span>
+  <span class="n">grad_b</span> <span class="o">=</span> <span class="p">(</span><span class="n">grad_y_pred</span> <span class="o">*</span> <span class="n">x</span><span class="p">).</span><span class="nb">sum</span><span class="p">()</span>
+  <span class="n">grad_c</span> <span class="o">=</span> <span class="p">(</span><span class="n">grad_y_pred</span> <span class="o">*</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span><span class="p">).</span><span class="nb">sum</span><span class="p">()</span>
+  <span class="n">grad_d</span> <span class="o">=</span> <span class="p">(</span><span class="n">grad_y_pred</span> <span class="o">*</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">3</span><span class="p">).</span><span class="nb">sum</span><span class="p">()</span>
+</code></pre></div>        </div>
+      </li>
+      <li>the same <strong>with</strong> <code class="language-plaintext highlighter-rouge">autograd</code>:
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">loss</span><span class="p">.</span><span class="n">backward</span><span class="p">()</span>
+</code></pre></div>        </div>
+        <p>where all parameter tensors must have <code class="language-plaintext highlighter-rouge">requires_grad = True</code> (otherwise <code class="language-plaintext highlighter-rouge">autograd</code> does not know wrt which parameters <code class="language-plaintext highlighter-rouge">loss</code> must be differentiated).</p>
+      </li>
+    </ul>
+  </li>
+  <li>Thankfully, we can use <strong>automatic differentiation</strong> to automate the computation of backward passes in neural networks. The <strong>autograd</strong> package in PyTorch provides exactly this functionality. When using autograd, the forward pass of your network will define a <strong>computational graph</strong>; nodes in the graph will be Tensors, and edges will be functions that produce output Tensors from input Tensors. Backpropagating through this graph then allows you to easily compute gradients.
+    <ul>
+      <li>auf Folie:
+        <ol>
+          <li>Convert NN to a computational graph
+            <ul>
+              <li>explanations:
+                <ul>
+                  <li><a href="https://blog.paperspace.com/pytorch-101-understanding-graphs-and-automatic-differentiation/">PyTorch 101, Part 1: Understanding Graphs, Automatic Differentiation and Autograd</a>
+                    <ul>
+                      <li><a href="/pytorch/machine_learning/notes-pytorch/#how-does-pytorch-create-a-computational-graph">important points from this blog post</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="https://towardsdatascience.com/computational-graphs-in-pytorch-and-tensorflow-c25cc40bdcd1">Computational graphs in PyTorch and TensorFlow</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>Each new layer/module specifies how it affects the forward and backward passes
+            <ul>
+              <li>auf nächster Folie: “Each module is defined by
+                <ul>
+                  <li><code class="language-plaintext highlighter-rouge">module.fprop(</code>$x$<code class="language-plaintext highlighter-rouge">)</code></li>
+                  <li><code class="language-plaintext highlighter-rouge">module.bprop(</code>$\frac{\partial E}{\partial y}$<code class="language-plaintext highlighter-rouge">)</code>
+                    <ul>
+                      <li>computes the gradients of the cost wrt. the inputs $x$ given the gradient wrt. the outputs $y$</li>
+                      <li><code class="language-plaintext highlighter-rouge">module.bprop()</code> ist in PyTorch wegen dem Autograd System nicht notwendig (vgl. <a href="/pytorch/machine_learning/notes-pytorch/#modules">aus PyTorch Doc</a>)</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>e.g. <code class="language-plaintext highlighter-rouge">torch.nn.Linear</code> specifies that it will apply a linear transformation $y=xA^T+b$ to the incoming data during the forward pass (each module has a <code class="language-plaintext highlighter-rouge">forward()</code> method, see e.g. <a href="https://pytorch.org/docs/stable/_modules/torch/nn/modules/linear.html#Linear">source nn.Linear</a>)</li>
+            </ul>
+          </li>
+          <li>Apply reverse-mode differentiation
+            <ul>
+              <li>i.e. call <code class="language-plaintext highlighter-rouge">loss.backward()</code></li>
+            </ul>
+          </li>
+        </ol>
+      </li>
+    </ul>
+  </li>
+  <li>This sounds complicated, it’s pretty simple to use in practice. Each Tensor represents a node in a computational graph. If <code class="language-plaintext highlighter-rouge">x</code> is a Tensor that has <code class="language-plaintext highlighter-rouge">x.requires_grad=True</code> then <code class="language-plaintext highlighter-rouge">x.grad</code> is another Tensor holding the gradient of <code class="language-plaintext highlighter-rouge">x</code> with respect to some scalar value.
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1"># -*- coding: utf-8 -*-
+</span>  <span class="kn">import</span> <span class="nn">torch</span>
+  <span class="kn">import</span> <span class="nn">math</span>
+
+
+  <span class="c1"># Create Tensors to hold input and outputs.
+</span>  <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">math</span><span class="p">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">math</span><span class="p">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+  <span class="c1"># For this example, the output y is a linear function of (x, x^2, x^3), so
+</span>  <span class="c1"># we can consider it as a linear layer neural network. Let's prepare the
+</span>  <span class="c1"># tensor (x, x^2, x^3).
+</span>  <span class="n">p</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+  <span class="n">xx</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">).</span><span class="nb">pow</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+
+  <span class="c1"># In the above code, x.unsqueeze(-1) has shape (2000, 1), and p has shape
+</span>  <span class="c1"># (3,), for this case, broadcasting semantics will apply to obtain a tensor
+</span>  <span class="c1"># of shape (2000, 3)
+</span>
+  <span class="c1"># Use the nn package to define our model as a sequence of layers. nn.Sequential
+</span>  <span class="c1"># is a Module which contains other Modules, and applies them in sequence to
+</span>  <span class="c1"># produce its output. The Linear Module computes output from input using a
+</span>  <span class="c1"># linear function, and holds internal Tensors for its weight and bias.
+</span>  <span class="c1"># The Flatten layer flatens the output of the linear layer to a 1D tensor,
+</span>  <span class="c1"># to match the shape of `y`.
+</span>  <span class="n">model</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">Sequential</span><span class="p">(</span>
+      <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+      <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">Flatten</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="p">)</span>
+
+  <span class="c1"># The nn package also contains definitions of popular loss functions; in this
+</span>  <span class="c1"># case we will use Mean Squared Error (MSE) as our loss function.
+</span>  <span class="n">loss_fn</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">MSELoss</span><span class="p">(</span><span class="n">reduction</span><span class="o">=</span><span class="s">'sum'</span><span class="p">)</span>
+
+  <span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">1e-6</span>
+  <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2000</span><span class="p">):</span>
+
+      <span class="c1"># Forward pass: compute predicted y by passing x to the model. Module objects
+</span>      <span class="c1"># override the __call__ operator so you can call them like functions. When
+</span>      <span class="c1"># doing so you pass a Tensor of input data to the Module and it produces
+</span>      <span class="c1"># a Tensor of output data.
+</span>      <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">xx</span><span class="p">)</span>
+
+      <span class="c1"># Compute and print loss. We pass Tensors containing the predicted and true
+</span>      <span class="c1"># values of y, and the loss function returns a Tensor containing the
+</span>      <span class="c1"># loss.
+</span>      <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">t</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">99</span><span class="p">:</span>
+          <span class="k">print</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">loss</span><span class="p">.</span><span class="n">item</span><span class="p">())</span>
+
+      <span class="c1"># Zero the gradients before running the backward pass.
+</span>      <span class="n">model</span><span class="p">.</span><span class="n">zero_grad</span><span class="p">()</span>
+
+      <span class="c1"># Backward pass: compute gradient of the loss with respect to all the learnable
+</span>      <span class="c1"># parameters of the model. Internally, the parameters of each Module are stored
+</span>      <span class="c1"># in Tensors with requires_grad=True, so this call will compute gradients for
+</span>      <span class="c1"># all learnable parameters in the model.
+</span>      <span class="n">loss</span><span class="p">.</span><span class="n">backward</span><span class="p">()</span>
+
+      <span class="c1"># Update the weights using gradient descent. Each parameter is a Tensor, so
+</span>      <span class="c1"># we can access its gradients like we did before.
+</span>      <span class="k">with</span> <span class="n">torch</span><span class="p">.</span><span class="n">no_grad</span><span class="p">():</span>
+          <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">model</span><span class="p">.</span><span class="n">parameters</span><span class="p">():</span>
+              <span class="n">param</span> <span class="o">-=</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">param</span><span class="p">.</span><span class="n">grad</span>
+
+  <span class="c1"># You can access the first layer of `model` like accessing the first item of a list
+</span>  <span class="n">linear_layer</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+  <span class="c1"># For linear layer, its parameters are stored as `weight` and `bias`.
+</span>  <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'Result: y = </span><span class="si">{</span><span class="n">linear_layer</span><span class="p">.</span><span class="n">bias</span><span class="p">.</span><span class="n">item</span><span class="p">()</span><span class="si">}</span><span class="s"> + </span><span class="si">{</span><span class="n">linear_layer</span><span class="p">.</span><span class="n">weight</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">].</span><span class="n">item</span><span class="p">()</span><span class="si">}</span><span class="s"> x + </span><span class="si">{</span><span class="n">linear_layer</span><span class="p">.</span><span class="n">weight</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">].</span><span class="n">item</span><span class="p">()</span><span class="si">}</span><span class="s"> x^2 + </span><span class="si">{</span><span class="n">linear_layer</span><span class="p">.</span><span class="n">weight</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">].</span><span class="n">item</span><span class="p">()</span><span class="si">}</span><span class="s"> x^3'</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="forward-propagation">Forward Propagation</h2>
+
+<ul>
+  <li>inputs:
+    <ul>
+      <li>depth $l$</li>
+      <li>$l$ weight matrices of the model $\mathbf{W}^{(i)}$</li>
+      <li>$l$ biases of the model $\mathbf{b}^{(i)}$</li>
+      <li>input $\mathbf{x}$ (here: only one for simplicity)</li>
+      <li>target $\mathbf{y}$</li>
+    </ul>
+  </li>
+  <li>outputs:
+    <ul>
+      <li>output $\hat{\mathbf{y}}$</li>
+      <li>cost function $J$</li>
+      <li>input of unit $j$: $\mathbf{a}_j^{(k)}$ for all $j$</li>
+      <li>output of unit $j$: $\mathbf{h}_j^{(k)}$ for all $j$</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="backprop">Backprop</h2>
+
+<ul>
+  <li>inputs:
+    <ul>
+      <li>depth $l$</li>
+      <li>$l$ weight matrices of the model $\mathbf{W}^{(i)}$</li>
+      <li>$l$ biases of the model $\mathbf{b}^{(i)}$</li>
+      <li>outputs of Forward Propagation</li>
+    </ul>
+  </li>
+  <li>outputs:
+    <ul>
+      <li>gradients w.r.t. all weights and biases $\nabla_{\mathbf{W}^{(k)}}J$ and $\nabla_{\mathbf{b}^{(k)}}J$
+        <ul>
+          <li>also computes all $\nabla_{\mathbf{a}^{(k)}}J$ and $\nabla_{\mathbf{h}^{(k)}}J$ in the process
+            <ul>
+              <li>$\nabla_{\mathbf{a}^{(k)}}J$ can be interpreted as an indication of how each layer’s output should change to reduce error
+                <ul>
+                  <li>es gibt ein $\nabla_{\mathbf{a}^{(k)}}J$ pro layer k: jede unit in layer k entspricht einer Komponente von $\nabla_{\mathbf{a}^{(k)}}J$</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>refers only to the <strong>method used to compute all necessary gradients</strong>, whereas another algorithm (e.g. SGD) is used to perform <strong>learning</strong> using these gradients!
+    <ul>
+      <li>“however, the term is often used loosely to refer to the entire learning algorithm, including how the gradient is used, such as by stochastic gradient descent” <a href="https://en.wikipedia.org/wiki/Backpropagation">source</a>
+        <blockquote>
+          <p><a name="reverse_mode_accumulation"></a>“More generally, the field of <strong>automatic differentiation</strong> is concerned with how to compute derivatives algorithmically. The back-propagation algorithm described here is only one approach to automatic differentiation. It is a special case of a broader class of techniques called <strong>reverse mode accumulation</strong>.” (Goodfellow, Bengio)</p>
+        </blockquote>
+      </li>
+    </ul>
+  </li>
+  <li>“layer below builds upon (gradient) result of layer above” (basically, chain rule)
+    <ul>
+      <li>this is why it’s called “backprop”</li>
+      <li>“propagates the gradient backwards through the layers”</li>
+      <li>this suggests a modular (layerwise) implementation:
+        <ul>
+          <li>each layer is a module
+  <img src="/home/assets/images/ML_part2/modular_implementation.png" alt="modular_implementation.png" /></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>“performs on the order of one <strong>Jacobian product</strong> per node in the graph” (Goodfellow, Bengio)
+    <ul>
+      <li>This can be seen from the fact that Backprop visits each edge (of the computational graph for this problem) only once</li>
+    </ul>
+  </li>
+  <li>“[…] the amount of computation required for performing the back-propagation <strong>scales linearly with the number of edges</strong> in $\mathcal{G}$, where the computation <strong>for each edge</strong> corresponds to computing
+    <ul>
+      <li>a partial derivative (of one node with respect to one of its parents) as well as performing</li>
+      <li>one multiplication and</li>
+      <li>one addition.” (Goodfellow, Bengio)</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="computational-graphs">Computational Graphs</h3>
+
+<ul>
+  <li>the following texts from <a href="#Goodfellow_2016">Goodfellow_2016</a> describe the same graphs as Olah is describing in his <a href="https://colah.github.io/posts/2015-08-Backprop/">blog post</a>
+    <ul>
+      <li>“That algorithm specifies the <strong>forward propagation</strong> computation, which we could put in a graph $\mathcal{G}$. In order to perform <strong>back-propagation</strong>, we can construct a computational graph that depends on $\mathcal{G}$ and adds to it an extra set of nodes. These form a <strong>subgraph</strong> $\mathcal{B}$ with one node per node of $\mathcal{G}$. Computation in $\mathcal{B}$ proceeds in exactly the reverse of the order of computation in $\mathcal{G}$, and each node of $\mathcal{B}$ computes the derivative $\frac{\partial u^{(n)}}{\partial u^{(i)}}$ associated with the <strong>forward graph</strong> node $u^{(i)}$.” (Goodfellow, Bengio)</li>
+      <li>“The subgraph $\mathcal{B}$ contains exactly one edge for each edge from node $u^{(j)}$ to node $u^{(i)}$ of $\mathcal{G}$.” (Goodfellow, Bengio)</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="dynamic-programming">Dynamic Programming</h3>
+
+<ul>
+  <li>a computer programming method
+    <ul>
+      <li>though, in literature one often finds the plural form “dynamic programming methods”</li>
+    </ul>
+  </li>
+  <li>refers to simplifying a complicated problem by breaking it down into simpler sub-problems in a recursive manner
+    <ul>
+      <li>if this “breaking down” is possible for a problem, then the problem is said to have <strong>optimal substructure</strong></li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="example-fibonacci-sequence">Example: Fibonacci sequence</h4>
+
+<p>source: <a href="https://en.wikipedia.org/wiki/Dynamic_programming#Fibonacci_sequence">https://en.wikipedia.org/wiki/Dynamic_programming#Fibonacci_sequence</a></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">var</span> <span class="n">m</span> <span class="p">:</span><span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="mi">0</span> <span class="err">→</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span> <span class="err">→</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">function</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="n">n</span> <span class="ow">is</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">map</span> <span class="n">m</span>
+        <span class="n">m</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="p">:</span><span class="o">=</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span> <span class="err">−</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span> <span class="err">−</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">m</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+</code></pre></div></div>
+
+<ul>
+  <li>This technique of saving values that have already been calculated is called <strong>memoization</strong></li>
+  <li>The function requires only $\mathcal{O}(n)$ time instead of <strong>exponential time</strong> (but requires $\mathcal{O}(n)$ space)
+    <ul>
+      <li>i.e. the number of common subexpressions is reduced <strong>without regard to memory</strong>!</li>
+      <li>note: sometimes recalculating instead of storing can be a good decision, <strong>if memory is limited</strong>!</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="relation-to-backprop">Relation to Backprop</h4>
+
+<ul>
+  <li>Backprop stores the $y_i^{(k-1)}$ during the forward pass and re-uses it during the backward pass to calculate $\frac{\partial E}{\partial w_{ji}^{(k-1)}}=y_i^{(k-1)}\frac{\partial E}{\partial w_{ji}^{(k-1)}}$ (memoization, Dynamic Programming)</li>
+  <li>During the backward pass Backprop visits each edge only once (see above) and gradients that have already been calculated are saved in memory (cf. <code class="language-plaintext highlighter-rouge">grad_table[u[i]]</code> in Algo 6.2 or <code class="language-plaintext highlighter-rouge">g</code> in Algo 6.4 Goodfellow, Bengio)! (memoization, Dynamic Programming)
+    <ul>
+      <li>this is analogous to the Fibonacci Sequence Algo’s map <code class="language-plaintext highlighter-rouge">m</code> (see above) which saves the <code class="language-plaintext highlighter-rouge">fib(n − 1) + fib(n − 2)</code> that have already been calculated in memory</li>
+    </ul>
+  </li>
+  <li>(cf. Figure 6.9 in Goodfellow, Bengio) Back-propagation avoids the exponential explosion in <strong>repeated subexpressions</strong></li>
+  <li>similar to the Fibonacci example “the back-propagation algorithm is designed to reduce the number of common subexpressions <strong>without regard to memory</strong>.” (Goodfellow, Bengio)</li>
+  <li>“When the memory required to store the value of these expressions is low, the back-propagation approach of equation 6.52 <img src="/assets/images/goodfellow_ml/Goodf_6_50-6_53.png" alt="6.52" /> is clearly preferable because of its reduced runtime. However, equation 6.53 is also a valid implementation of the chain rule, and is useful <strong>when memory is limited</strong>.” (Goodfellow, Bengio)</li>
+</ul>
+
+<h2 id="implementing-softmax-correctly">Implementing Softmax Correctly</h2>
+
+<ul>
+  <li>Problem: Exponentials get very big and can have very different magnitudes
+    <ul>
+      <li>Solution:
+        <ul>
+          <li>Evaluate $\ln{(\sum_{j=1}^K\exp{(\mathbf{w}_j^\top\mathbf{x})})}$ in the denominator <strong>before</strong> calculating the fraction</li>
+          <li>since $\text{softmax}(\mathbf{a} + \mathbf{b}) = \text{softmax}(\mathbf{a})$ for all $\mathbf{b}\in\mathbb{R}^D$, one can subtract the largest $\mathbf{w}_j$ from the others
+            <ul>
+              <li>(entspricht $\mathbf{a}=\mathbf{w}_j^\top\mathbf{x}$ und $\mathbf{b}=\mathbf{w}_M^\top\mathbf{x}$ bzw. Kürzen des Bruches mit $\exp{(\mathbf{w}_M^\top\mathbf{x})}$, wobei $\mathbf{w}_M$ das größte weight ist)</li>
+              <li>(egal, ob $\mathbf{b}$ von $\mathbf{x}$ abhängt oder nicht!)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="mlp-in-numpy-from-scratch">MLP in numpy from scratch</h2>
+
+<ul>
+  <li>see <a href="https://htmlpreview.github.io/?https://github.com/pharath/home/blob/master/_posts_html/notebooks_in_html/Expl_NN_in_numpy_copy.html">here</a></li>
+</ul>
+
+<h2 id="stochastic-learning-vs-batch-learning">Stochastic Learning vs Batch Learning</h2>
+
+<p>[source: LeCun et al. “Efficient BackProp”]</p>
+
+<h3 id="sgd">SGD</h3>
+
+<ul>
+  <li>Pros:
+    <ul>
+      <li>is usually much faster than batch learning
+        <ul>
+          <li>consider large redundant data set
+            <ul>
+              <li>example: training set of size 1000 is inadvertently composed of 10 identical copies of a set with 100 samples</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>also often results in better solutions because of the noise in the updates
+        <ul>
+          <li>because the noise present in the updates can result in the weights jumping into the basin of another, possibly deeper, local minimum. This has been demonstrated in certain simplified cases</li>
+        </ul>
+      </li>
+      <li>can be used for tracking changes
+        <ul>
+          <li>useful when the function being modeled is changing over time</li>
+        </ul>
+      </li>
+      <li>Small batches can offer a <strong>regularizing effect</strong> (Wilson and Martinez, 2003), <strong>perhaps due to the noise they add</strong> to the learning process. <strong>Generalization error is often best</strong> for a batch size of 1.</li>
+    </ul>
+  </li>
+  <li>Cons:
+    <ul>
+      <li>noise also prevents full convergence to the minimum
+        <ul>
+          <li>Instead of converging to the exact minimum, the convergence stalls out due to the <strong>weight fluctuations</strong>:
+            <ul>
+              <li><strong>size</strong> of the fluctuations depend on the degree of noise of the stochastic updates:
+                <ul>
+                  <li>The variance of the fluctuations around the local minimum is proportional to the learning rate $\eta$
+                    <ul>
+                      <li>which in turn is inversely proportional to the number of patterns presented $\eta\propto\frac{c}{t}$ [see paper]</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>“So in order <strong>to reduce the fluctuations</strong> we can either”
+                <ol>
+                  <li>“decrease (anneal) the learning rate or”
+                    <ul>
+                      <li>start with large $\eta$ and decrease $\eta$ as the training proceeds</li>
+                    </ul>
+                  </li>
+                  <li>“have an adaptive batch size.”
+                    <ul>
+                      <li>start with small mini-batch size $t$ and increase mini-batch size $t$ as the training proceeds
+        - determining an appropriate $t$ is as difficult as determining an appropriate $\eta$ and, therefore, methods (i) and (ii) are equally efficient at reducing these weight fluctuations</li>
+                      <li>Note: This is <strong>only valid in the noise regime at the end of training</strong> and not a general rule for training!
+                        <ul>
+                          <li><strong>in the beginning of the training</strong> for a non-convex, non-quadratic error surface simple rules like this one do not apply, i.e. increasing the mini-batch size may have a different effect than decreasing the learning rate!</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ol>
+              </li>
+              <li>however, this weight fluctuation problem may be “less severe than one thinks because of <strong>generalization</strong>”
+                <ul>
+                  <li>i.e. “<strong>Overtraining</strong> may occur long before the <strong>noise regime</strong> is even reached.”</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="batch-gd">Batch GD</h3>
+
+<ul>
+  <li>Pros:
+    <ul>
+      <li>Conditions of convergence are <strong>well understood</strong>.</li>
+      <li>Many <strong>acceleration techniques</strong> (most <a href="#2nd_order_methods">2nd order methods</a>, e.g. conjugate gradient) only operate in batch learning.</li>
+      <li>Theoretical analysis of the weight dynamics and convergence rates are simpler</li>
+    </ul>
+  </li>
+  <li>Cons:
+    <ul>
+      <li>redundancy can make batch learning much slower than on-line</li>
+      <li>often results in worse solutions because of the absence of noise in the updates
+        <ul>
+          <li>will discover the minimum of whatever basin the weights are initially placed</li>
+        </ul>
+      </li>
+      <li>changes go undetected and we obtain rather bad results since we are likely to average over several rules</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="mini-batch-gd">Mini-batch GD</h3>
+
+<ul>
+  <li>LeCun “Efficient BackProp”:
+    <ul>
+      <li>Another method to remove noise [in SGD] is to use “mini-batches”, that is, start with a small batch size and increase the size as training proceeds.
+        <ul>
+          <li>However, deciding the rate at which to increase the batch size and which inputs to include in the small batches is as difficult as determining the proper learning rate. <strong>Effectively the size of the learning rate in stochastic learning corresponds to the respective size of the mini batch.</strong></li>
+        </ul>
+      </li>
+      <li>Note also that the problem of removing the noise in the data may be less critical than one thinks because of generalization. <strong>Overtraining may occur long before the noise regime is even reached.</strong></li>
+    </ul>
+  </li>
+  <li>[Jastrzębski, S., Kenton, Z., Arpit, D., Ballas, N., Fischer, A., Bengio, Y., &amp; Storkey, A., (2018, October), “<strong>Width of Minima</strong> Reached by Stochastic Gradient Descent is Influenced by <strong>Learning Rate to Batch Size Ratio</strong>”]
+    <ul>
+      <li>The authors give the mathematical and empirical foundation to the idea that the <strong>ratio of learning rate to batch size</strong> influences the generalization capacity of DNN. They show that this ratio plays a major role in the <strong>width of the minima</strong> found by SGD. <strong>The higher ratio the wider is minima and better generalization</strong>. <a href="https://stackoverflow.com/a/55690257">source</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="hyperparameter-tuning-and-optimization">Hyperparameter Tuning and Optimization</h2>
+
+<h3 id="capacity">Capacity</h3>
+
+<h4 id="forms-of-capacity">Forms of Capacity</h4>
+
+<ul>
+  <li><strong>representational capacity</strong> of a model
+    <ul>
+      <li>which family of functions the learning algorithm can choose from when varying the parameters</li>
+    </ul>
+  </li>
+  <li><strong>effective capacity</strong><a name="effective_capacity"></a>
+    <ul>
+      <li>the <strong>effective capacity</strong> may be less than the <strong>representational capacity</strong> because of additional limitations, e.g.:
+        <ul>
+          <li><strong>imperfection of the optimization algorithm</strong>: in practice, the learning algorithm does not actually find the best function, but merely one that significantly reduces the training error.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="changing-a-models-capacity">Changing a Model’s Capacity</h4>
+
+<ul>
+  <li>change the number of input features
+    <ul>
+      <li>(and accordingly adding new parameters associated with those features)</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="quantifying-a-models-capacity-statistical-learning-theory">Quantifying a Model’s Capacity (Statistical Learning Theory)</h4>
+
+<ul>
+  <li>VC dimension</li>
+  <li>The most important results in statistical learning theory show that
+    <ul>
+      <li>the <strong>discrepancy between training error and generalization error</strong> is bounded from above by a quantity that grows as the model capacity grows but shrinks as the number of training examples increases (Vapnik and Chervonenkis, 1971; Vapnik, 1982; Blumer et al., 1989; Vapnik, 1995).
+        <ul>
+          <li>these bounds provide intellectual justification that machine learning algorithms can work</li>
+          <li>however, these bounds are rarely used in practice because:
+            <ul>
+              <li>bounds are often quite loose</li>
+              <li>it is difficult to determine the capacity of deep learning models
+                <ul>
+                  <li>because “effective capacity is limited by the capabilities of the optimization algorithm, and we have little theoretical understanding of the very general non-convex optimization problems involved in deep learning.”</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="relationship-between-capacity-and-error">Relationship between Capacity and Error</h4>
+
+<ul>
+  <li><strong>Note</strong>: Figure 5.3 shows the <strong>capacity</strong> on the x-axis and <strong>not</strong> the training epochs!
+<img src="/home/assets/images/goodfellow_ml/capacity_and_error.png" alt="capacity_and_error.png" />
+source: <a href="#Goodfellow_2016">Goodfellow_2016</a></li>
+</ul>
+
+<h3 id="learning-rate">Learning Rate</h3>
+
+<ul>
+  <li><a href="#Goodfellow_2016">Goodfellow_2016</a>
+    <ul>
+      <li><strong>controls the <a href="#effective_capacity">effective capacity</a> of the model</strong> in a more complicated way than other hyperparameters
+        <ul>
+          <li>the effective capacity of the model is highest when the learning rate is <strong>correct</strong> for the optimization problem, <strong>not when the learning rate is especially large or especially small</strong></li>
+        </ul>
+      </li>
+      <li>The learning rate has a U-shaped curve for training error, illustrated in figure 11.1.
+        <ul>
+          <li>When the learning rate is <strong>too large</strong>, gradient descent can inadvertently increase rather than decrease the training error.
+            <ul>
+              <li>In the idealized quadratic case, this occurs if the learning rate is at least twice as large as its optimal value (LeCun et al., 1998a).</li>
+            </ul>
+          </li>
+          <li>When the learning rate is <strong>too small</strong>, training is <strong>not only slower, but may become permanently stuck</strong> with a high training error.
+            <ul>
+              <li>This effect is poorly understood (it <strong>would not happen for a convex loss function</strong>).</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="adaptive-learning-rate-methods">Adaptive Learning Rate Methods</h4>
+
+<h5 id="methods-if-directions-of-sensitivity-are-not-axis-aligned-momentum-based-methods">Methods, if Directions of Sensitivity are NOT axis-aligned (momentum based methods)</h5>
+
+<ul>
+  <li>the smoothing effects of momentum based techniques also result in <strong>overshooting</strong> and <strong>correction</strong>. (see <a href="https://imgur.com/a/Hqolp">Alec Radford</a>)</li>
+  <li>handle large / dynamic gradients much more poorly than gradient scaling based algorithms and vanilla SGD</li>
+</ul>
+
+<h6 id="momentum-method">Momentum Method</h6>
+
+<h6 id="nesterov-accelerated-gradient">Nesterov-accelerated gradient</h6>
+
+<h5 id="methods-if-directions-of-sensitivity-are-axis-aligned-gradient-scaling-based-methods">Methods, if Directions of Sensitivity are axis-aligned (gradient scaling based methods)</h5>
+
+<h6 id="separate-adaptive-learning-rates-delta-bar-delta-algorithm">Separate, Adaptive Learning Rates (delta-bar-delta algorithm)</h6>
+
+<ul>
+  <li>only for full batch learning</li>
+  <li><strong>global</strong> learning rate multiplied by a <strong>local gain per weight</strong></li>
+  <li><a href="https://www.sciencedirect.com/science/article/pii/0893608088900032">Robert A. Jacobs, 1988</a>
+    <ul>
+      <li><strong>delta-bar-delta</strong> algorithm</li>
+    </ul>
+  </li>
+  <li>Hinton, Lecture 6.4 — Adaptive learning rates for each connection:
+    <ul>
+      <li><strong>only</strong> deals with <strong>axis-aligned effects</strong> [Goodfellow: “If we believe that the directions of sensitivity are somewhat <strong>axis-aligned</strong>, it can make sense to use a separate learning rate for each parameter, and automatically adapt these learning rates throughout the course of learning.” <strong>{d.h. die Achsen sind entlang der $w_{ij}$}</strong>]
+        <ul>
+          <li>as opposed to momentum which can deal with these diagonal ellipses [i.e. correlated $\mathbf{w}_{ij}$] and go in that diagonal direction quickly</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h6 id="rprop">Rprop</h6>
+
+<ul>
+  <li>only for full batch learning</li>
+  <li><strong>local</strong> learning rate per weight (unlike RMSprop), but <strong>global gain</strong> $\eta^+$ or $\eta^-$ respectively
+    <ul>
+      <li>one initial learning rate $\gamma_{ij}^{(0)}$ per weight $w_{ij}$ which will be updated in each iteration by a <strong>global gain</strong> $\eta^+$ or $\eta^-$ respectively</li>
+    </ul>
+  </li>
+  <li>Hinton, Lecture 6.5 — Rmsprop: normalize the gradient:
+    <ul>
+      <li>for issues like escaping from <strong>plateaus with very small gradients</strong> this is a great technique
+        <ul>
+          <li>because even with tiny gradients we will take quite big steps</li>
+          <li>we could not achieve that just by turning up the learning rate because then the steps we took for weights that had big gradients would be much too big</li>
+        </ul>
+      </li>
+      <li>combines the idea of just using the <strong>sign of the gradient</strong> with the idea of making the <strong>step size</strong> depend on which weight it is
+        <ul>
+          <li>so to decide how much to change a weight
+            <ul>
+              <li>you <strong>don’t</strong> look at the magnitude of the gradient,
+                <ul>
+                  <li>we just look at the <strong>sign of the gradient</strong>,</li>
+                </ul>
+              </li>
+              <li>but you do look at the <strong>step size</strong> that you have decided on for that weight and that step size <strong>adapts over time</strong>, again, without looking at the magnitude of the gradient
+                <ul>
+                  <li>increase step size multiplicatively (if last 2 gradient signs agree)
+                    <ul>
+                      <li>as opposed to Robert Jacobs’ “Adpative Learning Rate” method which increases <strong>additively</strong></li>
+                    </ul>
+                  </li>
+                  <li>decrease step size multiplicatively (if last 2 gradient signs disagree)</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h6 id="adagrad">AdaGrad</h6>
+
+<ul>
+  <li><a href="#Goodfellow_2016">Goodfellow_2016</a>:
+    <ul>
+      <li>“The AdaGrad algorithm, shown in algorithm 8.4,
+        <ul>
+          <li>individually adapts the learning rates of all model parameters by scaling them <strong>inversely proportional to the square root of the sum of <mark>all</mark> of their historical squared values</strong> <a href="https://www.jmlr.org/papers/volume12/duchi11a/duchi11a.pdf">(Duchi et al., 2011)</a>.</li>
+        </ul>
+      </li>
+      <li>The parameters with the <strong>largest partial derivative of the loss</strong> have a correspondingly <strong>rapid decrease</strong> in their learning rate, while parameters with <strong>small partial derivatives</strong> have a relatively <strong>small decrease</strong> in their learning rate.</li>
+      <li>The <strong>net effect</strong> is greater progress in the more gently sloped directions of parameter space.</li>
+      <li>empirically it has been found that - for training deep neural network models - the accumulation of squared gradients <em>from the beginning of training</em> can result in a <strong>premature and excessive decrease in the effective learning rate</strong>.</li>
+      <li>AdaGrad performs well for some but not all deep learning models.</li>
+    </ul>
+  </li>
+</ul>
+
+<h6 id="rmsprop">RMSprop</h6>
+
+<ul>
+  <li><strong>global</strong> learning rate</li>
+  <li>eigentlich eine Verbesserung von AdaGrad:
+    <ul>
+      <li>Zaheer, Shaziya, “A Study of the Optimization Algorithms in Deep Learning”:
+        <ul>
+          <li>RMSProp changes the adagrad in a way how the gradient is accumulated.
+            <ul>
+              <li>Gradients are accumulated into an exponentially weighted average.</li>
+              <li>RMSProp <strong>discards the history</strong> and <strong>maintains only recent gradient information</strong>.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Andrew Ng, Oscillation sketch:
+    <ul>
+      <li><strong>Richtung</strong> für jede Dimension/Achse $w_{ij}$ wird über <strong>sign</strong> of gradient gegeben.</li>
+      <li><strong>Betrag</strong> für jede Dimension wird über EMA gegeben (global learning rate kann sich ja nicht ändern!), weshalb oszillierende Dimensionen gedämpft werden und nicht oszillierende Dimensionen gleich bleiben bzw. sich etwas verzögert an Änderungen anpassen.</li>
+    </ul>
+  </li>
+  <li>Hinton:
+    <ul>
+      <li><strong>Motivation:</strong> “Rprop for mini-batch learning”
+        <ul>
+          <li>Rprop is equivalent to using the gradient, but also dividing by the magnitude of the gradient
+            <ul>
+              <li><strong>problem:</strong> we divide by a different magnitude for each mini-batch!
+                <ul>
+                  <li>I.e. the core idea of SGD of stochastic “averaging of weight updates over mini-batches” is violated</li>
+                  <li>in other words, the weight update noise is not the same as in standard mini-batch SGD !</li>
+                </ul>
+              </li>
+              <li><strong>solution:</strong> force the number we divide by to be pretty much the same for nearby mini-batches</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>combines
+        <ul>
+          <li>the robustness of Rprop (which allows to combine gradients in the right way)</li>
+          <li>efficiency of mini-batches</li>
+          <li>averaging of gradients over mini-batches</li>
+        </ul>
+      </li>
+      <li>Hinton:
+        <ul>
+          <li>notice, that we are not adapting the learning rate separately for each connection here!</li>
+          <li>This is a simpler method, where we simply, <strong>for each connection</strong>, keep a running average of the root mean square gradient and divide by that.</li>
+          <li>Extensions:
+            <ul>
+              <li>can be combined with <strong>momentum</strong>, but does not help as much as momentum normally does
+                <ul>
+                  <li>that needs more investigation</li>
+                </ul>
+              </li>
+              <li>can be combined with <strong>adaptive learning rates for each connection</strong>
+                <ul>
+                  <li>Hinton: “That needs more investigation. I just do not know how helpful that will be.”</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/images/goodfellow_ml/RMSprop.png" alt="RMSprop" />
+<a href="#Goodfellow_2016">source: Goodfellow_2016</a></p>
+
+<h3 id="the-condition-number-of-the-hessian">The Condition Number of the Hessian</h3>
+
+<ul>
+  <li><a href="#Goodfellow_2016">Goodfellow_2016</a>:
+    <ul>
+      <li>“In multiple dimensions, there is a different second derivative for each direction at a single point. The <strong>condition number</strong> of the Hessian at this point <strong>measures how much the second derivatives differ from each other</strong>.”
+        <ul>
+          <li>“When the Hessian has a poor condition number, <strong>gradient descent performs poorly</strong>.”
+            <ul>
+              <li>“This is because in one direction, the derivative increases rapidly, while in another direction, it increases slowly. <strong>Gradient descent is unaware of this change in the derivative</strong>”
+                <ul>
+                  <li>information about the <strong>change in the function</strong> is contained in <strong>1st derivative</strong></li>
+                  <li>information about the <strong>change in the derivative</strong> is contained in the <strong>2nd derivative!</strong></li>
+                </ul>
+              </li>
+              <li>“so it does not know that it needs to explore preferentially in the direction where the derivative remains negative for longer.”</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="the-proliferation-of-saddle-points-in-higher-dimensions">The proliferation of saddle points in higher dimensions</h3>
+
+<ul>
+  <li>Goodfellow_2016:
+    <ul>
+      <li>At a saddle point, the <strong>Hessian matrix</strong> [important tool for analyzing critical points, e.g. determine Eigenvalues to check, if it is a saddle point, a local minimum or a maximum] has both positive and negative eigenvalues.</li>
+      <li>Points lying <strong>along eigenvectors</strong> associated with <strong>positive eigenvalues</strong> have greater cost than the saddle point, while points lying <strong>along negative eigenvalues</strong> have lower value.</li>
+    </ul>
+  </li>
+  <li><a href="http://videolectures.net/deeplearning2015_bengio_theoretical_motivations/">Bengio, summer school lecture</a>
+    <ul>
+      <li>wrong idea: non-convex error surface $\Rightarrow$ many local minima $\Rightarrow$ we don’t get any guarantees to find the optimal solution and furthermore, we might be stuck in very poor solutions
+        <ul>
+          <li>one of the reasons why researchers lost interest in NNs</li>
+        </ul>
+      </li>
+      <li>there is theoretical and empirical evidence that this issue of non-convexity is not an issue at all
+        <ul>
+          <li><a href="https://arxiv.org/abs/1405.4604">Pascanu, Dauphin, Ganguli, Bengio</a></li>
+          <li><a href="https://arxiv.org/abs/1406.2572">Dauphin, Pascanu, Gulcehre, Cho, Ganguli, Bengio</a></li>
+          <li><a href="https://arxiv.org/abs/1412.0233">Choromanska, Henaff, Mathieu, Ben Arous &amp; LeCun</a>
+            <ul>
+              <li>these papers describe saddle points in high dimensions:
+                <ul>
+                  <li>for a local minimum all the directions starting from the <strong>critical point</strong> (i.e. derivative equal to zero) must go up (and for a local maximum v.v.)</li>
+                  <li>the more dimensions you have the more “unlikely” (if you construct a function with some randomness and you choose independently whether a direction starting from the critical point goes up or down) it gets that <strong>all</strong> the directions go up at a critical point
+                    <ul>
+                      <li>this gets <strong>exponentially</strong> more unlikely with each additional dimension!</li>
+                      <li><strong>except</strong>, if you are at the bottom of your high-dimensional landscape, i.e. near the global minimum
+                        <ul>
+                          <li>because if you have a minimum near the global minimum you cannot go further down, so all the directions have to go up
+                            <ul>
+                              <li>this means, you have local minima [for high-dimensional functions], but they are very close to the global minimum in terms of their objective function</li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>Note in talk: “Of course, you could always construct a high-dimensional function, where there is a local minimum which is <strong>not</strong> close to the global minimum. You could just place a local minimum by hand at some higher point of the error surface. I just argue that local minima are very likely not the problem, when training gets stuck.”</li>
+              <li>plot: training error and norm of the gradients:
+                <ul>
+                  <li>you see the error go down and it plateaus and then, if you are lucky, something happens and then it goes down again and it plateaus again and then we might think this is the best we can get, <strong>but</strong> the gradients do not approach zero, what’s going on?
+                    <ul>
+                      <li>this looks like we are approaching a <strong>saddle point</strong>
+                        <ul>
+                          <li>the gradient is bouncing around and not finding the escape route<a name="gradient_fluctuating_on_plateau"></a></li>
+                        </ul>
+                      </li>
+                      <li>my intuition is that this such a high-dimensional space that there is only a few dimensions where it is going down and somehow simple Gradient Descent is not finding them (maybe because of curvature problems [Goodfellow_2016, Fig. 4.5] or other things)
+                        <ul>
+                          <li>What I’m saying is, yes, it is worthwhile to continue exploring other optimization algorithms beyond simple GD, but we need to take into account the fact that maybe what we are fighting is not local minima, it might be something else. It might be something classical like differences of curvature or something more subtle.</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>as you go further down it spends more and more time on these plateaus (and it gets harder and harder to decide whether we are still on a saddle point), presumably because there are less directions going down [i.e. we are close to the global minimum]</li>
+                  <li>Goodfellow_2016:
+                    <ul>
+                      <li>experts now suspect that, for sufficiently large neural networks, most local minima have a low cost function value, and that it is not important to find a true global minimum rather than to find a point in parameter space that has low but not minimal cost</li>
+                      <li>Many practitioners attribute nearly all difficulty with neural network optimization to <strong>local minima</strong>.
+                        <ul>
+                          <li>We encourage practitioners to <strong>carefully test</strong> for specific problems.
+                            <ul>
+                              <li>A <strong>test</strong> that can rule out local minima as the problem is to <strong><mark>plot the norm of the gradient over time</mark></strong>. If the norm of the gradient does not shrink to insignificant size [same problem as discussed <a href="#gradient_fluctuating_on_plateau">here</a>], the problem is neither local minima nor any other kind of critical point. [then it’s either a saddle point or something more subtle]</li>
+                              <li>This kind of negative test can rule out local minima.</li>
+                            </ul>
+                          </li>
+                          <li>In high dimensional spaces, it can be very difficult to positively establish that local minima are the problem. Many structures other than local minima also have small gradients.</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>Note in talk: stopping criterion? You should be ready to wait. People discarded NNs in part because they were not ready to wait long enough (when I was a PhD student, we were ready to wait weeks, people are getting lazy these days ;))</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="http://www.marekrei.com/blog/26-things-i-learned-in-the-deep-learning-summer-school/">source</a>
+    <ul>
+      <li>The team of Yoshua Bengio have experimentally found that when optimising the parameters of high-dimensional neural nets, there effectively are no local minima. Instead, there are saddle points which are local minima in some dimensions but not all. This means that training can slow down quite a lot in these points, until the network figures out how to escape, but as long as we’re willing to wait long enough then it will find a way.</li>
+      <li>Given one specific dimension, there is some small probability $p$ with which a point is a local minimum, but not a global minimum, in that dimension. Now, the probability of a point in a $1000$-dimensional space being an incorrect local minimum in all of these would be $p^{1000}$, which is just astronomically small. However, the probability of it being a local minimum in some of these dimensions is actually quite high. And when we get these minima in many dimensions at once, then training can appear to be stuck until it finds the right direction.</li>
+      <li>In addition, this probability $p$ will increase as the loss function gets closer to the global minimum.  This means that if we do ever end up at a genuine local minimum, then for all intents and purposes it will be close enough to the global minimum that it will not matter.</li>
+    </ul>
+  </li>
+  <li><a href="#Goodfellow_2016">Goodfellow_2016</a>
+    <ul>
+      <li>For many high-dimensional non-convex functions, local minima (and maxima) are in fact rare compared to another kind of point with zero gradient: a saddle point.</li>
+      <li>Some points around a saddle point have greater cost than the saddle point, while others have a lower cost.</li>
+      <li>At a saddle point, the <strong>Hessian matrix</strong> has both positive and negative eigenvalues.
+        <ul>
+          <li>Points lying along eigenvectors associated with positive eigenvalues have greater cost than the saddle point, while points lying along negative eigenvalues have lower value.</li>
+        </ul>
+      </li>
+      <li>We can think of a saddle point as being a local minimum along one cross-section [sozusagen als würde man mit einer Ebene senkrecht durch den Graph schneiden] of the cost function and a local maximum along another cross-section. See figure 4.5 for an illustration.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="shuffling-the-examples">Shuffling the Examples</h3>
+
+<ul>
+  <li>Müller, Montavon:
+    <ul>
+      <li>Networks learn the fastest from the most unexpected sample. Therefore, it is advisable to <mark>**choose a sample at each iteration that is the most unfamiliar to the system**</mark>.
+        <ul>
+          <li>Note, this applies only to stochastic learning since the order of input presentation is irrelevant for batch.</li>
+          <li>Of course, there is no simple way to know <strong>which inputs are information rich</strong>,
+            <ul>
+              <li>however, a very simple <strong>trick</strong> that crudely implements this idea is to simply <strong>choose successive examples that are from different classes</strong> since training examples belonging to the same class will most likely contain similar information.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Another heuristic for judging how much new information a training example contains is to <strong>examine the error between the network output and the target value</strong> when this input is presented.
+        <ul>
+          <li>A <strong>large error indicates that this input has not been learned</strong> by the network and so contains a lot of new information.</li>
+          <li>Therefore, it makes sense to <strong>present this input more frequently</strong>.</li>
+          <li>Of course, by “large” we mean relative to all of the other training examples.</li>
+          <li>As the network trains, these relative errors will change and so should the <strong>frequency of presentation</strong> for a particular input pattern.</li>
+          <li>A method that modifies the probability of appearance of each pattern is called an <mark>**emphasizing scheme**</mark>.</li>
+        </ul>
+      </li>
+      <li>However, <strong>one must be careful when perturbing the normal frequencies of input examples</strong> because this changes the relative importance that the network places on different examples. This may or may not be desirable.
+        <ul>
+          <li>For example, this technique applied to data containing <strong>outliers</strong> can be disastrous because outliers can produce large errors yet should not be presented frequently.</li>
+          <li>On the other hand, this technique can be particularly beneficial for <strong>boosting the performance for infrequently occurring inputs</strong>, e.g. /z/ in phoneme recognition.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="transforming-the-inputs">Transforming the inputs</h3>
+
+<ul>
+  <li>Hinton, Lecture 6.2 — A bag of tricks for mini batch gradient descent:
+    <ul>
+      <li><strong>red line</strong> corresponds to the bottom of the “trough” defined by the training point $x_1=(101,99)$, the corresponding output of the simple 2 unit NN shown below is $0$
+        <ul>
+          <li>“trough” in 2-D: “parabolic cylinder”, see below: graph in the middle: $z=x^2$
+            <ul>
+              <li><strong>superposition</strong> of two <strong>parabolic cylinders</strong> results in an <strong>elliptic paraboloid</strong>, see below: left graph: $z=x^2+y^2$
+                <ul>
+                  <li>this is why $x_1$ and $x_2$ together form an elliptic paraboloid error surface</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><strong>green line</strong> corresponds to the bottom of the “trough” defined by the training point $x_2=(101,101)$, the corresponding output of the simple 2 unit NN shown below is $2$</li>
+      <li>the <strong>black ellipse</strong> corresponds to the contours of the error surface (which in 2-D has the shape of an elliptic paraboloid)
+        <ul>
+          <li>this ellipse has a very <strong>elongated shape</strong> because $x_1$ and $x_2$ are both positive and do not have average zero
+            <ul>
+              <li>steepest descent methods have difficulties with such “troughs”</li>
+              <li>slows down learning</li>
+            </ul>
+          </li>
+          <li>shifting the inputs, so that the average over the whole training set is close to zero makes the error surface contours more circular (see below)
+            <ul>
+              <li>speeds learning with steepest descent</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><img src="/assets/images/optimization/normalization1_hinton.png" alt="normalization1_hinton" /></li>
+      <li><img src="/assets/images/optimization/paraboloids.png" alt="paraboloids" /></li>
+      <li><img src="/assets/images/optimization/normalization2_hinton.png" alt="normalization2_hinton" /></li>
+    </ul>
+  </li>
+  <li>LeCun “Efficient BackProp”:
+    <ol>
+      <li>“The average of each input variable over the training set should be close to zero.”
+        <ul>
+          <li>When all of the components of an input vector are positive, all of the updates of weights that feed into a node will be the same sign (i.e. $\text{sign}(\delta)$).
+            <ul>
+              <li>biases the updates in a particular direction</li>
+              <li>As a result, these weights can only all decrease or all increase <strong>together</strong> for a given input pattern.
+                <ul>
+                  <li>Thus, if a weight vector must change direction it can only do so by <strong>zigzagging</strong> which is inefficient and thus very slow.
+  <img src="/assets/images/optimization/normalization.JPG" alt="normalization" /></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>In the above example, the inputs were all positive. However, <strong>in general, any shift of the average input away from zero will bias the updates in a particular direction</strong> and thus slow down learning.</li>
+          <li>Therefore, it is good to <strong>shift the inputs so that the average over the training set is close to zero</strong>.
+            <ul>
+              <li>This heuristic should be applied <strong>at all layers</strong> which means that we want the average of the outputs of a node to be close to zero because these outputs are the inputs to the next layer [19], chapter 10.
+                <ul>
+                  <li>This problem can be addressed by coordinating how the inputs are transformed with the choice of sigmoidal activation function.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>“Scale input variables so that their covariances are about the same.”
+        <ul>
+          <li>helps to balance out the rate at which the weights connected to the input nodes learn.</li>
+          <li>The value of the covariance should be <strong>matched with that of the sigmoid</strong> used.</li>
+          <li>The <strong>exception</strong> to scaling all covariances to the same value occurs
+            <ul>
+              <li>when it is known that some inputs are of less significance than others.
+                <ul>
+                  <li>In such a case, it can be beneficial to scale the less significant inputs down so that they are “less visible” to the learning process</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>“Input variables should be uncorrelated if possible.”
+        <ul>
+          <li>If inputs are uncorrelated then it is possible to solve for the value of $w_1$ that minimizes the error <strong>without any concern for $w_2$</strong>, and vice versa.
+            <ul>
+              <li>In other words, the <strong>two variables are independent</strong> (the system of equations is diagonal).</li>
+              <li>With correlated inputs, one must solve for both simultaneously which is a much harder problem.</li>
+            </ul>
+          </li>
+          <li><strong>Principal component analysis</strong> (also known as the <strong>Karhunen-Loeve expansion</strong>) can be used to remove linear correlations in inputs [10].</li>
+          <li>Inputs that are linearly dependent (the extreme case of correlation) may also produce <strong>degeneracies</strong> which may slow learning.
+            <ul>
+              <li>Consider the case where one input is always twice the other input ($z_2 = 2z_1$).
+                <ul>
+                  <li>We are trying to solve in 2-D what is effectively only a 1-D problem.</li>
+                  <li><strong>Ideally</strong> we want to <strong>remove one of the inputs</strong> which will <strong>decrease the size of the network</strong>.
+                    <ul>
+                      <li>Summary:</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>(1) shift inputs so the mean is zero,</li>
+          <li>(2) decorrelate inputs, and</li>
+          <li>(3) equalize covariances.</li>
+        </ul>
+      </li>
+    </ol>
+  </li>
+</ul>
+
+<h3 id="sigmoids">Sigmoids</h3>
+
+<ul>
+  <li>LeCun, “Efficient BackProp”:
+    <ol>
+      <li>Symmetric sigmoids such as hyperbolic tangent often converge faster than the standard logistic function.</li>
+      <li>A recommended sigmoid is: $f(x) = 1.7159\tanh\frac{2}{3}x$. Since the $\tanh$ function is sometimes computationally expensive, an approximation of it by a ratio of polynomials can be used instead.
+        <ul>
+          <li>The constants in the recommended sigmoid given above have been chosen so that, when used with transformed inputs (see previous discussion), the <strong>variance of the outputs will also be close to 1</strong>
+            <ul>
+              <li>because the <strong>effective gain of the sigmoid is roughly 1</strong> over its useful range.</li>
+            </ul>
+          </li>
+          <li>Properties:
+            <ul>
+              <li>(a) $f(±1) = ±1$,</li>
+              <li>(b) the second derivative is a maximum at $x = 1$ [siehe “1.4.5 Choosing Target Values”], and</li>
+              <li>(c) the effective gain is close to $1$.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Sometimes it is helpful to add a small linear term, e.g. $f(x) = \tanh(x) + ax$ so as to avoid flat spots.
+        <ul>
+          <li>One of the potential problems with using symmetric sigmoids is that the <strong>error surface can be very flat near the origin</strong>.
+            <ul>
+              <li>For this reason it is good to <strong>avoid initializing with very small weights</strong>.</li>
+            </ul>
+          </li>
+          <li>Because of the saturation of the sigmoids, the <strong>error surface is also flat far from the origin</strong>.</li>
+          <li><strong>Adding a small linear term</strong> to the sigmoid can sometimes help avoid the flat regions (see chapter 9).</li>
+        </ul>
+      </li>
+    </ol>
+  </li>
+  <li>Sigmoids that are symmetric about the origin are preferred for the same reason that inputs should be normalized, namely, because they are more likely to produce outputs (which are inputs to the next layer) that are on average close to zero.</li>
+</ul>
+
+<h3 id="weight-initialization">Weight initialization</h3>
+
+<ul>
+  <li><strong>sigmoidal</strong> activation functions have the “vanishing gradients” problem, <strong>ReLU</strong> does not!
+    <blockquote>
+      <p>Nevertheless, this Xavier initialization (after Glorot’s first name) is a neat trick that works well in practice. However, along came rectified linear units (ReLU), a non-linearity that is scale-invariant around 0 and does not saturate at large input values. This seemingly solved both of the problems the sigmoid function had; or were they just alleviated? I am unsure of how widely used Xavier initialization is, but if it is not, perhaps it is because ReLU seemingly eliminated this problem. <a href="http://deepdish.io/">http://deepdish.io/</a></p>
+    </blockquote>
+  </li>
+  <li><a href="http://deepdish.io/">http://deepdish.io/</a>:
+    <ul>
+      <li>First, let’s go back to the time of sigmoidal activation functions and initialization of parameters using i.i.d. Gaussian or uniform distributions with fairly <strong>arbitrarily set variances</strong>.
+        <ul>
+          <li>Building deep networks was difficult because of <strong>exploding or vanishing activations and gradients</strong>.</li>
+        </ul>
+      </li>
+      <li>Let’s take <strong>activations</strong> first:
+        <ul>
+          <li>If all your parameters are <strong>too small</strong>,
+            <ul>
+              <li>the <strong>variance of your activations will drop in each layer</strong>.</li>
+              <li>This is a problem if your activation <strong>function is sigmoidal</strong>, since it is <strong>approximately linear close to 0</strong>.
+                <ul>
+                  <li>That is, you <strong>gradually lose your non-linearity</strong>, which means there is <strong>no benefit to having multiple layers</strong>.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>If, on the other hand, your activations become <strong>larger and larger</strong>,
+            <ul>
+              <li>then your <strong>activations will saturate</strong> and become meaningless, with <strong>gradients approaching 0</strong>.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="xavier-glorot-initialization">Xavier Glorot Initialization</h4>
+
+<ul>
+  <li><a href="https://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf">Glorot, Bengio paper</a></li>
+  <li>Xavier Glorot is the author’s full name</li>
+  <li>vanishing gradients problem: <a href="https://github.com/pharath/home/tree/master/_posts_html/Weight%20Initialization%20in%20Neural%20Networks%20A%20Journey%20From%20the%20Basics%20to%20Kaiming%20%7C%20by%20James%20Dellinger%20%7C%20Towards%20Data%20Science">code example</a> (download this directory and view the html file locally, else it does not work)</li>
+</ul>
+
+<h3 id="dying-relu-problem">Dying ReLU problem</h3>
+
+<ul>
+  <li>causes:
+    <ul>
+      <li>too high learning rate</li>
+      <li>too large negative bias</li>
+    </ul>
+  </li>
+  <li>solutions:
+    <ul>
+      <li>use a lower learning rate</li>
+      <li>use a variation of ReLU, e.g.
+        <ul>
+          <li>Leaky ReLU: $\max{\beta a, a}$
+            <ul>
+              <li>pro: avoids stuck-at-zero units</li>
+              <li>pro: weaker offset bias</li>
+            </ul>
+          </li>
+          <li>ELU: $e^a-1$ for $a \leq 0$
+            <ul>
+              <li>pro: no offset bias</li>
+              <li>con: need to store activations</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>modification of the initialization method
+        <ul>
+          <li>do <strong>not</strong> use He initialization (i.e. initializing weights and biases through <strong>symmetric</strong> probability distributions)
+            <ul>
+              <li>instead, use <strong>randomized asymmetric initialization</strong> [<a href="https://arxiv.org/abs/1903.06733">Lu, Shin, Su, Karniadakis</a>]</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="dropout">Dropout</h3>
+
+<ul>
+  <li><a href="https://jmlr.org/papers/volume15/srivastava14a/srivastava14a.pdf">Srivastava, Hinton</a>
+    <ul>
+      <li>Abstract:
+        <ul>
+          <li>[…] <strong>overfitting</strong> is a serious problem in such networks.</li>
+          <li>Large networks are also slow to use, making it <strong>difficult to deal with overfitting by combining the predictions of many different large neural nets at test time</strong>.</li>
+          <li><strong>Dropout</strong> is a technique for addressing this problem.
+            <ul>
+              <li>The key idea is to randomly drop units (along with their connections) from the neural network during training.
+                <ul>
+                  <li>This prevents units from co-adapting too much.</li>
+                </ul>
+              </li>
+              <li>During training, dropout samples from an <strong>exponential number</strong> of different “thinned” networks.</li>
+              <li>At test time, it is easy to <strong>approximate the effect of averaging the predictions of all these thinned networks</strong> by simply using a single unthinned network that has smaller weights.</li>
+              <li>This significantly <strong>reduces overfitting</strong> and gives major <strong>improvements over other regularization methods</strong>.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>there are $2^n$ (Mächtigkeit der Potenzmenge für n Elemente) thinned NNs, where $n$ is the number of hidden units
+        <ul>
+          <li>but still only $\mathcal{O}(n^2)$ parameters (soll heißen Dropout führt keine neuen Parameter ein)
+            <ul>
+              <li>Das $\mathcal{O}(n^2)$ ist ein upper bound? [<a href="https://en.wikipedia.org/wiki/Vapnik%E2%80%93Chervonenkis_dimension#VC_dimension_of_a_neural_network">VC dimension of a NN</a>]</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>at test time use $p\mathbf{w}$, so that the output of a node <strong>at test time</strong> is the expected output <strong>at training time</strong>
+        <ul>
+          <li><a href="https://machinelearningmastery.com/dropout-for-regularizing-deep-neural-networks/">source</a>: Note: The rescaling of the weights can be performed at training time instead, after each weight update at the end of the mini-batch. This is sometimes called “inverse dropout” and does not require any modification of weights during training. Both the Keras and PyTorch deep learning libraries implement dropout in this way.</li>
+          <li>[mulipliziere $\mathbf{w}$ mit $p$ heißt das “Neuron” feuert nur in einem Bruchteil $p$ aller Fälle, sodass der gesamte Erwartungswert über <strong>alle</strong> “Neuronen”, d.h. der Output des gesamten NN, aber stimmt (auch wenn $p\mathbf{w}$ nur ein <strong>geschätzter</strong> Erwartungswert <strong>eines bestimmten</strong> “Neurons” ist)]</li>
+        </ul>
+      </li>
+      <li><img src="/assets/images/optimization/dropout.png" alt="dropout.png" /></li>
+    </ul>
+  </li>
+  <li><a href="https://machinelearningmastery.com/dropout-for-regularizing-deep-neural-networks/">source</a>:
+    <ul>
+      <li><strong>Ensembles of neural networks</strong> with different model configurations are known to <strong>reduce overfitting</strong>, <strong>but</strong> require the <strong>additional computational expense</strong> of training and maintaining multiple models.</li>
+      <li>A single model can be used to <strong>simulate having a large number of different network architectures</strong> by randomly dropping out nodes during training.
+        <ul>
+          <li>This is called <strong>dropout</strong> and offers a very <strong>computationally cheap</strong> and remarkably effective <strong>regularization method</strong> to <strong>reduce overfitting</strong> and <strong>improve generalization error</strong> in deep neural networks of all kinds.</li>
+        </ul>
+      </li>
+      <li><strong>Large weights</strong> in a neural network <strong>are a sign</strong> of a more complex network that has overfit the training data.</li>
+      <li>Probabilistically dropping out nodes in the network is a simple and effective <strong>regularization</strong> method.</li>
+      <li>A <strong>large</strong> network with <strong>more training</strong> and the use of a <strong>weight constraint</strong> are <strong>suggested</strong> when using dropout.
+        <ul>
+          <li>large NN:
+            <ul>
+              <li>It is common for <strong>larger</strong> networks (more layers or more nodes) to <strong>more easily overfit</strong> the training data.</li>
+              <li>When using dropout regularization, it is possible to use larger networks with less risk of overfitting. In fact, a large network (more nodes per layer) may be required as dropout will probabilistically reduce the capacity of the network.</li>
+              <li>A good <strong>rule of thumb</strong> is to divide the number of nodes in the layer before dropout by the proposed dropout rate and use that as the number of nodes in the new network that uses dropout. For example, a network with 100 nodes and a proposed dropout rate of 0.5 will require 200 nodes (100 / 0.5) when using dropout.</li>
+            </ul>
+          </li>
+          <li>grid search parameters:
+            <ul>
+              <li>Rather than guess at a suitable dropout rate for your network, test different rates systematically.</li>
+            </ul>
+          </li>
+          <li>weight constraint:
+            <ul>
+              <li>Network weights will increase in size in response to the probabilistic removal of layer activations.</li>
+              <li>Large weight size can be a sign of an unstable network.</li>
+              <li>To counter this effect a <strong>weight constraint</strong> can be imposed to force the norm (magnitude) of all weights in a layer to be below a specified value.
+                <ul>
+                  <li>For example, the <strong>maximum norm constraint</strong> is recommended with a value between 3-4.</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="classical-2nd-order-optimization-methods">Classical 2nd order optimization methods<a name="2nd_order_methods"></a></h2>
+
+<p>[source: LeCun et al. “Efficient BackProp”]</p>
+
+<p>“Second order methods <strong>speed learning</strong> by estimating not just the <strong>gradient</strong> but also the <strong>curvature</strong> of the cost surface. Given the curvature, one can estimate the approximate location of the actual minimum.”</p>
+<ul>
+  <li>Newton-Raphson Algorithm
+    <ul>
+      <li>it is a $\mathcal{O}(N^3)$ (complexity of the matrix inversion of the $N\times N$ Hessian) method, where $N$ is the number of components of the parameter vector $\mathbf{w}$ <a href="https://en.wikipedia.org/wiki/Computational_complexity_of_mathematical_operations#Matrix_algebra">[complexity of mathematical operations]</a></li>
+      <li>see notes part 1</li>
+    </ul>
+  </li>
+  <li>Conjugate Gradient
+    <ul>
+      <li>(1) it is a $\mathcal{O}(N)$ method,</li>
+      <li>(2) it doesn’t use the Hessian explicitly,</li>
+      <li>(3) it attempts to find descent directions that try to minimally spoil the result achieved in the previous iterations,</li>
+      <li>(4) it uses a line search, and most importantly,</li>
+      <li>(5) it <strong>works only for batch learning</strong>.</li>
+    </ul>
+  </li>
+  <li>Quasi-Newton (BFGS)
+    <ul>
+      <li>(1) iteratively computes an estimate of the inverse Hessian,</li>
+      <li>(2) is an $\mathcal{O}(N^2)$ algorithm,
+        <ul>
+          <li>“Since the updates of the BFGS curvature matrix do not require matrix inversion, its computational complexity is only $\mathcal{O}(n^2)$, compared to $\mathcal{O}(n^3)$ in Newton’s method” - <a href="https://en.wikipedia.org/wiki/Broyden%E2%80%93Fletcher%E2%80%93Goldfarb%E2%80%93Shanno_algorithm">Wikipedia</a></li>
+        </ul>
+      </li>
+      <li>(3) requires line search and</li>
+      <li>(4) it <strong>works only for batch learning</strong>.</li>
+    </ul>
+  </li>
+  <li>Gauss-Newton and Levenberg Marquardt algorithm
+    <ul>
+      <li>(1) use the square Jacobi approximation,</li>
+      <li>(2) are <strong>mainly designed for batch learning</strong>,</li>
+      <li>(3) have a complexity of $\mathcal{O}(N^3)$ and</li>
+      <li>(4) most important, they work only for mean squared error loss functions.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="mlp-example-implementations">MLP Example Implementations</h2>
+
+<ul>
+  <li><a href="https://nbviewer.org/github/pharath/home/blob/master/assets/notebooks/Expl_NN_in_numpy.ipynb">Expl_NN_in_numpy</a></li>
+  <li><a href="https://nbviewer.org/github/pharath/home/blob/master/assets/notebooks/MLP_in_numpy.ipynb">MLP_in_numpy</a></li>
+  <li><a href="https://nbviewer.org/github/pharath/home/blob/master/assets/notebooks/MLP_selbst_versucht.ipynb">MLP_selbst_versucht</a></li>
+  <li><a href="https://nbviewer.org/github/pharath/home/blob/master/assets/notebooks/WofuerIst__name__gut.ipynb">WofuerIst__name__gut</a></li>
+</ul>
+
+<h1 id="cnns">CNNs</h1>
+
+<h1 id="references">REFERENCES</h1>
+
+<ul>
+  <li><a name="Bishop_2006"></a> <a href="https://www.amazon.de/Pattern-Recognition-Learning-Information-Statistics/dp/0387310738">Bishop, Christopher M., <em>Pattern Recognition and Machine Learning (Information Science and Statistics)</em> (2006), Springer-Verlag, Berlin, Heidelberg, 0387310738.</a></li>
+  <li><a name="Goodfellow_2016"></a> <a href="http://www.deeplearningbook.org">Ian J. Goodfellow and Yoshua Bengio and Aaron Courville, <em>Deep Learning</em> (2016), MIT Press, Cambridge, MA, USA</a></li>
+</ul>
+

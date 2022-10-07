@@ -1,0 +1,792 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Firefox Setup - Pharath Palesuvaran</title>
+<meta name="description" content="Profiles  Profile Directory  about:support -&gt; “Profile Directory” -&gt; “Open Directory” Button  History  source  Firefox stores your history and bookmarks together in a database file named places.sqlite which is in your profile folder.     Just copy places.sqlite to another profile folder in order to transfer the history of one profile to another one.   Tools     about:about   about:preferences   about:performance   about:config   about:addons (besser: about:addons#extensions)   about:memory   about:support -&gt; “Profile Directory” -&gt; “Open Directory” Button   Shortcuts                 command       description                       cmd + shift + n       open recently closed window                 cmd + shift + t       open recently closed tab                 cmd + shift + b       hide/show bookmarks toolbar                 alt + b (linux: ctrl + alt + b)       hide/show bookmark search plus pane                 ctrl + shift + m       show mobile version of website           Addons     Adblock Plus   Bookmark Serch Plus 2   DownThemAll!   Video Downloadhelper (by mig)   Duplicate Tab Shortcut (by Stefan Sundin)   iCloud Bookmarks   Link to Text Fragment   PDF Mage   Raindrop.io   Search with Wikipedia   Textmarker   TeXZilla   Web Search Navigator   Vimium-FF (by Stephen Blott, Phil Crosby)   GNOME Shell integration   Reload in address bar   StickyNotes   Tab Session Manager">
+
+
+  <meta name="author" content="Pharath Palesuvaran">
+  
+  <meta property="article:author" content="Pharath Palesuvaran">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Pharath Palesuvaran">
+<meta property="og:title" content="Firefox Setup">
+<meta property="og:url" content="http://localhost:4000/setup/notes-firefox/">
+
+
+  <meta property="og:description" content="Profiles  Profile Directory  about:support -&gt; “Profile Directory” -&gt; “Open Directory” Button  History  source  Firefox stores your history and bookmarks together in a database file named places.sqlite which is in your profile folder.     Just copy places.sqlite to another profile folder in order to transfer the history of one profile to another one.   Tools     about:about   about:preferences   about:performance   about:config   about:addons (besser: about:addons#extensions)   about:memory   about:support -&gt; “Profile Directory” -&gt; “Open Directory” Button   Shortcuts                 command       description                       cmd + shift + n       open recently closed window                 cmd + shift + t       open recently closed tab                 cmd + shift + b       hide/show bookmarks toolbar                 alt + b (linux: ctrl + alt + b)       hide/show bookmark search plus pane                 ctrl + shift + m       show mobile version of website           Addons     Adblock Plus   Bookmark Serch Plus 2   DownThemAll!   Video Downloadhelper (by mig)   Duplicate Tab Shortcut (by Stefan Sundin)   iCloud Bookmarks   Link to Text Fragment   PDF Mage   Raindrop.io   Search with Wikipedia   Textmarker   TeXZilla   Web Search Navigator   Vimium-FF (by Stephen Blott, Phil Crosby)   GNOME Shell integration   Reload in address bar   StickyNotes   Tab Session Manager">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2021-07-22T00:00:00+02:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/setup/notes-firefox/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Pharath Palesuvaran Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://raw.githubusercontent.com/pharath/home/master/assets/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/pharath/home/master/assets/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://raw.githubusercontent.com/pharath/home/master/assets/favicons/favicon-16x16.png">
+<link rel="manifest" href="https://raw.githubusercontent.com/pharath/home/master/assets/favicons/site.webmanifest">
+<link rel="shortcut icon" href="https://raw.githubusercontent.com/pharath/home/master/assets/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="https://raw.githubusercontent.com/pharath/home/master/assets/favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      displayMath: [ ['$$','$$'], ["\\(","\\)"] ],
+    },
+		TeX: {
+    	Macros: {
+				bra: ["\\langle{#1}|", 1],
+				ket: ["|{#1}\\rangle", 1],
+        braket: ["\\langle{#1}\\rangle", 1],
+				bk: ["\\langle{#1}|{#2}|{#3}\\rangle", 3]
+    	}
+  	}
+	});
+
+</script>
+<!--
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML' async></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML' async></script>
+-->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/pytorch-logo.png" alt="Pharath Palesuvaran"></a>
+        
+        <a class="site-title" href="/">
+          Pharath Palesuvaran
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/posts/">Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button" accesskey="s">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/profile_pic.jpg" alt="Pharath Palesuvaran" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Pharath Palesuvaran</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Machine Learning, Computer Vision, Self-driving cars and a very rusty first degree in Physics</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Aachen (Germany)</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:phrth2@gmail.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://twitter.com/pharath_one" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/pharath" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="/_pages/404.md" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i><span class="label">Instagram</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Firefox Setup">
+    <meta itemprop="description" content="ProfilesProfile Directoryabout:support -&gt; “Profile Directory” -&gt; “Open Directory” ButtonHistorysourceFirefox stores your history and bookmarks together in a database file named places.sqlite which is in your profile folder.  Just copy places.sqlite to another profile folder in order to transfer the history of one profile to another one.Tools  about:about  about:preferences  about:performance  about:config  about:addons (besser: about:addons#extensions)  about:memory  about:support -&gt; “Profile Directory” -&gt; “Open Directory” ButtonShortcuts            command      description                  cmd + shift + n      open recently closed window              cmd + shift + t      open recently closed tab              cmd + shift + b      hide/show bookmarks toolbar              alt + b (linux: ctrl + alt + b)      hide/show bookmark search plus pane              ctrl + shift + m      show mobile version of website      Addons  Adblock Plus  Bookmark Serch Plus 2  DownThemAll!  Video Downloadhelper (by mig)  Duplicate Tab Shortcut (by Stefan Sundin)  iCloud Bookmarks  Link to Text Fragment  PDF Mage  Raindrop.io  Search with Wikipedia  Textmarker  TeXZilla  Web Search Navigator  Vimium-FF (by Stephen Blott, Phil Crosby)  GNOME Shell integration  Reload in address bar  StickyNotes  Tab Session Manager">
+    <meta itemprop="datePublished" content="2021-07-22T00:00:00+02:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/setup/notes-firefox/" class="u-url" itemprop="url">Firefox Setup
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-07-22T00:00:00+02:00">July 22, 2021</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header>
+              <ul class="toc__menu"><li><a href="#profiles">Profiles</a><ul><li><a href="#profile-directory">Profile Directory</a></li><li><a href="#history">History</a></li></ul></li><li><a href="#tools">Tools</a></li><li><a href="#shortcuts">Shortcuts</a></li><li><a href="#addons">Addons</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h1 id="profiles">Profiles</h1>
+
+<h2 id="profile-directory">Profile Directory</h2>
+
+<p>about:support -&gt; “Profile Directory” -&gt; “Open Directory” Button</p>
+
+<h2 id="history">History</h2>
+
+<p><a href="https://support.mozilla.org/en-US/questions/1176169">source</a></p>
+
+<p>Firefox stores your history and bookmarks together in a database file named <em>places.sqlite</em> which is in your profile folder.</p>
+
+<ul>
+  <li>Just copy <em>places.sqlite</em> to another profile folder in order to transfer the history of one profile to another one.</li>
+</ul>
+
+<h1 id="tools">Tools</h1>
+
+<ul>
+  <li>about:about</li>
+  <li>about:preferences</li>
+  <li>about:performance</li>
+  <li>about:config</li>
+  <li>about:addons (<strong>besser</strong>: about:addons#extensions)</li>
+  <li>about:memory</li>
+  <li>about:support -&gt; “Profile Directory” -&gt; “Open Directory” Button</li>
+</ul>
+
+<h1 id="shortcuts">Shortcuts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">cmd + shift + n</td>
+      <td style="text-align: center">open recently closed window</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">cmd + shift + t</td>
+      <td style="text-align: center">open recently closed tab</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">cmd + shift + b</td>
+      <td style="text-align: center">hide/show bookmarks toolbar</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">alt + b (linux: ctrl + alt + b)</td>
+      <td style="text-align: center">hide/show bookmark search plus pane</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">ctrl + shift + m</td>
+      <td style="text-align: center">show mobile version of website</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="addons">Addons</h1>
+
+<ul>
+  <li>Adblock Plus</li>
+  <li>Bookmark Serch Plus 2</li>
+  <li>DownThemAll!</li>
+  <li>Video Downloadhelper (by mig)</li>
+  <li>Duplicate Tab Shortcut (by Stefan Sundin)</li>
+  <li>iCloud Bookmarks</li>
+  <li>Link to Text Fragment</li>
+  <li>PDF Mage</li>
+  <li>Raindrop.io</li>
+  <li>Search with Wikipedia</li>
+  <li>Textmarker</li>
+  <li>TeXZilla</li>
+  <li>Web Search Navigator</li>
+  <li>Vimium-FF (by Stephen Blott, Phil Crosby)</li>
+  <li>GNOME Shell integration</li>
+  <li>Reload in address bar</li>
+  <li>StickyNotes</li>
+  <li>Tab Session Manager</li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#firefox" class="page__taxonomy-item p-category" rel="tag">firefox</a><span class="sep">, </span>
+    
+      <a href="/tags/#setup" class="page__taxonomy-item p-category" rel="tag">setup</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#setup" class="page__taxonomy-item p-category" rel="tag">Setup</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2021-07-22T00:00:00+02:00">July 22, 2021</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Firefox+Setup%20http%3A%2F%2Flocalhost%3A4000%2Fsetup%2Fnotes-firefox%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fsetup%2Fnotes-firefox%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fsetup%2Fnotes-firefox%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/cheatsheet/cheatsheet-VSCode/" class="pagination--pager" title="VS Code Cheatsheet
+">Previous</a>
+    
+    
+      <a href="/gpu/notes-rtx/" class="pagination--pager" title="RTX 3060 Setup
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You May Also Enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/lenet.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/lecture_notes/machine_learning/lecture-notes-ML-part2-old/" rel="permalink">Machine Learning (Part 2) [OLD VERSION]
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-03-09T00:00:00+01:00">March 9, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          14 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">[OLD VERSION!] Notes on Machine Learning theory. Based on C. M. Bishop, “Pattern Recognition and Machine Learning” (2011) and Goodfellow, Bengio, Courville, ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/lenet.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/notes/machine_learning/notes-Neuroscience/" rel="permalink">New Inspirations for Machine Learning Methods
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-02-26T00:00:00+01:00">February 26, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Notes on some inspirations for Machine Learning methods. Based on opinions from leading scientists and also some of my own opinions.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/lenet.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/carla/simulator/self_driving/notes-Carla/" rel="permalink">Carla Simulator
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-02-17T00:00:00+01:00">February 17, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Notes on the Carla Simulator
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/lenet.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/lecture_notes/machine_learning/computer_vision/lecture-notes-ML-part3/" rel="permalink">Machine Learning (Part 3)
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-01-27T00:00:00+01:00">January 27, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          56 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Notes on Computer Vision theory and NLP. Based on Goodfellow, Bengio “Deep Learning”, Stanford CS231n and RWTH Aachen University Machine Learning
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/pharath_one" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://github.com/pharath" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="/_pages/404.md" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 Pharath Palesuvaran. </div>
+
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>
