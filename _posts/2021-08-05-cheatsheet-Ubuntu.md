@@ -84,6 +84,10 @@ To change this behaviour: From [askubuntu](https://askubuntu.com/a/1162672)
 gsettings set org.gnome.shell.extensions.dash-to-dock isolate-workspaces true
 ```
 
+## Remove "Window is ready" popup and focus window
+
+see [NoAnnoyance v2](https://extensions.gnome.org/extension/2182/noannoyance/)
+
 # Appearance
 
 ## Restart GUI

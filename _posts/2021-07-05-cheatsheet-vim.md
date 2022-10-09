@@ -112,12 +112,17 @@ ctrl + g | show current file name
 :tab ter | open terminal in new Tab
 ctrl + w N | scroll in a terminal tab
 
-### Re-open closed Tab
+## Buffers
 
 | command | description |
 | :---: | :---: |
 :ls | get the buffer number of all files edited in this session
+:files | see `:ls`
+:buffers | see `:ls`
 :tabnew +Nbuf | re-open closed tab (where N is the buffer number of the closed tab which you can get via `:ls`), e.g. `:tabnew +18buf` in order to reopen buffer 18
+:buffer very/very/long/path/to/a/veryVeryLongFileName.txt | switch to buffer `very/very/long/path/to/a/veryVeryLongFileName.txt`, where a **buffer** is a file in the `:ls` list
+:b LongFileName | short form of `:buffer very/very/long/path/to/a/veryVeryLongFileName.txt` (**note**: `:b` command can also take a **substring** of the name of the file, thus `LongFileName` instead of `veryVeryLongFileName`!)
+:b 5 | switch to buffer 5 (see file-number map in the `:ls` list)
 
 ## Saving
 
