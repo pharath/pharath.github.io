@@ -136,10 +136,6 @@
   </ul>
 </nav>
 
-    <!--[if lt IE 9]>
-<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
-<![endif]-->
-
     
 
 <div class="masthead">
@@ -225,7 +221,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          51 minute read
+          52 minute read
         
       </span>
     
@@ -246,6 +242,8 @@
 </span>
   
 </div>
+
+
 
 
 
@@ -297,11 +295,11 @@
           
         
           
-            <li><a href="https://twitter.com/pharath_one" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+            <li><a href="https://twitter.com/pharath_one" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
           
         
           
-            <li><a href="https://github.com/pharath" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+            <li><a href="https://github.com/pharath" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
           
         
           
@@ -368,6 +366,7 @@
     </ul>
   </div>
 </div>
+
   
   </div>
 
@@ -387,7 +386,7 @@
           <aside class="sidebar__right ">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header>
-              <ul class="toc__menu"><li><a href="#cnn-concept">CNN Concept</a><ul><li><a href="#good-overviews">Good Overviews</a></li><li><a href="#why-do-cnns-work">Why do CNNs work?</a><ul><li><a href="#sparse-connectivity">Sparse Connectivity</a></li><li><a href="#parameter-sharing">Parameter Sharing</a></li><li><a href="#efficiency-of-the-convolution-operation">Efficiency of the Convolution Operation</a></li><li><a href="#translational-equivariance-via-parameter-sharing">Translational Equivariance (via Parameter Sharing)</a><ul><li><a href="#reduction-in-flexibility-of-model">Reduction in Flexibility of Model</a></li><li><a href="#extend-this-idea">Extend this idea</a></li></ul></li><li><a href="#translational-invariance-via-pooling">Translational invariance (via Pooling)</a></li><li><a href="#pooling">Pooling</a><ul><li><a href="#how-to-set-size-of-pools">How to set size of pools?</a></li><li><a href="#learning-invariance-to-other-transformations">Learning Invariance to other Transformations</a></li><li><a href="#strided-pooling">Strided Pooling</a></li><li><a href="#nonlinear-downsampling-method">Nonlinear Downsampling Method</a></li></ul></li><li><a href="#nonlinearities">Nonlinearities</a><ul><li><a href="#what-do-relu-layers-accomplish-">What do ReLU layers accomplish ?</a></li></ul></li><li><a href="#other-reasons-ranzato">Other Reasons (Ranzato)</a></li></ul></li><li><a href="#conv-layer-properties">Conv Layer properties</a></li><li><a href="#how-many-feature-maps-per-conv-layer">How many feature maps (per conv layer)?</a></li><li><a href="#whats-the-size-of-the-filters">What’s the size of the filters?</a></li><li><a href="#why-is-the-size-of-f-always-an-odd-number">Why is the size of $F$ always an odd number?</a></li><li><a href="#whats-the-receptive-field-of-a-filter">What’s the receptive field of a filter?</a></li><li><a href="#padding">Padding</a><ul><li><a href="#why-pad-with-zeros-">Why pad with zeros ?</a></li><li><a href="#valid-vs-same-padding">VALID vs SAME padding</a></li></ul></li><li><a href="#whats-the-function-of-1x1-filters">What’s the function of 1x1 filters?</a></li><li><a href="#data-augmentation">Data Augmentation</a><ul><li><a href="#implementation">Implementation</a></li><li><a href="#common-examples">Common examples</a></li><li><a href="#test-time-augmentation-tta">Test-time augmentation (TTA)</a></li></ul></li></ul></li><li><a href="#cnn-datasets">CNN Datasets</a><ul><li><a href="#imagenet-dataset-vs-pascal-dataset">ImageNet Dataset vs PASCAL Dataset</a></li></ul></li><li><a href="#cnn-architectures">CNN Architectures</a><ul><li><a href="#alexnet-vs-lenet">AlexNet vs LeNet</a></li><li><a href="#zfnet-vs-alexnet">ZFNet vs AlexNet</a></li><li><a href="#vggnet-vs-alexnet">VGGNet vs AlexNet</a></li><li><a href="#googlenet-vs-alexnet">GoogleNet vs AlexNet</a></li><li><a href="#resnet">ResNet</a><ul><li><a href="#architecture">Architecture</a></li><li><a href="#he-et-al">He et al</a></li><li><a href="#veit-et-al">Veit et al</a><ul><li><a href="#alternative-view-of-resnets">Alternative View of ResNets</a></li><li><a href="#deleting-layers">Deleting Layers</a></li><li><a href="#gradient-contributions">Gradient Contributions</a></li><li><a href="#resnet-as-ensemble-method">ResNet as Ensemble Method</a></li></ul></li></ul></li></ul></li><li><a href="#cnn-training">CNN Training</a><ul><li><a href="#transfer-learning">Transfer learning</a><ul><li><a href="#method">Method</a></li><li><a href="#additional-hyperparameters">Additional Hyperparameters</a></li><li><a href="#joint-vs-separate-training">Joint vs Separate training</a></li></ul></li></ul></li><li><a href="#cnn-tasks">CNN Tasks</a><ul><li><a href="#classification--localization">Classification &amp; Localization</a><ul><li><a href="#architecture-1">Architecture</a></li></ul></li><li><a href="#multi-task-learning">Multi-task Learning</a></li><li><a href="#human-pose-estimation">Human Pose Estimation</a></li><li><a href="#object-detection">Object Detection</a><ul><li><a href="#r-cnn-methods">R-CNN methods</a><ul><li><a href="#r-cnn">R-CNN</a><ul><li><a href="#problems">Problems</a></li></ul></li><li><a href="#fast-r-cnn">Fast R-CNN</a><ul><li><a href="#comparison-with-r-cnn">Comparison with R-CNN</a></li><li><a href="#problems-1">Problems</a></li></ul></li><li><a href="#faster-r-cnn">Faster R-CNN</a><ul><li><a href="#3-ways-for-training">3 Ways for Training</a></li></ul></li><li><a href="#mask-r-cnn">Mask R-CNN</a></li></ul></li><li><a href="#single-shot-methods">Single-Shot methods</a><ul><li><a href="#yolo">YOLO</a><ul><li><a href="#confidence-score">Confidence Score</a></li><li><a href="#comparison-with-r-cnn-1">Comparison with R-CNN</a></li></ul></li><li><a href="#ssd">SSD</a></li></ul></li></ul></li><li><a href="#semantic-segmentation">Semantic Segmentation</a><ul><li><a href="#semantic-vs-instance-segmentation">Semantic vs Instance Segmentation</a></li><li><a href="#naive-idea-1-sliding-window-approach">Naive Idea 1: Sliding Window approach</a></li><li><a href="#naive-idea-2-fcn-which-preserves-the-input-size">Naive Idea 2: FCN which preserves the input size</a></li><li><a href="#fcn-long-shelhamer-darrell">FCN (Long, Shelhamer, Darrell)</a><ul><li><a href="#overview">Overview</a></li><li><a href="#advantages">Advantages</a></li><li><a href="#convolutionalization">Convolutionalization</a></li><li><a href="#learnable-upsampling">Learnable Upsampling</a></li><li><a href="#skip-connections">Skip Connections</a></li><li><a href="#alternative-view-of-fc-layers">Alternative View of FC layers</a></li></ul></li><li><a href="#encoder-decoder-architecture">Encoder-Decoder Architecture</a><ul><li><a href="#learnable-upsampling-1">Learnable Upsampling</a></li><li><a href="#skip-connections-1">Skip Connections</a></li></ul></li></ul></li><li><a href="#instance-segmentation">Instance Segmentation</a></li><li><a href="#embeddings-in-vision-and-siamese-networks">Embeddings in Vision and Siamese Networks</a><ul><li><a href="#digression-n-gram-model">Digression: N-gram model</a><ul><li><a href="#word-probability-markov-assumption">Word Probability (Markov Assumption)</a></li><li><a href="#problems-2">Problems</a></li><li><a href="#smoothing-methods">Smoothing Methods</a></li></ul></li><li><a href="#digression-word-embeddings-and-nplm">Digression: Word Embeddings and NPLM</a><ul><li><a href="#neural-probabilistic-language-model-bengio-2003">Neural Probabilistic Language Model (Bengio 2003)</a><ul><li><a href="#learning-a-word-embedding">Learning a Word Embedding</a></li><li><a href="#analogy-questions">Analogy Questions</a></li><li><a href="#implementation-1">Implementation</a></li><li><a href="#nplmnnlm-problems">NPLM/NNLM problems</a></li></ul></li></ul></li><li><a href="#siamese-networks">Siamese Networks</a></li></ul></li></ul></li><li><a href="#rnn">RNN</a><ul><li><a href="#architecture-2">Architecture</a></li><li><a href="#bptt">BPTT</a></li><li><a href="#cliffs-and-exploding-gradients">Cliffs and Exploding Gradients</a><ul><li><a href="#solution-gradient-clipping">Solution: Gradient Clipping</a></li><li><a href="#relus">ReLUs</a></li></ul></li><li><a href="#vanishing-gradient-problem">Vanishing Gradient Problem</a></li><li><a href="#long-range-dependencies">Long-range Dependencies</a></li><li><a href="#apps">Apps</a></li><li><a href="#units-with-a-gating-mechanism">Units with a Gating Mechanism</a><ul><li><a href="#lstm">LSTM</a><ul><li><a href="#optimization">Optimization</a></li></ul></li><li><a href="#gru">GRU</a></li></ul></li></ul></li><li><a href="#references">REFERENCES</a></li></ul>
+              <ul class="toc__menu"><li><a href="#cnn-concept">CNN Concept</a><ul><li><a href="#good-overviews">Good Overviews</a></li><li><a href="#why-do-cnns-work">Why do CNNs work?</a><ul><li><a href="#sparse-connectivity">Sparse Connectivity</a></li><li><a href="#parameter-sharing">Parameter Sharing</a></li><li><a href="#efficiency-of-the-convolution-operation">Efficiency of the Convolution Operation</a></li><li><a href="#translational-equivariance-via-parameter-sharing">Translational Equivariance (via Parameter Sharing)</a><ul><li><a href="#reduction-in-flexibility-of-model">Reduction in Flexibility of Model</a></li><li><a href="#extend-this-idea">Extend this idea</a></li></ul></li><li><a href="#translational-invariance-via-pooling">Translational invariance (via Pooling)</a></li><li><a href="#pooling">Pooling</a><ul><li><a href="#how-to-set-size-of-pools">How to set size of pools?</a></li><li><a href="#learning-invariance-to-other-transformations">Learning Invariance to other Transformations</a></li><li><a href="#strided-pooling">Strided Pooling</a></li><li><a href="#nonlinear-downsampling-method">Nonlinear Downsampling Method</a></li></ul></li><li><a href="#nonlinearities">Nonlinearities</a><ul><li><a href="#what-do-relu-layers-accomplish-">What do ReLU layers accomplish ?</a></li></ul></li><li><a href="#other-reasons-ranzato">Other Reasons (Ranzato)</a></li></ul></li><li><a href="#conv-layer-properties">Conv Layer properties</a></li><li><a href="#how-many-feature-maps-per-conv-layer">How many feature maps (per conv layer)?</a></li><li><a href="#whats-the-size-of-the-filters">What’s the size of the filters?</a></li><li><a href="#whats-the-receptive-field-of-a-filter">What’s the receptive field of a filter?</a></li><li><a href="#padding">Padding</a><ul><li><a href="#why-pad-with-zeros-">Why pad with zeros ?</a></li><li><a href="#valid-vs-same-padding">VALID vs SAME padding</a></li></ul></li><li><a href="#whats-the-function-of-1x1-filters">What’s the function of 1x1 filters?</a></li><li><a href="#data-augmentation">Data Augmentation</a><ul><li><a href="#implementation">Implementation</a></li><li><a href="#common-examples">Common examples</a></li><li><a href="#test-time-augmentation-tta">Test-time augmentation (TTA)</a></li></ul></li></ul></li><li><a href="#cnn-datasets">CNN Datasets</a><ul><li><a href="#mnist">MNIST</a></li><li><a href="#imagenet-dataset-vs-pascal-dataset">ImageNet Dataset vs PASCAL Dataset</a></li></ul></li><li><a href="#cnn-architectures">CNN Architectures</a><ul><li><a href="#alexnet-vs-lenet">AlexNet vs LeNet</a></li><li><a href="#zfnet-vs-alexnet">ZFNet vs AlexNet</a></li><li><a href="#vggnet-vs-alexnet">VGGNet vs AlexNet</a></li><li><a href="#googlenet-vs-alexnet">GoogleNet vs AlexNet</a></li><li><a href="#resnet">ResNet</a><ul><li><a href="#architecture">Architecture</a></li><li><a href="#he-et-al">He et al</a><ul><li><a href="#plain-nets-stacking-3times-3-conv-layers">Plain nets: stacking $3\times 3$ Conv layers</a></li></ul></li><li><a href="#veit-et-al">Veit et al</a><ul><li><a href="#alternative-view-of-resnets">Alternative View of ResNets</a></li><li><a href="#deleting-layers">Deleting Layers</a></li><li><a href="#gradient-contributions">Gradient Contributions</a></li><li><a href="#resnet-as-ensemble-method">ResNet as Ensemble Method</a></li></ul></li></ul></li></ul></li><li><a href="#cnn-training">CNN Training</a><ul><li><a href="#transfer-learning">Transfer learning</a><ul><li><a href="#method">Method</a></li><li><a href="#additional-hyperparameters">Additional Hyperparameters</a></li><li><a href="#joint-vs-separate-training">Joint vs Separate training</a></li></ul></li></ul></li><li><a href="#cnn-tasks">CNN Tasks</a><ul><li><a href="#classification--localization">Classification &amp; Localization</a><ul><li><a href="#architecture-1">Architecture</a></li></ul></li><li><a href="#multi-task-learning">Multi-task Learning</a></li><li><a href="#human-pose-estimation">Human Pose Estimation</a></li><li><a href="#object-detection">Object Detection</a><ul><li><a href="#r-cnn-methods">R-CNN methods</a><ul><li><a href="#r-cnn">R-CNN</a><ul><li><a href="#problems">Problems</a></li></ul></li><li><a href="#fast-r-cnn">Fast R-CNN</a><ul><li><a href="#comparison-with-r-cnn">Comparison with R-CNN</a></li><li><a href="#problems-1">Problems</a></li></ul></li><li><a href="#faster-r-cnn">Faster R-CNN</a><ul><li><a href="#3-ways-for-training">3 Ways for Training</a></li></ul></li><li><a href="#mask-r-cnn">Mask R-CNN</a></li></ul></li><li><a href="#single-shot-methods">Single-Shot methods</a><ul><li><a href="#yolo">YOLO</a><ul><li><a href="#confidence-score">Confidence Score</a></li><li><a href="#comparison-with-r-cnn-1">Comparison with R-CNN</a></li></ul></li><li><a href="#ssd">SSD</a></li></ul></li></ul></li><li><a href="#semantic-segmentation">Semantic Segmentation</a><ul><li><a href="#semantic-vs-instance-segmentation">Semantic vs Instance Segmentation</a></li><li><a href="#naive-idea-1-sliding-window-approach">Naive Idea 1: Sliding Window approach</a></li><li><a href="#naive-idea-2-fcn-which-preserves-the-input-size">Naive Idea 2: FCN which preserves the input size</a></li><li><a href="#fcn-long-shelhamer-darrell">FCN (Long, Shelhamer, Darrell)</a><ul><li><a href="#overview">Overview</a></li><li><a href="#advantages">Advantages</a></li><li><a href="#convolutionalization">Convolutionalization</a></li><li><a href="#learnable-upsampling">Learnable Upsampling</a></li><li><a href="#skip-connections">Skip Connections</a></li><li><a href="#alternative-view-of-fc-layers">Alternative View of FC layers</a></li></ul></li><li><a href="#encoder-decoder-architecture">Encoder-Decoder Architecture</a><ul><li><a href="#learnable-upsampling-1">Learnable Upsampling</a></li><li><a href="#skip-connections-1">Skip Connections</a></li></ul></li></ul></li><li><a href="#instance-segmentation">Instance Segmentation</a></li><li><a href="#embeddings-in-vision-and-siamese-networks">Embeddings in Vision and Siamese Networks</a><ul><li><a href="#digression-n-gram-model">Digression: N-gram model</a><ul><li><a href="#word-probability-markov-assumption">Word Probability (Markov Assumption)</a></li><li><a href="#problems-2">Problems</a></li><li><a href="#smoothing-methods">Smoothing Methods</a></li></ul></li><li><a href="#digression-word-embeddings-and-nplm">Digression: Word Embeddings and NPLM</a><ul><li><a href="#neural-probabilistic-language-model-bengio-2003">Neural Probabilistic Language Model (Bengio 2003)</a><ul><li><a href="#learning-a-word-embedding">Learning a Word Embedding</a></li><li><a href="#analogy-questions">Analogy Questions</a></li><li><a href="#implementation-1">Implementation</a></li><li><a href="#nplmnnlm-problems">NPLM/NNLM problems</a></li></ul></li></ul></li><li><a href="#siamese-networks">Siamese Networks</a></li></ul></li></ul></li><li><a href="#rnn">RNN</a><ul><li><a href="#architecture-2">Architecture</a></li><li><a href="#bptt">BPTT</a></li><li><a href="#cliffs-and-exploding-gradients">Cliffs and Exploding Gradients</a><ul><li><a href="#solution-gradient-clipping">Solution: Gradient Clipping</a></li><li><a href="#relus">ReLUs</a></li></ul></li><li><a href="#vanishing-gradient-problem">Vanishing Gradient Problem</a></li><li><a href="#long-range-dependencies">Long-range Dependencies</a></li><li><a href="#apps">Apps</a></li><li><a href="#units-with-a-gating-mechanism">Units with a Gating Mechanism</a><ul><li><a href="#lstm">LSTM</a><ul><li><a href="#optimization">Optimization</a></li></ul></li><li><a href="#gru">GRU</a></li></ul></li></ul></li><li><a href="#references">REFERENCES</a></li></ul>
 
             </nav>
           </aside>
@@ -673,9 +672,9 @@
 <h2 id="conv-layer-properties">Conv Layer properties</h2>
 
 <ul>
-  <li>key points of Karpathy slide below:
+  <li>key points:
     <ul>
-      <li>output size: $(\frac{W-F+2P}{S}+1) \times (\frac{H-F+2P}{S}+1) \times K$</li>
+      <li>output size: $\text{Floor}(\frac{W-F+2P}{S}+1) \times \text{Floor}(\frac{H-F+2P}{S}+1) \times K$</li>
       <li>number of parameters: $(F\cdot F\cdot D_{input}+1)\cdot K$
         <ul>
           <li><strong>Note</strong>: for FC layers: number of parameters: $(c \cdot p)+c$
@@ -690,6 +689,12 @@
           </li>
         </ul>
       </li>
+    </ul>
+  </li>
+  <li>$\text{RF}<em>i=(\text{RF}</em>{i-1}-1)S_i+F_i$
+    <ul>
+      <li>$F_i$: Kernel size</li>
+      <li>$S_i$: Stride</li>
     </ul>
   </li>
   <li>Ranzato slides:
@@ -723,16 +728,15 @@
 
 <ul>
   <li>The size of the filters has to match the size/scale of the patterns we want to detect (task dependent)</li>
-</ul>
-
-<h2 id="why-is-the-size-of-f-always-an-odd-number">Why is the size of $F$ always an odd number?</h2>
-
-<ul>
-  <li>usually $1$, $3$, $5$, $7$ and sometimes $11$</li>
-  <li>you can use filters with even numbers, but it is not common</li>
-  <li>the lowest people use is $3$, mainly for convenience
+  <li>Why is the size of $F$ always an odd number?
     <ul>
-      <li>you want to apply the filter around a well-defined position that “exists” in the input volume (see traditional image processing)</li>
+      <li>usually $1$, $3$, $5$, $7$ and sometimes $11$</li>
+      <li>you can use filters with even numbers, but it is not common</li>
+      <li>the lowest people use is $3$, mainly for convenience
+        <ul>
+          <li>you want to apply the filter around a well-defined position that “exists” in the input volume (see traditional image processing)</li>
+        </ul>
+      </li>
     </ul>
   </li>
 </ul>
@@ -848,6 +852,12 @@
 </ul>
 
 <h1 id="cnn-datasets">CNN Datasets</h1>
+
+<h2 id="mnist">MNIST</h2>
+
+<ul>
+  <li>There are 60,000 images in the training dataset and 10,000 images in the validation dataset, one class per digit so a total of 10 classes, with 7,000 images (6,000 train images and 1,000 test images) per class.</li>
+</ul>
 
 <h2 id="imagenet-dataset-vs-pascal-dataset">ImageNet Dataset vs PASCAL Dataset</h2>
 
@@ -1114,69 +1124,68 @@
 
 <h3 id="he-et-al">He et al</h3>
 
+<h4 id="plain-nets-stacking-3times-3-conv-layers">Plain nets: stacking $3\times 3$ Conv layers</h4>
+
 <ul>
-  <li>Plain nets: stacking $3\times 3$ Conv layers
+  <li><strong>problem</strong>: 56-layer net has higher <strong>training</strong> error than 20-layer net</li>
+  <li><strong>not</strong> the reason:
     <ul>
-      <li>56-layer net has higher <strong>training</strong> error than 20-layer net
+      <li>not caused by overfitting
         <ul>
-          <li>not caused by overfitting
+          <li>when you are overfitting you would expect to have a very low training error rate and just bad test error</li>
+        </ul>
+      </li>
+      <li>unlikely to be caused by vanishing gradients
+        <ul>
+          <li>plain nets are trained with BN, which ensures that forward propageted signals have non-zero variances
             <ul>
-              <li>when you are overfitting you would expect to have a very low training error rate and just bad test error</li>
+              <li>i.e. forward signals do not vanish!</li>
             </ul>
           </li>
-          <li>unlikely to be caused by vanishing gradients
+          <li>He et al verify that the gradients exhibit healthy norms
             <ul>
-              <li>plain nets are trained with BN, which ensures that forward propageted signals have non-zero variances
-                <ul>
-                  <li>i.e. forward signals do not vanish!</li>
-                </ul>
-              </li>
-              <li>He et al verify that the gradients exhibit healthy norms
-                <ul>
-                  <li>i.e. backward signals do not vanish!</li>
-                </ul>
-              </li>
+              <li>i.e. backward signals do not vanish!</li>
             </ul>
           </li>
-          <li>the solver works to some extent
+        </ul>
+      </li>
+      <li>the solver works to some extent
+        <ul>
+          <li>“In fact, the 34-layer plain net is still able to achieve competitive accuracy (Table 3), suggesting that <strong>the solver works</strong> to some extent.”</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>reason</strong>: optimization difficulties
+    <ul>
+      <li>“deep plain nets may have <strong>exponentially low convergence rates</strong>”
+        <ul>
+          <li>d.h. der Solver funktioniert, aber er braucht einfach nur so lange, dass es so aussieht als würde er nicht konvergieren</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>idea</strong>: deeper model has a richer solution space which should allow it to find better solutions (i.e. it should perform at least as well as a shallower model)
+    <ul>
+      <li><strong>solution by construction</strong>:
+        <ul>
+          <li>copy the original layers from the shallower model and just set the extra layers as identity mappings
             <ul>
-              <li>“In fact, the 34-layer plain net is still able to achieve competitive accuracy (Table 3), suggesting that <strong>the solver works</strong> to some extent.”</li>
+              <li>this model should be at least as well as the shallower model</li>
             </ul>
           </li>
-          <li>deeper model has a richer solution space which should allow it to find better solutions (i.e. it should perform at least as well as a shallower model)
+          <li>this motivates the ResNet design:
             <ul>
-              <li><strong>solution by construction</strong>:
+              <li>fit a residual mapping instead of a direct mapping, so that it is <strong>easier for the deep NN to learn an identity mapping on unused layers</strong> (“learn some Delta/residual” instead of “learn an arbitrary mapping”)
                 <ul>
-                  <li>copy the original layers from the shallower model and just set the extra layers as identity mappings
+                  <li>Why is learning a residual easier than learning the direct mapping?
                     <ul>
-                      <li>this model should be at least as well as the shallower model</li>
+                      <li>This is not proven. It’s just He’s hypothesis.</li>
                     </ul>
                   </li>
-                  <li>this motivates the ResNet design:
-                    <ul>
-                      <li>fit a residual mapping instead of a direct mapping, so that it is <strong>easier for the deep NN to learn an identity mapping on unused layers</strong> (“learn some Delta/residual” instead of “learn an arbitrary mapping”)
-                        <ul>
-                          <li>Why is learning a residual easier than learning the direct mapping?
-                            <ul>
-                              <li>This is not proven. It’s just He’s hypothesis.</li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </li>
-                      <li>so we can get something close to this “<strong>solution by construction</strong>” that we had earlier</li>
-                    </ul>
-                  </li>
                 </ul>
               </li>
-            </ul>
-          </li>
-          <li><strong>reason</strong>: optimization difficulties
-            <ul>
-              <li>“deep plain nets may have <strong>exponentially low convergence rates</strong>”
-                <ul>
-                  <li>d.h. der Solver funktioniert, aber er braucht einfach nur so lange, dass es so aussieht als würde er nicht konvergieren</li>
-                </ul>
-              </li>
+              <li>so we can get something close to this “<strong>solution by construction</strong>” that we had earlier</li>
             </ul>
           </li>
         </ul>
@@ -2611,6 +2620,7 @@
   <li><a href="https://arxiv.org/pdf/1504.00941.pdf">Le, Hinton 2015</a>:
     <ul>
       <li><strong>At first sight, ReLUs seem inappropriate for RNNs</strong> because they can have very large outputs so they might be expected to be <strong>far more likely to explode</strong> than units that have bounded values</li>
+      <li>In this paper, we demonstrate that, with the <strong>right initialization of the weights</strong>, RNNs composed of [ReLUs] rectified linear units are relatively easy to train and are good at modeling long-range dependencies.</li>
     </ul>
   </li>
 </ul>
@@ -2942,164 +2952,12 @@
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
       <div class="archive__item-teaser">
-        <img src="/assets/images/lenet.png" alt="">
+        <img src="/assets/images/mario-question-block.jpeg" alt="">
       </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/lecture_notes/machine_learning/lecture-notes-ML-part2-old/" rel="permalink">Machine Learning (Part 2) [OLD VERSION]
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-03-09T00:00:00+01:00">March 9, 2022</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          14 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">[OLD VERSION!] Notes on Machine Learning theory. Based on C. M. Bishop, “Pattern Recognition and Machine Learning” (2011) and Goodfellow, Bengio, Courville, ...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src="/assets/images/lenet.png" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/notes/machine_learning/notes-Neuroscience/" rel="permalink">New Inspirations for Machine Learning Methods
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-02-26T00:00:00+01:00">February 26, 2022</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          less than 1 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Notes on some inspirations for Machine Learning methods. Based on opinions from leading scientists and also some of my own opinions.
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src="/assets/images/lenet.png" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/carla/simulator/self_driving/notes-Carla/" rel="permalink">Carla Simulator
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-02-17T00:00:00+01:00">February 17, 2022</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          less than 1 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Notes on the Carla Simulator
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src="/assets/images/mario-question.png" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/cheatsheet/cheatsheet-ros/" rel="permalink">ROS Cheatsheet
+        <a href="/notes/notes-html/" rel="permalink">HTML Notes
 </a>
       
     </h2>
@@ -3111,7 +2969,7 @@
       <span class="page__meta-date">
         <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2022-01-22T00:00:00+01:00">January 22, 2022</time>
+        <time datetime="2022-10-10T00:00:00+02:00">October 10, 2022</time>
       </span>
     
 
@@ -3121,15 +2979,131 @@
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">roslaunch
+    <p class="archive__item-excerpt" itemprop="description">For learning html.
+</p>
+  </article>
+</div>
 
-roslaunch --ros-args /path/to/launchfile.launch
+        
+          
 
-  Display command-line arguments for this launch file
 
 
-&lt;launch&gt;
-  &lt;!-- ros_args.launch ...</p>
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/Cpp_logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/notes/notes-cpp/" rel="permalink">C++ Notes
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-10-06T00:00:00+02:00">October 6, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">For learning C++
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/C_logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/cheatsheet/cheatsheet-android/" rel="permalink">Android Cheatsheet
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-10-04T00:00:00+02:00">October 4, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Useful tips for using Android
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/C_logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/notes/notes-SE/" rel="permalink">Software Engineering Notes
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-10-03T00:00:00+02:00">October 3, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Software Engineering Basics
+</p>
   </article>
 </div>
 
@@ -3139,6 +3113,7 @@ roslaunch --ros-args /path/to/launchfile.launch
   
   
 </div>
+
     </div>
 
     

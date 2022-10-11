@@ -30,7 +30,7 @@
 
 
 
-  <meta property="og:image" content="http://localhost:4000/assets/images/Vim.jpg">
+  <meta property="og:image" content="http://localhost:4000/assets/images/Vim.png">
 
 
 
@@ -136,10 +136,6 @@
   </ul>
 </nav>
 
-    <!--[if lt IE 9]>
-<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
-<![endif]-->
-
     
 
 <div class="masthead">
@@ -190,7 +186,7 @@
 
 
 <div class="page__hero--overlay"
-  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/Vim.jpg');"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/Vim.png');"
 >
   
     <div class="wrapper">
@@ -228,6 +224,8 @@
   
   
 </div>
+
+
 
 
 
@@ -279,11 +277,11 @@
           
         
           
-            <li><a href="https://twitter.com/pharath_one" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+            <li><a href="https://twitter.com/pharath_one" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
           
         
           
-            <li><a href="https://github.com/pharath" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+            <li><a href="https://github.com/pharath" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
           
         
           
@@ -350,6 +348,7 @@
     </ul>
   </div>
 </div>
+
   
   </div>
 
@@ -369,7 +368,7 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
-              <ul class="toc__menu"><li><a href="#plugins">Plugins</a><ul><li><a href="#install-autocomplete-clang_complete">Install Autocomplete clang_complete</a></li></ul></li><li><a href="#help">help</a></li><li><a href="#regexp">regexp</a></li><li><a href="#von-shell-aus">Von Shell aus</a></li><li><a href="#netrw">netrw</a></li><li><a href="#in-command-mode">In COMMAND mode</a><ul><li><a href="#tabs">Tabs</a><ul><li><a href="#re-open-closed-tab">Re-open closed Tab</a></li></ul></li><li><a href="#saving">Saving</a></li><li><a href="#sessions">Sessions</a></li><li><a href="#mehrere-zeilen-auskommentieren">Mehrere Zeilen auskommentieren:</a></li><li><a href="#navigation">Navigation</a></li><li><a href="#syntax-highlighting">Syntax highlighting</a></li></ul></li><li><a href="#in-insert-mode">In INSERT mode</a><ul><li><a href="#avoid-the-escape-key">Avoid the escape key:</a></li><li><a href="#schreiben">Schreiben</a></li></ul></li><li><a href="#general-facts">General facts</a><ul><li><a href="#reasons-for-swap-files-swp">Reasons for swap files (.swp)</a></li><li><a href="#freezefreezing">Freeze/Freezing</a></li><li><a href="#change-default-vim-vimrc-location">Change default .vim .vimrc location</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#plugins">Plugins</a><ul><li><a href="#install-autocomplete-clang_complete">Install Autocomplete clang_complete</a></li></ul></li><li><a href="#help">help</a></li><li><a href="#regexregexp">regex/regexp</a></li><li><a href="#von-shell-aus">Von Shell aus</a></li><li><a href="#netrw">netrw</a></li><li><a href="#compile-run">Compile, Run</a></li><li><a href="#in-command-mode">In COMMAND mode</a><ul><li><a href="#vim-settings">Vim Settings</a><ul><li><a href="#syntax-highlighting">Syntax highlighting</a></li></ul></li><li><a href="#vim-sessions">Vim Sessions</a></li><li><a href="#tabs">Tabs</a></li><li><a href="#buffers">Buffers</a></li><li><a href="#file-open-close-suspend-name-refresh">File Open, Close, Suspend, Name, Refresh</a></li><li><a href="#file-saving">File Saving</a></li><li><a href="#navigation">Navigation</a></li><li><a href="#write">Write</a><ul><li><a href="#mehrere-zeilen-auskommentieren">Mehrere Zeilen auskommentieren</a></li></ul></li></ul></li><li><a href="#in-insert-mode">In INSERT mode</a><ul><li><a href="#avoid-the-escape-key">Avoid the escape key:</a></li><li><a href="#schreiben">Schreiben</a></li></ul></li><li><a href="#general-facts">General facts</a><ul><li><a href="#reasons-for-swap-files-swp">Reasons for swap files (.swp)</a></li><li><a href="#freezefreezing">Freeze/Freezing</a></li><li><a href="#change-default-vim-vimrc-location">Change default .vim .vimrc location</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -386,40 +385,30 @@
 
 <h2 id="install-autocomplete-clang_complete">Install Autocomplete clang_complete</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: center">command</th>
-      <th style="text-align: center">description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: center">1. Download https://apt.llvm.org/llvm.sh</td>
-      <td style="text-align: center"> </td>
-    </tr>
-    <tr>
-      <td style="text-align: center">2. chmod u+x ~/Downloads/llvm.sh</td>
-      <td style="text-align: center"> </td>
-    </tr>
-    <tr>
-      <td style="text-align: center">3. bash -c ~/Downloads/llvm.sh</td>
-      <td style="text-align: center">(einige dependencies - output sagt welche - müssen evtl. manuell nachinstalliert werden) installs LLVM + Clang + compiler-rt + polly + LLDB + LLD + libFuzzer + libc++ + libc++abi + openmp + libclc (see <a href="https://apt.llvm.org/">here</a>)</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">4. Install https://github.com/xavierd/clang_complete</td>
-      <td style="text-align: center">with minimum Configuration (Achtung: hier im <code class="language-plaintext highlighter-rouge">.vimrc</code> stattdessen <code class="language-plaintext highlighter-rouge">:let g:clang_library_path='/usr/lib/llvm-12/lib'</code> einsetzen, dh. die richtige llvm Version) (optional: make <code class="language-plaintext highlighter-rouge">.clang_complete</code> file for setting Compiler options)</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">5. cd /usr/lib/llvm-12/lib</td>
-      <td style="text-align: center">look for libclang.so.1 file</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">6. ln -s libclang.so.1 libclang.so</td>
-      <td style="text-align: center">make a symlink (=symbolic link) called libclang.so to libclang.so.1 in this directory</td>
-    </tr>
-  </tbody>
-</table>
+<ol>
+  <li>Download https://apt.llvm.org/llvm.sh</li>
+  <li>chmod u+x ~/Downloads/llvm.sh</li>
+  <li>bash -c ~/Downloads/llvm.sh
+    <ul>
+      <li>(einige dependencies - output sagt welche - müssen evtl. manuell nachinstalliert werden) installs LLVM + Clang + compiler-rt + polly + LLDB + LLD + libFuzzer + libc++ + libc++abi + openmp + libclc (see <a href="https://apt.llvm.org/">here</a>)</li>
+    </ul>
+  </li>
+  <li>Install https://github.com/xavierd/clang_complete
+    <ul>
+      <li>with minimum Configuration (Achtung: hier im <code class="language-plaintext highlighter-rouge">.vimrc</code> stattdessen <code class="language-plaintext highlighter-rouge">:let g:clang_library_path='/usr/lib/llvm-12/lib'</code> einsetzen, dh. die richtige llvm Version) (optional: make <code class="language-plaintext highlighter-rouge">.clang_complete</code> file for setting Compiler options)</li>
+    </ul>
+  </li>
+  <li>cd /usr/lib/llvm-12/lib
+    <ul>
+      <li>look for libclang.so.1 file</li>
+    </ul>
+  </li>
+  <li>ln -s libclang.so.1 libclang.so
+    <ul>
+      <li>make a symlink (=symbolic link) called libclang.so to libclang.so.1 in this directory</li>
+    </ul>
+  </li>
+</ol>
 
 <h1 id="help">help</h1>
 
@@ -433,7 +422,7 @@
   <tbody>
     <tr>
       <td style="text-align: center">:h</td>
-      <td style="text-align: center"> </td>
+      <td style="text-align: center">Hilfe (in Hilfe Cursor auf Tag zB |syntax.txt| platzieren ctrl + alt + 6 und ctrl + alt + 6 um auf content zu springen)</td>
     </tr>
     <tr>
       <td style="text-align: center">:h i_CTRL-R</td>
@@ -479,7 +468,8 @@
   </tbody>
 </table>
 
-<h1 id="regexp">regexp</h1>
+<h1 id="regexregexp">regex/regexp</h1>
+
 <p>(Achtung: in Windows manchmal bisschen anders s. <a href="https://superuser.com/a/518231">https://superuser.com/a/518231</a></p>
 
 <table>
@@ -491,27 +481,31 @@
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: center">^</td>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">^</code></td>
       <td style="text-align: center">vim: jump to the first non-blank character of the line; regexp: beginning of line ( praktisch für netrw: zB für jump to nächstem Ordner der mit “i” anfängt: /^i )</td>
     </tr>
     <tr>
-      <td style="text-align: center">\n oder \r</td>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">\n</code> oder <code class="language-plaintext highlighter-rouge">\r</code></td>
       <td style="text-align: center">linebreak (man kann damit auch linebreaks suchen und mit einem whitespace (ie einfach 1x Leertaste) ersetzen)</td>
     </tr>
     <tr>
-      <td style="text-align: center">:%s/pattern/replace/g</td>
-      <td style="text-align: center">find pattern (regexp) and replace with replace (Achtung: Sonderzeichen (eg. Klammern, Punkt, …) muss ein \ vorangestellt werden!)</td>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">:%s/pattern/replace/g</code></td>
+      <td style="text-align: center">find pattern (regexp) and replace with replace (Achtung: Sonderzeichen (eg. Klammern, Punkt, …) muss ein <code class="language-plaintext highlighter-rouge">\</code> vorangestellt werden! [The basic construct of the command is <code class="language-plaintext highlighter-rouge">s#search#replace#</code>. Sometimes you see it as <code class="language-plaintext highlighter-rouge">s///</code>. The <code class="language-plaintext highlighter-rouge">%</code> before the <code class="language-plaintext highlighter-rouge">s</code> tells the regex to work on all lines in the vim buffer, not just the current. The space followed by <code class="language-plaintext highlighter-rouge">\+</code> matches one or more spaces. The trailing <code class="language-plaintext highlighter-rouge">g</code> tells the regex to match multiple times in a single line.]</td>
     </tr>
     <tr>
-      <td style="text-align: center">:g/pattern/d</td>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">:%s/  /    /g</code></td>
+      <td style="text-align: center">replace two spaces with four spaces</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">:g/pattern/d</code></td>
       <td style="text-align: center">remove all lines containing “pattern”</td>
     </tr>
     <tr>
-      <td style="text-align: center">^\R</td>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">^\R</code></td>
       <td style="text-align: center">blank line (exact empty line)</td>
     </tr>
     <tr>
-      <td style="text-align: center">^\h*\R</td>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">^\h\*\R</code></td>
       <td style="text-align: center">for empty lines with blanks, only</td>
     </tr>
   </tbody>
@@ -583,6 +577,27 @@
   </tbody>
 </table>
 
+<h1 id="compile-run">Compile, Run</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">:!g++ -g -Wall %</td>
+      <td style="text-align: center">compile current file (% steht für current file)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">:!./a.out</td>
+      <td style="text-align: center">(after :!g++ -g -Wall %) execute compiled file a.out</td>
+    </tr>
+  </tbody>
+</table>
+
 <h1 id="in-command-mode">In COMMAND mode</h1>
 
 <table>
@@ -598,36 +613,107 @@
       <td style="text-align: center">gehe in INSERT modus</td>
     </tr>
     <tr>
-      <td style="text-align: center">shift + z q</td>
-      <td style="text-align: center">wie :q!</td>
+      <td style="text-align: center">:terminal</td>
+      <td style="text-align: center">open a terminal in Vim</td>
     </tr>
     <tr>
-      <td style="text-align: center">ctrl + w, q</td>
-      <td style="text-align: center">wie <code class="language-plaintext highlighter-rouge">:q</code> (ohne <code class="language-plaintext highlighter-rouge">!</code>), schließe aktiven split window</td>
+      <td style="text-align: center">ctrl+w capital N</td>
+      <td style="text-align: center">in terminal mode: enable scrolling (move around with cursor) in vim terminal mode (press i or a to resume using terminal as before)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="vim-settings">Vim Settings</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">:syntax on</td>
+      <td style="text-align: center"> </td>
     </tr>
     <tr>
-      <td style="text-align: center">shift + z z</td>
-      <td style="text-align: center">wie :x ( dasselbe wie :wq, aber :wq überschreibt auch wenn keine modification [nur wichtig, falls modification times matter] )</td>
+      <td style="text-align: center">:set number</td>
+      <td style="text-align: center"> </td>
     </tr>
     <tr>
-      <td style="text-align: center">1. ctrl + z</td>
-      <td style="text-align: center">pause and switch to terminal</td>
+      <td style="text-align: center">:set nonumber</td>
+      <td style="text-align: center"> </td>
     </tr>
     <tr>
-      <td style="text-align: center">2. in terminal: fg</td>
-      <td style="text-align: center">go back to vim</td>
+      <td style="text-align: center">:set hlsearch</td>
+      <td style="text-align: center"> </td>
     </tr>
     <tr>
-      <td style="text-align: center">ctrl + g</td>
-      <td style="text-align: center">show current file name</td>
+      <td style="text-align: center">:set nohlsearch</td>
+      <td style="text-align: center"> </td>
     </tr>
     <tr>
-      <td style="text-align: center">1 + ctrl + g</td>
-      <td style="text-align: center">show current file name + path</td>
+      <td style="text-align: center">:filetype indent plugin on</td>
+      <td style="text-align: center"> </td>
     </tr>
     <tr>
-      <td style="text-align: center">:r !xsel</td>
-      <td style="text-align: center">paste from clipboard</td>
+      <td style="text-align: center">:so $VIMRUNTIME/syntax/python.vim</td>
+      <td style="text-align: center">aktiviere Python Syntax</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="syntax-highlighting">Syntax highlighting</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">:set filetype=cmake</td>
+      <td style="text-align: center">wenn Syntax nicht automatisch aktiviert wird, diesen Befehl ausführen</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">:scriptnames</td>
+      <td style="text-align: center">To find out which files Vim has actually loaded. Generally, only the last one listed is “active”, and even it may not be if you’ve turned syntax highlighting off.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">:echo b:current_syntax</td>
+      <td style="text-align: center">To see the syntax currently in effect.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">:syntax list</td>
+      <td style="text-align: center">To see the syntax items currently in effect. This may help if syntax items from more than one syntax file are in effect.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">:setlocal syntax?</td>
+      <td style="text-align: center">The syntax for the current buffer can be queried via this command. It usually (but not necessarily) corresponds to the buffer’s filetype (<code class="language-plaintext highlighter-rouge">:setlocal filetype?</code>).</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="vim-sessions">Vim Sessions</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">:mks ~/.vim-sessions/some-project-session.vim</td>
+      <td style="text-align: center">save vim session</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">:so ~/.vim-sessions/some-project-session.vim</td>
+      <td style="text-align: center">restore vim session</td>
     </tr>
   </tbody>
 </table>
@@ -666,10 +752,14 @@
       <td style="text-align: center">:tab ter</td>
       <td style="text-align: center">open terminal in new Tab</td>
     </tr>
+    <tr>
+      <td style="text-align: center">ctrl + w N</td>
+      <td style="text-align: center">scroll in a terminal tab</td>
+    </tr>
   </tbody>
 </table>
 
-<h3 id="re-open-closed-tab">Re-open closed Tab</h3>
+<h2 id="buffers">Buffers</h2>
 
 <table>
   <thead>
@@ -684,13 +774,41 @@
       <td style="text-align: center">get the buffer number of all files edited in this session</td>
     </tr>
     <tr>
+      <td style="text-align: center">:files</td>
+      <td style="text-align: center">see <code class="language-plaintext highlighter-rouge">:ls</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">:buffers</td>
+      <td style="text-align: center">see <code class="language-plaintext highlighter-rouge">:ls</code></td>
+    </tr>
+    <tr>
       <td style="text-align: center">:tabnew +Nbuf</td>
       <td style="text-align: center">re-open closed tab (where N is the buffer number of the closed tab which you can get via <code class="language-plaintext highlighter-rouge">:ls</code>), e.g. <code class="language-plaintext highlighter-rouge">:tabnew +18buf</code> in order to reopen buffer 18</td>
     </tr>
+    <tr>
+      <td style="text-align: center">:buffer very/very/long/path/to/a/veryVeryLongFileName.txt</td>
+      <td style="text-align: center">switch to buffer <code class="language-plaintext highlighter-rouge">very/very/long/path/to/a/veryVeryLongFileName.txt</code>, where a <strong>buffer</strong> is a file in the <code class="language-plaintext highlighter-rouge">:ls</code> list</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">:b LongFileName</td>
+      <td style="text-align: center">short form of <code class="language-plaintext highlighter-rouge">:buffer very/very/long/path/to/a/veryVeryLongFileName.txt</code> (<strong>note</strong>: <code class="language-plaintext highlighter-rouge">:b</code> command can also take a <strong>substring</strong> of the name of the file, thus <code class="language-plaintext highlighter-rouge">LongFileName</code> instead of <code class="language-plaintext highlighter-rouge">veryVeryLongFileName</code>!)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">:b SubstringOfFilename</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center">:b 5</td>
+      <td style="text-align: center">switch to buffer 5 (see file-number map in the <code class="language-plaintext highlighter-rouge">:ls</code> list)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">:bd</td>
+      <td style="text-align: center">Unload buffer <code class="language-plaintext highlighter-rouge">[N]</code> (default: current buffer) and delete it from the buffer list. If the buffer was changed, this fails, unless when <code class="language-plaintext highlighter-rouge">[!]</code> is specified, in which case changes are lost. The file remains unaffected.</td>
+    </tr>
   </tbody>
 </table>
 
-<h2 id="saving">Saving</h2>
+<h2 id="file-open-close-suspend-name-refresh">File Open, Close, Suspend, Name, Refresh</h2>
 
 <table>
   <thead>
@@ -701,127 +819,65 @@
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: center">:sav(eas) new_file_name</td>
-      <td style="text-align: center">save as new_file_name and set new_file_name as current file (:sav and :saveas are the same)</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="sessions">Sessions</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: center">command</th>
-      <th style="text-align: center">description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: center">:mks ~/.vim-sessions/some-project-session.vim</td>
-      <td style="text-align: center">save vim session</td>
+      <td style="text-align: center">shift + z q</td>
+      <td style="text-align: center">wie <code class="language-plaintext highlighter-rouge">:q!</code></td>
     </tr>
     <tr>
-      <td style="text-align: center">:so ~/.vim-sessions/some-project-session.vim</td>
-      <td style="text-align: center">restore vim session</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="mehrere-zeilen-auskommentieren">Mehrere Zeilen auskommentieren:</h2>
-<p><a href="https://discuss.devopscube.com/t/how-to-comment-and-uncomment-multiple-line-vi-terminal-editor/64">how-to-comment-and-uncomment-multiple-line-vi-terminal-editor</a></p>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: center">command</th>
-      <th style="text-align: center">description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: center">1. ctrl + v</td>
-      <td style="text-align: center">Block markieren</td>
+      <td style="text-align: center">ctrl + w q</td>
+      <td style="text-align: center">wie <code class="language-plaintext highlighter-rouge">:q</code> (ohne <code class="language-plaintext highlighter-rouge">!</code>), schließe aktiven split window</td>
     </tr>
     <tr>
-      <td style="text-align: center">2. Shift + i</td>
-      <td style="text-align: center">enter Insert mode (while in Block mode)</td>
+      <td style="text-align: center">shift + z z</td>
+      <td style="text-align: center">wie <code class="language-plaintext highlighter-rouge">:x</code> ( dasselbe wie <code class="language-plaintext highlighter-rouge">:wq</code>, aber <code class="language-plaintext highlighter-rouge">:wq</code> überschreibt auch wenn keine modification [nur wichtig, falls modification times matter] )</td>
     </tr>
     <tr>
-      <td style="text-align: center">3. “</td>
-      <td style="text-align: center">Kommentarsymbol am Anfang der ersten Zeile eingeben (while in Block mode)</td>
+      <td style="text-align: center">ctrl + z</td>
+      <td style="text-align: center">suspend, i.e. pause and switch to terminal (sends SIGTSTP to a process, like <code class="language-plaintext highlighter-rouge">kill -TSTP [processid]</code>, see notes on Bash under section “job control”)</td>
     </tr>
     <tr>
-      <td style="text-align: center">4. Esc</td>
-      <td style="text-align: center">drücken und 1 sec warten (bis das Kommentarsymbol vor allen Zeilen im Block auftaucht)</td>
+      <td style="text-align: center">in terminal: fg</td>
+      <td style="text-align: center">resume, i.e. go back to vim (a shell <strong>builtin command</strong>)</td>
     </tr>
     <tr>
-      <td style="text-align: center">:terminal</td>
-      <td style="text-align: center"> </td>
+      <td style="text-align: center">ctrl + g</td>
+      <td style="text-align: center">show current file name</td>
     </tr>
     <tr>
-      <td style="text-align: center">ctrl+w capital N</td>
-      <td style="text-align: center">in terminal mode: enable scrolling (move around with cursor) in vim terminal mode (press i or a to resume using terminal as before)</td>
+      <td style="text-align: center">1 + ctrl + g</td>
+      <td style="text-align: center">show current file name + path</td>
     </tr>
     <tr>
-      <td style="text-align: center">:syntax on</td>
-      <td style="text-align: center"> </td>
+      <td style="text-align: center">:e</td>
+      <td style="text-align: center">reload/refresh file</td>
     </tr>
     <tr>
-      <td style="text-align: center">:set number</td>
-      <td style="text-align: center"> </td>
-    </tr>
-    <tr>
-      <td style="text-align: center">:set nonumber</td>
-      <td style="text-align: center"> </td>
-    </tr>
-    <tr>
-      <td style="text-align: center">:set hlsearch</td>
-      <td style="text-align: center"> </td>
-    </tr>
-    <tr>
-      <td style="text-align: center">:set nohlsearch</td>
-      <td style="text-align: center"> </td>
-    </tr>
-    <tr>
-      <td style="text-align: center">:filetype indent plugin on</td>
-      <td style="text-align: center"> </td>
-    </tr>
-    <tr>
-      <td style="text-align: center">:so $VIMRUNTIME/syntax/python.vim</td>
-      <td style="text-align: center">aktiviere Python Syntax</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">:h</td>
-      <td style="text-align: center">Hilfe (in Hilfe Cursor auf 	Tag zB |syntax.txt| platzieren ctrl + alt + 6 und ctrl + alt + 6 um auf content zu springen)</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">/irgend_ein_wort</td>
-      <td style="text-align: center">suche irgend_ein_wort vorwärts (springt zum ersten solchen Wort, drücke n für nächstes Wort und N für previous occurrence)</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">?irgend_ein_wort</td>
-      <td style="text-align: center">suche irgend_ein_wort rückwärts</td>
+      <td style="text-align: center">:e!</td>
+      <td style="text-align: center">discard local changes and reload/refresh file</td>
     </tr>
     <tr>
       <td style="text-align: center">:e /path/to/other/file</td>
       <td style="text-align: center">öffne anderen file in vim</td>
     </tr>
+  </tbody>
+</table>
+
+<h2 id="file-saving">File Saving</h2>
+
+<table>
+  <thead>
     <tr>
-      <td style="text-align: center">:!g++ -g -Wall %</td>
-      <td style="text-align: center">compile current file (% steht für current file)</td>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">:w</code></td>
+      <td style="text-align: center"> </td>
     </tr>
     <tr>
-      <td style="text-align: center">:!./a.out</td>
-      <td style="text-align: center">(after :!g++ -g -Wall %) execute compiled file a.out</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">ctrl - k <em>digraph_id</em></td>
-      <td style="text-align: center">to type special characters that are not on the keyboard</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">:dig</td>
-      <td style="text-align: center">list all digraphs (see :h digraph)</td>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">:sav(eas)</code> new_file_name</td>
+      <td style="text-align: center">save as new_file_name and set new_file_name as current file (<code class="language-plaintext highlighter-rouge">:sav</code> and <code class="language-plaintext highlighter-rouge">:saveas</code> are the same)</td>
     </tr>
   </tbody>
 </table>
@@ -836,6 +892,14 @@
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td style="text-align: center">/irgend_ein_wort</td>
+      <td style="text-align: center">suche irgend_ein_wort vorwärts (springt zum ersten solchen Wort, drücke n für nächstes Wort und N für previous occurrence)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">?irgend_ein_wort</td>
+      <td style="text-align: center">suche irgend_ein_wort rückwärts</td>
+    </tr>
     <tr>
       <td style="text-align: center">h j k l</td>
       <td style="text-align: center">links hoch runter rechts</td>
@@ -907,6 +971,10 @@
     <tr>
       <td style="text-align: center">p</td>
       <td style="text-align: center">paste</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">:r !xsel</td>
+      <td style="text-align: center">paste from clipboard</td>
     </tr>
     <tr>
       <td style="text-align: center">o</td>
@@ -1037,17 +1105,17 @@
       <td style="text-align: center">decrease active viewport size (für 8 Einheiten Verkleinerung: ctrl + w, 8, &lt;)</td>
     </tr>
     <tr>
-      <td style="text-align: center">ctrl +</td>
+      <td style="text-align: center">ctrl + +</td>
       <td style="text-align: center">zoom in (anschließend ctrl + w, =)</td>
     </tr>
     <tr>
-      <td style="text-align: center">ctrl -</td>
+      <td style="text-align: center">ctrl - -</td>
       <td style="text-align: center">zoom out (anschließend ctrl + w, =)</td>
     </tr>
   </tbody>
 </table>
 
-<h2 id="syntax-highlighting">Syntax highlighting</h2>
+<h2 id="write">Write</h2>
 
 <table>
   <thead>
@@ -1058,27 +1126,26 @@
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: center">:set filetype=cmake</td>
-      <td style="text-align: center">wenn Syntax nicht automatisch aktiviert wird, diesen Befehl ausführen</td>
+      <td style="text-align: center">ctrl - k <em>digraph_id</em></td>
+      <td style="text-align: center">to type special characters that are not on the keyboard</td>
     </tr>
     <tr>
-      <td style="text-align: center">:scriptnames</td>
-      <td style="text-align: center">To find out which files Vim has actually loaded. Generally, only the last one listed is “active”, and even it may not be if you’ve turned syntax highlighting off.</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">:echo b:current_syntax</td>
-      <td style="text-align: center">To see the syntax currently in effect.</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">:syntax list</td>
-      <td style="text-align: center">To see the syntax items currently in effect. This may help if syntax items from more than one syntax file are in effect.</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">:setlocal syntax?</td>
-      <td style="text-align: center">The syntax for the current buffer can be queried via this command. It usually (but not necessarily) corresponds to the buffer’s filetype (<code class="language-plaintext highlighter-rouge">:setlocal filetype?</code>).</td>
+      <td style="text-align: center">:dig</td>
+      <td style="text-align: center">list all digraphs (see :h digraph)</td>
     </tr>
   </tbody>
 </table>
+
+<h3 id="mehrere-zeilen-auskommentieren">Mehrere Zeilen auskommentieren</h3>
+
+<p><a href="https://discuss.devopscube.com/t/how-to-comment-and-uncomment-multiple-line-vi-terminal-editor/64">how-to-comment-and-uncomment-multiple-line-vi-terminal-editor</a></p>
+
+<ol>
+  <li>ctrl + v	(Block markieren)</li>
+  <li>Shift + i (enter Insert mode (while in Block mode))</li>
+  <li>” (Kommentarsymbol am Anfang der ersten Zeile eingeben (while in Block mode))</li>
+  <li>Esc (drücken und 1 sec warten (bis das Kommentarsymbol vor allen Zeilen im Block auftaucht))</li>
+</ol>
 
 <h1 id="in-insert-mode">In INSERT mode</h1>
 
@@ -1274,12 +1341,12 @@ Swap files also provide a way to avoid multiple instances of Vim from editing th
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
       <div class="archive__item-teaser">
-        <img src="/assets/images/lenet.png" alt="">
+        <img src="/assets/images/mario-question-block.jpeg" alt="">
       </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/lecture_notes/machine_learning/lecture-notes-ML-part2-old/" rel="permalink">Machine Learning (Part 2) [OLD VERSION]
+        <a href="/notes/notes-html/" rel="permalink">HTML Notes
 </a>
       
     </h2>
@@ -1289,79 +1356,19 @@ Swap files also provide a way to avoid multiple instances of Vim from editing th
     
       
       <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2022-03-09T00:00:00+01:00">March 9, 2022</time>
+        <time datetime="2022-10-10T00:00:00+02:00">October 10, 2022</time>
       </span>
     
 
-    <span class="page__meta-sep"></span>
-
     
-      
-      
 
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          14 minute read
-        
-      </span>
     
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">[OLD VERSION!] Notes on Machine Learning theory. Based on C. M. Bishop, “Pattern Recognition and Machine Learning” (2011) and Goodfellow, Bengio, Courville, ...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src="/assets/images/lenet.png" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/notes/machine_learning/notes-Neuroscience/" rel="permalink">New Inspirations for Machine Learning Methods
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-02-26T00:00:00+01:00">February 26, 2022</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          less than 1 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Notes on some inspirations for Machine Learning methods. Based on opinions from leading scientists and also some of my own opinions.
+    <p class="archive__item-excerpt" itemprop="description">For learning html.
 </p>
   </article>
 </div>
@@ -1375,12 +1382,12 @@ Swap files also provide a way to avoid multiple instances of Vim from editing th
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
       <div class="archive__item-teaser">
-        <img src="/assets/images/lenet.png" alt="">
+        <img src="/assets/images/Cpp_logo.png" alt="">
       </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/carla/simulator/self_driving/notes-Carla/" rel="permalink">Carla Simulator
+        <a href="/notes/notes-cpp/" rel="permalink">C++ Notes
 </a>
       
     </h2>
@@ -1390,29 +1397,19 @@ Swap files also provide a way to avoid multiple instances of Vim from editing th
     
       
       <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2022-02-17T00:00:00+01:00">February 17, 2022</time>
+        <time datetime="2022-10-06T00:00:00+02:00">October 6, 2022</time>
       </span>
     
 
-    <span class="page__meta-sep"></span>
-
     
-      
-      
 
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          less than 1 minute read
-        
-      </span>
     
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Notes on the Carla Simulator
+    <p class="archive__item-excerpt" itemprop="description">For learning C++
 </p>
   </article>
 </div>
@@ -1426,12 +1423,12 @@ Swap files also provide a way to avoid multiple instances of Vim from editing th
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
       <div class="archive__item-teaser">
-        <img src="/assets/images/lenet.png" alt="">
+        <img src="/assets/images/C_logo.png" alt="">
       </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/lecture_notes/machine_learning/computer_vision/lecture-notes-ML-part3/" rel="permalink">Machine Learning (Part 3)
+        <a href="/cheatsheet/cheatsheet-android/" rel="permalink">Android Cheatsheet
 </a>
       
     </h2>
@@ -1441,29 +1438,60 @@ Swap files also provide a way to avoid multiple instances of Vim from editing th
     
       
       <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2022-01-27T00:00:00+01:00">January 27, 2022</time>
+        <time datetime="2022-10-04T00:00:00+02:00">October 4, 2022</time>
       </span>
     
 
-    <span class="page__meta-sep"></span>
-
     
-      
-      
 
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          56 minute read
-        
-      </span>
     
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Notes on Computer Vision theory and NLP. Based on Goodfellow, Bengio “Deep Learning”, Stanford CS231n and RWTH Aachen University Machine Learning
+    <p class="archive__item-excerpt" itemprop="description">Useful tips for using Android
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/C_logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/notes/notes-SE/" rel="permalink">Software Engineering Notes
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-10-03T00:00:00+02:00">October 3, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Software Engineering Basics
 </p>
   </article>
 </div>
@@ -1474,6 +1502,7 @@ Swap files also provide a way to avoid multiple instances of Vim from editing th
   
   
 </div>
+
     </div>
 
     

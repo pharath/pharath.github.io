@@ -10,7 +10,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Ubuntu Cheatsheet - Pharath Palesuvaran</title>
-<meta name="description" content="General Shortcuts  For Bluetooth     Create .desktop file (“.desktop” ending required!) with this content   [Desktop Entry] Name=open_bluetooth_settings Exec=gnome-control-center bluetooth Terminal=false Type=Application     Make sure that your script is executable, like this:   sudo chmod +x /path/to/script.sh     (if it does not execute, copy it to ~/Desktop/. There right-click on it and select “Allow Launching”.)            Move .desktop file to /usr/share/applications/. Press Super to open Activities and in the application grid view select “All” (instead of “Frequent”) and search the created .desktop file there. Right-click on it and select “Add to Favorites”. Now the .desktop file should be in the dock and can be accessed via shortcut Super + &lt;position_in_dock&gt;.           It also won’t work with if your script uses the sudo command, or anything else that requires user input.      If you want it to open a terminal window when you run it (if you needed to add input or watch the output) set Terminal to true.  Terminal=true  Network  On the server computer:     Connect server and client via Ethernet cable.   On the computer, which is connected to the Internet, click the network icon in the panel and go to “Settings” at the bottom of the menu. [der Schieberegler von “Wired” beim Server sollte bereits aktiv sein, der Schieberegler beim Client sollte inaktiv sein (auch nachdem Kabel eingesteckt wurde)]   Click on the “Settings symbol” of your Wired Connection (Leave your wireless connection untouched).   On the “IPv4 Settings tab”, select Method: “Shared to other computers”. Click on “Apply” and close this window.   On the server reconnect by clicking on the Wired Network’s toggle switch [dh. einmal aus und an], so it gets a new IP address. (The two computers must be connected by an ethernet cable for this step, so connect them now if you haven’t already.) [Toggle Switch auf Client sollte noch inactive sein]   Do not change IP settings. Leave everything as it is.   On the client computer:     Connect simply via toggle switch of Wired Connection. IP settings are configured automatically!   Mostly from: Instructions  Power     source The Settings which determine what happens, when the Battery Level is critically low are in /etc/UPower/UPower.conf. There, the relevant entries are:     PercentageAction=2 CriticalPowerAction=HybridSleep           for laptops: source            cat /sys/class/power_supply/BAT0/capacity outputs laptop battery level (in percent)       cat /sys/class/power_supply/BAT0/status outputs laptop battery status (values: “Unknown”, “Charging”, “Discharging”, “Not charging”, “Full”)       cat /sys/class/power_supply/BAT0/capacity_level outputs laptop battery level description (values: “Unknown”, “Critical”, “Low”, “Normal”, “High”, “Full”). From doc: “Coarse representation of battery capacity.”           Appearance  Restart GUI  Press Alt + F2, then type r and press Enter.  other methods: https://linuxconfig.org/how-to-restart-gui-on-ubuntu-20-04-focal-fossa  Dock like MacOS  gsettings set org.gnome.shell.extensions.dash-to-dock extend-height false  gsettings set org.gnome.shell.extensions.dash-to-dock show-show-apps-button false   gsettings set org.gnome.shell.extensions.dash-to-dock show-trash true      add Launcher icon to dock: via .desktop icon to favorites using “launch show-apps from command line”   Hide Dock permanently  see source Option 3  Hide:  gsettings set org.gnome.shell.extensions.dash-to-dock autohide false  gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed false  gsettings set org.gnome.shell.extensions.dash-to-dock intellihide false   Show:  gsettings set org.gnome.shell.extensions.dash-to-dock autohide true  gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true  gsettings set org.gnome.shell.extensions.dash-to-dock intellihide true  Default Applications  Change default mail client  If not already present, add  MimeType=x-scheme-handler/mailto;x-scheme-handler/mailspring;   to ~/.local/share/applications/mailspring_mailspring.desktop and run  update-desktop-database ~/.local/share/applications   There should be a new line x-scheme-handler/mailto=mailspring_mailspring.desktop in ~/.config/mimeapps.list now.  Converter  pptx (or ppt) to pdf  libreoffice --headless --invisible --convert-to pdf *.ppt">
+<meta name="description" content="General Shortcuts  For Bluetooth     Create .desktop file (“.desktop” ending required!) with this content   [Desktop Entry] Name=open_bluetooth_settings Exec=gnome-control-center bluetooth Terminal=false Type=Application     Make sure that your script is executable, like this:   sudo chmod +x /path/to/script.sh     (if it does not execute, copy it to ~/Desktop/. There right-click on it and select “Allow Launching”.)            Move .desktop file to /usr/share/applications/. Press Super to open Activities and in the application grid view select “All” (instead of “Frequent”) and search the created .desktop file there. Right-click on it and select “Add to Favorites”. Now the .desktop file should be in the dock and can be accessed via shortcut Super + &lt;position_in_dock&gt;.           It also won’t work with if your script uses the sudo command, or anything else that requires user input.      If you want it to open a terminal window when you run it (if you needed to add input or watch the output) set Terminal to true.  Terminal=true  Network  On the server computer:     Connect server and client via Ethernet cable.   On the computer, which is connected to the Internet, click the network icon in the panel and go to “Settings” at the bottom of the menu. [der Schieberegler von “Wired” beim Server sollte bereits aktiv sein, der Schieberegler beim Client sollte inaktiv sein (auch nachdem Kabel eingesteckt wurde)]   Click on the “Settings symbol” of your Wired Connection (Leave your wireless connection untouched).   On the “IPv4 Settings tab”, select Method: “Shared to other computers”. Click on “Apply” and close this window.   On the server reconnect by clicking on the Wired Network’s toggle switch [dh. einmal aus und an], so it gets a new IP address. (The two computers must be connected by an ethernet cable for this step, so connect them now if you haven’t already.) [Toggle Switch auf Client sollte noch inactive sein]   Do not change IP settings. Leave everything as it is.   On the client computer:     Connect simply via toggle switch of Wired Connection. IP settings are configured automatically!   Mostly from: Instructions  Power     source The Settings which determine what happens, when the Battery Level is critically low are in /etc/UPower/UPower.conf. There, the relevant entries are:     PercentageAction=2 CriticalPowerAction=HybridSleep           for laptops: source            cat /sys/class/power_supply/BAT0/capacity outputs laptop battery level (in percent)       cat /sys/class/power_supply/BAT0/status outputs laptop battery status (values: “Unknown”, “Charging”, “Discharging”, “Not charging”, “Full”)       cat /sys/class/power_supply/BAT0/capacity_level outputs laptop battery level description (values: “Unknown”, “Critical”, “Low”, “Normal”, “High”, “Full”). From doc: “Coarse representation of battery capacity.”           Gnome Shell  Launch new instance when there is no instance open ON CURRENT WORKSPACE  E.g. if a gedit instance is already open on some workspace, if you open a new instance, Ubuntu will always switch to that workspace first before opening the new instance which is presumably not what you want.  To change this behaviour: From askubuntu gsettings set org.gnome.shell.extensions.dash-to-dock isolate-workspaces true   Remove “Window is ready” popup and focus window  see NoAnnoyance v2  Appearance  Restart GUI  Press Alt + F2, then type r and press Enter.  other methods: https://linuxconfig.org/how-to-restart-gui-on-ubuntu-20-04-focal-fossa  Dock like MacOS  gsettings set org.gnome.shell.extensions.dash-to-dock extend-height false  gsettings set org.gnome.shell.extensions.dash-to-dock show-show-apps-button false   gsettings set org.gnome.shell.extensions.dash-to-dock show-trash true      add Launcher icon to dock: via .desktop icon to favorites using “launch show-apps from command line”   Hide Dock permanently  see source Option 3  Hide:  gsettings set org.gnome.shell.extensions.dash-to-dock autohide false  gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed false  gsettings set org.gnome.shell.extensions.dash-to-dock intellihide false   Show:  gsettings set org.gnome.shell.extensions.dash-to-dock autohide true  gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true  gsettings set org.gnome.shell.extensions.dash-to-dock intellihide true   Default Applications  Config files     /usr/share/applications/defaults.list (root)   /etc/gnome/defaults.list (root)   ~/.config/mimeapps.list (local user)   Change default app  xdg-mime default some_app some_filetype   E.g.  xdg-mime default org.kde.okular.desktop application/pdf   creates an entry in the local MIME database ~/.config/mimeapps.list.  Change default mail client  If not already present, add  MimeType=x-scheme-handler/mailto;x-scheme-handler/mailspring;   to ~/.local/share/applications/mailspring_mailspring.desktop and run  update-desktop-database ~/.local/share/applications   There should be a new line x-scheme-handler/mailto=mailspring_mailspring.desktop in ~/.config/mimeapps.list now.  “Open with …” and set default app for a given file  mimeopen -d myfile.pdf   will give you a list of applications that can open the file, and (the -d flag) will also update the default application for you. Note: After running this command the default works for mimeopen myfile.pdf only. xdg-open myfile.pdf and nautilus defaults need to be specified via xdg-mime default some_app some_filetype (see above)!  Converter  pptx (or ppt) to pdf     libreoffice --headless --invisible --convert-to pdf *.ppt   Webcam  Troubleshooting  Flickering     caused by 50Hz vs 60Hz powerline frequency differences (see source)            solution: try v4l2-ctl --set-ctrl power_line_frequency=0 or v4l2-ctl --set-ctrl power_line_frequency=1           Nano     M-U means “Meta Key” + Alt. The “Meta key” is not present on most keyboards. (Its use in software is for primarily historical reasons.) Usually, the meta key is emulated by another key on your keyboard. On Windows and Linux, it is usually the Alt key. On Mac OS X, that key (aka Option) already has other uses, and so Escape is used instead.">
 
 
   <meta name="author" content="Pharath Palesuvaran">
@@ -26,7 +26,7 @@
 <meta property="og:url" content="http://localhost:4000/cheatsheet/cheatsheet-Ubuntu/">
 
 
-  <meta property="og:description" content="General Shortcuts  For Bluetooth     Create .desktop file (“.desktop” ending required!) with this content   [Desktop Entry] Name=open_bluetooth_settings Exec=gnome-control-center bluetooth Terminal=false Type=Application     Make sure that your script is executable, like this:   sudo chmod +x /path/to/script.sh     (if it does not execute, copy it to ~/Desktop/. There right-click on it and select “Allow Launching”.)            Move .desktop file to /usr/share/applications/. Press Super to open Activities and in the application grid view select “All” (instead of “Frequent”) and search the created .desktop file there. Right-click on it and select “Add to Favorites”. Now the .desktop file should be in the dock and can be accessed via shortcut Super + &lt;position_in_dock&gt;.           It also won’t work with if your script uses the sudo command, or anything else that requires user input.      If you want it to open a terminal window when you run it (if you needed to add input or watch the output) set Terminal to true.  Terminal=true  Network  On the server computer:     Connect server and client via Ethernet cable.   On the computer, which is connected to the Internet, click the network icon in the panel and go to “Settings” at the bottom of the menu. [der Schieberegler von “Wired” beim Server sollte bereits aktiv sein, der Schieberegler beim Client sollte inaktiv sein (auch nachdem Kabel eingesteckt wurde)]   Click on the “Settings symbol” of your Wired Connection (Leave your wireless connection untouched).   On the “IPv4 Settings tab”, select Method: “Shared to other computers”. Click on “Apply” and close this window.   On the server reconnect by clicking on the Wired Network’s toggle switch [dh. einmal aus und an], so it gets a new IP address. (The two computers must be connected by an ethernet cable for this step, so connect them now if you haven’t already.) [Toggle Switch auf Client sollte noch inactive sein]   Do not change IP settings. Leave everything as it is.   On the client computer:     Connect simply via toggle switch of Wired Connection. IP settings are configured automatically!   Mostly from: Instructions  Power     source The Settings which determine what happens, when the Battery Level is critically low are in /etc/UPower/UPower.conf. There, the relevant entries are:     PercentageAction=2 CriticalPowerAction=HybridSleep           for laptops: source            cat /sys/class/power_supply/BAT0/capacity outputs laptop battery level (in percent)       cat /sys/class/power_supply/BAT0/status outputs laptop battery status (values: “Unknown”, “Charging”, “Discharging”, “Not charging”, “Full”)       cat /sys/class/power_supply/BAT0/capacity_level outputs laptop battery level description (values: “Unknown”, “Critical”, “Low”, “Normal”, “High”, “Full”). From doc: “Coarse representation of battery capacity.”           Appearance  Restart GUI  Press Alt + F2, then type r and press Enter.  other methods: https://linuxconfig.org/how-to-restart-gui-on-ubuntu-20-04-focal-fossa  Dock like MacOS  gsettings set org.gnome.shell.extensions.dash-to-dock extend-height false  gsettings set org.gnome.shell.extensions.dash-to-dock show-show-apps-button false   gsettings set org.gnome.shell.extensions.dash-to-dock show-trash true      add Launcher icon to dock: via .desktop icon to favorites using “launch show-apps from command line”   Hide Dock permanently  see source Option 3  Hide:  gsettings set org.gnome.shell.extensions.dash-to-dock autohide false  gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed false  gsettings set org.gnome.shell.extensions.dash-to-dock intellihide false   Show:  gsettings set org.gnome.shell.extensions.dash-to-dock autohide true  gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true  gsettings set org.gnome.shell.extensions.dash-to-dock intellihide true  Default Applications  Change default mail client  If not already present, add  MimeType=x-scheme-handler/mailto;x-scheme-handler/mailspring;   to ~/.local/share/applications/mailspring_mailspring.desktop and run  update-desktop-database ~/.local/share/applications   There should be a new line x-scheme-handler/mailto=mailspring_mailspring.desktop in ~/.config/mimeapps.list now.  Converter  pptx (or ppt) to pdf  libreoffice --headless --invisible --convert-to pdf *.ppt">
+  <meta property="og:description" content="General Shortcuts  For Bluetooth     Create .desktop file (“.desktop” ending required!) with this content   [Desktop Entry] Name=open_bluetooth_settings Exec=gnome-control-center bluetooth Terminal=false Type=Application     Make sure that your script is executable, like this:   sudo chmod +x /path/to/script.sh     (if it does not execute, copy it to ~/Desktop/. There right-click on it and select “Allow Launching”.)            Move .desktop file to /usr/share/applications/. Press Super to open Activities and in the application grid view select “All” (instead of “Frequent”) and search the created .desktop file there. Right-click on it and select “Add to Favorites”. Now the .desktop file should be in the dock and can be accessed via shortcut Super + &lt;position_in_dock&gt;.           It also won’t work with if your script uses the sudo command, or anything else that requires user input.      If you want it to open a terminal window when you run it (if you needed to add input or watch the output) set Terminal to true.  Terminal=true  Network  On the server computer:     Connect server and client via Ethernet cable.   On the computer, which is connected to the Internet, click the network icon in the panel and go to “Settings” at the bottom of the menu. [der Schieberegler von “Wired” beim Server sollte bereits aktiv sein, der Schieberegler beim Client sollte inaktiv sein (auch nachdem Kabel eingesteckt wurde)]   Click on the “Settings symbol” of your Wired Connection (Leave your wireless connection untouched).   On the “IPv4 Settings tab”, select Method: “Shared to other computers”. Click on “Apply” and close this window.   On the server reconnect by clicking on the Wired Network’s toggle switch [dh. einmal aus und an], so it gets a new IP address. (The two computers must be connected by an ethernet cable for this step, so connect them now if you haven’t already.) [Toggle Switch auf Client sollte noch inactive sein]   Do not change IP settings. Leave everything as it is.   On the client computer:     Connect simply via toggle switch of Wired Connection. IP settings are configured automatically!   Mostly from: Instructions  Power     source The Settings which determine what happens, when the Battery Level is critically low are in /etc/UPower/UPower.conf. There, the relevant entries are:     PercentageAction=2 CriticalPowerAction=HybridSleep           for laptops: source            cat /sys/class/power_supply/BAT0/capacity outputs laptop battery level (in percent)       cat /sys/class/power_supply/BAT0/status outputs laptop battery status (values: “Unknown”, “Charging”, “Discharging”, “Not charging”, “Full”)       cat /sys/class/power_supply/BAT0/capacity_level outputs laptop battery level description (values: “Unknown”, “Critical”, “Low”, “Normal”, “High”, “Full”). From doc: “Coarse representation of battery capacity.”           Gnome Shell  Launch new instance when there is no instance open ON CURRENT WORKSPACE  E.g. if a gedit instance is already open on some workspace, if you open a new instance, Ubuntu will always switch to that workspace first before opening the new instance which is presumably not what you want.  To change this behaviour: From askubuntu gsettings set org.gnome.shell.extensions.dash-to-dock isolate-workspaces true   Remove “Window is ready” popup and focus window  see NoAnnoyance v2  Appearance  Restart GUI  Press Alt + F2, then type r and press Enter.  other methods: https://linuxconfig.org/how-to-restart-gui-on-ubuntu-20-04-focal-fossa  Dock like MacOS  gsettings set org.gnome.shell.extensions.dash-to-dock extend-height false  gsettings set org.gnome.shell.extensions.dash-to-dock show-show-apps-button false   gsettings set org.gnome.shell.extensions.dash-to-dock show-trash true      add Launcher icon to dock: via .desktop icon to favorites using “launch show-apps from command line”   Hide Dock permanently  see source Option 3  Hide:  gsettings set org.gnome.shell.extensions.dash-to-dock autohide false  gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed false  gsettings set org.gnome.shell.extensions.dash-to-dock intellihide false   Show:  gsettings set org.gnome.shell.extensions.dash-to-dock autohide true  gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true  gsettings set org.gnome.shell.extensions.dash-to-dock intellihide true   Default Applications  Config files     /usr/share/applications/defaults.list (root)   /etc/gnome/defaults.list (root)   ~/.config/mimeapps.list (local user)   Change default app  xdg-mime default some_app some_filetype   E.g.  xdg-mime default org.kde.okular.desktop application/pdf   creates an entry in the local MIME database ~/.config/mimeapps.list.  Change default mail client  If not already present, add  MimeType=x-scheme-handler/mailto;x-scheme-handler/mailspring;   to ~/.local/share/applications/mailspring_mailspring.desktop and run  update-desktop-database ~/.local/share/applications   There should be a new line x-scheme-handler/mailto=mailspring_mailspring.desktop in ~/.config/mimeapps.list now.  “Open with …” and set default app for a given file  mimeopen -d myfile.pdf   will give you a list of applications that can open the file, and (the -d flag) will also update the default application for you. Note: After running this command the default works for mimeopen myfile.pdf only. xdg-open myfile.pdf and nautilus defaults need to be specified via xdg-mime default some_app some_filetype (see above)!  Converter  pptx (or ppt) to pdf     libreoffice --headless --invisible --convert-to pdf *.ppt   Webcam  Troubleshooting  Flickering     caused by 50Hz vs 60Hz powerline frequency differences (see source)            solution: try v4l2-ctl --set-ctrl power_line_frequency=0 or v4l2-ctl --set-ctrl power_line_frequency=1           Nano     M-U means “Meta Key” + Alt. The “Meta key” is not present on most keyboards. (Its use in software is for primarily historical reasons.) Usually, the meta key is emulated by another key on your keyboard. On Windows and Linux, it is usually the Alt key. On Mac OS X, that key (aka Option) already has other uses, and so Escape is used instead.">
 
 
 
@@ -134,10 +134,6 @@
   </ul>
 </nav>
 
-    <!--[if lt IE 9]>
-<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
-<![endif]-->
-
     
 
 <div class="masthead">
@@ -179,6 +175,8 @@
 
     <div class="initial-content">
       
+
+
 
 
 
@@ -228,11 +226,11 @@
           
         
           
-            <li><a href="https://twitter.com/pharath_one" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+            <li><a href="https://twitter.com/pharath_one" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
           
         
           
-            <li><a href="https://github.com/pharath" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+            <li><a href="https://github.com/pharath" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
           
         
           
@@ -299,6 +297,7 @@
     </ul>
   </div>
 </div>
+
   
   </div>
 
@@ -306,7 +305,7 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Ubuntu Cheatsheet">
-    <meta itemprop="description" content="General ShortcutsFor Bluetooth  Create .desktop file (“.desktop” ending required!) with this content[Desktop Entry]Name=open_bluetooth_settingsExec=gnome-control-center bluetoothTerminal=falseType=Application  Make sure that your script is executable, like this:sudo chmod +x /path/to/script.sh  (if it does not execute, copy it to ~/Desktop/. There right-click on it and select “Allow Launching”.)      Move .desktop file to /usr/share/applications/. Press Super to open Activities and in the application grid view select “All” (instead of “Frequent”) and search the created .desktop file there. Right-click on it and select “Add to Favorites”. Now the .desktop file should be in the dock and can be accessed via shortcut Super + &lt;position_in_dock&gt;.        It also won’t work with if your script uses the sudo command, or anything else that requires user input.  If you want it to open a terminal window when you run it (if you needed to add input or watch the output) set Terminal to true.Terminal=trueNetworkOn the server computer:  Connect server and client via Ethernet cable.  On the computer, which is connected to the Internet, click the network icon in the panel and go to “Settings” at the bottom of the menu. [der Schieberegler von “Wired” beim Server sollte bereits aktiv sein, der Schieberegler beim Client sollte inaktiv sein (auch nachdem Kabel eingesteckt wurde)]  Click on the “Settings symbol” of your Wired Connection (Leave your wireless connection untouched).  On the “IPv4 Settings tab”, select Method: “Shared to other computers”. Click on “Apply” and close this window.  On the server reconnect by clicking on the Wired Network’s toggle switch [dh. einmal aus und an], so it gets a new IP address. (The two computers must be connected by an ethernet cable for this step, so connect them now if you haven’t already.) [Toggle Switch auf Client sollte noch inactive sein]  Do not change IP settings. Leave everything as it is.On the client computer:  Connect simply via toggle switch of Wired Connection. IP settings are configured automatically!Mostly from: InstructionsPower  source The Settings which determine what happens, when the Battery Level is critically low are in /etc/UPower/UPower.conf. There, the relevant entries are:    PercentageAction=2CriticalPowerAction=HybridSleep        for laptops: source          cat /sys/class/power_supply/BAT0/capacity outputs laptop battery level (in percent)      cat /sys/class/power_supply/BAT0/status outputs laptop battery status (values: “Unknown”, “Charging”, “Discharging”, “Not charging”, “Full”)      cat /sys/class/power_supply/BAT0/capacity_level outputs laptop battery level description (values: “Unknown”, “Critical”, “Low”, “Normal”, “High”, “Full”). From doc: “Coarse representation of battery capacity.”      AppearanceRestart GUIPress Alt + F2, then type r and press Enter.other methods: https://linuxconfig.org/how-to-restart-gui-on-ubuntu-20-04-focal-fossaDock like MacOSgsettings set org.gnome.shell.extensions.dash-to-dock extend-height falsegsettings set org.gnome.shell.extensions.dash-to-dock show-show-apps-button false gsettings set org.gnome.shell.extensions.dash-to-dock show-trash true  add Launcher icon to dock: via .desktop icon to favorites using “launch show-apps from command line”Hide Dock permanentlysee source Option 3Hide:gsettings set org.gnome.shell.extensions.dash-to-dock autohide falsegsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed falsegsettings set org.gnome.shell.extensions.dash-to-dock intellihide falseShow:gsettings set org.gnome.shell.extensions.dash-to-dock autohide truegsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed truegsettings set org.gnome.shell.extensions.dash-to-dock intellihide trueDefault ApplicationsChange default mail clientIf not already present, addMimeType=x-scheme-handler/mailto;x-scheme-handler/mailspring;to ~/.local/share/applications/mailspring_mailspring.desktop and runupdate-desktop-database ~/.local/share/applicationsThere should be a new line x-scheme-handler/mailto=mailspring_mailspring.desktop in ~/.config/mimeapps.list now.Converterpptx (or ppt) to pdflibreoffice --headless --invisible --convert-to pdf *.ppt">
+    <meta itemprop="description" content="General ShortcutsFor Bluetooth  Create .desktop file (“.desktop” ending required!) with this content[Desktop Entry]Name=open_bluetooth_settingsExec=gnome-control-center bluetoothTerminal=falseType=Application  Make sure that your script is executable, like this:sudo chmod +x /path/to/script.sh  (if it does not execute, copy it to ~/Desktop/. There right-click on it and select “Allow Launching”.)      Move .desktop file to /usr/share/applications/. Press Super to open Activities and in the application grid view select “All” (instead of “Frequent”) and search the created .desktop file there. Right-click on it and select “Add to Favorites”. Now the .desktop file should be in the dock and can be accessed via shortcut Super + &lt;position_in_dock&gt;.        It also won’t work with if your script uses the sudo command, or anything else that requires user input.  If you want it to open a terminal window when you run it (if you needed to add input or watch the output) set Terminal to true.Terminal=trueNetworkOn the server computer:  Connect server and client via Ethernet cable.  On the computer, which is connected to the Internet, click the network icon in the panel and go to “Settings” at the bottom of the menu. [der Schieberegler von “Wired” beim Server sollte bereits aktiv sein, der Schieberegler beim Client sollte inaktiv sein (auch nachdem Kabel eingesteckt wurde)]  Click on the “Settings symbol” of your Wired Connection (Leave your wireless connection untouched).  On the “IPv4 Settings tab”, select Method: “Shared to other computers”. Click on “Apply” and close this window.  On the server reconnect by clicking on the Wired Network’s toggle switch [dh. einmal aus und an], so it gets a new IP address. (The two computers must be connected by an ethernet cable for this step, so connect them now if you haven’t already.) [Toggle Switch auf Client sollte noch inactive sein]  Do not change IP settings. Leave everything as it is.On the client computer:  Connect simply via toggle switch of Wired Connection. IP settings are configured automatically!Mostly from: InstructionsPower  source The Settings which determine what happens, when the Battery Level is critically low are in /etc/UPower/UPower.conf. There, the relevant entries are:    PercentageAction=2CriticalPowerAction=HybridSleep        for laptops: source          cat /sys/class/power_supply/BAT0/capacity outputs laptop battery level (in percent)      cat /sys/class/power_supply/BAT0/status outputs laptop battery status (values: “Unknown”, “Charging”, “Discharging”, “Not charging”, “Full”)      cat /sys/class/power_supply/BAT0/capacity_level outputs laptop battery level description (values: “Unknown”, “Critical”, “Low”, “Normal”, “High”, “Full”). From doc: “Coarse representation of battery capacity.”      Gnome ShellLaunch new instance when there is no instance open ON CURRENT WORKSPACEE.g. if a gedit instance is already open on some workspace, if you open a new instance, Ubuntu will always switch to that workspace first before opening the new instance which is presumably not what you want.To change this behaviour: From askubuntugsettings set org.gnome.shell.extensions.dash-to-dock isolate-workspaces trueRemove “Window is ready” popup and focus windowsee NoAnnoyance v2AppearanceRestart GUIPress Alt + F2, then type r and press Enter.other methods: https://linuxconfig.org/how-to-restart-gui-on-ubuntu-20-04-focal-fossaDock like MacOSgsettings set org.gnome.shell.extensions.dash-to-dock extend-height falsegsettings set org.gnome.shell.extensions.dash-to-dock show-show-apps-button false gsettings set org.gnome.shell.extensions.dash-to-dock show-trash true  add Launcher icon to dock: via .desktop icon to favorites using “launch show-apps from command line”Hide Dock permanentlysee source Option 3Hide:gsettings set org.gnome.shell.extensions.dash-to-dock autohide falsegsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed falsegsettings set org.gnome.shell.extensions.dash-to-dock intellihide falseShow:gsettings set org.gnome.shell.extensions.dash-to-dock autohide truegsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed truegsettings set org.gnome.shell.extensions.dash-to-dock intellihide trueDefault ApplicationsConfig files  /usr/share/applications/defaults.list (root)  /etc/gnome/defaults.list (root)  ~/.config/mimeapps.list (local user)Change default appxdg-mime default some_app some_filetypeE.g.xdg-mime default org.kde.okular.desktop application/pdfcreates an entry in the local MIME database ~/.config/mimeapps.list.Change default mail clientIf not already present, addMimeType=x-scheme-handler/mailto;x-scheme-handler/mailspring;to ~/.local/share/applications/mailspring_mailspring.desktop and runupdate-desktop-database ~/.local/share/applicationsThere should be a new line x-scheme-handler/mailto=mailspring_mailspring.desktop in ~/.config/mimeapps.list now.“Open with …” and set default app for a given filemimeopen -d myfile.pdfwill give you a list of applications that can open the file, and (the -d flag) will also update the default application for you. Note: After running this command the default works for mimeopen myfile.pdf only. xdg-open myfile.pdf and nautilus defaults need to be specified via xdg-mime default some_app some_filetype (see above)!Converterpptx (or ppt) to pdf  libreoffice --headless --invisible --convert-to pdf *.pptWebcamTroubleshootingFlickering  caused by 50Hz vs 60Hz powerline frequency differences (see source)          solution: try v4l2-ctl --set-ctrl power_line_frequency=0 or v4l2-ctl --set-ctrl power_line_frequency=1      Nano  M-U means “Meta Key” + Alt. The “Meta key” is not present on most keyboards. (Its use in software is for primarily historical reasons.) Usually, the meta key is emulated by another key on your keyboard. On Windows and Linux, it is usually the Alt key. On Mac OS X, that key (aka Option) already has other uses, and so Escape is used instead.">
     <meta itemprop="datePublished" content="2021-08-05T00:00:00+02:00">
     
 
@@ -343,7 +342,7 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
-              <ul class="toc__menu"><li><a href="#general-shortcuts">General Shortcuts</a><ul><li><a href="#for-bluetooth">For Bluetooth</a></li></ul></li><li><a href="#network">Network</a><ul><li><a href="#on-the-server-computer">On the server computer:</a></li><li><a href="#on-the-client-computer">On the client computer:</a></li></ul></li><li><a href="#power">Power</a></li><li><a href="#appearance">Appearance</a><ul><li><a href="#restart-gui">Restart GUI</a></li><li><a href="#dock-like-macos">Dock like MacOS</a></li><li><a href="#hide-dock-permanently">Hide Dock permanently</a></li></ul></li><li><a href="#default-applications">Default Applications</a><ul><li><a href="#change-default-mail-client">Change default mail client</a></li></ul></li><li><a href="#converter">Converter</a><ul><li><a href="#pptx-or-ppt-to-pdf">pptx (or ppt) to pdf</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#general-shortcuts">General Shortcuts</a><ul><li><a href="#for-bluetooth">For Bluetooth</a></li></ul></li><li><a href="#network">Network</a><ul><li><a href="#on-the-server-computer">On the server computer:</a></li><li><a href="#on-the-client-computer">On the client computer:</a></li></ul></li><li><a href="#power">Power</a></li><li><a href="#gnome-shell">Gnome Shell</a><ul><li><a href="#launch-new-instance-when-there-is-no-instance-open-on-current-workspace">Launch new instance when there is no instance open ON CURRENT WORKSPACE</a></li><li><a href="#remove-window-is-ready-popup-and-focus-window">Remove “Window is ready” popup and focus window</a></li></ul></li><li><a href="#appearance">Appearance</a><ul><li><a href="#restart-gui">Restart GUI</a></li><li><a href="#dock-like-macos">Dock like MacOS</a></li><li><a href="#hide-dock-permanently">Hide Dock permanently</a></li></ul></li><li><a href="#default-applications">Default Applications</a><ul><li><a href="#config-files">Config files</a></li><li><a href="#change-default-app">Change default app</a></li><li><a href="#change-default-mail-client">Change default mail client</a></li><li><a href="#open-with--and-set-default-app-for-a-given-file">“Open with …” and set default app for a given file</a></li></ul></li><li><a href="#converter">Converter</a><ul><li><a href="#pptx-or-ppt-to-pdf">pptx (or ppt) to pdf</a></li></ul></li><li><a href="#webcam">Webcam</a><ul><li><a href="#troubleshooting">Troubleshooting</a><ul><li><a href="#flickering">Flickering</a></li></ul></li></ul></li><li><a href="#nano">Nano</a></li></ul>
 
             </nav>
           </aside>
@@ -424,6 +423,20 @@
   </li>
 </ul>
 
+<h1 id="gnome-shell">Gnome Shell</h1>
+
+<h2 id="launch-new-instance-when-there-is-no-instance-open-on-current-workspace">Launch new instance when there is no instance open ON CURRENT WORKSPACE</h2>
+
+<p>E.g. if a <code class="language-plaintext highlighter-rouge">gedit</code> instance is already open on some workspace, if you open a new instance, Ubuntu will always switch to that workspace first before opening the new instance which is presumably not what you want.</p>
+
+<p>To change this behaviour: From <a href="https://askubuntu.com/a/1162672">askubuntu</a></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gsettings <span class="nb">set </span>org.gnome.shell.extensions.dash-to-dock isolate-workspaces <span class="nb">true</span>
+</code></pre></div></div>
+
+<h2 id="remove-window-is-ready-popup-and-focus-window">Remove “Window is ready” popup and focus window</h2>
+
+<p>see <a href="https://extensions.gnome.org/extension/2182/noannoyance/">NoAnnoyance v2</a></p>
+
 <h1 id="appearance">Appearance</h1>
 
 <h2 id="restart-gui">Restart GUI</h2>
@@ -466,7 +479,28 @@
 
 </span>gsettings <span class="nb">set </span>org.gnome.shell.extensions.dash-to-dock intellihide <span class="nb">true</span>
 </code></pre></div></div>
+
 <h1 id="default-applications">Default Applications</h1>
+
+<h2 id="config-files">Config files</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">/usr/share/applications/defaults.list</code> (root)</li>
+  <li><code class="language-plaintext highlighter-rouge">/etc/gnome/defaults.list</code> (root)</li>
+  <li><code class="language-plaintext highlighter-rouge">~/.config/mimeapps.list</code> (local user)</li>
+</ul>
+
+<h2 id="change-default-app">Change default app</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xdg-mime default some_app some_filetype
+</code></pre></div></div>
+
+<p>E.g.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xdg-mime default org.kde.okular.desktop application/pdf
+</code></pre></div></div>
+
+<p>creates an entry in the local MIME database <code class="language-plaintext highlighter-rouge">~/.config/mimeapps.list</code>.</p>
 
 <h2 id="change-default-mail-client">Change default mail client</h2>
 
@@ -482,12 +516,40 @@
 
 <p>There should be a new line <code class="language-plaintext highlighter-rouge">x-scheme-handler/mailto=mailspring_mailspring.desktop</code> in <code class="language-plaintext highlighter-rouge">~/.config/mimeapps.list</code> now.</p>
 
+<h2 id="open-with--and-set-default-app-for-a-given-file">“Open with …” and set default app for a given file</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mimeopen <span class="nt">-d</span> myfile.pdf
+</code></pre></div></div>
+
+<p>will give you a list of applications that can open the file, and (the <code class="language-plaintext highlighter-rouge">-d</code> flag) will also update the default application for you. <em>Note</em>: After running this command the default works for <code class="language-plaintext highlighter-rouge">mimeopen myfile.pdf</code> only. <code class="language-plaintext highlighter-rouge">xdg-open myfile.pdf</code> and <code class="language-plaintext highlighter-rouge">nautilus</code> defaults need to be specified via <code class="language-plaintext highlighter-rouge">xdg-mime default some_app some_filetype</code> (see above)!</p>
+
 <h1 id="converter">Converter</h1>
 
 <h2 id="pptx-or-ppt-to-pdf">pptx (or ppt) to pdf</h2>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>libreoffice <span class="nt">--headless</span> <span class="nt">--invisible</span> <span class="nt">--convert-to</span> pdf <span class="k">*</span>.ppt
-</code></pre></div></div>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">libreoffice --headless --invisible --convert-to pdf *.ppt</code></li>
+</ul>
+
+<h1 id="webcam">Webcam</h1>
+
+<h2 id="troubleshooting">Troubleshooting</h2>
+
+<h3 id="flickering">Flickering</h3>
+
+<ul>
+  <li>caused by 50Hz vs 60Hz powerline frequency differences (see <a href="https://blog.christophersmart.com/2017/02/07/fixing-webcam-flicker-in-linux-with-udev/">source</a>)
+    <ul>
+      <li><strong>solution</strong>: try <code class="language-plaintext highlighter-rouge">v4l2-ctl --set-ctrl power_line_frequency=0</code> or <code class="language-plaintext highlighter-rouge">v4l2-ctl --set-ctrl power_line_frequency=1</code></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="nano">Nano</h1>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">M-U</code> means “Meta Key” + <kbd>Alt</kbd>. The “Meta key” is not present on most keyboards. (Its use in software is for primarily historical reasons.) Usually, the meta key is emulated by another key on your keyboard. On Windows and Linux, it is usually the <kbd>Alt</kbd> key. On Mac OS X, that key (aka <kbd>Option</kbd>) already has other uses, and so <kbd>Escape</kbd> is used instead.</li>
+</ul>
 
         
       </section>
@@ -577,12 +639,12 @@
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
       <div class="archive__item-teaser">
-        <img src="/assets/images/lenet.png" alt="">
+        <img src="/assets/images/mario-question-block.jpeg" alt="">
       </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/lecture_notes/machine_learning/lecture-notes-ML-part2-old/" rel="permalink">Machine Learning (Part 2) [OLD VERSION]
+        <a href="/notes/notes-html/" rel="permalink">HTML Notes
 </a>
       
     </h2>
@@ -592,79 +654,19 @@
     
       
       <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2022-03-09T00:00:00+01:00">March 9, 2022</time>
+        <time datetime="2022-10-10T00:00:00+02:00">October 10, 2022</time>
       </span>
     
 
-    <span class="page__meta-sep"></span>
-
     
-      
-      
 
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          14 minute read
-        
-      </span>
     
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">[OLD VERSION!] Notes on Machine Learning theory. Based on C. M. Bishop, “Pattern Recognition and Machine Learning” (2011) and Goodfellow, Bengio, Courville, ...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src="/assets/images/lenet.png" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/notes/machine_learning/notes-Neuroscience/" rel="permalink">New Inspirations for Machine Learning Methods
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-02-26T00:00:00+01:00">February 26, 2022</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          less than 1 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Notes on some inspirations for Machine Learning methods. Based on opinions from leading scientists and also some of my own opinions.
+    <p class="archive__item-excerpt" itemprop="description">For learning html.
 </p>
   </article>
 </div>
@@ -678,12 +680,12 @@
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
       <div class="archive__item-teaser">
-        <img src="/assets/images/lenet.png" alt="">
+        <img src="/assets/images/Cpp_logo.png" alt="">
       </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/carla/simulator/self_driving/notes-Carla/" rel="permalink">Carla Simulator
+        <a href="/notes/notes-cpp/" rel="permalink">C++ Notes
 </a>
       
     </h2>
@@ -693,29 +695,19 @@
     
       
       <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2022-02-17T00:00:00+01:00">February 17, 2022</time>
+        <time datetime="2022-10-06T00:00:00+02:00">October 6, 2022</time>
       </span>
     
 
-    <span class="page__meta-sep"></span>
-
     
-      
-      
 
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          less than 1 minute read
-        
-      </span>
     
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Notes on the Carla Simulator
+    <p class="archive__item-excerpt" itemprop="description">For learning C++
 </p>
   </article>
 </div>
@@ -729,12 +721,12 @@
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
       <div class="archive__item-teaser">
-        <img src="/assets/images/lenet.png" alt="">
+        <img src="/assets/images/C_logo.png" alt="">
       </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/lecture_notes/machine_learning/computer_vision/lecture-notes-ML-part3/" rel="permalink">Machine Learning (Part 3)
+        <a href="/cheatsheet/cheatsheet-android/" rel="permalink">Android Cheatsheet
 </a>
       
     </h2>
@@ -744,29 +736,60 @@
     
       
       <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2022-01-27T00:00:00+01:00">January 27, 2022</time>
+        <time datetime="2022-10-04T00:00:00+02:00">October 4, 2022</time>
       </span>
     
 
-    <span class="page__meta-sep"></span>
-
     
-      
-      
 
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          56 minute read
-        
-      </span>
     
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Notes on Computer Vision theory and NLP. Based on Goodfellow, Bengio “Deep Learning”, Stanford CS231n and RWTH Aachen University Machine Learning
+    <p class="archive__item-excerpt" itemprop="description">Useful tips for using Android
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/C_logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/notes/notes-SE/" rel="permalink">Software Engineering Notes
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-10-03T00:00:00+02:00">October 3, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Software Engineering Basics
 </p>
   </article>
 </div>
@@ -777,6 +800,7 @@
   
   
 </div>
+
     </div>
 
     

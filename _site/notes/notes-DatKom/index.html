@@ -1,0 +1,831 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>DatKom Notes - Pharath Palesuvaran</title>
+<meta name="description" content="For learning DatKom">
+
+
+  <meta name="author" content="Pharath Palesuvaran">
+  
+  <meta property="article:author" content="Pharath Palesuvaran">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Pharath Palesuvaran">
+<meta property="og:title" content="DatKom Notes">
+<meta property="og:url" content="http://localhost:4000/notes/notes-DatKom/">
+
+
+  <meta property="og:description" content="For learning DatKom">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/C_logo.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2022-09-22T00:00:00+02:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/notes/notes-DatKom/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Pharath Palesuvaran Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://raw.githubusercontent.com/pharath/home/master/assets/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/pharath/home/master/assets/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://raw.githubusercontent.com/pharath/home/master/assets/favicons/favicon-16x16.png">
+<link rel="manifest" href="https://raw.githubusercontent.com/pharath/home/master/assets/favicons/site.webmanifest">
+<link rel="shortcut icon" href="https://raw.githubusercontent.com/pharath/home/master/assets/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="https://raw.githubusercontent.com/pharath/home/master/assets/favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      displayMath: [ ['$$','$$'], ["\\(","\\)"] ],
+    },
+		TeX: {
+    	Macros: {
+				bra: ["\\langle{#1}|", 1],
+				ket: ["|{#1}\\rangle", 1],
+        braket: ["\\langle{#1}\\rangle", 1],
+				bk: ["\\langle{#1}|{#2}|{#3}\\rangle", 3]
+    	}
+  	}
+	});
+
+</script>
+<!--
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML' async></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML' async></script>
+-->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/pytorch-logo.png" alt="Pharath Palesuvaran"></a>
+        
+        <a class="site-title" href="/">
+          Pharath Palesuvaran
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/posts/">Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button" accesskey="s">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/C_logo.png');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          DatKom Notes
+
+        
+      </h1>
+      
+        <p class="page__lead">For learning DatKom
+</p>
+      
+      
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-09-22T00:00:00+02:00">September 22, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/profile_pic.jpg" alt="Pharath Palesuvaran" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Pharath Palesuvaran</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Machine Learning, Computer Vision, Self-driving cars and a very rusty first degree in Physics</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Aachen (Germany)</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:phrth2@gmail.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://twitter.com/pharath_one" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/pharath" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="/_pages/404.md" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i><span class="label">Instagram</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="DatKom Notes">
+    <meta itemprop="description" content="For learning DatKom">
+    <meta itemprop="datePublished" content="2022-09-22T00:00:00+02:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header>
+              <ul class="toc__menu"><li><a href="#concepts">Concepts</a></li><li><a href="#what-every-cs-major-should-know">What every CS major should know</a><ul><li><a href="#networking">Networking</a><ul><li><a href="#specific-recommendations">Specific recommendations</a></li><li><a href="#recommended-reading">Recommended reading</a></li></ul></li><li><a href="#security">Security</a><ul><li><a href="#specific-recommendations-1">Specific recommendations</a></li><li><a href="#recommended-reading-1">Recommended reading</a></li></ul></li><li><a href="#cryptography">Cryptography</a><ul><li><a href="#specific-recommendations-2">Specific recommendations</a></li><li><a href="#recommended-reading-2">Recommended reading</a></li></ul></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <h1 id="concepts">Concepts</h1>
+
+<ul>
+  <li>Communication services, layer models, protocols</li>
+  <li>Physical basics of transmission</li>
+  <li>Error handling and medium access</li>
+  <li>Internet Protocol (IP) and Routing: Connecting remote hosts</li>
+  <li>Transmission Control Protocol (TCP): Connecting applications</li>
+  <li>Security: Cryptographic primitives, IPsec, SSL/TLS</li>
+</ul>
+
+<p>From [<a href="https://www.campus.rwth-aachen.de/rwth/all/abstractModule.asp?gguid=0x2F22AE7D7BE14B4B8AEC4D8B904EC25A&amp;tguid=0x52DF76AB4F0BB84AB1CAEF0A89F08202">source</a>]:</p>
+<ul>
+  <li>Client/Server- und Peer-to-Peer-Systeme</li>
+  <li>OSI-Referenzmodell und TCP/IP-Referenzmodell</li>
+  <li>Übertragungsmedien und Signaldarstellung</li>
+  <li>Fehlerbehandlung, Flusssteuerung und Medienzugriff</li>
+  <li>Lokale Netze, speziell Ethernet</li>
+  <li>Netzkomponenten und Firewalls</li>
+  <li>Internet-Protokolle: IP, Routing, TCP/UDP</li>
+  <li>Sicherheitsmanagement und Datenschutz, Sicherheitsprobleme und Angriffe im Internet</li>
+  <li>Grundlagen der Kryptographie und sichere Internet-Protokolle</li>
+</ul>
+
+<h1 id="what-every-cs-major-should-know">What every CS major should know</h1>
+
+<p>[<a href="https://matt.might.net/articles/what-cs-majors-should-know/">source</a>]</p>
+
+<h2 id="networking">Networking</h2>
+
+<p>Given the ubiquity of networks, computer scientists should have a firm understanding of the network stack and routing protocols within a network.</p>
+
+<p>The mechanics of building an efficient, reliable transmission protocol (like TCP) on top of an unreliable transmission protocol (like IP) should not be magic to a computer scientist. It should be core knowledge.</p>
+
+<p>Computer scientists must understand the trade-offs involved in protocol design–for example, when to choose TCP and when to choose UDP. (Programmers need to understand the larger social implications for congestion should they use UDP at large scales as well.)</p>
+
+<h3 id="specific-recommendations">Specific recommendations</h3>
+
+<p>Given the frequency with which the modern programmer encounters network programming, it’s helpful to know the protocols for existing standards, such as:</p>
+
+<ul>
+  <li>802.3 and 802.11;</li>
+  <li>IPv4 and IPv6; and</li>
+  <li>DNS, SMTP and HTTP.</li>
+</ul>
+
+<p>Computer scientists should understand exponential back off in packet collision resolution and the additive-increase multiplicative-decrease mechanism involved in congestion control.</p>
+
+<p>Every computer scientist should implement the following:</p>
+
+<ul>
+  <li>an HTTP client and daemon;</li>
+  <li>a DNS resolver and server; and</li>
+  <li>a command-line SMTP mailer.</li>
+</ul>
+
+<p>No student should ever pass an intro neworking class without sniffing their instructor’s Google query off wireshark.</p>
+
+<p>It’s probably going too far to require all students to implement a reliable transmission protocol from scratch atop IP, but I can say that it was a personally transformative experience for me as a student.</p>
+
+<h3 id="recommended-reading">Recommended reading</h3>
+
+<ul>
+  <li>Unix Network Programming by Stevens, Fenner and Rudoff.</li>
+</ul>
+
+<h2 id="security">Security</h2>
+
+<p>The sad truth of security is that the majority of security vulnerabilities come from sloppy programming. The sadder truth is that many schools do a poor job of training programmers to secure their code.</p>
+
+<p>Computer scientists must be aware of the means by which a program can be compromised.</p>
+
+<p>They need to develop a sense of defensive programming–a mind for thinking about how their own code might be attacked.</p>
+
+<p>Security is the kind of training that is best distributed throughout the entire curriculum: each discipline should warn students of its native vulnerabilities.</p>
+
+<h3 id="specific-recommendations-1">Specific recommendations</h3>
+
+<p>At a minimum, every computer scientist needs to understand:</p>
+
+<ul>
+  <li>social engineering;</li>
+  <li>buffer overflows;</li>
+  <li>integer overflow;</li>
+  <li>code injection vulnerabilities;</li>
+  <li>race conditions; and</li>
+  <li>privilege confusion.</li>
+</ul>
+
+<p>A few readers have pointed out that computer scientists also need to be aware of basic IT security measures, such how to choose legitimately good passwords and how to properly configure a firewall with iptables.</p>
+
+<h3 id="recommended-reading-1">Recommended reading</h3>
+
+<ul>
+  <li>Metasploit: The Penetration Tester’s Guide by Kennedy, O’Gorman, Kearns and Aharoni.</li>
+  <li>Security Engineering by Anderson.</li>
+</ul>
+
+<h2 id="cryptography">Cryptography</h2>
+
+<p>Cryptography is what makes much of our digital lives possible.</p>
+
+<p>Computer scientists should understand and be able to implement the following concepts, as well as the common pitfalls in doing so:</p>
+
+<ul>
+  <li>symmetric-key cryptosystems;</li>
+  <li>public-key cryptosystems;</li>
+  <li>secure hash functions;</li>
+  <li>challenge-response authentication;</li>
+  <li>digital signature algorithms; and</li>
+  <li>threshold cryptosystems.</li>
+</ul>
+
+<p>Since it’s a common fault in implementations of cryptosystems, every computer scientist should know how to acquire a sufficiently random number for the task at hand.</p>
+
+<p>At the very least, as nearly every data breach has shown, computer scientists need to know how to salt and hash passwords for storage.</p>
+
+<h3 id="specific-recommendations-2">Specific recommendations</h3>
+
+<p>Every computer scientist should have the pleasure of breaking ciphertext using pre-modern cryptosystems with hand-rolled statistical tools.</p>
+
+<p>RSA is easy enough to implement that everyone should do it.</p>
+
+<p>Every student should create their own digital certificate and set up https in apache. (It’s surprisingly arduous to do this.)</p>
+
+<p>Student should also write a console web client that connects over SSL.</p>
+
+<p>As strictly practical matters, computer scientists should know how to use GPG; how to use public-key authentication for ssh; and how to encrypt a directory or a hard disk.</p>
+
+<h3 id="recommended-reading-2">Recommended reading</h3>
+
+<ul>
+  <li>Cryptography Engineering by Ferguson, Schneier and Kohno.</li>
+</ul>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#datkom" class="page__taxonomy-item p-category" rel="tag">datkom</a><span class="sep">, </span>
+    
+      <a href="/tags/#notes" class="page__taxonomy-item p-category" rel="tag">notes</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#notes" class="page__taxonomy-item p-category" rel="tag">Notes</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2022-09-22T00:00:00+02:00">September 22, 2022</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?text=DatKom+Notes%20http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fnotes-DatKom%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fnotes-DatKom%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fnotes-DatKom%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/cheatsheet/cheatsheet-wsl2/" class="pagination--pager" title="WSL2 Cheatsheet
+">Previous</a>
+    
+    
+      <a href="/notes/notes-OS/" class="pagination--pager" title="Operating Systems Notes
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You May Also Enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/mario-question-block.jpeg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/notes/notes-html/" rel="permalink">HTML Notes
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-10-10T00:00:00+02:00">October 10, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">For learning html.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/Cpp_logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/notes/notes-cpp/" rel="permalink">C++ Notes
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-10-06T00:00:00+02:00">October 6, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">For learning C++
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/C_logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/cheatsheet/cheatsheet-android/" rel="permalink">Android Cheatsheet
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-10-04T00:00:00+02:00">October 4, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Useful tips for using Android
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/C_logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/notes/notes-SE/" rel="permalink">Software Engineering Notes
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-10-03T00:00:00+02:00">October 3, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Software Engineering Basics
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/pharath_one" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://github.com/pharath" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="/_pages/404.md" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 Pharath Palesuvaran. </div>
+
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

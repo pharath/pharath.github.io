@@ -136,10 +136,6 @@
   </ul>
 </nav>
 
-    <!--[if lt IE 9]>
-<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
-<![endif]-->
-
     
 
 <div class="masthead">
@@ -233,6 +229,8 @@
 
 
 
+
+
 <div id="main" role="main">
   
   <div class="sidebar sticky">
@@ -279,11 +277,11 @@
           
         
           
-            <li><a href="https://twitter.com/pharath_one" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+            <li><a href="https://twitter.com/pharath_one" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
           
         
           
-            <li><a href="https://github.com/pharath" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+            <li><a href="https://github.com/pharath" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
           
         
           
@@ -350,6 +348,7 @@
     </ul>
   </div>
 </div>
+
   
   </div>
 
@@ -369,12 +368,12 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
-              <ul class="toc__menu"><li><a href="#apps">Apps:</a></li><li><a href="#my-aliases">My aliases</a></li><li><a href="#system-folder">System Folder</a></li><li><a href="#general-commands">General commands</a></li><li><a href="#apt-apt-get-snap-dpkg-pkg-config">apt, apt-get, snap, dpkg, pkg-config</a><ul><li><a href="#difference-between-apt-and-apt-get--apt-cache">Difference between apt and apt-get + apt-cache:</a></li><li><a href="#apt">apt</a></li><li><a href="#dpkg">dpkg</a></li><li><a href="#snap">snap</a></li><li><a href="#pkg-config">pkg-config</a></li></ul></li><li><a href="#system-information">System information</a></li><li><a href="#chmod-groups">chmod, Groups</a></li><li><a href="#docker">docker</a><ul><li><a href="#remove-dangling-images">Remove dangling images</a></li><li><a href="#container">container</a></li><li><a href="#gitlab-container-registry">Gitlab Container Registry</a></li></ul></li><li><a href="#bash">bash</a><ul><li><a href="#terminal-shortcuts">terminal shortcuts</a></li><li><a href="#terminal-commands-and-bash-scripting">terminal commands and bash scripting</a></li></ul></li><li><a href="#unzipping">Unzipping</a></li><li><a href="#manage-drives-hard-drive-usb-flash-drive">Manage Drives (hard drive, usb flash drive)</a></li><li><a href="#system-information-1">System information:</a></li><li><a href="#retrieval-commands-curl-und-wget">Retrieval commands curl und wget:</a></li><li><a href="#gpg">gpg</a></li><li><a href="#cron">cron</a></li><li><a href="#network">network</a><ul><li><a href="#ssh">ssh</a></li><li><a href="#scp">scp</a></li><li><a href="#rsync">rsync</a></li></ul></li><li><a href="#gpu">GPU</a></li><li><a href="#tree">tree</a></li></ul>
+              <ul class="toc__menu"><li><a href="#apps">Apps</a></li><li><a href="#my-aliases">My aliases</a></li><li><a href="#system-folder">System Folder</a></li><li><a href="#general-commands">General commands</a></li><li><a href="#checks">Checks</a></li><li><a href="#apt-apt-get-snap-dpkg-pkg-config">apt, apt-get, snap, dpkg, pkg-config</a><ul><li><a href="#difference-between-apt-and-apt-get--apt-cache">Difference between apt and apt-get + apt-cache:</a></li><li><a href="#apt">apt</a><ul><li><a href="#ppas">PPAs</a></li><li><a href="#install">Install</a></li><li><a href="#uninstall">Uninstall</a></li><li><a href="#check">Check</a></li><li><a href="#apt-mark">apt-mark</a></li></ul></li><li><a href="#dpkg">dpkg</a></li><li><a href="#snap">snap</a></li><li><a href="#pkg-config">pkg-config</a></li></ul></li><li><a href="#system-information">System information</a></li><li><a href="#chmod-groups">chmod, Groups</a></li><li><a href="#bash">bash</a><ul><li><a href="#terminal-shortcuts">terminal shortcuts</a></li><li><a href="#terminal-commands-and-bash-scripting">terminal commands and bash scripting</a></li></ul></li><li><a href="#unzipping">Unzipping</a></li><li><a href="#manage-drives-hard-drive-usb-flash-drive">Manage Drives (hard drive, usb flash drive)</a></li><li><a href="#system-information-1">System information</a><ul><li><a href="#hardware">Hardware</a></li><li><a href="#hard-disk">Hard disk</a></li><li><a href="#disk-usage">Disk Usage</a></li><li><a href="#webcam">Webcam</a></li></ul></li><li><a href="#gpu-information">GPU information</a></li><li><a href="#retrieval-commands-curl-und-wget">Retrieval commands curl und wget:</a></li><li><a href="#gpg">gpg</a></li><li><a href="#cron">cron</a></li><li><a href="#network">network</a><ul><li><a href="#ssh">ssh</a></li><li><a href="#scp">scp</a></li><li><a href="#rsync">rsync</a><ul><li><a href="#resume-partially-scp-transferred-files-using-rsync">Resume partially scp-transferred files using Rsync</a></li></ul></li></ul></li><li><a href="#tree">tree</a></li></ul>
 
             </nav>
           </aside>
         
-        <h1 id="apps">Apps:</h1>
+        <h1 id="apps">Apps</h1>
 
 <table>
   <thead>
@@ -406,6 +405,10 @@
     <tr>
       <td>ffmpeg -i foo.mp4 bar.mp3</td>
       <td>convert foo.mp4 to bar.mp3</td>
+    </tr>
+    <tr>
+      <td>ffmpeg -i source.mp4 -ss 00:00:00 -t 00:00:00 -vcodec copy -acodec copy outsplice.mp4</td>
+      <td>crop source.mp4 from start time <code class="language-plaintext highlighter-rouge">-ss</code> to time <code class="language-plaintext highlighter-rouge">-t</code></td>
     </tr>
   </tbody>
 </table>
@@ -848,7 +851,7 @@
   <tbody>
     <tr>
       <td>python2.7</td>
-      <td>einfach per <code class="language-plaintext highlighter-rouge">apt python2.7</code> installieren; starten per <code class="language-plaintext highlighter-rouge">python2.7</code> (nur <code class="language-plaintext highlighter-rouge">python2</code> geht nicht!)</td>
+      <td>einfach per <code class="language-plaintext highlighter-rouge">apt install python2.7</code> installieren (Achtung: some apps also need <code class="language-plaintext highlighter-rouge">python2.7-dev</code>!); starten per <code class="language-plaintext highlighter-rouge">python2.7</code> (nur <code class="language-plaintext highlighter-rouge">python2</code> geht nicht!)</td>
     </tr>
   </tbody>
 </table>
@@ -871,33 +874,6 @@
     <tr>
       <td>ipad_charge</td>
       <td><a href="https://github.com/mkorenkov/ipad_charge/wiki">github link</a> automatically start charging ipad when connected to ubuntu</td>
-    </tr>
-  </tbody>
-</table>
-
-<hr />
-
-<table>
-  <tbody>
-    <tr>
-      <td>sudo apt-get install ruby-full</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>sudo apt install rubygems-integration</td>
-      <td>nicht nötig, wenn ruby-full installiert wurde</td>
-    </tr>
-    <tr>
-      <td>sudo gem install bundler</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>sudo bundle install</td>
-      <td>im github-pages repo root folder</td>
-    </tr>
-    <tr>
-      <td>bundle exec jekyll serve</td>
-      <td>warten bis “Server running… press ctrl-c to stop.” message und dann ctrl gedrückt halten und auf server address clicken (oder in Browser “http://localhost:4000” aufrufen)</td>
     </tr>
   </tbody>
 </table>
@@ -954,6 +930,39 @@
     <tr>
       <td>barrier</td>
       <td>share keyboard and mouse between multiple computers (client-server model) [<strong>Note:</strong> uncheck “enable SSL” box in barrier “Menu” -&gt; “Change Settings” (on all devices)]</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<table>
+  <tbody>
+    <tr>
+      <td>backgroundremover</td>
+      <td><code class="language-plaintext highlighter-rouge">pip install backgroundremover</code> and then download <code class="language-plaintext highlighter-rouge">u2net.pth</code> from <code class="language-plaintext highlighter-rouge">https://drive.google.com/uc?id=1ao1ovG1Qtx4b7EoskHXmi2E9rp5CHLcZ</code> (or <code class="language-plaintext highlighter-rouge">https://drive.google.com/file/d/1ao1ovG1Qtx4b7EoskHXmi2E9rp5CHLcZ/view</code>) and save it as <code class="language-plaintext highlighter-rouge">/home/bra-ket/.u2net/u2net.pth</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<table>
+  <tbody>
+    <tr>
+      <td>v4l2-ctl</td>
+      <td>for setting webcam powerline frequency (see below)</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<table>
+  <tbody>
+    <tr>
+      <td>sudo snap install pdftk</td>
+      <td>use <code class="language-plaintext highlighter-rouge">pdftk full-pdf.pdf cat 12-15 output outfile_p12-15.pdf</code> to save pages 12-15 from <code class="language-plaintext highlighter-rouge">full-pdf.pdf</code> in <code class="language-plaintext highlighter-rouge">outfile_p12-15.pdf</code></td>
     </tr>
   </tbody>
 </table>
@@ -1108,7 +1117,15 @@
     </tr>
     <tr>
       <td>kill <em>PID</em></td>
-      <td>stop process with id <em>PID</em></td>
+      <td>stop process with id <em>PID</em>, sends SIGTERM (i.e. kills gracefully)</td>
+    </tr>
+    <tr>
+      <td>pkill <em>process_name</em></td>
+      <td>stop all processes containing <em>process_name</em> (which is a regular expression), sends SIGTERM (i.e. kills gracefully), <em>Warning:</em> use <code class="language-plaintext highlighter-rouge">pgrep</code> first to check which processes will be killed</td>
+    </tr>
+    <tr>
+      <td>pgrep <em>process_name</em></td>
+      <td>list all PIDs containing <em>process_name</em> (which is a regular expression)</td>
     </tr>
   </tbody>
 </table>
@@ -1142,6 +1159,13 @@
     </tr>
   </tbody>
 </table>
+
+<h1 id="checks">Checks</h1>
+
+<ul>
+  <li>Check current shell type: <code class="language-plaintext highlighter-rouge">echo $0</code></li>
+  <li>Check installed library: <code class="language-plaintext highlighter-rouge">ldconfig -p | grep libnvinfer_plugin.so</code></li>
+</ul>
 
 <h1 id="apt-apt-get-snap-dpkg-pkg-config">apt, apt-get, snap, dpkg, pkg-config</h1>
 
@@ -1197,6 +1221,26 @@
 
 <h2 id="apt">apt</h2>
 
+<h3 id="ppas">PPAs</h3>
+
+<p><strong>Personal Package Archives (PPAs)</strong> are software repositories designed for Ubuntu users and are easier to install than other third-party repositories. PPAs are often used to distribute pre-release software so that it can be tested. [<a href="https://help.ubuntu.com/stable/ubuntu-help/addremove-ppa.html.en">source</a>]</p>
+
+<p>Adding PPAs:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># add repository</span>
+<span class="nb">sudo </span>add-apt-repository ppa:whatever/ppa
+</code></pre></div></div>
+
+<p>Removing PPAs:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># remove repository</span>
+<span class="nb">sudo </span>add-apt-repository <span class="nt">--remove</span> ppa:whatever/ppa
+</code></pre></div></div>
+
+<p>You can also remove PPAs by deleting the <code class="language-plaintext highlighter-rouge">.list</code> files from <code class="language-plaintext highlighter-rouge">/etc/apt/sources.list.d</code> directory.</p>
+
+<h3 id="install">Install</h3>
+
 <table>
   <thead>
     <tr>
@@ -1208,6 +1252,69 @@
     <tr>
       <td style="text-align: center">sudo apt install ./name.deb</td>
       <td style="text-align: center">install a .deb file</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">sudo apt-get install &lt;package name&gt;=&lt;version&gt;</code></td>
+      <td style="text-align: center">install a specific version</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="uninstall">Uninstall</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">sudo apt purge …</td>
+      <td style="text-align: center">Removing packages with <code class="language-plaintext highlighter-rouge">sudo apt purge ...</code> or <code class="language-plaintext highlighter-rouge">sudo apt --purge remove ...</code> will remove them and all their global (i.e., systemwide) configuration files. This is usually what people mean when they talk about completely removing a package. <strong>This does not remove packages that were installed as dependencies</strong>, when you installed the package you’re now removing. Assuming those packages aren’t dependencies of any other packages, and that you haven’t marked them as manually installed, you can remove the dependencies with <code class="language-plaintext highlighter-rouge">sudo apt autoremove</code> or (if you want to delete their systemwide configuration files too) <code class="language-plaintext highlighter-rouge">sudo apt --purge autoremove</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">sudo apt –purge remove …</td>
+      <td style="text-align: center">see <code class="language-plaintext highlighter-rouge">sudo apt purge ...</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="check">Check</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">apt-cache policy &lt;package name&gt;</code></td>
+      <td style="text-align: center">shows installed package version and also all the available versions in the repository according to the version of Ubuntu in which you are running</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="apt-mark">apt-mark</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">sudo apt-mark hold package_name</code></td>
+      <td style="text-align: center">hold packages (i.e. do not upgrade, remove or modify <code class="language-plaintext highlighter-rouge">package_name</code>)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">sudo apt-mark unhold package_name</code></td>
+      <td style="text-align: center">unhold “held” packages</td>
     </tr>
   </tbody>
 </table>
@@ -1290,6 +1397,14 @@
       <td>install package_file.deb (alternative: <code class="language-plaintext highlighter-rouge">sudo apt install ./name.deb</code>)</td>
     </tr>
     <tr>
+      <td>sudo dpkg -P <em>some_package</em></td>
+      <td>purge <em>some_package</em></td>
+    </tr>
+    <tr>
+      <td>sudo dpkg -r <em>some_package</em></td>
+      <td>remove <em>some_package</em></td>
+    </tr>
+    <tr>
       <td>sudo apt remove package</td>
       <td>uninstall package_file.deb</td>
     </tr>
@@ -1320,6 +1435,10 @@
 
 <h2 id="snap">snap</h2>
 
+<ul>
+  <li>see <code class="language-plaintext highlighter-rouge">man snap</code> for details</li>
+</ul>
+
 <table>
   <thead>
     <tr>
@@ -1328,6 +1447,10 @@
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td style="text-align: center">snap list</td>
+      <td style="text-align: center"> </td>
+    </tr>
     <tr>
       <td style="text-align: center">snap find <em>package</em></td>
       <td style="text-align: center"> </td>
@@ -1338,6 +1461,10 @@
     </tr>
     <tr>
       <td style="text-align: center">sudo snap remove <em>package</em></td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center">sudo snap remove –purge <em>package</em></td>
       <td style="text-align: center"> </td>
     </tr>
   </tbody>
@@ -1501,311 +1628,11 @@
   </tbody>
 </table>
 
-<h1 id="docker">docker</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: center">command</th>
-      <th style="text-align: center">description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: center">sudo ls /var/lib/docker/overlay2</td>
-      <td style="text-align: center">hier ist der Großteil aller docker image Daten</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">sudo du -sh $(ls /var/lib/docker/)</td>
-      <td style="text-align: center">list size of all files and dirs in /var/lib/docker/</td>
-    </tr>
-  </tbody>
-</table>
-
-<hr />
-
-<table>
-  <tbody>
-    <tr>
-      <td>xhost +local:root</td>
-      <td>enable GUI for docker</td>
-    </tr>
-    <tr>
-      <td>docker login registry.git.rwth-aachen.de</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>docker pull</td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<hr />
-
-<table>
-  <tbody>
-    <tr>
-      <td>sudo docker ps -a</td>
-      <td>-a flag: Show all containers (default shows just running)</td>
-    </tr>
-    <tr>
-      <td>sudo docker images</td>
-      <td>show all images</td>
-    </tr>
-    <tr>
-      <td>sudo docker system df</td>
-      <td>Show docker disk usage (size of all images together)</td>
-    </tr>
-  </tbody>
-</table>
-
-<hr />
-
-<table>
-  <tbody>
-    <tr>
-      <td>sudo docker commit 308aeb468339 tensorflow/tensorflow:latest-gpu-jupyter_braket</td>
-      <td><a href="https://stackoverflow.com/a/64532554">Schritte</a>, i.e. <code class="language-plaintext highlighter-rouge">docker commit CONTAINER_ID NEW_IMAGE_NAME</code></td>
-    </tr>
-    <tr>
-      <td>docker commit -m “added test file” eloquent_lehmann</td>
-      <td>commit with commit message</td>
-    </tr>
-    <tr>
-      <td>docker history &lt;image hash&gt;</td>
-      <td>view commit messages</td>
-    </tr>
-  </tbody>
-</table>
-
-<hr />
-
-<table>
-  <tbody>
-    <tr>
-      <td>sudo docker image rm 1ff0175b5104</td>
-      <td>remove image with id 1ff0175b5104</td>
-    </tr>
-    <tr>
-      <td>sudo docker rmi 1ff0175b5104</td>
-      <td>alias for <code class="language-plaintext highlighter-rouge">docker image rm</code> <a href="https://stackoverflow.com/a/63035352">source</a>, see also <a href="http://manpages.ubuntu.com/manpages/bionic/man1/docker-rmi.1.html">doc</a></td>
-    </tr>
-  </tbody>
-</table>
-
-<hr />
-
-<table>
-  <tbody>
-    <tr>
-      <td>sudo docker container ls -a</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>sudo docker container stop 1ff0175b5104</td>
-      <td>stoppt den container nur (dh. container Status: “Exited”), aber “docker ps -a” zeigt den container noch</td>
-    </tr>
-    <tr>
-      <td>sudo docker container rm 1ff0175b5104</td>
-      <td>entfernt den container, dh. “docker ps -a” zeigt den container nicht mehr</td>
-    </tr>
-    <tr>
-      <td>sudo docker container kill 1ff0175b5104</td>
-      <td>killt den container (Unterschied zu <code class="language-plaintext highlighter-rouge">docker container stop</code>: see <a href="https://stackoverflow.com/a/66736836">here</a>: “So ideally we always stop a container with the <code class="language-plaintext highlighter-rouge">docker stop</code> command in order to get the running process inside of it a little bit of time to shut itself down, otherwise if it feels like the container has locked up and it’s not responding to the docker stop command then we could issue <code class="language-plaintext highlighter-rouge">docker kill</code> instead.”)</td>
-    </tr>
-  </tbody>
-</table>
-
-<hr />
-
-<table>
-  <tbody>
-    <tr>
-      <td>sudo docker run -d …</td>
-      <td>start a container in detached mode <a href="https://docs.docker.com/engine/reference/run/#detached--d">docs</a></td>
-    </tr>
-    <tr>
-      <td>sudo docker run –rm …</td>
-      <td>Automatically remove the container when it exits</td>
-    </tr>
-    <tr>
-      <td>docker run –name test -it <em>image_name</em></td>
-      <td>This example runs a container named test using the image <em>image_name</em>. The <code class="language-plaintext highlighter-rouge">-it</code> instructs Docker to allocate a pseudo-TTY connected to the container’s stdin; creating an interactive bash shell in the container.</td>
-    </tr>
-    <tr>
-      <td>docker run –rm –name ubuntu_phth -it –entrypoint=/bin/bash deep_braket:v4</td>
-      <td>start deep_braket:v4 in bash shell instead of starting in Jupyter Lab.</td>
-    </tr>
-    <tr>
-      <td>docker run -e “TERM=xterm-256color” …</td>
-      <td>enable color output in docker bash terminal</td>
-    </tr>
-  </tbody>
-</table>
-
-<hr />
-
-<table>
-  <tbody>
-    <tr>
-      <td>sudo docker exec -it 6b594d9d60cc bash</td>
-      <td>start bash in container 6b594d9d60cc</td>
-    </tr>
-  </tbody>
-</table>
-
-<hr />
-
-<table>
-  <tbody>
-    <tr>
-      <td>sudo docker build –no-cache -t deep_braket:v1 .</td>
-      <td><code class="language-plaintext highlighter-rouge">-t</code>: REPO name and TAG name of image; <code class="language-plaintext highlighter-rouge">--no-cache</code>: <a href="https://stackoverflow.com/a/35595021">explanation</a>, ohne diesen flag wird Layer Caching benutzt (image updated die alte image-Version sozusagen nur und hat dependencies zur alten image-Version; die alte image-Version kann also nicht gelöscht werden!); <code class="language-plaintext highlighter-rouge">.</code>: location of Dockerfile</td>
-    </tr>
-  </tbody>
-</table>
-
-<hr />
-
-<table>
-  <tbody>
-    <tr>
-      <td>sudo docker top 6b594d9d60cc</td>
-      <td>see all processes (incl. pids) in container 6b594d9d60cc</td>
-    </tr>
-  </tbody>
-</table>
-
-<hr />
-
-<table>
-  <tbody>
-    <tr>
-      <td>docker attach <em>double-tab</em></td>
-      <td>attach to running container (double-tab shows names of running containers or use container id)</td>
-    </tr>
-    <tr>
-      <td>ctrl-p ctrl-q</td>
-      <td>detach from container</td>
-    </tr>
-  </tbody>
-</table>
-
-<hr />
-
-<table>
-  <tbody>
-    <tr>
-      <td><a href="https://www.baeldung.com/ops/docker-volumes">docker volume overview</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>docker volume create data_volume_name</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>docker volume ls</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>docker volume inspect volume_hash</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>docker volume rm data_volume_name</td>
-      <td>remove one or more volumes individually</td>
-    </tr>
-    <tr>
-      <td>docker volume prune</td>
-      <td>remove all the unused volumes</td>
-    </tr>
-    <tr>
-      <td>docker run -v data-volume:/var/opt/project bash:latest bash -c “ls /var/opt/project”</td>
-      <td>start a container with a volume using the -v option. The -v option contains three components, separated by colons: 1. Source directory or volume name, 2. Mount point within the container, 3. (Optional) <em>ro</em> if the mount is to be read-only</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="remove-dangling-images">Remove dangling images</h2>
-
-<ul>
-  <li><strong>Dangling images</strong> entstehen, wenn man ein neues image committet, das den Namen eines bereits existierenden images hat.
-In <code class="language-plaintext highlighter-rouge">docker images</code> wird das alte image dann &lt;none&gt; genannt (sowohl REPOSITORY als auch TAG) <a href="https://stackoverflow.com/a/40791752">source</a></li>
-</ul>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: center">command</th>
-      <th style="text-align: center">description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: center">docker images –filter dangling=true</td>
-      <td style="text-align: center">lists all images that are dangling and has no pointer to it</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">docker rmi `docker images –filter dangling=true -q`</td>
-      <td style="text-align: center">Removes all those images.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="container">container</h2>
-
-<p><strong>tensorflow/tensorflow</strong></p>
-
-<p>Quickstart: <a href="https://hub.docker.com/r/tensorflow/tensorflow/">examples for using the tags</a> or <a href="https://www.tensorflow.org/install/docker">tensorflow.org examples</a></p>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: center">command</th>
-      <th style="text-align: center">description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">sudo docker run -it --rm --runtime=nvidia -v $(realpath ~/notebooks):/tf/notebooks -p 8888:8888 tensorflow/tensorflow:latest-gpu-jupyter_braket</code></td>
-      <td style="text-align: center">mit jupyter, GPU support und mit meinen zusätzlichen (über apt installierten) packages</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="gitlab-container-registry">Gitlab Container Registry</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: center">command</th>
-      <th style="text-align: center">description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: center">docker login registry.git.rwth-aachen.de</td>
-      <td style="text-align: center">login to Container Registry</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">docker image tag galaxis_simulation:phth-8 registry.git.rwth-aachen.de/pharath/gitlab_backups/galaxis_simulation:phth-8</td>
-      <td style="text-align: center">tag local image “galaxis_simulation:phth-8” (Note: the tag registry.git.rwth-aachen.de/pharath/gitlab_backups/galaxis_simulation:phth-8 must have this form!)</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">docker tag galaxis_simulation:phth-8 registry.git.rwth-aachen.de/pharath/gitlab_backups/galaxis_simulation:phth-8</td>
-      <td style="text-align: center">see <code class="language-plaintext highlighter-rouge">docker image tag</code></td>
-    </tr>
-    <tr>
-      <td style="text-align: center">docker push registry.git.rwth-aachen.de/pharath/gitlab_backups/galaxis_simulation:phth-8</td>
-      <td style="text-align: center">push image to Gitlab Container Registry</td>
-    </tr>
-  </tbody>
-</table>
-
 <h1 id="bash">bash</h1>
 
 <h2 id="terminal-shortcuts">terminal shortcuts</h2>
+
+<p><img src="/home/assets/images/moving_cli.png" alt="jumping with command line cursor" /></p>
 
 <table>
   <thead>
@@ -2162,6 +1989,10 @@ In <code class="language-plaintext highlighter-rouge">docker images</code> wird 
       <td>echo “blabla” | tee <em>filename</em></td>
       <td>write output to file <em>filename</em></td>
     </tr>
+    <tr>
+      <td>tee</td>
+      <td>read from standard input and write to both standard output <strong>and</strong> files <a href="http://manpages.ubuntu.com/manpages/bionic/man1/tee.1.html">doc</a> (name derived from “T-junction”, since <code class="language-plaintext highlighter-rouge">tee</code> is usually used in pipes)</td>
+    </tr>
   </tbody>
 </table>
 
@@ -2241,18 +2072,24 @@ In <code class="language-plaintext highlighter-rouge">docker images</code> wird 
 <hr />
 
 <table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
   <tbody>
     <tr>
-      <td>sudo diskutil mountDisk /dev/disk2s2</td>
-      <td>(Partitionsname disk2s2 steht in rechter Spalte bei diskutil list; /dev/disk2 mounted alle Unterpartitionen)</td>
+      <td style="text-align: center">sudo diskutil mountDisk /dev/disk2s2</td>
+      <td style="text-align: center">(Partitionsname disk2s2 steht in rechter Spalte bei diskutil list; /dev/disk2 mounted alle Unterpartitionen)</td>
     </tr>
     <tr>
-      <td>sudo diskutil umountDisk /dev/disk2s2</td>
-      <td> </td>
+      <td style="text-align: center">sudo diskutil umountDisk /dev/disk2s2</td>
+      <td style="text-align: center"> </td>
     </tr>
     <tr>
-      <td>mount_ntfs -o r “/Volumes/Volume node”</td>
-      <td>(r für read-only; rw für read-write (NICHT MACHEN! Es gibt einen Grund warum das bei Mac per default nicht geht!)</td>
+      <td style="text-align: center">mount_ntfs -o r “/Volumes/Volume node”</td>
+      <td style="text-align: center">(r für read-only; rw für read-write (NICHT MACHEN! Es gibt einen Grund warum das bei Mac per default nicht geht!)</td>
     </tr>
   </tbody>
 </table>
@@ -2260,27 +2097,35 @@ In <code class="language-plaintext highlighter-rouge">docker images</code> wird 
 <hr />
 
 <table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
   <tbody>
     <tr>
-      <td>df</td>
-      <td>zeige alle Laufwerke, ganz rechts steht die Location mit dem Inhalt des Datenträgers (zB /media/bra-ket/UBUNTU 20_0)</td>
+      <td style="text-align: center">df</td>
+      <td style="text-align: center">zeige alle Laufwerke, ganz rechts steht die Location mit dem Inhalt des Datenträgers (zB /media/bra-ket/UBUNTU 20_0)</td>
     </tr>
     <tr>
-      <td>sudo fdisk -l</td>
-      <td>wie df, aber mehr Details</td>
+      <td style="text-align: center">sudo fdisk -l</td>
+      <td style="text-align: center">wie df, aber mehr Details</td>
     </tr>
     <tr>
-      <td>lsusb</td>
-      <td> </td>
+      <td style="text-align: center">lsusb</td>
+      <td style="text-align: center"> </td>
     </tr>
     <tr>
-      <td>lsblk</td>
-      <td> </td>
+      <td style="text-align: center">lsblk</td>
+      <td style="text-align: center"> </td>
     </tr>
   </tbody>
 </table>
 
-<h1 id="system-information-1">System information:</h1>
+<h1 id="system-information-1">System information</h1>
+
+<h2 id="hardware">Hardware</h2>
 
 <table>
   <thead>
@@ -2345,50 +2190,185 @@ In <code class="language-plaintext highlighter-rouge">docker images</code> wird 
   </tbody>
 </table>
 
-<hr />
-
 <table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
   <tbody>
     <tr>
-      <td>sudo dmidecode -t processor</td>
+      <td style="text-align: center">sudo dmidecode -t processor</td>
+      <td style="text-align: center"> </td>
     </tr>
     <tr>
-      <td>sudo dmidecode -t memory</td>
+      <td style="text-align: center">sudo dmidecode -t memory</td>
+      <td style="text-align: center"> </td>
     </tr>
     <tr>
-      <td>sudo dmidecode -t bios</td>
+      <td style="text-align: center">sudo dmidecode -t bios</td>
+      <td style="text-align: center"> </td>
     </tr>
   </tbody>
 </table>
 
-<hr />
-
 <table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
   <tbody>
     <tr>
-      <td>cat /proc/cpuinfo</td>
+      <td style="text-align: center">cat /proc/cpuinfo</td>
+      <td style="text-align: center"> </td>
     </tr>
     <tr>
-      <td>cat /proc/meminfo</td>
+      <td style="text-align: center">cat /proc/meminfo</td>
+      <td style="text-align: center"> </td>
     </tr>
     <tr>
-      <td>cat /proc/version</td>
+      <td style="text-align: center">cat /proc/version</td>
+      <td style="text-align: center"> </td>
     </tr>
     <tr>
-      <td>cat /proc/scsi/scsi</td>
+      <td style="text-align: center">cat /proc/scsi/scsi</td>
+      <td style="text-align: center"> </td>
     </tr>
     <tr>
-      <td>cat /proc/partitions</td>
+      <td style="text-align: center">cat /proc/partitions</td>
+      <td style="text-align: center"> </td>
     </tr>
   </tbody>
 </table>
 
-<hr />
+<h2 id="hard-disk">Hard disk</h2>
 
 <table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
   <tbody>
     <tr>
-      <td>sudo hdparm -i /dev/sda</td>
+      <td style="text-align: center">sudo hdparm -i /dev/sda</td>
+      <td style="text-align: center"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="disk-usage">Disk Usage</h2>
+
+<ul>
+  <li><a href="https://unix.stackexchange.com/a/120312">FAQ</a>
+    <ul>
+      <li>How much disk space does a file use?</li>
+      <li>Why is the total from <code class="language-plaintext highlighter-rouge">du</code> different from the sum of the file sizes?</li>
+      <li>What are these numbers from <code class="language-plaintext highlighter-rouge">df</code> exactly?</li>
+      <li>What’s using the space on my disk?</li>
+    </ul>
+  </li>
+  <li><a href="https://unix.stackexchange.com/questions/9612/why-is-there-a-discrepancy-in-disk-usage-reported-by-df-and-du">Why is there a discrepancy in disk usage reported by df and du?</a></li>
+  <li><a href="http://linuxshellaccount.blogspot.com/2008/12/why-du-and-df-display-different-values.html">Why du and df display different values</a></li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">du -sh *</code></td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">du -sh * | sort -h</code></td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">du -sh * .[^.]*</code></td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">du -sh * .[^.]* | sort -h</code></td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">df -h</code></td>
+      <td style="text-align: center">to analyze the whole filesystem</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="webcam">Webcam</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">mpv /dev/video0</code></td>
+      <td style="text-align: center">check, if device <code class="language-plaintext highlighter-rouge">/dev/video0</code> is the webcam</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">vlc v4l2:///dev/video0</code></td>
+      <td style="text-align: center">check, if device <code class="language-plaintext highlighter-rouge">/dev/video0</code> is the webcam</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">mplayer tv://device=/dev/video0</code></td>
+      <td style="text-align: center">check, if device <code class="language-plaintext highlighter-rouge">/dev/video0</code> is the webcam</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">gst-launch-1.0 v4l2src device=/dev/video2 name=cam_src ! videoconvert ! videoscale ! video/x-raw,format=RGB ! queue ! videoconvert ! ximagesink name=img_origin</code></td>
+      <td style="text-align: center">check, if device <code class="language-plaintext highlighter-rouge">/dev/video2</code> is the webcam</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">v4l2-ctl --list-devices</code></td>
+      <td style="text-align: center">list cameras</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">v4l2-ctl -L -d /dev/videoN</code></td>
+      <td style="text-align: center">list available settings of camera <code class="language-plaintext highlighter-rouge">/dev/videoN</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">v4l2-ctl --set-ctrl power_line_frequency=0 -d /dev/videoN</code></td>
+      <td style="text-align: center">set powerline frequency (50Hz vs 60Hz) of camera <code class="language-plaintext highlighter-rouge">/dev/videoN</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">v4l2-ctl -d /dev/video2 --list-formats-ext</code></td>
+      <td style="text-align: center">check supported pixel formats, fps and resolutions of camera <code class="language-plaintext highlighter-rouge">/dev/video2</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="gpu-information">GPU information</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">nvidia-smi -q -d temperature</td>
+      <td style="text-align: center">temperature info including critical temperature values, shutdown temperature etc.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">nvidia-smi –query-gpu=name –format=csv</td>
+      <td style="text-align: center">get GPU name</td>
     </tr>
   </tbody>
 </table>
@@ -2621,7 +2601,9 @@ In <code class="language-plaintext highlighter-rouge">docker images</code> wird 
   </tbody>
 </table>
 
-<h1 id="gpu">GPU</h1>
+<h3 id="resume-partially-scp-transferred-files-using-rsync">Resume partially scp-transferred files using Rsync</h3>
+
+<p><a href="https://ostechnix.com/how-to-resume-partially-downloaded-or-transferred-files-using-rsync/">source</a></p>
 
 <table>
   <thead>
@@ -2632,12 +2614,20 @@ In <code class="language-plaintext highlighter-rouge">docker images</code> wird 
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: center">nvidia-smi -q -d temperature</td>
-      <td style="text-align: center">temperature info including critical temperature values, shutdown temperature etc.</td>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">rsync -P -rsh=ssh ubuntu.iso sk@192.168.225.22:/home/sk/</code></td>
+      <td style="text-align: center">resume partially transferred file <code class="language-plaintext highlighter-rouge">ubuntu.iso</code></td>
     </tr>
     <tr>
-      <td style="text-align: center">nvidia-smi –query-gpu=name –format=csv</td>
-      <td style="text-align: center">get GPU name</td>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">rsync --partial -rsh=ssh ubuntu.iso sk@192.168.225.22:/home/sk/</code></td>
+      <td style="text-align: center">see above</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">rsync -avP ubuntu.iso sk@192.168.225.22:/home/sk/</code></td>
+      <td style="text-align: center">see above</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">rsync -av --partial ubuntu.iso sk@192.168.225.22:/home/sk/</code></td>
+      <td style="text-align: center">see above</td>
     </tr>
   </tbody>
 </table>
@@ -2745,12 +2735,12 @@ In <code class="language-plaintext highlighter-rouge">docker images</code> wird 
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
       <div class="archive__item-teaser">
-        <img src="/assets/images/lenet.png" alt="">
+        <img src="/assets/images/mario-question-block.jpeg" alt="">
       </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/lecture_notes/machine_learning/lecture-notes-ML-part2-old/" rel="permalink">Machine Learning (Part 2) [OLD VERSION]
+        <a href="/notes/notes-html/" rel="permalink">HTML Notes
 </a>
       
     </h2>
@@ -2760,79 +2750,19 @@ In <code class="language-plaintext highlighter-rouge">docker images</code> wird 
     
       
       <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2022-03-09T00:00:00+01:00">March 9, 2022</time>
+        <time datetime="2022-10-10T00:00:00+02:00">October 10, 2022</time>
       </span>
     
 
-    <span class="page__meta-sep"></span>
-
     
-      
-      
 
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          14 minute read
-        
-      </span>
     
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">[OLD VERSION!] Notes on Machine Learning theory. Based on C. M. Bishop, “Pattern Recognition and Machine Learning” (2011) and Goodfellow, Bengio, Courville, ...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src="/assets/images/lenet.png" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/notes/machine_learning/notes-Neuroscience/" rel="permalink">New Inspirations for Machine Learning Methods
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-02-26T00:00:00+01:00">February 26, 2022</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          less than 1 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Notes on some inspirations for Machine Learning methods. Based on opinions from leading scientists and also some of my own opinions.
+    <p class="archive__item-excerpt" itemprop="description">For learning html.
 </p>
   </article>
 </div>
@@ -2846,12 +2776,12 @@ In <code class="language-plaintext highlighter-rouge">docker images</code> wird 
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
       <div class="archive__item-teaser">
-        <img src="/assets/images/lenet.png" alt="">
+        <img src="/assets/images/Cpp_logo.png" alt="">
       </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/carla/simulator/self_driving/notes-Carla/" rel="permalink">Carla Simulator
+        <a href="/notes/notes-cpp/" rel="permalink">C++ Notes
 </a>
       
     </h2>
@@ -2861,29 +2791,19 @@ In <code class="language-plaintext highlighter-rouge">docker images</code> wird 
     
       
       <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2022-02-17T00:00:00+01:00">February 17, 2022</time>
+        <time datetime="2022-10-06T00:00:00+02:00">October 6, 2022</time>
       </span>
     
 
-    <span class="page__meta-sep"></span>
-
     
-      
-      
 
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          less than 1 minute read
-        
-      </span>
     
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Notes on the Carla Simulator
+    <p class="archive__item-excerpt" itemprop="description">For learning C++
 </p>
   </article>
 </div>
@@ -2897,12 +2817,12 @@ In <code class="language-plaintext highlighter-rouge">docker images</code> wird 
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
       <div class="archive__item-teaser">
-        <img src="/assets/images/lenet.png" alt="">
+        <img src="/assets/images/C_logo.png" alt="">
       </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/lecture_notes/machine_learning/computer_vision/lecture-notes-ML-part3/" rel="permalink">Machine Learning (Part 3)
+        <a href="/cheatsheet/cheatsheet-android/" rel="permalink">Android Cheatsheet
 </a>
       
     </h2>
@@ -2912,29 +2832,60 @@ In <code class="language-plaintext highlighter-rouge">docker images</code> wird 
     
       
       <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2022-01-27T00:00:00+01:00">January 27, 2022</time>
+        <time datetime="2022-10-04T00:00:00+02:00">October 4, 2022</time>
       </span>
     
 
-    <span class="page__meta-sep"></span>
-
     
-      
-      
 
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          56 minute read
-        
-      </span>
     
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Notes on Computer Vision theory and NLP. Based on Goodfellow, Bengio “Deep Learning”, Stanford CS231n and RWTH Aachen University Machine Learning
+    <p class="archive__item-excerpt" itemprop="description">Useful tips for using Android
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/C_logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/notes/notes-SE/" rel="permalink">Software Engineering Notes
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-10-03T00:00:00+02:00">October 3, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Software Engineering Basics
 </p>
   </article>
 </div>
@@ -2945,6 +2896,7 @@ In <code class="language-plaintext highlighter-rouge">docker images</code> wird 
   
   
 </div>
+
     </div>
 
     

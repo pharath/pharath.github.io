@@ -23,7 +23,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Pharath Palesuvaran">
 <meta property="og:title" content="Machine Learning (Part 1)">
-<meta property="og:url" content="http://localhost:4000/lecture_notes/machine_learning/lecture-notes-ML/">
+<meta property="og:url" content="http://localhost:4000/lecture_notes/machine_learning/lecture-notes-ML-part1/">
 
 
   <meta property="og:description" content="Notes on Machine Learning theory. Based on C. M. Bishop, “Pattern Recognition and Machine Learning” (2011) and Goodfellow, Bengio, Courville, “Deep Learning”.">
@@ -43,7 +43,7 @@
 
 
 
-<link rel="canonical" href="http://localhost:4000/lecture_notes/machine_learning/lecture-notes-ML/">
+<link rel="canonical" href="http://localhost:4000/lecture_notes/machine_learning/lecture-notes-ML-part1/">
 
 
 
@@ -136,10 +136,6 @@
   </ul>
 </nav>
 
-    <!--[if lt IE 9]>
-<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
-<![endif]-->
-
     
 
 <div class="masthead">
@@ -225,7 +221,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          40 minute read
+          41 minute read
         
       </span>
     
@@ -246,6 +242,8 @@
 </span>
   
 </div>
+
+
 
 
 
@@ -297,11 +295,11 @@
           
         
           
-            <li><a href="https://twitter.com/pharath_one" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+            <li><a href="https://twitter.com/pharath_one" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
           
         
           
-            <li><a href="https://github.com/pharath" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+            <li><a href="https://github.com/pharath" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
           
         
           
@@ -368,6 +366,7 @@
     </ul>
   </div>
 </div>
+
   
   </div>
 
@@ -387,7 +386,7 @@
           <aside class="sidebar__right ">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header>
-              <ul class="toc__menu"><li><a href="#general-remarks">General Remarks</a></li><li><a href="#overfitting-problem">Overfitting problem</a><ul><li><a href="#why-important">Why important</a></li><li><a href="#effects">Effects</a></li><li><a href="#paradoxes-related-to-the-overfitting-problem">Paradoxes (related to the overfitting problem)</a></li><li><a href="#possible-solutions-to-the-overfitting-problem">Possible Solutions (to the overfitting problem)</a></li><li><a href="#related-problems">Related Problems</a><ul><li><a href="#in-maximum-likelihood">In Maximum Likelihood</a><ul><li><a href="#bias">Bias</a></li><li><a href="#mog">MoG</a></li><li><a href="#logistic-regression">Logistic Regression</a></li></ul></li></ul></li></ul></li><li><a href="#probability-theory">Probability Theory</a><ul><li><a href="#why-important-1">Why important?</a></li><li><a href="#sum-rule-product-rule-bayes-theorem">Sum rule, Product rule, Bayes’ Theorem</a><ul><li><a href="#example-fruits-in-boxes">Example: Fruits in Boxes</a></li></ul></li><li><a href="#likelihood">Likelihood</a></li><li><a href="#frequentist-vs-bayesian-approach">Frequentist vs Bayesian approach</a><ul><li><a href="#frequentist">Frequentist</a></li><li><a href="#bayesian">Bayesian</a></li></ul></li><li><a href="#the-uniform-distribution">The Uniform Distribution</a></li><li><a href="#the-gaussian-distribution">The Gaussian Distribution</a><ul><li><a href="#entropy">Entropy</a></li><li><a href="#central-limit-theorem-clt">Central Limit Theorem (CLT)</a><ul><li><a href="#example-sum-of-uniformly-distributed-iid-random-variables-eg-distribution-of-the-average-of-random-variables">Example: Sum of uniformly distributed i.i.d. random variables (e.g. distribution of the average of random variables)</a></li></ul></li><li><a href="#relation-to-other-distributions">Relation to other distributions</a></li><li><a href="#well-defined">Well-defined</a></li><li><a href="#intuition-for-multivariate-gaussians">Intuition for Multivariate Gaussians</a></li><li><a href="#number-of-parameters-of-gaussian-models">Number of Parameters of Gaussian Models</a></li><li><a href="#conditionals-and-marginals-of-gaussians">Conditionals and Marginals of Gaussians</a></li><li><a href="#limitations-of-gaussians">Limitations of Gaussians</a><ul><li><a href="#problem">Problem</a></li><li><a href="#solution-latent-variable-models">Solution: Latent variable models</a></li></ul></li><li><a href="#proof-covariance-sigma-symmetric-wlog">Proof: Covariance $\Sigma$ symmetric w.l.o.g.</a></li></ul></li><li><a href="#moggmm">MoG/GMM</a><ul><li><a href="#mixture-models-in-general">Mixture Models in general</a><ul><li><a href="#applications-of-mixture-models">Applications of Mixture Models</a></li></ul></li></ul></li><li><a href="#non-parametric-models">Non-parametric Models</a><ul><li><a href="#proof-convergence-of-the-knn-and-kde-estimates">Proof: Convergence of the KNN and KDE Estimates</a></li><li><a href="#k-nn">K-NN</a></li></ul></li></ul></li><li><a href="#outlier-removal">Outlier removal</a></li><li><a href="#model-selection--comparison">Model Selection / Comparison</a></li><li><a href="#the-curse-of-dimensionality">The Curse of Dimensionality</a><ul><li><a href="#why-important-2">Why important?</a></li></ul></li><li><a href="#decision-theory">Decision Theory</a><ul><li><a href="#why-important-3">Why important?</a></li></ul></li><li><a href="#ml-for-mixture-models">ML for Mixture Models</a><ul><li><a href="#k-means-algorithm">K-means algorithm</a><ul><li><a href="#k-means-intuitively">K-means intuitively</a></li><li><a href="#initialization-of-k-means">Initialization of K-means</a></li><li><a href="#advantages">Advantages</a></li><li><a href="#issues-in-practice">Issues in practice</a></li><li><a href="#online-version">Online version</a></li><li><a href="#k-medoids-algorithm">K-medoids algorithm</a></li><li><a href="#complexity">Complexity</a></li><li><a href="#elliptical-k-means">Elliptical K-means</a></li><li><a href="#applications-of-k-means">Applications of K-means</a></li></ul></li><li><a href="#latent-variable-formulation-of-mixture-distributions">Latent variable formulation of Mixture Distributions</a></li><li><a href="#em-algorithm">EM algorithm</a><ul><li><a href="#applications">Applications</a></li><li><a href="#general-em-algorithm">General EM Algorithm</a></li><li><a href="#initialization-of-em">Initialization of EM</a></li><li><a href="#issues-in-practice-1">Issues in practice</a></li><li><a href="#credit-assignment-problem">Credit Assignment problem</a></li><li><a href="#relation-to-k-means">Relation to K-means</a></li></ul></li></ul></li><li><a href="#linear-models-for-regression">Linear models for regression</a></li><li><a href="#linear-models-for-classification">Linear models for classification</a><ul><li><a href="#linear-models-vs-mlps">Linear Models vs MLPs</a></li><li><a href="#linear-models-vs-generalized-linear-models">Linear Models vs Generalized Linear Models</a></li><li><a href="#discriminant-functions">discriminant functions</a></li><li><a href="#probabilistic-generative-models-indirect-modeling-of-posterior">probabilistic generative models (indirect modeling of posterior)</a></li><li><a href="#probabilistic-discriminative-models-direct-modeling-of-posterior">probabilistic discriminative models (direct modeling of posterior)</a></li><li><a href="#generative-vs-discriminative-models">generative vs discriminative models</a></li></ul></li><li><a href="#linear-basis-function-models">Linear Basis Function Models</a></li><li><a href="#least-squares-and-maximum-likelihood">Least Squares and Maximum Likelihood</a></li><li><a href="#relation-of-gradient-descent-to-taylor-expansion">Relation of Gradient Descent to Taylor Expansion</a></li><li><a href="#newtons-method-newton-raphson-gradient-descent">Newton’s method (Newton-Raphson gradient descent)</a><ul><li><a href="#update-formula">Update Formula</a></li><li><a href="#pros">Pros</a></li><li><a href="#cons">Cons</a></li><li><a href="#local-quadratic-approximation">Local Quadratic Approximation</a><ul><li><a href="#2nd-order-taylor-polynomial-anschaulich">2nd order Taylor polynomial anschaulich</a></li></ul></li><li><a href="#gd-vs-newton-raphson">GD vs Newton-Raphson</a><ul><li><a href="#2-definition">Definition</a></li></ul></li></ul></li><li><a href="#subgradient-methods">Subgradient Methods</a></li><li><a href="#kernel-functions">Kernel functions</a><ul><li><a href="#properties">Properties</a></li><li><a href="#kernel-method">Kernel Method</a></li><li><a href="#examples">Examples</a></li><li><a href="#idea">Idea</a></li><li><a href="#mercers-theorem">Mercer’s theorem</a></li><li><a href="#constructing-new-kernels">Constructing new kernels</a></li><li><a href="#apps">Apps</a></li></ul></li><li><a href="#linearly-separable">Linearly separable</a></li><li><a href="#svms">SVMs</a><ul><li><a href="#motivation">Motivation</a></li><li><a href="#canonical-representation-of-the-decision-hyperplane">Canonical representation of the decision hyperplane</a></li><li><a href="#soft-margin-svm">Soft-margin SVM</a></li><li><a href="#limitations-of-svms">Limitations of SVMs</a></li><li><a href="#trainingsolving-the-quadratic-programming-problem">Training/Solving the Quadratic Programming Problem</a></li><li><a href="#probabilistic-outputs">Probabilistic Outputs</a></li><li><a href="#apps-1">Apps</a></li></ul></li><li><a href="#adaboost">AdaBoost</a></li><li><a href="#references">REFERENCES</a></li></ul>
+              <ul class="toc__menu"><li><a href="#general-remarks">General Remarks</a></li><li><a href="#overfitting-problem">Overfitting problem</a><ul><li><a href="#why-important">Why important</a></li><li><a href="#effects">Effects</a></li><li><a href="#paradoxes-related-to-the-overfitting-problem">Paradoxes (related to the overfitting problem)</a></li><li><a href="#possible-solutions-to-the-overfitting-problem">Possible Solutions (to the overfitting problem)</a></li><li><a href="#related-problems">Related Problems</a><ul><li><a href="#in-maximum-likelihood">In Maximum Likelihood</a><ul><li><a href="#bias">Bias</a></li><li><a href="#mog">MoG</a></li><li><a href="#logistic-regression">Logistic Regression</a></li></ul></li></ul></li></ul></li><li><a href="#probability-theory">Probability Theory</a><ul><li><a href="#why-important-1">Why important?</a></li><li><a href="#sum-rule-product-rule-bayes-theorem">Sum rule, Product rule, Bayes’ Theorem</a><ul><li><a href="#example-fruits-in-boxes">Example: Fruits in Boxes</a></li></ul></li><li><a href="#likelihood">Likelihood</a></li><li><a href="#frequentist-vs-bayesian-approach">Frequentist vs Bayesian approach</a><ul><li><a href="#frequentist">Frequentist</a></li><li><a href="#bayesian">Bayesian</a></li></ul></li><li><a href="#the-uniform-distribution">The Uniform Distribution</a></li><li><a href="#the-gaussian-distribution">The Gaussian Distribution</a><ul><li><a href="#entropy">Entropy</a></li><li><a href="#central-limit-theorem-clt">Central Limit Theorem (CLT)</a><ul><li><a href="#example-sum-of-uniformly-distributed-iid-random-variables-eg-distribution-of-the-average-of-random-variables">Example: Sum of uniformly distributed i.i.d. random variables (e.g. distribution of the average of random variables)</a></li></ul></li><li><a href="#relation-to-other-distributions">Relation to other distributions</a></li><li><a href="#well-defined">Well-defined</a></li><li><a href="#intuition-for-multivariate-gaussians">Intuition for Multivariate Gaussians</a></li><li><a href="#number-of-parameters-of-gaussian-models">Number of Parameters of Gaussian Models</a></li><li><a href="#conditionals-and-marginals-of-gaussians">Conditionals and Marginals of Gaussians</a></li><li><a href="#limitations-of-gaussians">Limitations of Gaussians</a><ul><li><a href="#problem">Problem</a></li><li><a href="#solution-latent-variable-models">Solution: Latent variable models</a></li></ul></li><li><a href="#proof-covariance-sigma-symmetric-wlog">Proof: Covariance $\Sigma$ symmetric w.l.o.g.</a></li></ul></li><li><a href="#moggmm">MoG/GMM</a><ul><li><a href="#mixture-models-in-general">Mixture Models in general</a><ul><li><a href="#applications-of-mixture-models">Applications of Mixture Models</a></li></ul></li></ul></li><li><a href="#non-parametric-models">Non-parametric Models</a><ul><li><a href="#proof-convergence-of-the-knn-and-kde-estimates">Proof: Convergence of the KNN and KDE Estimates</a></li><li><a href="#k-nn">K-NN</a></li></ul></li></ul></li><li><a href="#outlier-removal">Outlier removal</a></li><li><a href="#model-selection--comparison">Model Selection / Comparison</a></li><li><a href="#the-curse-of-dimensionality">The Curse of Dimensionality</a><ul><li><a href="#why-important-2">Why important?</a></li></ul></li><li><a href="#decision-theory">Decision Theory</a><ul><li><a href="#why-important-3">Why important?</a></li></ul></li><li><a href="#ml-for-mixture-models">ML for Mixture Models</a><ul><li><a href="#k-means-algorithm">K-means algorithm</a><ul><li><a href="#k-means-intuitively">K-means intuitively</a></li><li><a href="#initialization-of-k-means">Initialization of K-means</a></li><li><a href="#advantages">Advantages</a></li><li><a href="#issues-in-practice">Issues in practice</a></li><li><a href="#online-version">Online version</a></li><li><a href="#k-medoids-algorithm">K-medoids algorithm</a></li><li><a href="#complexity">Complexity</a></li><li><a href="#elliptical-k-means">Elliptical K-means</a></li><li><a href="#applications-of-k-means">Applications of K-means</a></li></ul></li><li><a href="#latent-variable-formulation-of-mixture-distributions">Latent variable formulation of Mixture Distributions</a></li><li><a href="#em-algorithm">EM algorithm</a><ul><li><a href="#applications">Applications</a></li><li><a href="#general-em-algorithm">General EM Algorithm</a></li><li><a href="#initialization-of-em">Initialization of EM</a></li><li><a href="#issues-in-practice-1">Issues in practice</a></li><li><a href="#credit-assignment-problem">Credit Assignment problem</a></li><li><a href="#relation-to-k-means">Relation to K-means</a></li></ul></li></ul></li><li><a href="#linear-models-for-regression">Linear models for regression</a></li><li><a href="#linear-models-for-classification">Linear models for classification</a><ul><li><a href="#linear-models-vs-mlps">Linear Models vs MLPs</a></li><li><a href="#linear-models-vs-generalized-linear-models">Linear Models vs Generalized Linear Models</a></li><li><a href="#discriminant-functions">discriminant functions</a></li><li><a href="#probabilistic-generative-models-indirect-modeling-of-posterior">probabilistic generative models (indirect modeling of posterior)</a></li><li><a href="#probabilistic-discriminative-models-direct-modeling-of-posterior">probabilistic discriminative models (direct modeling of posterior)</a></li><li><a href="#generative-vs-discriminative-models">generative vs discriminative models</a></li></ul></li><li><a href="#linear-basis-function-models">Linear Basis Function Models</a></li><li><a href="#least-squares-and-maximum-likelihood">Least Squares and Maximum Likelihood</a></li><li><a href="#relation-of-gradient-descent-to-taylor-expansion">Relation of Gradient Descent to Taylor Expansion</a></li><li><a href="#delta-rule">Delta rule</a><ul><li><a href="#canonical-link-functions-of-the-exponential-family">Canonical link functions of the exponential family</a></li></ul></li><li><a href="#newtons-method-newton-raphson-gradient-descent">Newton’s method (Newton-Raphson gradient descent)</a><ul><li><a href="#update-formula">Update Formula</a></li><li><a href="#pros">Pros</a></li><li><a href="#cons">Cons</a></li><li><a href="#local-quadratic-approximation">Local Quadratic Approximation</a><ul><li><a href="#2nd-order-taylor-polynomial-anschaulich">2nd order Taylor polynomial anschaulich</a></li></ul></li><li><a href="#gd-vs-newton-raphson">GD vs Newton-Raphson</a><ul><li><a href="#2-definition">Definition</a></li></ul></li></ul></li><li><a href="#subgradient-methods">Subgradient Methods</a></li><li><a href="#kernel-functions">Kernel functions</a><ul><li><a href="#properties">Properties</a></li><li><a href="#kernel-method">Kernel Method</a></li><li><a href="#examples">Examples</a></li><li><a href="#idea">Idea</a></li><li><a href="#mercers-theorem">Mercer’s theorem</a></li><li><a href="#constructing-new-kernels">Constructing new kernels</a></li><li><a href="#apps">Apps</a></li></ul></li><li><a href="#linearly-separable">Linearly separable</a></li><li><a href="#svms">SVMs</a><ul><li><a href="#motivation">Motivation</a></li><li><a href="#canonical-representation-of-the-decision-hyperplane">Canonical representation of the decision hyperplane</a></li><li><a href="#soft-margin-svm">Soft-margin SVM</a></li><li><a href="#limitations-of-svms">Limitations of SVMs</a></li><li><a href="#trainingsolving-the-quadratic-programming-problem">Training/Solving the Quadratic Programming Problem</a></li><li><a href="#probabilistic-outputs">Probabilistic Outputs</a></li><li><a href="#apps-1">Apps</a></li></ul></li><li><a href="#adaboost">AdaBoost</a></li><li><a href="#references">REFERENCES</a></li></ul>
 
             </nav>
           </aside>
@@ -457,10 +456,14 @@
 <ul>
   <li><strong>Note</strong>: “<strong>regularization</strong>”, broadly speaking, means “constraining the universe of possible model functions”</li>
   <li>reduce number of model parameters (a form of <strong>regularization</strong>)</li>
-  <li>increase number of data points $N$</li>
+  <li>increase number of data points $N$
+    <ul>
+      <li>i.e. <strong>reducing</strong> number of data points $N$ <strong>increases</strong> overfitting!</li>
+    </ul>
+  </li>
   <li>increase regularization parameter $\lambda$ (in statistics: shrinkage methods)
     <ul>
-      <li><strong>Note: Do not include the bias term $w_0$ in the penalty term! Otherwise the procedure would depend on the origin chosen for the target.</strong>
+      <li><strong>Note: Do not include the bias term</strong> $w_0$ <strong>in the penalty term! Otherwise the procedure would depend on the origin chosen for the target.</strong>
         <blockquote>
           <p>Note that often the coefficient $w_0$ is omitted from the regularizer because its inclusion causes the results to depend on the choice of origin for the target variable (Hastie et al., 2001), or it may be included but with its own regularization coefficient - <a href="#Bishop_2006">Bishop_2006</a></p>
         </blockquote>
@@ -594,8 +597,18 @@
 <h2 id="why-important-1">Why important?</h2>
 
 <ul>
-  <li>
-    <p><mark>**[Bayesian Inference](https://en.wikipedia.org/wiki/Bayesian_inference):**</mark> We have to understand the concepts of <strong>posterior</strong> and <strong>prior</strong> probabilities, as well as <strong>likelihood</strong> because e.g. both generative and discriminative linear models model the posterior probabilities $P(C_k\vert\mathbf{x})$ of the classes $C_k$ given the input $\mathbf{x}$.</p>
+  <li><mark>**[Bayesian Inference](https://en.wikipedia.org/wiki/Bayesian_inference):**</mark> We have to understand the concepts of <strong>posterior</strong> and <strong>prior</strong> probabilities, as well as <strong>likelihood</strong> because e.g. both generative and discriminative linear models model the posterior probabilities $P(C_k\vert\mathbf{x})$ of the classes $C_k$ given the input $\mathbf{x}$.
+    <ul>
+      <li>when we <strong>minimize the error/loss function</strong> of a model, we are actually <strong>maximizing the likelihood</strong>
+        <ul>
+          <li>thus, e.g. <strong>Logistic Regression is a maximum likelihood method</strong>
+            <ul>
+              <li><strong>Note:</strong> SVMs are <strong>non-probabilistic</strong> classifiers (have to use <strong>Platt scaling/calibration</strong> to make it probabilistic)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
 
     <blockquote>
       <p>“Bayesian inference is a method of statistical inference in which Bayes’ theorem is used to update the probability for a hypothesis as more evidence or information becomes available.” - <a href="https://en.wikipedia.org/wiki/Bayesian_inference">Wikipedia</a></p>
@@ -1662,7 +1675,11 @@ Tipping and Bishop (1997, 1999b) and by <a href="http://www.stat.columbia.edu/~l
     <ul>
       <li>least squares<a name="least_squares_discriminant"></a>
         <ul>
-          <li>wrong tool for binary (i.e. 1-of-K coded) targets because binary targets do not have a Gaussian distribution and least squares corresponds to ML under the assumption of a Gaussian target distribution (see <a href="#Bishop_2006">Bishop_2006</a>, 1.2.5)</li>
+          <li>(see <a href="#Bishop_2006">Bishop_2006</a>, 1.2.5)
+            <ul>
+              <li>wrong tool for binary (i.e. 1-of-K coded) targets because binary targets do not have a Gaussian distribution and least squares (1.67) corresponds to ML under the assumption of a “Gaussian conditional distribution for $t$ given $x$ given by (1.60)” [quote from Fig. 1.16 Bishop_2006] $p(t\vert x)$</li>
+            </ul>
+          </li>
         </ul>
       </li>
       <li>Fisher’s linear discriminant</li>
@@ -1674,6 +1691,8 @@ Tipping and Bishop (1997, 1999b) and by <a href="http://www.stat.columbia.edu/~l
 
 <h2 id="probabilistic-generative-models-indirect-modeling-of-posterior">probabilistic generative models (indirect modeling of posterior)</h2>
 
+<p><a href="https://shuaili8.github.io/Teaching/VE445/L12_gmm.pdf">source</a>
+<img src="/home/assets/images/ML_part1/GenerativeModels.png" alt="GenerativeModels.png" /></p>
 <ul>
   <li>Examples:
     <ul>
@@ -1734,6 +1753,8 @@ Tipping and Bishop (1997, 1999b) and by <a href="http://www.stat.columbia.edu/~l
 
 <h2 id="probabilistic-discriminative-models-direct-modeling-of-posterior">probabilistic discriminative models (direct modeling of posterior)</h2>
 
+<p><a href="https://shuaili8.github.io/Teaching/VE445/L12_gmm.pdf">source</a>
+<img src="/home/assets/images/ML_part1/DiscriminativeModels.png" alt="DiscriminativeModels.png" /></p>
 <ul>
   <li>maximize likelihood function defined through $P(C_k\vert\mathbf{x})$
     <ul>
@@ -1827,6 +1848,32 @@ Tipping and Bishop (1997, 1999b) and by <a href="http://www.stat.columbia.edu/~l
 <ul>
   <li>see <a href="https://www.cs.princeton.edu/courses/archive/fall18/cos597G/lecnotes/lecture3.pdf">chapter 3.1-3.2</a></li>
 </ul>
+
+<h1 id="delta-rule">Delta rule</h1>
+
+<ul>
+  <li><strong>Rule</strong>: $\frac{\partial E_n}{\partial \mathbf{w}}=$ ‘error’ (aka Delta) $y_n-t_n$ times the feature vector $\vec{\phi}_n$
+    <ul>
+      <li>$E_n$: contribution to the error function from a data point $\mathbf{x}_n$</li>
+    </ul>
+  </li>
+  <li>can be used e.g. for
+    <ul>
+      <li><strong>linear regression model</strong> with a Gaussian noise distribution and the sum-of-squares error function</li>
+      <li><strong>logistic regression model</strong> with the sigmoid activation function and the cross-entropy error function</li>
+      <li><strong>softmax regression model</strong> with softmax activation function and the multiclass cross-entropy error function</li>
+    </ul>
+  </li>
+  <li>Bishop_2006:
+    <ul>
+      <li>this [Delta rule] is a general result of assuming a <mark>conditional distribution for the target variable</mark> from the <strong>exponential family</strong>, along with a corresponding choice for the <mark>activation function</mark> known as the <strong>canonical link function</strong>.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="canonical-link-functions-of-the-exponential-family">Canonical link functions of the exponential family</h2>
+
+<p><img src="/home/assets/images/ML_part1/exponential_family_canon_link.png" alt="exponential_family_canon_link.png" /></p>
 
 <h1 id="newtons-method-newton-raphson-gradient-descent">Newton’s method (Newton-Raphson gradient descent)</h1>
 
@@ -2348,11 +2395,11 @@ Tipping and Bishop (1997, 1999b) and by <a href="http://www.stat.columbia.edu/~l
       <section class="page__share">
   
 
-  <a href="https://twitter.com/intent/tweet?text=Machine+Learning+%28Part+1%29%20http%3A%2F%2Flocalhost%3A4000%2Flecture_notes%2Fmachine_learning%2Flecture-notes-ML%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Machine+Learning+%28Part+1%29%20http%3A%2F%2Flocalhost%3A4000%2Flecture_notes%2Fmachine_learning%2Flecture-notes-ML-part1%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Flecture_notes%2Fmachine_learning%2Flecture-notes-ML%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Flecture_notes%2Fmachine_learning%2Flecture-notes-ML-part1%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Flecture_notes%2Fmachine_learning%2Flecture-notes-ML%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Flecture_notes%2Fmachine_learning%2Flecture-notes-ML-part1%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
@@ -2387,12 +2434,12 @@ Tipping and Bishop (1997, 1999b) and by <a href="http://www.stat.columbia.edu/~l
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
       <div class="archive__item-teaser">
-        <img src="/assets/images/lenet.png" alt="">
+        <img src="/assets/images/mario-question-block.jpeg" alt="">
       </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/lecture_notes/machine_learning/lecture-notes-ML-part2-old/" rel="permalink">Machine Learning (Part 2) [OLD VERSION]
+        <a href="/notes/notes-html/" rel="permalink">HTML Notes
 </a>
       
     </h2>
@@ -2402,79 +2449,19 @@ Tipping and Bishop (1997, 1999b) and by <a href="http://www.stat.columbia.edu/~l
     
       
       <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2022-03-09T00:00:00+01:00">March 9, 2022</time>
+        <time datetime="2022-10-10T00:00:00+02:00">October 10, 2022</time>
       </span>
     
 
-    <span class="page__meta-sep"></span>
-
     
-      
-      
 
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          14 minute read
-        
-      </span>
     
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">[OLD VERSION!] Notes on Machine Learning theory. Based on C. M. Bishop, “Pattern Recognition and Machine Learning” (2011) and Goodfellow, Bengio, Courville, ...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src="/assets/images/lenet.png" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/notes/machine_learning/notes-Neuroscience/" rel="permalink">New Inspirations for Machine Learning Methods
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-02-26T00:00:00+01:00">February 26, 2022</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          less than 1 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Notes on some inspirations for Machine Learning methods. Based on opinions from leading scientists and also some of my own opinions.
+    <p class="archive__item-excerpt" itemprop="description">For learning html.
 </p>
   </article>
 </div>
@@ -2488,12 +2475,12 @@ Tipping and Bishop (1997, 1999b) and by <a href="http://www.stat.columbia.edu/~l
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
       <div class="archive__item-teaser">
-        <img src="/assets/images/lenet.png" alt="">
+        <img src="/assets/images/Cpp_logo.png" alt="">
       </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/carla/simulator/self_driving/notes-Carla/" rel="permalink">Carla Simulator
+        <a href="/notes/notes-cpp/" rel="permalink">C++ Notes
 </a>
       
     </h2>
@@ -2503,29 +2490,19 @@ Tipping and Bishop (1997, 1999b) and by <a href="http://www.stat.columbia.edu/~l
     
       
       <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2022-02-17T00:00:00+01:00">February 17, 2022</time>
+        <time datetime="2022-10-06T00:00:00+02:00">October 6, 2022</time>
       </span>
     
 
-    <span class="page__meta-sep"></span>
-
     
-      
-      
 
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          less than 1 minute read
-        
-      </span>
     
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Notes on the Carla Simulator
+    <p class="archive__item-excerpt" itemprop="description">For learning C++
 </p>
   </article>
 </div>
@@ -2539,12 +2516,12 @@ Tipping and Bishop (1997, 1999b) and by <a href="http://www.stat.columbia.edu/~l
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
       <div class="archive__item-teaser">
-        <img src="/assets/images/lenet.png" alt="">
+        <img src="/assets/images/C_logo.png" alt="">
       </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/lecture_notes/machine_learning/computer_vision/lecture-notes-ML-part3/" rel="permalink">Machine Learning (Part 3)
+        <a href="/cheatsheet/cheatsheet-android/" rel="permalink">Android Cheatsheet
 </a>
       
     </h2>
@@ -2554,29 +2531,60 @@ Tipping and Bishop (1997, 1999b) and by <a href="http://www.stat.columbia.edu/~l
     
       
       <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2022-01-27T00:00:00+01:00">January 27, 2022</time>
+        <time datetime="2022-10-04T00:00:00+02:00">October 4, 2022</time>
       </span>
     
 
-    <span class="page__meta-sep"></span>
-
     
-      
-      
 
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          56 minute read
-        
-      </span>
     
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Notes on Computer Vision theory and NLP. Based on Goodfellow, Bengio “Deep Learning”, Stanford CS231n and RWTH Aachen University Machine Learning
+    <p class="archive__item-excerpt" itemprop="description">Useful tips for using Android
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/C_logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/notes/notes-SE/" rel="permalink">Software Engineering Notes
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-10-03T00:00:00+02:00">October 3, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Software Engineering Basics
 </p>
   </article>
 </div>
@@ -2587,6 +2595,7 @@ Tipping and Bishop (1997, 1999b) and by <a href="http://www.stat.columbia.edu/~l
   
   
 </div>
+
     </div>
 
     

@@ -171,7 +171,7 @@ qtcreator | for GUI development
 
 <hr>
 
-python2.7 | einfach per `apt python2.7` installieren; starten per `python2.7` (nur `python2` geht nicht!)
+python2.7 | einfach per `apt install python2.7` installieren (Achtung: some apps also need `python2.7-dev`!); starten per `python2.7` (nur `python2` geht nicht!)
 
 <hr>
 
@@ -180,14 +180,6 @@ ocrmypdf | `ocrmypdf in.pdf out.pdf`
 <hr>
 
 ipad_charge | [github link](https://github.com/mkorenkov/ipad_charge/wiki) automatically start charging ipad when connected to ubuntu
-
-<hr>
-
-sudo apt-get install ruby-full |
-sudo apt install rubygems-integration | nicht nötig, wenn ruby-full installiert wurde
-sudo gem install bundler |
-sudo bundle install | im github-pages repo root folder
-bundle exec jekyll serve | warten bis "Server running... press ctrl-c to stop." message und dann ctrl gedrückt halten und auf server address clicken (oder in Browser "http://localhost:4000" aufrufen)
 
 <hr>
 

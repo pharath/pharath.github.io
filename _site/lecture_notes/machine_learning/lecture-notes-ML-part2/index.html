@@ -136,10 +136,6 @@
   </ul>
 </nav>
 
-    <!--[if lt IE 9]>
-<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
-<![endif]-->
-
     
 
 <div class="masthead">
@@ -225,7 +221,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          58 minute read
+          59 minute read
         
       </span>
     
@@ -246,6 +242,8 @@
 </span>
   
 </div>
+
+
 
 
 
@@ -297,11 +295,11 @@
           
         
           
-            <li><a href="https://twitter.com/pharath_one" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+            <li><a href="https://twitter.com/pharath_one" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
           
         
           
-            <li><a href="https://github.com/pharath" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+            <li><a href="https://github.com/pharath" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
           
         
           
@@ -368,6 +366,7 @@
     </ul>
   </div>
 </div>
+
   
   </div>
 
@@ -384,10 +383,10 @@
 
       <section class="page__content e-content" itemprop="text">
         
-          <aside class="sidebar__right sticky">
+          <aside class="sidebar__right ">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header>
-              <ul class="toc__menu"><li><a href="#neural-networks">Neural Networks</a><ul><li><a href="#perceptrons-rosenblatt-1962">Perceptrons (Rosenblatt 1962)</a></li><li><a href="#terminology">Terminology</a></li><li><a href="#gradient-descent">Gradient Descent</a></li><li><a href="#computational-differentiation-methods">Computational Differentiation Methods</a></li><li><a href="#automatic-differentiation">Automatic Differentiation</a><ul><li><a href="#forward-mode-vs-reverse-mode-differentiation">Forward-mode vs Reverse-mode differentiation</a></li><li><a href="#pytorch-autograd">PyTorch autograd</a></li></ul></li><li><a href="#forward-propagation">Forward Propagation</a><ul><li><a href="#inputsoutputs">Inputs/Outputs</a></li></ul></li><li><a href="#backprop">Backprop</a><ul><li><a href="#inputsoutputs-1">Inputs/Outputs</a></li><li><a href="#terminology-1">Terminology</a></li><li><a href="#modular-implementation">Modular Implementation</a></li><li><a href="#complexity">Complexity</a></li><li><a href="#computational-graphs">Computational Graphs</a></li><li><a href="#dynamic-programming">Dynamic Programming</a><ul><li><a href="#example-fibonacci-sequence">Example: Fibonacci sequence</a></li><li><a href="#relation-to-backprop">Relation to Backprop</a></li></ul></li></ul></li><li><a href="#softmax">Softmax</a><ul><li><a href="#implementing-softmax-correctly">Implementing Softmax Correctly</a></li></ul></li><li><a href="#mlp-in-numpy-from-scratch">MLP in numpy from scratch</a></li><li><a href="#stochastic-learning-vs-batch-learning">Stochastic Learning vs Batch Learning</a><ul><li><a href="#sgd-one-at-a-time">SGD (one at a time)</a><ul><li><a href="#pros">Pros</a></li><li><a href="#cons">Cons</a></li><li><a href="#convergence">Convergence</a></li></ul></li><li><a href="#batch-gd-entire-training-set">Batch GD (entire training set)</a></li><li><a href="#mini-batch-gd">Mini-batch GD</a></li></ul></li><li><a href="#hyperparameter-tuning-and-optimization">Hyperparameter Tuning and Optimization</a><ul><li><a href="#manual-hyperparameter-search">Manual Hyperparameter Search</a></li><li><a href="#overfitting">Overfitting</a></li><li><a href="#capacity">Capacity</a><ul><li><a href="#forms-of-capacity">Forms of Capacity</a></li><li><a href="#changing-a-models-capacity">Changing a Model’s Capacity</a></li><li><a href="#quantifying-a-models-capacity-statistical-learning-theory">Quantifying a Model’s Capacity (Statistical Learning Theory)</a></li><li><a href="#relationship-between-capacity-and-error">Relationship between Capacity and Error</a></li></ul></li><li><a href="#learning-curve-diagnostics">Learning Curve Diagnostics</a></li><li><a href="#learning-rate">Learning Rate</a></li><li><a href="#adaptive-learning-rate-methods">Adaptive Learning Rate Methods</a><ul><li><a href="#methods-if-directions-of-sensitivity-are-not-axis-aligned-momentum-based-methods">Methods, if Directions of Sensitivity are NOT axis-aligned (momentum based methods)</a><ul><li><a href="#momentum-method">Momentum Method</a></li><li><a href="#nesterov-accelerated-gradient">Nesterov-accelerated gradient</a></li></ul></li><li><a href="#methods-if-directions-of-sensitivity-are-axis-aligned">Methods, if Directions of Sensitivity ARE axis-aligned</a><ul><li><a href="#separate-adaptive-learning-rates-based-methods">Separate, Adaptive Learning Rates based methods</a><ul><li><a href="#robert-a-jacobs-method-delta-bar-delta-algorithm">Robert A. Jacobs’ method (delta-bar-delta algorithm)</a></li><li><a href="#rprop">Rprop</a></li></ul></li><li><a href="#gradient-scaling-based-methods">Gradient Scaling based methods</a><ul><li><a href="#adagrad">AdaGrad</a></li><li><a href="#rmsprop">RMSprop</a></li></ul></li></ul></li></ul></li><li><a href="#learning-rate-schedules">Learning rate schedules</a></li><li><a href="#saddle-points-and-local-minima">Saddle Points and Local Minima</a><ul><li><a href="#hessian-2nd-derivative-test">Hessian (2nd derivative test)</a></li><li><a href="#the-condition-number-of-the-hessian">The Condition Number of the Hessian</a></li><li><a href="#the-proliferation-of-saddle-points-in-higher-dimensions">The proliferation of saddle points in higher dimensions</a></li></ul></li><li><a href="#shufflingorderingemphasizing-schemes">Shuffling/Ordering/Emphasizing Schemes</a><ul><li><a href="#shuffling">Shuffling</a></li><li><a href="#ordering">Ordering</a></li><li><a href="#emphasizing-schemes">Emphasizing Schemes</a></li></ul></li><li><a href="#transforming-the-inputs-shift-scale-decorrelate">Transforming the inputs (shift, scale, decorrelate)</a></li><li><a href="#sigmoids">Sigmoids</a></li><li><a href="#biases-initialization">Biases Initialization</a></li><li><a href="#weight-initialization">Weight initialization</a><ul><li><a href="#why-does-it-matter">Why does it matter?</a></li><li><a href="#open-questions">Open Questions</a></li><li><a href="#symmetry-breaking-problem">Symmetry breaking Problem</a></li><li><a href="#random-initialization">Random Initialization</a></li><li><a href="#biases-and-other-parameters">Biases and other Parameters</a></li><li><a href="#gaussian-or-uniform">Gaussian or Uniform</a></li><li><a href="#scale">Scale</a></li><li><a href="#optimization-vs-regularization-perspective">Optimization vs Regularization Perspective</a></li><li><a href="#implicit-prior-of-sgd">Implicit Prior of SGD</a></li><li><a href="#vanishing-gradients-problem">Vanishing Gradients Problem</a><ul><li><a href="#difference-sigmoidals-vs-relu">Difference: Sigmoidals vs ReLU</a></li><li><a href="#deepdish-explanation">Deepdish explanation</a></li><li><a href="#code-experiment">Code experiment</a></li><li><a href="#leibe">Leibe</a></li><li><a href="#solutions">Solutions</a></li><li><a href="#rnns">RNNs</a></li></ul></li><li><a href="#xavier-glorot-initialization">Xavier Glorot Initialization</a></li><li><a href="#kaiming-he-initialization">Kaiming He Initialization</a></li><li><a href="#dependence-on-nn-depth">Dependence on NN depth</a></li></ul></li><li><a href="#dying-relu-problem">Dying ReLU problem</a></li><li><a href="#batch-normalization-ioffe-szegedy-2015">Batch Normalization (Ioffe, Szegedy 2015)</a><ul><li><a href="#steps">Steps</a></li><li><a href="#additional-weights-gamma-and-beta">Additional weights $\gamma$ and $\beta$</a></li><li><a href="#effect">Effect</a></li><li><a href="#implementation">Implementation</a></li></ul></li><li><a href="#dropout">Dropout</a></li></ul></li><li><a href="#classical-2nd-order-optimization-methods">Classical 2nd order optimization methods</a></li><li><a href="#mlp-example-implementations">MLP Example Implementations</a></li></ul></li><li><a href="#references">REFERENCES</a></li></ul>
+              <ul class="toc__menu"><li><a href="#neural-networks">Neural Networks</a><ul><li><a href="#perceptrons-rosenblatt-1962">Perceptrons (Rosenblatt 1962)</a></li><li><a href="#terminology">Terminology</a></li><li><a href="#gradient-descent">Gradient Descent</a></li><li><a href="#computational-differentiation-methods">Computational Differentiation Methods</a></li><li><a href="#automatic-differentiation">Automatic Differentiation</a><ul><li><a href="#forward-mode-vs-reverse-mode-differentiation">Forward-mode vs Reverse-mode differentiation</a></li><li><a href="#pytorch-autograd">PyTorch autograd</a></li></ul></li><li><a href="#forward-propagation">Forward Propagation</a><ul><li><a href="#inputsoutputs">Inputs/Outputs</a></li></ul></li><li><a href="#backprop">Backprop</a><ul><li><a href="#inputsoutputs-1">Inputs/Outputs</a></li><li><a href="#terminology-1">Terminology</a></li><li><a href="#modular-implementation">Modular Implementation</a></li><li><a href="#complexity">Complexity</a></li><li><a href="#computational-graphs">Computational Graphs</a></li><li><a href="#dynamic-programming">Dynamic Programming</a><ul><li><a href="#example-fibonacci-sequence">Example: Fibonacci sequence</a></li><li><a href="#relation-to-backprop">Relation to Backprop</a></li></ul></li></ul></li><li><a href="#softmax">Softmax</a><ul><li><a href="#implementing-softmax-correctly">Implementing Softmax Correctly</a></li></ul></li><li><a href="#mlp-in-numpy-from-scratch">MLP in numpy from scratch</a></li><li><a href="#stochastic-learning-vs-batch-learning">Stochastic Learning vs Batch Learning</a><ul><li><a href="#sgd-one-at-a-time">SGD (one at a time)</a><ul><li><a href="#pros">Pros</a></li><li><a href="#cons">Cons</a></li><li><a href="#convergence">Convergence</a></li></ul></li><li><a href="#batch-gd-entire-training-set">Batch GD (entire training set)</a></li><li><a href="#mini-batch-gd">Mini-batch GD</a></li></ul></li><li><a href="#hyperparameter-tuning-and-optimization">Hyperparameter Tuning and Optimization</a><ul><li><a href="#manual-hyperparameter-search">Manual Hyperparameter Search</a></li><li><a href="#overfitting">Overfitting</a></li><li><a href="#capacity">Capacity</a><ul><li><a href="#forms-of-capacity">Forms of Capacity</a></li><li><a href="#changing-a-models-capacity">Changing a Model’s Capacity</a></li><li><a href="#quantifying-a-models-capacity-statistical-learning-theory">Quantifying a Model’s Capacity (Statistical Learning Theory)</a></li><li><a href="#relationship-between-capacity-and-error">Relationship between Capacity and Error</a></li></ul></li><li><a href="#learning-curve-diagnostics">Learning Curve Diagnostics</a></li><li><a href="#learning-rate">Learning Rate</a></li><li><a href="#adaptive-learning-rate-methods">Adaptive Learning Rate Methods</a><ul><li><a href="#methods-if-directions-of-sensitivity-are-not-axis-aligned-momentum-based-methods">Methods, if Directions of Sensitivity are NOT axis-aligned (momentum based methods)</a><ul><li><a href="#momentum-method">Momentum Method</a></li><li><a href="#nesterov-accelerated-gradient">Nesterov-accelerated gradient</a></li></ul></li><li><a href="#methods-if-directions-of-sensitivity-are-axis-aligned">Methods, if Directions of Sensitivity ARE axis-aligned</a><ul><li><a href="#separate-adaptive-learning-rates-based-methods">Separate, Adaptive Learning Rates based methods</a><ul><li><a href="#robert-a-jacobs-method-delta-bar-delta-algorithm">Robert A. Jacobs’ method (delta-bar-delta algorithm)</a></li><li><a href="#rprop">Rprop</a></li></ul></li><li><a href="#gradient-scaling-based-methods">Gradient Scaling based methods</a><ul><li><a href="#adagrad">AdaGrad</a></li><li><a href="#rmsprop">RMSprop</a></li><li><a href="#rmsprop-with-nesterov-momentum">RMSProp with Nesterov Momentum</a></li><li><a href="#adam">Adam</a></li></ul></li></ul></li></ul></li><li><a href="#learning-rate-schedules">Learning rate schedules</a></li><li><a href="#saddle-points-and-local-minima">Saddle Points and Local Minima</a><ul><li><a href="#hessian-2nd-derivative-test">Hessian (2nd derivative test)</a></li><li><a href="#the-condition-number-of-the-hessian">The Condition Number of the Hessian</a></li><li><a href="#the-proliferation-of-saddle-points-in-higher-dimensions">The proliferation of saddle points in higher dimensions</a></li></ul></li><li><a href="#shufflingorderingemphasizing-schemes">Shuffling/Ordering/Emphasizing Schemes</a><ul><li><a href="#shuffling">Shuffling</a></li><li><a href="#ordering">Ordering</a></li><li><a href="#emphasizing-schemes">Emphasizing Schemes</a></li></ul></li><li><a href="#transforming-the-inputs-shift-scale-decorrelate">Transforming the inputs (shift, scale, decorrelate)</a></li><li><a href="#sigmoids">Sigmoids</a></li><li><a href="#biases-initialization">Biases Initialization</a></li><li><a href="#weight-initialization">Weight initialization</a><ul><li><a href="#why-does-it-matter">Why does it matter?</a></li><li><a href="#open-questions">Open Questions</a></li><li><a href="#symmetry-breaking-problem">Symmetry breaking Problem</a></li><li><a href="#random-initialization">Random Initialization</a></li><li><a href="#biases-and-other-parameters">Biases and other Parameters</a></li><li><a href="#gaussian-or-uniform">Gaussian or Uniform</a></li><li><a href="#scale">Scale</a></li><li><a href="#optimization-vs-regularization-perspective">Optimization vs Regularization Perspective</a></li><li><a href="#implicit-prior-of-sgd">Implicit Prior of SGD</a></li><li><a href="#vanishing-gradients-problem">Vanishing Gradients Problem</a><ul><li><a href="#difference-sigmoidals-vs-relu">Difference: Sigmoidals vs ReLU</a></li><li><a href="#deepdish-explanation">Deepdish explanation</a></li><li><a href="#code-experiment">Code experiment</a></li><li><a href="#leibe">Leibe</a></li><li><a href="#solutions">Solutions</a></li><li><a href="#rnns">RNNs</a></li></ul></li><li><a href="#xavier-glorot-initialization">Xavier Glorot Initialization</a></li><li><a href="#kaiming-he-initialization">Kaiming He Initialization</a></li><li><a href="#dependence-on-nn-depth">Dependence on NN depth</a></li></ul></li><li><a href="#dying-relu-problem">Dying ReLU problem</a></li><li><a href="#batch-normalization-ioffe-szegedy-2015">Batch Normalization (Ioffe, Szegedy 2015)</a><ul><li><a href="#bn-steps">BN Steps</a></li><li><a href="#additional-weights-gamma-and-beta">Additional weights $\gamma$ and $\beta$</a></li><li><a href="#effect">Effect</a></li><li><a href="#implementation">Implementation</a></li></ul></li><li><a href="#dropout">Dropout</a></li></ul></li><li><a href="#classical-2nd-order-optimization-methods">Classical 2nd order optimization methods</a></li><li><a href="#mlp-example-implementations">MLP Example Implementations</a></li></ul></li><li><a href="#references">REFERENCES</a></li></ul>
 
             </nav>
           </aside>
@@ -399,7 +398,7 @@
 <ul>
   <li>perceptrons (SLPs) are <strong>generalized linear models</strong> (“generalized” because of the activation function)
     <ul>
-      <li><strong>BUT</strong>: Deep Neural Networks (MLPs) are <strong>nonlinear parametric models</strong>.</li>
+      <li><strong>BUT</strong>: Deep Neural Networks (MLPs) are <strong>nonlinear models</strong>.</li>
     </ul>
   </li>
   <li>more specifically: perceptrons are <strong>generalized linear discriminants</strong> (because they map the input <strong>x</strong> directly to a class label t in {-1,+1} [see above: “Linear models for classification”: approach 1.])</li>
@@ -1205,6 +1204,7 @@ source: <a href="#Goodfellow_2016">Goodfellow_2016</a></li>
 <h3 id="learning-curve-diagnostics">Learning Curve Diagnostics</h3>
 
 <ul>
+  <li>training error converges to true error for $N\to\infty$, <strong>if data points are i.i.d.</strong></li>
   <li>see <a href="https://rstudio-conf-2020.github.io/dl-keras-tf/notebooks/learning-curve-diagnostics.nb.html">Learning Curve Diagnostics and Solutions</a>
     <ul>
       <li>original version, but slightly less content: <a href="https://machinelearningmastery.com/learning-curves-for-diagnosing-machine-learning-model-performance/">Jason Brownlee “How to use Learning Curves to Diagnose Machine Learning Model Performance”</a></li>
@@ -1400,6 +1400,7 @@ source: <a href="#Goodfellow_2016">Goodfellow_2016</a></li>
 <h6 id="rmsprop">RMSprop</h6>
 
 <ul>
+  <li>Hinton 2012</li>
   <li><strong>global</strong> learning rate</li>
   <li>eigentlich eine Verbesserung von AdaGrad:
     <ul>
@@ -1413,6 +1414,12 @@ source: <a href="#Goodfellow_2016">Goodfellow_2016</a></li>
           </li>
         </ul>
       </li>
+    </ul>
+  </li>
+  <li>Goodfellow_2016
+    <ul>
+      <li>RMSProp uses an <strong>exponentially decaying average</strong> to <strong>discard history from the extreme past</strong> so that it can converge rapidly after finding a convex bowl, as if it were an instance of the AdaGrad algorithm initialized within that bowl.</li>
+      <li>Compared to AdaGrad, the use of the moving average <strong>introduces a new hyperparameter</strong>, $\rho$, that controls the <strong>length scale of the moving average</strong>.</li>
     </ul>
   </li>
   <li>Andrew Ng, Oscillation sketch:
@@ -1471,6 +1478,20 @@ source: <a href="#Goodfellow_2016">Goodfellow_2016</a></li>
 
 <p><img src="/home/assets/images/goodfellow_ml/RMSprop.png" alt="RMSprop" />
 <a href="#Goodfellow_2016">source: Goodfellow_2016</a></p>
+
+<h6 id="rmsprop-with-nesterov-momentum">RMSProp with Nesterov Momentum</h6>
+
+<h6 id="adam">Adam</h6>
+
+<ul>
+  <li>Kingma, Ba 2014</li>
+  <li>Goodfellow_2016
+    <ul>
+      <li>The name “Adam” derives from the phrase “adaptive moments.”</li>
+      <li>In the context of the earlier algorithms, it is perhaps best seen as a variant on the combination of <strong>RMSProp and momentum</strong> [s.o] with a few important distinctions.</li>
+    </ul>
+  </li>
+</ul>
 
 <h3 id="learning-rate-schedules">Learning rate schedules</h3>
 
@@ -2345,13 +2366,13 @@ source: <a href="#Goodfellow_2016">Goodfellow_2016</a></li>
   <li>source of the following: <strong>all</strong> Andrew Ng videos about BN</li>
 </ul>
 
-<h4 id="steps">Steps</h4>
+<h4 id="bn-steps">BN Steps</h4>
 
 <ul>
-  <li>Done
+  <li>Done …
     <ul>
-      <li><strong>in each layer</strong></li>
-      <li>after $\mathbf{W}^{[l]}a^{[l]}+b^{[l]}$, but before the nonlinearity</li>
+      <li>… <strong>in each layer</strong></li>
+      <li>… after $\mathbf{W}^{[l]}a^{[l]}+b^{[l]}$, but before the nonlinearity</li>
     </ul>
   </li>
   <li>Steps:
@@ -2667,12 +2688,12 @@ source: <a href="#Goodfellow_2016">Goodfellow_2016</a></li>
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
       <div class="archive__item-teaser">
-        <img src="/assets/images/lenet.png" alt="">
+        <img src="/assets/images/mario-question-block.jpeg" alt="">
       </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/lecture_notes/machine_learning/lecture-notes-ML-part2-old/" rel="permalink">Machine Learning (Part 2) [OLD VERSION]
+        <a href="/notes/notes-html/" rel="permalink">HTML Notes
 </a>
       
     </h2>
@@ -2682,79 +2703,19 @@ source: <a href="#Goodfellow_2016">Goodfellow_2016</a></li>
     
       
       <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2022-03-09T00:00:00+01:00">March 9, 2022</time>
+        <time datetime="2022-10-10T00:00:00+02:00">October 10, 2022</time>
       </span>
     
 
-    <span class="page__meta-sep"></span>
-
     
-      
-      
 
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          14 minute read
-        
-      </span>
     
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">[OLD VERSION!] Notes on Machine Learning theory. Based on C. M. Bishop, “Pattern Recognition and Machine Learning” (2011) and Goodfellow, Bengio, Courville, ...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-      <div class="archive__item-teaser">
-        <img src="/assets/images/lenet.png" alt="">
-      </div>
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/notes/machine_learning/notes-Neuroscience/" rel="permalink">New Inspirations for Machine Learning Methods
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-02-26T00:00:00+01:00">February 26, 2022</time>
-      </span>
-    
-
-    <span class="page__meta-sep"></span>
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          less than 1 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">Notes on some inspirations for Machine Learning methods. Based on opinions from leading scientists and also some of my own opinions.
+    <p class="archive__item-excerpt" itemprop="description">For learning html.
 </p>
   </article>
 </div>
@@ -2768,12 +2729,12 @@ source: <a href="#Goodfellow_2016">Goodfellow_2016</a></li>
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
       <div class="archive__item-teaser">
-        <img src="/assets/images/lenet.png" alt="">
+        <img src="/assets/images/Cpp_logo.png" alt="">
       </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/carla/simulator/self_driving/notes-Carla/" rel="permalink">Carla Simulator
+        <a href="/notes/notes-cpp/" rel="permalink">C++ Notes
 </a>
       
     </h2>
@@ -2783,29 +2744,19 @@ source: <a href="#Goodfellow_2016">Goodfellow_2016</a></li>
     
       
       <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2022-02-17T00:00:00+01:00">February 17, 2022</time>
+        <time datetime="2022-10-06T00:00:00+02:00">October 6, 2022</time>
       </span>
     
 
-    <span class="page__meta-sep"></span>
-
     
-      
-      
 
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          less than 1 minute read
-        
-      </span>
     
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Notes on the Carla Simulator
+    <p class="archive__item-excerpt" itemprop="description">For learning C++
 </p>
   </article>
 </div>
@@ -2819,12 +2770,12 @@ source: <a href="#Goodfellow_2016">Goodfellow_2016</a></li>
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
       <div class="archive__item-teaser">
-        <img src="/assets/images/lenet.png" alt="">
+        <img src="/assets/images/C_logo.png" alt="">
       </div>
     
     <h2 class="archive__item-title no_toc" itemprop="headline">
       
-        <a href="/lecture_notes/machine_learning/computer_vision/lecture-notes-ML-part3/" rel="permalink">Machine Learning (Part 3)
+        <a href="/cheatsheet/cheatsheet-android/" rel="permalink">Android Cheatsheet
 </a>
       
     </h2>
@@ -2834,29 +2785,60 @@ source: <a href="#Goodfellow_2016">Goodfellow_2016</a></li>
     
       
       <span class="page__meta-date">
-        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
         
-        <time datetime="2022-01-27T00:00:00+01:00">January 27, 2022</time>
+        <time datetime="2022-10-04T00:00:00+02:00">October 4, 2022</time>
       </span>
     
 
-    <span class="page__meta-sep"></span>
-
     
-      
-      
 
-      <span class="page__meta-readtime">
-        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
-        
-          56 minute read
-        
-      </span>
     
   </p>
 
 
-    <p class="archive__item-excerpt" itemprop="description">Notes on Computer Vision theory and NLP. Based on Goodfellow, Bengio “Deep Learning”, Stanford CS231n and RWTH Aachen University Machine Learning
+    <p class="archive__item-excerpt" itemprop="description">Useful tips for using Android
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/C_logo.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/notes/notes-SE/" rel="permalink">Software Engineering Notes
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-10-03T00:00:00+02:00">October 3, 2022</time>
+      </span>
+    
+
+    
+
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Software Engineering Basics
 </p>
   </article>
 </div>
@@ -2867,6 +2849,7 @@ source: <a href="#Goodfellow_2016">Goodfellow_2016</a></li>
   
   
 </div>
+
     </div>
 
     

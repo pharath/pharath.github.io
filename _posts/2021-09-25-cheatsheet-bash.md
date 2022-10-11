@@ -74,3 +74,45 @@ fi
     - `> /dev/null` dumps all the `stdout` to `/dev/null`
     - `2>&1` redirects `stderr` (file descriptor value: `2`) to `stdout` (file descriptor value: `1`)
 - phth note: `> /dev/null 2>&1` idea came from `~/git/geohot/openpilot/update_requirements.sh`
+
+# Job control
+
+## List running jobs
+
+- `jobs -l` (also shows the `jobID`s)
+
+## ctrl - c
+
+- sends the signal `SIGINT`
+- like `kill -SIGINT [processPID]` (**Note**: `kill` sends the `SIGTERM` (termination) signal by default unless you specify the signal to send.)
+- can be intercepted by a program so it can clean its self up before exiting, or not exit at all
+
+## ctrl - z
+
+- suspends a running process
+- sends a `SIGTSTP`
+- like `kill -TSTP [processid]`
+- cannot be intercepted by the program
+- **note**: the process will **halt**, so if you want it to continue running in the background use `bg`!
+
+## bg
+
+- let a process run in the background: `bg %[jobID]`
+    - But output (e.g. `stdout`, `stderr`, etc) will still be printed in the terminal! Redirect output to `/dev/null` to avoid this.
+- sends a `SIGCONT`
+- like `kill -CONT [processid]`
+- to **start** a process in the background: `mycommand &`
+    - additionally, to avoid any output of this process in the current terminal window: `command > /dev/null 2>&1 &`
+
+## fg
+
+- brings a process to the foreground: `fg %[jobID]`
+
+## nohup
+
+- make a process continue running even if the shell session accidentally dies: `nohup firefox &`
+- makes a process ignore the `SIGHUP` signal sent to the process
+- example:
+    - `nohup gedit &`, now if the terminal dies `gedit` will **not** be closed!
+- use case:
+    - wenn man z.B. per `ssh` auf einem fremden Rechner arbeitet und dort einen langwierigen Prozess starten möchte, die ssh-Verbindung aber während des Prozesses nicht permanent aktiv sein soll, weil man etwa den eigenen Rechner ausschalten möchte

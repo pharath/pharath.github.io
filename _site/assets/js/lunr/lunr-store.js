@@ -1,12 +1,12 @@
 var store = [{
         "title": "Vim Cheatsheet",
-        "excerpt":"Plugins ‘VundleVim/Vundle.vim’ ‘NLKNguyen/papercolor-theme’ ‘rip-rip/clang_complete’ (install: see below) ‘godlygeek/tabular’ ‘plasticboy/vim-markdown’ Install Autocomplete clang_complete command description 1. Download https://apt.llvm.org/llvm.sh   2. chmod u+x ~/Downloads/llvm.sh   3. bash -c ~/Downloads/llvm.sh (einige dependencies - output sagt welche - müssen evtl. manuell nachinstalliert werden) installs LLVM + Clang + compiler-rt + polly + LLDB +...","categories": ["Cheatsheet"],
+        "excerpt":"Plugins ‘VundleVim/Vundle.vim’ ‘NLKNguyen/papercolor-theme’ ‘rip-rip/clang_complete’ (install: see below) ‘godlygeek/tabular’ ‘plasticboy/vim-markdown’ Install Autocomplete clang_complete Download https://apt.llvm.org/llvm.sh chmod u+x ~/Downloads/llvm.sh bash -c ~/Downloads/llvm.sh (einige dependencies - output sagt welche - müssen evtl. manuell nachinstalliert werden) installs LLVM + Clang + compiler-rt + polly + LLDB + LLD + libFuzzer + libc++ + libc++abi...","categories": ["Cheatsheet"],
         "tags": ["vim","cheatsheet"],
         "url": "/cheatsheet/cheatsheet-vim/",
-        "teaser": "/assets/images/Vim.jpg"
+        "teaser": "/assets/images/Vim.png"
       },{
         "title": "Linux Cheatsheet",
-        "excerpt":"Apps: command description htop activity monitor (sieht besser aus als “top”) hardinfo hardware info ffmpeg mp4 to mp3 converter ffmpeg -i foo.mp4 bar.mp3 convert foo.mp4 to bar.mp3 pyTranscriber generates subtitles for .mp3 files via Google Speech Recognition API using Autosub (GUI) goldendict dict for fast lookup (ctrl + c +...","categories": ["Cheatsheet"],
+        "excerpt":"Apps command description htop activity monitor (sieht besser aus als “top”) hardinfo hardware info ffmpeg mp4 to mp3 converter ffmpeg -i foo.mp4 bar.mp3 convert foo.mp4 to bar.mp3 ffmpeg -i source.mp4 -ss 00:00:00 -t 00:00:00 -vcodec copy -acodec copy outsplice.mp4 crop source.mp4 from start time -ss to time -t pyTranscriber generates...","categories": ["Cheatsheet"],
         "tags": ["linux","cheatsheet"],
         "url": "/cheatsheet/cheatsheet-linux/",
         "teaser": "/assets/images/linux_teaser.jpg"
@@ -18,10 +18,10 @@ var store = [{
         "teaser": "/assets/images/mario-question.png"
       },{
         "title": "VS Code Cheatsheet",
-        "excerpt":"Navigation Setup Navigation command description ctrl + alt + v toggle vim mode (this custom shortcut must have been configured previously) ctrl + 0 focus file explorer ctrl + 1 focus editor group 1 ctrl + 2 focus editor group 2, usw. ctrl + w close current editor group (after...","categories": ["Cheatsheet"],
+        "excerpt":"Setup install extensions: Remote-Containers on Ubuntu: only Dev-Containers C/C++ Doxygen Documentation Generator CMake CMake Tools Python Pylance Jupyter Jupyter Keymap Jupyter Notebook Renderers TabNine Autocompletion vim Markdown PDF for md2pdf conversion set “Toggle Vim Mode” command keybinding “ctrl + alt + v” in menu “Manage” (unten links) -&gt; keyboard shortcuts...","categories": ["Cheatsheet"],
         "tags": ["vscode","cheatsheet"],
         "url": "/cheatsheet/cheatsheet-VSCode/",
-        "teaser": "/assets/images/mario-question.png"
+        "teaser": "/assets/images/vscode.png"
       },{
         "title": "Firefox Setup",
         "excerpt":"Profiles Profile Directory about:support -&gt; “Profile Directory” -&gt; “Open Directory” Button History source Firefox stores your history and bookmarks together in a database file named places.sqlite which is in your profile folder. Just copy places.sqlite to another profile folder in order to transfer the history of one profile to another...","categories": ["Setup"],
@@ -42,13 +42,13 @@ var store = [{
         "teaser": "/assets/images/mario-question.png"
       },{
         "title": "Docker Notes",
-        "excerpt":"Welcher CMD wird per default beim image Start ausgeführt? Welcher CMD wird per default beim image Start ausgeführt? Klicke auf den letzten der layers in der Liste links. Dann erscheint rechts der zugehörige vollständige CMD. Beispiele Run osrf/ros image with GUI support: xhost +local:root docker run -it --rm -e DISPLAY=$DISPLAY...","categories": ["Notes"],
+        "excerpt":"docker Location on System command description sudo ls /var/lib/docker/overlay2 hier ist der Großteil aller docker image Daten sudo du -sh $(ls /var/lib/docker/) list size of all files and dirs in /var/lib/docker/ X11 Forwarding xhost + enable GUI for docker xhost +local:root enable GUI for docker docker login docker login registry.git.rwth-aachen.de...","categories": ["Notes"],
         "tags": ["docker","notes"],
         "url": "/notes/cheatsheet-docker/",
         "teaser": "/assets/images/mario-question.png"
       },{
         "title": "Git Cheatsheet",
-        "excerpt":"Terminology remote = remote-repository (e.g. in git push *remote* *branch*) Basics command description git clone –recurse-submodules repo &lt;Ziel directory&gt;   git branch -a show/list all branches (local and remote) git branch -r show/list all branches (only remote) git show-branch -a show/list all branches and commits (local and remote) git show-branch...","categories": ["Cheatsheet"],
+        "excerpt":"Terminology remote = remote-repository (e.g. in git push *remote* *branch*) Basics command description git rm file1.txt remove the file from the Git repository and the filesystem git rm --cached file1.txt remove the file only from the Git repository and not remove it from the filesystem git add -u :/ git...","categories": ["Cheatsheet"],
         "tags": ["git","cheatsheet"],
         "url": "/cheatsheet/cheatsheet-git/",
         "teaser": "/assets/images/Vim.jpg"
@@ -69,7 +69,7 @@ var store = [{
         "excerpt":"Databases 1.1 Introduction What is a DBMS ? A database management system (DBMS) provides efficient, reliable, convenient&nbsp;and safe&nbsp;multi-user&nbsp;storage of&nbsp;and access to&nbsp;massive&nbsp;amounts of persistent&nbsp;data.massive&nbsp;scale: So if you think about the amount of data that is being produced today, database systems are handling terabytes of data, sometimes even terabytes of data every...","categories": ["Summaries"],
         "tags": ["summaries","databases"],
         "url": "/summaries/summary-Databases/",
-        "teaser": "/assets//assets/images/images_databases/databases.png"
+        "teaser": "/assets/images/images_databases/databases.png"
       },{
         "title": "Bash Cheatsheet",
         "excerpt":"bash scripting Shebang beste Erklärung: askubuntu discussion oder aus Wikipedia: In computing, a shebang is the character sequence consisting of the characters number sign and exclamation mark (#!) at the beginning of a script. When a text file with a shebang is used as if it is an executable in...","categories": ["Cheatsheet"],
@@ -84,7 +84,7 @@ var store = [{
         "teaser": "/assets/images/mario-question.png"
       },{
         "title": "Python Cheatsheet",
-        "excerpt":"python packages and modules source .py files are modules folders (containing modules) are packages importing a package essentially imports the package’s __init__.py file as a module pyenv For Python version management, e.g. if you want to use multiple python versions on the same machine if a project requires an older...","categories": ["Cheatsheet","Python"],
+        "excerpt":"Installing multiple Python Versions source: sudo add-apt-repository ppa:deadsnakes/ppa sudo apt-get update sudo apt-get install python3.5 sudo apt-get install python3.5-dev It will not overwrite your existing python3.4 which is still symlinked as python3. Instead, to run python3.5, run the command python3.5 (or python3.X for any other version of python). venv using...","categories": ["Cheatsheet","Python"],
         "tags": ["python","conda","cheatsheet"],
         "url": "/cheatsheet/python/cheatsheet-python/",
         "teaser": "/assets/images/mario-question.png"
@@ -96,7 +96,7 @@ var store = [{
         "teaser": "/assets/images/mario-question.png"
       },{
         "title": "ROS2 Cheatsheet",
-        "excerpt":"Install Über apt install installieren (wie hier beschrieben) Dann, wie in binary installation unter “Installing and initializing rosdep” und “Installing the missing dependencies” beschrieben, die restlichen dependencies installieren (ohne 2. funktioniert ROS2 nicht!). Uninstall sudo apt remove ~nros-galactic-* &amp;&amp; sudo apt autoremove Create Package $ mkdir -p ~/dev_ws/src $ cd...","categories": ["Cheatsheet"],
+        "excerpt":"Install Über apt install installieren (wie hier beschrieben) Dann, wie in binary installation unter “Installing and initializing rosdep” und bei älteren EOL distros geht rosdep install --from-paths /opt/ros/eloquent/share nur, wenn rosdep update --include-eol-distros ausgeführt wurde - “Installing the missing dependencies” beschrieben, die restlichen dependencies installieren (ohne 2. funktioniert ROS2 nicht!)....","categories": ["Cheatsheet"],
         "tags": ["ros2","ros","cheatsheet"],
         "url": "/cheatsheet/cheatsheet-ros2/",
         "teaser": "/assets/images/mario-question.png"
@@ -134,7 +134,7 @@ var store = [{
         "title": "Machine Learning (Part 1)",
         "excerpt":"General Remarks Don’t lose sight of the bigger picture ! Only learn stuff when you need it ! As Feynman said: don’t read everything about a topic before starting to work on it. Think about the problem for yourself, figure out what’s important, then read the literature. This will allow...","categories": ["Lecture_Notes","Machine_Learning"],
         "tags": ["lecture_notes","ml"],
-        "url": "/lecture_notes/machine_learning/lecture-notes-ML/",
+        "url": "/lecture_notes/machine_learning/lecture-notes-ML-part1/",
         "teaser": "/assets/images/lenet.png"
       },{
         "title": "Network Cheatsheet",
@@ -180,13 +180,13 @@ var store = [{
         "teaser": "/assets//assets/images/images_databases/databases.png"
       },{
         "title": "Machine Learning (Part 2)",
-        "excerpt":"Neural Networks Perceptrons (Rosenblatt 1962) perceptrons (SLPs) are generalized linear models (“generalized” because of the activation function) BUT: Deep Neural Networks (MLPs) are nonlinear parametric models. more specifically: perceptrons are generalized linear discriminants (because they map the input x directly to a class label t in {-1,+1} [see above: “Linear...","categories": ["Lecture_Notes","Machine_Learning"],
+        "excerpt":"Neural Networks Perceptrons (Rosenblatt 1962) perceptrons (SLPs) are generalized linear models (“generalized” because of the activation function) BUT: Deep Neural Networks (MLPs) are nonlinear models. more specifically: perceptrons are generalized linear discriminants (because they map the input x directly to a class label t in {-1,+1} [see above: “Linear models...","categories": ["Lecture_Notes","Machine_Learning"],
         "tags": ["lecture_notes","ml"],
         "url": "/lecture_notes/machine_learning/lecture-notes-ML-part2/",
         "teaser": "/assets/images/lenet.png"
       },{
         "title": "ROS Cheatsheet",
-        "excerpt":"roslaunch roslaunch --ros-args /path/to/launchfile.launch Display command-line arguments for this launch file &lt;launch&gt; &lt;!-- ros_args.launch --&gt; &lt;arg name=\"foo\" default=\"true\" doc=\"I pity the foo'.\"/&gt; &lt;arg name=\"bar\" doc=\"Someone walks into this.\"/&gt; &lt;arg name=\"baz\" default=\"false\"/&gt; &lt;arg name=\"nop\"/&gt; &lt;arg name=\"fix\" value=\"true\"/&gt; &lt;/launch&gt; $&gt; roslaunch --ros-args ros_args.launch Required Arguments: bar: Someone walks into this. nop: undocumented...","categories": ["Cheatsheet"],
+        "excerpt":"ROS Packages image_view Display the images of an image topic: rosrun image_view image_view image:=/sensor/camera1/image_raw opencv_apps Install sudo apt install ros-noetic-opencv-apps Hough Transform roslaunch opencv_apps hough_lines.launch image:=/sensor/camera1/image_raw # view all arguments of a node in the launch file roslaunch --args hough_lines /opt/ros/noetic/share/opencv_apps/launch/hough_lines.launch # view all arguments of the launch file roslaunch...","categories": ["Cheatsheet"],
         "tags": ["ros","cheatsheet"],
         "url": "/cheatsheet/cheatsheet-ros/",
         "teaser": "/assets/images/mario-question.png"
@@ -214,4 +214,118 @@ var store = [{
         "tags": ["lecture_notes","ml"],
         "url": "/lecture_notes/machine_learning/lecture-notes-ML-part2-old/",
         "teaser": "/assets/images/lenet.png"
+      },{
+        "title": "Tensorflow",
+        "excerpt":"Compatibility (Tensorflow, Python version, Compiler, Build tools, cuDNN and CUDA) see List Check the CUDA version (paths might differ slightly depending on the cuda version): cat /usr/local/cuda/version.txt and cuDNN version: grep CUDNN_MAJOR -A 2 /usr/local/cuda/include/cudnn.h Check GPUs Tensorflow 2 tf.config.list_physical_devices('GPU') print(\"Num GPUs Available: \", len(tf.config.list_physical_devices('GPU'))) Porting (Tensorflow 1 to Tensorflow...","categories": ["Tensorflow","Machine_Learning"],
+        "tags": ["tensorflow","ml"],
+        "url": "/tensorflow/machine_learning/notes-tensorflow/",
+        "teaser": "/assets/images/lenet.png"
+      },{
+        "title": "Python Plots Cheatsheet",
+        "excerpt":"imshow()   plt.imshow just finishes drawing a picture instead of printing it. If you want to print the picture, you just need to add plt.show.  ","categories": ["Cheatsheet","Python","Plotting"],
+        "tags": ["python","cheatsheet","plotting"],
+        "url": "/cheatsheet/python/plotting/cheatsheet-py-plots/",
+        "teaser": "/assets/images/mario-question.png"
+      },{
+        "title": "Notes on CUDA and cuDNN",
+        "excerpt":"Currently installed CUDA 11.2 Update 2 cuDNN 8.1.1.33 Install install CUDA normally install cuDNN without sudo add-apt-repository \"deb https://developer.download.nvidia.com/compute/cuda/repos/${OS}/x86_64/ /\", but use sudo dpkg -i cuda-keyring_1.0-1_all.deb instead Nvidia Blog Post! install nvidia-docker2, sonst funktionieren die Container nicht! Troubleshooting 1 `fatal error: cuda_runtime_api.h: No such file or directory` Is /usr/local/cuda a...","categories": ["Notes","CUDA","cuDNN"],
+        "tags": ["cuda","cudnn","notes"],
+        "url": "/notes/cuda/cudnn/notes-CUDA/",
+        "teaser": "/assets/images/mario-question.png"
+      },{
+        "title": "Notes on Deepstream, TAO Toolkit, NGC CLI",
+        "excerpt":"GStreamer framework DeepStream SDK is based on the GStreamer framework. Wikipedia GStreamer is a pipeline-based multimedia framework that links together a wide variety of media processing systems to complete complex workflows. For instance, GStreamer can be used to build a system that reads files in one format, processes them, and...","categories": ["Notes","Deepstream","TAO_Toolkit","NGC_CLI"],
+        "tags": ["notes","deepstream","tao_toolkit","ngc_cli"],
+        "url": "/notes/deepstream/tao_toolkit/ngc_cli/notes-Deepstream-TAO-NGC/",
+        "teaser": "/assets/images/mario-question.png"
+      },{
+        "title": "Notes on Jetson Xavier AGX",
+        "excerpt":"Jetpack check Jetpack version: sudo apt-cache show nvidia-jetpack SDK Manager Install Troubleshooting Unmet dependencies You might want to run 'apt --fix-broken install' to correct these. The following packages have unmet dependencies: gconf-service-backend : Depends: libgconf-2-4 (= 3.2.6-4ubuntu1) but 3.2.6-4.1 is installed gconf2 : Depends: gconf-service (= 3.2.6-4.1) libgconf-2-4 : Depends:...","categories": ["Notes","AGX"],
+        "tags": ["agx","notes"],
+        "url": "/notes/agx/notes-AGX/",
+        "teaser": "/assets/images/mario-question.png"
+      },{
+        "title": "Notes on Computer Vision Coding",
+        "excerpt":"pickle use the following code to inspect and view .pickle or .p datasets import pickle import matplotlib.pyplot as plt with open('train.p', 'rb') as data: # \"im\" is a dictionary! Get list of keys via im.keys() method. im = pickle.load(data) # without print there is no output in the terminal! #print(im[\"features\"])...","categories": ["Notes","Computer_Vision","OpenCV"],
+        "tags": ["notes","computer_vision","opencv","cv2"],
+        "url": "/notes/computer_vision/opencv/notes-cv-coding/",
+        "teaser": "/assets/images/mario-question.png"
+      },{
+        "title": "TensorRT",
+        "excerpt":"Install WARNING: apt upgrade maybe upgrades libcudnn8 which removes all tensorrt libs! apt-mark hold all libcudnn8 packages before installation! Debian installation, else no samples, no trtexec, … etc. compile trtexec in samples and put export PATH=/usr/src/tensorrt/bin${PATH:+:${PATH}} in .bashrc Install using pip wheel file Check installation import tensorrt as trt print(trt.__version__)...","categories": ["TensorRT","Machine_Learning"],
+        "tags": ["tensorrt","ml"],
+        "url": "/tensorrt/machine_learning/notes-tensorrt/",
+        "teaser": "/assets/images/lenet.png"
+      },{
+        "title": "Notes on YOLO Object Detection",
+        "excerpt":"Anchors      AlexeyAB explanation  ","categories": ["Notes","Computer_Vision","Yolo"],
+        "tags": ["notes","computer_vision","yolo"],
+        "url": "/notes/computer_vision/yolo/notes-yolo/",
+        "teaser": "/assets/images/mario-question.png"
+      },{
+        "title": "Data Science Basics",
+        "excerpt":"Interpreting a PR Curve It is desired that the algorithm should have both high precision, and high recall. However, most machine learning algorithms often involve a trade-off between the two. A good PR curve has greater AUC (area under curve). source Relation to ROC Curve In certain applications (e.g. searching...","categories": ["Notes","Data_Science"],
+        "tags": ["notes","data_science"],
+        "url": "/notes/data_science/notes-DS/",
+        "teaser": "/assets/images/lenet.png"
+      },{
+        "title": "Notes on Building Code",
+        "excerpt":"configure Script      purpose of configure scripts   check “failed” warnings  ","categories": ["Notes","Build"],
+        "tags": ["build","notes"],
+        "url": "/notes/build/notes-build/",
+        "teaser": "/assets/images/mario-question.png"
+      },{
+        "title": "Embedded Systems",
+        "excerpt":"Microcontroller µC $\\approx$ low-end microprocessor + memory + I/O + additional peripherals more general than ASIPs and SoCs Pentium Processor FDIV Bug FDIV Bug deutsch see history of microprocessors modern µCs nowadays may have more than one microprocessor core Structure of a microcontroller Clock clocks that use an electronic oscillator...","categories": ["EmSys","Notes"],
+        "tags": ["emsys","notes"],
+        "url": "/emsys/notes/notes-EmSys/",
+        "teaser": "/assets/images/linux_teaser.jpg"
+      },{
+        "title": "WSL2 Cheatsheet",
+        "excerpt":"Setup Windows 10 Select Start &gt; Settings &gt; Time &amp; language &gt; Language &amp; region. Choose a language from the Windows display language menu, or, next to Preferred languages, select Add a language to install the one you want if it isn’t listed. press Alt + Shift to change keyboard...","categories": ["Cheatsheet"],
+        "tags": ["wsl2","cheatsheet"],
+        "url": "/cheatsheet/cheatsheet-wsl2/",
+        "teaser": "/assets/images/Vim.jpg"
+      },{
+        "title": "DatKom Notes",
+        "excerpt":"Concepts Communication services, layer models, protocols Physical basics of transmission Error handling and medium access Internet Protocol (IP) and Routing: Connecting remote hosts Transmission Control Protocol (TCP): Connecting applications Security: Cryptographic primitives, IPsec, SSL/TLS From [source]: Client/Server- und Peer-to-Peer-Systeme OSI-Referenzmodell und TCP/IP-Referenzmodell Übertragungsmedien und Signaldarstellung Fehlerbehandlung, Flusssteuerung und Medienzugriff Lokale...","categories": ["Notes"],
+        "tags": ["datkom","notes"],
+        "url": "/notes/notes-DatKom/",
+        "teaser": "/assets/images/C_logo.png"
+      },{
+        "title": "Operating Systems Notes",
+        "excerpt":"Concepts Unix shell and programming language C Process management: processes, threads, inter-process communication CPU scheduling Process synchronization, deadlocks Memory management: virtual memory, segmentation, paging, fragmentation File system and I/O system Communication subsystem and sockets Aufgaben und Struktur von Betriebssystemen Das Betriebssystem Unix Systemaufrufe und Shellprogrammierung Einführung in die Programmiersprache C...","categories": ["Notes"],
+        "tags": ["os","notes"],
+        "url": "/notes/notes-OS/",
+        "teaser": "/assets/images/C_logo.png"
+      },{
+        "title": "C Notes",
+        "excerpt":"Concepts RWTH Grundgebiete der Informatik 1 Gegenstand der Vorlesung ist die Einführung in Programmiertechniken, Datenstrukturen und Algorithmen anhand von C. Grundlegende Programmelemente: Skalare und zusammengesetzte Datentypen, Anweisungen, Kontrollfluß, Funktionen, Klassen, C-Programmstruktur und Programmierumgebung; Programmanalyse: Wachstumsordnungen, Komplexitätsklassen, best/worst case Analyse; Lineare Datenstrukturen: Listen, Stacks, Queues, Iteration und Rekursion; Nichtlineare Datenstrukturen und...","categories": ["Notes"],
+        "tags": ["c","notes"],
+        "url": "/notes/notes-c/",
+        "teaser": "/assets/images/C_logo.png"
+      },{
+        "title": "Software Engineering Notes",
+        "excerpt":"Advanced Software Engineering (in Mechanical Engineering) The aim of the course is to explain students for what purposes, under which conditions and with which consequences computer systems are used for the solution of problems related to Mechanical Engineering. Within the first part of the course the steps from problem description...","categories": ["Notes"],
+        "tags": ["software_engineering","notes"],
+        "url": "/notes/notes-SE/",
+        "teaser": "/assets/images/C_logo.png"
+      },{
+        "title": "Android Cheatsheet",
+        "excerpt":"File Transfer   Android 9   To Ubuntu      TODO  ","categories": ["Cheatsheet"],
+        "tags": ["android","cheatsheet"],
+        "url": "/cheatsheet/cheatsheet-android/",
+        "teaser": "/assets/images/C_logo.png"
+      },{
+        "title": "C++ Notes",
+        "excerpt":"DEFINITIONS areas of memory stack - Local variables, function parameters code space - Code global namespace - global variables registers - used for internal housekeeping functions, such as keeping track of the top of the stack and the instruction pointer free store = heap - Just about all of the...","categories": ["Notes"],
+        "tags": ["c++","notes"],
+        "url": "/notes/notes-cpp/",
+        "teaser": "/assets/images/Cpp_logo.png"
+      },{
+        "title": "HTML Notes",
+        "excerpt":"Jekyll Jekyll is written in Ruby. Ruby 101 explains: Gems Gems are code you can include in Ruby projects Ruby gems search Ruby gems list Jekyll Jekyll is a gem. Many Jekyll plugins are also gems, including jekyll-feed, jekyll-seo-tag and jekyll-archives. Gemfile a list of gems used by your site....","categories": ["Notes"],
+        "tags": ["html","notes"],
+        "url": "/notes/notes-html/",
+        "teaser": "/assets/images/mario-question-block.jpeg"
       }]

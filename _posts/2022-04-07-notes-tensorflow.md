@@ -93,3 +93,17 @@ for raw_record in raw_dataset.take(1):
     - It is a way to store multidimensional arrays / data frames / matrix into memory, which can be considered as a 1-D array. 
 
 ## NHWC
+
+# Tensorflow API
+
+## tf.where
+
+```python
+segmentation_map = tf.where(
+                                    condition=tf.reduce_all(tf.equal(image, color), axis=-1),
+                                    x=tf.cast(class_id, tf.uint8),
+                                    y=segmentation_map
+                                    )
+```
+
+**Achtung**: Reihenfolge von `image` und `color` bei `tf.equal()` ist wichtig !

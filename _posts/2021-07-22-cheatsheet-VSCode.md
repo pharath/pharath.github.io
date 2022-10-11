@@ -1,7 +1,12 @@
 ---
 title: "VS Code Cheatsheet"
 read_time: false
+excerpt: "Some tips for VS Code."
 excerpt_separator: "<!--more-->"
+header:
+    teaser: /assets/images/vscode.png
+    overlay_image: /assets/images/vscode.png
+    overlay_filter: 0.5 
 categories:
   - Cheatsheet
 tags:
@@ -12,12 +17,21 @@ tags:
 # Setup
 
 - install extensions: 
-  - C/C++
-  - CMake Tools
-  - Python
-  - TabNine Autocompletion
-  - Remote-Containers
-  - vim
+    - Remote-Containers
+        - on Ubuntu: only Dev-Containers
+    - C/C++
+    - Doxygen Documentation Generator
+    - CMake
+    - CMake Tools
+    - Python
+    - Pylance
+    - Jupyter
+    - Jupyter Keymap
+    - Jupyter Notebook Renderers
+    - TabNine Autocompletion
+    - vim
+    - Markdown PDF
+        - for md2pdf conversion
 - set "Toggle Vim Mode" command keybinding "ctrl + alt + v" in menu "Manage" (unten links) -> keyboard shortcuts -> search "togglevim" 
 
 ## Reset
@@ -70,16 +84,24 @@ ctrl-k ctrl-j | unfold all
 ctrl + shift + . | focus breadcrumbs (jump between methods/functions)
 ctrl + alt + - | go back (i.e. jump to previous location) (Windows: alt + left)
 ctrl + shift + - | go forward (i.e. jump to next location) (Windows: alt + right)
+ctrl + d | "add selection to next find match" (for quickly modifying multiple occurrences of the selected code simultaneously)
+ctrl + k ctrl + d | "move last selection to next find match" (like `*` in Vim)
 
 ## Write
 
 | command | description |
 | :---: | :---: |
 ctrl + h | replace (in the replace window press ctrl + alt + enter to replace all)
+ctrl + c | copy line
+ctrl + x | cut line
 ctrl + shift + k | delete line
 ctrl + k ctrl + c | add line comment
 ctrl + k ctrl + u | remove line comment
 shift + alt + DownArrow | copy line down
+
+## Format
+
+- **automatic code format** (in command palette: "format document"): ctrl + shift + I
 
 # Git
 

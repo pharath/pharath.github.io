@@ -54,7 +54,8 @@ sudo docker rmi "image with more than 1 tag" | If your image is tagged with more
 
 | :---: | :---: |
 sudo docker container ls -a |
-sudo docker container stop 1ff0175b5104 | stoppt den container nur (dh. container Status: "Exited"), aber "docker ps -a" zeigt den container noch
+docker container inspect container_id | zeige container info (u.a. **Bindings** [= Ordner, deren Inhalte host und container sharen])
+sudo docker container stop 1ff0175b5104 | stoppt den container nur (dh. container Status: "Exited"), aber `docker ps -a` zeigt den container noch!
 sudo docker container rm 1ff0175b5104 | entfernt den container, dh. "docker ps -a" zeigt den container nicht mehr
 sudo docker container kill 1ff0175b5104 | killt den container (Unterschied zu `docker container stop`: see [here](https://stackoverflow.com/a/66736836): "So ideally we always stop a container with the `docker stop` command in order to get the running process inside of it a little bit of time to shut itself down, otherwise if it feels like the container has locked up and it's not responding to the docker stop command then we could issue `docker kill` instead.")
 
@@ -118,7 +119,7 @@ docker image tag galaxis_simulation:phth-8 registry.git.rwth-aachen.de/pharath/g
 docker tag galaxis_simulation:phth-8 registry.git.rwth-aachen.de/pharath/gitlab_backups/galaxis_simulation:phth-8 | see `docker image tag`
 docker push registry.git.rwth-aachen.de/pharath/gitlab_backups/galaxis_simulation:phth-8 | push image to Gitlab Container Registry
 
-## Check GUI
+## Check if GUIs work in a Linux container
 
 ```bash
 sudo apt update
@@ -162,3 +163,31 @@ Start new bash shell in running container with color support:
 
 - `lsb_release -sirc`
 - `cat /etc/os-release`
+
+# Troubleshooting
+
+## Running GUI apps in a Linux container
+
+```bash
+$ sudo ./run.sh
+xauth: (argv):1:  unable to read any entries from file "(stdin)"
+```
+
+**Solution**:
+das Problem kann folgende Ursachen haben:
+- es gibt keinen `/tmp/.docker.xauth`
+- es gibt nur einen **FOLDER** `/tmp/.docker.xauth/` aber keinen **FILE** `/tmp/.docker.xauth`
+
+From (vgl: [riptutorial](https://riptutorial.com/docker/example/21831/running-gui-apps-in-a-linux-container)):  
+1. entferne **FOLDER** `/tmp/.docker.xauth/`, falls es existiert 
+    - (**ACHTUNG**: falls ein gleichnamiger **FILE** `/tmp/.docker.xauth` (ohne "`/`" hinten) existiert, diesen FILE nicht entfernen)
+2. `xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f /tmp/.docker.xauth nmerge -` (creates `/tmp/.docker.xauth`)
+3. nachschauen, ob `/tmp/.docker.xauth` kreiert wurde
+
+```bash
+$ ./run.sh
+xauth:  /tmp/.docker.xauth not writable, changes will be ignored
+```
+
+**Solution**:
+führe stattdessen `sudo ./run.sh` aus.

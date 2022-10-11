@@ -115,10 +115,24 @@ Using "`system`" as a version name would reset the selection to your system-prov
 - pip caches downloaded packages, so that you can resume downloads and installations by running `pip install` again, if e.g. 
     - the installation is aborted because there was no space left on the device
 
+## Basics
+
+| command | description |
+| :---: | :---: |
+pip show *package* | show location of *package*
+
+## Install packages
+
+| command | description |
+| :---: | :---: |
+pip install -U,	--upgrade | Upgrade all specified packages to the newest available version. The handling of dependencies depends on the upgrade-strategy used. 
+pip install -q,	--quiet | Give less output. Option is additive, and can be used up to 3 times (corresponding to WARNING, ERROR, and CRITICAL logging levels).
+
+## Uninstall packages
+
 | command | description |
 | :---: | :---: |
 pip install pip-autoremove | utility to remove a package plus unused dependencies
-pip show *package* | show location of *package*
 pip-autoremove *package* | remove a package plus unused dependencies (install `pip install pip-autoremove` first)
 
 # venv (python3)
@@ -218,3 +232,20 @@ jupyter nbconvert --to pdf notebook.ipynb |
 | command | description |
 | :---: | :---: |
 pip show torch | show the location of package "torch" (there you can find the source code of the package)
+
+# Useful Packages
+
+## argparse
+
+[argparse](https://docs.python.org/3/library/argparse.html)
+- erlaubt zB mit `python prog.py 1 2 3 4 5  —sum`  einen command line Befehl selber zu definieren: 
+    - The `argparse` module makes it easy to write user-friendly command-line interfaces. The program defines what arguments it requires, and `argparse` will figure out how to parse those out of `sys.argv`. The `argparse` module also automatically generates **help and usage messages** and **issues errors** when users give the program invalid arguments. 
+
+## functools
+
+### partial()
+
+`new_function = partial(some_function, *args)` 
+- [functools.partial documentation](https://docs.python.org/3/library/functools.html#functools.partial)
+- definiert eine neue Funktion `new_function`, die genau das gleiche macht wie `some_function`
+    - Praktisch, um bestimmte Argumente einer Funktion festzulegen, damit sie nicht wieder eingegeben werden müssen: zB `basetwo = partial(int, base=2)` um nicht jedes mal `base=2` eingeben zu müssen um binäre Zahlen in Dezimalzahlen umzuwandeln
