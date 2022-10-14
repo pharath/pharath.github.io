@@ -368,7 +368,7 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header>
-              <ul class="toc__menu"><li><a href="#concepts">Concepts</a></li></ul>
+              <ul class="toc__menu"><li><a href="#concepts">Concepts</a></li><li><a href="#resource-limits">Resource Limits</a><ul><li><a href="#setrlimit-getrlimit">setrlimit(), getrlimit()</a></li><li><a href="#ulimit">ulimit</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -398,6 +398,37 @@
   <li>I/O-System</li>
   <li>Verteilte Systeme</li>
   <li>Socket-Programmierung</li>
+</ul>
+
+<h1 id="resource-limits">Resource Limits</h1>
+
+<h2 id="setrlimit-getrlimit">setrlimit(), getrlimit()</h2>
+
+<ul>
+  <li>see <a href="https://github.com/pharath/C_exercises/blob/master/day_20_memory/setrlimit.c">example setrlimit.c</a></li>
+  <li>see <code class="language-plaintext highlighter-rouge">man setrlimit</code>
+    <ul>
+      <li><strong>Trick</strong>: to get <code class="language-plaintext highlighter-rouge">man</code> pages in color:
+        <ul>
+          <li>install the <code class="language-plaintext highlighter-rouge">most</code> pager using <code class="language-plaintext highlighter-rouge">sudo apt-get install most</code></li>
+          <li>in terminal set <code class="language-plaintext highlighter-rouge">export PAGER="most"</code></li>
+          <li>to change <code class="language-plaintext highlighter-rouge">most</code> keybindings to vim keybindings <code class="language-plaintext highlighter-rouge">cp -iv /usr/share/doc/most/lesskeys.rc ~/.mostrc</code></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="ulimit">ulimit</h2>
+
+<ul>
+  <li>get and set user limits
+    <ul>
+      <li>i.e. not for one process, but for one user!</li>
+    </ul>
+  </li>
+  <li>see <code class="language-plaintext highlighter-rouge">man ulimit</code></li>
+  <li>current user limits: <code class="language-plaintext highlighter-rouge">ulimit -a</code></li>
 </ul>
 
         

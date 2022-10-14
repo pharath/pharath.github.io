@@ -11,9 +11,18 @@ tags:
 - cheatsheet
 ---
 
-# General Shortcuts
+# OS
 
-## For Bluetooth
+## tty
+
+- To switch ttys use ctrl + alt + F\#, where \# is the tty number you want to switch to.
+- see [Switching between ttys](https://unix.stackexchange.com/a/167388)
+    - Ubuntu 17.10+ assigns the X server to tty1 and a "dumb terminal" / "console" to tty2-7
+        - older Ubuntus assign X server to tty7 instead of tty1!
+
+# Creating Shortcuts
+
+## For Bluetooth Settings Icon in Ubuntu Activities
 
 - Create .desktop file (".desktop" ending required!) with this content
 
@@ -43,6 +52,7 @@ If you want it to open a terminal window when you run it (if you needed to add i
 ```bash
 Terminal=true
 ```
+
 # Network
 
 ## On the server computer:

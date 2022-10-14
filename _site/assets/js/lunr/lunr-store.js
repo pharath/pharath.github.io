@@ -36,7 +36,7 @@ var store = [{
         "teaser": "/assets/images/mario-question.png"
       },{
         "title": "Ubuntu Cheatsheet",
-        "excerpt":"General Shortcuts For Bluetooth Create .desktop file (“.desktop” ending required!) with this content [Desktop Entry] Name=open_bluetooth_settings Exec=gnome-control-center bluetooth Terminal=false Type=Application Make sure that your script is executable, like this: sudo chmod +x /path/to/script.sh (if it does not execute, copy it to ~/Desktop/. There right-click on it and select “Allow Launching”.)...","categories": ["Cheatsheet"],
+        "excerpt":"OS tty To switch ttys use ctrl + alt + F#, where # is the tty number you want to switch to. see Switching between ttys Ubuntu 17.10+ assigns the X server to tty1 and a “dumb terminal” / “console” to tty2-7 older Ubuntus assign X server to tty7 instead...","categories": ["Cheatsheet"],
         "tags": ["ubuntu","cheatsheet"],
         "url": "/cheatsheet/cheatsheet-Ubuntu/",
         "teaser": "/assets/images/mario-question.png"
@@ -51,7 +51,7 @@ var store = [{
         "excerpt":"Terminology remote = remote-repository (e.g. in git push *remote* *branch*) Basics command description git rm file1.txt remove the file from the Git repository and the filesystem git rm --cached file1.txt remove the file only from the Git repository and not remove it from the filesystem git add -u :/ git...","categories": ["Cheatsheet"],
         "tags": ["git","cheatsheet"],
         "url": "/cheatsheet/cheatsheet-git/",
-        "teaser": "/assets/images/Vim.jpg"
+        "teaser": "/assets/images/mario-question.png"
       },{
         "title": "Mac Cheatsheet",
         "excerpt":"Wifi settings   cd /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/ ./airport en1 prefs # set wifi connection behaviour (eg. DisconnectOnLogout=NO)   ssh   Achtung: ssh muss auf Mac erst aktiviert werden: unter “System Preferences”/”Sharing” bei “Remote login” Häkchen setzen!                  command       description                       caffeinate -u       prevent the system from sleeping and (-u for) prevent the system from sleeping source          ","categories": ["Cheatsheet"],
@@ -129,7 +129,7 @@ var store = [{
         "excerpt":"CFG (control flow graph) generator   python3   staticfg   source: https://github.com/coetaur0/staticfg.git Error fix: https://github.com/coetaur0/staticfg/issues/16#issue-704702759   Installation   python3 -m venv env source env/bin/activate   ACHTUNG: erst pip install wheel !   Usage      s. github repo README   am besten über das example/build_cfg.py script !  ","categories": ["Notes"],
         "tags": ["tools","notes"],
         "url": "/notes/notes-tools/",
-        "teaser": "/assets/images/Vim.jpg"
+        "teaser": "/assets/images/mario-question.png"
       },{
         "title": "Machine Learning (Part 1)",
         "excerpt":"General Remarks Don’t lose sight of the bigger picture ! Only learn stuff when you need it ! As Feynman said: don’t read everything about a topic before starting to work on it. Think about the problem for yourself, figure out what’s important, then read the literature. This will allow...","categories": ["Lecture_Notes","Machine_Learning"],
@@ -143,11 +143,11 @@ var store = [{
         "url": "/cheatsheet/cheatsheet-network/",
         "teaser": "/assets/images/linux_teaser.jpg"
       },{
-        "title": "test latex",
-        "excerpt":"Algorithm 1   \\[\\LaTeX\\]  Just a sample algorithmn  ","categories": ["Test"],
-        "tags": ["test"],
-        "url": "/test/blabla/",
-        "teaser": "/assets/images/databases.png"
+        "title": "Jekyll Notes",
+        "excerpt":"Latex   \\[\\LaTeX\\]  Just a sample algorithmn   Linking to posts   see Jekyll documentation   E.g. this link is a link to the post “Operating Systems Notes”.  ","categories": ["Notes"],
+        "tags": ["jekyll","test"],
+        "url": "/notes/notes-jekyll/",
+        "teaser": "/assets/images/mario-question.png"
       },{
         "title": "Computational Graphs in PyTorch",
         "excerpt":"PyTorch 101, Part 1: Understanding Graphs, Automatic Differentiation and Autograd In this article, we dive into how PyTorch’s Autograd engine performs automatic differentiation. 3 years ago • 13 min read By Ayoosh Kathuria MathJax.Hub.Config({ tex2jax: { inlineMath: [[”$”, “$”], [”\\(”, “\\)”]], processEscapes: true } }); PyTorch is one of the...","categories": ["Lecture_Notes","Machine_Learning"],
@@ -177,7 +177,7 @@ var store = [{
         "excerpt":" ","categories": ["Summaries"],
         "tags": ["summaries","cv"],
         "url": "/summaries/summary-CV/",
-        "teaser": "/assets//assets/images/images_databases/databases.png"
+        "teaser": "/assets/images/lenet.png"
       },{
         "title": "Machine Learning (Part 2)",
         "excerpt":"Neural Networks Perceptrons (Rosenblatt 1962) perceptrons (SLPs) are generalized linear models (“generalized” because of the activation function) BUT: Deep Neural Networks (MLPs) are nonlinear models. more specifically: perceptrons are generalized linear discriminants (because they map the input x directly to a class label t in {-1,+1} [see above: “Linear models...","categories": ["Lecture_Notes","Machine_Learning"],
@@ -285,7 +285,7 @@ var store = [{
         "excerpt":"Setup Windows 10 Select Start &gt; Settings &gt; Time &amp; language &gt; Language &amp; region. Choose a language from the Windows display language menu, or, next to Preferred languages, select Add a language to install the one you want if it isn’t listed. press Alt + Shift to change keyboard...","categories": ["Cheatsheet"],
         "tags": ["wsl2","cheatsheet"],
         "url": "/cheatsheet/cheatsheet-wsl2/",
-        "teaser": "/assets/images/Vim.jpg"
+        "teaser": "/assets/images/mario-question.png"
       },{
         "title": "DatKom Notes",
         "excerpt":"Concepts Communication services, layer models, protocols Physical basics of transmission Error handling and medium access Internet Protocol (IP) and Routing: Connecting remote hosts Transmission Control Protocol (TCP): Connecting applications Security: Cryptographic primitives, IPsec, SSL/TLS From [source]: Client/Server- und Peer-to-Peer-Systeme OSI-Referenzmodell und TCP/IP-Referenzmodell Übertragungsmedien und Signaldarstellung Fehlerbehandlung, Flusssteuerung und Medienzugriff Lokale...","categories": ["Notes"],

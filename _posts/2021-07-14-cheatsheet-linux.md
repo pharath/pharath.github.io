@@ -419,16 +419,23 @@ sudo snap remove --purge *package* |
 
 # System information
 
+**Note**: `lsb_release` and `uname` may report different Kernel versions!
+
 | command | description |
 | :---: | :---: |
 cat /etc/os-release	 |	Ubuntu Version (lang)
-lsb_release -a |			Ubuntu Version (kurz)
-hostnamectl |				Ubuntu Version (mittel) mit Linux Kernel Version
-
-<hr>
-
-uname -r | 				Linux Kernel Version
-uname -a |				print system information
+lsb_release -a | Ubuntu Version (kurz)
+hostnamectl | Ubuntu Version (mittel) mit Linux Kernel Version
+uname --help | Returns the help manual for the uname command, including all available options.
+uname -a | Prints all information for the server/system you're on.
+uname -s | Prints the kernel name
+uname -n | Prints the node name
+uname -r | Prints the kernel release data
+uname -v | Prints the kernel version data
+uname -m | Prints the machine data
+uname -p | Prints the processor information
+uname -i | Prints the platform hardware information
+uname -o | Prints the operating system information
 
 # chmod, Groups
 

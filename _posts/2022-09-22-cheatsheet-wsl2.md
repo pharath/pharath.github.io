@@ -2,10 +2,6 @@
 title: "WSL2 Cheatsheet"
 read_time: false
 excerpt: "For quick setup of WSL2"
-header:
-    teaser: /assets/images/Vim.jpg
-    overlay_image: /assets/images/Vim.jpg
-    overlay_filter: 0.5 
 toc: true
 toc_label: "Contents"
 toc_sticky: true

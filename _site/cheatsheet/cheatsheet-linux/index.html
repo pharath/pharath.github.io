@@ -1501,6 +1501,8 @@
 
 <h1 id="system-information">System information</h1>
 
+<p><strong>Note</strong>: <code class="language-plaintext highlighter-rouge">lsb_release</code> and <code class="language-plaintext highlighter-rouge">uname</code> may report different Kernel versions!</p>
+
 <table>
   <thead>
     <tr>
@@ -1521,20 +1523,45 @@
       <td style="text-align: center">hostnamectl</td>
       <td style="text-align: center">Ubuntu Version (mittel) mit Linux Kernel Version</td>
     </tr>
-  </tbody>
-</table>
-
-<hr />
-
-<table>
-  <tbody>
     <tr>
-      <td>uname -r</td>
-      <td>Linux Kernel Version</td>
+      <td style="text-align: center">uname –help</td>
+      <td style="text-align: center">Returns the help manual for the uname command, including all available options.</td>
     </tr>
     <tr>
-      <td>uname -a</td>
-      <td>print system information</td>
+      <td style="text-align: center">uname -a</td>
+      <td style="text-align: center">Prints all information for the server/system you’re on.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">uname -s</td>
+      <td style="text-align: center">Prints the kernel name</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">uname -n</td>
+      <td style="text-align: center">Prints the node name</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">uname -r</td>
+      <td style="text-align: center">Prints the kernel release data</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">uname -v</td>
+      <td style="text-align: center">Prints the kernel version data</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">uname -m</td>
+      <td style="text-align: center">Prints the machine data</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">uname -p</td>
+      <td style="text-align: center">Prints the processor information</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">uname -i</td>
+      <td style="text-align: center">Prints the platform hardware information</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">uname -o</td>
+      <td style="text-align: center">Prints the operating system information</td>
     </tr>
   </tbody>
 </table>

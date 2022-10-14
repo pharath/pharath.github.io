@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-10-11T19:01:51+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Pharath Palesuvaran</title><subtitle>Deep Learning and Self-Driving Cars.</subtitle><author><name>Pharath Palesuvaran</name></author><entry><title type="html">HTML Notes</title><link href="http://localhost:4000/notes/notes-html/" rel="alternate" type="text/html" title="HTML Notes" /><published>2022-10-10T00:00:00+02:00</published><updated>2022-10-10T00:00:00+02:00</updated><id>http://localhost:4000/notes/notes-html</id><content type="html" xml:base="http://localhost:4000/notes/notes-html/">&lt;h1 id=&quot;jekyll&quot;&gt;Jekyll&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-10-14T22:10:59+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Pharath Palesuvaran</title><subtitle>Deep Learning and Self-Driving Cars.</subtitle><author><name>Pharath Palesuvaran</name></author><entry><title type="html">HTML Notes</title><link href="http://localhost:4000/notes/notes-html/" rel="alternate" type="text/html" title="HTML Notes" /><published>2022-10-10T00:00:00+02:00</published><updated>2022-10-10T00:00:00+02:00</updated><id>http://localhost:4000/notes/notes-html</id><content type="html" xml:base="http://localhost:4000/notes/notes-html/">&lt;h1 id=&quot;jekyll&quot;&gt;Jekyll&lt;/h1&gt;
 
 &lt;p&gt;Jekyll is written in Ruby.&lt;/p&gt;
 &lt;ul&gt;
@@ -671,6 +671,37 @@ Unpacked 2424 files and folders to /home/bra-ket/.vscode-server/bin/74b1f979648c
   &lt;li&gt;I/O-System&lt;/li&gt;
   &lt;li&gt;Verteilte Systeme&lt;/li&gt;
   &lt;li&gt;Socket-Programmierung&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;resource-limits&quot;&gt;Resource Limits&lt;/h1&gt;
+
+&lt;h2 id=&quot;setrlimit-getrlimit&quot;&gt;setrlimit(), getrlimit()&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;see &lt;a href=&quot;https://github.com/pharath/C_exercises/blob/master/day_20_memory/setrlimit.c&quot;&gt;example setrlimit.c&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;see &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;man setrlimit&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;Trick&lt;/strong&gt;: to get &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;man&lt;/code&gt; pages in color:
+        &lt;ul&gt;
+          &lt;li&gt;install the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;most&lt;/code&gt; pager using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo apt-get install most&lt;/code&gt;&lt;/li&gt;
+          &lt;li&gt;in terminal set &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;export PAGER=&quot;most&quot;&lt;/code&gt;&lt;/li&gt;
+          &lt;li&gt;to change &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;most&lt;/code&gt; keybindings to vim keybindings &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cp -iv /usr/share/doc/most/lesskeys.rc ~/.mostrc&lt;/code&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;ulimit&quot;&gt;ulimit&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;get and set user limits
+    &lt;ul&gt;
+      &lt;li&gt;i.e. not for one process, but for one user!&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;see &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;man ulimit&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;current user limits: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ulimit -a&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;</content><author><name>Pharath Palesuvaran</name></author><category term="Notes" /><category term="os" /><category term="notes" /><summary type="html">Operating Systems Basics</summary></entry><entry><title type="html">C Notes</title><link href="http://localhost:4000/notes/notes-c/" rel="alternate" type="text/html" title="C Notes" /><published>2022-09-22T00:00:00+02:00</published><updated>2022-09-22T00:00:00+02:00</updated><id>http://localhost:4000/notes/notes-c</id><content type="html" xml:base="http://localhost:4000/notes/notes-c/">&lt;h1 id=&quot;concepts&quot;&gt;Concepts&lt;/h1&gt;
 
 &lt;ul&gt;
@@ -802,6 +833,10 @@ Unpacked 2424 files and folders to /home/bra-ket/.vscode-server/bin/74b1f979648c
 &lt;/ul&gt;
 
 &lt;h1 id=&quot;variables&quot;&gt;Variables&lt;/h1&gt;
+
+&lt;h2 id=&quot;initialization&quot;&gt;Initialization&lt;/h2&gt;
+
+&lt;p&gt;see &lt;a href=&quot;https://www.geeksforgeeks.org/different-ways-to-initialize-a-variable-in-c-c/&quot;&gt;Different ways to initialize a variable in C/C++&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;global-variables-aka-external-variables&quot;&gt;Global variables (aka External variables)&lt;/h2&gt;
 
@@ -951,7 +986,7 @@ Unpacked 2424 files and folders to /home/bra-ket/.vscode-server/bin/74b1f979648c
   &lt;li&gt;Individual array elements are stored in &lt;strong&gt;sequential memory locations&lt;/strong&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;initialization&quot;&gt;Initialization&lt;/h2&gt;
+&lt;h2 id=&quot;initialization-1&quot;&gt;Initialization&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;You can initialize &lt;strong&gt;all or part of&lt;/strong&gt; an array when you first declare it
@@ -1248,9 +1283,18 @@ Unpacked 2424 files and folders to /home/bra-ket/.vscode-server/bin/74b1f979648c
 
 &lt;p&gt;These are the basic format specifiers. We can add some other parts with the format specifiers. These are like below&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;A minus symbol (-) sign tells left alignment&lt;/li&gt;
-  &lt;li&gt;A number after &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%&lt;/code&gt; specifies the minimum field width. If string is less than the width, it will be filled with spaces&lt;/li&gt;
-  &lt;li&gt;A period (.) is used to separate field width and precision&lt;/li&gt;
+  &lt;li&gt;A minus symbol (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-&lt;/code&gt;) sign tells left alignment&lt;/li&gt;
+  &lt;li&gt;A number after &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%&lt;/code&gt; specifies the minimum &lt;strong&gt;field width&lt;/strong&gt;. If string is less than the width, it will be filled with spaces&lt;/li&gt;
+  &lt;li&gt;A period (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.&lt;/code&gt;) is used to separate &lt;strong&gt;field width&lt;/strong&gt; and &lt;strong&gt;precision&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;precision&quot;&gt;Precision&lt;/h3&gt;
+
+&lt;p&gt;From C99 §7.19.6.1:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;A &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;double&lt;/code&gt; argument representing a floating-point number is converted to decimal notation in the style &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[−]ddd.ddd&lt;/code&gt;, where the number of digits after the decimal-point character is equal to the &lt;strong&gt;precision&lt;/strong&gt; specification.&lt;/li&gt;
+  &lt;li&gt;If the precision is missing, it is taken as 6; if the precision is zero and the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#&lt;/code&gt; flag is not specified, no decimal-point character appears. If a decimal-point character appears, at least one digit appears before it.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;The value is rounded to the appropriate number of digits&lt;/strong&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h1 id=&quot;scanf-gets-fgets&quot;&gt;scanf, gets, fgets&lt;/h1&gt;
@@ -1539,6 +1583,40 @@ Unpacked 2424 files and folders to /home/bra-ket/.vscode-server/bin/74b1f979648c
   &lt;li&gt;TL;TR: Yes, a pointer is a data type (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;void *&lt;/code&gt; in its purest form). The pure form is quite unusable (because you can’t dereference it). Instead of having to cast the pointer every time you decide to use it, C offers the convenience of derived pointer types (like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;char *&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;int *&lt;/code&gt; and so on). But really, they’re pointers, and therefore a data-type in their own right.&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;h2 id=&quot;void-pointer&quot;&gt;void pointer&lt;/h2&gt;
+
+&lt;h3 id=&quot;in-c&quot;&gt;In C++&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.learncpp.com/cpp-tutorial/void-pointers/&quot;&gt;source&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;A void pointer can point to objects of any data type:&lt;/p&gt;
+&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;float&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Something&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;float&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;Something&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ptr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ptr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// valid&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ptr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// valid&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ptr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// valid&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;However, because the void pointer does not know what type of object it is pointing to, dereferencing a void pointer is illegal. Instead, the void pointer must first be cast to another pointer type before the dereference can be performed.&lt;/p&gt;
+&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;voidPtr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// std::cout &amp;lt;&amp;lt; *voidPtr &amp;lt;&amp;lt; '\n'; // illegal: dereference of void pointer&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;intPtr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;static_cast&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;voidPtr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// however, if we cast our void pointer to an int pointer...&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cout&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;intPtr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;'\n'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// then we can dereference the result&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
 &lt;h2 id=&quot;null-pointer&quot;&gt;NULL pointer&lt;/h2&gt;
 
 &lt;p&gt;Definition:&lt;/p&gt;
@@ -1736,6 +1814,19 @@ Unpacked 2424 files and folders to /home/bra-ket/.vscode-server/bin/74b1f979648c
 
 &lt;h1 id=&quot;memory&quot;&gt;Memory&lt;/h1&gt;
 
+&lt;h2 id=&quot;monitoring-of-memory&quot;&gt;Monitoring of memory&lt;/h2&gt;
+
+&lt;p&gt;Read &lt;a href=&quot;https://www.linuxatemyram.com/#when-should-i-start-to-worry&quot;&gt;How do I see how much free ram I really have?&lt;/a&gt; first! Also read section “When should I start to worry?”!&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;watch free &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Also see &lt;a href=&quot;https://stackoverflow.com/questions/13921053/malloc-inside-an-infinte-loop&quot;&gt;malloc inside an infinte loop&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;bad-signs&quot;&gt;Bad signs&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dmesg | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;oom-killer
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;should not show any output! If it does, it is a bad sign!&lt;/p&gt;
+
 &lt;h2 id=&quot;areas-of-memory&quot;&gt;Areas of memory&lt;/h2&gt;
 
 &lt;p&gt;When a program begins the operating system sets up following areas of memory (depending on the requirements of the compiler):&lt;/p&gt;
@@ -1777,6 +1868,11 @@ Unpacked 2424 files and folders to /home/bra-ket/.vscode-server/bin/74b1f979648c
   &lt;li&gt;last-in, first-out
     &lt;ul&gt;
       &lt;li&gt;data is &lt;strong&gt;pushed&lt;/strong&gt; onto the stack and &lt;strong&gt;popped&lt;/strong&gt; off the stack&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setrlimit()&lt;/code&gt;: use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RLIMIT_STACK&lt;/code&gt; &lt;a href=&quot;/notes/notes-OS/#resource-limits&quot;&gt;resource limit&lt;/a&gt; to limit the stack size
+    &lt;ul&gt;
+      &lt;li&gt;If you exceed the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RLIMIT_STACK&lt;/code&gt; limit (call stack too deep, or allocate too many variables on the stack), your program will receive a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SIGSEGV&lt;/code&gt;.&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;stack pointer
@@ -1846,6 +1942,15 @@ Unpacked 2424 files and folders to /home/bra-ket/.vscode-server/bin/74b1f979648c
 &lt;h3 id=&quot;free-store-heap&quot;&gt;Free store (Heap)&lt;/h3&gt;
 
 &lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setrlimit()&lt;/code&gt;: use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RLIMIT_DATA&lt;/code&gt; &lt;a href=&quot;/notes/notes-OS/#resource-limits&quot;&gt;resource limit&lt;/a&gt; to limit the heap size
+    &lt;ul&gt;
+      &lt;li&gt;If you try to extend the data segment past the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RLIMIT_DATA&lt;/code&gt; limit (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;brk&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sbrk&lt;/code&gt; or some intermediary like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;malloc&lt;/code&gt;), the attempt will fail. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;brk&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sbrk&lt;/code&gt; will return &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt; 0&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;malloc&lt;/code&gt; will return a null pointer.
+        &lt;ul&gt;
+          &lt;li&gt;but &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;malloc&lt;/code&gt; uses the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mmap&lt;/code&gt; system call which is independent of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RLIMIT_DATA&lt;/code&gt; !&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;in C++&lt;/strong&gt;: You allocate memory on the free store in C++ by using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;new&lt;/code&gt; keyword.&lt;/li&gt;
 &lt;/ul&gt;
 

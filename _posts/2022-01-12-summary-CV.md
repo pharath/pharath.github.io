@@ -2,8 +2,8 @@
 title: "Computer Vision"
 excerpt: "Click on \"Content in HTML\" button below."
 header:
-  teaser: /assets//assets/images/images_databases/databases.png
-  overlay_image: /assets//assets/images/images_databases/databases.png
+  teaser: /assets/images/lenet.png
+  overlay_image: /assets/images/lenet.png
   overlay_filter: 0.5 
   caption: "Photo credit: [**Jennifer Widom**](https://cs.stanford.edu/people/widom/)"
   actions:

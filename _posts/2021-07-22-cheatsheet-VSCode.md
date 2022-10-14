@@ -84,8 +84,8 @@ ctrl-k ctrl-j | unfold all
 ctrl + shift + . | focus breadcrumbs (jump between methods/functions)
 ctrl + alt + - | go back (i.e. jump to previous location) (Windows: alt + left)
 ctrl + shift + - | go forward (i.e. jump to next location) (Windows: alt + right)
-ctrl + d | "add selection to next find match" (for quickly modifying multiple occurrences of the selected code simultaneously)
 ctrl + k ctrl + d | "move last selection to next find match" (like `*` in Vim)
+ctrl + d | "add selection to next find match" (for quickly modifying multiple occurrences of the selected code simultaneously)
 
 ## Write
 
