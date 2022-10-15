@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-10-14T22:10:59+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Pharath Palesuvaran</title><subtitle>Deep Learning and Self-Driving Cars.</subtitle><author><name>Pharath Palesuvaran</name></author><entry><title type="html">HTML Notes</title><link href="http://localhost:4000/notes/notes-html/" rel="alternate" type="text/html" title="HTML Notes" /><published>2022-10-10T00:00:00+02:00</published><updated>2022-10-10T00:00:00+02:00</updated><id>http://localhost:4000/notes/notes-html</id><content type="html" xml:base="http://localhost:4000/notes/notes-html/">&lt;h1 id=&quot;jekyll&quot;&gt;Jekyll&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-10-15T20:36:13+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Pharath Palesuvaran</title><subtitle>Deep Learning and Self-Driving Cars.</subtitle><author><name>Pharath Palesuvaran</name></author><entry><title type="html">HTML Notes</title><link href="http://localhost:4000/notes/notes-html/" rel="alternate" type="text/html" title="HTML Notes" /><published>2022-10-10T00:00:00+02:00</published><updated>2022-10-10T00:00:00+02:00</updated><id>http://localhost:4000/notes/notes-html</id><content type="html" xml:base="http://localhost:4000/notes/notes-html/">&lt;h1 id=&quot;jekyll&quot;&gt;Jekyll&lt;/h1&gt;
 
 &lt;p&gt;Jekyll is written in Ruby.&lt;/p&gt;
 &lt;ul&gt;
@@ -671,6 +671,24 @@ Unpacked 2424 files and folders to /home/bra-ket/.vscode-server/bin/74b1f979648c
   &lt;li&gt;I/O-System&lt;/li&gt;
   &lt;li&gt;Verteilte Systeme&lt;/li&gt;
   &lt;li&gt;Socket-Programmierung&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;unix-system-calls&quot;&gt;UNIX System calls&lt;/h1&gt;
+
+&lt;h2 id=&quot;strace&quot;&gt;strace&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;overview: &lt;a href=&quot;https://www.thegeekstuff.com/2011/11/strace-examples/&quot;&gt;thegeekstuff&lt;/a&gt;:&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;strace some_command&lt;/code&gt;: trace system calls and signals&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;strace ./avail_mem_malloc -l&lt;/code&gt;: trace system calls and signals when running the command &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;./avail_mem_malloc -l&lt;/code&gt; (source code of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;./avail_mem_malloc -l&lt;/code&gt; is in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/home/bra-ket/Desktop/Aachen/Uni/Basics_CS/OS/git/C_exercises/day_20_memory/avail_mem_malloc.c&lt;/code&gt;)&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;strace -e mmap ./avail_mem_malloc -l&lt;/code&gt;: filter a &lt;strong&gt;specific&lt;/strong&gt; system call and/or signals, here: the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mmap&lt;/code&gt; system call&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;related-to-memory&quot;&gt;Related to Memory&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mmap&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;munmap&lt;/code&gt;: map or unmap files or devices into memory&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;brk&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sbrk&lt;/code&gt;: change data segment size&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h1 id=&quot;resource-limits&quot;&gt;Resource Limits&lt;/h1&gt;
@@ -1819,13 +1837,21 @@ Unpacked 2424 files and folders to /home/bra-ket/.vscode-server/bin/74b1f979648c
 &lt;p&gt;Read &lt;a href=&quot;https://www.linuxatemyram.com/#when-should-i-start-to-worry&quot;&gt;How do I see how much free ram I really have?&lt;/a&gt; first! Also read section “When should I start to worry?”!&lt;/p&gt;
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;watch free &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Also see &lt;a href=&quot;https://stackoverflow.com/questions/13921053/malloc-inside-an-infinte-loop&quot;&gt;malloc inside an infinte loop&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h3 id=&quot;bad-signs&quot;&gt;Bad signs&lt;/h3&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dmesg | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;oom-killer
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dmesg &lt;span class=&quot;nt&quot;&gt;-T&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;oom-killer
+&lt;span class=&quot;c&quot;&gt;# same as&lt;/span&gt;
+dmesg &lt;span class=&quot;nt&quot;&gt;--ctime&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;oom-killer
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;should not show any output! If it does, it is a bad sign!&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-T&lt;/code&gt; (same as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--ctime&lt;/code&gt;) flag is used to print human-readable timestamps
+    &lt;ul&gt;
+      &lt;li&gt;Be aware that the timestamp could be inaccurate! (see &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;man dmesg&lt;/code&gt;)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h2 id=&quot;areas-of-memory&quot;&gt;Areas of memory&lt;/h2&gt;
 
@@ -1933,6 +1959,46 @@ Unpacked 2424 files and folders to /home/bra-ket/.vscode-server/bin/74b1f979648c
   &lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;h4 id=&quot;stack-overflow&quot;&gt;Stack Overflow&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Stack_overflow&quot;&gt;Wikipedia&lt;/a&gt;:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;A stack overflow occurs if the &lt;strong&gt;call stack pointer&lt;/strong&gt; (ESP, see above) exceeds the stack bound.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Causes&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Infinite recursion&lt;/strong&gt; (most common cause of stack overflows):&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;int foo&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; 
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return &lt;/span&gt;foo&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;space needed to store the variables and information associated with each call&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;foo()&lt;/code&gt; invokes itself until the stack overflows resulting in a &lt;a href=&quot;#segmentation-fault&quot;&gt;segmentation fault&lt;/a&gt; (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SIGSEGV&lt;/code&gt; in UNIX, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;STATUS_ACCESS_VIOLATION&lt;/code&gt; exception in Windows)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Very Deep Recursion&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;a recursive function that terminates in theory but causes a call stack buffer overflow in practice
+    &lt;ul&gt;
+      &lt;li&gt;fix by transforming the recursion into a loop&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Very large stack variables&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;attempt to allocate more memory on the stack than will fit, e.g. by creating local array variables that are too large
+    &lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; 
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1048576&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;h3 id=&quot;global-namespace&quot;&gt;Global namespace&lt;/h3&gt;
 
 &lt;ul&gt;
@@ -1946,7 +2012,8 @@ Unpacked 2424 files and folders to /home/bra-ket/.vscode-server/bin/74b1f979648c
     &lt;ul&gt;
       &lt;li&gt;If you try to extend the data segment past the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RLIMIT_DATA&lt;/code&gt; limit (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;brk&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sbrk&lt;/code&gt; or some intermediary like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;malloc&lt;/code&gt;), the attempt will fail. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;brk&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sbrk&lt;/code&gt; will return &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt; 0&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;malloc&lt;/code&gt; will return a null pointer.
         &lt;ul&gt;
-          &lt;li&gt;but &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;malloc&lt;/code&gt; uses the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mmap&lt;/code&gt; system call which is independent of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RLIMIT_DATA&lt;/code&gt; !&lt;/li&gt;
+          &lt;li&gt;but &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;malloc&lt;/code&gt; uses the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mmap&lt;/code&gt; system call which creates mappings in &lt;strong&gt;virtual memory&lt;/strong&gt; and not in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RLIMIT_DATA&lt;/code&gt; !&lt;/li&gt;
+          &lt;li&gt;use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ulimit -Sv kiloBytes&lt;/code&gt; to limit the program’s virtual memory! (Note: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kiloBytes&lt;/code&gt; must be sufficiently large, i.e. $\approx\gt 3000$ kiloBytes!)&lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
     &lt;/ul&gt;
@@ -2072,6 +2139,46 @@ Unpacked 2424 files and folders to /home/bra-ket/.vscode-server/bin/74b1f979648c
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;memset()&lt;/code&gt;&lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;memcpy()&lt;/code&gt;&lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;memmove()&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;heap-overflow&quot;&gt;Heap Overflow&lt;/h2&gt;
+
+&lt;p&gt;from &lt;a href=&quot;https://en.wikipedia.org/wiki/Heap_overflow&quot;&gt;Wikipedia&lt;/a&gt;:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;An accidental overflow may result in data corruption or unexpected behavior by any process that accesses the affected memory area.
+    &lt;ul&gt;
+      &lt;li&gt;On operating systems &lt;strong&gt;without&lt;/strong&gt; memory protection, this could be any process on the system.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;exploitation-vulnerability&quot;&gt;Exploitation, Vulnerability&lt;/h3&gt;
+
+&lt;p&gt;from &lt;a href=&quot;https://en.wikipedia.org/wiki/Heap_overflow&quot;&gt;Wikipedia&lt;/a&gt;:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Memory on the heap is dynamically allocated at runtime and typically &lt;strong&gt;contains program data&lt;/strong&gt;.&lt;/li&gt;
+  &lt;li&gt;Exploitation is performed by corrupting this data in specific ways to cause the application to overwrite internal structures such as &lt;strong&gt;linked list pointers&lt;/strong&gt;.&lt;/li&gt;
+  &lt;li&gt;The canonical &lt;strong&gt;heap overflow technique&lt;/strong&gt; overwrites dynamic memory allocation linkage (such as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;malloc&lt;/code&gt; metadata) and uses the resulting pointer exchange to overwrite a program function pointer.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;iOS jailbreaking&lt;/strong&gt; often uses heap overflows to gain arbitrary code execution.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;UAF&lt;/strong&gt;: see &lt;a href=&quot;https://encyclopedia.kaspersky.com/glossary/use-after-free/&quot;&gt;Use-After-Free Vulnerability&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;segmentation-fault&quot;&gt;Segmentation Fault&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Segmentation_fault&quot;&gt;from Wikipedia&lt;/a&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;On standard x86 computers, this is a form of &lt;strong&gt;general protection fault&lt;/strong&gt;.&lt;/li&gt;
+      &lt;li&gt;The &lt;strong&gt;operating system kernel&lt;/strong&gt; will, in response, usually perform some &lt;strong&gt;corrective action&lt;/strong&gt;, generally passing the fault on to the offending process by sending the process a signal.&lt;/li&gt;
+      &lt;li&gt;Processes can in some cases install &lt;strong&gt;a custom signal handler&lt;/strong&gt;, allowing them to recover on their own, but otherwise &lt;strong&gt;the OS default signal handler&lt;/strong&gt; is used, generally causing &lt;strong&gt;abnormal termination&lt;/strong&gt; of the process (a &lt;strong&gt;program crash&lt;/strong&gt;), and sometimes a &lt;strong&gt;core dump&lt;/strong&gt;.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://stackoverflow.com/a/14367598&quot;&gt;from stackoverflow&lt;/a&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;Segmentation faults don’t directly have anything to do with the heap. The term segmentation fault comes from older operating systems (Unix-style) that used “segments” of memory for different usages, and “Segmentation fault” was when the program went outside it’s allocated segment. In modern systems, the memory is split into “pages” - typically 4KB each, but some processors have larger pages, and many modern processors support “large pages” of, for examble, 2MB or 1GB, which is used for large chunks of memory.&lt;/li&gt;
+      &lt;li&gt;Now, if you use an address that points to a page that isn’t there (or isn’t “yours”), you get a segmentation fault. This, typically will end the application then and there. You can “trap” segmentation fault, but in all operating systems I’m aware of, it’s not valid to try to continue from this “trap” - but you could for example store away some files to explain what happened and help troubleshoot the problem later, etc.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h1 id=&quot;linked-list&quot;&gt;Linked List&lt;/h1&gt;

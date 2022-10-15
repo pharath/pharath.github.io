@@ -368,7 +368,7 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header>
-              <ul class="toc__menu"><li><a href="#concepts">Concepts</a></li><li><a href="#resource-limits">Resource Limits</a><ul><li><a href="#setrlimit-getrlimit">setrlimit(), getrlimit()</a></li><li><a href="#ulimit">ulimit</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#concepts">Concepts</a></li><li><a href="#unix-system-calls">UNIX System calls</a><ul><li><a href="#strace">strace</a></li><li><a href="#related-to-memory">Related to Memory</a></li></ul></li><li><a href="#resource-limits">Resource Limits</a><ul><li><a href="#setrlimit-getrlimit">setrlimit(), getrlimit()</a></li><li><a href="#ulimit">ulimit</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -398,6 +398,24 @@
   <li>I/O-System</li>
   <li>Verteilte Systeme</li>
   <li>Socket-Programmierung</li>
+</ul>
+
+<h1 id="unix-system-calls">UNIX System calls</h1>
+
+<h2 id="strace">strace</h2>
+
+<ul>
+  <li>overview: <a href="https://www.thegeekstuff.com/2011/11/strace-examples/">thegeekstuff</a>:</li>
+  <li><code class="language-plaintext highlighter-rouge">strace some_command</code>: trace system calls and signals</li>
+  <li><code class="language-plaintext highlighter-rouge">strace ./avail_mem_malloc -l</code>: trace system calls and signals when running the command <code class="language-plaintext highlighter-rouge">./avail_mem_malloc -l</code> (source code of <code class="language-plaintext highlighter-rouge">./avail_mem_malloc -l</code> is in <code class="language-plaintext highlighter-rouge">/home/bra-ket/Desktop/Aachen/Uni/Basics_CS/OS/git/C_exercises/day_20_memory/avail_mem_malloc.c</code>)</li>
+  <li><code class="language-plaintext highlighter-rouge">strace -e mmap ./avail_mem_malloc -l</code>: filter a <strong>specific</strong> system call and/or signals, here: the <code class="language-plaintext highlighter-rouge">mmap</code> system call</li>
+</ul>
+
+<h2 id="related-to-memory">Related to Memory</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">mmap</code>, <code class="language-plaintext highlighter-rouge">munmap</code>: map or unmap files or devices into memory</li>
+  <li><code class="language-plaintext highlighter-rouge">brk</code>, <code class="language-plaintext highlighter-rouge">sbrk</code>: change data segment size</li>
 </ul>
 
 <h1 id="resource-limits">Resource Limits</h1>
