@@ -84,12 +84,12 @@ var store = [{
         "teaser": "/assets/images/mario-question.png"
       },{
         "title": "Python Cheatsheet",
-        "excerpt":"Installing multiple Python Versions source: sudo add-apt-repository ppa:deadsnakes/ppa sudo apt-get update sudo apt-get install python3.5 sudo apt-get install python3.5-dev It will not overwrite your existing python3.4 which is still symlinked as python3. Instead, to run python3.5, run the command python3.5 (or python3.X for any other version of python). venv using...","categories": ["Cheatsheet","Python"],
+        "excerpt":"Installing multiple Python Versions source: sudo add-apt-repository ppa:deadsnakes/ppa sudo apt-get update sudo apt-get install python3.5 sudo apt-get install python3.5-dev It will not overwrite your existing python3.4 which is still symlinked as python3. Instead, to run python3.5, run the command python3.5 (or python3.X for any other version of python). venv using...","categories": ["Cheatsheet"],
         "tags": ["python","conda","cheatsheet"],
-        "url": "/cheatsheet/python/cheatsheet-python/",
+        "url": "/cheatsheet/cheatsheet-python/",
         "teaser": "/assets/images/mario-question.png"
       },{
-        "title": "Python Cheatsheet",
+        "title": "Qt Cheatsheet",
         "excerpt":"Install am besten mit offline installer (created with Qt Installer Framework); automatische installation via script, das installer automatisch “durchklickt” s. here and here; flags für CLI des offline installers here wenn man qt über apt installiert, muss man qtcreator und die qt library manuell verbinden (umständlich) Vorteil: Installation weiterer Komponenten...","categories": ["Cheatsheet"],
         "tags": ["python","conda","cheatsheet"],
         "url": "/cheatsheet/cheatsheet-qt/",
@@ -132,12 +132,12 @@ var store = [{
         "teaser": "/assets/images/mario-question.png"
       },{
         "title": "Machine Learning (Part 1)",
-        "excerpt":"General Remarks Don’t lose sight of the bigger picture ! Only learn stuff when you need it ! As Feynman said: don’t read everything about a topic before starting to work on it. Think about the problem for yourself, figure out what’s important, then read the literature. This will allow...","categories": ["Lecture_Notes","Machine_Learning"],
-        "tags": ["lecture_notes","ml"],
-        "url": "/lecture_notes/machine_learning/lecture-notes-ML-part1/",
+        "excerpt":"General Remarks Don’t lose sight of the bigger picture ! Only learn stuff when you need it ! As Feynman said: don’t read everything about a topic before starting to work on it. Think about the problem for yourself, figure out what’s important, then read the literature. This will allow...","categories": ["Notes"],
+        "tags": ["lecture_notes","notes","ml"],
+        "url": "/notes/lecture-notes-ML-part1/",
         "teaser": "/assets/images/lenet.png"
       },{
-        "title": "Network Cheatsheet",
+        "title": "Networking Cheatsheet",
         "excerpt":"MacOS networksetup -setairportpower en1 off networksetup -setairportpower en1 on Ifconfig networksetup ( ohne parameter: zeigt alle möglichen parameter ) alias listssids='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/local/bin/airport' # (Achtung: ‘ und nicht “ als Anführungszeichen benutzen!) # =&gt; diese Zeile in “vim ~/.bash_profile” einfügen # =&gt; “listssids -s” kann dann alle SSIDs abrufen networksetup -setairportnetwork...","categories": ["Cheatsheet"],
         "tags": ["network","cheatsheet"],
         "url": "/cheatsheet/cheatsheet-network/",
@@ -180,9 +180,9 @@ var store = [{
         "teaser": "/assets/images/lenet.png"
       },{
         "title": "Machine Learning (Part 2)",
-        "excerpt":"Neural Networks Perceptrons (Rosenblatt 1962) perceptrons (SLPs) are generalized linear models (“generalized” because of the activation function) BUT: Deep Neural Networks (MLPs) are nonlinear models. more specifically: perceptrons are generalized linear discriminants (because they map the input x directly to a class label t in {-1,+1} [see above: “Linear models...","categories": ["Lecture_Notes","Machine_Learning"],
-        "tags": ["lecture_notes","ml"],
-        "url": "/lecture_notes/machine_learning/lecture-notes-ML-part2/",
+        "excerpt":"Neural Networks Perceptrons (Rosenblatt 1962) perceptrons (SLPs) are generalized linear models (“generalized” because of the activation function) BUT: Deep Neural Networks (MLPs) are nonlinear models. more specifically: perceptrons are generalized linear discriminants (because they map the input x directly to a class label t in {-1,+1} [see above: “Linear models...","categories": ["Notes"],
+        "tags": ["lecture_notes","notes","ml"],
+        "url": "/notes/lecture-notes-ML-part2/",
         "teaser": "/assets/images/lenet.png"
       },{
         "title": "ROS Cheatsheet",
@@ -192,9 +192,9 @@ var store = [{
         "teaser": "/assets/images/mario-question.png"
       },{
         "title": "Machine Learning (Part 3)",
-        "excerpt":"CNN Concept Good Overviews Wikipedia Why do CNNs work? Sparse Connectivity as opposed to Full Connectivity Goodfellow_2016: Convolutional networks, however, typically have sparse interactions (also referred to as sparse connectivity or sparse weights). This is accomplished by making the kernel smaller than the input. This means that we need to...","categories": ["Lecture_Notes","Machine_Learning","Computer_Vision"],
-        "tags": ["lecture_notes","ml","cv"],
-        "url": "/lecture_notes/machine_learning/computer_vision/lecture-notes-ML-part3/",
+        "excerpt":"CNN Concept Good Overviews Wikipedia Why do CNNs work? Sparse Connectivity as opposed to Full Connectivity Goodfellow_2016: Convolutional networks, however, typically have sparse interactions (also referred to as sparse connectivity or sparse weights). This is accomplished by making the kernel smaller than the input. This means that we need to...","categories": ["Notes"],
+        "tags": ["lecture_notes","notes","ml","cv"],
+        "url": "/notes/lecture-notes-ML-part3/",
         "teaser": "/assets/images/lenet.png"
       },{
         "title": "Carla Simulator",
@@ -252,9 +252,9 @@ var store = [{
         "teaser": "/assets/images/mario-question.png"
       },{
         "title": "TensorRT",
-        "excerpt":"Install WARNING: apt upgrade maybe upgrades libcudnn8 which removes all tensorrt libs! apt-mark hold all libcudnn8 packages before installation! Debian installation, else no samples, no trtexec, … etc. compile trtexec in samples and put export PATH=/usr/src/tensorrt/bin${PATH:+:${PATH}} in .bashrc Install using pip wheel file Check installation import tensorrt as trt print(trt.__version__)...","categories": ["TensorRT","Machine_Learning"],
+        "excerpt":"Install WARNING: apt upgrade maybe upgrades libcudnn8 which removes all tensorrt libs! apt-mark hold all libcudnn8 packages before installation! Debian installation, else no samples, no trtexec, … etc. compile trtexec in samples and put export PATH=/usr/src/tensorrt/bin${PATH:+:${PATH}} in .bashrc Install using pip wheel file Check installation import tensorrt as trt print(trt.__version__)...","categories": ["Notes"],
         "tags": ["tensorrt","ml"],
-        "url": "/tensorrt/machine_learning/notes-tensorrt/",
+        "url": "/notes/notes-tensorrt/",
         "teaser": "/assets/images/lenet.png"
       },{
         "title": "Notes on YOLO Object Detection",

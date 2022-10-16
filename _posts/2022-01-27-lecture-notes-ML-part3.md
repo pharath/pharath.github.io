@@ -11,11 +11,10 @@ header:
     - label: "Some Content"
 [//]: # (      url: "https://htmlpreview.github.io/?https://github.com/pharath/home/blob/master/_posts_html/2021-09-23-Databases.html")
 categories:
-  - Lecture_Notes
-  - Machine_Learning
-  - Computer_Vision
+  - Notes
 tags:
   - lecture_notes
+  - notes
   - ml
   - cv
 toc: true

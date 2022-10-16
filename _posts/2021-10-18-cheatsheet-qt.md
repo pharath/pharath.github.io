@@ -1,5 +1,5 @@
 ---
-title: "Python Cheatsheet"
+title: "Qt Cheatsheet"
 read_time: false
 excerpt_separator: "<!--more-->"
 categories:

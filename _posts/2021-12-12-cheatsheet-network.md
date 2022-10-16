@@ -1,5 +1,5 @@
 ---
-title: "Network Cheatsheet"
+title: "Networking Cheatsheet"
 read_time: false
 excerpt: "Some essential networking commands"
 header:

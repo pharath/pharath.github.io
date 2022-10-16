@@ -57,7 +57,7 @@
 <lastmod>2021-10-09T00:00:00+02:00</lastmod>
 </url>
 <url>
-<loc>http://localhost:4000/cheatsheet/python/cheatsheet-python/</loc>
+<loc>http://localhost:4000/cheatsheet/cheatsheet-python/</loc>
 <lastmod>2021-10-12T00:00:00+02:00</lastmod>
 </url>
 <url>
@@ -89,7 +89,7 @@
 <lastmod>2021-12-06T00:00:00+01:00</lastmod>
 </url>
 <url>
-<loc>http://localhost:4000/lecture_notes/machine_learning/lecture-notes-ML-part1/</loc>
+<loc>http://localhost:4000/notes/lecture-notes-ML-part1/</loc>
 <lastmod>2021-12-11T00:00:00+01:00</lastmod>
 </url>
 <url>
@@ -121,7 +121,7 @@
 <lastmod>2022-01-12T21:00:52+01:00</lastmod>
 </url>
 <url>
-<loc>http://localhost:4000/lecture_notes/machine_learning/lecture-notes-ML-part2/</loc>
+<loc>http://localhost:4000/notes/lecture-notes-ML-part2/</loc>
 <lastmod>2022-01-17T00:00:00+01:00</lastmod>
 </url>
 <url>
@@ -129,7 +129,7 @@
 <lastmod>2022-01-22T00:00:00+01:00</lastmod>
 </url>
 <url>
-<loc>http://localhost:4000/lecture_notes/machine_learning/computer_vision/lecture-notes-ML-part3/</loc>
+<loc>http://localhost:4000/notes/lecture-notes-ML-part3/</loc>
 <lastmod>2022-01-27T00:00:00+01:00</lastmod>
 </url>
 <url>
@@ -169,7 +169,7 @@
 <lastmod>2022-04-13T00:00:00+02:00</lastmod>
 </url>
 <url>
-<loc>http://localhost:4000/tensorrt/machine_learning/notes-tensorrt/</loc>
+<loc>http://localhost:4000/notes/notes-tensorrt/</loc>
 <lastmod>2022-04-17T22:00:52+02:00</lastmod>
 </url>
 <url>

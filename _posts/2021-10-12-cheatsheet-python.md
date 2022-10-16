@@ -4,7 +4,6 @@ read_time: false
 excerpt_separator: "<!--more-->"
 categories:
   - Cheatsheet
-  - Python
 tags:
   - python
   - conda
