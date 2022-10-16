@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-10-16T17:50:55+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Pharath Palesuvaran</title><subtitle>Deep Learning and Self-Driving Cars.</subtitle><author><name>Pharath Palesuvaran</name></author><entry><title type="html">HTML Notes</title><link href="http://localhost:4000/notes/notes-html/" rel="alternate" type="text/html" title="HTML Notes" /><published>2022-10-10T00:00:00+02:00</published><updated>2022-10-10T00:00:00+02:00</updated><id>http://localhost:4000/notes/notes-html</id><content type="html" xml:base="http://localhost:4000/notes/notes-html/">&lt;h1 id=&quot;jekyll&quot;&gt;Jekyll&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-10-16T23:56:45+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Pharath Palesuvaran</title><subtitle>Deep Learning and Self-Driving Cars.</subtitle><author><name>Pharath Palesuvaran</name></author><entry><title type="html">HTML Notes</title><link href="http://localhost:4000/notes/notes-html/" rel="alternate" type="text/html" title="HTML Notes" /><published>2022-10-10T00:00:00+02:00</published><updated>2022-10-10T00:00:00+02:00</updated><id>http://localhost:4000/notes/notes-html</id><content type="html" xml:base="http://localhost:4000/notes/notes-html/">&lt;h1 id=&quot;jekyll&quot;&gt;Jekyll&lt;/h1&gt;
 
 &lt;p&gt;Jekyll is written in Ruby.&lt;/p&gt;
 &lt;ul&gt;
@@ -1101,10 +1101,22 @@ Unpacked 2424 files and folders to /home/bra-ket/.vscode-server/bin/74b1f979648c
 
 &lt;h2 id=&quot;low-order-byte-and-high-order-byte&quot;&gt;Low-order byte and High-order byte&lt;/h2&gt;
 
+&lt;p&gt;From &lt;a href=&quot;https://stackoverflow.com/questions/47117509/high-order-and-low-order-byte&quot;&gt;stackoverflow&lt;/a&gt;:&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;In C, the size of an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;int&lt;/code&gt; is implementation defined, but is usually 2, or 4 bytes in size. The &lt;strong&gt;high-order byte&lt;/strong&gt; would be the byte that contains the largest portion of the value. The &lt;strong&gt;low-order byte&lt;/strong&gt; would be the byte that contains the smallest portion of the value.
     &lt;ul&gt;
-      &lt;li&gt;For example, if you have a 16-bit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;int&lt;/code&gt;, and the value is 5,243, you’d write that in hex as 0x147B. The high order byte is the 0x14 (1 byte = 8 bit, sodass 256 Werte möglich sind, was in hex &lt;strong&gt;2 Ziffern&lt;/strong&gt; sind! Daher die 14 und nicht nur die 1 hinter dem 0x.), and the low-order byte is the 0x7B. A &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;char&lt;/code&gt; is only 1 byte, so it is always contained within the lowest order byte. When written in hex (in left-to-right fashion) the low-order byte will always be the right-most 2 digits, and the high-order byte will be the left-most 2 digits (assuming they write all the bytes out, including leading 0s). (&lt;a href=&quot;https://stackoverflow.com/questions/47117509/high-order-and-low-order-byte&quot;&gt;stackoverflow&lt;/a&gt;)&lt;/li&gt;
+      &lt;li&gt;For example, if you have a 16-bit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;int&lt;/code&gt;, and the value is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;5,243&lt;/code&gt;, you’d write that &lt;strong&gt;in hex&lt;/strong&gt; as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x147B&lt;/code&gt; (&lt;strong&gt;phth&lt;/strong&gt;: 4 hex Stellen, weil 16-bit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;int&lt;/code&gt;).
+        &lt;ul&gt;
+          &lt;li&gt;The high order byte is the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x14&lt;/code&gt; (&lt;strong&gt;phth&lt;/strong&gt;: 1 byte = 8 bit, sodass 256 Werte möglich sind, was in hex &lt;strong&gt;2 Ziffern&lt;/strong&gt; sind! Daher die &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;14&lt;/code&gt; und nicht nur die &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1&lt;/code&gt; hinter dem &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x&lt;/code&gt;.), and&lt;/li&gt;
+          &lt;li&gt;the low-order byte is the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x7B&lt;/code&gt;.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;A &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;char&lt;/code&gt; is only 1 byte, so it is &lt;strong&gt;always&lt;/strong&gt; contained within the lowest order byte. When written &lt;strong&gt;in hex&lt;/strong&gt; (in left-to-right fashion)
+        &lt;ul&gt;
+          &lt;li&gt;the low-order byte will always be the right-most 2 digits, and&lt;/li&gt;
+          &lt;li&gt;the high-order byte will be the left-most 2 digits (assuming they write all the bytes out, including leading 0s).&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -2343,9 +2355,40 @@ dmesg &lt;span class=&quot;nt&quot;&gt;--ctime&lt;/span&gt; | &lt;span class=&qu
 &lt;h2 id=&quot;manipulation&quot;&gt;Manipulation&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;memset()&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;memcpy()&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;memmove()&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;void *memset(void *dest, int c, size_t count);&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;while &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;c&lt;/code&gt; is a type &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;int&lt;/code&gt;, it is treated as a type &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;char&lt;/code&gt;.&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;count&lt;/code&gt; is the number of bytes, starting at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dest&lt;/code&gt;, to be set&lt;/li&gt;
+      &lt;li&gt;set all the bytes in a block of memory to a particular value&lt;/li&gt;
+      &lt;li&gt;you can specify values of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;c&lt;/code&gt; only in the range &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0&lt;/code&gt; through &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;255&lt;/code&gt;
+        &lt;ul&gt;
+          &lt;li&gt;therefore,
+            &lt;ul&gt;
+              &lt;li&gt;&lt;strong&gt;do&lt;/strong&gt; use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;memset&lt;/code&gt; to initialize an array of type &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;char&lt;/code&gt;,&lt;/li&gt;
+              &lt;li&gt;&lt;strong&gt;do not&lt;/strong&gt; use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;memset&lt;/code&gt; to initialize arrays of type &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;int&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;float&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;double&lt;/code&gt;,
+                &lt;ul&gt;
+                  &lt;li&gt;you &lt;strong&gt;can&lt;/strong&gt; initialize these arrays’ elements to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0&lt;/code&gt;, though&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;void *memcpy(void *dest, void *src, size_t count);&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;copies bytes of data between memory blocks, sometimes called &lt;strong&gt;buffers&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;successive byte-for-byte copy&lt;/li&gt;
+      &lt;li&gt;The return value is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dest&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Problem&lt;/strong&gt;: If the two blocks of memory overlap, the function might not operate properly: some of the data in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;src&lt;/code&gt; might be overwritten before being copied. Use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;memmove()&lt;/code&gt; instead. You rarely, have a reason to use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;memcpy()&lt;/code&gt;.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;void *memmove(void *dest, void *src, size_t count);&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;memcpy()&lt;/code&gt;, copying a specified number of bytes from one memory block to another, but &lt;strong&gt;can&lt;/strong&gt; handle overlapping memory blocks properly&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;heap-overflow&quot;&gt;Heap Overflow&lt;/h2&gt;
@@ -2391,7 +2434,34 @@ dmesg &lt;span class=&quot;nt&quot;&gt;--ctime&lt;/span&gt; | &lt;span class=&qu
 &lt;h1 id=&quot;linked-list&quot;&gt;Linked List&lt;/h1&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;TODO&lt;/li&gt;
+  &lt;li&gt;method of &lt;strong&gt;data storage&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;types of linked lists (each type is suited for certain types of data storage)
+    &lt;ul&gt;
+      &lt;li&gt;single-linked list&lt;/li&gt;
+      &lt;li&gt;double-linked list&lt;/li&gt;
+      &lt;li&gt;binary tree&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;array-vs-linked-list&quot;&gt;Array vs Linked List&lt;/h2&gt;
+
+&lt;p&gt;from &lt;a href=&quot;https://www.thegeekstuff.com/2012/08/c-linked-list-example/&quot;&gt;thegeekstuff&lt;/a&gt;:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;a linked list is a &lt;strong&gt;dynamic&lt;/strong&gt; data structure whose length can be increased or decreased &lt;strong&gt;at run time&lt;/strong&gt;, whereas an array is a &lt;strong&gt;static&lt;/strong&gt; data structure, i.e. the length of array &lt;strong&gt;cannot&lt;/strong&gt; be altered at run time.&lt;/li&gt;
+  &lt;li&gt;In an array, all the elements are kept at &lt;strong&gt;consecutive&lt;/strong&gt; memory locations, whereas in a linked list the elements (or nodes) may be kept at &lt;strong&gt;any&lt;/strong&gt; location but still connected to each other.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;single-linked-list&quot;&gt;Single-linked list&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;last element/node&lt;/strong&gt;: has a pointer &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;next&lt;/code&gt; being assigned the value of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NULL&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;head pointer&lt;/strong&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;always points to the first element/node&lt;/li&gt;
+      &lt;li&gt;if the entire list is empty (contains no links), the head pointer is set to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NULL&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;</content><author><name>Pharath Palesuvaran</name></author><category term="Notes" /><category term="c" /><category term="notes" /><summary type="html">For learning C. Content mostly from Bradley L. Jones, Peter Aitken - Sams Teach Yourself C in 21 Days -Sams (2002).</summary></entry><entry><title type="html">Embedded Systems</title><link href="http://localhost:4000/emsys/notes/notes-EmSys/" rel="alternate" type="text/html" title="Embedded Systems" /><published>2022-05-30T00:00:00+02:00</published><updated>2022-05-30T00:00:00+02:00</updated><id>http://localhost:4000/emsys/notes/notes-EmSys</id><content type="html" xml:base="http://localhost:4000/emsys/notes/notes-EmSys/">&lt;h1 id=&quot;microcontroller&quot;&gt;Microcontroller&lt;/h1&gt;
 
 &lt;ul&gt;
