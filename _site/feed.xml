@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-10-15T20:36:13+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Pharath Palesuvaran</title><subtitle>Deep Learning and Self-Driving Cars.</subtitle><author><name>Pharath Palesuvaran</name></author><entry><title type="html">HTML Notes</title><link href="http://localhost:4000/notes/notes-html/" rel="alternate" type="text/html" title="HTML Notes" /><published>2022-10-10T00:00:00+02:00</published><updated>2022-10-10T00:00:00+02:00</updated><id>http://localhost:4000/notes/notes-html</id><content type="html" xml:base="http://localhost:4000/notes/notes-html/">&lt;h1 id=&quot;jekyll&quot;&gt;Jekyll&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-10-16T03:34:10+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Pharath Palesuvaran</title><subtitle>Deep Learning and Self-Driving Cars.</subtitle><author><name>Pharath Palesuvaran</name></author><entry><title type="html">HTML Notes</title><link href="http://localhost:4000/notes/notes-html/" rel="alternate" type="text/html" title="HTML Notes" /><published>2022-10-10T00:00:00+02:00</published><updated>2022-10-10T00:00:00+02:00</updated><id>http://localhost:4000/notes/notes-html</id><content type="html" xml:base="http://localhost:4000/notes/notes-html/">&lt;h1 id=&quot;jekyll&quot;&gt;Jekyll&lt;/h1&gt;
 
 &lt;p&gt;Jekyll is written in Ruby.&lt;/p&gt;
 &lt;ul&gt;
@@ -881,7 +881,7 @@ Unpacked 2424 files and folders to /home/bra-ket/.vscode-server/bin/74b1f979648c
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;use them only when all or most of the program’s functions need access to the variable&lt;/li&gt;
-  &lt;li&gt;When a function uses an external variable, it is good programming practice to declare the variable within the function using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;extern&lt;/code&gt; keyword (see &lt;a href=&quot;https://en.cppreference.com/w/c/language/storage_duration&quot;&gt;Storage-class specifiers&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;When a function uses an external variable, it is good programming practice to declare the variable within the function using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;extern&lt;/code&gt; keyword (&lt;strong&gt;C&lt;/strong&gt;: see &lt;a href=&quot;https://devdocs.io/c/language/storage_duration&quot;&gt;Storage-class specifiers&lt;/a&gt;; &lt;strong&gt;C++&lt;/strong&gt;: see &lt;a href=&quot;https://en.cppreference.com/w/c/language/storage_duration&quot;&gt;Storage-class specifiers&lt;/a&gt;)&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;local-variables&quot;&gt;Local variables&lt;/h2&gt;
@@ -1601,6 +1601,47 @@ Unpacked 2424 files and folders to /home/bra-ket/.vscode-server/bin/74b1f979648c
   &lt;li&gt;TL;TR: Yes, a pointer is a data type (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;void *&lt;/code&gt; in its purest form). The pure form is quite unusable (because you can’t dereference it). Instead of having to cast the pointer every time you decide to use it, C offers the convenience of derived pointer types (like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;char *&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;int *&lt;/code&gt; and so on). But really, they’re pointers, and therefore a data-type in their own right.&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;h2 id=&quot;where-is-a-pointer-stored&quot;&gt;Where is a pointer stored?&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;a pointer can be stored &lt;strong&gt;anywhere&lt;/strong&gt; in the process’ &lt;strong&gt;virtual memory&lt;/strong&gt; (aka address space) which is typically organized in &lt;strong&gt;6 sections&lt;/strong&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;environment section - used to store environment variables and command line arguments;&lt;/li&gt;
+      &lt;li&gt;the stack, used to store memory for function arguments, return values, and &lt;strong&gt;automatic&lt;/strong&gt; variables;&lt;/li&gt;
+      &lt;li&gt;the heap (free store) used for dynamic allocation,&lt;/li&gt;
+      &lt;li&gt;data section for uninitialized &lt;strong&gt;static&lt;/strong&gt; and global variables&lt;/li&gt;
+      &lt;li&gt;data section for initialized &lt;strong&gt;static&lt;/strong&gt; and global variables&lt;/li&gt;
+      &lt;li&gt;a text section where the actual code is kept&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;more precisely&lt;/strong&gt;: from &lt;a href=&quot;https://www.cprogramming.com/tutorial/virtual_memory_and_heaps.html&quot;&gt;cprogramming.com&lt;/a&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;The size of the &lt;strong&gt;virtual memory&lt;/strong&gt; is the maximum size of the maximum size your computer can address using &lt;strong&gt;pointers&lt;/strong&gt; (usually on a 32-bit processor each process can address 4 GB of memory).&lt;/li&gt;
+      &lt;li&gt;Typically, in each process, the virtual memory available to that process is called its &lt;strong&gt;address space&lt;/strong&gt;.&lt;/li&gt;
+      &lt;li&gt;Even though every application has its own 4 GB (on 32-bit systems) of virtual memory, that does not necessarily mean that your program can actually use all of that memory.
+        &lt;ul&gt;
+          &lt;li&gt;On &lt;strong&gt;Windows&lt;/strong&gt;, the upper 2 GB of that memory are allocated to the operating system kernel, and are unavailable to the process.
+            &lt;ul&gt;
+              &lt;li&gt;(Therefore, any pointer starting with 0x8xxxxxxx is unavailable in user space.)&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;On &lt;strong&gt;Linux&lt;/strong&gt;, the upper 1 GB is kernel address space&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://stackoverflow.com/a/24381621&quot;&gt;stackoverflow&lt;/a&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;a pointer can be created in any of these &lt;a href=&quot;https://devdocs.io/c/language/storage_duration&quot;&gt;storage classes&lt;/a&gt;; and objects being pointed to can also be in any of these storage classes&lt;/li&gt;
+      &lt;li&gt;Roughly, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dynamic&lt;/code&gt; corresponds to “heap”, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;automatic&lt;/code&gt; corresponds to “stack”.
+        &lt;ul&gt;
+          &lt;li&gt;e.g. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;malloc()&lt;/code&gt; dynamically allocates memory from the heap&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;h2 id=&quot;void-pointer&quot;&gt;void pointer&lt;/h2&gt;
 
 &lt;h3 id=&quot;in-c&quot;&gt;In C++&lt;/h3&gt;
@@ -2008,17 +2049,48 @@ dmesg &lt;span class=&quot;nt&quot;&gt;--ctime&lt;/span&gt; | &lt;span class=&qu
 &lt;h3 id=&quot;free-store-heap&quot;&gt;Free store (Heap)&lt;/h3&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setrlimit()&lt;/code&gt;: use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RLIMIT_DATA&lt;/code&gt; &lt;a href=&quot;/notes/notes-OS/#resource-limits&quot;&gt;resource limit&lt;/a&gt; to limit the heap size
+  &lt;li&gt;read: &lt;a href=&quot;https://www.cprogramming.com/tutorial/virtual_memory_and_heaps.html&quot;&gt;virtual memory vs. heap&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;in C++&lt;/strong&gt;: You allocate memory on the free store in C++ by using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;new&lt;/code&gt; keyword.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;limiting-the-heap-size&quot;&gt;Limiting the heap size&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;Method 1&lt;/strong&gt;: In the source code:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setrlimit()&lt;/code&gt;: use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RLIMIT_DATA&lt;/code&gt; &lt;a href=&quot;/notes/notes-OS/#resource-limits&quot;&gt;resource limit&lt;/a&gt; to limit the &lt;strong&gt;data segment&lt;/strong&gt; (i.e. initialized data, uninitialized data, and &lt;strong&gt;heap&lt;/strong&gt;)
     &lt;ul&gt;
-      &lt;li&gt;If you try to extend the data segment past the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RLIMIT_DATA&lt;/code&gt; limit (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;brk&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sbrk&lt;/code&gt; or some intermediary like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;malloc&lt;/code&gt;), the attempt will fail. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;brk&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sbrk&lt;/code&gt; will return &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt; 0&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;malloc&lt;/code&gt; will return a null pointer.
-        &lt;ul&gt;
-          &lt;li&gt;but &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;malloc&lt;/code&gt; uses the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mmap&lt;/code&gt; system call which creates mappings in &lt;strong&gt;virtual memory&lt;/strong&gt; and not in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RLIMIT_DATA&lt;/code&gt; !&lt;/li&gt;
-          &lt;li&gt;use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ulimit -Sv kiloBytes&lt;/code&gt; to limit the program’s virtual memory! (Note: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kiloBytes&lt;/code&gt; must be sufficiently large, i.e. $\approx\gt 3000$ kiloBytes!)&lt;/li&gt;
-        &lt;/ul&gt;
+      &lt;li&gt;If you try to extend the &lt;strong&gt;data segment&lt;/strong&gt; past the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RLIMIT_DATA&lt;/code&gt; limit (e.g. using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;brk&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sbrk&lt;/code&gt; or some intermediary like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;malloc&lt;/code&gt;), the attempt will fail. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;brk&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sbrk&lt;/code&gt; will return &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt; 0&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;malloc&lt;/code&gt; will return a null pointer.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Note&lt;/strong&gt; on &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;malloc&lt;/code&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;usually &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;malloc&lt;/code&gt; allocates memory from the &lt;strong&gt;heap&lt;/strong&gt; (calling &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sbrk()&lt;/code&gt; to adjust heap size, if necessary):
+        &lt;blockquote&gt;
+          &lt;p&gt;&lt;a href=&quot;https://man7.org/linux/man-pages/man3/malloc.3.html&quot;&gt;malloc doc&lt;/a&gt;: Normally, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;malloc()&lt;/code&gt; allocates memory from the heap, and adjusts the size of the heap as required, using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sbrk(2)&lt;/code&gt;.&lt;/p&gt;
+        &lt;/blockquote&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;only if&lt;/strong&gt; memory blocks larger than &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MMAP_THRESHOLD&lt;/code&gt; are allocated, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;malloc&lt;/code&gt; will use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mmap()&lt;/code&gt; system call (which creates mappings in &lt;strong&gt;virtual memory&lt;/strong&gt;):
+        &lt;blockquote&gt;
+          &lt;p&gt;&lt;a href=&quot;https://man7.org/linux/man-pages/man3/malloc.3.html&quot;&gt;malloc doc&lt;/a&gt;: When allocating blocks of memory larger than &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MMAP_THRESHOLD&lt;/code&gt; bytes, the glibc &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;malloc()&lt;/code&gt; implementation allocates the memory as a private anonymous mapping using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mmap(2)&lt;/code&gt;.&lt;/p&gt;
+        &lt;/blockquote&gt;
+      &lt;/li&gt;
+      &lt;li&gt;in order to limit the available memory for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;malloc&lt;/code&gt; use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RLIMIT_DATA&lt;/code&gt;:
+        &lt;blockquote&gt;
+          &lt;p&gt;&lt;a href=&quot;https://man7.org/linux/man-pages/man3/malloc.3.html&quot;&gt;malloc doc&lt;/a&gt;: Prior to Linux 4.7 allocations performed using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mmap(2)&lt;/code&gt; were unaffected by the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RLIMIT_DATA&lt;/code&gt; resource limit; since Linux 4.7, this limit is also enforced for allocations performed using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mmap(2)&lt;/code&gt;.&lt;/p&gt;
+        &lt;/blockquote&gt;
       &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;in C++&lt;/strong&gt;: You allocate memory on the free store in C++ by using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;new&lt;/code&gt; keyword.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Method 2&lt;/strong&gt;: In the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bash&lt;/code&gt; session, where the program will be executed:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ulimit -Sd kiloBytes&lt;/code&gt; to limit the program’s data segment! (Note: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kiloBytes&lt;/code&gt; must be sufficiently large, i.e. approx. $\gt 3000$ kiloBytes!)&lt;/li&gt;
+  &lt;li&gt;use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ulimit -Sv kiloBytes&lt;/code&gt; to limit the program’s virtual memory (address space)! (Note: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kiloBytes&lt;/code&gt; must be sufficiently large, i.e. approx. $\gt 3000$ kiloBytes!)
+    &lt;ul&gt;
+      &lt;li&gt;limiting the entire virtual memory also limits the heap!&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;ram-available-for-allocation&quot;&gt;RAM available for allocation&lt;/h2&gt;

@@ -91,9 +91,11 @@ ctrl + d | "add selection to next find match" (for quickly modifying multiple oc
 
 | command | description |
 | :---: | :---: |
+ctrl + shift + up/down | place cursor on multiple lines
 ctrl + h | replace (in the replace window press ctrl + alt + enter to replace all)
 ctrl + c | copy line
 ctrl + x | cut line
+ctrl + shift + up/down, ctrl + x | select and cut multiple lines
 ctrl + shift + k | delete line
 ctrl + k ctrl + c | add line comment
 ctrl + k ctrl + u | remove line comment
