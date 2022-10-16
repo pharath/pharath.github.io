@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-10-16T03:34:10+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Pharath Palesuvaran</title><subtitle>Deep Learning and Self-Driving Cars.</subtitle><author><name>Pharath Palesuvaran</name></author><entry><title type="html">HTML Notes</title><link href="http://localhost:4000/notes/notes-html/" rel="alternate" type="text/html" title="HTML Notes" /><published>2022-10-10T00:00:00+02:00</published><updated>2022-10-10T00:00:00+02:00</updated><id>http://localhost:4000/notes/notes-html</id><content type="html" xml:base="http://localhost:4000/notes/notes-html/">&lt;h1 id=&quot;jekyll&quot;&gt;Jekyll&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-10-16T16:31:01+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Pharath Palesuvaran</title><subtitle>Deep Learning and Self-Driving Cars.</subtitle><author><name>Pharath Palesuvaran</name></author><entry><title type="html">HTML Notes</title><link href="http://localhost:4000/notes/notes-html/" rel="alternate" type="text/html" title="HTML Notes" /><published>2022-10-10T00:00:00+02:00</published><updated>2022-10-10T00:00:00+02:00</updated><id>http://localhost:4000/notes/notes-html</id><content type="html" xml:base="http://localhost:4000/notes/notes-html/">&lt;h1 id=&quot;jekyll&quot;&gt;Jekyll&lt;/h1&gt;
 
 &lt;p&gt;Jekyll is written in Ruby.&lt;/p&gt;
 &lt;ul&gt;
@@ -646,8 +646,11 @@ Unpacked 2424 files and folders to /home/bra-ket/.vscode-server/bin/74b1f979648c
 
 &lt;ul&gt;
   &lt;li&gt;Cryptography Engineering by Ferguson, Schneier and Kohno.&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Pharath Palesuvaran</name></author><category term="Notes" /><category term="datkom" /><category term="notes" /><summary type="html">For learning DatKom</summary></entry><entry><title type="html">Operating Systems Notes</title><link href="http://localhost:4000/notes/notes-OS/" rel="alternate" type="text/html" title="Operating Systems Notes" /><published>2022-09-22T00:00:00+02:00</published><updated>2022-09-22T00:00:00+02:00</updated><id>http://localhost:4000/notes/notes-OS</id><content type="html" xml:base="http://localhost:4000/notes/notes-OS/">&lt;h1 id=&quot;concepts&quot;&gt;Concepts&lt;/h1&gt;
+&lt;/ul&gt;</content><author><name>Pharath Palesuvaran</name></author><category term="Notes" /><category term="datkom" /><category term="notes" /><summary type="html">For learning DatKom</summary></entry><entry><title type="html">Operating Systems Notes</title><link href="http://localhost:4000/notes/notes-OS/" rel="alternate" type="text/html" title="Operating Systems Notes" /><published>2022-09-22T00:00:00+02:00</published><updated>2022-09-22T00:00:00+02:00</updated><id>http://localhost:4000/notes/notes-OS</id><content type="html" xml:base="http://localhost:4000/notes/notes-OS/">&lt;h1 id=&quot;lectures&quot;&gt;Lectures&lt;/h1&gt;
 
+&lt;h2 id=&quot;i4-comsys-wehrle-sose&quot;&gt;i4 ComSys, Wehrle (SoSe)&lt;/h2&gt;
+
+&lt;p&gt;from &lt;a href=&quot;https://www.comsys.rwth-aachen.de/teaching&quot;&gt;comsys website&lt;/a&gt;:&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Unix shell and programming language C&lt;/li&gt;
   &lt;li&gt;Process management: processes, threads, inter-process communication&lt;/li&gt;
@@ -655,9 +658,11 @@ Unpacked 2424 files and folders to /home/bra-ket/.vscode-server/bin/74b1f979648c
   &lt;li&gt;Process synchronization, deadlocks&lt;/li&gt;
   &lt;li&gt;Memory management: virtual memory, segmentation, paging, fragmentation&lt;/li&gt;
   &lt;li&gt;File system and I/O system&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Communication subsystem and sockets&lt;/p&gt;
-  &lt;/li&gt;
+  &lt;li&gt;Communication subsystem and sockets&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;from RWTH Online:&lt;/p&gt;
+&lt;ul&gt;
   &lt;li&gt;Aufgaben und Struktur von Betriebssystemen&lt;/li&gt;
   &lt;li&gt;Das Betriebssystem Unix&lt;/li&gt;
   &lt;li&gt;Systemaufrufe und Shellprogrammierung&lt;/li&gt;
@@ -671,6 +676,122 @@ Unpacked 2424 files and folders to /home/bra-ket/.vscode-server/bin/74b1f979648c
   &lt;li&gt;I/O-System&lt;/li&gt;
   &lt;li&gt;Verteilte Systeme&lt;/li&gt;
   &lt;li&gt;Socket-Programmierung&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;power-system-automation-lankes&quot;&gt;Power System Automation, Lankes&lt;/h2&gt;
+
+&lt;h3 id=&quot;6sws&quot;&gt;6SWS&lt;/h3&gt;
+
+&lt;p&gt;Die Vorlesung vermittelt den Entwurf und den Aufbau von modernen Betriebssystemen. Hierzu wird zunächst der Aufbau von Rechnerarchitekturen analysiert und die Konsequenzen für die Systemsoftware gezogen.  Insbesondere werden Sicherheitsrisiken erläutert und wie die Systemsoftware den Nutzer vor Angriffen schützt. Neben Sicherheitsaspekten vermittelt die Vorlesung, welche Möglichkeiten zur Leistungssteigerung existieren und wie Optimierungsziele der Ressourcenverwaltung erreicht werden.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Aufgaben und Struktur von Betriebssystemen&lt;/li&gt;
+  &lt;li&gt;Einführung in UNIX&lt;/li&gt;
+  &lt;li&gt;Programmierwerkzeuge
+    &lt;ul&gt;
+      &lt;li&gt;Verwaltung von Source Code&lt;/li&gt;
+      &lt;li&gt;Einführung in dem Prozess des „Code Reviews“ und des automatisierten Testens&lt;/li&gt;
+      &lt;li&gt;Rust vs. C/C++&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Systemnahe Programmierung
+    &lt;ul&gt;
+      &lt;li&gt;Prozessormodelle (insbesondere Intel 80x86)&lt;/li&gt;
+      &lt;li&gt;Register- und Speichermodelle, Befehlsformate, Datentypen, Adressierungsarten&lt;/li&gt;
+      &lt;li&gt;Instruktionslevelparallelität / Datenparalleliät&lt;/li&gt;
+      &lt;li&gt;Mehrkern- und Mehrprozessor-Architekturen
+        &lt;ul&gt;
+          &lt;li&gt;Einführung in die nebenläufige Programmierung&lt;/li&gt;
+          &lt;li&gt;Einführung in die Parallelisierung&lt;/li&gt;
+          &lt;li&gt;Leistungsevaluation, Leistungsgrenzen (u.a. Amdahls Gesetz)&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Funktionsaufrufe und ihre Konventionen
+        &lt;ul&gt;
+          &lt;li&gt;Sicherheitsrisiken, mögliche Angriffsszenarien („Exploits“) und existierende Schutztechniken&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Assembler und Assemblierung: Aufgaben, Funktionsweise&lt;/li&gt;
+  &lt;li&gt;Laden, Binden:
+    &lt;ul&gt;
+      &lt;li&gt;Statisches / dynamisches Binden, Laden mit / ohne Speicherverwaltung&lt;/li&gt;
+      &lt;li&gt;Angriffsszenarien und existierende Schutztechniken
+        &lt;ul&gt;
+          &lt;li&gt;Adress Space Layout Randomization (ASLR)&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Entwurfsprinzipien
+    &lt;ul&gt;
+      &lt;li&gt;Monolithische Betriebssysteme&lt;/li&gt;
+      &lt;li&gt;Microkernels (insbesondere seL4)&lt;/li&gt;
+      &lt;li&gt;Unikernels / Library OS&lt;/li&gt;
+      &lt;li&gt;Exokernels&lt;/li&gt;
+      &lt;li&gt;Funktionale Sicherheit der Systemsoftware
+        &lt;ul&gt;
+          &lt;li&gt;z.B. durch die Verwendung einer sicheren, systemnahen Programmiersprache&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Betriebsmittel- und Prozessverwaltung
+    &lt;ul&gt;
+      &lt;li&gt;Aufgaben der Betriebsmittel- und Prozessverwaltung&lt;/li&gt;
+      &lt;li&gt;Scheduling / Prozessplanung&lt;/li&gt;
+      &lt;li&gt;Prozesssynchronisation&lt;/li&gt;
+      &lt;li&gt;Verklemmungen&lt;/li&gt;
+      &lt;li&gt;Interprozesskommunikation&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Unterbrechungen
+    &lt;ul&gt;
+      &lt;li&gt;Arten und Aufgaben von Unterbrechungen&lt;/li&gt;
+      &lt;li&gt;Interruptsystem insbesondere des x86&lt;/li&gt;
+      &lt;li&gt;Systemaufrufe&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Arbeitsspeicherverwaltung
+    &lt;ul&gt;
+      &lt;li&gt;Paging und Segmentierung&lt;/li&gt;
+      &lt;li&gt;Demand Paging und Verdrängungsstrategien&lt;/li&gt;
+      &lt;li&gt;Seitenkanalattacken am Beispiel von Meltdown&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Ein-/ Ausgabe
+    &lt;ul&gt;
+      &lt;li&gt;Memory-mapped I/O&lt;/li&gt;
+      &lt;li&gt;Schichtung der E/A-Software&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Dateisysteme
+    &lt;ul&gt;
+      &lt;li&gt;Dateizugriff / Dateioperationen&lt;/li&gt;
+      &lt;li&gt;Struktur und Schichtung&lt;/li&gt;
+      &lt;li&gt;Journaling&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Isolierung von Systemkomponenten
+    &lt;ul&gt;
+      &lt;li&gt;Sandboxing&lt;/li&gt;
+      &lt;li&gt;Betriebssystemvirtualisierung / Container&lt;/li&gt;
+      &lt;li&gt;Virtuelle Maschinen&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;3sws&quot;&gt;3SWS&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Modelle, Grundlagen und Konzepte von Betriebssystemen (Linux/UNIX, Windows; Beispielarchitektur: 80x86).&lt;/li&gt;
+  &lt;li&gt;Einleitung und Steuersprachen: Begriffsdefinitionen, Aufgaben und Struktur von Betriebssystemen, Steuersprachen und Shellprogrammierung (Bsp.: die Bourne-Shell), Programmierwerkzeuge.&lt;/li&gt;
+  &lt;li&gt;Betriebsmittel- und Prozessverwaltung: Aufgaben der Betriebsmittelverwaltung, Prozessverwaltung, Prozesssynchronisation, Verklemmungen.&lt;/li&gt;
+  &lt;li&gt;Unterbrechungen: Arten und Aufgaben von Unterbrechungen, das Interruptsystem der 80x86-Architektur.&lt;/li&gt;
+  &lt;li&gt;Arbeitsspeicherverwaltung: Grundlegende Strategien der Speicherverwaltung, Seitenadressierung, Seitenwechsel auf Abruf, Seitenverdrängungsstrategien, Segmentierung, Segmentierung/Seitenadressierung/Zugriffschutz in der 80x86-Architektur.&lt;/li&gt;
+  &lt;li&gt;Ein-/ Ausgabe: E/A in der 80x86-Architektur, Plattenspeicherverwaltung, Schichtung der E/A-Software.&lt;/li&gt;
+  &lt;li&gt;Dateisysteme: Definitionen, Dateizugriff, Dateioperationen, Struktur, Schichtung, Beispiel: Aufbau eines I-Node-basierten Dateisystems&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h1 id=&quot;unix-system-calls&quot;&gt;UNIX System calls&lt;/h1&gt;
@@ -1077,6 +1198,14 @@ Unpacked 2424 files and folders to /home/bra-ket/.vscode-server/bin/74b1f979648c
 &lt;ul&gt;
   &lt;li&gt;use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#define&lt;/code&gt; statements to create constants that can be used when declaring arrays. Then you can easily change the number of elements in the array.&lt;/li&gt;
   &lt;li&gt;do &lt;strong&gt;not&lt;/strong&gt; use multidimensional arrays with &lt;strong&gt;more than three&lt;/strong&gt; dimensions&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;functions&quot;&gt;Functions&lt;/h1&gt;
+
+&lt;h2 id=&quot;best-practice-2&quot;&gt;Best practice&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;void foo(void);&lt;/code&gt; to say “no parameters” in C, and it also works in C++. (&lt;a href=&quot;https://stackoverflow.com/a/693794&quot;&gt;why this is important&lt;/a&gt;)&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h1 id=&quot;program-inputoutput-devices&quot;&gt;Program Input/Output, Devices&lt;/h1&gt;
@@ -2203,6 +2332,12 @@ dmesg &lt;span class=&quot;nt&quot;&gt;--ctime&lt;/span&gt; | &lt;span class=&qu
   &lt;li&gt;prototype: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;void free(void *ptr);&lt;/code&gt;&lt;/li&gt;
   &lt;li&gt;must have been allocated with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;malloc()&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;calloc()&lt;/code&gt;, or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;realloc()&lt;/code&gt;&lt;/li&gt;
   &lt;li&gt;If &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ptr&lt;/code&gt; is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NULL&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;free()&lt;/code&gt; does nothing&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;realloc-stdlibh-1&quot;&gt;realloc (stdlib.h)&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;If the argument size is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0&lt;/code&gt;, the memory that &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ptr&lt;/code&gt; points to is freed, and the function returns &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NULL&lt;/code&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;manipulation&quot;&gt;Manipulation&lt;/h2&gt;

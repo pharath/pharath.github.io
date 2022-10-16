@@ -4,8 +4,6 @@ read_time: false
 excerpt_separator: "<!--more-->"
 categories:
   - Notes
-  - CUDA
-  - cuDNN
 tags:
   - cuda
   - cudnn

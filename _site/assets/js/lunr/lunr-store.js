@@ -228,9 +228,9 @@ var store = [{
         "teaser": "/assets/images/mario-question.png"
       },{
         "title": "Notes on CUDA and cuDNN",
-        "excerpt":"Currently installed CUDA 11.2 Update 2 cuDNN 8.1.1.33 Install install CUDA normally install cuDNN without sudo add-apt-repository \"deb https://developer.download.nvidia.com/compute/cuda/repos/${OS}/x86_64/ /\", but use sudo dpkg -i cuda-keyring_1.0-1_all.deb instead Nvidia Blog Post! install nvidia-docker2, sonst funktionieren die Container nicht! Troubleshooting 1 `fatal error: cuda_runtime_api.h: No such file or directory` Is /usr/local/cuda a...","categories": ["Notes","CUDA","cuDNN"],
+        "excerpt":"Currently installed CUDA 11.2 Update 2 cuDNN 8.1.1.33 Install install CUDA normally install cuDNN without sudo add-apt-repository \"deb https://developer.download.nvidia.com/compute/cuda/repos/${OS}/x86_64/ /\", but use sudo dpkg -i cuda-keyring_1.0-1_all.deb instead Nvidia Blog Post! install nvidia-docker2, sonst funktionieren die Container nicht! Troubleshooting 1 `fatal error: cuda_runtime_api.h: No such file or directory` Is /usr/local/cuda a...","categories": ["Notes"],
         "tags": ["cuda","cudnn","notes"],
-        "url": "/notes/cuda/cudnn/notes-CUDA/",
+        "url": "/notes/notes-CUDA/",
         "teaser": "/assets/images/mario-question.png"
       },{
         "title": "Notes on Deepstream, TAO Toolkit, NGC CLI",
@@ -294,7 +294,7 @@ var store = [{
         "teaser": "/assets/images/C_logo.png"
       },{
         "title": "Operating Systems Notes",
-        "excerpt":"Concepts Unix shell and programming language C Process management: processes, threads, inter-process communication CPU scheduling Process synchronization, deadlocks Memory management: virtual memory, segmentation, paging, fragmentation File system and I/O system Communication subsystem and sockets Aufgaben und Struktur von Betriebssystemen Das Betriebssystem Unix Systemaufrufe und Shellprogrammierung Einführung in die Programmiersprache C...","categories": ["Notes"],
+        "excerpt":"Lectures i4 ComSys, Wehrle (SoSe) from comsys website: Unix shell and programming language C Process management: processes, threads, inter-process communication CPU scheduling Process synchronization, deadlocks Memory management: virtual memory, segmentation, paging, fragmentation File system and I/O system Communication subsystem and sockets from RWTH Online: Aufgaben und Struktur von Betriebssystemen Das...","categories": ["Notes"],
         "tags": ["os","notes"],
         "url": "/notes/notes-OS/",
         "teaser": "/assets/images/C_logo.png"

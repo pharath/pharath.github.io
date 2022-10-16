@@ -368,13 +368,16 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header>
-              <ul class="toc__menu"><li><a href="#concepts">Concepts</a></li><li><a href="#unix-system-calls">UNIX System calls</a><ul><li><a href="#strace">strace</a></li><li><a href="#related-to-memory">Related to Memory</a></li></ul></li><li><a href="#resource-limits">Resource Limits</a><ul><li><a href="#setrlimit-getrlimit">setrlimit(), getrlimit()</a></li><li><a href="#ulimit">ulimit</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#lectures">Lectures</a><ul><li><a href="#i4-comsys-wehrle-sose">i4 ComSys, Wehrle (SoSe)</a></li><li><a href="#power-system-automation-lankes">Power System Automation, Lankes</a><ul><li><a href="#6sws">6SWS</a></li><li><a href="#3sws">3SWS</a></li></ul></li></ul></li><li><a href="#unix-system-calls">UNIX System calls</a><ul><li><a href="#strace">strace</a></li><li><a href="#related-to-memory">Related to Memory</a></li></ul></li><li><a href="#resource-limits">Resource Limits</a><ul><li><a href="#setrlimit-getrlimit">setrlimit(), getrlimit()</a></li><li><a href="#ulimit">ulimit</a></li></ul></li></ul>
 
             </nav>
           </aside>
         
-        <h1 id="concepts">Concepts</h1>
+        <h1 id="lectures">Lectures</h1>
 
+<h2 id="i4-comsys-wehrle-sose">i4 ComSys, Wehrle (SoSe)</h2>
+
+<p>from <a href="https://www.comsys.rwth-aachen.de/teaching">comsys website</a>:</p>
 <ul>
   <li>Unix shell and programming language C</li>
   <li>Process management: processes, threads, inter-process communication</li>
@@ -382,9 +385,11 @@
   <li>Process synchronization, deadlocks</li>
   <li>Memory management: virtual memory, segmentation, paging, fragmentation</li>
   <li>File system and I/O system</li>
-  <li>
-    <p>Communication subsystem and sockets</p>
-  </li>
+  <li>Communication subsystem and sockets</li>
+</ul>
+
+<p>from RWTH Online:</p>
+<ul>
   <li>Aufgaben und Struktur von Betriebssystemen</li>
   <li>Das Betriebssystem Unix</li>
   <li>Systemaufrufe und Shellprogrammierung</li>
@@ -398,6 +403,122 @@
   <li>I/O-System</li>
   <li>Verteilte Systeme</li>
   <li>Socket-Programmierung</li>
+</ul>
+
+<h2 id="power-system-automation-lankes">Power System Automation, Lankes</h2>
+
+<h3 id="6sws">6SWS</h3>
+
+<p>Die Vorlesung vermittelt den Entwurf und den Aufbau von modernen Betriebssystemen. Hierzu wird zunächst der Aufbau von Rechnerarchitekturen analysiert und die Konsequenzen für die Systemsoftware gezogen.  Insbesondere werden Sicherheitsrisiken erläutert und wie die Systemsoftware den Nutzer vor Angriffen schützt. Neben Sicherheitsaspekten vermittelt die Vorlesung, welche Möglichkeiten zur Leistungssteigerung existieren und wie Optimierungsziele der Ressourcenverwaltung erreicht werden.</p>
+
+<ul>
+  <li>Aufgaben und Struktur von Betriebssystemen</li>
+  <li>Einführung in UNIX</li>
+  <li>Programmierwerkzeuge
+    <ul>
+      <li>Verwaltung von Source Code</li>
+      <li>Einführung in dem Prozess des „Code Reviews“ und des automatisierten Testens</li>
+      <li>Rust vs. C/C++</li>
+    </ul>
+  </li>
+  <li>Systemnahe Programmierung
+    <ul>
+      <li>Prozessormodelle (insbesondere Intel 80x86)</li>
+      <li>Register- und Speichermodelle, Befehlsformate, Datentypen, Adressierungsarten</li>
+      <li>Instruktionslevelparallelität / Datenparalleliät</li>
+      <li>Mehrkern- und Mehrprozessor-Architekturen
+        <ul>
+          <li>Einführung in die nebenläufige Programmierung</li>
+          <li>Einführung in die Parallelisierung</li>
+          <li>Leistungsevaluation, Leistungsgrenzen (u.a. Amdahls Gesetz)</li>
+        </ul>
+      </li>
+      <li>Funktionsaufrufe und ihre Konventionen
+        <ul>
+          <li>Sicherheitsrisiken, mögliche Angriffsszenarien („Exploits“) und existierende Schutztechniken</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Assembler und Assemblierung: Aufgaben, Funktionsweise</li>
+  <li>Laden, Binden:
+    <ul>
+      <li>Statisches / dynamisches Binden, Laden mit / ohne Speicherverwaltung</li>
+      <li>Angriffsszenarien und existierende Schutztechniken
+        <ul>
+          <li>Adress Space Layout Randomization (ASLR)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Entwurfsprinzipien
+    <ul>
+      <li>Monolithische Betriebssysteme</li>
+      <li>Microkernels (insbesondere seL4)</li>
+      <li>Unikernels / Library OS</li>
+      <li>Exokernels</li>
+      <li>Funktionale Sicherheit der Systemsoftware
+        <ul>
+          <li>z.B. durch die Verwendung einer sicheren, systemnahen Programmiersprache</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Betriebsmittel- und Prozessverwaltung
+    <ul>
+      <li>Aufgaben der Betriebsmittel- und Prozessverwaltung</li>
+      <li>Scheduling / Prozessplanung</li>
+      <li>Prozesssynchronisation</li>
+      <li>Verklemmungen</li>
+      <li>Interprozesskommunikation</li>
+    </ul>
+  </li>
+  <li>Unterbrechungen
+    <ul>
+      <li>Arten und Aufgaben von Unterbrechungen</li>
+      <li>Interruptsystem insbesondere des x86</li>
+      <li>Systemaufrufe</li>
+    </ul>
+  </li>
+  <li>Arbeitsspeicherverwaltung
+    <ul>
+      <li>Paging und Segmentierung</li>
+      <li>Demand Paging und Verdrängungsstrategien</li>
+      <li>Seitenkanalattacken am Beispiel von Meltdown</li>
+    </ul>
+  </li>
+  <li>Ein-/ Ausgabe
+    <ul>
+      <li>Memory-mapped I/O</li>
+      <li>Schichtung der E/A-Software</li>
+    </ul>
+  </li>
+  <li>Dateisysteme
+    <ul>
+      <li>Dateizugriff / Dateioperationen</li>
+      <li>Struktur und Schichtung</li>
+      <li>Journaling</li>
+    </ul>
+  </li>
+  <li>Isolierung von Systemkomponenten
+    <ul>
+      <li>Sandboxing</li>
+      <li>Betriebssystemvirtualisierung / Container</li>
+      <li>Virtuelle Maschinen</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="3sws">3SWS</h3>
+
+<ul>
+  <li>Modelle, Grundlagen und Konzepte von Betriebssystemen (Linux/UNIX, Windows; Beispielarchitektur: 80x86).</li>
+  <li>Einleitung und Steuersprachen: Begriffsdefinitionen, Aufgaben und Struktur von Betriebssystemen, Steuersprachen und Shellprogrammierung (Bsp.: die Bourne-Shell), Programmierwerkzeuge.</li>
+  <li>Betriebsmittel- und Prozessverwaltung: Aufgaben der Betriebsmittelverwaltung, Prozessverwaltung, Prozesssynchronisation, Verklemmungen.</li>
+  <li>Unterbrechungen: Arten und Aufgaben von Unterbrechungen, das Interruptsystem der 80x86-Architektur.</li>
+  <li>Arbeitsspeicherverwaltung: Grundlegende Strategien der Speicherverwaltung, Seitenadressierung, Seitenwechsel auf Abruf, Seitenverdrängungsstrategien, Segmentierung, Segmentierung/Seitenadressierung/Zugriffschutz in der 80x86-Architektur.</li>
+  <li>Ein-/ Ausgabe: E/A in der 80x86-Architektur, Plattenspeicherverwaltung, Schichtung der E/A-Software.</li>
+  <li>Dateisysteme: Definitionen, Dateizugriff, Dateioperationen, Struktur, Schichtung, Beispiel: Aufbau eines I-Node-basierten Dateisystems</li>
 </ul>
 
 <h1 id="unix-system-calls">UNIX System calls</h1>
