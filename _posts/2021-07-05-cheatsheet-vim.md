@@ -153,8 +153,8 @@ ctrl + w N | scroll in a terminal tab
 :buffers | see `:ls`
 :tabnew +Nbuf | re-open closed tab (where N is the buffer number of the closed tab which you can get via `:ls`), e.g. `:tabnew +18buf` in order to reopen buffer 18
 :buffer very/very/long/path/to/a/veryVeryLongFileName.txt | switch to buffer `very/very/long/path/to/a/veryVeryLongFileName.txt`, where a **buffer** is a file in the `:ls` list
-:b LongFileName | short form of `:buffer very/very/long/path/to/a/veryVeryLongFileName.txt` (**note**: `:b` command can also take a **substring** of the name of the file, thus `LongFileName` instead of `veryVeryLongFileName`!)
-:b SubstringOfFilename |
+:b LongFileName\<hit tab to find a match\> | short form of `:buffer very/very/long/path/to/a/veryVeryLongFileName.txt` (**note**: `:b` command can also take a **substring** of the name of the file, thus `LongFileName` instead of `veryVeryLongFileName`!)
+:b SubstringOfFilename\<hit tab to find a match\> |
 :b 5 | switch to buffer 5 (see file-number map in the `:ls` list)
 :bd | Unload buffer `[N]` (default: current buffer) and delete it from the buffer list. If the buffer was changed, this fails, unless when `[!]` is specified, in which case changes are lost. The file remains unaffected.
 
@@ -184,22 +184,55 @@ ctrl + g | show current file name
 
 | command | description |
 | :---: | :---: |
+ctrl + e	| 		scroll window one line down
+ctrl + y	|		scroll window one line up 
+ctrl + + | zoom in (anschließend ctrl + w, =)
+ctrl - - | zoom out (anschließend ctrl + w, =)
+
+### Viewports
+
+| command | description |
+| :---: | :---: |
+vi -o /path/to/file1 /path/to/file2	|	öffne 2 files in split screen
+ctrl + w, s	|	öffne neuen split window horizontal
+ctrl + w, v	|	öffne neuen split window vertical (oder besser: `:Lexplore`)
+<kbd>ctrl</kbd> + <kbd>w</kbd> <kbd>t</kbd>, <kbd>ctrl</kbd> + <kbd>w</kbd> <kbd>K</kbd> |    change two vertically split windows to horizonally split
+<kbd>ctrl</kbd> + <kbd>w</kbd> <kbd>t</kbd>, <kbd>ctrl</kbd> + <kbd>w</kbd> <kbd>H</kbd> |    change two horizonally split windows to vertically split
+ctrl + w, &lt;h j k l&gt;|	change active viewport
+ctrl + r		|	rotate viewport (zum Anordnen der viewports)
+ctrl + R |
+ctrl + w, q	|	wie `:q` (ohne `!`), schließe aktiven split window
+ctrl + w, =	|	resize viewports to be of equal size
+ctrl + w, &lt;	|	decrease active viewport size (für 8 Einheiten Verkleinerung: ctrl + w, 8, &lt;)
+
+### Jump
+
+| command | description |
+| :---: | :---: |
+h j k l |			links hoch runter rechts
 /irgend_ein_wort | suche irgend_ein_wort vorwärts (springt zum ersten solchen Wort, drücke n für nächstes Wort und N für previous occurrence)
 ?irgend_ein_wort | suche irgend_ein_wort rückwärts
-h j k l |			links hoch runter rechts
-line number + shift + g|	spring zu Zeile line number
 0	|			spring zu Zeilenanfang
 $	|			spring zu Zeilenende
 b	|			spring zu Wortanfang
 e	|			spring zu Wortende
 \* |				jump to next occurrence of the word under the cursor (then navigate back and forth with "n" and "shift + n")
 f x |				spring zum nächsten "x" in der Zeile (repeat mit ";", reverse mit ",")
-ctrl + e	| 		scroll window one line down
-ctrl + y	|		scroll window one line up 
 ctrl + d	|		spring 1/2 window nach unten
 ctrl + u	|		spring 1/2 window nach oben
 ctrl + f       |		spring 1 window nach unten (Merke: "f" für forward)
 ctrl + b       |		spring 1 window nach oben (Merke: "b" für backward)
+shift + g | 		Jump to end of file
+"line number" + shift + g | Jump to line
+g + g |			Jump to first line of file
+ctrl + o | Jump to previous cursor position
+ctrl + i | Jump to next cursor position
+ctrl + ] | Jump to definition (if ctags is installed)
+
+## Write
+
+| command | description |
+| :---: | :---: |
 v	|			markieren
 Shift + v	|		Zeile markieren
 x	|			cut
@@ -222,28 +255,6 @@ y %		|		yank to the matching character (useful to copy text betw matching bracke
 &lt;%		|		unindent betw matching brackets {}, [], ()
 u oder :u	|		undo last change
 ctrl + r	|		redo
-shift + g | 		Jump to end of file
-g + g |			Jump to first line of file
-ctrl + o | Jump to previous cursor position
-ctrl + i | Jump to next cursor position
-vi -o /path/to/file1 /path/to/file2	|	öffne 2 files in split screen
-ctrl + w, s	|	öffne neuen split window horizontal
-ctrl + w, v	|	öffne neuen split window vertical (oder besser: `:Lexplore`)
-<kbd>ctrl</kbd> + <kbd>w</kbd> <kbd>t</kbd>, <kbd>ctrl</kbd> + <kbd>w</kbd> <kbd>K</kbd> |    change two vertically split windows to horizonally split
-<kbd>ctrl</kbd> + <kbd>w</kbd> <kbd>t</kbd>, <kbd>ctrl</kbd> + <kbd>w</kbd> <kbd>H</kbd> |    change two horizonally split windows to vertically split
-ctrl + w, &lt;h j k l&gt;|	change active viewport
-ctrl + r		|	rotate viewport (zum Anordnen der viewports)
-ctrl + R|
-ctrl + w, q	|	wie `:q` (ohne `!`), schließe aktiven split window
-ctrl + w, =	|	resize viewports to be of equal size
-ctrl + w, &lt;	|	decrease active viewport size (für 8 Einheiten Verkleinerung: ctrl + w, 8, &lt;)
-ctrl + + | zoom in (anschließend ctrl + w, =)
-ctrl - - | zoom out (anschließend ctrl + w, =)
-
-## Write
-
-| command | description |
-| :---: | :---: |
 ctrl - k *digraph_id* | to type special characters that are not on the keyboard
 :dig | list all digraphs (see :h digraph)
 

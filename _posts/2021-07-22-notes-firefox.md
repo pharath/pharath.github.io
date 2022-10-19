@@ -66,3 +66,5 @@ ctrl + shift + m | show mobile version of website
 - Reload in address bar
 - StickyNotes
 - Tab Session Manager
+- Grammarly: Grammar Checker and Writing App
+- Fast Tab Switcher

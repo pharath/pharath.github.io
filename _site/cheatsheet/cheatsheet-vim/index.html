@@ -368,7 +368,7 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
-              <ul class="toc__menu"><li><a href="#plugins">Plugins</a><ul><li><a href="#install-autocomplete-clang_complete">Install Autocomplete clang_complete</a></li></ul></li><li><a href="#help">help</a></li><li><a href="#regexregexp">regex/regexp</a></li><li><a href="#von-shell-aus">Von Shell aus</a></li><li><a href="#netrw">netrw</a></li><li><a href="#compile-run">Compile, Run</a></li><li><a href="#in-command-mode">In COMMAND mode</a><ul><li><a href="#vim-settings">Vim Settings</a><ul><li><a href="#syntax-highlighting">Syntax highlighting</a></li></ul></li><li><a href="#vim-sessions">Vim Sessions</a></li><li><a href="#tabs">Tabs</a></li><li><a href="#buffers">Buffers</a></li><li><a href="#file-open-close-suspend-name-refresh">File Open, Close, Suspend, Name, Refresh</a></li><li><a href="#file-saving">File Saving</a></li><li><a href="#navigation">Navigation</a></li><li><a href="#write">Write</a><ul><li><a href="#mehrere-zeilen-auskommentieren">Mehrere Zeilen auskommentieren</a></li></ul></li></ul></li><li><a href="#in-insert-mode">In INSERT mode</a><ul><li><a href="#avoid-the-escape-key">Avoid the escape key:</a></li><li><a href="#schreiben">Schreiben</a></li></ul></li><li><a href="#general-facts">General facts</a><ul><li><a href="#reasons-for-swap-files-swp">Reasons for swap files (.swp)</a></li><li><a href="#freezefreezing">Freeze/Freezing</a></li><li><a href="#change-default-vim-vimrc-location">Change default .vim .vimrc location</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#plugins">Plugins</a><ul><li><a href="#install-autocomplete-clang_complete">Install Autocomplete clang_complete</a></li></ul></li><li><a href="#help">help</a></li><li><a href="#regexregexp">regex/regexp</a></li><li><a href="#von-shell-aus">Von Shell aus</a></li><li><a href="#netrw">netrw</a></li><li><a href="#compile-run">Compile, Run</a></li><li><a href="#in-command-mode">In COMMAND mode</a><ul><li><a href="#vim-settings">Vim Settings</a><ul><li><a href="#syntax-highlighting">Syntax highlighting</a></li></ul></li><li><a href="#vim-sessions">Vim Sessions</a></li><li><a href="#tabs">Tabs</a></li><li><a href="#buffers">Buffers</a></li><li><a href="#file-open-close-suspend-name-refresh">File Open, Close, Suspend, Name, Refresh</a></li><li><a href="#file-saving">File Saving</a></li><li><a href="#navigation">Navigation</a><ul><li><a href="#viewports">Viewports</a></li><li><a href="#jump">Jump</a></li></ul></li><li><a href="#write">Write</a><ul><li><a href="#mehrere-zeilen-auskommentieren">Mehrere Zeilen auskommentieren</a></li></ul></li></ul></li><li><a href="#in-insert-mode">In INSERT mode</a><ul><li><a href="#avoid-the-escape-key">Avoid the escape key:</a></li><li><a href="#schreiben">Schreiben</a></li></ul></li><li><a href="#general-facts">General facts</a><ul><li><a href="#reasons-for-swap-files-swp">Reasons for swap files (.swp)</a></li><li><a href="#freezefreezing">Freeze/Freezing</a></li><li><a href="#change-default-vim-vimrc-location">Change default .vim .vimrc location</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -790,11 +790,11 @@
       <td style="text-align: center">switch to buffer <code class="language-plaintext highlighter-rouge">very/very/long/path/to/a/veryVeryLongFileName.txt</code>, where a <strong>buffer</strong> is a file in the <code class="language-plaintext highlighter-rouge">:ls</code> list</td>
     </tr>
     <tr>
-      <td style="text-align: center">:b LongFileName</td>
+      <td style="text-align: center">:b LongFileName&lt;hit tab to find a match&gt;</td>
       <td style="text-align: center">short form of <code class="language-plaintext highlighter-rouge">:buffer very/very/long/path/to/a/veryVeryLongFileName.txt</code> (<strong>note</strong>: <code class="language-plaintext highlighter-rouge">:b</code> command can also take a <strong>substring</strong> of the name of the file, thus <code class="language-plaintext highlighter-rouge">LongFileName</code> instead of <code class="language-plaintext highlighter-rouge">veryVeryLongFileName</code>!)</td>
     </tr>
     <tr>
-      <td style="text-align: center">:b SubstringOfFilename</td>
+      <td style="text-align: center">:b SubstringOfFilename&lt;hit tab to find a match&gt;</td>
       <td style="text-align: center"> </td>
     </tr>
     <tr>
@@ -893,20 +893,102 @@
   </thead>
   <tbody>
     <tr>
+      <td style="text-align: center">ctrl + e</td>
+      <td style="text-align: center">scroll window one line down</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">ctrl + y</td>
+      <td style="text-align: center">scroll window one line up</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">ctrl + +</td>
+      <td style="text-align: center">zoom in (anschließend ctrl + w, =)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">ctrl - -</td>
+      <td style="text-align: center">zoom out (anschließend ctrl + w, =)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="viewports">Viewports</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">vi -o /path/to/file1 /path/to/file2</td>
+      <td style="text-align: center">öffne 2 files in split screen</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">ctrl + w, s</td>
+      <td style="text-align: center">öffne neuen split window horizontal</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">ctrl + w, v</td>
+      <td style="text-align: center">öffne neuen split window vertical (oder besser: <code class="language-plaintext highlighter-rouge">:Lexplore</code>)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><kbd>ctrl</kbd> + <kbd>w</kbd> <kbd>t</kbd>, <kbd>ctrl</kbd> + <kbd>w</kbd> <kbd>K</kbd></td>
+      <td style="text-align: center">change two vertically split windows to horizonally split</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><kbd>ctrl</kbd> + <kbd>w</kbd> <kbd>t</kbd>, <kbd>ctrl</kbd> + <kbd>w</kbd> <kbd>H</kbd></td>
+      <td style="text-align: center">change two horizonally split windows to vertically split</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">ctrl + w, &lt;h j k l&gt;</td>
+      <td style="text-align: center">change active viewport</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">ctrl + r</td>
+      <td style="text-align: center">rotate viewport (zum Anordnen der viewports)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">ctrl + R</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center">ctrl + w, q</td>
+      <td style="text-align: center">wie <code class="language-plaintext highlighter-rouge">:q</code> (ohne <code class="language-plaintext highlighter-rouge">!</code>), schließe aktiven split window</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">ctrl + w, =</td>
+      <td style="text-align: center">resize viewports to be of equal size</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">ctrl + w, &lt;</td>
+      <td style="text-align: center">decrease active viewport size (für 8 Einheiten Verkleinerung: ctrl + w, 8, &lt;)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="jump">Jump</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">h j k l</td>
+      <td style="text-align: center">links hoch runter rechts</td>
+    </tr>
+    <tr>
       <td style="text-align: center">/irgend_ein_wort</td>
       <td style="text-align: center">suche irgend_ein_wort vorwärts (springt zum ersten solchen Wort, drücke n für nächstes Wort und N für previous occurrence)</td>
     </tr>
     <tr>
       <td style="text-align: center">?irgend_ein_wort</td>
       <td style="text-align: center">suche irgend_ein_wort rückwärts</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">h j k l</td>
-      <td style="text-align: center">links hoch runter rechts</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">line number + shift + g</td>
-      <td style="text-align: center">spring zu Zeile line number</td>
     </tr>
     <tr>
       <td style="text-align: center">0</td>
@@ -933,14 +1015,6 @@
       <td style="text-align: center">spring zum nächsten “x” in der Zeile (repeat mit “;”, reverse mit “,”)</td>
     </tr>
     <tr>
-      <td style="text-align: center">ctrl + e</td>
-      <td style="text-align: center">scroll window one line down</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">ctrl + y</td>
-      <td style="text-align: center">scroll window one line up</td>
-    </tr>
-    <tr>
       <td style="text-align: center">ctrl + d</td>
       <td style="text-align: center">spring 1/2 window nach unten</td>
     </tr>
@@ -956,6 +1030,43 @@
       <td style="text-align: center">ctrl + b</td>
       <td style="text-align: center">spring 1 window nach oben (Merke: “b” für backward)</td>
     </tr>
+    <tr>
+      <td style="text-align: center">shift + g</td>
+      <td style="text-align: center">Jump to end of file</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">“line number” + shift + g</td>
+      <td style="text-align: center">Jump to line</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">g + g</td>
+      <td style="text-align: center">Jump to first line of file</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">ctrl + o</td>
+      <td style="text-align: center">Jump to previous cursor position</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">ctrl + i</td>
+      <td style="text-align: center">Jump to next cursor position</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">ctrl + ]</td>
+      <td style="text-align: center">Jump to definition (if ctags is installed)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="write">Write</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td style="text-align: center">v</td>
       <td style="text-align: center">markieren</td>
@@ -1044,87 +1155,6 @@
       <td style="text-align: center">ctrl + r</td>
       <td style="text-align: center">redo</td>
     </tr>
-    <tr>
-      <td style="text-align: center">shift + g</td>
-      <td style="text-align: center">Jump to end of file</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">g + g</td>
-      <td style="text-align: center">Jump to first line of file</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">ctrl + o</td>
-      <td style="text-align: center">Jump to previous cursor position</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">ctrl + i</td>
-      <td style="text-align: center">Jump to next cursor position</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">vi -o /path/to/file1 /path/to/file2</td>
-      <td style="text-align: center">öffne 2 files in split screen</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">ctrl + w, s</td>
-      <td style="text-align: center">öffne neuen split window horizontal</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">ctrl + w, v</td>
-      <td style="text-align: center">öffne neuen split window vertical (oder besser: <code class="language-plaintext highlighter-rouge">:Lexplore</code>)</td>
-    </tr>
-    <tr>
-      <td style="text-align: center"><kbd>ctrl</kbd> + <kbd>w</kbd> <kbd>t</kbd>, <kbd>ctrl</kbd> + <kbd>w</kbd> <kbd>K</kbd></td>
-      <td style="text-align: center">change two vertically split windows to horizonally split</td>
-    </tr>
-    <tr>
-      <td style="text-align: center"><kbd>ctrl</kbd> + <kbd>w</kbd> <kbd>t</kbd>, <kbd>ctrl</kbd> + <kbd>w</kbd> <kbd>H</kbd></td>
-      <td style="text-align: center">change two horizonally split windows to vertically split</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">ctrl + w, &lt;h j k l&gt;</td>
-      <td style="text-align: center">change active viewport</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">ctrl + r</td>
-      <td style="text-align: center">rotate viewport (zum Anordnen der viewports)</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">ctrl + R</td>
-      <td style="text-align: center"> </td>
-    </tr>
-    <tr>
-      <td style="text-align: center">ctrl + w, q</td>
-      <td style="text-align: center">wie <code class="language-plaintext highlighter-rouge">:q</code> (ohne <code class="language-plaintext highlighter-rouge">!</code>), schließe aktiven split window</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">ctrl + w, =</td>
-      <td style="text-align: center">resize viewports to be of equal size</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">ctrl + w, &lt;</td>
-      <td style="text-align: center">decrease active viewport size (für 8 Einheiten Verkleinerung: ctrl + w, 8, &lt;)</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">ctrl + +</td>
-      <td style="text-align: center">zoom in (anschließend ctrl + w, =)</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">ctrl - -</td>
-      <td style="text-align: center">zoom out (anschließend ctrl + w, =)</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="write">Write</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: center">command</th>
-      <th style="text-align: center">description</th>
-    </tr>
-  </thead>
-  <tbody>
     <tr>
       <td style="text-align: center">ctrl - k <em>digraph_id</em></td>
       <td style="text-align: center">to type special characters that are not on the keyboard</td>

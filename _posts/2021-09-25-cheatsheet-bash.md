@@ -95,6 +95,14 @@ fi
 - cannot be intercepted by the program
 - **note**: the process will **halt**, so if you want it to continue running in the background use `bg`!
 
+## ctrl - s
+
+- sends a `SIGSTOP`
+
+## ctrl - q 
+
+- sends a `SIGCONT`
+
 ## bg
 
 - let a process run in the background: `bg %[jobID]`

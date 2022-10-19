@@ -270,7 +270,7 @@ gio open file		|		same as xdg-open, but depends on what desktop the user has ins
 top	| activity monitor
 ps | wie `top`, aber keine real-time updates (dh. nur ein snapshot)
 echo $$ | show PID of current shell
-kill *PID* | stop process with id *PID*, sends SIGTERM (i.e. kills gracefully)
+kill *PID* | stop process with id *PID*, sends SIGTERM (i.e. kills gracefully) (see [notes bash]({% post_url 2021-09-25-cheatsheet-bash %}#job-control) and [kill doc](https://man7.org/linux/man-pages/man1/kill.1.html))
 pkill *process_name* | stop all processes containing *process_name* (which is a regular expression), sends SIGTERM (i.e. kills gracefully), *Warning:* use `pgrep` first to check which processes will be killed
 pgrep *process_name* | list all PIDs containing *process_name* (which is a regular expression)
 
