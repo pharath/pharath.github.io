@@ -12,7 +12,7 @@ toc: true
 toc_sticky: true
 ---
 
-# Install
+# Install ROS2
 
 1. Über `apt install` installieren (wie [hier](https://docs.ros.org/en/galactic/Installation/Ubuntu-Install-Debians.html) beschrieben) 
 2. Dann, wie in [binary installation](https://docs.ros.org/en/galactic/Installation/Ubuntu-Install-Binary.html) unter 
@@ -23,11 +23,13 @@ toc_sticky: true
 beschrieben, die restlichen dependencies installieren (ohne 2. funktioniert ROS2 nicht!).
 3. colcon installieren: `sudo apt install python3-colcon-common-extensions`
 
-# Uninstall
+# Uninstall ROS2
 
 - `sudo apt remove ~nros-galactic-* && sudo apt autoremove`
 
-# Create Package
+# ROS2 Packages
+
+## Create a Package
 
 ```bash
 $ mkdir -p ~/dev_ws/src
@@ -80,7 +82,7 @@ install(TARGETS
   DESTINATION lib/${PROJECT_NAME})
 ```
 
-## Build
+## Build a package
 
 ```bash
 $ rosdep install -i --from-path src --rosdistro eloquent -y
