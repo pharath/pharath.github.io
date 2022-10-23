@@ -2,6 +2,9 @@
 title: "Bash Cheatsheet"
 read_time: false
 excerpt_separator: "<!--more-->"
+toc: true
+toc_label: "Contents"
+toc_sticky: true
 categories:
   - Cheatsheet
 tags:
@@ -9,7 +12,7 @@ tags:
   - cheatsheet
 ---
 
-# bash scripting
+# bash syntax
 
 ## Shebang
 
@@ -22,6 +25,25 @@ In computing, a shebang is the character sequence consisting of the characters n
 When a text file with a shebang is used as if it is an executable in a Unix-like operating system, the program loader mechanism parses the rest of the file's initial line as an interpreter directive. The loader executes the specified interpreter program, passing to it as an argument the path that was initially used when attempting to run the script, so that the program may use the file as input data.[8] For example, if a script is named with the path path/to/script, and it starts with the following line, #!/bin/sh, then the program loader is instructed to run the program /bin/sh, passing path/to/script as the first argument. In Linux, this behavior is the result of both kernel and user-space code.[9] 
 The shebang line is usually ignored by the interpreter, because the "#" character is a comment marker in many scripting languages; some language interpreters that do not use the hash mark to begin comments still may ignore the shebang line in recognition of its purpose.[10] 
 
+## Double-ampersand vs semicolon
+
+- semicolon: run the command no matter what the exit status of the previous command is
+- double-ampersand: only run the command if the previous command is a success
+
+```bash
+$ false ; echo "OK"
+OK
+$ true ; echo "OK"
+OK
+$ false && echo "OK"
+$ true && echo "OK"
+OK
+$ false || echo "OK"
+OK
+$ true || echo "OK"
+$
+```
+
 ## Was bedeutet $# in einem bash script? (s. [askubuntu post](https://askubuntu.com/questions/939620/what-does-mean-in-bash))
 
 Zum Beispiel:
@@ -30,8 +52,7 @@ Zum Beispiel:
 if [[ $# -gt 0 ]]; then
 ```
 
-$# steht für: number of arguments (wie argc in C)
-
+`$#` steht für: number of arguments (wie `argc` in C)
 
 ## Vergleichsoperatoren
 
@@ -81,9 +102,20 @@ fi
 
 - `jobs -l` (also shows the `jobID`s)
 
+## Exit codes
+
+**Important**: Exit codes, in general, depend on the shell used! Different shells have different exit codes!
+
+### Bash
+
+From Bash manual:
+> When a command terminates on a fatal signal whose number is N, Bash uses the value 128+N as the exit status
+These **signal numbers** are given below for each signal.
+
 ## ctrl - c
 
-- sends the signal `SIGINT`
+- sends the signal `SIGINT` (signal number: 2, bash exit code: 130)
+    - **note**: Exit code 130 can mean either `SIGINT` or `_exit(130)` in bash! `SIGINT` and `_exit(130)` are not the same (more details on [stackoverflow](https://unix.stackexchange.com/a/386856)).
 - like `kill -SIGINT [processPID]` (**Note**: `kill` sends the `SIGTERM` (termination) signal by default unless you specify the signal to send.)
 - can be intercepted by a program so it can clean its self up before exiting, or not exit at all
 
