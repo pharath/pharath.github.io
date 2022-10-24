@@ -229,6 +229,13 @@ ctrl + o | Jump to previous cursor position
 ctrl + i | Jump to next cursor position
 ctrl + ] | Jump to definition (if ctags is installed)
 
+### URLs
+
+| command | description |
+| :---: | :---: |
+gx | in normal mode: open the URL under the cursor in Firefox
+gx | in visual mode: open the (manually) selected URL in Firefox
+
 ## Write
 
 | command | description |
