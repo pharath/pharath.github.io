@@ -55,6 +55,7 @@ tags:
 ctrl + alt + v | toggle vim mode (this custom shortcut must have been configured previously) 
 ctrl + w | close current tab
 ctrl + o | open file
+ctrl + e | **search and** open file
 ctrl + n | new file
 
 ## Focus
@@ -81,6 +82,7 @@ ctrl-k ctrl-j | unfold all
 
 | command | description |
 | :---: | :---: |
+ctrl + e | **search and** open file
 ctrl + shift + . | focus breadcrumbs (jump between methods/functions)
 ctrl + alt + - | go back (i.e. jump to previous location) (Windows: alt + left)
 ctrl + shift + - | go forward (i.e. jump to next location) (Windows: alt + right)

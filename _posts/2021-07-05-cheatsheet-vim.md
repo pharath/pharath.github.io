@@ -18,10 +18,21 @@ tags:
 # Plugins
 
 - 'VundleVim/Vundle.vim'
-- 'NLKNguyen/papercolor-theme'
 - 'rip-rip/clang_complete' (install: see [below](#install-autocomplete-clang_complete))
-- 'godlygeek/tabular'
-- 'plasticboy/vim-markdown'
+- for `junegunn/fzf`: when this plugin asks for downloading the executable, confirm with "y"
+
+```bash
+"braket Plugins
+Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'rip-rip/clang_complete'
+"Plugin 'godlygeek/tabular' " required for vim-markdown plugin
+"Plugin 'plasticboy/vim-markdown'
+Plugin 'iamcco/markdown-preview.nvim'
+Plugin 'tomasiser/vim-code-dark'
+Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
+```
 
 ## Install Autocomplete clang_complete 
 
