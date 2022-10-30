@@ -18,20 +18,41 @@ tags:
 # Plugins
 
 - 'VundleVim/Vundle.vim'
+    - **install**: add `Plugin 'github_repo_name'` to `.vimrc`, `PluginInstall`
+    - **uninstall**: remove `Plugin 'github_repo_name'` from `.vimrc`, `PluginUpdate`, restart vim, `PluginClean`
 - 'rip-rip/clang_complete' (install: see [below](#install-autocomplete-clang_complete))
 - for `junegunn/fzf`: when this plugin asks for downloading the executable, confirm with "y"
 
 ```bash
-"braket Plugins
+" braket Plugins
+
 Plugin 'NLKNguyen/papercolor-theme'
+
+" c++ autocomplete
 Plugin 'rip-rip/clang_complete'
+
+" markdown editing in vim
 "Plugin 'godlygeek/tabular' " required for vim-markdown plugin
 "Plugin 'plasticboy/vim-markdown'
+
+" markdown previewing in a browser
 Plugin 'iamcco/markdown-preview.nvim'
+
+" vscode dark theme
 Plugin 'tomasiser/vim-code-dark'
 Plugin 'octol/vim-cpp-enhanced-highlight'
+
+" fuzzy file search
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
+
+" Viewer & Finder for LSP symbols and tags 
+" (built to replace "tagbar" plugin which does not support LSP)
+" (LSP: https://en.wikipedia.org/wiki/Language_Server_Protocol)
+Plugin 'liuchengxu/vista.vim'
+
+" Delete/change/add parentheses/quotes/XML-tags/much more with ease
+Plugin 'tpope/vim-surround'
 ```
 
 ## Install Autocomplete clang_complete 
@@ -225,6 +246,8 @@ h j k l |			links hoch runter rechts
 ?irgend_ein_wort | suche irgend_ein_wort rückwärts
 0	|			spring zu Zeilenanfang
 $	|			spring zu Zeilenende
+H   |           spring zu top of page ("**H**igh")
+L   |           spring zu bottom of page ("**L**ow")
 b	|			spring zu Wortanfang
 e	|			spring zu Wortende
 \* |				jump to next occurrence of the word under the cursor (then navigate back and forth with "n" and "shift + n")

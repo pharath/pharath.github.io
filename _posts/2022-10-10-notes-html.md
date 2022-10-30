@@ -57,6 +57,18 @@ cd myblog
 bundle exec jekyll serve
 ```
 
+## Latex
+
+$$\LaTeX$$
+
+Just a sample algorithmn
+
+## Linking to posts
+
+see [Jekyll documentation](https://jekyllrb.com/docs/liquid/tags/#linking-to-posts)
+
+E.g. [this link]({% post_url 2022-09-22-notes-OS %}) is a link to the post "Operating Systems Notes".
+
 ## Troubleshooting
 
 ### Markdown Syntax

@@ -134,3 +134,117 @@ As strictly practical matters, computer scientists should know how to use GPG; h
 
 - Cryptography Engineering by Ferguson, Schneier and Kohno.
 
+# Multiplexing
+
+## Circuit Switching (TDM or FDM)
+
+- In **circuit switching** network resources (bandwidth) are divided into pieces (using either **TD multiplexing (TDM)** or **FD multiplexing (FDM)**)
+- bit delay is constant during a connection
+
+## Packet Switching (statistical multiplexing)
+
+- transfers the data to a network in form of **packets** (using **statistical multiplexing**)
+- unlike circuit switching, packet switching requires no pre-setup (saving time) or reservation of resources (saving resources)
+- from [geeksforgeeks](https://www.geeksforgeeks.org/packet-switching-and-delays-in-computer-network/?ref=lbp)
+    - Packet Switching uses **Store and Forward** technique while switching the packets; while forwarding the packet each hop first stores that packet then forward. 
+        - This technique is very **beneficial because** packets may get discarded at any hop due to some reason. 
+        - **More than one path is possible** between a pair of sources and destinations. Each packet contains Source and destination address using which **they independently travel** through the network. 
+            - In other words, packets belonging to the same file may or may not travel through the same path. If there is **congestion** at some path, packets are allowed to choose different paths possible over an existing network. 
+
+# The Internet
+
+- An **Internet service provider (ISP)** is an organization that provides services for accessing, using, or participating in the Internet.
+- **Internet exchange points** (**IXes** or **IXPs**) are common grounds of IP networking, allowing participant Internet service providers (ISPs) to exchange data destined for their respective networks
+
+## Tiers of networks
+
+- There is no authority that defines tiers of networks participating in the Internet
+- A **Tier 1 network** is a network that can reach every other network on the Internet without purchasing IP transit or paying for peering
+- A **Tier 2 network** is an Internet service provider which engages in the practice of peering with other networks, but which also purchases IP transit to reach some portion of the Internet.
+    - the most common Internet service providers, as it is much easier to purchase transit from a Tier 1 network than to peer with them and attempt to become a Tier 1 carrier
+- The term **Tier 3 network** is sometimes also used to describe networks who solely purchase IP transit from other networks to reach the Internet
+
+# Delay and Loss
+
+- delay
+    - transmission delay
+        - takes some time to put the bits on the wire (or whatever the medium is)
+    - queueing delay
+        - if there is a line, i.e. some packets are waiting to be sent, there will be a delay
+- loss
+    - arriving packets will be dropped by the router, if the queue is full, i.e. if there are no free buffers
+
+# Application layer
+
+- **ip address**: identifies a specific host
+- **port**: identifies a specific process
+    - e.g. **http servers**/web servers run on **port 80**
+        - when **browsers** want http files, they will send a message to the ip address of the server and the port number associated with http, i.e. port 80
+
+# Transport layer
+
+## Transport protocols: TCP/UDP
+
+- TCP
+    - **connection-oriented**: sets up a connection between client and server processes (thus, there is some overhead to set this up initially)
+    - **reliable**: makes sure there is no packet loss (requires some extra information to be sent, i.e. reliability requires some extra bandwidth)
+    - **flow control**: slows down the sender because the **receiver** is overloaded
+    - **congestion control**: slows down the sender because the **network** (in between the sender and receiver) is overloaded
+- UDP
+    - **connection-less**: no setting up, thus no overhead
+    - **unreliable**: no guarantees that a sent packet will arrive or will be uncorrupted or will be unduplicated
+    - **no flow control**
+    - **no congestion control**
+- **note**: UDP is faster and gives you more control over the trade-offs you want to make than TCP. If you need reliability, flow control or congestion control you could implement it yourself at the application layer. For some apps UDP makes more sense, e.g. internet telephony, streaming video.
+    - from wiki: "Voice and video traffic is generally transmitted using UDP"
+
+# Email
+
+## SMTP
+
+- using **app passwords** in Gmail: "When you use 2-Step Verification, some less secure apps or devices may be blocked from accessing your Google Account. App Passwords are a way to let the blocked app or device access your Google Account."
+- Mostly from [stackoverflow](https://stackoverflow.com/a/13772865/12282296):
+```bash
+# must use -ign_eof flag here, otherwise the "R" in RCPT TO line will cause "RENEGOTIATING"
+# (see https://stackoverflow.com/questions/59956241/connection-with-google-mail-using-openssl-s-client-command)
+$ openssl s_client -connect smtp.gmail.com:465 -ign_eof
+
+HELO smtp
+
+auth login
+
+# get username in base64 encoding 
+# (sidenote: in order to *DE*code simply use "base64 -d" instead of "base64" at the end of this command)
+echo -n 'phrth2@gmail.com' | base64
+
+# generate app password (see https://support.google.com/accounts/answer/185833?hl=en)
+echo -n 'app_password' | base64
+
+EHLO smtp
+MAIL FROM: <phrth@gmx.de>
+RCPT TO: <phrth2@gmail.com>
+DATA
+
+=== enter e-mail content ===
+
+ctrl-v-enter enter
+. ctrl-v-enter
+```
+
+# DNS
+
+- **local DNS server** (aka **default name server**): 
+    - does not belong to the hierarchy
+    - each ISP has a local DNS server
+    - when a host connects to an ISP, the ISP provides the host with the IP addresses of one or more of its local DNS servers (via **DHCP**)
+    - typically close to the host (i.e. not more than a few routers away from the host)
+- in theory, any DNS query can be **iterative** or **recursive**
+- in practice, DNS queries typically follow the pattern in Fig. 2.19
+    - i.e. the query from the requesting host to the local DNS server is recursive, and the remaining queries are iterative
+
+## DNS Cache
+
+- In a query chain, when a DNS server receives a DNS reply (containing, for example, a mapping from a hostname to an IP address), it can **cache** the mapping in its local memory.
+- **Timeout**: Because hosts and mappings between hostnames and IP addresses are by no means permanent, DNS servers **discard** cached information after a period of time (often set to two days)
+- A local DNS server can also cache the **TLD server**s' IP addresses
+    - In fact, because of caching, **root servers** are bypassed for all but a very small fraction of DNS queries
