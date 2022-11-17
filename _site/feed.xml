@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-10-19T21:13:25+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Pharath Palesuvaran</title><subtitle>Deep Learning and Self-Driving Cars.</subtitle><author><name>Pharath Palesuvaran</name></author><entry><title type="html">HTML Notes</title><link href="http://localhost:4000/notes/notes-html/" rel="alternate" type="text/html" title="HTML Notes" /><published>2022-10-10T00:00:00+02:00</published><updated>2022-10-10T00:00:00+02:00</updated><id>http://localhost:4000/notes/notes-html</id><content type="html" xml:base="http://localhost:4000/notes/notes-html/">&lt;h1 id=&quot;jekyll&quot;&gt;Jekyll&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-03T22:04:45+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Pharath Palesuvaran</title><subtitle>Deep Learning and Self-Driving Cars.</subtitle><author><name>Pharath Palesuvaran</name></author><entry><title type="html">HTML Notes</title><link href="http://localhost:4000/notes/notes-html/" rel="alternate" type="text/html" title="HTML Notes" /><published>2022-10-10T00:00:00+02:00</published><updated>2022-10-10T00:00:00+02:00</updated><id>http://localhost:4000/notes/notes-html</id><content type="html" xml:base="http://localhost:4000/notes/notes-html/">&lt;h1 id=&quot;jekyll&quot;&gt;Jekyll&lt;/h1&gt;
 
 &lt;p&gt;Jekyll is written in Ruby.&lt;/p&gt;
 &lt;ul&gt;
@@ -79,6 +79,18 @@ jekyll new myblog
 // Build the site and make it available on a &lt;span class=&quot;nb&quot;&gt;local &lt;/span&gt;server
 bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll serve
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;latex&quot;&gt;Latex&lt;/h2&gt;
+
+\[\LaTeX\]
+
+&lt;p&gt;Just a sample algorithmn&lt;/p&gt;
+
+&lt;h2 id=&quot;linking-to-posts&quot;&gt;Linking to posts&lt;/h2&gt;
+
+&lt;p&gt;see &lt;a href=&quot;https://jekyllrb.com/docs/liquid/tags/#linking-to-posts&quot;&gt;Jekyll documentation&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;E.g. &lt;a href=&quot;/notes/notes-OS/&quot;&gt;this link&lt;/a&gt; is a link to the post “Operating Systems Notes”.&lt;/p&gt;
 
 &lt;h2 id=&quot;troubleshooting&quot;&gt;Troubleshooting&lt;/h2&gt;
 
@@ -524,7 +536,7 @@ Unpacked 2424 files and folders to /home/bra-ket/.vscode-server/bin/74b1f979648c
   &lt;li&gt;Security: Cryptographic primitives, IPsec, SSL/TLS&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;From [&lt;a href=&quot;https://www.campus.rwth-aachen.de/rwth/all/abstractModule.asp?gguid=0x2F22AE7D7BE14B4B8AEC4D8B904EC25A&amp;amp;tguid=0x52DF76AB4F0BB84AB1CAEF0A89F08202&quot;&gt;source&lt;/a&gt;]:&lt;/p&gt;
+&lt;p&gt;From &lt;a href=&quot;https://www.campus.rwth-aachen.de/rwth/all/abstractModule.asp?gguid=0x2F22AE7D7BE14B4B8AEC4D8B904EC25A&amp;amp;tguid=0x52DF76AB4F0BB84AB1CAEF0A89F08202&quot;&gt;source&lt;/a&gt;:&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Client/Server- und Peer-to-Peer-Systeme&lt;/li&gt;
   &lt;li&gt;OSI-Referenzmodell und TCP/IP-Referenzmodell&lt;/li&gt;
@@ -536,6 +548,20 @@ Unpacked 2424 files and folders to /home/bra-ket/.vscode-server/bin/74b1f979648c
   &lt;li&gt;Sicherheitsmanagement und Datenschutz, Sicherheitsprobleme und Angriffe im Internet&lt;/li&gt;
   &lt;li&gt;Grundlagen der Kryptographie und sichere Internet-Protokolle&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;h1 id=&quot;linux-commands&quot;&gt;Linux commands&lt;/h1&gt;
+
+&lt;p&gt;Base64 decode:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'UGFzc3dvcmQ6'&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;base64&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Base64 encode:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Password:'&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;base64&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Hex to decimal number:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;printf&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;%d&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; 0xFF
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h1 id=&quot;what-every-cs-major-should-know&quot;&gt;What every CS major should know&lt;/h1&gt;
 
@@ -646,7 +672,324 @@ Unpacked 2424 files and folders to /home/bra-ket/.vscode-server/bin/74b1f979648c
 
 &lt;ul&gt;
   &lt;li&gt;Cryptography Engineering by Ferguson, Schneier and Kohno.&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Pharath Palesuvaran</name></author><category term="Notes" /><category term="datkom" /><category term="notes" /><summary type="html">For learning DatKom</summary></entry><entry><title type="html">Operating Systems Notes</title><link href="http://localhost:4000/notes/notes-OS/" rel="alternate" type="text/html" title="Operating Systems Notes" /><published>2022-09-22T00:00:00+02:00</published><updated>2022-09-22T00:00:00+02:00</updated><id>http://localhost:4000/notes/notes-OS</id><content type="html" xml:base="http://localhost:4000/notes/notes-OS/">&lt;h1 id=&quot;lectures&quot;&gt;Lectures&lt;/h1&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;multiplexing&quot;&gt;Multiplexing&lt;/h1&gt;
+
+&lt;h2 id=&quot;circuit-switching-tdm-or-fdm&quot;&gt;Circuit Switching (TDM or FDM)&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;In &lt;strong&gt;circuit switching&lt;/strong&gt; network resources (bandwidth) are divided into pieces (using either &lt;strong&gt;TD multiplexing (TDM)&lt;/strong&gt; or &lt;strong&gt;FD multiplexing (FDM)&lt;/strong&gt;)&lt;/li&gt;
+  &lt;li&gt;bit delay is constant during a connection&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;packet-switching-statistical-multiplexing&quot;&gt;Packet Switching (statistical multiplexing)&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;transfers the data to a network in form of &lt;strong&gt;packets&lt;/strong&gt; (using &lt;strong&gt;statistical multiplexing&lt;/strong&gt;)&lt;/li&gt;
+  &lt;li&gt;unlike circuit switching, packet switching requires no pre-setup (saving time) or reservation of resources (saving resources)&lt;/li&gt;
+  &lt;li&gt;from &lt;a href=&quot;https://www.geeksforgeeks.org/packet-switching-and-delays-in-computer-network/?ref=lbp&quot;&gt;geeksforgeeks&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Packet Switching uses &lt;strong&gt;Store and Forward&lt;/strong&gt; technique while switching the packets; while forwarding the packet each hop first stores that packet then forward.
+        &lt;ul&gt;
+          &lt;li&gt;This technique is very &lt;strong&gt;beneficial because&lt;/strong&gt; packets may get discarded at any hop due to some reason.&lt;/li&gt;
+          &lt;li&gt;&lt;strong&gt;More than one path is possible&lt;/strong&gt; between a pair of sources and destinations. Each packet contains Source and destination address using which &lt;strong&gt;they independently travel&lt;/strong&gt; through the network.
+            &lt;ul&gt;
+              &lt;li&gt;In other words, packets belonging to the same file may or may not travel through the same path. If there is &lt;strong&gt;congestion&lt;/strong&gt; at some path, packets are allowed to choose different paths possible over an existing network.&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;the-internet&quot;&gt;The Internet&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;An &lt;strong&gt;Internet service provider (ISP)&lt;/strong&gt; is an organization that provides services for accessing, using, or participating in the Internet.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Internet exchange points&lt;/strong&gt; (&lt;strong&gt;IXes&lt;/strong&gt; or &lt;strong&gt;IXPs&lt;/strong&gt;) are common grounds of IP networking, allowing participant Internet service providers (ISPs) to exchange data destined for their respective networks&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;tiers-of-networks&quot;&gt;Tiers of networks&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;There is no authority that defines tiers of networks participating in the Internet&lt;/li&gt;
+  &lt;li&gt;A &lt;strong&gt;Tier 1 network&lt;/strong&gt; is a network that can reach every other network on the Internet without purchasing IP transit or paying for peering&lt;/li&gt;
+  &lt;li&gt;A &lt;strong&gt;Tier 2 network&lt;/strong&gt; is an Internet service provider which engages in the practice of peering with other networks, but which also purchases IP transit to reach some portion of the Internet.
+    &lt;ul&gt;
+      &lt;li&gt;the most common Internet service providers, as it is much easier to purchase transit from a Tier 1 network than to peer with them and attempt to become a Tier 1 carrier&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;The term &lt;strong&gt;Tier 3 network&lt;/strong&gt; is sometimes also used to describe networks who solely purchase IP transit from other networks to reach the Internet&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;delay-and-loss&quot;&gt;Delay and Loss&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;delay
+    &lt;ul&gt;
+      &lt;li&gt;transmission delay
+        &lt;ul&gt;
+          &lt;li&gt;takes some time to put the bits on the wire (or whatever the medium is)&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;queueing delay
+        &lt;ul&gt;
+          &lt;li&gt;if there is a line, i.e. some packets are waiting to be sent, there will be a delay&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;loss
+    &lt;ul&gt;
+      &lt;li&gt;arriving packets will be dropped by the router, if the queue is full, i.e. if there are no free buffers&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;application-layer&quot;&gt;Application layer&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;ip address&lt;/strong&gt;: identifies a specific host&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;port&lt;/strong&gt;: identifies a specific process
+    &lt;ul&gt;
+      &lt;li&gt;e.g. &lt;strong&gt;http servers&lt;/strong&gt;/web servers run on &lt;strong&gt;port 80&lt;/strong&gt;
+        &lt;ul&gt;
+          &lt;li&gt;when &lt;strong&gt;browsers&lt;/strong&gt; want http files, they will send a message to the ip address of the server and the port number associated with http, i.e. port 80&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;transport-layer&quot;&gt;Transport layer&lt;/h1&gt;
+
+&lt;h2 id=&quot;transport-protocols-tcpudp&quot;&gt;Transport protocols: TCP/UDP&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;TCP
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;connection-oriented&lt;/strong&gt;: sets up a connection between client and server processes (thus, there is some overhead to set this up initially)&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;reliable&lt;/strong&gt;: makes sure there is no packet loss (requires some extra information to be sent, i.e. reliability requires some extra bandwidth)&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;flow control&lt;/strong&gt;: slows down the sender because the &lt;strong&gt;receiver&lt;/strong&gt; is overloaded&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;congestion control&lt;/strong&gt;: slows down the sender because the &lt;strong&gt;network&lt;/strong&gt; (in between the sender and receiver) is overloaded&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;UDP
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;connection-less&lt;/strong&gt;: no setting up, thus no overhead&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;unreliable&lt;/strong&gt;: no guarantees that a sent packet will arrive or will be uncorrupted or will be unduplicated&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;no flow control&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;no congestion control&lt;/strong&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;note&lt;/strong&gt;: UDP is faster and gives you more control over the trade-offs you want to make than TCP. If you need reliability, flow control or congestion control you could implement it yourself at the application layer. For some apps UDP makes more sense, e.g. internet telephony, streaming video.
+    &lt;ul&gt;
+      &lt;li&gt;from wiki: “Voice and video traffic is generally transmitted using UDP”&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;email&quot;&gt;Email&lt;/h1&gt;
+
+&lt;h2 id=&quot;smtp&quot;&gt;SMTP&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;using &lt;strong&gt;app passwords&lt;/strong&gt; in Gmail: “When you use 2-Step Verification, some less secure apps or devices may be blocked from accessing your Google Account. App Passwords are a way to let the blocked app or device access your Google Account.”&lt;/li&gt;
+  &lt;li&gt;Mostly from &lt;a href=&quot;https://stackoverflow.com/a/13772865/12282296&quot;&gt;stackoverflow&lt;/a&gt;:
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# must use -ign_eof flag here, otherwise the &quot;R&quot; in RCPT TO line will cause &quot;RENEGOTIATING&quot;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# (see https://stackoverflow.com/questions/59956241/connection-with-google-mail-using-openssl-s-client-command)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;openssl s_client &lt;span class=&quot;nt&quot;&gt;-connect&lt;/span&gt; smtp.gmail.com:465 &lt;span class=&quot;nt&quot;&gt;-ign_eof&lt;/span&gt;
+  
+HELO smtp
+  
+auth login
+  
+&lt;span class=&quot;c&quot;&gt;# get username in base64 encoding &lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# (sidenote: in order to *DE*code simply use &quot;base64 -d&quot; instead of &quot;base64&quot; at the end of this command)&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'phrth2@gmail.com'&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;base64&lt;/span&gt;
+  
+&lt;span class=&quot;c&quot;&gt;# generate app password (see https://support.google.com/accounts/answer/185833?hl=en)&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'app_password'&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;base64
+  
+&lt;/span&gt;EHLO smtp
+MAIL FROM: &amp;lt;phrth@gmx.de&amp;gt;
+RCPT TO: &amp;lt;phrth2@gmail.com&amp;gt;
+DATA
+  
+&lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; enter e-mail content &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt;
+  
+ctrl-v-enter enter
+&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; ctrl-v-enter
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;dns&quot;&gt;DNS&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;A Distributed, Hierarchical Database&lt;/li&gt;
+  &lt;li&gt;hierarchy:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;root DNS server&lt;/strong&gt; (returns IP address of TLD server, e.g. for TLD &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.com&lt;/code&gt;)&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;TLD server&lt;/strong&gt; (returns IP address of authoritative server, e.g. authoritative for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;amazon.com&lt;/code&gt;)
+        &lt;ul&gt;
+          &lt;li&gt;&lt;strong&gt;Note&lt;/strong&gt;: The TLD server does not always know the authoritative DNS server for the hostname! It may know only of an &lt;strong&gt;intermediate DNS server&lt;/strong&gt;, which in turn knows the authoritative DNS server for the hostname.
+            &lt;ul&gt;
+              &lt;li&gt;e.g. an intermediate university DNS server and authoritative departmental DNS servers&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;(intermediate DNS server)&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;authoritative DNS server&lt;/strong&gt; (returns the IP address for the hostname, e.g. for the hostname &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;www.amazon.com&lt;/code&gt;)
+        &lt;ul&gt;
+          &lt;li&gt;most universities and large companies implement and maintain their own authoritative server&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;local DNS server&lt;/strong&gt; (aka &lt;strong&gt;default name server&lt;/strong&gt;):
+    &lt;ul&gt;
+      &lt;li&gt;does not belong to the hierarchy&lt;/li&gt;
+      &lt;li&gt;each ISP has a local DNS server&lt;/li&gt;
+      &lt;li&gt;when a host connects to an ISP, the ISP provides the host with the IP addresses of one or more of its local DNS servers (via &lt;strong&gt;DHCP&lt;/strong&gt;)&lt;/li&gt;
+      &lt;li&gt;typically close to the host (i.e. not more than a few routers away from the host)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;recursive-vs-iterative-dns-query&quot;&gt;Recursive vs Iterative DNS query&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;recursive DNS query&lt;/strong&gt;: obtain the mapping on the querying DNS server’s behalf&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;iterative DNS query&lt;/strong&gt;: replies are directly returned to the querying DNS server&lt;/li&gt;
+  &lt;li&gt;in theory, any DNS query can be &lt;strong&gt;iterative&lt;/strong&gt; or &lt;strong&gt;recursive&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;in practice, DNS queries typically follow the pattern in Fig. 2.19
+    &lt;ul&gt;
+      &lt;li&gt;i.e. the query from the requesting host to the local DNS server is recursive, and the remaining queries are iterative&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;dns-cache&quot;&gt;DNS Cache&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;In a query chain, when a DNS server receives a DNS reply (containing, for example, a mapping from a hostname to an IP address), it can &lt;strong&gt;cache&lt;/strong&gt; the mapping in its local memory.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Timeout&lt;/strong&gt;: Because hosts and mappings between hostnames and IP addresses are by no means permanent, DNS servers &lt;strong&gt;discard&lt;/strong&gt; cached information after a period of time (often set to two days)&lt;/li&gt;
+  &lt;li&gt;A local DNS server can also cache the &lt;strong&gt;TLD server&lt;/strong&gt;s’ IP addresses
+    &lt;ul&gt;
+      &lt;li&gt;In fact, because of caching, &lt;strong&gt;root servers&lt;/strong&gt; are bypassed for all but a very small fraction of DNS queries&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;show-the-cached-records-time-to-live-ttl&quot;&gt;Show the cached records, Time to Live (TTL)&lt;/h3&gt;
+
+&lt;p&gt;First check, if DNS caching is enabled:&lt;/p&gt;
+
+&lt;p&gt;If DNS caching is &lt;strong&gt;enabled&lt;/strong&gt; the DNS server used to resolve the domain name (e.g. when using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nslookup domain_name&lt;/code&gt;) is a &lt;a href=&quot;#loopback-address&quot;&gt;loopback IP address&lt;/a&gt;, e.g. 127.0.0.53. If you have it &lt;strong&gt;disabled&lt;/strong&gt;, then the DNS server should be anything other than 127.0.0.X.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;nslookup &lt;span class=&quot;nt&quot;&gt;-debug&lt;/span&gt; www.cyberciti.biz
+nslookup &lt;span class=&quot;nt&quot;&gt;-debug&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;NS google.com
+
+dig +ttlunits A www.cyberciti.biz
+dig +ttlunits NS google.com
+
+&lt;span class=&quot;c&quot;&gt;# show the TTL only&lt;/span&gt;
+dig +nocmd +noall +answer +ttlid A www.cyberciti.biz
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;dns-resource-records-rrs&quot;&gt;DNS Resource Records (RRs)&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;a four-touple &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(Name, Value, Type, TTL)&lt;/code&gt;, where &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Name&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Value&lt;/code&gt; depend on the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Type&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;If a DNS server is &lt;strong&gt;authoritative&lt;/strong&gt; for a particular hostname, then the DNS server will contain a &lt;strong&gt;Type A record&lt;/strong&gt; for the hostname.
+    &lt;ul&gt;
+      &lt;li&gt;(Even if the DNS server is not authoritative, it may contain a Type A record in its &lt;strong&gt;cache&lt;/strong&gt;.)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;If a server is &lt;strong&gt;not authoritative&lt;/strong&gt; for a hostname, then the server will contain a &lt;strong&gt;Type NS record&lt;/strong&gt; for the domain that includes the hostname
+    &lt;ul&gt;
+      &lt;li&gt;it will also contain a &lt;strong&gt;Type A record&lt;/strong&gt; that provides the IP address of the DNS server in the Value field of the NS record.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;nslookup-dig&quot;&gt;nslookup, dig&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Caution&lt;/strong&gt;: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dig&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nslookup&lt;/code&gt; sometimes display different information. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dig&lt;/code&gt; uses the OS resolver libraries. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nslookup&lt;/code&gt; uses its own internal ones. ISC recommends to stop using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nslookup&lt;/code&gt; (see &lt;a href=&quot;https://unix.stackexchange.com/a/93809&quot;&gt;stackexchange&lt;/a&gt;)!&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;nslookup&lt;/strong&gt;:
+General syntax: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nslookup –option1 –option2 host-to-find dns-server&lt;/code&gt;
+Options:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nslookup -debug&lt;/code&gt;: show additional information, e.g. TTL&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;dig&lt;/strong&gt;:
+General syntax: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dig [options] TYPE domain auth-name-server-here&lt;/code&gt;
+Options:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dig +short&lt;/code&gt;: short form answer&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dig +ttlunits&lt;/code&gt;: human-readable time units&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dig +nocmd +noall +answer +ttlid&lt;/code&gt;: show the TTL only&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Example 1&lt;/strong&gt;: Send me the IP address for the host www.mit.edu:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;nslookup &lt;span class=&quot;nt&quot;&gt;-type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;A www.mit.edu
+dig A www.mit.edu
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Example 2&lt;/strong&gt;: Send me the host names of the authoritative DNS servers for domain mit.edu:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;nslookup &lt;span class=&quot;nt&quot;&gt;-type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;NS mit.edu
+dig NS mit.edu
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Example 3&lt;/strong&gt;: Query sent to the DNS server &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dns2.p08.nsone.net&lt;/code&gt; rather than to the default DNS server:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;possible errors, when using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nslookup&lt;/code&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;** server can't find some_site.com: NXDOMAIN&lt;/code&gt;: the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;host-to-find&lt;/code&gt; is wrong&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;** server can't find some_site.com: REFUSED&lt;/code&gt;: the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dns-server&lt;/code&gt; is wrong, more precisely:
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;https://superuser.com/a/1624001&quot;&gt;nslookup from another name server&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://stackoverflow.com/a/1697403/12282296&quot;&gt;“Refused” doesn’t mean that the connection to the DNS server is refused. It means that the DNS server refuses to provide whatever data you asked for, or to do whatever action you asked it to do&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;nslookup www.google.com dns2.p08.nsone.net
+
+&lt;span class=&quot;c&quot;&gt;# note: do not forget the @ symbol here!&lt;/span&gt;
+dig www.google.com @dns2.p08.nsone.net
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;ip-ifconfig-ipconfig-nmcli&quot;&gt;ip, ifconfig, ipconfig, nmcli&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ipconfig&lt;/code&gt; is a Windows command, it displays slightly different information than &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ifconfig&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ip&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ifconfig&lt;/code&gt; is deprecated, use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ip&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ip a&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ip address&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ip address show&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ip r&lt;/code&gt; default gateway/router address&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nmcli dev show wlo1&lt;/code&gt; show gateway and DNS servers for device &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wlo1&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nmcli dev status&lt;/code&gt; get device names and their status types&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;loopback-address&quot;&gt;Loopback address&lt;/h2&gt;
+
+&lt;p&gt;From &lt;a href=&quot;https://www.techopedia.com/definition/2440/loopback-address-ip-address&quot;&gt;techopedia.com&lt;/a&gt;:&lt;/p&gt;
+
+&lt;p&gt;A &lt;strong&gt;loopback address&lt;/strong&gt; has been built into the IP domain system in order to allow for a device to send and receive its own data packets.&lt;/p&gt;
+
+&lt;p&gt;Loopback addresses can be useful in various kinds of analysis like testing and debugging, or in allowing routers to communicate in specific ways.&lt;/p&gt;
+
+&lt;p&gt;A simple way of describing how using a loopback address works is that a data packet will get sent through a network and routed back to the same device where it originated.&lt;/p&gt;
+
+&lt;p&gt;In IPv4, &lt;strong&gt;127.0.0.1&lt;/strong&gt; is the most commonly used loopback address, however, this can range be extended to &lt;strong&gt;127.255.255.255&lt;/strong&gt;.&lt;/p&gt;</content><author><name>Pharath Palesuvaran</name></author><category term="Notes" /><category term="datkom" /><category term="notes" /><summary type="html">For learning DatKom</summary></entry><entry><title type="html">Operating Systems Notes</title><link href="http://localhost:4000/notes/notes-OS/" rel="alternate" type="text/html" title="Operating Systems Notes" /><published>2022-09-22T00:00:00+02:00</published><updated>2022-09-22T00:00:00+02:00</updated><id>http://localhost:4000/notes/notes-OS</id><content type="html" xml:base="http://localhost:4000/notes/notes-OS/">&lt;h1 id=&quot;lectures&quot;&gt;Lectures&lt;/h1&gt;
 
 &lt;h2 id=&quot;i4-comsys-wehrle-sose&quot;&gt;i4 ComSys, Wehrle (SoSe)&lt;/h2&gt;
 
@@ -794,7 +1137,233 @@ Unpacked 2424 files and folders to /home/bra-ket/.vscode-server/bin/74b1f979648c
   &lt;li&gt;Dateisysteme: Definitionen, Dateizugriff, Dateioperationen, Struktur, Schichtung, Beispiel: Aufbau eines I-Node-basierten Dateisystems&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&quot;unix-system-calls&quot;&gt;UNIX System calls&lt;/h1&gt;
+&lt;h1 id=&quot;man-pages&quot;&gt;man pages&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;see book appendix F.8 “Documentation”&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;man man&lt;/code&gt; includes a list of all sections in the man pages&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;man -k some_keyword&lt;/code&gt; to search man pages for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;some_keyword&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;man -s 6 --regex -k '.*'&lt;/code&gt; to show the title of all manuals in section 6&lt;/li&gt;
+  &lt;li&gt;standard sections:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RETURN VALUES&lt;/code&gt; tells you what the function will return under success or failure&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ERRORS&lt;/code&gt; tells what happens under failure&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SYNOPSIS&lt;/code&gt;:
+        &lt;ul&gt;
+          &lt;li&gt;what &lt;strong&gt;arguments&lt;/strong&gt; to pass to a library call,&lt;/li&gt;
+          &lt;li&gt;what &lt;strong&gt;header files&lt;/strong&gt; need to be included to use a library call&lt;/li&gt;
+          &lt;li&gt;what &lt;strong&gt;libraries you need to link with&lt;/strong&gt; to use the call&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;look for the &lt;strong&gt;definition of the structure&lt;/strong&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;timeval&lt;/code&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;grep&lt;/code&gt;: use e.g. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;grep 'struct timeval' /usr/include/sys/*.h&lt;/code&gt; to look for the &lt;strong&gt;definition of the structure&lt;/strong&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;timeval&lt;/code&gt; in all files that end with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.h&lt;/code&gt; in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/usr/include/sys&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;using the compiler: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gcc -E main.c&lt;/code&gt; (where &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;main.c&lt;/code&gt; includes the header &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;time.h&lt;/code&gt;) will produce a C file that has all of the needed structures and prototypes in it, including the definition of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;timeval&lt;/code&gt; struct&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://unix.stackexchange.com/a/487931&quot;&gt;What is in section 6 “Games”?&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;see &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls /usr/games/&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;man -a kill&lt;/code&gt;: cycle through all of the different man pages named “kill”
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kill(2)&lt;/code&gt; means &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kill&lt;/code&gt; in section 2&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;virtualization&quot;&gt;Virtualization&lt;/h1&gt;
+
+&lt;h2 id=&quot;processes&quot;&gt;Processes&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;process (abstraction) := a &lt;strong&gt;running program&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;a typical system runs hundreds of processes at the same time&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;virtualizing-the-cpu&quot;&gt;Virtualizing the CPU&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;time sharing of the CPU&lt;/strong&gt;: the OS creates the &lt;strong&gt;illusion that many CPUs exist&lt;/strong&gt; by running one process, stopping it and running another etc.
+    &lt;ul&gt;
+      &lt;li&gt;a resource (the CPU) is “divided &lt;strong&gt;in time&lt;/strong&gt;” among the processes&lt;/li&gt;
+      &lt;li&gt;allows users to run as many concurrent processes as they want&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;drawback: if the CPUs are shared, each process will run more slowly&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;implementation&lt;/strong&gt; via …
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;mechanisms&lt;/strong&gt;
+        &lt;ul&gt;
+          &lt;li&gt;low-level methods or protocols that implement a needed piece of functionality
+            &lt;ul&gt;
+              &lt;li&gt;e.g. context switch (“stop one program and start another on a given CPU”) (a “time-sharing mechanism”)&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;policies&lt;/strong&gt;
+        &lt;ul&gt;
+          &lt;li&gt;algorithms for making some kind of decision within the OS
+            &lt;ul&gt;
+              &lt;li&gt;e.g. scheduling policy (“decide which program the OS should run”)&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;separation of mechanisms and policies&lt;/strong&gt;
+        &lt;ul&gt;
+          &lt;li&gt;allows one to change mechanisms without having to change the policies and vice versa&lt;/li&gt;
+          &lt;li&gt;a form of modularity&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;machine-state-of-a-process&quot;&gt;Machine State of a process&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What constitutes a process?&lt;/li&gt;
+  &lt;li&gt;What parts of the machine matter to the program execution?&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;machine state&lt;/strong&gt;: what a program can read or update during its execution
+    &lt;ul&gt;
+      &lt;li&gt;components:
+        &lt;ul&gt;
+          &lt;li&gt;address space
+            &lt;ul&gt;
+              &lt;li&gt;instructions&lt;/li&gt;
+              &lt;li&gt;data (which the program reads and writes)&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;registers
+            &lt;ul&gt;
+              &lt;li&gt;program counter (PC) aka instruction pointer (IP)&lt;/li&gt;
+              &lt;li&gt;stack pointer&lt;/li&gt;
+              &lt;li&gt;frame pointer&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;I/O information (e.g. list of the files the process currently has open)&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.quora.com/What-is-the-difference-between-registers-and-address-space&quot;&gt;address space, registers&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;process-api-overview&quot;&gt;Process API (Overview)&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;must be included in any interface of an OS:
+    &lt;ul&gt;
+      &lt;li&gt;create&lt;/li&gt;
+      &lt;li&gt;destroy&lt;/li&gt;
+      &lt;li&gt;wait&lt;/li&gt;
+      &lt;li&gt;suspend a process&lt;/li&gt;
+      &lt;li&gt;resume a process&lt;/li&gt;
+      &lt;li&gt;get status information, e.g.
+        &lt;ul&gt;
+          &lt;li&gt;how long a process has run for&lt;/li&gt;
+          &lt;li&gt;what state a process is in&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;more details under &lt;a href=&quot;#process-api&quot;&gt;Process API&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;process-creation&quot;&gt;Process Creation&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;loading of code and static data into address space
+    &lt;ul&gt;
+      &lt;li&gt;eagerly&lt;/li&gt;
+      &lt;li&gt;lazily&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;allocate memory for the program’s &lt;strong&gt;stack&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;initialize the stack with arguments
+    &lt;ul&gt;
+      &lt;li&gt;fill in parameters to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;main()&lt;/code&gt; function (i.e. the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;argc&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;argv&lt;/code&gt; arrays)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;allocate some memory for the program’s &lt;strong&gt;heap&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;initialization tasks related to I/O
+    &lt;ul&gt;
+      &lt;li&gt;UNIX default for each process: initialize three &lt;a href=&quot;#file-descriptors&quot;&gt;file descriptors&lt;/a&gt;: stdin, stdout, stderr&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;start program at entry point &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;main()&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;OS transfers control of the CPU to the newly-created process&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;process-states&quot;&gt;Process States&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Running&lt;/li&gt;
+  &lt;li&gt;Ready&lt;/li&gt;
+  &lt;li&gt;Blocked = “not ready to run until some event (e.g. I/O completion, reading from a disk, waiting for a packet from a network) takes place”&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;other-states&quot;&gt;Other states&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;initial state
+    &lt;ul&gt;
+      &lt;li&gt;when process is being created&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;final state (aka zombie state)
+    &lt;ul&gt;
+      &lt;li&gt;process exited, but has not been cleaned up&lt;/li&gt;
+      &lt;li&gt;allows the &lt;strong&gt;parent&lt;/strong&gt; that created the process to examine the &lt;strong&gt;return code&lt;/strong&gt; of the child and then call &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wait()&lt;/code&gt; to clean up the child&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;scheduling&quot;&gt;Scheduling&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;scheduled = “moved from ready to running”&lt;/li&gt;
+  &lt;li&gt;descheduled = “moved from running to ready”&lt;/li&gt;
+  &lt;li&gt;OS scheduler = e.g. decides …
+    &lt;ul&gt;
+      &lt;li&gt;to run process 2 while process 1 issued an I/O,&lt;/li&gt;
+      &lt;li&gt;not to switch back to process 1 when I/O is completed&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;data-structures&quot;&gt;Data structures&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;process list (aka task list)&lt;/li&gt;
+  &lt;li&gt;process control block (PCB)
+    &lt;ul&gt;
+      &lt;li&gt;register context (for context switches)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;process-api&quot;&gt;Process API&lt;/h1&gt;
+
+&lt;h1 id=&quot;file-descriptors&quot;&gt;File Descriptors&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;from &lt;a href=&quot;https://en.wikipedia.org/wiki/File_descriptor&quot;&gt;File Descriptor&lt;/a&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;On Linux, the set of file descriptors open in a process can be accessed under the path &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/proc/PID/fd/&lt;/code&gt;, where &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PID&lt;/code&gt; is the process identifier. File descriptor &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/proc/PID/fd/0&lt;/code&gt; is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;stdin&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/proc/PID/fd/1&lt;/code&gt; is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;stdout&lt;/code&gt;, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/proc/PID/fd/2&lt;/code&gt; is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;stderr&lt;/code&gt;. As a shortcut to these, any running process can also access its own file descriptors through the folders &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/proc/self/fd&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/dev/fd&lt;/code&gt;.
+        &lt;h1 id=&quot;unix-system-calls&quot;&gt;UNIX System calls&lt;/h1&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h2 id=&quot;strace&quot;&gt;strace&lt;/h2&gt;
 
@@ -841,6 +1410,57 @@ Unpacked 2424 files and folders to /home/bra-ket/.vscode-server/bin/74b1f979648c
   &lt;/li&gt;
   &lt;li&gt;see &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;man ulimit&lt;/code&gt;&lt;/li&gt;
   &lt;li&gt;current user limits: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ulimit -a&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;counting-processes&quot;&gt;Counting Processes&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;see &lt;a href=&quot;https://coderscat.com/how-to-count-the-number-of-processes-in-linux/&quot;&gt;how-to-count-the-number-of-processes-in-linux&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ps aux&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aux&lt;/code&gt; are &lt;a href=&quot;https://unix.stackexchange.com/a/106848&quot;&gt;BSD style flags&lt;/a&gt;
+        &lt;ul&gt;
+          &lt;li&gt;a = show processes for all users&lt;/li&gt;
+          &lt;li&gt;u = display the process’s user/owner&lt;/li&gt;
+          &lt;li&gt;x = also show processes not attached to a terminal&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;visualize-memory-usage&quot;&gt;Visualize Memory Usage&lt;/h1&gt;
+
+&lt;h2 id=&quot;smem&quot;&gt;smem&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;see &lt;a href=&quot;https://www.xmodulo.com/visualize-memory-usage-linux.html&quot;&gt;How to visualize memory usage on Linux&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;to fix the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NameError: name 'xrange' is not defined&lt;/code&gt; edit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/bin/smem&lt;/code&gt; and apply this &lt;a href=&quot;https://bugs.debian.org/cgi-bin/bugreport.cgi?att=1;bug=958129;filename=smem-xrange-fix.patch;msg=5&quot;&gt;patch&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;smem
+
+&lt;span class=&quot;c&quot;&gt;# Pie chart&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;python3 /bin/smem &lt;span class=&quot;nt&quot;&gt;--pie&lt;/span&gt; name &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;pss&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-U&lt;/span&gt; some_username
+
+&lt;span class=&quot;c&quot;&gt;# Bar chart&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;python3 /bin/smem &lt;span class=&quot;nt&quot;&gt;--bar&lt;/span&gt; name &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;pss uss&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-U&lt;/span&gt; some_username
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;concurrency&quot;&gt;Concurrency&lt;/h1&gt;
+
+&lt;h2 id=&quot;multi-threaded-programs&quot;&gt;Multi-Threaded Programs&lt;/h2&gt;
+
+&lt;h3 id=&quot;gcc--pthread-vs--lpthread&quot;&gt;gcc -pthread vs -lpthread&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;from &lt;a href=&quot;https://stackoverflow.com/a/23251828&quot;&gt;Difference between -pthread and -lpthread while compiling&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-pthread&lt;/code&gt; tells the compiler to link in the pthread library as well as configure the compilation for threads.&lt;/li&gt;
+      &lt;li&gt;Using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-lpthread&lt;/code&gt; option only causes the pthread library to be linked - the &lt;strong&gt;pre-defined macros don’t get defined&lt;/strong&gt;.&lt;/li&gt;
+      &lt;li&gt;Bottom line: you should use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-pthread&lt;/code&gt; option.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;</content><author><name>Pharath Palesuvaran</name></author><category term="Notes" /><category term="os" /><category term="notes" /><summary type="html">Operating Systems Basics</summary></entry><entry><title type="html">C Notes</title><link href="http://localhost:4000/notes/notes-c/" rel="alternate" type="text/html" title="C Notes" /><published>2022-09-22T00:00:00+02:00</published><updated>2022-09-22T00:00:00+02:00</updated><id>http://localhost:4000/notes/notes-c</id><content type="html" xml:base="http://localhost:4000/notes/notes-c/">&lt;h1 id=&quot;concepts&quot;&gt;Concepts&lt;/h1&gt;
 
 &lt;ul&gt;
@@ -965,6 +1585,19 @@ Unpacked 2424 files and folders to /home/bra-ket/.vscode-server/bin/74b1f979648c
   &lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;h1 id=&quot;preprocessor&quot;&gt;Preprocessor&lt;/h1&gt;
+
+&lt;h2 id=&quot;include&quot;&gt;include&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;difference between &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#include &amp;lt;lib.h&amp;gt;&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#include &quot;lib.h&quot;&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;What differs is the locations in which the preprocessor searches for the file to be included (&lt;a href=&quot;https://stackoverflow.com/a/21594&quot;&gt;stackoverflow&lt;/a&gt;)&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;phth test&lt;/strong&gt;: This matters because if you write &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#include &amp;lt;lib.h&amp;gt;&lt;/code&gt; instead of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#include &quot;lib.h&quot;&lt;/code&gt; the preprocessor will not find &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lib.h&lt;/code&gt; !!!&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;h1 id=&quot;operator-precedence-associativity&quot;&gt;Operator Precedence, Associativity&lt;/h1&gt;
 
 &lt;ul&gt;
@@ -1002,7 +1635,11 @@ Unpacked 2424 files and folders to /home/bra-ket/.vscode-server/bin/74b1f979648c
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;use them only when all or most of the program’s functions need access to the variable&lt;/li&gt;
-  &lt;li&gt;When a function uses an external variable, it is good programming practice to declare the variable within the function using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;extern&lt;/code&gt; keyword (&lt;strong&gt;C&lt;/strong&gt;: see &lt;a href=&quot;https://devdocs.io/c/language/storage_duration&quot;&gt;Storage-class specifiers&lt;/a&gt;; &lt;strong&gt;C++&lt;/strong&gt;: see &lt;a href=&quot;https://en.cppreference.com/w/c/language/storage_duration&quot;&gt;Storage-class specifiers&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;When a function uses an external variable, it is good programming practice to declare the variable within the function using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;extern&lt;/code&gt; keyword (&lt;strong&gt;C&lt;/strong&gt;: see &lt;a href=&quot;https://devdocs.io/c/language/storage_duration&quot;&gt;Storage-class specifiers&lt;/a&gt;; &lt;strong&gt;C++&lt;/strong&gt;: see &lt;a href=&quot;https://en.cppreference.com/w/c/language/storage_duration&quot;&gt;Storage-class specifiers&lt;/a&gt;)
+    &lt;ul&gt;
+      &lt;li&gt;“You normally use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;extern&lt;/code&gt; when you want to refer to something that is not in the current translation unit, such as a variable that’s defined in a library you will be linking to.” (&lt;a href=&quot;https://stackoverflow.com/a/2652576/12282296&quot;&gt;stackoverflow&lt;/a&gt;)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;local-variables&quot;&gt;Local variables&lt;/h2&gt;
@@ -1214,6 +1851,24 @@ Unpacked 2424 files and folders to /home/bra-ket/.vscode-server/bin/74b1f979648c
 
 &lt;h1 id=&quot;functions&quot;&gt;Functions&lt;/h1&gt;
 
+&lt;h2 id=&quot;return-statements&quot;&gt;Return statements&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;main&lt;/code&gt; function a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;return 0;&lt;/code&gt; is optional in C99, i.e. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;return 0;&lt;/code&gt; will be returned &lt;strong&gt;by default&lt;/strong&gt; if there is no explicit return statement at the end of the function &lt;a href=&quot;https://stackoverflow.com/a/4138710&quot;&gt;stackoverflow&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;inline-functions&quot;&gt;Inline Functions&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;from &lt;a href=&quot;https://stackoverflow.com/questions/31108159/what-is-the-use-of-the-inline-keyword-in-c&quot;&gt;What is the use of the inline keyword in C?&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;A C code can be optimized in two ways: For Code size and for Execution Time.&lt;/li&gt;
+      &lt;li&gt;So, it tells the compiler to build the function into the code where it is used with the intention of improving execution time.&lt;/li&gt;
+      &lt;li&gt;If you declare small functions like setting/clearing a flag or some bit toggle which are performed repeatedly, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;inline&lt;/code&gt;, it can make a &lt;strong&gt;big performance difference&lt;/strong&gt; with respect to time, but at the cost of code size.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;h2 id=&quot;best-practice-2&quot;&gt;Best practice&lt;/h2&gt;
 
 &lt;ul&gt;
@@ -1337,13 +1992,38 @@ Unpacked 2424 files and folders to /home/bra-ket/.vscode-server/bin/74b1f979648c
 
 &lt;h1 id=&quot;printf&quot;&gt;printf&lt;/h1&gt;
 
+&lt;h2 id=&quot;understanding-the-printf-declaration&quot;&gt;Understanding the printf Declaration&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;prototype: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;int printf(const char *restrict format, ...);&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://stackoverflow.com/a/52216472&quot;&gt;Ellipsis in the declaration&lt;/a&gt;
+        &lt;ul&gt;
+          &lt;li&gt;the ellipsis notation in the declaration of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;printf()&lt;/code&gt; means that default argument promotions occur, but that affects only the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;float&lt;/code&gt; type and integer types smaller than &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;int&lt;/code&gt; (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;short&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;char&lt;/code&gt;, etc).&lt;/li&gt;
+          &lt;li&gt;from &lt;a href=&quot;https://stackoverflow.com/a/3792789&quot;&gt;What is ellipsis operator in c&lt;/a&gt;:
+            &lt;ul&gt;
+              &lt;li&gt;An &lt;strong&gt;ellipsis&lt;/strong&gt; is used to represent a variable number of parameters to a function. For example &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;void format(const char* fmt, ...)&lt;/code&gt; in C could then be called with different types and numbers of parameters such as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;format(&quot;%d-%d-%d&quot;, 2010, 9, 25);&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;format(&quot;product: %s, price: %f&quot;, &quot;HDD&quot;, 450.90);&lt;/code&gt;.&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;h2 id=&quot;escape-sequences&quot;&gt;Escape sequences&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;see &lt;a href=&quot;https://en.wikipedia.org/wiki/Escape_sequences_in_C#Table_of_escape_sequences&quot;&gt;Table of escape sequences&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;format-specifiers&quot;&gt;Format specifiers&lt;/h2&gt;
+&lt;h2 id=&quot;conversion-command&quot;&gt;Conversion command&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%[flag][field_width][.[precision]][l]conversion_char&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Components of the command &lt;strong&gt;in brackets&lt;/strong&gt; are optional.&lt;/p&gt;
+
+&lt;h3 id=&quot;format-specifiers&quot;&gt;Format specifiers&lt;/h3&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
@@ -1414,6 +2094,10 @@ Unpacked 2424 files and folders to /home/bra-ket/.vscode-server/bin/74b1f979648c
       &lt;td style=&quot;text-align: center&quot;&gt;Octal representation&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%x&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%X&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Hexadecimal representation&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
       &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%p&lt;/code&gt;&lt;/td&gt;
       &lt;td style=&quot;text-align: center&quot;&gt;Pointer&lt;/td&gt;
     &lt;/tr&gt;
@@ -1424,10 +2108,6 @@ Unpacked 2424 files and folders to /home/bra-ket/.vscode-server/bin/74b1f979648c
     &lt;tr&gt;
       &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%u&lt;/code&gt;&lt;/td&gt;
       &lt;td style=&quot;text-align: center&quot;&gt;Unsigned int&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%x&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%X&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Hexadecimal representation&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%n&lt;/code&gt;&lt;/td&gt;
@@ -1454,6 +2134,67 @@ Unpacked 2424 files and folders to /home/bra-ket/.vscode-server/bin/74b1f979648c
   &lt;li&gt;A &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;double&lt;/code&gt; argument representing a floating-point number is converted to decimal notation in the style &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[−]ddd.ddd&lt;/code&gt;, where the number of digits after the decimal-point character is equal to the &lt;strong&gt;precision&lt;/strong&gt; specification.&lt;/li&gt;
   &lt;li&gt;If the precision is missing, it is taken as 6; if the precision is zero and the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#&lt;/code&gt; flag is not specified, no decimal-point character appears. If a decimal-point character appears, at least one digit appears before it.&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;The value is rounded to the appropriate number of digits&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;field-width&quot;&gt;Field width&lt;/h3&gt;
+
+&lt;p&gt;Determines the minimum number of characters output:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;decimal integer not starting with 0&lt;/strong&gt;: output is padded on the left with spaces&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;decimal integer starting with 0&lt;/strong&gt;: output is padded on the left with zeros&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;the * character&lt;/strong&gt;: value of the next argument of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;printf()&lt;/code&gt; (which must be an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;int&lt;/code&gt;) is used as field width, e.g. in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;printf(&quot;%*d&quot;, w, a);&lt;/code&gt; the integer &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;w&lt;/code&gt; specifies the field width&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;no field width&lt;/strong&gt; or &lt;strong&gt;field width narrower than output&lt;/strong&gt;: field width just as wide as needed&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;flag&quot;&gt;Flag&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;+&lt;/code&gt;: display signed numbers with leading &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;+&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;fprintf&quot;&gt;fprintf&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;same as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;printf&lt;/code&gt; except that &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;printf&lt;/code&gt; always uses the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;stdout&lt;/code&gt;, whereas &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fprintf&lt;/code&gt; specifies the output stream&lt;/li&gt;
+  &lt;li&gt;generally, used for output to disk files&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;usage&quot;&gt;Usage&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;disk files&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fprintf(stderr, &quot;An error has occurred.&quot;);&lt;/code&gt; or for better &lt;strong&gt;maintainability&lt;/strong&gt;:
+    &lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;error_message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;An error has occurred.&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;error_message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;fprintf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stderr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;p&gt;this way, only &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;void error_message()&lt;/code&gt; needs to be changed in order to direct the error messages to some other destination.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;redirection&quot;&gt;Redirection&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;redirect output: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;./program &amp;gt; output.txt&lt;/code&gt; redirects &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;stdout&lt;/code&gt; of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;./program&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;output.txt&lt;/code&gt; (overwrites &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;output.txt&lt;/code&gt; if it exists already!)&lt;/li&gt;
+  &lt;li&gt;redirect input: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;./program &amp;lt; input.txt&lt;/code&gt; (source code for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;./program&lt;/code&gt; see below) will take &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;input.txt&lt;/code&gt; as input rather than asking the user for input via keyboard
+    &lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/* program.c */&lt;/span&gt;
+
+&lt;span class=&quot;cp&quot;&gt;#include &amp;lt;stdio.h&amp;gt;
+&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+  
+  &lt;span class=&quot;n&quot;&gt;gets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;buf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;The input was: %s&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;gt;&amp;gt;&lt;/code&gt;: redirects &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;stdout&lt;/code&gt; to a file and &lt;strong&gt;appends&lt;/strong&gt; it to the file (instead of &lt;strong&gt;overwriting&lt;/strong&gt; the file like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;gt;&lt;/code&gt;)&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h1 id=&quot;scanf-gets-fgets&quot;&gt;scanf, gets, fgets&lt;/h1&gt;
@@ -1829,7 +2570,7 @@ Unpacked 2424 files and folders to /home/bra-ket/.vscode-server/bin/74b1f979648c
   &lt;li&gt;If a null pointer constant is converted to a pointer type, the resulting pointer, called a &lt;strong&gt;null pointer&lt;/strong&gt;, is guaranteed to compare unequal to a pointer to any object or function.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;usage&quot;&gt;Usage&lt;/h3&gt;
+&lt;h3 id=&quot;usage-1&quot;&gt;Usage&lt;/h3&gt;
 
 &lt;ol&gt;
   &lt;li&gt;To initialize a pointer variable when that pointer variable hasn’t been assigned any valid memory address yet.
@@ -2479,6 +3220,36 @@ dmesg &lt;span class=&quot;nt&quot;&gt;--ctime&lt;/span&gt; | &lt;span class=&qu
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;h1 id=&quot;signal-handling&quot;&gt;Signal Handling&lt;/h1&gt;
+
+&lt;h2 id=&quot;sigint-ctrl---c&quot;&gt;SIGINT, ctrl - c&lt;/h2&gt;
+
+&lt;p&gt;Demo: See &lt;a href=&quot;https://github.com/pharath/OS_exercises/blob/main/02_intro/sigint_handler.c&quot;&gt;sigint_handler.c&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;From &lt;a href=&quot;https://stackoverflow.com/a/246392&quot;&gt;Why is volatile needed in C?&lt;/a&gt;:&lt;/p&gt;
+
+&lt;p&gt;Another use for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;volatile&lt;/code&gt; is signal handlers. If you have code like this:&lt;/p&gt;
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;quit&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;quit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;cm&quot;&gt;/* very small loop which is completely visible to the compiler */&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;The compiler is allowed to notice the loop body does not touch the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;quit&lt;/code&gt; variable and convert the loop to a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;while (true)&lt;/code&gt; loop. Even if the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;quit&lt;/code&gt; variable is set on the signal handler for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SIGINT&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SIGTERM&lt;/code&gt;; the compiler has no way to know that.&lt;/p&gt;
+
+&lt;p&gt;However, if the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;quit&lt;/code&gt; variable is declared &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;volatile&lt;/code&gt;, the compiler is forced to load it every time, because it can be modified elsewhere. This is exactly what you want in this situation.&lt;/p&gt;
+
+&lt;p&gt;From Comments:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@AmitSinghTomar&lt;/code&gt; It means what it says: &lt;strong&gt;Every time the code checks the value, it is reloaded&lt;/strong&gt;. Otherwise, the compiler is allowed to assume that functions that don’t take a reference to the variable can’t modify it, so assuming as CesarB intended that the above loop does not set &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;quit&lt;/code&gt;, the compiler can optimise it into a constant loop, assuming that there’s no way for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;quit&lt;/code&gt; to be changed between iterations. N.B.: This isn’t necessarily a good substitute for actual &lt;strong&gt;threadsafe programming&lt;/strong&gt;. - &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;underscore_d&lt;/code&gt;, Jul 2, 2016 at 14:46&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Soll heißen, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;volatile&lt;/code&gt; zu benutzen, ersetzt nicht threadsafe Programmierung! Dazu gehört noch mehr!&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@PierreG&lt;/code&gt;. No, &lt;strong&gt;the compiler can always assume that the code is single-threaded, unless told otherwise&lt;/strong&gt;. That is, in the absence of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;volatile&lt;/code&gt; or other markers, it will assume that nothing outside the loop modifies that variable once it enters the loop, even if it’s a global variable. - &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CesarB&lt;/code&gt;, Sep 12, 2016 at 12:37&lt;/p&gt;
+
+&lt;p&gt;Other use cases for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;volatile&lt;/code&gt; in &lt;a href=&quot;https://stackoverflow.com/questions/246127/why-is-volatile-needed-in-c&quot;&gt;Why is volatile needed in C?&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h1 id=&quot;gdb&quot;&gt;gdb&lt;/h1&gt;
 

@@ -36,6 +36,13 @@ Firefox stores your history and bookmarks together in a database file named *pla
 - about:memory
 - about:support -> "Profile Directory" -> "Open Directory" Button
 
+## Developer Tools
+
+| command | description |
+| :---: | :---: |
+ctrl + shift + i | [Toolbox](https://firefox-source-docs.mozilla.org/devtools-user/tools_toolbox/index.html)
+ctrl + i | page info (i.e. general, media, permissions, security)
+
 # Shortcuts
 
 | command | description |

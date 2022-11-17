@@ -1,6 +1,6 @@
 var store = [{
         "title": "Vim Cheatsheet",
-        "excerpt":"Plugins ‘VundleVim/Vundle.vim’ ‘NLKNguyen/papercolor-theme’ ‘rip-rip/clang_complete’ (install: see below) ‘godlygeek/tabular’ ‘plasticboy/vim-markdown’ Install Autocomplete clang_complete Download https://apt.llvm.org/llvm.sh chmod u+x ~/Downloads/llvm.sh bash -c ~/Downloads/llvm.sh (einige dependencies - output sagt welche - müssen evtl. manuell nachinstalliert werden) installs LLVM + Clang + compiler-rt + polly + LLDB + LLD + libFuzzer + libc++ + libc++abi...","categories": ["Cheatsheet"],
+        "excerpt":"Plugins ‘VundleVim/Vundle.vim’ install: add Plugin 'github_repo_name' to .vimrc, PluginInstall uninstall: remove Plugin 'github_repo_name' from .vimrc, PluginUpdate, restart vim, PluginClean ‘rip-rip/clang_complete’ (install: see below) for junegunn/fzf: when this plugin asks for downloading the executable, confirm with “y” \" braket Plugins Plugin 'NLKNguyen/papercolor-theme' \" c++ autocomplete Plugin 'rip-rip/clang_complete' \" markdown editing in...","categories": ["Cheatsheet"],
         "tags": ["vim","cheatsheet"],
         "url": "/cheatsheet/cheatsheet-vim/",
         "teaser": "/assets/images/Vim.png"
@@ -72,7 +72,7 @@ var store = [{
         "teaser": "/assets/images/images_databases/databases.png"
       },{
         "title": "Bash Cheatsheet",
-        "excerpt":"bash scripting Shebang beste Erklärung: askubuntu discussion oder aus Wikipedia: In computing, a shebang is the character sequence consisting of the characters number sign and exclamation mark (#!) at the beginning of a script. When a text file with a shebang is used as if it is an executable in...","categories": ["Cheatsheet"],
+        "excerpt":"bash syntax Shebang beste Erklärung: askubuntu discussion oder aus Wikipedia: In computing, a shebang is the character sequence consisting of the characters number sign and exclamation mark (#!) at the beginning of a script. When a text file with a shebang is used as if it is an executable in...","categories": ["Cheatsheet"],
         "tags": ["bash","cheatsheet"],
         "url": "/cheatsheet/cheatsheet-bash/",
         "teaser": "/assets/images/mario-question.png"
@@ -96,7 +96,7 @@ var store = [{
         "teaser": "/assets/images/mario-question.png"
       },{
         "title": "ROS2 Cheatsheet",
-        "excerpt":"Install Über apt install installieren (wie hier beschrieben) Dann, wie in binary installation unter “Installing and initializing rosdep” und bei älteren EOL distros geht rosdep install --from-paths /opt/ros/eloquent/share nur, wenn rosdep update --include-eol-distros ausgeführt wurde - “Installing the missing dependencies” beschrieben, die restlichen dependencies installieren (ohne 2. funktioniert ROS2 nicht!)....","categories": ["Cheatsheet"],
+        "excerpt":"Install ROS2 Über apt install installieren (wie hier beschrieben) Dann, wie in binary installation unter “Installing and initializing rosdep” und bei älteren EOL distros geht rosdep install --from-paths /opt/ros/eloquent/share nur, wenn rosdep update --include-eol-distros ausgeführt wurde - “Installing the missing dependencies” beschrieben, die restlichen dependencies installieren (ohne 2. funktioniert ROS2...","categories": ["Cheatsheet"],
         "tags": ["ros2","ros","cheatsheet"],
         "url": "/cheatsheet/cheatsheet-ros2/",
         "teaser": "/assets/images/mario-question.png"
@@ -142,12 +142,6 @@ var store = [{
         "tags": ["network","cheatsheet"],
         "url": "/cheatsheet/cheatsheet-network/",
         "teaser": "/assets/images/linux_teaser.jpg"
-      },{
-        "title": "Jekyll Notes",
-        "excerpt":"Latex   \\[\\LaTeX\\]  Just a sample algorithmn   Linking to posts   see Jekyll documentation   E.g. this link is a link to the post “Operating Systems Notes”.  ","categories": ["Notes"],
-        "tags": ["jekyll","test"],
-        "url": "/notes/notes-jekyll/",
-        "teaser": "/assets/images/mario-question.png"
       },{
         "title": "Computational Graphs in PyTorch",
         "excerpt":"PyTorch 101, Part 1: Understanding Graphs, Automatic Differentiation and Autograd In this article, we dive into how PyTorch’s Autograd engine performs automatic differentiation. 3 years ago • 13 min read By Ayoosh Kathuria MathJax.Hub.Config({ tex2jax: { inlineMath: [[”$”, “$”], [”\\(”, “\\)”]], processEscapes: true } }); PyTorch is one of the...","categories": ["Lecture_Notes","Machine_Learning"],
@@ -288,7 +282,7 @@ var store = [{
         "teaser": "/assets/images/mario-question.png"
       },{
         "title": "DatKom Notes",
-        "excerpt":"Concepts Communication services, layer models, protocols Physical basics of transmission Error handling and medium access Internet Protocol (IP) and Routing: Connecting remote hosts Transmission Control Protocol (TCP): Connecting applications Security: Cryptographic primitives, IPsec, SSL/TLS From [source]: Client/Server- und Peer-to-Peer-Systeme OSI-Referenzmodell und TCP/IP-Referenzmodell Übertragungsmedien und Signaldarstellung Fehlerbehandlung, Flusssteuerung und Medienzugriff Lokale...","categories": ["Notes"],
+        "excerpt":"Concepts Communication services, layer models, protocols Physical basics of transmission Error handling and medium access Internet Protocol (IP) and Routing: Connecting remote hosts Transmission Control Protocol (TCP): Connecting applications Security: Cryptographic primitives, IPsec, SSL/TLS From source: Client/Server- und Peer-to-Peer-Systeme OSI-Referenzmodell und TCP/IP-Referenzmodell Übertragungsmedien und Signaldarstellung Fehlerbehandlung, Flusssteuerung und Medienzugriff Lokale...","categories": ["Notes"],
         "tags": ["datkom","notes"],
         "url": "/notes/notes-DatKom/",
         "teaser": "/assets/images/C_logo.png"

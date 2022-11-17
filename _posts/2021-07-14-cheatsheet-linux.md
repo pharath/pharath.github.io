@@ -417,26 +417,6 @@ sudo snap remove --purge *package* |
 | pkg-config --libs-only-L json-c | location of .so library file (hier: in ubuntu 18.04: findet er nicht, ist aber in `/lib/x86_64-linux-gnu`; in ubuntu 20.04: `-L/usr/local/lib`) (see also: [difference .so vs .a libraries](https://stackoverflow.com/a/9810368/12282296)) (muss nicht in CMakeLists.txt rein, s. [Minimalbsp](https://github.com/pharath/home/tree/master/assets/_code_examples/jsonc))
 | pkg-config --cflags json-c | include paths of the corresponding library with .h header files (hier: in ubuntu 18.04: `-I/usr/include/json-c`; in ubuntu 20.04: `-I/usr/local/include -I/usr/local/include/json-c`) (muss nicht in CMakeLists.txt rein)
 
-# System information
-
-**Note**: `lsb_release` and `uname` may report different Kernel versions!
-
-| command | description |
-| :---: | :---: |
-cat /etc/os-release	 |	Ubuntu Version (lang)
-lsb_release -a | Ubuntu Version (kurz)
-hostnamectl | Ubuntu Version (mittel) mit Linux Kernel Version
-uname --help | Returns the help manual for the uname command, including all available options.
-uname -a | Prints all information for the server/system you're on.
-uname -s | Prints the kernel name
-uname -n | Prints the node name
-uname -r | Prints the kernel release data
-uname -v | Prints the kernel version data
-uname -m | Prints the machine data
-uname -p | Prints the processor information
-uname -i | Prints the platform hardware information
-uname -o | Prints the operating system information
-
 # chmod, Groups
 
 | command | description |
@@ -632,6 +612,26 @@ lsusb |
 lsblk |
 
 # System information
+
+## Software
+
+**Note**: `lsb_release` and `uname` may report different Kernel versions!
+
+| command | description |
+| :---: | :---: |
+cat /etc/os-release	 |	Ubuntu Version (lang)
+lsb_release -a | Ubuntu Version (kurz)
+hostnamectl | Ubuntu Version (mittel) mit Linux Kernel Version
+uname --help | Returns the help manual for the uname command, including all available options.
+uname -a | Prints all information for the server/system you're on.
+uname -s | Prints the kernel name
+uname -n | Prints the node name
+uname -r | Prints the kernel release data
+uname -v | Prints the kernel version data
+uname -m | Prints the machine data
+uname -p | Prints the processor information
+uname -i | Prints the platform hardware information
+uname -o | Prints the operating system information
 
 ## Hardware
 

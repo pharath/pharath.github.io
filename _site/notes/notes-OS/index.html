@@ -368,7 +368,7 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header>
-              <ul class="toc__menu"><li><a href="#lectures">Lectures</a><ul><li><a href="#i4-comsys-wehrle-sose">i4 ComSys, Wehrle (SoSe)</a></li><li><a href="#power-system-automation-lankes">Power System Automation, Lankes</a><ul><li><a href="#6sws">6SWS</a></li><li><a href="#3sws">3SWS</a></li></ul></li></ul></li><li><a href="#unix-system-calls">UNIX System calls</a><ul><li><a href="#strace">strace</a></li><li><a href="#related-to-memory">Related to Memory</a></li></ul></li><li><a href="#resource-limits">Resource Limits</a><ul><li><a href="#setrlimit-getrlimit">setrlimit(), getrlimit()</a></li><li><a href="#ulimit">ulimit</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#lectures">Lectures</a><ul><li><a href="#i4-comsys-wehrle-sose">i4 ComSys, Wehrle (SoSe)</a></li><li><a href="#power-system-automation-lankes">Power System Automation, Lankes</a><ul><li><a href="#6sws">6SWS</a></li><li><a href="#3sws">3SWS</a></li></ul></li></ul></li><li><a href="#man-pages">man pages</a></li><li><a href="#virtualization">Virtualization</a><ul><li><a href="#processes">Processes</a></li><li><a href="#virtualizing-the-cpu">Virtualizing the CPU</a></li><li><a href="#machine-state-of-a-process">Machine State of a process</a></li><li><a href="#process-api-overview">Process API (Overview)</a></li><li><a href="#process-creation">Process Creation</a></li><li><a href="#process-states">Process States</a><ul><li><a href="#other-states">Other states</a></li><li><a href="#scheduling">Scheduling</a></li></ul></li><li><a href="#data-structures">Data structures</a></li></ul></li><li><a href="#process-api">Process API</a></li><li><a href="#file-descriptors">File Descriptors</a></li><li><a href="#unix-system-calls">UNIX System calls</a><ul><li><a href="#strace">strace</a></li><li><a href="#related-to-memory">Related to Memory</a></li></ul></li><li><a href="#resource-limits">Resource Limits</a><ul><li><a href="#setrlimit-getrlimit">setrlimit(), getrlimit()</a></li><li><a href="#ulimit">ulimit</a></li></ul></li><li><a href="#counting-processes">Counting Processes</a></li><li><a href="#visualize-memory-usage">Visualize Memory Usage</a><ul><li><a href="#smem">smem</a></li></ul></li><li><a href="#concurrency">Concurrency</a><ul><li><a href="#multi-threaded-programs">Multi-Threaded Programs</a><ul><li><a href="#gcc--pthread-vs--lpthread">gcc -pthread vs -lpthread</a></li></ul></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -521,7 +521,233 @@
   <li>Dateisysteme: Definitionen, Dateizugriff, Dateioperationen, Struktur, Schichtung, Beispiel: Aufbau eines I-Node-basierten Dateisystems</li>
 </ul>
 
-<h1 id="unix-system-calls">UNIX System calls</h1>
+<h1 id="man-pages">man pages</h1>
+
+<ul>
+  <li>see book appendix F.8 “Documentation”</li>
+  <li><code class="language-plaintext highlighter-rouge">man man</code> includes a list of all sections in the man pages</li>
+  <li><code class="language-plaintext highlighter-rouge">man -k some_keyword</code> to search man pages for <code class="language-plaintext highlighter-rouge">some_keyword</code></li>
+  <li><code class="language-plaintext highlighter-rouge">man -s 6 --regex -k '.*'</code> to show the title of all manuals in section 6</li>
+  <li>standard sections:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">RETURN VALUES</code> tells you what the function will return under success or failure</li>
+      <li><code class="language-plaintext highlighter-rouge">ERRORS</code> tells what happens under failure</li>
+      <li><code class="language-plaintext highlighter-rouge">SYNOPSIS</code>:
+        <ul>
+          <li>what <strong>arguments</strong> to pass to a library call,</li>
+          <li>what <strong>header files</strong> need to be included to use a library call</li>
+          <li>what <strong>libraries you need to link with</strong> to use the call</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>look for the <strong>definition of the structure</strong> <code class="language-plaintext highlighter-rouge">timeval</code>:
+    <ul>
+      <li>using <code class="language-plaintext highlighter-rouge">grep</code>: use e.g. <code class="language-plaintext highlighter-rouge">grep 'struct timeval' /usr/include/sys/*.h</code> to look for the <strong>definition of the structure</strong> <code class="language-plaintext highlighter-rouge">timeval</code> in all files that end with <code class="language-plaintext highlighter-rouge">.h</code> in <code class="language-plaintext highlighter-rouge">/usr/include/sys</code></li>
+      <li>using the compiler: <code class="language-plaintext highlighter-rouge">gcc -E main.c</code> (where <code class="language-plaintext highlighter-rouge">main.c</code> includes the header <code class="language-plaintext highlighter-rouge">time.h</code>) will produce a C file that has all of the needed structures and prototypes in it, including the definition of the <code class="language-plaintext highlighter-rouge">timeval</code> struct</li>
+    </ul>
+  </li>
+  <li><a href="https://unix.stackexchange.com/a/487931">What is in section 6 “Games”?</a>
+    <ul>
+      <li>see <code class="language-plaintext highlighter-rouge">ls /usr/games/</code></li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">man -a kill</code>: cycle through all of the different man pages named “kill”
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">kill(2)</code> means <code class="language-plaintext highlighter-rouge">kill</code> in section 2</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="virtualization">Virtualization</h1>
+
+<h2 id="processes">Processes</h2>
+
+<ul>
+  <li>process (abstraction) := a <strong>running program</strong></li>
+  <li>a typical system runs hundreds of processes at the same time</li>
+</ul>
+
+<h2 id="virtualizing-the-cpu">Virtualizing the CPU</h2>
+
+<ul>
+  <li><strong>time sharing of the CPU</strong>: the OS creates the <strong>illusion that many CPUs exist</strong> by running one process, stopping it and running another etc.
+    <ul>
+      <li>a resource (the CPU) is “divided <strong>in time</strong>” among the processes</li>
+      <li>allows users to run as many concurrent processes as they want</li>
+    </ul>
+  </li>
+  <li>drawback: if the CPUs are shared, each process will run more slowly</li>
+  <li><strong>implementation</strong> via …
+    <ul>
+      <li><strong>mechanisms</strong>
+        <ul>
+          <li>low-level methods or protocols that implement a needed piece of functionality
+            <ul>
+              <li>e.g. context switch (“stop one program and start another on a given CPU”) (a “time-sharing mechanism”)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><strong>policies</strong>
+        <ul>
+          <li>algorithms for making some kind of decision within the OS
+            <ul>
+              <li>e.g. scheduling policy (“decide which program the OS should run”)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><strong>separation of mechanisms and policies</strong>
+        <ul>
+          <li>allows one to change mechanisms without having to change the policies and vice versa</li>
+          <li>a form of modularity</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="machine-state-of-a-process">Machine State of a process</h2>
+
+<ul>
+  <li>What constitutes a process?</li>
+  <li>What parts of the machine matter to the program execution?</li>
+  <li><strong>machine state</strong>: what a program can read or update during its execution
+    <ul>
+      <li>components:
+        <ul>
+          <li>address space
+            <ul>
+              <li>instructions</li>
+              <li>data (which the program reads and writes)</li>
+            </ul>
+          </li>
+          <li>registers
+            <ul>
+              <li>program counter (PC) aka instruction pointer (IP)</li>
+              <li>stack pointer</li>
+              <li>frame pointer</li>
+            </ul>
+          </li>
+          <li>I/O information (e.g. list of the files the process currently has open)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="https://www.quora.com/What-is-the-difference-between-registers-and-address-space">address space, registers</a></li>
+</ul>
+
+<h2 id="process-api-overview">Process API (Overview)</h2>
+
+<ul>
+  <li>must be included in any interface of an OS:
+    <ul>
+      <li>create</li>
+      <li>destroy</li>
+      <li>wait</li>
+      <li>suspend a process</li>
+      <li>resume a process</li>
+      <li>get status information, e.g.
+        <ul>
+          <li>how long a process has run for</li>
+          <li>what state a process is in</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>more details under <a href="#process-api">Process API</a></li>
+</ul>
+
+<h2 id="process-creation">Process Creation</h2>
+
+<ol>
+  <li>loading of code and static data into address space
+    <ul>
+      <li>eagerly</li>
+      <li>lazily</li>
+    </ul>
+  </li>
+  <li>allocate memory for the program’s <strong>stack</strong></li>
+  <li>initialize the stack with arguments
+    <ul>
+      <li>fill in parameters to the <code class="language-plaintext highlighter-rouge">main()</code> function (i.e. the <code class="language-plaintext highlighter-rouge">argc</code> and <code class="language-plaintext highlighter-rouge">argv</code> arrays)</li>
+    </ul>
+  </li>
+  <li>allocate some memory for the program’s <strong>heap</strong></li>
+  <li>initialization tasks related to I/O
+    <ul>
+      <li>UNIX default for each process: initialize three <a href="#file-descriptors">file descriptors</a>: stdin, stdout, stderr</li>
+    </ul>
+  </li>
+  <li>start program at entry point <code class="language-plaintext highlighter-rouge">main()</code>
+    <ul>
+      <li>OS transfers control of the CPU to the newly-created process</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="process-states">Process States</h2>
+
+<ul>
+  <li>Running</li>
+  <li>Ready</li>
+  <li>Blocked = “not ready to run until some event (e.g. I/O completion, reading from a disk, waiting for a packet from a network) takes place”</li>
+</ul>
+
+<h3 id="other-states">Other states</h3>
+
+<ul>
+  <li>initial state
+    <ul>
+      <li>when process is being created</li>
+    </ul>
+  </li>
+  <li>final state (aka zombie state)
+    <ul>
+      <li>process exited, but has not been cleaned up</li>
+      <li>allows the <strong>parent</strong> that created the process to examine the <strong>return code</strong> of the child and then call <code class="language-plaintext highlighter-rouge">wait()</code> to clean up the child</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="scheduling">Scheduling</h3>
+
+<ul>
+  <li>scheduled = “moved from ready to running”</li>
+  <li>descheduled = “moved from running to ready”</li>
+  <li>OS scheduler = e.g. decides …
+    <ul>
+      <li>to run process 2 while process 1 issued an I/O,</li>
+      <li>not to switch back to process 1 when I/O is completed</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="data-structures">Data structures</h2>
+
+<ul>
+  <li>process list (aka task list)</li>
+  <li>process control block (PCB)
+    <ul>
+      <li>register context (for context switches)</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="process-api">Process API</h1>
+
+<h1 id="file-descriptors">File Descriptors</h1>
+
+<ul>
+  <li>from <a href="https://en.wikipedia.org/wiki/File_descriptor">File Descriptor</a>:
+    <ul>
+      <li>On Linux, the set of file descriptors open in a process can be accessed under the path <code class="language-plaintext highlighter-rouge">/proc/PID/fd/</code>, where <code class="language-plaintext highlighter-rouge">PID</code> is the process identifier. File descriptor <code class="language-plaintext highlighter-rouge">/proc/PID/fd/0</code> is <code class="language-plaintext highlighter-rouge">stdin</code>, <code class="language-plaintext highlighter-rouge">/proc/PID/fd/1</code> is <code class="language-plaintext highlighter-rouge">stdout</code>, and <code class="language-plaintext highlighter-rouge">/proc/PID/fd/2</code> is <code class="language-plaintext highlighter-rouge">stderr</code>. As a shortcut to these, any running process can also access its own file descriptors through the folders <code class="language-plaintext highlighter-rouge">/proc/self/fd</code> and <code class="language-plaintext highlighter-rouge">/dev/fd</code>.
+        <h1 id="unix-system-calls">UNIX System calls</h1>
+      </li>
+    </ul>
+  </li>
+</ul>
 
 <h2 id="strace">strace</h2>
 
@@ -568,6 +794,57 @@
   </li>
   <li>see <code class="language-plaintext highlighter-rouge">man ulimit</code></li>
   <li>current user limits: <code class="language-plaintext highlighter-rouge">ulimit -a</code></li>
+</ul>
+
+<h1 id="counting-processes">Counting Processes</h1>
+
+<ul>
+  <li>see <a href="https://coderscat.com/how-to-count-the-number-of-processes-in-linux/">how-to-count-the-number-of-processes-in-linux</a></li>
+  <li><code class="language-plaintext highlighter-rouge">ps aux</code>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">aux</code> are <a href="https://unix.stackexchange.com/a/106848">BSD style flags</a>
+        <ul>
+          <li>a = show processes for all users</li>
+          <li>u = display the process’s user/owner</li>
+          <li>x = also show processes not attached to a terminal</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="visualize-memory-usage">Visualize Memory Usage</h1>
+
+<h2 id="smem">smem</h2>
+
+<ul>
+  <li>see <a href="https://www.xmodulo.com/visualize-memory-usage-linux.html">How to visualize memory usage on Linux</a></li>
+  <li>to fix the <code class="language-plaintext highlighter-rouge">NameError: name 'xrange' is not defined</code> edit <code class="language-plaintext highlighter-rouge">/bin/smem</code> and apply this <a href="https://bugs.debian.org/cgi-bin/bugreport.cgi?att=1;bug=958129;filename=smem-xrange-fix.patch;msg=5">patch</a></li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>smem
+
+<span class="c"># Pie chart</span>
+<span class="nb">sudo </span>python3 /bin/smem <span class="nt">--pie</span> name <span class="nt">-c</span> <span class="s2">"pss"</span> <span class="nt">-U</span> some_username
+
+<span class="c"># Bar chart</span>
+<span class="nb">sudo </span>python3 /bin/smem <span class="nt">--bar</span> name <span class="nt">-c</span> <span class="s2">"pss uss"</span> <span class="nt">-U</span> some_username
+</code></pre></div></div>
+
+<h1 id="concurrency">Concurrency</h1>
+
+<h2 id="multi-threaded-programs">Multi-Threaded Programs</h2>
+
+<h3 id="gcc--pthread-vs--lpthread">gcc -pthread vs -lpthread</h3>
+
+<ul>
+  <li>from <a href="https://stackoverflow.com/a/23251828">Difference between -pthread and -lpthread while compiling</a>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">-pthread</code> tells the compiler to link in the pthread library as well as configure the compilation for threads.</li>
+      <li>Using the <code class="language-plaintext highlighter-rouge">-lpthread</code> option only causes the pthread library to be linked - the <strong>pre-defined macros don’t get defined</strong>.</li>
+      <li>Bottom line: you should use the <code class="language-plaintext highlighter-rouge">-pthread</code> option.</li>
+    </ul>
+  </li>
 </ul>
 
         

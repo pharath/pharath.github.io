@@ -368,7 +368,7 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
-              <ul class="toc__menu"><li><a href="#apps">Apps</a></li><li><a href="#my-aliases">My aliases</a></li><li><a href="#system-folder">System Folder</a></li><li><a href="#general-commands">General commands</a></li><li><a href="#checks">Checks</a></li><li><a href="#apt-apt-get-snap-dpkg-pkg-config">apt, apt-get, snap, dpkg, pkg-config</a><ul><li><a href="#difference-between-apt-and-apt-get--apt-cache">Difference between apt and apt-get + apt-cache:</a></li><li><a href="#apt">apt</a><ul><li><a href="#ppas">PPAs</a></li><li><a href="#install">Install</a></li><li><a href="#uninstall">Uninstall</a></li><li><a href="#check">Check</a></li><li><a href="#apt-mark">apt-mark</a></li></ul></li><li><a href="#dpkg">dpkg</a></li><li><a href="#snap">snap</a></li><li><a href="#pkg-config">pkg-config</a></li></ul></li><li><a href="#system-information">System information</a></li><li><a href="#chmod-groups">chmod, Groups</a></li><li><a href="#bash">bash</a><ul><li><a href="#terminal-shortcuts">terminal shortcuts</a></li><li><a href="#terminal-commands-and-bash-scripting">terminal commands and bash scripting</a></li></ul></li><li><a href="#unzipping">Unzipping</a></li><li><a href="#manage-drives-hard-drive-usb-flash-drive">Manage Drives (hard drive, usb flash drive)</a></li><li><a href="#system-information-1">System information</a><ul><li><a href="#hardware">Hardware</a></li><li><a href="#hard-disk">Hard disk</a></li><li><a href="#disk-usage">Disk Usage</a></li><li><a href="#webcam">Webcam</a></li></ul></li><li><a href="#gpu-information">GPU information</a></li><li><a href="#retrieval-commands-curl-und-wget">Retrieval commands curl und wget:</a></li><li><a href="#gpg">gpg</a></li><li><a href="#cron">cron</a></li><li><a href="#network">network</a><ul><li><a href="#ssh">ssh</a></li><li><a href="#scp">scp</a></li><li><a href="#rsync">rsync</a><ul><li><a href="#resume-partially-scp-transferred-files-using-rsync">Resume partially scp-transferred files using Rsync</a></li></ul></li></ul></li><li><a href="#tree">tree</a></li></ul>
+              <ul class="toc__menu"><li><a href="#apps">Apps</a></li><li><a href="#my-aliases">My aliases</a></li><li><a href="#system-folder">System Folder</a></li><li><a href="#general-commands">General commands</a></li><li><a href="#checks">Checks</a></li><li><a href="#apt-apt-get-snap-dpkg-pkg-config">apt, apt-get, snap, dpkg, pkg-config</a><ul><li><a href="#difference-between-apt-and-apt-get--apt-cache">Difference between apt and apt-get + apt-cache:</a></li><li><a href="#apt">apt</a><ul><li><a href="#ppas">PPAs</a></li><li><a href="#install">Install</a></li><li><a href="#uninstall">Uninstall</a></li><li><a href="#check">Check</a></li><li><a href="#apt-mark">apt-mark</a></li></ul></li><li><a href="#dpkg">dpkg</a></li><li><a href="#snap">snap</a></li><li><a href="#pkg-config">pkg-config</a></li></ul></li><li><a href="#chmod-groups">chmod, Groups</a></li><li><a href="#bash">bash</a><ul><li><a href="#terminal-shortcuts">terminal shortcuts</a></li><li><a href="#terminal-commands-and-bash-scripting">terminal commands and bash scripting</a></li></ul></li><li><a href="#unzipping">Unzipping</a></li><li><a href="#manage-drives-hard-drive-usb-flash-drive">Manage Drives (hard drive, usb flash drive)</a></li><li><a href="#system-information">System information</a><ul><li><a href="#software">Software</a></li><li><a href="#hardware">Hardware</a></li><li><a href="#hard-disk">Hard disk</a></li><li><a href="#disk-usage">Disk Usage</a></li><li><a href="#webcam">Webcam</a></li></ul></li><li><a href="#gpu-information">GPU information</a></li><li><a href="#retrieval-commands-curl-und-wget">Retrieval commands curl und wget:</a></li><li><a href="#gpg">gpg</a></li><li><a href="#cron">cron</a></li><li><a href="#network">network</a><ul><li><a href="#ssh">ssh</a></li><li><a href="#scp">scp</a></li><li><a href="#rsync">rsync</a><ul><li><a href="#resume-partially-scp-transferred-files-using-rsync">Resume partially scp-transferred files using Rsync</a></li></ul></li></ul></li><li><a href="#tree">tree</a></li></ul>
 
             </nav>
           </aside>
@@ -1499,73 +1499,6 @@
   </tbody>
 </table>
 
-<h1 id="system-information">System information</h1>
-
-<p><strong>Note</strong>: <code class="language-plaintext highlighter-rouge">lsb_release</code> and <code class="language-plaintext highlighter-rouge">uname</code> may report different Kernel versions!</p>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: center">command</th>
-      <th style="text-align: center">description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: center">cat /etc/os-release</td>
-      <td style="text-align: center">Ubuntu Version (lang)</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">lsb_release -a</td>
-      <td style="text-align: center">Ubuntu Version (kurz)</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">hostnamectl</td>
-      <td style="text-align: center">Ubuntu Version (mittel) mit Linux Kernel Version</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">uname –help</td>
-      <td style="text-align: center">Returns the help manual for the uname command, including all available options.</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">uname -a</td>
-      <td style="text-align: center">Prints all information for the server/system you’re on.</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">uname -s</td>
-      <td style="text-align: center">Prints the kernel name</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">uname -n</td>
-      <td style="text-align: center">Prints the node name</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">uname -r</td>
-      <td style="text-align: center">Prints the kernel release data</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">uname -v</td>
-      <td style="text-align: center">Prints the kernel version data</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">uname -m</td>
-      <td style="text-align: center">Prints the machine data</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">uname -p</td>
-      <td style="text-align: center">Prints the processor information</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">uname -i</td>
-      <td style="text-align: center">Prints the platform hardware information</td>
-    </tr>
-    <tr>
-      <td style="text-align: center">uname -o</td>
-      <td style="text-align: center">Prints the operating system information</td>
-    </tr>
-  </tbody>
-</table>
-
 <h1 id="chmod-groups">chmod, Groups</h1>
 
 <table>
@@ -2150,7 +2083,74 @@
   </tbody>
 </table>
 
-<h1 id="system-information-1">System information</h1>
+<h1 id="system-information">System information</h1>
+
+<h2 id="software">Software</h2>
+
+<p><strong>Note</strong>: <code class="language-plaintext highlighter-rouge">lsb_release</code> and <code class="language-plaintext highlighter-rouge">uname</code> may report different Kernel versions!</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">cat /etc/os-release</td>
+      <td style="text-align: center">Ubuntu Version (lang)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">lsb_release -a</td>
+      <td style="text-align: center">Ubuntu Version (kurz)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">hostnamectl</td>
+      <td style="text-align: center">Ubuntu Version (mittel) mit Linux Kernel Version</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">uname –help</td>
+      <td style="text-align: center">Returns the help manual for the uname command, including all available options.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">uname -a</td>
+      <td style="text-align: center">Prints all information for the server/system you’re on.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">uname -s</td>
+      <td style="text-align: center">Prints the kernel name</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">uname -n</td>
+      <td style="text-align: center">Prints the node name</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">uname -r</td>
+      <td style="text-align: center">Prints the kernel release data</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">uname -v</td>
+      <td style="text-align: center">Prints the kernel version data</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">uname -m</td>
+      <td style="text-align: center">Prints the machine data</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">uname -p</td>
+      <td style="text-align: center">Prints the processor information</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">uname -i</td>
+      <td style="text-align: center">Prints the platform hardware information</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">uname -o</td>
+      <td style="text-align: center">Prints the operating system information</td>
+    </tr>
+  </tbody>
+</table>
 
 <h2 id="hardware">Hardware</h2>
 

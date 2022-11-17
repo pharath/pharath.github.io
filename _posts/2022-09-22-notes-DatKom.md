@@ -26,7 +26,7 @@ tags:
 - Transmission Control Protocol (TCP): Connecting applications
 - Security: Cryptographic primitives, IPsec, SSL/TLS
 
-From [[source](https://www.campus.rwth-aachen.de/rwth/all/abstractModule.asp?gguid=0x2F22AE7D7BE14B4B8AEC4D8B904EC25A&tguid=0x52DF76AB4F0BB84AB1CAEF0A89F08202)]:
+From [source](https://www.campus.rwth-aachen.de/rwth/all/abstractModule.asp?gguid=0x2F22AE7D7BE14B4B8AEC4D8B904EC25A&tguid=0x52DF76AB4F0BB84AB1CAEF0A89F08202):
 - Client/Server- und Peer-to-Peer-Systeme
 - OSI-Referenzmodell und TCP/IP-Referenzmodell
 - Übertragungsmedien und Signaldarstellung
@@ -39,7 +39,7 @@ From [[source](https://www.campus.rwth-aachen.de/rwth/all/abstractModule.asp?ggu
 
 # What every CS major should know
 
-[[source](https://matt.might.net/articles/what-cs-majors-should-know/)]
+([source](https://matt.might.net/articles/what-cs-majors-should-know/))
 
 ## Networking
 
@@ -134,6 +134,30 @@ As strictly practical matters, computer scientists should know how to use GPG; h
 
 - Cryptography Engineering by Ferguson, Schneier and Kohno.
 
+# Linux commands
+
+Base64 decode:
+```bash
+echo -n 'UGFzc3dvcmQ6' | base64 -d
+```
+
+Base64 encode:
+```bash
+echo -n 'Password:' | base64
+```
+
+Hex to decimal number:
+```bash
+printf "%d\n" 0xFF
+```
+
+# Wireshark GUI meaning
+
+## The "Packet List" Pane
+
+- the lines in the **"No." column** connecting the selected packet with other packets ([see Table 3.16. Related packet symbols](https://www.wireshark.org/docs/wsug_html_chunked/ChUsePacketListPaneSection.html))
+    - DNS packets that use the **same port numbers**. Wireshark treats them as belonging to the **same conversation** and draws a line connecting them.
+
 # Multiplexing
 
 ## Circuit Switching (TDM or FDM)
@@ -174,14 +198,14 @@ As strictly practical matters, computer scientists should know how to use GPG; h
 - loss
     - arriving packets will be dropped by the router, if the queue is full, i.e. if there are no free buffers
 
-# Application layer
+# Application layer (Brief)
 
 - **ip address**: identifies a specific host
 - **port**: identifies a specific process
     - e.g. **http servers**/web servers run on **port 80**
         - when **browsers** want http files, they will send a message to the ip address of the server and the port number associated with http, i.e. port 80
 
-# Transport layer
+# Transport layer (Brief)
 
 ## Transport protocols: TCP/UDP
 
@@ -198,12 +222,19 @@ As strictly practical matters, computer scientists should know how to use GPG; h
 - **note**: UDP is faster and gives you more control over the trade-offs you want to make than TCP. If you need reliability, flow control or congestion control you could implement it yourself at the application layer. For some apps UDP makes more sense, e.g. internet telephony, streaming video.
     - from wiki: "Voice and video traffic is generally transmitted using UDP"
 
-# Email
+# Application Layer
 
-## SMTP
+## Web and HTTP
 
-- using **app passwords** in Gmail: "When you use 2-Step Verification, some less secure apps or devices may be blocked from accessing your Google Account. App Passwords are a way to let the blocked app or device access your Google Account."
-- Mostly from [stackoverflow](https://stackoverflow.com/a/13772865/12282296):
+TODO
+
+## Email
+
+### SMTP
+
+Using **app passwords** in Gmail: "When you use 2-Step Verification, some less secure apps or devices may be blocked from accessing your Google Account. App Passwords are a way to let the blocked app or device access your Google Account."
+
+Mostly from [stackoverflow](https://stackoverflow.com/a/13772865/12282296):
 ```bash
 # must use -ign_eof flag here, otherwise the "R" in RCPT TO line will cause "RENEGOTIATING"
 # (see https://stackoverflow.com/questions/59956241/connection-with-google-mail-using-openssl-s-client-command)
@@ -231,20 +262,187 @@ ctrl-v-enter enter
 . ctrl-v-enter
 ```
 
-# DNS
+## DNS
 
+- A Distributed, Hierarchical Database
+- hierarchy:
+    - **root DNS server** (returns IP address of TLD server, e.g. for TLD `.com`)
+    - **TLD server** (returns IP address of authoritative server, e.g. authoritative for `amazon.com`)
+        - **Note**: The TLD server does not always know the authoritative DNS server for the hostname! It may know only of an **intermediate DNS server**, which in turn knows the authoritative DNS server for the hostname.
+            - e.g. an intermediate university DNS server and authoritative departmental DNS servers
+    - (intermediate DNS server)
+    - **authoritative DNS server** (returns the IP address for the hostname, e.g. for the hostname `www.amazon.com`)
+        - most universities and large companies implement and maintain their own authoritative server
 - **local DNS server** (aka **default name server**): 
     - does not belong to the hierarchy
     - each ISP has a local DNS server
     - when a host connects to an ISP, the ISP provides the host with the IP addresses of one or more of its local DNS servers (via **DHCP**)
     - typically close to the host (i.e. not more than a few routers away from the host)
+
+### Recursive vs Iterative DNS query
+
+- **recursive DNS query**: obtain the mapping on the querying DNS server's behalf
+- **iterative DNS query**: replies are directly returned to the querying DNS server
 - in theory, any DNS query can be **iterative** or **recursive**
 - in practice, DNS queries typically follow the pattern in Fig. 2.19
     - i.e. the query from the requesting host to the local DNS server is recursive, and the remaining queries are iterative
 
-## DNS Cache
+### DNS Cache
 
 - In a query chain, when a DNS server receives a DNS reply (containing, for example, a mapping from a hostname to an IP address), it can **cache** the mapping in its local memory.
 - **Timeout**: Because hosts and mappings between hostnames and IP addresses are by no means permanent, DNS servers **discard** cached information after a period of time (often set to two days)
 - A local DNS server can also cache the **TLD server**s' IP addresses
     - In fact, because of caching, **root servers** are bypassed for all but a very small fraction of DNS queries
+
+#### DNS Cache in Ubuntu, Time to Live (TTL)
+
+From [linuxhint.com](https://linuxhint.com/flush_dns_cache_ubuntu/) and [techrepublic.com](https://www.techrepublic.com/article/how-to-view-dns-cache-entries-with-the-new-systemd-resolved-resolver/):
+
+Ubuntu caches DNS queries by default using **systemd-resolved**. 
+- `systemd-resolved` is a **systemd service** that provides network name resolution *to local applications* via a **local DNS stub listener** on `127.0.0.53`. (from [wiki.archlinux](https://wiki.archlinux.org/title/systemd-resolved))
+    - It implements a **caching** and validating DNS/DNSSEC stub resolver (from [freedesktop.org](https://www.freedesktop.org/software/systemd/man/systemd-resolved.service.html))
+- Prior to systemd, there was almost no OS-level DNS caching, see [stackexchange](https://unix.stackexchange.com/a/211396)
+    - old Ubuntu versions used `dnsmasq` (A lightweight DHCP and caching DNS server) and `nscd` (name service cache daemon) instead of `systemd-resolved`
+
+```bash
+# check how many DNS entries are cached
+sudo systemd-resolve --statistics
+
+# flush the DNS cache
+sudo systemd-resolve --flush-caches
+
+# alternatively, restart the systemd-resolved service to flush the DNS caches
+sudo systemctl restart systemd-resolved
+
+# view the DNS cache contents
+sudo killall -USR1 systemd-resolved
+sudo journalctl -u systemd-resolved > ~/dns-cache.txt
+```
+
+First check, if DNS caching is enabled:
+
+If DNS caching is **enabled** the DNS server used to resolve the domain name (e.g. when using `nslookup domain_name`) is a [loopback IP address](#loopback-address), e.g. 127.0.0.53. If you have it **disabled**, then the DNS server should be anything other than 127.0.0.X.
+    - **Why?**: This is because the loopback ip address `127.0.0.X` indicates that the service `systemd-resolved` (which caches DNS records) is running.
+
+Then, in order to get **TTL values**:
+
+```bash
+nslookup -debug www.cyberciti.biz
+nslookup -debug -type=NS google.com
+
+dig +ttlunits A www.cyberciti.biz
+dig +ttlunits NS google.com
+
+# show the TTL only
+dig +nocmd +noall +answer +ttlid A www.cyberciti.biz
+```
+
+### DNS Resource Records (RRs)
+
+- a four-touple `(Name, Value, Type, TTL)`, where `Name` and `Value` depend on the `Type`
+- If a DNS server is **authoritative** for a particular hostname, then the DNS server will contain a **Type A record** for the hostname. 
+    - (Even if the DNS server is not authoritative, it may contain a Type A record in its **cache**.) 
+- If a server is **not authoritative** for a hostname, then the server will contain a **Type NS record** for the domain that includes the hostname
+    - it will also contain a **Type A record** that provides the IP address of the DNS server in the Value field of the NS record.
+
+#### nslookup, dig
+
+**Caution**: `dig` and `nslookup` sometimes display different information. `dig` uses the OS resolver libraries. `nslookup` uses its own internal ones. ISC recommends to stop using `nslookup` (see [stackexchange](https://unix.stackexchange.com/a/93809))!
+
+**nslookup**:
+General syntax: `nslookup –option1 –option2 host-to-find dns-server`
+Options:
+- `nslookup -debug`: show additional information, e.g. TTL
+
+**dig**:
+General syntax: `dig [options] TYPE domain auth-name-server-here`
+Options:
+- `dig +short`: short form answer
+- `dig +ttlunits`: human-readable time units
+- `dig +nocmd +noall +answer +ttlid`: show the TTL only
+
+**Example 1**: Send me the IP address for the **host** www.mit.edu:
+```bash
+nslookup -type=A www.mit.edu
+dig A www.mit.edu
+```
+
+**Example 2**: Send me the host names of the authoritative DNS servers for the **domain** mit.edu:
+```bash
+# note: mit.edu is a domain, so no "www."!
+nslookup -type=NS mit.edu
+dig NS mit.edu
+```
+
+**Example 3**: Query sent to the DNS server `dns2.p08.nsone.net` rather than to the default DNS server:
+- possible errors, when using `nslookup`:
+    - `** server can't find some_site.com: NXDOMAIN`: the `host-to-find` is wrong
+    - `** server can't find some_site.com: REFUSED`: the `dns-server` is wrong, more precisely:
+        - [nslookup from another name server](https://superuser.com/a/1624001)
+        - ["Refused" doesn't mean that the connection to the DNS server is refused. It means that the DNS server refuses to provide whatever data you asked for, or to do whatever action you asked it to do](https://stackoverflow.com/a/1697403/12282296)
+
+```bash
+nslookup www.google.com dns2.p08.nsone.net
+
+# note: do not forget the @ symbol here!
+dig www.google.com @dns2.p08.nsone.net
+```
+
+### ip, ifconfig, ipconfig, nmcli
+
+- `ipconfig` is a Windows command, it displays slightly different information than `ifconfig` and `ip`
+- `ifconfig` is deprecated, use `ip`
+- `ip a`, `ip address`, `ip address show`
+- `ip r` default gateway/router address
+- `nmcli dev show wlo1` show gateway and DNS servers for device `wlo1`
+- `nmcli dev status` get device names and their status types
+- `systemd-resolve --status | grep Current`: currently used DNS server IP address ([source](https://linuxconfig.org/how-to-find-my-ip-address-on-ubuntu-20-04-focal-fossa-linux))
+
+### Loopback address, Localhost
+
+From [techopedia.com](https://www.techopedia.com/definition/2440/loopback-address-ip-address):
+
+A **loopback address** has been built into the IP domain system in order to allow for a device to send and receive its own data packets.
+
+Loopback addresses can be useful in various kinds of analysis like testing and debugging, or in allowing routers to communicate in specific ways.
+
+A simple way of describing how using a loopback address works is that a data packet will get sent through a network and routed back to the same device where it originated.
+
+In IPv4, **127.0.0.1** is the most commonly used loopback address, however, this can range be extended to **127.255.255.255**.
+
+From [tutorialspoint.com](https://www.tutorialspoint.com/ipv4/ipv4_reserved_addresses.htm):
+
+The IP address range 127.0.0.0 – 127.255.255.255 is reserved for loopback, i.e. a Host's self-address, also known as **localhost address**. This loopback IP address is managed entirely by and within the operating system. Loopback addresses, enable the Server and Client processes on a single system to communicate with each other. When a process creates a packet with destination address as loopback address, the operating system loops it back to itself without having any interference of NIC ([wiki "NIC"](https://en.wikipedia.org/wiki/Network_interface_controller): **network interface controller** (**NIC**, also known as a **network interface card**, **network adapter**, **LAN adapter** or **physical network interface**).
+
+Data sent on loopback is forwarded by the operating system to a **virtual network interface** within operating system. This address is mostly used for testing purposes like client-server architecture on a single machine. Other than that, if a host machine can successfully ping 127.0.0.1 or any IP from loopback range, implies that the TCP/IP software stack on the machine is successfully loaded and working.
+
+Why is such a **large IPv4 range assigned to localhost**? (from [stackexchange](https://networkengineering.stackexchange.com/questions/2840/why-is-such-a-large-ipv4-range-assigned-to-localhost))
+
+At the time (1986), the internet was completely classful and nobody really gave much thought to allocating this much space to the loopback address. Thus, the loopback got an entire Class A network.
+
+## P2P File Distribution
+
+TODO
+
+# Transport Layer
+
+The **Transport Layer** is about providing **logical communication** between **processes**.
+    - in other words **TCP and UDP** are **end to end** protocols (and not "point to point"!)
+
+The transport layer of the sender **disassembles** (multiplexing) the messages passed from the application layer into chunks and the receiver **reassembles** (demultiplexing) those messages.
+
+## End-to-End Principle
+
+see 
+- [explanation on youtube](https://www.youtube.com/watch?v=3Iy4EQpGnpo)
+- [devopedia.org](https://devopedia.org/end-to-end-principle)
+
+Basic design principle of the internet: "keep the core simple".
+
+There are many different phrasings:
+- "Communication protocol operations should be defined to occur at the **endpoints** of a communication system."
+- Saltzer 1984: "The principle, called the **end-to-end argument**, suggests that functions placed at low levels of a system may be **redundant** or of **little value** when compared with the cost of providing them at that low level."
+
+Examples:
+- TCP checksum vs. application checksum
+- "smart" TCP vs "dumb" IP

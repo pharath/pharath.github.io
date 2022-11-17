@@ -368,7 +368,7 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header>
-              <ul class="toc__menu"><li><a href="#concepts">Concepts</a></li><li><a href="#what-every-cs-major-should-know">What every CS major should know</a><ul><li><a href="#networking">Networking</a><ul><li><a href="#specific-recommendations">Specific recommendations</a></li><li><a href="#recommended-reading">Recommended reading</a></li></ul></li><li><a href="#security">Security</a><ul><li><a href="#specific-recommendations-1">Specific recommendations</a></li><li><a href="#recommended-reading-1">Recommended reading</a></li></ul></li><li><a href="#cryptography">Cryptography</a><ul><li><a href="#specific-recommendations-2">Specific recommendations</a></li><li><a href="#recommended-reading-2">Recommended reading</a></li></ul></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#concepts">Concepts</a></li><li><a href="#linux-commands">Linux commands</a></li><li><a href="#what-every-cs-major-should-know">What every CS major should know</a><ul><li><a href="#networking">Networking</a><ul><li><a href="#specific-recommendations">Specific recommendations</a></li><li><a href="#recommended-reading">Recommended reading</a></li></ul></li><li><a href="#security">Security</a><ul><li><a href="#specific-recommendations-1">Specific recommendations</a></li><li><a href="#recommended-reading-1">Recommended reading</a></li></ul></li><li><a href="#cryptography">Cryptography</a><ul><li><a href="#specific-recommendations-2">Specific recommendations</a></li><li><a href="#recommended-reading-2">Recommended reading</a></li></ul></li></ul></li><li><a href="#multiplexing">Multiplexing</a><ul><li><a href="#circuit-switching-tdm-or-fdm">Circuit Switching (TDM or FDM)</a></li><li><a href="#packet-switching-statistical-multiplexing">Packet Switching (statistical multiplexing)</a></li></ul></li><li><a href="#the-internet">The Internet</a><ul><li><a href="#tiers-of-networks">Tiers of networks</a></li></ul></li><li><a href="#delay-and-loss">Delay and Loss</a></li><li><a href="#application-layer">Application layer</a></li><li><a href="#transport-layer">Transport layer</a><ul><li><a href="#transport-protocols-tcpudp">Transport protocols: TCP/UDP</a></li></ul></li><li><a href="#email">Email</a><ul><li><a href="#smtp">SMTP</a></li></ul></li><li><a href="#dns">DNS</a><ul><li><a href="#recursive-vs-iterative-dns-query">Recursive vs Iterative DNS query</a></li><li><a href="#dns-cache">DNS Cache</a><ul><li><a href="#show-the-cached-records-time-to-live-ttl">Show the cached records, Time to Live (TTL)</a></li></ul></li><li><a href="#dns-resource-records-rrs">DNS Resource Records (RRs)</a><ul><li><a href="#nslookup-dig">nslookup, dig</a></li></ul></li><li><a href="#ip-ifconfig-ipconfig-nmcli">ip, ifconfig, ipconfig, nmcli</a></li><li><a href="#loopback-address">Loopback address</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -384,7 +384,7 @@
   <li>Security: Cryptographic primitives, IPsec, SSL/TLS</li>
 </ul>
 
-<p>From [<a href="https://www.campus.rwth-aachen.de/rwth/all/abstractModule.asp?gguid=0x2F22AE7D7BE14B4B8AEC4D8B904EC25A&amp;tguid=0x52DF76AB4F0BB84AB1CAEF0A89F08202">source</a>]:</p>
+<p>From <a href="https://www.campus.rwth-aachen.de/rwth/all/abstractModule.asp?gguid=0x2F22AE7D7BE14B4B8AEC4D8B904EC25A&amp;tguid=0x52DF76AB4F0BB84AB1CAEF0A89F08202">source</a>:</p>
 <ul>
   <li>Client/Server- und Peer-to-Peer-Systeme</li>
   <li>OSI-Referenzmodell und TCP/IP-Referenzmodell</li>
@@ -396,6 +396,20 @@
   <li>Sicherheitsmanagement und Datenschutz, Sicherheitsprobleme und Angriffe im Internet</li>
   <li>Grundlagen der Kryptographie und sichere Internet-Protokolle</li>
 </ul>
+
+<h1 id="linux-commands">Linux commands</h1>
+
+<p>Base64 decode:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'UGFzc3dvcmQ6'</span> | <span class="nb">base64</span> <span class="nt">-d</span>
+</code></pre></div></div>
+
+<p>Base64 encode:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'Password:'</span> | <span class="nb">base64</span>
+</code></pre></div></div>
+
+<p>Hex to decimal number:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">printf</span> <span class="s2">"%d</span><span class="se">\n</span><span class="s2">"</span> 0xFF
+</code></pre></div></div>
 
 <h1 id="what-every-cs-major-should-know">What every CS major should know</h1>
 
@@ -508,6 +522,322 @@
   <li>Cryptography Engineering by Ferguson, Schneier and Kohno.</li>
 </ul>
 
+<h1 id="multiplexing">Multiplexing</h1>
+
+<h2 id="circuit-switching-tdm-or-fdm">Circuit Switching (TDM or FDM)</h2>
+
+<ul>
+  <li>In <strong>circuit switching</strong> network resources (bandwidth) are divided into pieces (using either <strong>TD multiplexing (TDM)</strong> or <strong>FD multiplexing (FDM)</strong>)</li>
+  <li>bit delay is constant during a connection</li>
+</ul>
+
+<h2 id="packet-switching-statistical-multiplexing">Packet Switching (statistical multiplexing)</h2>
+
+<ul>
+  <li>transfers the data to a network in form of <strong>packets</strong> (using <strong>statistical multiplexing</strong>)</li>
+  <li>unlike circuit switching, packet switching requires no pre-setup (saving time) or reservation of resources (saving resources)</li>
+  <li>from <a href="https://www.geeksforgeeks.org/packet-switching-and-delays-in-computer-network/?ref=lbp">geeksforgeeks</a>
+    <ul>
+      <li>Packet Switching uses <strong>Store and Forward</strong> technique while switching the packets; while forwarding the packet each hop first stores that packet then forward.
+        <ul>
+          <li>This technique is very <strong>beneficial because</strong> packets may get discarded at any hop due to some reason.</li>
+          <li><strong>More than one path is possible</strong> between a pair of sources and destinations. Each packet contains Source and destination address using which <strong>they independently travel</strong> through the network.
+            <ul>
+              <li>In other words, packets belonging to the same file may or may not travel through the same path. If there is <strong>congestion</strong> at some path, packets are allowed to choose different paths possible over an existing network.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="the-internet">The Internet</h1>
+
+<ul>
+  <li>An <strong>Internet service provider (ISP)</strong> is an organization that provides services for accessing, using, or participating in the Internet.</li>
+  <li><strong>Internet exchange points</strong> (<strong>IXes</strong> or <strong>IXPs</strong>) are common grounds of IP networking, allowing participant Internet service providers (ISPs) to exchange data destined for their respective networks</li>
+</ul>
+
+<h2 id="tiers-of-networks">Tiers of networks</h2>
+
+<ul>
+  <li>There is no authority that defines tiers of networks participating in the Internet</li>
+  <li>A <strong>Tier 1 network</strong> is a network that can reach every other network on the Internet without purchasing IP transit or paying for peering</li>
+  <li>A <strong>Tier 2 network</strong> is an Internet service provider which engages in the practice of peering with other networks, but which also purchases IP transit to reach some portion of the Internet.
+    <ul>
+      <li>the most common Internet service providers, as it is much easier to purchase transit from a Tier 1 network than to peer with them and attempt to become a Tier 1 carrier</li>
+    </ul>
+  </li>
+  <li>The term <strong>Tier 3 network</strong> is sometimes also used to describe networks who solely purchase IP transit from other networks to reach the Internet</li>
+</ul>
+
+<h1 id="delay-and-loss">Delay and Loss</h1>
+
+<ul>
+  <li>delay
+    <ul>
+      <li>transmission delay
+        <ul>
+          <li>takes some time to put the bits on the wire (or whatever the medium is)</li>
+        </ul>
+      </li>
+      <li>queueing delay
+        <ul>
+          <li>if there is a line, i.e. some packets are waiting to be sent, there will be a delay</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>loss
+    <ul>
+      <li>arriving packets will be dropped by the router, if the queue is full, i.e. if there are no free buffers</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="application-layer">Application layer</h1>
+
+<ul>
+  <li><strong>ip address</strong>: identifies a specific host</li>
+  <li><strong>port</strong>: identifies a specific process
+    <ul>
+      <li>e.g. <strong>http servers</strong>/web servers run on <strong>port 80</strong>
+        <ul>
+          <li>when <strong>browsers</strong> want http files, they will send a message to the ip address of the server and the port number associated with http, i.e. port 80</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="transport-layer">Transport layer</h1>
+
+<h2 id="transport-protocols-tcpudp">Transport protocols: TCP/UDP</h2>
+
+<ul>
+  <li>TCP
+    <ul>
+      <li><strong>connection-oriented</strong>: sets up a connection between client and server processes (thus, there is some overhead to set this up initially)</li>
+      <li><strong>reliable</strong>: makes sure there is no packet loss (requires some extra information to be sent, i.e. reliability requires some extra bandwidth)</li>
+      <li><strong>flow control</strong>: slows down the sender because the <strong>receiver</strong> is overloaded</li>
+      <li><strong>congestion control</strong>: slows down the sender because the <strong>network</strong> (in between the sender and receiver) is overloaded</li>
+    </ul>
+  </li>
+  <li>UDP
+    <ul>
+      <li><strong>connection-less</strong>: no setting up, thus no overhead</li>
+      <li><strong>unreliable</strong>: no guarantees that a sent packet will arrive or will be uncorrupted or will be unduplicated</li>
+      <li><strong>no flow control</strong></li>
+      <li><strong>no congestion control</strong></li>
+    </ul>
+  </li>
+  <li><strong>note</strong>: UDP is faster and gives you more control over the trade-offs you want to make than TCP. If you need reliability, flow control or congestion control you could implement it yourself at the application layer. For some apps UDP makes more sense, e.g. internet telephony, streaming video.
+    <ul>
+      <li>from wiki: “Voice and video traffic is generally transmitted using UDP”</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="email">Email</h1>
+
+<h2 id="smtp">SMTP</h2>
+
+<ul>
+  <li>using <strong>app passwords</strong> in Gmail: “When you use 2-Step Verification, some less secure apps or devices may be blocked from accessing your Google Account. App Passwords are a way to let the blocked app or device access your Google Account.”</li>
+  <li>Mostly from <a href="https://stackoverflow.com/a/13772865/12282296">stackoverflow</a>:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># must use -ign_eof flag here, otherwise the "R" in RCPT TO line will cause "RENEGOTIATING"</span>
+<span class="c"># (see https://stackoverflow.com/questions/59956241/connection-with-google-mail-using-openssl-s-client-command)</span>
+<span class="nv">$ </span>openssl s_client <span class="nt">-connect</span> smtp.gmail.com:465 <span class="nt">-ign_eof</span>
+  
+HELO smtp
+  
+auth login
+  
+<span class="c"># get username in base64 encoding </span>
+<span class="c"># (sidenote: in order to *DE*code simply use "base64 -d" instead of "base64" at the end of this command)</span>
+<span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'phrth2@gmail.com'</span> | <span class="nb">base64</span>
+  
+<span class="c"># generate app password (see https://support.google.com/accounts/answer/185833?hl=en)</span>
+<span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'app_password'</span> | <span class="nb">base64
+  
+</span>EHLO smtp
+MAIL FROM: &lt;phrth@gmx.de&gt;
+RCPT TO: &lt;phrth2@gmail.com&gt;
+DATA
+  
+<span class="o">===</span> enter e-mail content <span class="o">===</span>
+  
+ctrl-v-enter enter
+<span class="nb">.</span> ctrl-v-enter
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h1 id="dns">DNS</h1>
+
+<ul>
+  <li>A Distributed, Hierarchical Database</li>
+  <li>hierarchy:
+    <ul>
+      <li><strong>root DNS server</strong> (returns IP address of TLD server, e.g. for TLD <code class="language-plaintext highlighter-rouge">.com</code>)</li>
+      <li><strong>TLD server</strong> (returns IP address of authoritative server, e.g. authoritative for <code class="language-plaintext highlighter-rouge">amazon.com</code>)
+        <ul>
+          <li><strong>Note</strong>: The TLD server does not always know the authoritative DNS server for the hostname! It may know only of an <strong>intermediate DNS server</strong>, which in turn knows the authoritative DNS server for the hostname.
+            <ul>
+              <li>e.g. an intermediate university DNS server and authoritative departmental DNS servers</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>(intermediate DNS server)</li>
+      <li><strong>authoritative DNS server</strong> (returns the IP address for the hostname, e.g. for the hostname <code class="language-plaintext highlighter-rouge">www.amazon.com</code>)
+        <ul>
+          <li>most universities and large companies implement and maintain their own authoritative server</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>local DNS server</strong> (aka <strong>default name server</strong>):
+    <ul>
+      <li>does not belong to the hierarchy</li>
+      <li>each ISP has a local DNS server</li>
+      <li>when a host connects to an ISP, the ISP provides the host with the IP addresses of one or more of its local DNS servers (via <strong>DHCP</strong>)</li>
+      <li>typically close to the host (i.e. not more than a few routers away from the host)</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="recursive-vs-iterative-dns-query">Recursive vs Iterative DNS query</h2>
+
+<ul>
+  <li><strong>recursive DNS query</strong>: obtain the mapping on the querying DNS server’s behalf</li>
+  <li><strong>iterative DNS query</strong>: replies are directly returned to the querying DNS server</li>
+  <li>in theory, any DNS query can be <strong>iterative</strong> or <strong>recursive</strong></li>
+  <li>in practice, DNS queries typically follow the pattern in Fig. 2.19
+    <ul>
+      <li>i.e. the query from the requesting host to the local DNS server is recursive, and the remaining queries are iterative</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="dns-cache">DNS Cache</h2>
+
+<ul>
+  <li>In a query chain, when a DNS server receives a DNS reply (containing, for example, a mapping from a hostname to an IP address), it can <strong>cache</strong> the mapping in its local memory.</li>
+  <li><strong>Timeout</strong>: Because hosts and mappings between hostnames and IP addresses are by no means permanent, DNS servers <strong>discard</strong> cached information after a period of time (often set to two days)</li>
+  <li>A local DNS server can also cache the <strong>TLD server</strong>s’ IP addresses
+    <ul>
+      <li>In fact, because of caching, <strong>root servers</strong> are bypassed for all but a very small fraction of DNS queries</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="show-the-cached-records-time-to-live-ttl">Show the cached records, Time to Live (TTL)</h3>
+
+<p>First check, if DNS caching is enabled:</p>
+
+<p>If DNS caching is <strong>enabled</strong> the DNS server used to resolve the domain name (e.g. when using <code class="language-plaintext highlighter-rouge">nslookup domain_name</code>) is a <a href="#loopback-address">loopback IP address</a>, e.g. 127.0.0.53. If you have it <strong>disabled</strong>, then the DNS server should be anything other than 127.0.0.X.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nslookup <span class="nt">-debug</span> www.cyberciti.biz
+nslookup <span class="nt">-debug</span> <span class="nt">-type</span><span class="o">=</span>NS google.com
+
+dig +ttlunits A www.cyberciti.biz
+dig +ttlunits NS google.com
+
+<span class="c"># show the TTL only</span>
+dig +nocmd +noall +answer +ttlid A www.cyberciti.biz
+</code></pre></div></div>
+
+<h2 id="dns-resource-records-rrs">DNS Resource Records (RRs)</h2>
+
+<ul>
+  <li>a four-touple <code class="language-plaintext highlighter-rouge">(Name, Value, Type, TTL)</code>, where <code class="language-plaintext highlighter-rouge">Name</code> and <code class="language-plaintext highlighter-rouge">Value</code> depend on the <code class="language-plaintext highlighter-rouge">Type</code></li>
+  <li>If a DNS server is <strong>authoritative</strong> for a particular hostname, then the DNS server will contain a <strong>Type A record</strong> for the hostname.
+    <ul>
+      <li>(Even if the DNS server is not authoritative, it may contain a Type A record in its <strong>cache</strong>.)</li>
+    </ul>
+  </li>
+  <li>If a server is <strong>not authoritative</strong> for a hostname, then the server will contain a <strong>Type NS record</strong> for the domain that includes the hostname
+    <ul>
+      <li>it will also contain a <strong>Type A record</strong> that provides the IP address of the DNS server in the Value field of the NS record.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="nslookup-dig">nslookup, dig</h3>
+
+<p><strong>Caution</strong>: <code class="language-plaintext highlighter-rouge">dig</code> and <code class="language-plaintext highlighter-rouge">nslookup</code> sometimes display different information. <code class="language-plaintext highlighter-rouge">dig</code> uses the OS resolver libraries. <code class="language-plaintext highlighter-rouge">nslookup</code> uses its own internal ones. ISC recommends to stop using <code class="language-plaintext highlighter-rouge">nslookup</code> (see <a href="https://unix.stackexchange.com/a/93809">stackexchange</a>)!</p>
+
+<p><strong>nslookup</strong>:
+General syntax: <code class="language-plaintext highlighter-rouge">nslookup –option1 –option2 host-to-find dns-server</code>
+Options:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">nslookup -debug</code>: show additional information, e.g. TTL</li>
+</ul>
+
+<p><strong>dig</strong>:
+General syntax: <code class="language-plaintext highlighter-rouge">dig [options] TYPE domain auth-name-server-here</code>
+Options:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">dig +short</code>: short form answer</li>
+  <li><code class="language-plaintext highlighter-rouge">dig +ttlunits</code>: human-readable time units</li>
+  <li><code class="language-plaintext highlighter-rouge">dig +nocmd +noall +answer +ttlid</code>: show the TTL only</li>
+</ul>
+
+<p><strong>Example 1</strong>: Send me the IP address for the host www.mit.edu:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nslookup <span class="nt">-type</span><span class="o">=</span>A www.mit.edu
+dig A www.mit.edu
+</code></pre></div></div>
+
+<p><strong>Example 2</strong>: Send me the host names of the authoritative DNS servers for domain mit.edu:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nslookup <span class="nt">-type</span><span class="o">=</span>NS mit.edu
+dig NS mit.edu
+</code></pre></div></div>
+
+<p><strong>Example 3</strong>: Query sent to the DNS server <code class="language-plaintext highlighter-rouge">dns2.p08.nsone.net</code> rather than to the default DNS server:</p>
+<ul>
+  <li>possible errors, when using <code class="language-plaintext highlighter-rouge">nslookup</code>:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">** server can't find some_site.com: NXDOMAIN</code>: the <code class="language-plaintext highlighter-rouge">host-to-find</code> is wrong</li>
+      <li><code class="language-plaintext highlighter-rouge">** server can't find some_site.com: REFUSED</code>: the <code class="language-plaintext highlighter-rouge">dns-server</code> is wrong, more precisely:
+        <ul>
+          <li><a href="https://superuser.com/a/1624001">nslookup from another name server</a></li>
+          <li><a href="https://stackoverflow.com/a/1697403/12282296">“Refused” doesn’t mean that the connection to the DNS server is refused. It means that the DNS server refuses to provide whatever data you asked for, or to do whatever action you asked it to do</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nslookup www.google.com dns2.p08.nsone.net
+
+<span class="c"># note: do not forget the @ symbol here!</span>
+dig www.google.com @dns2.p08.nsone.net
+</code></pre></div></div>
+
+<h2 id="ip-ifconfig-ipconfig-nmcli">ip, ifconfig, ipconfig, nmcli</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ipconfig</code> is a Windows command, it displays slightly different information than <code class="language-plaintext highlighter-rouge">ifconfig</code> and <code class="language-plaintext highlighter-rouge">ip</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ifconfig</code> is deprecated, use <code class="language-plaintext highlighter-rouge">ip</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ip a</code>, <code class="language-plaintext highlighter-rouge">ip address</code>, <code class="language-plaintext highlighter-rouge">ip address show</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ip r</code> default gateway/router address</li>
+  <li><code class="language-plaintext highlighter-rouge">nmcli dev show wlo1</code> show gateway and DNS servers for device <code class="language-plaintext highlighter-rouge">wlo1</code></li>
+  <li><code class="language-plaintext highlighter-rouge">nmcli dev status</code> get device names and their status types</li>
+</ul>
+
+<h2 id="loopback-address">Loopback address</h2>
+
+<p>From <a href="https://www.techopedia.com/definition/2440/loopback-address-ip-address">techopedia.com</a>:</p>
+
+<p>A <strong>loopback address</strong> has been built into the IP domain system in order to allow for a device to send and receive its own data packets.</p>
+
+<p>Loopback addresses can be useful in various kinds of analysis like testing and debugging, or in allowing routers to communicate in specific ways.</p>
+
+<p>A simple way of describing how using a loopback address works is that a data packet will get sent through a network and routed back to the same device where it originated.</p>
+
+<p>In IPv4, <strong>127.0.0.1</strong> is the most commonly used loopback address, however, this can range be extended to <strong>127.255.255.255</strong>.</p>
 
         
       </section>

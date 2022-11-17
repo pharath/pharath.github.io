@@ -368,7 +368,7 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
-              <ul class="toc__menu"><li><a href="#plugins">Plugins</a><ul><li><a href="#install-autocomplete-clang_complete">Install Autocomplete clang_complete</a></li></ul></li><li><a href="#help">help</a></li><li><a href="#regexregexp">regex/regexp</a></li><li><a href="#von-shell-aus">Von Shell aus</a></li><li><a href="#netrw">netrw</a></li><li><a href="#compile-run">Compile, Run</a></li><li><a href="#in-command-mode">In COMMAND mode</a><ul><li><a href="#vim-settings">Vim Settings</a><ul><li><a href="#syntax-highlighting">Syntax highlighting</a></li></ul></li><li><a href="#vim-sessions">Vim Sessions</a></li><li><a href="#tabs">Tabs</a></li><li><a href="#buffers">Buffers</a></li><li><a href="#file-open-close-suspend-name-refresh">File Open, Close, Suspend, Name, Refresh</a></li><li><a href="#file-saving">File Saving</a></li><li><a href="#navigation">Navigation</a><ul><li><a href="#viewports">Viewports</a></li><li><a href="#jump">Jump</a></li></ul></li><li><a href="#write">Write</a><ul><li><a href="#mehrere-zeilen-auskommentieren">Mehrere Zeilen auskommentieren</a></li></ul></li></ul></li><li><a href="#in-insert-mode">In INSERT mode</a><ul><li><a href="#avoid-the-escape-key">Avoid the escape key:</a></li><li><a href="#schreiben">Schreiben</a></li></ul></li><li><a href="#general-facts">General facts</a><ul><li><a href="#reasons-for-swap-files-swp">Reasons for swap files (.swp)</a></li><li><a href="#freezefreezing">Freeze/Freezing</a></li><li><a href="#change-default-vim-vimrc-location">Change default .vim .vimrc location</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#plugins">Plugins</a><ul><li><a href="#install-autocomplete-clang_complete">Install Autocomplete clang_complete</a></li></ul></li><li><a href="#help">help</a></li><li><a href="#regexregexp">regex/regexp</a></li><li><a href="#von-shell-aus">Von Shell aus</a></li><li><a href="#netrw">netrw</a></li><li><a href="#compile-run">Compile, Run</a></li><li><a href="#in-command-mode">In COMMAND mode</a><ul><li><a href="#vim-settings">Vim Settings</a><ul><li><a href="#syntax-highlighting">Syntax highlighting</a></li></ul></li><li><a href="#vim-sessions">Vim Sessions</a></li><li><a href="#tabs">Tabs</a></li><li><a href="#buffers">Buffers</a></li><li><a href="#file-open-close-suspend-name-refresh">File Open, Close, Suspend, Name, Refresh</a></li><li><a href="#file-saving">File Saving</a></li><li><a href="#navigation">Navigation</a><ul><li><a href="#viewports">Viewports</a></li><li><a href="#jump">Jump</a></li><li><a href="#urls">URLs</a></li></ul></li><li><a href="#write">Write</a><ul><li><a href="#mehrere-zeilen-auskommentieren">Mehrere Zeilen auskommentieren</a></li></ul></li></ul></li><li><a href="#in-insert-mode">In INSERT mode</a><ul><li><a href="#avoid-the-escape-key">Avoid the escape key:</a></li><li><a href="#schreiben">Schreiben</a></li></ul></li><li><a href="#general-facts">General facts</a><ul><li><a href="#reasons-for-swap-files-swp">Reasons for swap files (.swp)</a></li><li><a href="#freezefreezing">Freeze/Freezing</a></li><li><a href="#change-default-vim-vimrc-location">Change default .vim .vimrc location</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -376,12 +376,46 @@
         <h1 id="plugins">Plugins</h1>
 
 <ul>
-  <li>‘VundleVim/Vundle.vim’</li>
-  <li>‘NLKNguyen/papercolor-theme’</li>
+  <li>‘VundleVim/Vundle.vim’
+    <ul>
+      <li><strong>install</strong>: add <code class="language-plaintext highlighter-rouge">Plugin 'github_repo_name'</code> to <code class="language-plaintext highlighter-rouge">.vimrc</code>, <code class="language-plaintext highlighter-rouge">PluginInstall</code></li>
+      <li><strong>uninstall</strong>: remove <code class="language-plaintext highlighter-rouge">Plugin 'github_repo_name'</code> from <code class="language-plaintext highlighter-rouge">.vimrc</code>, <code class="language-plaintext highlighter-rouge">PluginUpdate</code>, restart vim, <code class="language-plaintext highlighter-rouge">PluginClean</code></li>
+    </ul>
+  </li>
   <li>‘rip-rip/clang_complete’ (install: see <a href="#install-autocomplete-clang_complete">below</a>)</li>
-  <li>‘godlygeek/tabular’</li>
-  <li>‘plasticboy/vim-markdown’</li>
+  <li>for <code class="language-plaintext highlighter-rouge">junegunn/fzf</code>: when this plugin asks for downloading the executable, confirm with “y”</li>
 </ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">" braket Plugins
+
+Plugin 'NLKNguyen/papercolor-theme'
+
+"</span> c++ autocomplete
+Plugin <span class="s1">'rip-rip/clang_complete'</span>
+
+<span class="s2">" markdown editing in vim
+"</span>Plugin <span class="s1">'godlygeek/tabular'</span> <span class="s2">" required for vim-markdown plugin
+"</span>Plugin <span class="s1">'plasticboy/vim-markdown'</span>
+
+<span class="s2">" markdown previewing in a browser
+Plugin 'iamcco/markdown-preview.nvim'
+
+"</span> vscode dark theme
+Plugin <span class="s1">'tomasiser/vim-code-dark'</span>
+Plugin <span class="s1">'octol/vim-cpp-enhanced-highlight'</span>
+
+<span class="s2">" fuzzy file search
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
+
+"</span> Viewer &amp; Finder <span class="k">for </span>LSP symbols and tags 
+<span class="s2">" (built to replace "</span>tagbar<span class="s2">" plugin which does not support LSP)
+"</span> <span class="o">(</span>LSP: https://en.wikipedia.org/wiki/Language_Server_Protocol<span class="o">)</span>
+Plugin <span class="s1">'liuchengxu/vista.vim'</span>
+
+<span class="s2">" Delete/change/add parentheses/quotes/XML-tags/much more with ease
+Plugin 'tpope/vim-surround'
+</span></code></pre></div></div>
 
 <h2 id="install-autocomplete-clang_complete">Install Autocomplete clang_complete</h2>
 
@@ -999,6 +1033,14 @@
       <td style="text-align: center">spring zu Zeilenende</td>
     </tr>
     <tr>
+      <td style="text-align: center">H</td>
+      <td style="text-align: center">spring zu top of page (“<strong>H</strong>igh”)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">L</td>
+      <td style="text-align: center">spring zu bottom of page (“<strong>L</strong>ow”)</td>
+    </tr>
+    <tr>
       <td style="text-align: center">b</td>
       <td style="text-align: center">spring zu Wortanfang</td>
     </tr>
@@ -1053,6 +1095,27 @@
     <tr>
       <td style="text-align: center">ctrl + ]</td>
       <td style="text-align: center">Jump to definition (if ctags is installed)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="urls">URLs</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">command</th>
+      <th style="text-align: center">description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">gx</td>
+      <td style="text-align: center">in normal mode: open the URL under the cursor in Firefox</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">gx</td>
+      <td style="text-align: center">in visual mode: open the (manually) selected URL in Firefox</td>
     </tr>
   </tbody>
 </table>
