@@ -424,12 +424,135 @@ At the time (1986), the internet was completely classful and nobody really gave 
 
 TODO
 
-# Transport Layer
+# Transport Layer (Layer 4)
 
-The **Transport Layer** is about providing **logical communication** between **processes**.
+The **Transport Layer** (Layer 4) is about providing **logical** communication between **processes**.
+    - **logical**: it will appear as if host A is talking to host B, even though in actuality they are going over lots of other hosts, intermediate links, routers etc.
     - in other words **TCP and UDP** are **end to end** protocols (and not "point to point"!)
 
-The transport layer of the sender **disassembles** (multiplexing) the messages passed from the application layer into chunks and the receiver **reassembles** (demultiplexing) those messages.
+The transport layer of the sender **disassembles** (multiplexes) the messages passed from the application layer into chunks and the receiver **reassembles** (demultiplexes) those messages.
+
+The **Network Layer** (Layer 3) is about providing **logical** communication between **hosts**.
+    - **hosts**: a generic name for computers or routers
+    - **point to point**: where the points are the hosts
+
+From [quora](https://www.quora.com/What-is-the-difference-between-End-to-End-Point-to-Point-and-Hop-by-Hop-networks):
+- **End to end** indicates a communication happening between two applications (maybe you and your friend using Skype). It doesn't care what's in the middle, it just consider that the two ends are taking with one another. It generally is a Layer 4 (or higher) communication
+- **Point to point** is a Layer 2 link with two devices only on it. That is, two devices with an IP address have a cable going straight from a device into the other. A protocol used there is PPP, and HDLC is a legacy one.
+- **Hop by Hop** indicates the flow the communication follows. Data pass through multiple devices with an IP address, and each is genetically named “hop”. Hop by Hop indicates analyzing the data flow at layer 3, checking all devices in the path
+
+Analogy:
+    - 2 houses - **hosts**
+        - NY and LA
+    - 12 siblings/house - **processes**
+    - 1 letter/child/week - **messages**
+    - Ann (NY) and Bill (LA) - **transport layer**
+        - collect and distribute
+    - Post office (PO) - **network layer**
+        - delivers from NY PO to LA PO
+
+The **transport layer** just connects processes to the **network layer**. The transport layer abstracts away all the complexity of the network layer (in the analogy: delivering may involve trucks, plane, etc. which is dealt with at the PO level, but Ann and Bill do not know these details).
+
+## TCP and UDP
+
+- neither of these provide **delay guarantees** or **bandwidth guarantees**
+
+### TCP
+
+- Reliable, In-Order
+- provides:
+    - **congestion control** (TCP slows itself down if network is congested)
+    - **flow control** (TCP sender will slow itself down if TCP receiver cannot keep up with the speed that it is sending)
+    - **connection setup** (requires time and resources to be set up ahead of time to create this TCP connection)
+- ensures that packets/segments are received **reliably** (i.e. they do not get lost) and they are received **in order**
+
+### UDP
+
+- Unreliable, Unordered
+- "Best Effort", "no-frills", "bare bones"
+- UDP is very much a "no-frills" extension of the internet protocol IP that it is sitting on top of
+- very little overhead
+    - no handshaking
+    - no connection establishment
+        - no delay
+    - no connection state at sender, receiver
+        - thus, small segment header, less wasted bandwidth
+    - no congestion control
+        - thus, no speed limit
+- use cases:
+    - streaming multimedia
+    - DNS
+    - SNMP
+        - Simple Network Management Protocol
+        - protocol for collecting and organizing information about managed devices on IP networks and for modifying that information to change device behaviour
+        - supported by: cable modems, routers, switches, servers, workstations, printers, and more
+        - is a part of **TCP/IP Suite**
+        - includes an application layer protocol, a database schema, and a set of data objects
+- **if you need reliability** you can add it at the application layer and do application specific error recovery
+
+## Multiplexing/Demultiplexing
+
+- **socket**: like a "door", a connection piece that ...
+    - sits in between the application and transport layer
+    - is the means by which processes communicate
+    - a process (as part of a network application) can have **one or more** sockets, doors through which data passes 
+        - from the network to the process and 
+        - from the process to the network
+    - the transport layer **in the receiving host** does not actually deliver data directly to a **process**, but instead to an intermediary **socket**
+    - each socket has a **unique identifier**
+- **port number**: distinguishing identifier - one of them - that we use to distinguish what process needs to get a message/segment
+    - 16-bit number (0 to 65535)
+    - **well-known ports 0 to 1023** (RFC 3232 which replaced RFC 1700)
+        - http: 80
+        - ftp: 21
+        - smtp: 25
+        - dns: 53
+        - [Official List: Internet Assigned Numbers Authority (iana.org)](https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml)
+
+### Segments, Datagrams, Messages (Encapsulation)
+
+- **application layer message** (**application layer data unit**)
+- **transport layer segment** format (**transport layer data unit**): 
+    - **width**: 32 bits
+    - source port #, dest port #
+    - other header fields
+    - application data (message)
+- **UDP segment** format:
+    - source port # (16 bits), dest port # (16 bits)
+    - length (in bytes, incl. header and [payload](#payload)), checksum
+    - application data (message)
+- **IP datagram** format (**network layer data unit**):
+    - source IP address
+    - destination IP address
+    - TCP/UDP segment (see above)
+- difference between datagrams and segments (from [quora](https://www.quora.com/What-is-the-difference-between-datagrams-and-segments-in-the-TCP-IP-and-OSI-models)):
+    - We say **TCP segment** is the protocol data unit which consists of a **TCP header** and an **application data piece (packet)** which comes from the (upper) **Application Layer**. **Transport layer data** is generally named as **segment** and **network layer data unit** is named as **datagram**, but when we use UDP as transport layer protocol we don't say UDP segment, instead, we say UDP datagram. I think this is because we do not segmentate UDP data unit (segmentation is made in transport layer when we use TCP).
+- **encapsulation**: 
+    - a datagram encapsulates a segment which encapsulates a message
+
+### Payload
+
+From Kurose, Ross:
+
+At each layer, a packet has **two types of fields**: 
+- header fields
+- a payload field 
+    - typically a packet from the layer above
+
+### Demultiplexing
+
+- **Connectionless Demultiplexing (UDP)**:
+    - UDP socket identified **by 2-tuple**
+        - the destination port (DP) and 
+        - the destination IP address
+    - the source port (SP) and the source IP address are **not** relevant for UDP demultiplexing, but they provide the **return address** (i.e. SP and DP will be swapped around, when talking back)
+        - thus, a server can demultiplex messages from two hosts, even if those happen to have the same SP (cf. Fig. 3.5 Kurose)
+- **Connection-Oriented Demultiplexing (TCP)**:
+    - TCP socket identified **by 4-tuple**
+        - the SP and 
+        - the source IP address
+        - the DP and 
+        - the destination IP address
 
 ## End-to-End Principle
 
