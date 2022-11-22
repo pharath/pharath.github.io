@@ -519,8 +519,9 @@ The **transport layer** just connects processes to the **network layer**. The tr
     - application data (message)
 - **UDP segment** format:
     - source port # (16 bits), dest port # (16 bits)
-    - length (in bytes, incl. header and [payload](#payload)), checksum
+    - length (in bytes, incl. header and [payload](#payload)), [checksum](#checksum)
     - application data (message)
+    - UDP adds **four fields** (2 bytes each, i.e. 8 bytes in total) to the application data (message)
 - **IP datagram** format (**network layer data unit**):
     - source IP address
     - destination IP address
@@ -554,6 +555,37 @@ At each layer, a packet has **two types of fields**:
         - the DP and 
         - the destination IP address
 
+### Checksum
+
+- [ones' complement](#ones-complement) of the sum of all the 16-bit words in the UDP segment
+    - [why we use 1's complement instead of 2's complement](https://stackoverflow.com/a/67907578/12282296)
+        - because using 2's complement may give you a wrong result if the sender and receiver machines have different [endianness](#endianness)
+- checksum of sender and receiver is compared **by addition** (their sum must be zero!)
+- at the link layer **cyclic redundancy check (CRC)** is used
+    - because algorithm above fails to detect some common errors which affect many bits at once, such as 
+        - changing the order of data words, or 
+        - inserting or deleting words with all bits set to zero
+- Why is the link layer checksum not enough?
+    - no guarantees that the link layer is reliable and does the checksum
+    - [End-to-End principle](#end-to-end-principle)
+
+#### Ones' Complement
+
+- terminology: bit flip = bitwise NOT = **ones' complement** of a binary number
+
+#### Two's Complement
+
+- "1 added to the ones' complement"
+- Two's complement 
+    - (in maths) operation to reversibly **convert a positive binary number into a negative binary number** with equivalent (but negative) value, using the binary digit with the greatest place value to indicate whether the binary number is positive or negative (the sign)
+    - is executed by 1) inverting (i.e. **flipping**) all bits, then 2) adding a place value of 1 to the inverted number
+    - most common method of representing **signed integers**
+        - in two's complement, there is **only one representation for zero**, whereas in ones' complement there are two (this is the reason why two's complement is generally used) [source](https://www.geeksforgeeks.org/difference-between-1s-complement-representation-and-2s-complement-representation-technique/)
+
+#### Endianness
+
+A **big-endian** system stores the most significant byte (MSB) of a word at the smallest memory address.
+
 ## End-to-End Principle
 
 see 
@@ -566,6 +598,54 @@ There are many different phrasings:
 - "Communication protocol operations should be defined to occur at the **endpoints** of a communication system."
 - Saltzer 1984: "The principle, called the **end-to-end argument**, suggests that functions placed at low levels of a system may be **redundant** or of **little value** when compared with the cost of providing them at that low level."
 
-Examples:
+Examples of this principle:
 - TCP checksum vs. application checksum
-- "smart" TCP vs "dumb" IP
+- "smart" TCP vs "dumb" IP 
+    - IP is "below" TCP
+    - IP is "dumb" in the sense that it has not many features compared to TCP
+
+## Sequence Numbers
+
+- watch [original lecture video](https://www.youtube.com/watch?v=j93DZaMMjfg&list=PLm556dMNleHc1MWN5BX9B2XkwkNE2Djiu&index=19) to understand sequence numbers
+    - they explain them differently than [Kenan Casey](https://www.youtube.com/watch?v=6lP0ow8Voe0&list=PLLFIgriuZPAcCkmSTfcq7oaHcVy3rzEtc&index=16)
+    - both the sender and the receiver expect a certain sequence number (0 or 1) which does not have to be the same for the sender and the receiver
+
+## Go-Back-N and Selective Repeat Protocol
+
+- just play with Kurose animations:
+    - [GBN](https://media.pearsoncmg.com/aw/ecs_kurose_compnetwork_7/cw/content/interactiveanimations/go-back-n-protocol/index.html)
+    - [SR](https://media.pearsoncmg.com/aw/ecs_kurose_compnetwork_7/cw/content/interactiveanimations/selective-repeat-protocol/index.html)
+    - e.g. send 3 packets, kill packet 1 and **wait for the timeout** and see what happens
+
+## TCP
+
+- unicast (one-to-one communication, i.e. one sender and one receiver)
+- in-order byte stream (abstraction)
+    - i.e. there are no "message boundaries", it is just a stream of bytes that can flow in either direction
+- connection-oriented
+    - i.e. there is a handshaking setup process
+        - state variables
+        - buffers
+        - overhead associated with setting up the connection
+- full duplex data
+    - bi-directional data flow in same connection
+    - MSS: maximum segment size
+- cumulative ACKs
+- pipelining
+    - TCP congestion and flow control set window size
+- flow controlled
+    - sender will not overwhelm receiver
+
+## TCP Implementation
+
+- KR238: RFC recommended TCP **timer** implementations use only a **single** retransmission timer, even if there are multiple transmitted but not yet acknowledged segments
+    - because timer management can require considerable overhead
+- **duplicate ACKs** instead of NAKs
+- **fast retransmit** when **three duplicate ACKs** are received (= segment following the segment that has been ACKed three times has been lost)
+
+### Three-Way Handshake
+
+- SYN segment, SYNACK segment, ACK segment
+- SYN Flood Attack
+    - solution: [SYN Cookies](https://en.wikipedia.org/wiki/SYN_cookies)
+        - don't allocate resources until ACK received (confirming that there is really a client out there)

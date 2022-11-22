@@ -368,7 +368,7 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header>
-              <ul class="toc__menu"><li><a href="#concepts">Concepts</a></li><li><a href="#linux-commands">Linux commands</a></li><li><a href="#what-every-cs-major-should-know">What every CS major should know</a><ul><li><a href="#networking">Networking</a><ul><li><a href="#specific-recommendations">Specific recommendations</a></li><li><a href="#recommended-reading">Recommended reading</a></li></ul></li><li><a href="#security">Security</a><ul><li><a href="#specific-recommendations-1">Specific recommendations</a></li><li><a href="#recommended-reading-1">Recommended reading</a></li></ul></li><li><a href="#cryptography">Cryptography</a><ul><li><a href="#specific-recommendations-2">Specific recommendations</a></li><li><a href="#recommended-reading-2">Recommended reading</a></li></ul></li></ul></li><li><a href="#multiplexing">Multiplexing</a><ul><li><a href="#circuit-switching-tdm-or-fdm">Circuit Switching (TDM or FDM)</a></li><li><a href="#packet-switching-statistical-multiplexing">Packet Switching (statistical multiplexing)</a></li></ul></li><li><a href="#the-internet">The Internet</a><ul><li><a href="#tiers-of-networks">Tiers of networks</a></li></ul></li><li><a href="#delay-and-loss">Delay and Loss</a></li><li><a href="#application-layer">Application layer</a></li><li><a href="#transport-layer">Transport layer</a><ul><li><a href="#transport-protocols-tcpudp">Transport protocols: TCP/UDP</a></li></ul></li><li><a href="#email">Email</a><ul><li><a href="#smtp">SMTP</a></li></ul></li><li><a href="#dns">DNS</a><ul><li><a href="#recursive-vs-iterative-dns-query">Recursive vs Iterative DNS query</a></li><li><a href="#dns-cache">DNS Cache</a><ul><li><a href="#show-the-cached-records-time-to-live-ttl">Show the cached records, Time to Live (TTL)</a></li></ul></li><li><a href="#dns-resource-records-rrs">DNS Resource Records (RRs)</a><ul><li><a href="#nslookup-dig">nslookup, dig</a></li></ul></li><li><a href="#ip-ifconfig-ipconfig-nmcli">ip, ifconfig, ipconfig, nmcli</a></li><li><a href="#loopback-address">Loopback address</a></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#concepts">Concepts</a></li><li><a href="#what-every-cs-major-should-know">What every CS major should know</a><ul><li><a href="#networking">Networking</a><ul><li><a href="#specific-recommendations">Specific recommendations</a></li><li><a href="#recommended-reading">Recommended reading</a></li></ul></li><li><a href="#security">Security</a><ul><li><a href="#specific-recommendations-1">Specific recommendations</a></li><li><a href="#recommended-reading-1">Recommended reading</a></li></ul></li><li><a href="#cryptography">Cryptography</a><ul><li><a href="#specific-recommendations-2">Specific recommendations</a></li><li><a href="#recommended-reading-2">Recommended reading</a></li></ul></li></ul></li><li><a href="#linux-commands">Linux commands</a></li><li><a href="#wireshark-gui-meaning">Wireshark GUI meaning</a><ul><li><a href="#the-packet-list-pane">The “Packet List” Pane</a></li></ul></li><li><a href="#multiplexing">Multiplexing</a><ul><li><a href="#circuit-switching-tdm-or-fdm">Circuit Switching (TDM or FDM)</a></li><li><a href="#packet-switching-statistical-multiplexing">Packet Switching (statistical multiplexing)</a></li></ul></li><li><a href="#the-internet">The Internet</a><ul><li><a href="#tiers-of-networks">Tiers of networks</a></li></ul></li><li><a href="#delay-and-loss">Delay and Loss</a></li><li><a href="#application-layer-brief">Application layer (Brief)</a></li><li><a href="#transport-layer-brief">Transport layer (Brief)</a><ul><li><a href="#transport-protocols-tcpudp">Transport protocols: TCP/UDP</a></li></ul></li><li><a href="#application-layer">Application Layer</a><ul><li><a href="#web-and-http">Web and HTTP</a></li><li><a href="#email">Email</a><ul><li><a href="#smtp">SMTP</a></li></ul></li><li><a href="#dns">DNS</a><ul><li><a href="#recursive-vs-iterative-dns-query">Recursive vs Iterative DNS query</a></li><li><a href="#dns-cache">DNS Cache</a><ul><li><a href="#dns-cache-in-ubuntu-time-to-live-ttl">DNS Cache in Ubuntu, Time to Live (TTL)</a></li></ul></li><li><a href="#dns-resource-records-rrs">DNS Resource Records (RRs)</a><ul><li><a href="#nslookup-dig">nslookup, dig</a></li></ul></li><li><a href="#ip-ifconfig-ipconfig-nmcli">ip, ifconfig, ipconfig, nmcli</a></li><li><a href="#loopback-address-localhost">Loopback address, Localhost</a></li></ul></li><li><a href="#p2p-file-distribution">P2P File Distribution</a></li></ul></li><li><a href="#transport-layer-layer-4">Transport Layer (Layer 4)</a><ul><li><a href="#tcp-and-udp">TCP and UDP</a><ul><li><a href="#tcp">TCP</a></li><li><a href="#udp">UDP</a></li></ul></li><li><a href="#multiplexingdemultiplexing">Multiplexing/Demultiplexing</a><ul><li><a href="#segments-datagrams-messages-encapsulation">Segments, Datagrams, Messages (Encapsulation)</a></li><li><a href="#payload">Payload</a></li><li><a href="#demultiplexing">Demultiplexing</a></li><li><a href="#checksum">Checksum</a><ul><li><a href="#ones-complement">Ones’ Complement</a></li><li><a href="#twos-complement">Two’s Complement</a></li><li><a href="#endianness">Endianness</a></li></ul></li></ul></li><li><a href="#end-to-end-principle">End-to-End Principle</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -397,23 +397,9 @@
   <li>Grundlagen der Kryptographie und sichere Internet-Protokolle</li>
 </ul>
 
-<h1 id="linux-commands">Linux commands</h1>
-
-<p>Base64 decode:</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'UGFzc3dvcmQ6'</span> | <span class="nb">base64</span> <span class="nt">-d</span>
-</code></pre></div></div>
-
-<p>Base64 encode:</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'Password:'</span> | <span class="nb">base64</span>
-</code></pre></div></div>
-
-<p>Hex to decimal number:</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">printf</span> <span class="s2">"%d</span><span class="se">\n</span><span class="s2">"</span> 0xFF
-</code></pre></div></div>
-
 <h1 id="what-every-cs-major-should-know">What every CS major should know</h1>
 
-<p>[<a href="https://matt.might.net/articles/what-cs-majors-should-know/">source</a>]</p>
+<p>(<a href="https://matt.might.net/articles/what-cs-majors-should-know/">source</a>)</p>
 
 <h2 id="networking">Networking</h2>
 
@@ -522,6 +508,32 @@
   <li>Cryptography Engineering by Ferguson, Schneier and Kohno.</li>
 </ul>
 
+<h1 id="linux-commands">Linux commands</h1>
+
+<p>Base64 decode:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'UGFzc3dvcmQ6'</span> | <span class="nb">base64</span> <span class="nt">-d</span>
+</code></pre></div></div>
+
+<p>Base64 encode:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'Password:'</span> | <span class="nb">base64</span>
+</code></pre></div></div>
+
+<p>Hex to decimal number:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">printf</span> <span class="s2">"%d</span><span class="se">\n</span><span class="s2">"</span> 0xFF
+</code></pre></div></div>
+
+<h1 id="wireshark-gui-meaning">Wireshark GUI meaning</h1>
+
+<h2 id="the-packet-list-pane">The “Packet List” Pane</h2>
+
+<ul>
+  <li>the lines in the <strong>“No.” column</strong> connecting the selected packet with other packets (<a href="https://www.wireshark.org/docs/wsug_html_chunked/ChUsePacketListPaneSection.html">see Table 3.16. Related packet symbols</a>)
+    <ul>
+      <li>DNS packets that use the <strong>same port numbers</strong>. Wireshark treats them as belonging to the <strong>same conversation</strong> and draws a line connecting them.</li>
+    </ul>
+  </li>
+</ul>
+
 <h1 id="multiplexing">Multiplexing</h1>
 
 <h2 id="circuit-switching-tdm-or-fdm">Circuit Switching (TDM or FDM)</h2>
@@ -596,7 +608,7 @@
   </li>
 </ul>
 
-<h1 id="application-layer">Application layer</h1>
+<h1 id="application-layer-brief">Application layer (Brief)</h1>
 
 <ul>
   <li><strong>ip address</strong>: identifies a specific host</li>
@@ -611,7 +623,7 @@
   </li>
 </ul>
 
-<h1 id="transport-layer">Transport layer</h1>
+<h1 id="transport-layer-brief">Transport layer (Brief)</h1>
 
 <h2 id="transport-protocols-tcpudp">Transport protocols: TCP/UDP</h2>
 
@@ -639,42 +651,46 @@
   </li>
 </ul>
 
-<h1 id="email">Email</h1>
+<h1 id="application-layer">Application Layer</h1>
 
-<h2 id="smtp">SMTP</h2>
+<h2 id="web-and-http">Web and HTTP</h2>
 
-<ul>
-  <li>using <strong>app passwords</strong> in Gmail: “When you use 2-Step Verification, some less secure apps or devices may be blocked from accessing your Google Account. App Passwords are a way to let the blocked app or device access your Google Account.”</li>
-  <li>Mostly from <a href="https://stackoverflow.com/a/13772865/12282296">stackoverflow</a>:
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># must use -ign_eof flag here, otherwise the "R" in RCPT TO line will cause "RENEGOTIATING"</span>
+<p>TODO</p>
+
+<h2 id="email">Email</h2>
+
+<h3 id="smtp">SMTP</h3>
+
+<p>Using <strong>app passwords</strong> in Gmail: “When you use 2-Step Verification, some less secure apps or devices may be blocked from accessing your Google Account. App Passwords are a way to let the blocked app or device access your Google Account.”</p>
+
+<p>Mostly from <a href="https://stackoverflow.com/a/13772865/12282296">stackoverflow</a>:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># must use -ign_eof flag here, otherwise the "R" in RCPT TO line will cause "RENEGOTIATING"</span>
 <span class="c"># (see https://stackoverflow.com/questions/59956241/connection-with-google-mail-using-openssl-s-client-command)</span>
 <span class="nv">$ </span>openssl s_client <span class="nt">-connect</span> smtp.gmail.com:465 <span class="nt">-ign_eof</span>
-  
+
 HELO smtp
-  
+
 auth login
-  
+
 <span class="c"># get username in base64 encoding </span>
 <span class="c"># (sidenote: in order to *DE*code simply use "base64 -d" instead of "base64" at the end of this command)</span>
 <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'phrth2@gmail.com'</span> | <span class="nb">base64</span>
-  
+
 <span class="c"># generate app password (see https://support.google.com/accounts/answer/185833?hl=en)</span>
 <span class="nb">echo</span> <span class="nt">-n</span> <span class="s1">'app_password'</span> | <span class="nb">base64
-  
+
 </span>EHLO smtp
 MAIL FROM: &lt;phrth@gmx.de&gt;
 RCPT TO: &lt;phrth2@gmail.com&gt;
 DATA
-  
+
 <span class="o">===</span> enter e-mail content <span class="o">===</span>
-  
+
 ctrl-v-enter enter
 <span class="nb">.</span> ctrl-v-enter
-</code></pre></div>    </div>
-  </li>
-</ul>
+</code></pre></div></div>
 
-<h1 id="dns">DNS</h1>
+<h2 id="dns">DNS</h2>
 
 <ul>
   <li>A Distributed, Hierarchical Database</li>
@@ -708,7 +724,7 @@ ctrl-v-enter enter
   </li>
 </ul>
 
-<h2 id="recursive-vs-iterative-dns-query">Recursive vs Iterative DNS query</h2>
+<h3 id="recursive-vs-iterative-dns-query">Recursive vs Iterative DNS query</h3>
 
 <ul>
   <li><strong>recursive DNS query</strong>: obtain the mapping on the querying DNS server’s behalf</li>
@@ -721,7 +737,7 @@ ctrl-v-enter enter
   </li>
 </ul>
 
-<h2 id="dns-cache">DNS Cache</h2>
+<h3 id="dns-cache">DNS Cache</h3>
 
 <ul>
   <li>In a query chain, when a DNS server receives a DNS reply (containing, for example, a mapping from a hostname to an IP address), it can <strong>cache</strong> the mapping in its local memory.</li>
@@ -733,11 +749,44 @@ ctrl-v-enter enter
   </li>
 </ul>
 
-<h3 id="show-the-cached-records-time-to-live-ttl">Show the cached records, Time to Live (TTL)</h3>
+<h4 id="dns-cache-in-ubuntu-time-to-live-ttl">DNS Cache in Ubuntu, Time to Live (TTL)</h4>
+
+<p>From <a href="https://linuxhint.com/flush_dns_cache_ubuntu/">linuxhint.com</a> and <a href="https://www.techrepublic.com/article/how-to-view-dns-cache-entries-with-the-new-systemd-resolved-resolver/">techrepublic.com</a>:</p>
+
+<p>Ubuntu caches DNS queries by default using <strong>systemd-resolved</strong>.</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">systemd-resolved</code> is a <strong>systemd service</strong> that provides network name resolution <em>to local applications</em> via a <strong>local DNS stub listener</strong> on <code class="language-plaintext highlighter-rouge">127.0.0.53</code>. (from <a href="https://wiki.archlinux.org/title/systemd-resolved">wiki.archlinux</a>)
+    <ul>
+      <li>It implements a <strong>caching</strong> and validating DNS/DNSSEC stub resolver (from <a href="https://www.freedesktop.org/software/systemd/man/systemd-resolved.service.html">freedesktop.org</a>)</li>
+    </ul>
+  </li>
+  <li>Prior to systemd, there was almost no OS-level DNS caching, see <a href="https://unix.stackexchange.com/a/211396">stackexchange</a>
+    <ul>
+      <li>old Ubuntu versions used <code class="language-plaintext highlighter-rouge">dnsmasq</code> (A lightweight DHCP and caching DNS server) and <code class="language-plaintext highlighter-rouge">nscd</code> (name service cache daemon) instead of <code class="language-plaintext highlighter-rouge">systemd-resolved</code></li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># check how many DNS entries are cached</span>
+<span class="nb">sudo </span>systemd-resolve <span class="nt">--statistics</span>
+
+<span class="c"># flush the DNS cache</span>
+<span class="nb">sudo </span>systemd-resolve <span class="nt">--flush-caches</span>
+
+<span class="c"># alternatively, restart the systemd-resolved service to flush the DNS caches</span>
+<span class="nb">sudo </span>systemctl restart systemd-resolved
+
+<span class="c"># view the DNS cache contents</span>
+<span class="nb">sudo </span>killall <span class="nt">-USR1</span> systemd-resolved
+<span class="nb">sudo </span>journalctl <span class="nt">-u</span> systemd-resolved <span class="o">&gt;</span> ~/dns-cache.txt
+</code></pre></div></div>
 
 <p>First check, if DNS caching is enabled:</p>
 
-<p>If DNS caching is <strong>enabled</strong> the DNS server used to resolve the domain name (e.g. when using <code class="language-plaintext highlighter-rouge">nslookup domain_name</code>) is a <a href="#loopback-address">loopback IP address</a>, e.g. 127.0.0.53. If you have it <strong>disabled</strong>, then the DNS server should be anything other than 127.0.0.X.</p>
+<p>If DNS caching is <strong>enabled</strong> the DNS server used to resolve the domain name (e.g. when using <code class="language-plaintext highlighter-rouge">nslookup domain_name</code>) is a <a href="#loopback-address">loopback IP address</a>, e.g. 127.0.0.53. If you have it <strong>disabled</strong>, then the DNS server should be anything other than 127.0.0.X.
+    - <strong>Why?</strong>: This is because the loopback ip address <code class="language-plaintext highlighter-rouge">127.0.0.X</code> indicates that the service <code class="language-plaintext highlighter-rouge">systemd-resolved</code> (which caches DNS records) is running.</p>
+
+<p>Then, in order to get <strong>TTL values</strong>:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nslookup <span class="nt">-debug</span> www.cyberciti.biz
 nslookup <span class="nt">-debug</span> <span class="nt">-type</span><span class="o">=</span>NS google.com
@@ -749,7 +798,7 @@ dig +ttlunits NS google.com
 dig +nocmd +noall +answer +ttlid A www.cyberciti.biz
 </code></pre></div></div>
 
-<h2 id="dns-resource-records-rrs">DNS Resource Records (RRs)</h2>
+<h3 id="dns-resource-records-rrs">DNS Resource Records (RRs)</h3>
 
 <ul>
   <li>a four-touple <code class="language-plaintext highlighter-rouge">(Name, Value, Type, TTL)</code>, where <code class="language-plaintext highlighter-rouge">Name</code> and <code class="language-plaintext highlighter-rouge">Value</code> depend on the <code class="language-plaintext highlighter-rouge">Type</code></li>
@@ -765,7 +814,7 @@ dig +nocmd +noall +answer +ttlid A www.cyberciti.biz
   </li>
 </ul>
 
-<h3 id="nslookup-dig">nslookup, dig</h3>
+<h4 id="nslookup-dig">nslookup, dig</h4>
 
 <p><strong>Caution</strong>: <code class="language-plaintext highlighter-rouge">dig</code> and <code class="language-plaintext highlighter-rouge">nslookup</code> sometimes display different information. <code class="language-plaintext highlighter-rouge">dig</code> uses the OS resolver libraries. <code class="language-plaintext highlighter-rouge">nslookup</code> uses its own internal ones. ISC recommends to stop using <code class="language-plaintext highlighter-rouge">nslookup</code> (see <a href="https://unix.stackexchange.com/a/93809">stackexchange</a>)!</p>
 
@@ -785,13 +834,14 @@ Options:</p>
   <li><code class="language-plaintext highlighter-rouge">dig +nocmd +noall +answer +ttlid</code>: show the TTL only</li>
 </ul>
 
-<p><strong>Example 1</strong>: Send me the IP address for the host www.mit.edu:</p>
+<p><strong>Example 1</strong>: Send me the IP address for the <strong>host</strong> www.mit.edu:</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nslookup <span class="nt">-type</span><span class="o">=</span>A www.mit.edu
 dig A www.mit.edu
 </code></pre></div></div>
 
-<p><strong>Example 2</strong>: Send me the host names of the authoritative DNS servers for domain mit.edu:</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nslookup <span class="nt">-type</span><span class="o">=</span>NS mit.edu
+<p><strong>Example 2</strong>: Send me the host names of the authoritative DNS servers for the <strong>domain</strong> mit.edu:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># note: mit.edu is a domain, so no "www."!</span>
+nslookup <span class="nt">-type</span><span class="o">=</span>NS mit.edu
 dig NS mit.edu
 </code></pre></div></div>
 
@@ -816,7 +866,7 @@ dig NS mit.edu
 dig www.google.com @dns2.p08.nsone.net
 </code></pre></div></div>
 
-<h2 id="ip-ifconfig-ipconfig-nmcli">ip, ifconfig, ipconfig, nmcli</h2>
+<h3 id="ip-ifconfig-ipconfig-nmcli">ip, ifconfig, ipconfig, nmcli</h3>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">ipconfig</code> is a Windows command, it displays slightly different information than <code class="language-plaintext highlighter-rouge">ifconfig</code> and <code class="language-plaintext highlighter-rouge">ip</code></li>
@@ -825,9 +875,10 @@ dig www.google.com @dns2.p08.nsone.net
   <li><code class="language-plaintext highlighter-rouge">ip r</code> default gateway/router address</li>
   <li><code class="language-plaintext highlighter-rouge">nmcli dev show wlo1</code> show gateway and DNS servers for device <code class="language-plaintext highlighter-rouge">wlo1</code></li>
   <li><code class="language-plaintext highlighter-rouge">nmcli dev status</code> get device names and their status types</li>
+  <li><code class="language-plaintext highlighter-rouge">systemd-resolve --status | grep Current</code>: currently used DNS server IP address (<a href="https://linuxconfig.org/how-to-find-my-ip-address-on-ubuntu-20-04-focal-fossa-linux">source</a>)</li>
 </ul>
 
-<h2 id="loopback-address">Loopback address</h2>
+<h3 id="loopback-address-localhost">Loopback address, Localhost</h3>
 
 <p>From <a href="https://www.techopedia.com/definition/2440/loopback-address-ip-address">techopedia.com</a>:</p>
 
@@ -838,6 +889,313 @@ dig www.google.com @dns2.p08.nsone.net
 <p>A simple way of describing how using a loopback address works is that a data packet will get sent through a network and routed back to the same device where it originated.</p>
 
 <p>In IPv4, <strong>127.0.0.1</strong> is the most commonly used loopback address, however, this can range be extended to <strong>127.255.255.255</strong>.</p>
+
+<p>From <a href="https://www.tutorialspoint.com/ipv4/ipv4_reserved_addresses.htm">tutorialspoint.com</a>:</p>
+
+<p>The IP address range 127.0.0.0 – 127.255.255.255 is reserved for loopback, i.e. a Host’s self-address, also known as <strong>localhost address</strong>. This loopback IP address is managed entirely by and within the operating system. Loopback addresses, enable the Server and Client processes on a single system to communicate with each other. When a process creates a packet with destination address as loopback address, the operating system loops it back to itself without having any interference of NIC (<a href="https://en.wikipedia.org/wiki/Network_interface_controller">wiki “NIC”</a>: <strong>network interface controller</strong> (<strong>NIC</strong>, also known as a <strong>network interface card</strong>, <strong>network adapter</strong>, <strong>LAN adapter</strong> or <strong>physical network interface</strong>).</p>
+
+<p>Data sent on loopback is forwarded by the operating system to a <strong>virtual network interface</strong> within operating system. This address is mostly used for testing purposes like client-server architecture on a single machine. Other than that, if a host machine can successfully ping 127.0.0.1 or any IP from loopback range, implies that the TCP/IP software stack on the machine is successfully loaded and working.</p>
+
+<p>Why is such a <strong>large IPv4 range assigned to localhost</strong>? (from <a href="https://networkengineering.stackexchange.com/questions/2840/why-is-such-a-large-ipv4-range-assigned-to-localhost">stackexchange</a>)</p>
+
+<p>At the time (1986), the internet was completely classful and nobody really gave much thought to allocating this much space to the loopback address. Thus, the loopback got an entire Class A network.</p>
+
+<h2 id="p2p-file-distribution">P2P File Distribution</h2>
+
+<p>TODO</p>
+
+<h1 id="transport-layer-layer-4">Transport Layer (Layer 4)</h1>
+
+<p>The <strong>Transport Layer</strong> (Layer 4) is about providing <strong>logical</strong> communication between <strong>processes</strong>.
+    - <strong>logical</strong>: it will appear as if host A is talking to host B, even though in actuality they are going over lots of other hosts, intermediate links, routers etc.
+    - in other words <strong>TCP and UDP</strong> are <strong>end to end</strong> protocols (and not “point to point”!)</p>
+
+<p>The transport layer of the sender <strong>disassembles</strong> (multiplexes) the messages passed from the application layer into chunks and the receiver <strong>reassembles</strong> (demultiplexes) those messages.</p>
+
+<p>The <strong>Network Layer</strong> (Layer 3) is about providing <strong>logical</strong> communication between <strong>hosts</strong>.
+    - <strong>hosts</strong>: a generic name for computers or routers
+    - <strong>point to point</strong>: where the points are the hosts</p>
+
+<p>From <a href="https://www.quora.com/What-is-the-difference-between-End-to-End-Point-to-Point-and-Hop-by-Hop-networks">quora</a>:</p>
+<ul>
+  <li><strong>End to end</strong> indicates a communication happening between two applications (maybe you and your friend using Skype). It doesn’t care what’s in the middle, it just consider that the two ends are taking with one another. It generally is a Layer 4 (or higher) communication</li>
+  <li><strong>Point to point</strong> is a Layer 2 link with two devices only on it. That is, two devices with an IP address have a cable going straight from a device into the other. A protocol used there is PPP, and HDLC is a legacy one.</li>
+  <li><strong>Hop by Hop</strong> indicates the flow the communication follows. Data pass through multiple devices with an IP address, and each is genetically named “hop”. Hop by Hop indicates analyzing the data flow at layer 3, checking all devices in the path</li>
+</ul>
+
+<p>Analogy:
+    - 2 houses - <strong>hosts</strong>
+        - NY and LA
+    - 12 siblings/house - <strong>processes</strong>
+    - 1 letter/child/week - <strong>messages</strong>
+    - Ann (NY) and Bill (LA) - <strong>transport layer</strong>
+        - collect and distribute
+    - Post office (PO) - <strong>network layer</strong>
+        - delivers from NY PO to LA PO</p>
+
+<p>The <strong>transport layer</strong> just connects processes to the <strong>network layer</strong>. The transport layer abstracts away all the complexity of the network layer (in the analogy: delivering may involve trucks, plane, etc. which is dealt with at the PO level, but Ann and Bill do not know these details).</p>
+
+<h2 id="tcp-and-udp">TCP and UDP</h2>
+
+<ul>
+  <li>neither of these provide <strong>delay guarantees</strong> or <strong>bandwidth guarantees</strong></li>
+</ul>
+
+<h3 id="tcp">TCP</h3>
+
+<ul>
+  <li>Reliable, In-Order</li>
+  <li>provides:
+    <ul>
+      <li><strong>congestion control</strong> (TCP slows itself down if network is congested)</li>
+      <li><strong>flow control</strong> (TCP sender will slow itself down if TCP receiver cannot keep up with the speed that it is sending)</li>
+      <li><strong>connection setup</strong> (requires time and resources to be set up ahead of time to create this TCP connection)</li>
+    </ul>
+  </li>
+  <li>ensures that packets/segments are received <strong>reliably</strong> (i.e. they do not get lost) and they are received <strong>in order</strong></li>
+</ul>
+
+<h3 id="udp">UDP</h3>
+
+<ul>
+  <li>Unreliable, Unordered</li>
+  <li>“Best Effort”, “no-frills”, “bare bones”</li>
+  <li>UDP is very much a “no-frills” extension of the internet protocol IP that it is sitting on top of</li>
+  <li>very little overhead
+    <ul>
+      <li>no handshaking</li>
+      <li>no connection establishment
+        <ul>
+          <li>no delay</li>
+        </ul>
+      </li>
+      <li>no connection state at sender, receiver
+        <ul>
+          <li>thus, small segment header, less wasted bandwidth</li>
+        </ul>
+      </li>
+      <li>no congestion control
+        <ul>
+          <li>thus, no speed limit</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>use cases:
+    <ul>
+      <li>streaming multimedia</li>
+      <li>DNS</li>
+      <li>SNMP
+        <ul>
+          <li>Simple Network Management Protocol</li>
+          <li>protocol for collecting and organizing information about managed devices on IP networks and for modifying that information to change device behaviour</li>
+          <li>supported by: cable modems, routers, switches, servers, workstations, printers, and more</li>
+          <li>is a part of <strong>TCP/IP Suite</strong></li>
+          <li>includes an application layer protocol, a database schema, and a set of data objects</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>if you need reliability</strong> you can add it at the application layer and do application specific error recovery</li>
+</ul>
+
+<h2 id="multiplexingdemultiplexing">Multiplexing/Demultiplexing</h2>
+
+<ul>
+  <li><strong>socket</strong>: like a “door”, a connection piece that …
+    <ul>
+      <li>sits in between the application and transport layer</li>
+      <li>is the means by which processes communicate</li>
+      <li>a process (as part of a network application) can have <strong>one or more</strong> sockets, doors through which data passes
+        <ul>
+          <li>from the network to the process and</li>
+          <li>from the process to the network</li>
+        </ul>
+      </li>
+      <li>the transport layer <strong>in the receiving host</strong> does not actually deliver data directly to a <strong>process</strong>, but instead to an intermediary <strong>socket</strong></li>
+      <li>each socket has a <strong>unique identifier</strong></li>
+    </ul>
+  </li>
+  <li><strong>port number</strong>: distinguishing identifier - one of them - that we use to distinguish what process needs to get a message/segment
+    <ul>
+      <li>16-bit number (0 to 65535)</li>
+      <li><strong>well-known ports 0 to 1023</strong> (RFC 3232 which replaced RFC 1700)
+        <ul>
+          <li>http: 80</li>
+          <li>ftp: 21</li>
+          <li>smtp: 25</li>
+          <li>dns: 53</li>
+          <li><a href="https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml">Official List: Internet Assigned Numbers Authority (iana.org)</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="segments-datagrams-messages-encapsulation">Segments, Datagrams, Messages (Encapsulation)</h3>
+
+<ul>
+  <li><strong>application layer message</strong> (<strong>application layer data unit</strong>)</li>
+  <li><strong>transport layer segment</strong> format (<strong>transport layer data unit</strong>):
+    <ul>
+      <li><strong>width</strong>: 32 bits</li>
+      <li>source port #, dest port #</li>
+      <li>other header fields</li>
+      <li>application data (message)</li>
+    </ul>
+  </li>
+  <li><strong>UDP segment</strong> format:
+    <ul>
+      <li>source port # (16 bits), dest port # (16 bits)</li>
+      <li>length (in bytes, incl. header and <a href="#payload">payload</a>), <a href="#checksum">checksum</a></li>
+      <li>application data (message)</li>
+      <li>UDP adds <strong>four fields</strong> (2 bytes each, i.e. 8 bytes in total) to the application data (message)</li>
+    </ul>
+  </li>
+  <li><strong>IP datagram</strong> format (<strong>network layer data unit</strong>):
+    <ul>
+      <li>source IP address</li>
+      <li>destination IP address</li>
+      <li>TCP/UDP segment (see above)</li>
+    </ul>
+  </li>
+  <li>difference between datagrams and segments (from <a href="https://www.quora.com/What-is-the-difference-between-datagrams-and-segments-in-the-TCP-IP-and-OSI-models">quora</a>):
+    <ul>
+      <li>We say <strong>TCP segment</strong> is the protocol data unit which consists of a <strong>TCP header</strong> and an <strong>application data piece (packet)</strong> which comes from the (upper) <strong>Application Layer</strong>. <strong>Transport layer data</strong> is generally named as <strong>segment</strong> and <strong>network layer data unit</strong> is named as <strong>datagram</strong>, but when we use UDP as transport layer protocol we don’t say UDP segment, instead, we say UDP datagram. I think this is because we do not segmentate UDP data unit (segmentation is made in transport layer when we use TCP).</li>
+    </ul>
+  </li>
+  <li><strong>encapsulation</strong>:
+    <ul>
+      <li>a datagram encapsulates a segment which encapsulates a message</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="payload">Payload</h3>
+
+<p>From Kurose, Ross:</p>
+
+<p>At each layer, a packet has <strong>two types of fields</strong>:</p>
+<ul>
+  <li>header fields</li>
+  <li>a payload field
+    <ul>
+      <li>typically a packet from the layer above</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="demultiplexing">Demultiplexing</h3>
+
+<ul>
+  <li><strong>Connectionless Demultiplexing (UDP)</strong>:
+    <ul>
+      <li>UDP socket identified <strong>by 2-tuple</strong>
+        <ul>
+          <li>the destination port (DP) and</li>
+          <li>the destination IP address</li>
+        </ul>
+      </li>
+      <li>the source port (SP) and the source IP address are <strong>not</strong> relevant for UDP demultiplexing, but they provide the <strong>return address</strong> (i.e. SP and DP will be swapped around, when talking back)
+        <ul>
+          <li>thus, a server can demultiplex messages from two hosts, even if those happen to have the same SP (cf. Fig. 3.5 Kurose)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>Connection-Oriented Demultiplexing (TCP)</strong>:
+    <ul>
+      <li>TCP socket identified <strong>by 4-tuple</strong>
+        <ul>
+          <li>the SP and</li>
+          <li>the source IP address</li>
+          <li>the DP and</li>
+          <li>the destination IP address</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="checksum">Checksum</h3>
+
+<ul>
+  <li><a href="#ones-complement">ones’ complement</a> of the sum of all the 16-bit words in the UDP segment
+    <ul>
+      <li><a href="https://stackoverflow.com/a/67907578/12282296">why we use 1’s complement instead of 2’s complement</a>
+        <ul>
+          <li>because using 2’s complement may give you a wrong result if the sender and receiver machines have different <a href="#endianness">endianness</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>checksum of sender and receiver is compared <strong>by addition</strong> (their sum must be zero!)</li>
+  <li>at the link layer <strong>cyclic redundancy check (CRC)</strong> is used
+    <ul>
+      <li>because algorithm above fails to detect some common errors which affect many bits at once, such as
+        <ul>
+          <li>changing the order of data words, or</li>
+          <li>inserting or deleting words with all bits set to zero</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Why is the link layer checksum not enough?
+    <ul>
+      <li>no guarantees that the link layer is reliable and does the checksum</li>
+      <li><a href="#end-to-end-principle">End-to-End principle</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="ones-complement">Ones’ Complement</h4>
+
+<ul>
+  <li>terminology: bit flip = bitwise NOT = <strong>ones’ complement</strong> of a binary number</li>
+</ul>
+
+<h4 id="twos-complement">Two’s Complement</h4>
+
+<ul>
+  <li>“1 added to the ones’ complement”</li>
+  <li>Two’s complement
+    <ul>
+      <li>(in maths) operation to reversibly <strong>convert a positive binary number into a negative binary number</strong> with equivalent (but negative) value, using the binary digit with the greatest place value to indicate whether the binary number is positive or negative (the sign)</li>
+      <li>is executed by 1) inverting (i.e. <strong>flipping</strong>) all bits, then 2) adding a place value of 1 to the inverted number</li>
+      <li>most common method of representing <strong>signed integers</strong>
+        <ul>
+          <li>in two’s complement, there is <strong>only one representation for zero</strong>, whereas in ones’ complement there are two (this is the reason why two’s complement is generally used) <a href="https://www.geeksforgeeks.org/difference-between-1s-complement-representation-and-2s-complement-representation-technique/">source</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="endianness">Endianness</h4>
+
+<p>A <strong>big-endian</strong> system stores the most significant byte (MSB) of a word at the smallest memory address.</p>
+
+<h2 id="end-to-end-principle">End-to-End Principle</h2>
+
+<p>see</p>
+<ul>
+  <li><a href="https://www.youtube.com/watch?v=3Iy4EQpGnpo">explanation on youtube</a></li>
+  <li><a href="https://devopedia.org/end-to-end-principle">devopedia.org</a></li>
+</ul>
+
+<p>Basic design principle of the internet: “keep the core simple”.</p>
+
+<p>There are many different phrasings:</p>
+<ul>
+  <li>“Communication protocol operations should be defined to occur at the <strong>endpoints</strong> of a communication system.”</li>
+  <li>Saltzer 1984: “The principle, called the <strong>end-to-end argument</strong>, suggests that functions placed at low levels of a system may be <strong>redundant</strong> or of <strong>little value</strong> when compared with the cost of providing them at that low level.”</li>
+</ul>
+
+<p>Examples:</p>
+<ul>
+  <li>TCP checksum vs. application checksum</li>
+  <li>“smart” TCP vs “dumb” IP</li>
+</ul>
 
         
       </section>
