@@ -604,6 +604,63 @@ Examples of this principle:
     - IP is "below" TCP
     - IP is "dumb" in the sense that it has not many features compared to TCP
 
+## Principles of Reliable Data Transfer
+
+- FSM notation: (see rdt1.0 introduction)
+    - Lambda: "no action" or "no event"
+    - dashed arrow: initial state of the FSM
+- rdt1.0: reliable transfer over a reliable channel: no bit errors, no packet loss
+    - FSM:
+        - sender:
+            - 1 state: "wait for call from above"
+        - receiver:
+            - 1 state: "wait for call from below"
+- rdt2.0: channel with bit errors (**stop and wait** protocol)
+    - checksum to detect bit errors 
+    - ACKs and NAKs (without errors!)
+    - retransmit on receipt of NAK
+    - FSM changes wrt rdt1.0:
+        - sender:
+            - 2 states: "wait for call from above" and "wait for ACK or NAK"
+        - receiver:
+            - 1 state: "wait for call from below"
+- rdt2.1: corrupted ACKs/NAKs ([watch: Kurose](https://www.youtube.com/watch?v=nyUHUtmxWg0&list=PLm556dMNleHc1MWN5BX9B2XkwkNE2Djiu&index=19))
+    - sender
+        - if ACK/NAK corrupted: retransmit current packet 
+        - add seq number to each packet
+    - receiver
+        - discard (= do not deliver up) duplicate packets
+    - FSM changes wrt rdt2.0:
+        - sender:
+            - 4 states (because 2 seq numbers)
+        - receiver:
+            - 2 states (because 2 seq numbers)
+- rdt2.2: a NAK-free protocol (**similar to TCP**) ([watch: Epic Networks Lab](https://www.youtube.com/watch?v=j93DZaMMjfg&list=PLm556dMNleHc1MWN5BX9B2XkwkNE2Djiu&index=18))
+    - same as rdt2.1, using ACKs only
+    - the sequence number of the packet being ACKed is in the ACK's header
+    - receiver 
+        - keeps resending the ACK for the last packet that it received correctly
+    - sender 
+        - sees duplicate ACKs, 
+        - goes back and 
+        - resends the next packet after the one received correctly
+    - FSM changes wrt rdt2.1:
+        - same number of states as rdt2.1
+        - sender:
+            - instead of "ACK or NAK": check if ACK for 0 or ACK for 1
+            - if ACK, but not for the packet that is expected: resend last packet
+        - receiver:
+            - if "waiting for 0" and it gets
+                - a corrupt packet **or** seq1: send ACK for 1 (i.e. last packet that it received correctly)
+                - the expected packet: send ACK for 0 (i.e. the expected packet)
+- rdt3.0: channel with errors **and** loss
+    - FSM changes wrt rdt2.2:
+        - same number of states as rdt2.2
+        - sender:
+            - while in the "waiting for" state
+                - timeout: resend
+                - if corrupt packet or wrong seq number do not do anything, just wait for timeout
+
 ## Sequence Numbers
 
 - watch [original lecture video](https://www.youtube.com/watch?v=j93DZaMMjfg&list=PLm556dMNleHc1MWN5BX9B2XkwkNE2Djiu&index=19) to understand sequence numbers
