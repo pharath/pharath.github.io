@@ -59,15 +59,28 @@ git remote update origin --prune | To update the local list of remote branches
 
 # Reset/undo changes
 
+## Git Operations
+
 | command | description |
 | :---: | :---: |
 git reset | undo `git add`
+
+## Commits
+
+| command | description |
+| :---: | :---: |
 git reflog | get SHA-1 list of previous states
 git reset --soft HEAD~ | undo last commit **locally** (`--soft`: safe way)
 git reset --soft HEAD~1 | HEAD~ and HEAD~1 are the same
 git reset --soft *SHA-1* | reset to a previous state **locally** (`--soft`: safe way)
 git reset --hard *SHA-1* | reset to a previous state **locally** (**Warning**: `--hard`: All changes will be lost.)
 git push origin +HEAD | reset the **remote's** last commit to the **local's** last commit (**Note**: `HEAD` always points to the last commit.)
+
+## Specific Files
+
+| command | description |
+| :---: | :---: |
+`git checkout -- some_file` | undo changes to `some_file` in the local repository and get the latest `some_file` version from git instead
 
 ## Undo local changes
 
