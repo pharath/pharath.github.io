@@ -621,6 +621,7 @@ lsblk |
 | :---: | :---: |
 cat /etc/os-release	 |	Ubuntu Version (lang)
 lsb_release -a | Ubuntu Version (kurz)
+lsb_release -cs | Ubuntu Version (e.g. "focal")
 hostnamectl | Ubuntu Version (mittel) mit Linux Kernel Version
 uname --help | Returns the help manual for the uname command, including all available options.
 uname -a | Prints all information for the server/system you're on.
