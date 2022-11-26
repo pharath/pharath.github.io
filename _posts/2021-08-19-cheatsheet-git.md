@@ -203,14 +203,16 @@ git diff HEAD^ HEAD
 git diff 2326473e602be4b90b46f6b6afc7315ff1d09a17~ 2326473e602be4b90b46f6b6afc7315ff1d09a17
 ```
 
-# credential helper
+# Git Credential Helper, Storing Git Passwords
+
+## Set credential helper
 
 | command | description |
 | :---: | :---: |
-git config credential.helper store | store next entered pw in ~/.git-credentials (visible for anyone !) (for current repo only)
-git config --global credential.helper store | store next entered pw in ~/.git-credentials (visible for anyone !) (globally, ie. for all repos)
+git config credential.helper store | store the next entered password in ~/.git-credentials (visible for anyone !) (for current repo only)
+git config --global credential.helper store | store the next entered password in ~/.git-credentials (visible for anyone !) (globally, ie. for all repos)
 
-## Reset credential helper
+## Unset/Reset credential helper
 
 Unset credential helper
 
