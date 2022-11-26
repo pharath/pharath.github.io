@@ -161,4 +161,4 @@ sudo netstat -lpn |grep :8888
 kill some_pid # pid steht in der Spalte ganz rechts, zB. in "1239526/ssh" ist die pid vor dem slash
 # beenden. Denn port auf HPC Seite (hier: 8889) wird automatisch frei beim Beenden von jupyter, aber port auf meinem PC (hier: 8888) nicht!
 ```
-**Achtung**: Schau, dass die ports frei sind (mit (sudo) netstat -lpn |grep :8889 die pid suchen und mit “kill ABCDEF” port frei machen)! Sonst anderen port probieren.
+**Achtung**: Schau, dass die ports frei sind (mit `(sudo) netstat -lpn |grep :8889` die PID suchen und mit `kill ABCDEF` port frei machen)! Sonst anderen port probieren.
