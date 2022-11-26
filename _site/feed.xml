@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-18T10:45:47+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Pharath Palesuvaran</title><subtitle>Deep Learning and Self-Driving Cars.</subtitle><author><name>Pharath Palesuvaran</name></author><entry><title type="html">HTML Notes</title><link href="http://localhost:4000/notes/notes-html/" rel="alternate" type="text/html" title="HTML Notes" /><published>2022-10-10T00:00:00+02:00</published><updated>2022-10-10T00:00:00+02:00</updated><id>http://localhost:4000/notes/notes-html</id><content type="html" xml:base="http://localhost:4000/notes/notes-html/">&lt;h1 id=&quot;jekyll&quot;&gt;Jekyll&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-26T01:33:28+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Pharath Palesuvaran</title><subtitle>Deep Learning and Self-Driving Cars.</subtitle><author><name>Pharath Palesuvaran</name></author><entry><title type="html">HTML Notes</title><link href="http://localhost:4000/notes/notes-html/" rel="alternate" type="text/html" title="HTML Notes" /><published>2022-10-10T00:00:00+02:00</published><updated>2022-10-10T00:00:00+02:00</updated><id>http://localhost:4000/notes/notes-html</id><content type="html" xml:base="http://localhost:4000/notes/notes-html/">&lt;h1 id=&quot;jekyll&quot;&gt;Jekyll&lt;/h1&gt;
 
 &lt;p&gt;Jekyll is written in Ruby.&lt;/p&gt;
 &lt;ul&gt;
@@ -1343,10 +1343,241 @@ dig www.google.com @dns2.p08.nsone.net
   &lt;li&gt;Saltzer 1984: “The principle, called the &lt;strong&gt;end-to-end argument&lt;/strong&gt;, suggests that functions placed at low levels of a system may be &lt;strong&gt;redundant&lt;/strong&gt; or of &lt;strong&gt;little value&lt;/strong&gt; when compared with the cost of providing them at that low level.”&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Examples:&lt;/p&gt;
+&lt;p&gt;Examples of this principle:&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;TCP checksum vs. application checksum&lt;/li&gt;
-  &lt;li&gt;“smart” TCP vs “dumb” IP&lt;/li&gt;
+  &lt;li&gt;“smart” TCP vs “dumb” IP
+    &lt;ul&gt;
+      &lt;li&gt;IP is “below” TCP&lt;/li&gt;
+      &lt;li&gt;IP is “dumb” in the sense that it has not many features compared to TCP&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;principles-of-reliable-data-transfer&quot;&gt;Principles of Reliable Data Transfer&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;FSM notation: (see rdt1.0 introduction)
+    &lt;ul&gt;
+      &lt;li&gt;Lambda: “no action” or “no event”&lt;/li&gt;
+      &lt;li&gt;dashed arrow: initial state of the FSM&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;rdt1.0: reliable transfer over a reliable channel: no bit errors, no packet loss
+    &lt;ul&gt;
+      &lt;li&gt;FSM:
+        &lt;ul&gt;
+          &lt;li&gt;sender:
+            &lt;ul&gt;
+              &lt;li&gt;1 state: “wait for call from above”&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;receiver:
+            &lt;ul&gt;
+              &lt;li&gt;1 state: “wait for call from below”&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;rdt2.0: channel with bit errors (&lt;strong&gt;stop and wait&lt;/strong&gt; protocol)
+    &lt;ul&gt;
+      &lt;li&gt;checksum to detect bit errors&lt;/li&gt;
+      &lt;li&gt;ACKs and NAKs (without errors!)&lt;/li&gt;
+      &lt;li&gt;retransmit on receipt of NAK&lt;/li&gt;
+      &lt;li&gt;FSM changes wrt rdt1.0:
+        &lt;ul&gt;
+          &lt;li&gt;sender:
+            &lt;ul&gt;
+              &lt;li&gt;2 states: “wait for call from above” and “wait for ACK or NAK”&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;receiver:
+            &lt;ul&gt;
+              &lt;li&gt;1 state: “wait for call from below”&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;rdt2.1: corrupted ACKs/NAKs (&lt;a href=&quot;https://www.youtube.com/watch?v=nyUHUtmxWg0&amp;amp;list=PLm556dMNleHc1MWN5BX9B2XkwkNE2Djiu&amp;amp;index=19&quot;&gt;watch: Kurose&lt;/a&gt;)
+    &lt;ul&gt;
+      &lt;li&gt;sender
+        &lt;ul&gt;
+          &lt;li&gt;if ACK/NAK corrupted: retransmit current packet&lt;/li&gt;
+          &lt;li&gt;add seq number to each packet&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;receiver
+        &lt;ul&gt;
+          &lt;li&gt;discard (= do not deliver up) duplicate packets&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;FSM changes wrt rdt2.0:
+        &lt;ul&gt;
+          &lt;li&gt;sender:
+            &lt;ul&gt;
+              &lt;li&gt;4 states (because 2 seq numbers)&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;receiver:
+            &lt;ul&gt;
+              &lt;li&gt;2 states (because 2 seq numbers)&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;rdt2.2: a NAK-free protocol (&lt;strong&gt;similar to TCP&lt;/strong&gt;) (&lt;a href=&quot;https://www.youtube.com/watch?v=j93DZaMMjfg&amp;amp;list=PLm556dMNleHc1MWN5BX9B2XkwkNE2Djiu&amp;amp;index=18&quot;&gt;watch: Epic Networks Lab&lt;/a&gt;)
+    &lt;ul&gt;
+      &lt;li&gt;same as rdt2.1, using ACKs only&lt;/li&gt;
+      &lt;li&gt;the sequence number of the packet being ACKed is in the ACK’s header&lt;/li&gt;
+      &lt;li&gt;receiver
+        &lt;ul&gt;
+          &lt;li&gt;keeps resending the ACK for the last packet that it received correctly&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;sender
+        &lt;ul&gt;
+          &lt;li&gt;sees duplicate ACKs,&lt;/li&gt;
+          &lt;li&gt;goes back and&lt;/li&gt;
+          &lt;li&gt;resends the next packet after the one received correctly&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;FSM changes wrt rdt2.1:
+        &lt;ul&gt;
+          &lt;li&gt;same number of states as rdt2.1&lt;/li&gt;
+          &lt;li&gt;sender:
+            &lt;ul&gt;
+              &lt;li&gt;instead of “ACK or NAK”: check if ACK for 0 or ACK for 1&lt;/li&gt;
+              &lt;li&gt;if ACK, but not for the packet that is expected: resend last packet&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;receiver:
+            &lt;ul&gt;
+              &lt;li&gt;if “waiting for 0” and it gets
+                &lt;ul&gt;
+                  &lt;li&gt;a corrupt packet &lt;strong&gt;or&lt;/strong&gt; seq1: send ACK for 1 (i.e. last packet that it received correctly)&lt;/li&gt;
+                  &lt;li&gt;the expected packet: send ACK for 0 (i.e. the expected packet)&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;rdt3.0: channel with errors &lt;strong&gt;and&lt;/strong&gt; loss
+    &lt;ul&gt;
+      &lt;li&gt;FSM changes wrt rdt2.2:
+        &lt;ul&gt;
+          &lt;li&gt;same number of states as rdt2.2&lt;/li&gt;
+          &lt;li&gt;sender:
+            &lt;ul&gt;
+              &lt;li&gt;while in the “waiting for” state
+                &lt;ul&gt;
+                  &lt;li&gt;timeout: resend&lt;/li&gt;
+                  &lt;li&gt;if corrupt packet or wrong seq number do not do anything, just wait for timeout&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;sequence-numbers&quot;&gt;Sequence Numbers&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;watch &lt;a href=&quot;https://www.youtube.com/watch?v=j93DZaMMjfg&amp;amp;list=PLm556dMNleHc1MWN5BX9B2XkwkNE2Djiu&amp;amp;index=19&quot;&gt;original lecture video&lt;/a&gt; to understand sequence numbers
+    &lt;ul&gt;
+      &lt;li&gt;they explain them differently than &lt;a href=&quot;https://www.youtube.com/watch?v=6lP0ow8Voe0&amp;amp;list=PLLFIgriuZPAcCkmSTfcq7oaHcVy3rzEtc&amp;amp;index=16&quot;&gt;Kenan Casey&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;both the sender and the receiver expect a certain sequence number (0 or 1) which does not have to be the same for the sender and the receiver&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;go-back-n-and-selective-repeat-protocol&quot;&gt;Go-Back-N and Selective Repeat Protocol&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;just play with Kurose animations:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://media.pearsoncmg.com/aw/ecs_kurose_compnetwork_7/cw/content/interactiveanimations/go-back-n-protocol/index.html&quot;&gt;GBN&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://media.pearsoncmg.com/aw/ecs_kurose_compnetwork_7/cw/content/interactiveanimations/selective-repeat-protocol/index.html&quot;&gt;SR&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;e.g. send 3 packets, kill packet 1 and &lt;strong&gt;wait for the timeout&lt;/strong&gt; and see what happens&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;tcp-1&quot;&gt;TCP&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;unicast (one-to-one communication, i.e. one sender and one receiver)&lt;/li&gt;
+  &lt;li&gt;in-order byte stream (abstraction)
+    &lt;ul&gt;
+      &lt;li&gt;i.e. there are no “message boundaries”, it is just a stream of bytes that can flow in either direction&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;connection-oriented
+    &lt;ul&gt;
+      &lt;li&gt;i.e. there is a handshaking setup process
+        &lt;ul&gt;
+          &lt;li&gt;state variables&lt;/li&gt;
+          &lt;li&gt;buffers&lt;/li&gt;
+          &lt;li&gt;overhead associated with setting up the connection&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;full duplex data
+    &lt;ul&gt;
+      &lt;li&gt;bi-directional data flow in same connection&lt;/li&gt;
+      &lt;li&gt;MSS: maximum segment size&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;cumulative ACKs&lt;/li&gt;
+  &lt;li&gt;pipelining
+    &lt;ul&gt;
+      &lt;li&gt;TCP congestion and flow control set window size&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;flow controlled
+    &lt;ul&gt;
+      &lt;li&gt;sender will not overwhelm receiver&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;tcp-implementation&quot;&gt;TCP Implementation&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;KR238: RFC recommended TCP &lt;strong&gt;timer&lt;/strong&gt; implementations use only a &lt;strong&gt;single&lt;/strong&gt; retransmission timer, even if there are multiple transmitted but not yet acknowledged segments
+    &lt;ul&gt;
+      &lt;li&gt;because timer management can require considerable overhead&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;duplicate ACKs&lt;/strong&gt; instead of NAKs&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;fast retransmit&lt;/strong&gt; when &lt;strong&gt;three duplicate ACKs&lt;/strong&gt; are received (= segment following the segment that has been ACKed three times has been lost)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;three-way-handshake&quot;&gt;Three-Way Handshake&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;SYN segment, SYNACK segment, ACK segment&lt;/li&gt;
+  &lt;li&gt;SYN Flood Attack
+    &lt;ul&gt;
+      &lt;li&gt;solution: &lt;a href=&quot;https://en.wikipedia.org/wiki/SYN_cookies&quot;&gt;SYN Cookies&lt;/a&gt;
+        &lt;ul&gt;
+          &lt;li&gt;don’t allocate resources until ACK received (confirming that there is really a client out there)&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;</content><author><name>Pharath Palesuvaran</name></author><category term="Notes" /><category term="datkom" /><category term="notes" /><summary type="html">For learning DatKom</summary></entry><entry><title type="html">Operating Systems Notes</title><link href="http://localhost:4000/notes/notes-OS/" rel="alternate" type="text/html" title="Operating Systems Notes" /><published>2022-09-22T00:00:00+02:00</published><updated>2022-09-22T00:00:00+02:00</updated><id>http://localhost:4000/notes/notes-OS</id><content type="html" xml:base="http://localhost:4000/notes/notes-OS/">&lt;h1 id=&quot;lectures&quot;&gt;Lectures&lt;/h1&gt;
 
 &lt;h2 id=&quot;i4-comsys-wehrle-sose&quot;&gt;i4 ComSys, Wehrle (SoSe)&lt;/h2&gt;

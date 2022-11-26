@@ -506,7 +506,7 @@ ssh <span class="nt">-N</span> <span class="nt">-f</span> <span class="nt">-L</s
 <span class="nb">kill </span>some_pid <span class="c"># pid steht in der Spalte ganz rechts, zB. in "1239526/ssh" ist die pid vor dem slash</span>
 <span class="c"># beenden. Denn port auf HPC Seite (hier: 8889) wird automatisch frei beim Beenden von jupyter, aber port auf meinem PC (hier: 8888) nicht!</span>
 </code></pre></div></div>
-<p><strong>Achtung</strong>: Schau, dass die ports frei sind (mit (sudo) netstat -lpn |grep :8889 die pid suchen und mit “kill ABCDEF” port frei machen)! Sonst anderen port probieren.</p>
+<p><strong>Achtung</strong>: Schau, dass die ports frei sind (mit <code class="language-plaintext highlighter-rouge">(sudo) netstat -lpn |grep :8889</code> die PID suchen und mit <code class="language-plaintext highlighter-rouge">kill ABCDEF</code> port frei machen)! Sonst anderen port probieren.</p>
 
         
       </section>

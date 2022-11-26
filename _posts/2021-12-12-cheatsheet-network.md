@@ -129,7 +129,7 @@ scancel JOBID # Jupyter Server schließen
 ```
 
 ```bash
-nvidia-smi				GPU Usage Info
+nvidia-smi # GPU Usage Info
 ```
 
 # Für Jupyter Lab
