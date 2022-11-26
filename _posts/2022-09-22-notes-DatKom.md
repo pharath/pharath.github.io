@@ -668,6 +668,10 @@ Examples of this principle:
     - they explain them differently than [Kenan Casey](https://www.youtube.com/watch?v=6lP0ow8Voe0&list=PLLFIgriuZPAcCkmSTfcq7oaHcVy3rzEtc&index=16)
     - both the sender and the receiver expect a certain sequence number (0 or 1) which does not have to be the same for the sender and the receiver
 
+## Utilization
+
+## Pipelining
+
 ## Go-Back-N and Selective Repeat Protocol
 
 - just play with Kurose animations:
