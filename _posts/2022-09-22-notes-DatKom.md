@@ -615,7 +615,7 @@ Examples of this principle:
             - 1 state: "wait for call from above"
         - receiver:
             - 1 state: "wait for call from below"
-- rdt2.0: channel with bit errors (**stop and wait** protocol)
+- rdt2.0: channel with bit errors (**stop-and-wait** protocol)
     - checksum to detect bit errors 
     - ACKs and NAKs (without errors!)
     - retransmit on receipt of NAK
@@ -627,14 +627,14 @@ Examples of this principle:
 - rdt2.1: corrupted ACKs/NAKs ([watch: Kurose](https://www.youtube.com/watch?v=nyUHUtmxWg0&list=PLm556dMNleHc1MWN5BX9B2XkwkNE2Djiu&index=19))
     - sender
         - if ACK/NAK corrupted: retransmit current packet 
-        - add seq number to each packet
+        - add [sequence number](#sequence-numbers) to each packet
     - receiver
         - discard (= do not deliver up) duplicate packets
     - FSM changes wrt rdt2.0:
         - sender:
-            - 4 states (because 2 seq numbers)
+            - 4 states (because 2 sequence numbers)
         - receiver:
-            - 2 states (because 2 seq numbers)
+            - 2 states (because 2 sequence numbers)
 - rdt2.2: a NAK-free protocol (**similar to TCP**) ([watch: Epic Networks Lab](https://www.youtube.com/watch?v=j93DZaMMjfg&list=PLm556dMNleHc1MWN5BX9B2XkwkNE2Djiu&index=18))
     - same as rdt2.1, using ACKs only
     - the sequence number of the packet being ACKed is in the ACK's header
@@ -653,16 +653,17 @@ Examples of this principle:
             - if "waiting for 0" and it gets
                 - a corrupt packet **or** seq1: send ACK for 1 (i.e. last packet that it received correctly)
                 - the expected packet: send ACK for 0 (i.e. the expected packet)
-- rdt3.0: channel with errors **and** loss
+- rdt3.0: channel with errors **and** loss (**stop-and-wait** protocol)
     - FSM changes wrt rdt2.2:
         - same number of states as rdt2.2
         - sender:
             - while in the "waiting for" state
                 - timeout: resend
-                - if corrupt packet or wrong seq number do not do anything, just wait for timeout
+                - if corrupt packet or wrong sequence number do not do anything, just wait for timeout
 
 ## Sequence Numbers
 
+- in rdt2.1 and all following rdts
 - watch [original lecture video](https://www.youtube.com/watch?v=j93DZaMMjfg&list=PLm556dMNleHc1MWN5BX9B2XkwkNE2Djiu&index=19) to understand sequence numbers
     - they explain them differently than [Kenan Casey](https://www.youtube.com/watch?v=6lP0ow8Voe0&list=PLLFIgriuZPAcCkmSTfcq7oaHcVy3rzEtc&index=16)
     - both the sender and the receiver expect a certain sequence number (0 or 1) which does not have to be the same for the sender and the receiver
