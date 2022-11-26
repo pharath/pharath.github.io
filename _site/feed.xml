@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-26T01:33:28+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Pharath Palesuvaran</title><subtitle>Deep Learning and Self-Driving Cars.</subtitle><author><name>Pharath Palesuvaran</name></author><entry><title type="html">HTML Notes</title><link href="http://localhost:4000/notes/notes-html/" rel="alternate" type="text/html" title="HTML Notes" /><published>2022-10-10T00:00:00+02:00</published><updated>2022-10-10T00:00:00+02:00</updated><id>http://localhost:4000/notes/notes-html</id><content type="html" xml:base="http://localhost:4000/notes/notes-html/">&lt;h1 id=&quot;jekyll&quot;&gt;Jekyll&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-26T21:43:41+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Pharath Palesuvaran</title><subtitle>Deep Learning and Self-Driving Cars.</subtitle><author><name>Pharath Palesuvaran</name></author><entry><title type="html">HTML Notes</title><link href="http://localhost:4000/notes/notes-html/" rel="alternate" type="text/html" title="HTML Notes" /><published>2022-10-10T00:00:00+02:00</published><updated>2022-10-10T00:00:00+02:00</updated><id>http://localhost:4000/notes/notes-html</id><content type="html" xml:base="http://localhost:4000/notes/notes-html/">&lt;h1 id=&quot;jekyll&quot;&gt;Jekyll&lt;/h1&gt;
 
 &lt;p&gt;Jekyll is written in Ruby.&lt;/p&gt;
 &lt;ul&gt;
@@ -1381,7 +1381,7 @@ dig www.google.com @dns2.p08.nsone.net
       &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;rdt2.0: channel with bit errors (&lt;strong&gt;stop and wait&lt;/strong&gt; protocol)
+  &lt;li&gt;rdt2.0: channel with bit errors (&lt;strong&gt;stop-and-wait&lt;/strong&gt; protocol)
     &lt;ul&gt;
       &lt;li&gt;checksum to detect bit errors&lt;/li&gt;
       &lt;li&gt;ACKs and NAKs (without errors!)&lt;/li&gt;
@@ -1407,7 +1407,7 @@ dig www.google.com @dns2.p08.nsone.net
       &lt;li&gt;sender
         &lt;ul&gt;
           &lt;li&gt;if ACK/NAK corrupted: retransmit current packet&lt;/li&gt;
-          &lt;li&gt;add seq number to each packet&lt;/li&gt;
+          &lt;li&gt;add &lt;a href=&quot;#sequence-numbers&quot;&gt;sequence number&lt;/a&gt; to each packet&lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
       &lt;li&gt;receiver
@@ -1419,12 +1419,12 @@ dig www.google.com @dns2.p08.nsone.net
         &lt;ul&gt;
           &lt;li&gt;sender:
             &lt;ul&gt;
-              &lt;li&gt;4 states (because 2 seq numbers)&lt;/li&gt;
+              &lt;li&gt;4 states (because 2 sequence numbers)&lt;/li&gt;
             &lt;/ul&gt;
           &lt;/li&gt;
           &lt;li&gt;receiver:
             &lt;ul&gt;
-              &lt;li&gt;2 states (because 2 seq numbers)&lt;/li&gt;
+              &lt;li&gt;2 states (because 2 sequence numbers)&lt;/li&gt;
             &lt;/ul&gt;
           &lt;/li&gt;
         &lt;/ul&gt;
@@ -1470,7 +1470,7 @@ dig www.google.com @dns2.p08.nsone.net
       &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;rdt3.0: channel with errors &lt;strong&gt;and&lt;/strong&gt; loss
+  &lt;li&gt;rdt3.0: channel with errors &lt;strong&gt;and&lt;/strong&gt; loss (&lt;strong&gt;stop-and-wait&lt;/strong&gt; protocol)
     &lt;ul&gt;
       &lt;li&gt;FSM changes wrt rdt2.2:
         &lt;ul&gt;
@@ -1480,7 +1480,7 @@ dig www.google.com @dns2.p08.nsone.net
               &lt;li&gt;while in the “waiting for” state
                 &lt;ul&gt;
                   &lt;li&gt;timeout: resend&lt;/li&gt;
-                  &lt;li&gt;if corrupt packet or wrong seq number do not do anything, just wait for timeout&lt;/li&gt;
+                  &lt;li&gt;if corrupt packet or wrong sequence number do not do anything, just wait for timeout&lt;/li&gt;
                 &lt;/ul&gt;
               &lt;/li&gt;
             &lt;/ul&gt;
@@ -1494,6 +1494,7 @@ dig www.google.com @dns2.p08.nsone.net
 &lt;h2 id=&quot;sequence-numbers&quot;&gt;Sequence Numbers&lt;/h2&gt;
 
 &lt;ul&gt;
+  &lt;li&gt;in rdt2.1 and all following rdts&lt;/li&gt;
   &lt;li&gt;watch &lt;a href=&quot;https://www.youtube.com/watch?v=j93DZaMMjfg&amp;amp;list=PLm556dMNleHc1MWN5BX9B2XkwkNE2Djiu&amp;amp;index=19&quot;&gt;original lecture video&lt;/a&gt; to understand sequence numbers
     &lt;ul&gt;
       &lt;li&gt;they explain them differently than &lt;a href=&quot;https://www.youtube.com/watch?v=6lP0ow8Voe0&amp;amp;list=PLLFIgriuZPAcCkmSTfcq7oaHcVy3rzEtc&amp;amp;index=16&quot;&gt;Kenan Casey&lt;/a&gt;&lt;/li&gt;
@@ -1501,6 +1502,23 @@ dig www.google.com @dns2.p08.nsone.net
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;h2 id=&quot;utilization&quot;&gt;Utilization&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;$U$: fraction of time sender busy sending
+    &lt;ul&gt;
+      &lt;li&gt;ideal protocol: $U = 1$&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;$D_{trans}$: transmission delay
+    &lt;ul&gt;
+      &lt;li&gt;e.g. $D_{trans} = \frac{L}{R} = \frac{8000 bits}{1 Gbps} = 8 \mu sec$&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;pipelining&quot;&gt;Pipelining&lt;/h2&gt;
 
 &lt;h2 id=&quot;go-back-n-and-selective-repeat-protocol&quot;&gt;Go-Back-N and Selective Repeat Protocol&lt;/h2&gt;
 
