@@ -673,7 +673,8 @@ Examples of this principle:
 - $U$: fraction of time sender busy sending
     - ideal protocol: $U = 1$
 - $D_{trans}$: transmission delay
-    - e.g. $D_{trans} = \frac{L}{R} = \frac{8000\; \text{bits}}{1\; \text{Gbps}} = 8\; \mu s$
+    - e.g. $D_{trans} = \frac{L}{R} = \frac{8000\;\text{bits}}{1\;\text{Gbps}} = 8\;\mu s$
+        - **Note**: $8000\;\text{bits} = 1000\;\text{bytes}$
 
 ## Pipelining
 
