@@ -670,13 +670,25 @@ Examples of this principle:
 
 ## Utilization
 
+- $D_{prop}$: propagation delay (one way, i.e. sender to receiver, but not back!)
+    - $D_{prop} = 15\;\text{ms}$
+- $\text{RTT}$: Roundtrip time (both ways)
+    - $\text{RTT} = 2 \times 15\;\text{ms}$
+- $D_{trans}$: transmission delay
+    - $D_{trans} = \frac{L}{R} = \frac{8000\;\text{bits}}{1\;\text{Gbps}} = 8\;\mu s$
+        - **Note**: $8000\;\text{bits} = 1000\;\text{bytes}$
+- the transmission delay is much smaller relative to the propagation delay
 - $U$: fraction of time sender busy sending
     - ideal protocol: $U = 1$
-- $D_{trans}$: transmission delay
-    - e.g. $D_{trans} = \frac{L}{R} = \frac{8000\;\text{bits}}{1\;\text{Gbps}} = 8\;\mu s$
-        - **Note**: $8000\;\text{bits} = 1000\;\text{bytes}$
+    - $U = \frac{\frac{L}{R}}{\text{RTT} + \frac{L}{R}} = \frac{.008}{30.008} = 0.00027$
 
 ## Pipelining
+
+- sender allows multiple, "in-flight", yet-to-be-acknowledged packets
+    - range of sequence numbers must be increased
+    - buffering at sender and/or receiver
+- more utilization by "filling the pipe"
+    - $U_{sender} = \frac{3\frac{L}{R}}{\text{RTT} + \frac{L}{R}} = \frac{.024}{30.008} = 0.00081$
 
 ## Go-Back-N and Selective Repeat Protocol
 
