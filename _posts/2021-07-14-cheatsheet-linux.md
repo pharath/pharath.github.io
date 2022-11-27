@@ -212,6 +212,12 @@ v4l2-ctl | for setting webcam powerline frequency (see below)
 
 sudo snap install pdftk | use `pdftk full-pdf.pdf cat 12-15 output outfile_p12-15.pdf` to save pages 12-15 from `full-pdf.pdf` in `outfile_p12-15.pdf`
 
+<hr>
+
+`sudo apt install fzf` | general-purpose command-line fuzzy finder
+`apt-cache show fzf` | will show `Refer /usr/share/doc/fzf/README.Debian for quick instructions on how to add keybindings for Bash, Zsh, Fish to call fzf.`
+`vim /usr/share/doc/fzf/README.Debian` | how to `source` fzf
+
 # My aliases
 
 `alias listssids='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/local/bin/airport'`
