@@ -688,6 +688,7 @@ Examples of this principle:
     - range of sequence numbers must be increased
     - buffering at sender and/or receiver
 - more utilization by "filling the pipe"
+    - $U_{sender} = \frac{3\frac{L}{R}}{\text{RTT} + \frac{L}{R}} = \frac{.024}{30.008} = 0.00081$
 
 ### Go-Back-N and Selective Repeat Protocol
 
