@@ -322,4 +322,10 @@ var store = [{
         "tags": ["html","notes"],
         "url": "/notes/notes-html/",
         "teaser": "/assets/images/mario-question-block.jpeg"
+      },{
+        "title": "Markdown Syntax Cheatsheet",
+        "excerpt":"Latex      vim italics issue (because Latex uses underscores):            vim will display italic text as italics as long as the environment variable TERM is set to xterm-256color (looks ugly!)       if TERM is not set to anything, vim will highlight the italic text (looks even more ugly!)          ","categories": ["Cheatsheet"],
+        "tags": ["markdown","cheatsheet"],
+        "url": "/cheatsheet/cheatsheet-markdown/",
+        "teaser": "/assets/images/mario-question.png"
       }]

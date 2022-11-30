@@ -660,6 +660,8 @@ Examples of this principle:
             - while in the "waiting for" state
                 - timeout: resend
                 - if corrupt packet or wrong sequence number do not do anything, just wait for timeout
+    - **performance problem** with rdt3.0: [Utilization](#utilization)
+        - **solution**: [Pipelining](#pipelining)
 
 ## Sequence Numbers
 
@@ -670,36 +672,145 @@ Examples of this principle:
 
 ## Utilization
 
-- $D_{prop}$: propagation delay (one way, i.e. sender to receiver, but not back!)
-    - $D_{prop} = 15\;\text{ms}$
+- [watch: Epic Networks Lab](https://www.youtube.com/watch?v=NMbMXCbYaX4&list=PLm556dMNleHc1MWN5BX9B2XkwkNE2Djiu&index=20)
+- $D_{prop}_{}$: propagation delay (one way, i.e. sender to receiver, but not back!)
+    - $D_{prop}_{} = 15\;\text{ms}$
 - $\text{RTT}$: Roundtrip time (both ways)
     - $\text{RTT} = 2 \times 15\;\text{ms}$
-- $D_{trans}$: transmission delay
-    - $D_{trans} = \frac{L}{R} = \frac{8000\;\text{bits}}{1\;\text{Gbps}} = 8\;\mu s$
+- $D_{trans}_{}$: transmission delay
+    - $D_{trans}_{} = \frac{L}{R} = \frac{8000\;\text{bits}}{1\;\text{Gbps}} = 8\;\mu s$
         - **Note**: $8000\;\text{bits} = 1000\;\text{bytes}$
 - the transmission delay is much smaller relative to the propagation delay
 - $U$: fraction of time sender busy sending
     - ideal protocol: $U = 1$
     - $U = \frac{\frac{L}{R}}{\text{RTT} + \frac{L}{R}} = \frac{.008}{30.008} = 0.00027$
+        - Thus, rdt3.0 has very low utilization! This is why [pipelining](#pipelining) is necessary!
 
 ## Pipelining
 
+- [watch: Epic Networks Lab](https://www.youtube.com/watch?v=NMbMXCbYaX4&list=PLm556dMNleHc1MWN5BX9B2XkwkNE2Djiu&index=20)
 - sender allows multiple, "in-flight", yet-to-be-acknowledged packets
-    - range of sequence numbers must be increased
-    - buffering at sender and/or receiver
+    - range of sequence numbers must be increased 
+        - the range will depend on the approach (i.e. GBN or Selective Repeat)
+    - buffering (= saving) of more than one packet at sender and/or receiver
+        - buffer = save (see KR 3.4.3 "GBN" p. 219) 
 - more utilization by "filling the pipe"
-    - $U_{sender} = \frac{3\frac{L}{R}}{\text{RTT} + \frac{L}{R}} = \frac{.024}{30.008} = 0.00081$
+    - $U_{sender}_{} = \frac{3\frac{L}{R}}{\text{RTT} + \frac{L}{R}} = \frac{.024}{30.008} = 0.00081$
+- 2 common ways of pipelined error recovery
+    - Go-Back-N
+    - Selective Repeat
+- both algorithms were optimized to need as few **pointers** and **timers** as possible (resources were far more scarce back then)
 
-### Go-Back-N and Selective Repeat Protocol
+### Go-Back-N (sliding-window protocol)
 
 - just play with Kurose animations:
     - [GBN](https://media.pearsoncmg.com/aw/ecs_kurose_compnetwork_7/cw/content/interactiveanimations/go-back-n-protocol/index.html)
+    - e.g. send 3 packets, kill packet 1 and **wait for the timeout** and see what happens
+
+#### Sender
+
+- **window** of up to **N** consecutively transmitted but unACKed packets
+- 2 state variables:
+    - `base`: sequence number of the oldest unacknowledged packet
+    - `nextseqnum`: smallest unused sequence number (sequence number of the next packet to be sent)
+- **cumulative ACK**: ACK for a packet with sequence number $n$ will be taken to be a **cumulative ACK**
+    - i.e. the **sender assumes** that this ACK with sequence number $n$ indicates that **all packets** with a sequence number **up to and including** $n$ **have been correctly received** at the receiver
+- **timer** for oldest in-flight packet
+    - **timeout**: resend **all** packets that have been previously sent but that have not yet been acknowledged
+    - **restart timer**: ACK received but there are still outstanding packets
+    - **stop timer**: ACK received and no outstanding packets
+- Why limit N?
+    - see TCP discussion below
+    - flow control
+    - congestion control
+- **sequence number** is carried in a fixed-length field in the packet header 
+    - If $k$ is the number of bits in the packet sequence number field, the range of sequence numbers is thus $i\left[ 0, 2k - 1 \right]$
+    - With a finite range of sequence numbers, all arithmetic involving sequence numbers must then be done using modulo $2k$ arithmetic 
+        - i.e. the sequence number space can be thought of as a ring of size $2k$, where sequence number $2k - 1$ is immediately followed by sequence number $0$
+    - rdt3.0: 1-bit sequence number
+    - TCP: 32-bit sequence number
+        - TCP sequence numbers count **bytes** in the byte stream rather than **packets**
+            - sequence number as a "byte counter"
+
+#### Receiver
+
+- 1 state variable:
+    - `expectedseqnum`: sequence number of the next in-order packet
+- If a packet with sequence number $n$ is received correctly and is **in order** (i.e. data last delivered to upper layer came from a packet with seq $n - 1$), 
+    - the receiver sends an **ACK for packet** $n$ and **delivers** the data portion of the packet to the upper layer. 
+- In all other cases, 
+    - the receiver **discards the packet** and resends an **ACK for the most recently received** in-order packet.
+- discarding out-of-order packets
+    - advantage: 
+        - simplicity of receiver buffering
+            - the only piece of information the **receiver** need maintain is the sequence number of the next in-order packet `expectedseqnum`
+    - disadvantage:
+        - the subsequent retransmission of that packet might be lost or garbled and thus **even more retransmissions** would be required
+- (**Note**: In some implementations the receiver may buffer out-of-order packets instead of discarding them.)
+- experiments with [GBN animation](https://media.pearsoncmg.com/aw/ecs_kurose_compnetwork_7/cw/content/interactiveanimations/go-back-n-protocol/index.html):
+    - experiment 1 (see images below):
+        - send 3 packets (press three times "Send New")
+        - press "Pause"
+        - select the packet in the middle (packet number 1, see numbers on top of the packets) and "Kill Packet"
+        - press "Resume"
+    - observation 1 (see Figure 2):
+        - in addition to the ACK for the in-order packet 0, the receiver sends a second ACK for the packet last sent (packet number 2), too
+            - **reason**: Look closely at the numbers on top of the ACKs. Both ACKs have sequence number 0, the number of the most recently received **in-order** packet! Thus, the first ACK with sequence number 0 has been resent!
+
+**Figure 1**: packet 1 is lost
+![pre_ACK](/assets/images/datkom/pre_ACK.png)
+
+**Figure 2**: receiver seemingly sends an ACK for packet 2, but in actuality it is a **duplicate ACK**
+![post_ACK](/assets/images/datkom/post_ACK.png)
+
+**Figure 3**: window slides one position further
+![cum_ACK](/assets/images/datkom/cum_ACK.png)
+
+**Figure 4**: after the timeout for the lost packet 1
+![post_cum_ACK](/assets/images/datkom/post_cum_ACK.png)
+
+#### GBN vs. TCP
+
+- GBN protocol incorporates almost all of the techniques used in TCP:
+    - sequence numbers 
+    - cumulative acknowledgments 
+    - checksums
+    - timeout/retransmit operation
+
+### Selective Repeat
+
+- just play with Kurose animations:
     - [SR](https://media.pearsoncmg.com/aw/ecs_kurose_compnetwork_7/cw/content/interactiveanimations/selective-repeat-protocol/index.html)
     - e.g. send 3 packets, kill packet 1 and **wait for the timeout** and see what happens
 
+#### Sender
+
+- as before, window of **N** consecutive sequence numbers
+- as before, window can only be advanced when the lowest sequence number in it is ACKed
+    - it may need to be advanced multiple values, if other packets have been ACKed out-of-order
+- individual timer for every packet that it sends
+- individual timeout/retransmit 
+
+#### receiver
+
+- individual ACKs for each received packet
+    - i.e. **no duplicate ACKs**: out-of-order packets are ACKed like in-order packets!
+- **out-of-order buffer**: packets are buffered for eventual in-order delivery to upper layer
+    - i.e. **multiple packets together** may be delivered to the upper layer, if out-of-order packets have been received by the receiver (whereas for GBN only one packet at a time is delivered)
+
+#### Dilemma
+
+- [watch: Kenan Casey, chapter 3.4, 57:20](https://youtu.be/6lP0ow8Voe0?list=PLLFIgriuZPAcCkmSTfcq7oaHcVy3rzEtc&t=3457)
+
+![SRDilemma](/assets/images/datkom/SRDilemma.png)
+
+- While the packet 0 arriving is a **duplicate**, the receiver will treat it as **new data** and deliver this duplicate up to the application **out-of-order**! The receiver is "blind" to the state of the sender except that it can infer through the control messaging.
+    - **problem**: The reliable transfer protocol must guarantee **in-order** delivery!
+- **solution**: window size must be $\leq$ half the size of the sequence number space
+
 ## TCP
 
-- unicast (one-to-one communication, i.e. one sender and one receiver)
+- unicast (aka point-to-point aka one-to-one communication, i.e. one sender and one receiver)
 - in-order byte stream (abstraction)
     - i.e. there are no "message boundaries", it is just a stream of bytes that can flow in either direction
 - connection-oriented
@@ -711,19 +822,49 @@ Examples of this principle:
     - bi-directional data flow in same connection
     - MSS: maximum segment size
 - cumulative ACKs
-- pipelining
+- [pipelining](#pipelining)
+    - better utilization of the network
     - TCP congestion and flow control set window size
 - flow controlled
     - sender will not overwhelm receiver
 
-## TCP Implementation
+### TCP Segment Format
+
+- "TCP options" field can have a variable length, and therefore, a "TCP header length" field is needed
+- Grey fields are not really used, in practice
+
+![TCPsegment.png](/assets/images/datkom/TCPsegment.png)
+
+### Seq and ACK Fields
+
+- **sequence number field**: byte stream "number" of the **first byte** in that segment's payload data
+- **ACK field**: sequence number of next byte expected from other side (holds for both sides, receiver **and** sender! See Figure 6.)
+- cumulative ACKs (cf. section GBN sender)
+
+**Figure 5**: Seq and ACK fields
+![sender_vs_receiver.png](/assets/images/datkom/sender_vs_receiver.png)
+
+**Figure 6**: Note: resent ACK is always **one more** than the received Seq that triggered this ACK!
+![tcp_scenario_1.png](/assets/images/datkom/tcp_scenario_1.png)
+
+### RTT and timeout
+
+- too short: unnecessary retransmission
+- too long: long timeout
+- estimate RTT: 
+    - `SampleRTT`: measured time from segment transmission until ACK receipt
+    - `EstimatedRTT` $= (1 - \alpha) \times$ `EstimatedRTT` $+ \alpha \times$ `SampleRTT` (typically: $\alpha = 0.125$)
+    - `DevRTT` $= (1 - \beta) \times$ `DevRTT` $+ \beta \times \|$ `SampleRTT` $-$ `EstimatedRTT` $\|$
+    - `TimeoutInterval` $=$ `EstimatedRTT` $+ 4 \times$ `DevRTT`
+
+### TCP Implementation
 
 - KR238: RFC recommended TCP **timer** implementations use only a **single** retransmission timer, even if there are multiple transmitted but not yet acknowledged segments
     - because timer management can require considerable overhead
 - **duplicate ACKs** instead of NAKs
 - **fast retransmit** when **three duplicate ACKs** are received (= segment following the segment that has been ACKed three times has been lost)
 
-### Three-Way Handshake
+#### Three-Way Handshake
 
 - SYN segment, SYNACK segment, ACK segment
 - SYN Flood Attack

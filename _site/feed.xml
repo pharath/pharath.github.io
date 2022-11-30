@@ -1,4 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-26T23:54:48+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Pharath Palesuvaran</title><subtitle>Deep Learning and Self-Driving Cars.</subtitle><author><name>Pharath Palesuvaran</name></author><entry><title type="html">HTML Notes</title><link href="http://localhost:4000/notes/notes-html/" rel="alternate" type="text/html" title="HTML Notes" /><published>2022-10-10T00:00:00+02:00</published><updated>2022-10-10T00:00:00+02:00</updated><id>http://localhost:4000/notes/notes-html</id><content type="html" xml:base="http://localhost:4000/notes/notes-html/">&lt;h1 id=&quot;jekyll&quot;&gt;Jekyll&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-30T02:47:11+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Pharath Palesuvaran</title><subtitle>Deep Learning and Self-Driving Cars.</subtitle><author><name>Pharath Palesuvaran</name></author><entry><title type="html">Markdown Syntax Cheatsheet</title><link href="http://localhost:4000/cheatsheet/cheatsheet-markdown/" rel="alternate" type="text/html" title="Markdown Syntax Cheatsheet" /><published>2022-11-28T00:00:00+01:00</published><updated>2022-11-28T00:00:00+01:00</updated><id>http://localhost:4000/cheatsheet/cheatsheet-markdown</id><content type="html" xml:base="http://localhost:4000/cheatsheet/cheatsheet-markdown/">&lt;h2 id=&quot;latex&quot;&gt;Latex&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;vim italics issue (because Latex uses underscores):
+    &lt;ul&gt;
+      &lt;li&gt;vim will &lt;strong&gt;display&lt;/strong&gt; italic text &lt;strong&gt;as italics&lt;/strong&gt; as long as the environment variable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TERM&lt;/code&gt; is set to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;xterm-256color&lt;/code&gt; (looks ugly!)&lt;/li&gt;
+      &lt;li&gt;if &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TERM&lt;/code&gt; is not set to anything, vim will &lt;strong&gt;highlight&lt;/strong&gt; the italic text (looks even more ugly!)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Pharath Palesuvaran</name></author><category term="Cheatsheet" /><category term="markdown" /><category term="cheatsheet" /><summary type="html">Latex</summary></entry><entry><title type="html">HTML Notes</title><link href="http://localhost:4000/notes/notes-html/" rel="alternate" type="text/html" title="HTML Notes" /><published>2022-10-10T00:00:00+02:00</published><updated>2022-10-10T00:00:00+02:00</updated><id>http://localhost:4000/notes/notes-html</id><content type="html" xml:base="http://localhost:4000/notes/notes-html/">&lt;h1 id=&quot;jekyll&quot;&gt;Jekyll&lt;/h1&gt;
 
 &lt;p&gt;Jekyll is written in Ruby.&lt;/p&gt;
 &lt;ul&gt;
@@ -1487,6 +1496,11 @@ dig www.google.com @dns2.p08.nsone.net
           &lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;performance problem&lt;/strong&gt; with rdt3.0: &lt;a href=&quot;#utilization&quot;&gt;Utilization&lt;/a&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;strong&gt;solution&lt;/strong&gt;: &lt;a href=&quot;#pipelining&quot;&gt;Pipelining&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -1506,36 +1520,278 @@ dig www.google.com @dns2.p08.nsone.net
 &lt;h2 id=&quot;utilization&quot;&gt;Utilization&lt;/h2&gt;
 
 &lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=NMbMXCbYaX4&amp;amp;list=PLm556dMNleHc1MWN5BX9B2XkwkNE2Djiu&amp;amp;index=20&quot;&gt;watch: Epic Networks Lab&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;$D_{prop}_{}$: propagation delay (one way, i.e. sender to receiver, but not back!)
+    &lt;ul&gt;
+      &lt;li&gt;$D_{prop}_{} = 15\;\text{ms}$&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;$\text{RTT}$: Roundtrip time (both ways)
+    &lt;ul&gt;
+      &lt;li&gt;$\text{RTT} = 2 \times 15\;\text{ms}$&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;$D_{trans}_{}$: transmission delay
+    &lt;ul&gt;
+      &lt;li&gt;$D_{trans}_{} = \frac{L}{R} = \frac{8000\;\text{bits}}{1\;\text{Gbps}} = 8\;\mu s$
+        &lt;ul&gt;
+          &lt;li&gt;&lt;strong&gt;Note&lt;/strong&gt;: $8000\;\text{bits} = 1000\;\text{bytes}$&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;the transmission delay is much smaller relative to the propagation delay&lt;/li&gt;
   &lt;li&gt;$U$: fraction of time sender busy sending
     &lt;ul&gt;
       &lt;li&gt;ideal protocol: $U = 1$&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;$D_{trans}$: transmission delay
-    &lt;ul&gt;
-      &lt;li&gt;e.g. $D_{trans} = \frac{L}{R} = \frac{8000\, \text{bits}}{1\, \text{Gbps}} = 8 \mu s$&lt;/li&gt;
+      &lt;li&gt;$U = \frac{\frac{L}{R}}{\text{RTT} + \frac{L}{R}} = \frac{.008}{30.008} = 0.00027$
+        &lt;ul&gt;
+          &lt;li&gt;Thus, rdt3.0 has very low utilization! This is why &lt;a href=&quot;#pipelining&quot;&gt;pipelining&lt;/a&gt; is necessary!&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;pipelining&quot;&gt;Pipelining&lt;/h2&gt;
 
-&lt;h2 id=&quot;go-back-n-and-selective-repeat-protocol&quot;&gt;Go-Back-N and Selective Repeat Protocol&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=NMbMXCbYaX4&amp;amp;list=PLm556dMNleHc1MWN5BX9B2XkwkNE2Djiu&amp;amp;index=20&quot;&gt;watch: Epic Networks Lab&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;sender allows multiple, “in-flight”, yet-to-be-acknowledged packets
+    &lt;ul&gt;
+      &lt;li&gt;range of sequence numbers must be increased
+        &lt;ul&gt;
+          &lt;li&gt;the range will depend on the approach (i.e. GBN or Selective Repeat)&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;buffering (= saving) of more than one packet at sender and/or receiver
+        &lt;ul&gt;
+          &lt;li&gt;buffer = save (see KR 3.4.3 “GBN” p. 219)&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;more utilization by “filling the pipe”
+    &lt;ul&gt;
+      &lt;li&gt;$U_{sender}_{} = \frac{3\frac{L}{R}}{\text{RTT} + \frac{L}{R}} = \frac{.024}{30.008} = 0.00081$&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;2 common ways of pipelined error recovery
+    &lt;ul&gt;
+      &lt;li&gt;Go-Back-N&lt;/li&gt;
+      &lt;li&gt;Selective Repeat&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;both algorithms were optimized to need as few &lt;strong&gt;pointers&lt;/strong&gt; and &lt;strong&gt;timers&lt;/strong&gt; as possible (resources were far more scarce back then)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;go-back-n-sliding-window-protocol&quot;&gt;Go-Back-N (sliding-window protocol)&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;just play with Kurose animations:
     &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;https://media.pearsoncmg.com/aw/ecs_kurose_compnetwork_7/cw/content/interactiveanimations/go-back-n-protocol/index.html&quot;&gt;GBN&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;e.g. send 3 packets, kill packet 1 and &lt;strong&gt;wait for the timeout&lt;/strong&gt; and see what happens&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;sender&quot;&gt;Sender&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;window&lt;/strong&gt; of up to &lt;strong&gt;N&lt;/strong&gt; consecutively transmitted but unACKed packets&lt;/li&gt;
+  &lt;li&gt;2 state variables:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;base&lt;/code&gt;: sequence number of the oldest unacknowledged packet&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nextseqnum&lt;/code&gt;: smallest unused sequence number (sequence number of the next packet to be sent)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;cumulative ACK&lt;/strong&gt;: ACK for a packet with sequence number $n$ will be taken to be a &lt;strong&gt;cumulative ACK&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;i.e. the &lt;strong&gt;sender assumes&lt;/strong&gt; that this ACK with sequence number $n$ indicates that &lt;strong&gt;all packets&lt;/strong&gt; with a sequence number &lt;strong&gt;up to and including&lt;/strong&gt; $n$ &lt;strong&gt;have been correctly received&lt;/strong&gt; at the receiver&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;timer&lt;/strong&gt; for oldest in-flight packet
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;timeout&lt;/strong&gt;: resend &lt;strong&gt;all&lt;/strong&gt; packets that have been previously sent but that have not yet been acknowledged&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;restart timer&lt;/strong&gt;: ACK received but there are still outstanding packets&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;stop timer&lt;/strong&gt;: ACK received and no outstanding packets&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Why limit N?
+    &lt;ul&gt;
+      &lt;li&gt;see TCP discussion below&lt;/li&gt;
+      &lt;li&gt;flow control&lt;/li&gt;
+      &lt;li&gt;congestion control&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;sequence number&lt;/strong&gt; is carried in a fixed-length field in the packet header
+    &lt;ul&gt;
+      &lt;li&gt;If $k$ is the number of bits in the packet sequence number field, the range of sequence numbers is thus $i\left[ 0, 2k - 1 \right]$&lt;/li&gt;
+      &lt;li&gt;With a finite range of sequence numbers, all arithmetic involving sequence numbers must then be done using modulo $2k$ arithmetic
+        &lt;ul&gt;
+          &lt;li&gt;i.e. the sequence number space can be thought of as a ring of size $2k$, where sequence number $2k - 1$ is immediately followed by sequence number $0$&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;rdt3.0: 1-bit sequence number&lt;/li&gt;
+      &lt;li&gt;TCP: 32-bit sequence number
+        &lt;ul&gt;
+          &lt;li&gt;TCP sequence numbers count &lt;strong&gt;bytes&lt;/strong&gt; in the byte stream rather than &lt;strong&gt;packets&lt;/strong&gt;
+            &lt;ul&gt;
+              &lt;li&gt;sequence number as a “byte counter”&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;receiver&quot;&gt;Receiver&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;1 state variable:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;expectedseqnum&lt;/code&gt;: sequence number of the next in-order packet&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;If a packet with sequence number $n$ is received correctly and is &lt;strong&gt;in order&lt;/strong&gt; (i.e. data last delivered to upper layer came from a packet with seq $n - 1$),
+    &lt;ul&gt;
+      &lt;li&gt;the receiver sends an &lt;strong&gt;ACK for packet&lt;/strong&gt; $n$ and &lt;strong&gt;delivers&lt;/strong&gt; the data portion of the packet to the upper layer.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;In all other cases,
+    &lt;ul&gt;
+      &lt;li&gt;the receiver &lt;strong&gt;discards the packet&lt;/strong&gt; and resends an &lt;strong&gt;ACK for the most recently received&lt;/strong&gt; in-order packet.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;discarding out-of-order packets
+    &lt;ul&gt;
+      &lt;li&gt;advantage:
+        &lt;ul&gt;
+          &lt;li&gt;simplicity of receiver buffering
+            &lt;ul&gt;
+              &lt;li&gt;the only piece of information the &lt;strong&gt;receiver&lt;/strong&gt; need maintain is the sequence number of the next in-order packet &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;expectedseqnum&lt;/code&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;disadvantage:
+        &lt;ul&gt;
+          &lt;li&gt;the subsequent retransmission of that packet might be lost or garbled and thus &lt;strong&gt;even more retransmissions&lt;/strong&gt; would be required&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;(&lt;strong&gt;Note&lt;/strong&gt;: In some implementations the receiver may buffer out-of-order packets instead of discarding them.)&lt;/li&gt;
+  &lt;li&gt;experiments with &lt;a href=&quot;https://media.pearsoncmg.com/aw/ecs_kurose_compnetwork_7/cw/content/interactiveanimations/go-back-n-protocol/index.html&quot;&gt;GBN animation&lt;/a&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;experiment 1 (see images below):
+        &lt;ul&gt;
+          &lt;li&gt;send 3 packets (press three times “Send New”)&lt;/li&gt;
+          &lt;li&gt;press “Pause”&lt;/li&gt;
+          &lt;li&gt;select the packet in the middle (packet number 1, see numbers on top of the packets) and “Kill Packet”&lt;/li&gt;
+          &lt;li&gt;press “Resume”&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;observation 1 (see Figure 2):
+        &lt;ul&gt;
+          &lt;li&gt;in addition to the ACK for the in-order packet 0, the receiver sends a second ACK for the packet last sent (packet number 2), too
+            &lt;ul&gt;
+              &lt;li&gt;&lt;strong&gt;reason&lt;/strong&gt;: Look closely at the numbers on top of the ACKs. Both ACKs have sequence number 0, the number of the most recently received &lt;strong&gt;in-order&lt;/strong&gt; packet! Thus, the first ACK with sequence number 0 has been resent!&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Figure 1&lt;/strong&gt;: packet 1 is lost
+&lt;img src=&quot;/assets/images/datkom/pre_ACK.png&quot; alt=&quot;pre_ACK&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Figure 2&lt;/strong&gt;: receiver seemingly sends an ACK for packet 2, but in actuality it is a &lt;strong&gt;duplicate ACK&lt;/strong&gt;
+&lt;img src=&quot;/assets/images/datkom/post_ACK.png&quot; alt=&quot;post_ACK&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Figure 3&lt;/strong&gt;: window slides one position further
+&lt;img src=&quot;/assets/images/datkom/cum_ACK.png&quot; alt=&quot;cum_ACK&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Figure 4&lt;/strong&gt;: after the timeout for the lost packet 1
+&lt;img src=&quot;/assets/images/datkom/post_cum_ACK.png&quot; alt=&quot;post_cum_ACK&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;gbn-vs-tcp&quot;&gt;GBN vs. TCP&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;GBN protocol incorporates almost all of the techniques used in TCP:
+    &lt;ul&gt;
+      &lt;li&gt;sequence numbers&lt;/li&gt;
+      &lt;li&gt;cumulative acknowledgments&lt;/li&gt;
+      &lt;li&gt;checksums&lt;/li&gt;
+      &lt;li&gt;timeout/retransmit operation&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;selective-repeat&quot;&gt;Selective Repeat&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;just play with Kurose animations:
+    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;https://media.pearsoncmg.com/aw/ecs_kurose_compnetwork_7/cw/content/interactiveanimations/selective-repeat-protocol/index.html&quot;&gt;SR&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;e.g. send 3 packets, kill packet 1 and &lt;strong&gt;wait for the timeout&lt;/strong&gt; and see what happens&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;h4 id=&quot;sender-1&quot;&gt;Sender&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;as before, window of &lt;strong&gt;N&lt;/strong&gt; consecutive sequence numbers&lt;/li&gt;
+  &lt;li&gt;as before, window can only be advanced when the lowest sequence number in it is ACKed
+    &lt;ul&gt;
+      &lt;li&gt;it may need to be advanced multiple values, if other packets have been ACKed out-of-order&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;individual timer for every packet that it sends&lt;/li&gt;
+  &lt;li&gt;individual timeout/retransmit&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;receiver-1&quot;&gt;receiver&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;individual ACKs for each received packet
+    &lt;ul&gt;
+      &lt;li&gt;i.e. &lt;strong&gt;no duplicate ACKs&lt;/strong&gt;: out-of-order packets are ACKed like in-order packets!&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;out-of-order buffer&lt;/strong&gt;: packets are buffered for eventual in-order delivery to upper layer
+    &lt;ul&gt;
+      &lt;li&gt;i.e. &lt;strong&gt;multiple packets together&lt;/strong&gt; may be delivered to the upper layer, if out-of-order packets have been received by the receiver (whereas for GBN only one packet at a time is delivered)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;dilemma&quot;&gt;Dilemma&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://youtu.be/6lP0ow8Voe0?list=PLLFIgriuZPAcCkmSTfcq7oaHcVy3rzEtc&amp;amp;t=3457&quot;&gt;watch: Kenan Casey, chapter 3.4, 57:20&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/datkom/SRDilemma.png&quot; alt=&quot;SRDilemma&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;While the packet 0 arriving is a &lt;strong&gt;duplicate&lt;/strong&gt;, the receiver will treat it as &lt;strong&gt;new data&lt;/strong&gt; and deliver this duplicate up to the application &lt;strong&gt;out-of-order&lt;/strong&gt;! The receiver is “blind” to the state of the sender except that it can infer through the control messaging.
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;problem&lt;/strong&gt;: The reliable transfer protocol must guarantee &lt;strong&gt;in-order&lt;/strong&gt; delivery!&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;solution&lt;/strong&gt;: window size must be $\leq$ half the size of the sequence number space&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;h2 id=&quot;tcp-1&quot;&gt;TCP&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;unicast (one-to-one communication, i.e. one sender and one receiver)&lt;/li&gt;
+  &lt;li&gt;unicast (aka point-to-point aka one-to-one communication, i.e. one sender and one receiver)&lt;/li&gt;
   &lt;li&gt;in-order byte stream (abstraction)
     &lt;ul&gt;
       &lt;li&gt;i.e. there are no “message boundaries”, it is just a stream of bytes that can flow in either direction&lt;/li&gt;
@@ -1559,8 +1815,9 @@ dig www.google.com @dns2.p08.nsone.net
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;cumulative ACKs&lt;/li&gt;
-  &lt;li&gt;pipelining
+  &lt;li&gt;&lt;a href=&quot;#pipelining&quot;&gt;pipelining&lt;/a&gt;
     &lt;ul&gt;
+      &lt;li&gt;better utilization of the network&lt;/li&gt;
       &lt;li&gt;TCP congestion and flow control set window size&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
@@ -1571,7 +1828,45 @@ dig www.google.com @dns2.p08.nsone.net
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;tcp-implementation&quot;&gt;TCP Implementation&lt;/h2&gt;
+&lt;h3 id=&quot;tcp-segment-format&quot;&gt;TCP Segment Format&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;“TCP options” field can have a variable length, and therefore, a “TCP header length” field is needed&lt;/li&gt;
+  &lt;li&gt;Grey fields are not really used, in practice&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/datkom/TCPsegment.png&quot; alt=&quot;TCPsegment.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;seq-and-ack-fields&quot;&gt;Seq and ACK Fields&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;sequence number field&lt;/strong&gt;: byte stream “number” of the &lt;strong&gt;first byte&lt;/strong&gt; in that segment’s payload data&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;ACK field&lt;/strong&gt;: sequence number of next byte expected from other side (holds for both sides, receiver &lt;strong&gt;and&lt;/strong&gt; sender! See Figure 6.)&lt;/li&gt;
+  &lt;li&gt;cumulative ACKs (cf. section GBN sender)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Figure 5&lt;/strong&gt;: Seq and ACK fields
+&lt;img src=&quot;/assets/images/datkom/sender_vs_receiver.png&quot; alt=&quot;sender_vs_receiver.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Figure 6&lt;/strong&gt;: Note: resent ACK is always &lt;strong&gt;one more&lt;/strong&gt; than the received Seq that triggered this ACK!
+&lt;img src=&quot;/assets/images/datkom/tcp_scenario_1.png&quot; alt=&quot;tcp_scenario_1.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;rtt-and-timeout&quot;&gt;RTT and timeout&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;too short: unnecessary retransmission&lt;/li&gt;
+  &lt;li&gt;too long: long timeout&lt;/li&gt;
+  &lt;li&gt;estimate RTT:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SampleRTT&lt;/code&gt;: measured time from segment transmission until ACK receipt&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;EstimatedRTT&lt;/code&gt; $= (1 - \alpha) \times$ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;EstimatedRTT&lt;/code&gt; $+ \alpha \times$ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SampleRTT&lt;/code&gt; (typically: $\alpha = 0.125$)&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DevRTT&lt;/code&gt; $= (1 - \beta) \times$ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DevRTT&lt;/code&gt; $+ \beta \times |$ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SampleRTT&lt;/code&gt; $-$ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;EstimatedRTT&lt;/code&gt; $|$&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TimeoutInterval&lt;/code&gt; $=$ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;EstimatedRTT&lt;/code&gt; $+ 4 \times$ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DevRTT&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;tcp-implementation&quot;&gt;TCP Implementation&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;KR238: RFC recommended TCP &lt;strong&gt;timer&lt;/strong&gt; implementations use only a &lt;strong&gt;single&lt;/strong&gt; retransmission timer, even if there are multiple transmitted but not yet acknowledged segments
@@ -1583,7 +1878,7 @@ dig www.google.com @dns2.p08.nsone.net
   &lt;li&gt;&lt;strong&gt;fast retransmit&lt;/strong&gt; when &lt;strong&gt;three duplicate ACKs&lt;/strong&gt; are received (= segment following the segment that has been ACKed three times has been lost)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;three-way-handshake&quot;&gt;Three-Way Handshake&lt;/h3&gt;
+&lt;h4 id=&quot;three-way-handshake&quot;&gt;Three-Way Handshake&lt;/h4&gt;
 
 &lt;ul&gt;
   &lt;li&gt;SYN segment, SYNACK segment, ACK segment&lt;/li&gt;
@@ -4193,9 +4488,4 @@ dmesg &lt;span class=&quot;nt&quot;&gt;--ctime&lt;/span&gt; | &lt;span class=&qu
       &lt;li&gt;MOST&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Pharath Palesuvaran</name></author><category term="EmSys" /><category term="Notes" /><category term="emsys" /><category term="notes" /><summary type="html">Notes on Embedded Systems</summary></entry><entry><title type="html">Notes on Building Code</title><link href="http://localhost:4000/notes/build/notes-build/" rel="alternate" type="text/html" title="Notes on Building Code" /><published>2022-05-07T00:00:00+02:00</published><updated>2022-05-07T00:00:00+02:00</updated><id>http://localhost:4000/notes/build/notes-build</id><content type="html" xml:base="http://localhost:4000/notes/build/notes-build/">&lt;h1 id=&quot;configure-script&quot;&gt;configure Script&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Configure_script&quot;&gt;purpose of configure scripts&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/edenhill/librdkafka/issues/370#issuecomment-142095337&quot;&gt;check “failed” warnings&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Pharath Palesuvaran</name></author><category term="Notes" /><category term="Build" /><category term="build" /><category term="notes" /><summary type="html">configure Script purpose of configure scripts check “failed” warnings</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Pharath Palesuvaran</name></author><category term="EmSys" /><category term="Notes" /><category term="emsys" /><category term="notes" /><summary type="html">Notes on Embedded Systems</summary></entry></feed>
