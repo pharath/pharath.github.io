@@ -1,7 +1,7 @@
 ---
 title: "DatKom Notes"
 read_time: false
-excerpt: "For learning DatKom"
+excerpt: "For learning DatKom; content mostly from Kurose, Ross \"Computer Networking\"."
 header:
   teaser: /assets/images/C_logo.png
   overlay_image: /assets/images/C_logo.png
@@ -810,6 +810,8 @@ Examples of this principle:
 
 ## TCP
 
+- [watch: Kurose](https://www.youtube.com/watch?v=UYJP-6mhF6E&list=PLm556dMNleHc1MWN5BX9B2XkwkNE2Djiu&index=21)
+- phth: mostly like GBN; K. Casey: mixture of both GBN and SR
 - unicast (aka point-to-point aka one-to-one communication, i.e. one sender and one receiver)
 - in-order byte stream (abstraction)
     - i.e. there are no "message boundaries", it is just a stream of bytes that can flow in either direction
@@ -831,7 +833,7 @@ Examples of this principle:
 ### TCP Segment Format
 
 - "TCP options" field can have a variable length, and therefore, a "TCP header length" field is needed
-- Grey fields are not really used, in practice
+- Grey fields (URG for "urgent data", PSH for "push data now") are not really used, in practice
 
 ![TCPsegment.png](/assets/images/datkom/TCPsegment.png)
 
@@ -857,16 +859,165 @@ Examples of this principle:
     - `DevRTT` $= (1 - \beta) \times$ `DevRTT` $+ \beta \times \|$ `SampleRTT` $-$ `EstimatedRTT` $\|$
     - `TimeoutInterval` $=$ `EstimatedRTT` $+ 4 \times$ `DevRTT`
 
+### Sender
+
+![tcp_sender.png](/assets/images/datkom/tcp_sender.png)
+
+### Receiver
+
+![tcp_receiver.png](/assets/images/datkom/tcp_receiver.png)
+
+- [watch: Kurose example scenarios](https://www.youtube.com/watch?v=UYJP-6mhF6E&list=PLm556dMNleHc1MWN5BX9B2XkwkNE2Djiu&index=21)
+
+### Fast Retransmit
+
+**fast retransmit**: resend **unACKed segment with smallest Seq** when **three duplicate ACKs** are received 
+    - three duplicate ACKs = segment following the segment that has been ACKed three times has been lost
+
 ### TCP Implementation
 
 - KR238: RFC recommended TCP **timer** implementations use only a **single** retransmission timer, even if there are multiple transmitted but not yet acknowledged segments
     - because timer management can require considerable overhead
 - **duplicate ACKs** instead of NAKs
-- **fast retransmit** when **three duplicate ACKs** are received (= segment following the segment that has been ACKed three times has been lost)
 
-#### Three-Way Handshake
+### Flow Control
+
+- [watch: K. Casey](https://youtu.be/_WP9be9W3xE?list=PLLFIgriuZPAcCkmSTfcq7oaHcVy3rzEtc&t=1856)
+- speed-matching service
+
+![flow_control.png](/assets/images/datkom/flow_control.png)
+
+- `RcvBuffer`: there is that many bytes of buffer space
+- `rwnd`: unused buffer space
+
+#### Implementation
+
+- receiver: every ACK contains an `rwnd` field
+- sender limits the number of unACKed bytes ($= ($`LastByteSent` $-$ `LastByteAcked`$)$, see yellow bars in Figure 5) to the size of the `rwnd`
+
+![flow_control_implem.png](/assets/images/datkom/flow_control_implem.png)
+
+### Connection Management: Three-Way Handshake
+
+#### Establish a connection
 
 - SYN segment, SYNACK segment, ACK segment
+- SYN packet
+    - the client sends a SYN packet to the server
+    - **Seq** field is set to: client **randomly** chooses an initial sequence number `client_isn`
+    - does not contain any data
+    - **SYN bit** is set to 1
+- SYN-ACK packet
+    - the server responds with a SYN-ACK packet
+    - **Seq** field is set to: server **randomly** chooses its own initial sequence number `server_isn`
+    - the server allocates buffers and variables to the connection (see [SYN Flood Attack](#syn-flood-attack))
+    - does not contain any data
+    - **SYN bit** is set to 1
+    - **ACK** field is set to `client_isn + 1`
+- ACK packet
+    - the client saying "I am accepting your connection and starting the TCP connection"
+    - **Seq** field is set to `client_isn + 1`
+    - the client allocates buffers and variables to the connection
+    - may contain data
+    - **SYN bit** is set to zero
+    - **ACK** field is set to `server_isn + 1`
+- In each future segment, the SYN bit will be set to zero
+
+#### SYN Flood Attack
+
 - SYN Flood Attack
     - solution: [SYN Cookies](https://en.wikipedia.org/wiki/SYN_cookies)
-        - don't allocate resources until ACK received (confirming that there is really a client out there)
+        - don't allocate "resources" (i.e. buffers and variables) until ACK (3rd handshake step) received (confirming that there is really a client out there)
+
+#### Close a connection
+
+- 4-step process: FIN, ACK, FIN, ACK
+    - after the last ACK all resources in both hosts are **deallocated**
+- **shutdown/FIN segment**: `FIN` bit set to 1
+- **timed wait**: "lets the TCP client resend the final acknowledgment in case the ACK is lost" 
+    - time is implementation-dependent: typically 30 sec, 1 min or 2 min
+
+![tcp_close.png](/assets/images/datkom/tcp_close.png)
+
+#### Reset Segment
+
+- segment that has its `RST` flag bit set to 1
+- **event**: when a host receives a TCP segment whose port numbers or source IP address **do not match** with any of the ongoing sockets in the host
+- **action**: send a **reset segment** to the source
+    - when a host sends a reset segment, it is telling the source "I don't have a socket for that segment. Please do not resend the segment."
+
+#### Not covered
+
+- pathological scenarios, for example, when both sides of a connection want to initiate or shut down **at the same time**
+
+#### nmap
+
+- **port scanner**
+- "case the joint" for
+    - open TCP ports, 
+    - open UDP ports, 
+    - firewalls and their configurations, 
+    - versions of applications and operating systems
+- most of this is done by manipulating TCP connection-management segments.
+- source: KR p.192 "Port Scanning":
+    - **For TCP**, nmap sequentially scans ports, looking for ports that are accepting TCP connections. 
+    - **For UDP**, nmap again sequentially scans ports, looking for UDP ports that respond to transmitted UDP segments. 
+    - In both cases, nmap **returns a list of open, closed, or unreachable ports**.
+    - useful for **system administrators**, who are often interested in knowing which network applications are running on the hosts in their networks. 
+    - useful for **attackers**, in order to "case the joint" (i.e. checking which ports are open on target hosts)
+        - now, IF an application has a known security flaw **and** is listening on an open port, THEN a remote user can execute arbitrary code on the vulnerable host!
+            - e.g. Slammer worm
+- to explore port `portnumber` nmap sends a TCP SYN segment with destination port `portnumber`
+- 3 possible outcomes
+    - SYNACK
+        - target host is running an application with TCP port `portnumber`
+        - nmap returns `open`
+    - RST 
+        - target host is **not** running an application with TCP port `portnumber`
+        - attacker at least knows that port `portnumber` is **not blocked by any firewall**
+    - nothing
+        - SYN segment was blocked by a firewall
+
+## Congestion Control
+
+- [watch: Kurose](https://www.youtube.com/watch?v=Fm92xvIp6JY&list=PLm556dMNleHc1MWN5BX9B2XkwkNE2Djiu&index=23)
+- revisit KR chapter 1.4 "Delay, Loss" (in particular, Figure 1.18 "Dependence of average queuing delay on traffic intensity")
+- problems of congestion
+    - we lose packets (because [buffers overflow](https://youtu.be/qL7ZGeSoQRM?list=PLLFIgriuZPAcCkmSTfcq7oaHcVy3rzEtc&t=575), so that there is not enough room to store packets, see chapter 1.4 "Delay, Loss" K. Casey)
+    - long delays (because of the queueing in the routers)
+
+**Figure 7**: 2 connections (red line and blue line) are shared over a single hop, i.e. if the full link capacity is R each connection's throughput is limited to at most R/2 
+![congestion_scenario_1.png](/assets/images/datkom/congestion_scenario_1.png)
+
+- note about Figure 7: the senders **may** send at a rate higher than R/2 (because of the infinite buffer \[= storage\]), but the output rate $\lambda$ will not increase any further
+    - Kurose video: 
+        - "if each sender would be sending at a rate faster than R/2 the throughput would simply max out at R/2 per flow" (deshalb der Knick im Graph)
+        - "that's because the router's input and output links cannot carry more than R bps of traffic, R/2 for each of the two flows"
+        - read KR 1.4 "Delay, Loss"
+- note about Figure 7: unlimited buffer, thus, queueing delay can go to infinity (for a **limited** buffer size the delay does not really approach infinity, instead packets will be dropped, see KR 1.4.2 "Packet loss")
+
+![q_delay_1.png](/assets/images/datkom/q_delay_1.png)
+![q_delay_2.png](/assets/images/datkom/q_delay_2.png)
+![q_delay_3.png](/assets/images/datkom/q_delay_3.png)
+
+- costs of congestion:
+    - scenario 1: Large **queueing delays** are experienced as the **packet arrival rate** approaches the **link capacity**.
+    - scenario 2a: **packet loss**: sender must perform **retransmissions** in order to compensate for dropped (lost) packets due to buffer overflow
+    - scenario 2b: **premature time out of the sender**: unneeded **retransmissions** by the sender in the face of large delays may cause a router to use its link bandwidth to forward unneeded copies of a packet
+    - scenario 3: **multiple hops**: when a packet is dropped along a path, the transmission capacity that was used at each of the upstream links to forward that packet to the point at which it is dropped ends up having been wasted
+
+### Approaches
+
+- End-to-end congestion control
+    - presence of network congestion must be inferred by the end systems based only on observed network behavior (for example, packet loss and delay)
+    - this is what default TCP does
+        - **TCP segment loss** as indication of network congestion (decreases window size accordingly)
+        - **increased round-trip segment delay** as indicator
+- Network-assisted congestion control
+    - routers provide explicit feedback to the sender and/or receiver regarding the congestion state
+    - more recently, IP and TCP may also optionally implement network-assisted congestion control
+    - two ways
+        - 1. choke packet
+        - 2. Router marks/updates a field in a packet flowing from sender to receiver. When the receiver gets this marked packet the receiver notifies the sender of the congestion, so the sender can slow down. (Thus, this method takes a full RTT!)
+
+## TCP Congestion Control

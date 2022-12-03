@@ -10,7 +10,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>DatKom Notes - Pharath Palesuvaran</title>
-<meta name="description" content="For learning DatKom">
+<meta name="description" content="For learning DatKom; content mostly from Kurose, Ross “Computer Networking”.">
 
 
   <meta name="author" content="Pharath Palesuvaran">
@@ -26,7 +26,7 @@
 <meta property="og:url" content="http://localhost:4000/notes/notes-DatKom/">
 
 
-  <meta property="og:description" content="For learning DatKom">
+  <meta property="og:description" content="For learning DatKom; content mostly from Kurose, Ross “Computer Networking”.">
 
 
 
@@ -197,25 +197,10 @@
         
       </h1>
       
-        <p class="page__lead">For learning DatKom
+        <p class="page__lead">For learning DatKom; content mostly from Kurose, Ross “Computer Networking”.
 </p>
       
       
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-09-22T00:00:00+02:00">September 22, 2022</time>
-      </span>
-    
-
-    
-
-    
-  </p>
 
 
       
@@ -233,11 +218,130 @@
 
 <div id="main" role="main">
   
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/profile_pic.jpg" alt="Pharath Palesuvaran" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Pharath Palesuvaran</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>Machine Learning, Computer Vision, Self-driving cars and a very rusty first degree in Physics</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Aachen (Germany)</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:phrth2@gmail.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+        
+          
+            <li><a href="https://twitter.com/pharath_one" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/pharath" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="/_pages/404.md" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i><span class="label">Instagram</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="DatKom Notes">
-    <meta itemprop="description" content="For learning DatKom">
+    <meta itemprop="description" content="For learning DatKom; content mostly from Kurose, Ross “Computer Networking”.">
     <meta itemprop="datePublished" content="2022-09-22T00:00:00+02:00">
     
 
@@ -249,7 +353,7 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> Contents</h4></header>
-              <ul class="toc__menu"><li><a href="#concepts">Concepts</a></li><li><a href="#what-every-cs-major-should-know">What every CS major should know</a><ul><li><a href="#networking">Networking</a><ul><li><a href="#specific-recommendations">Specific recommendations</a></li><li><a href="#recommended-reading">Recommended reading</a></li></ul></li><li><a href="#security">Security</a><ul><li><a href="#specific-recommendations-1">Specific recommendations</a></li><li><a href="#recommended-reading-1">Recommended reading</a></li></ul></li><li><a href="#cryptography">Cryptography</a><ul><li><a href="#specific-recommendations-2">Specific recommendations</a></li><li><a href="#recommended-reading-2">Recommended reading</a></li></ul></li></ul></li><li><a href="#linux-commands">Linux commands</a></li><li><a href="#wireshark-gui-meaning">Wireshark GUI meaning</a><ul><li><a href="#the-packet-list-pane">The “Packet List” Pane</a></li></ul></li><li><a href="#multiplexing">Multiplexing</a><ul><li><a href="#circuit-switching-tdm-or-fdm">Circuit Switching (TDM or FDM)</a></li><li><a href="#packet-switching-statistical-multiplexing">Packet Switching (statistical multiplexing)</a></li></ul></li><li><a href="#the-internet">The Internet</a><ul><li><a href="#tiers-of-networks">Tiers of networks</a></li></ul></li><li><a href="#delay-and-loss">Delay and Loss</a></li><li><a href="#application-layer-brief">Application layer (Brief)</a></li><li><a href="#transport-layer-brief">Transport layer (Brief)</a><ul><li><a href="#transport-protocols-tcpudp">Transport protocols: TCP/UDP</a></li></ul></li><li><a href="#application-layer">Application Layer</a><ul><li><a href="#web-and-http">Web and HTTP</a></li><li><a href="#email">Email</a><ul><li><a href="#smtp">SMTP</a></li></ul></li><li><a href="#dns">DNS</a><ul><li><a href="#recursive-vs-iterative-dns-query">Recursive vs Iterative DNS query</a></li><li><a href="#dns-cache">DNS Cache</a><ul><li><a href="#dns-cache-in-ubuntu-time-to-live-ttl">DNS Cache in Ubuntu, Time to Live (TTL)</a></li></ul></li><li><a href="#dns-resource-records-rrs">DNS Resource Records (RRs)</a><ul><li><a href="#nslookup-dig">nslookup, dig</a></li></ul></li><li><a href="#ip-ifconfig-ipconfig-nmcli">ip, ifconfig, ipconfig, nmcli</a></li><li><a href="#loopback-address-localhost">Loopback address, Localhost</a></li></ul></li><li><a href="#p2p-file-distribution">P2P File Distribution</a></li></ul></li><li><a href="#transport-layer-layer-4">Transport Layer (Layer 4)</a><ul><li><a href="#tcp-and-udp">TCP and UDP</a><ul><li><a href="#tcp">TCP</a></li><li><a href="#udp">UDP</a></li></ul></li><li><a href="#multiplexingdemultiplexing">Multiplexing/Demultiplexing</a><ul><li><a href="#segments-datagrams-messages-encapsulation">Segments, Datagrams, Messages (Encapsulation)</a></li><li><a href="#payload">Payload</a></li><li><a href="#demultiplexing">Demultiplexing</a></li><li><a href="#checksum">Checksum</a><ul><li><a href="#ones-complement">Ones’ Complement</a></li><li><a href="#twos-complement">Two’s Complement</a></li><li><a href="#endianness">Endianness</a></li></ul></li></ul></li><li><a href="#end-to-end-principle">End-to-End Principle</a></li><li><a href="#principles-of-reliable-data-transfer">Principles of Reliable Data Transfer</a></li><li><a href="#sequence-numbers">Sequence Numbers</a></li><li><a href="#utilization">Utilization</a></li><li><a href="#pipelining">Pipelining</a><ul><li><a href="#go-back-n-sliding-window-protocol">Go-Back-N (sliding-window protocol)</a><ul><li><a href="#sender">Sender</a></li><li><a href="#receiver">Receiver</a></li><li><a href="#gbn-vs-tcp">GBN vs. TCP</a></li></ul></li><li><a href="#selective-repeat">Selective Repeat</a><ul><li><a href="#sender-1">Sender</a></li><li><a href="#receiver-1">receiver</a></li><li><a href="#dilemma">Dilemma</a></li></ul></li></ul></li><li><a href="#tcp-1">TCP</a><ul><li><a href="#tcp-segment-format">TCP Segment Format</a></li><li><a href="#seq-and-ack-fields">Seq and ACK Fields</a></li><li><a href="#rtt-and-timeout">RTT and timeout</a></li><li><a href="#tcp-implementation">TCP Implementation</a><ul><li><a href="#three-way-handshake">Three-Way Handshake</a></li></ul></li></ul></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#concepts">Concepts</a></li><li><a href="#what-every-cs-major-should-know">What every CS major should know</a><ul><li><a href="#networking">Networking</a><ul><li><a href="#specific-recommendations">Specific recommendations</a></li><li><a href="#recommended-reading">Recommended reading</a></li></ul></li><li><a href="#security">Security</a><ul><li><a href="#specific-recommendations-1">Specific recommendations</a></li><li><a href="#recommended-reading-1">Recommended reading</a></li></ul></li><li><a href="#cryptography">Cryptography</a><ul><li><a href="#specific-recommendations-2">Specific recommendations</a></li><li><a href="#recommended-reading-2">Recommended reading</a></li></ul></li></ul></li><li><a href="#linux-commands">Linux commands</a></li><li><a href="#wireshark-gui-meaning">Wireshark GUI meaning</a><ul><li><a href="#the-packet-list-pane">The “Packet List” Pane</a></li></ul></li><li><a href="#multiplexing">Multiplexing</a><ul><li><a href="#circuit-switching-tdm-or-fdm">Circuit Switching (TDM or FDM)</a></li><li><a href="#packet-switching-statistical-multiplexing">Packet Switching (statistical multiplexing)</a></li></ul></li><li><a href="#the-internet">The Internet</a><ul><li><a href="#tiers-of-networks">Tiers of networks</a></li></ul></li><li><a href="#delay-and-loss">Delay and Loss</a></li><li><a href="#application-layer-brief">Application layer (Brief)</a></li><li><a href="#transport-layer-brief">Transport layer (Brief)</a><ul><li><a href="#transport-protocols-tcpudp">Transport protocols: TCP/UDP</a></li></ul></li><li><a href="#application-layer">Application Layer</a><ul><li><a href="#web-and-http">Web and HTTP</a></li><li><a href="#email">Email</a><ul><li><a href="#smtp">SMTP</a></li></ul></li><li><a href="#dns">DNS</a><ul><li><a href="#recursive-vs-iterative-dns-query">Recursive vs Iterative DNS query</a></li><li><a href="#dns-cache">DNS Cache</a><ul><li><a href="#dns-cache-in-ubuntu-time-to-live-ttl">DNS Cache in Ubuntu, Time to Live (TTL)</a></li></ul></li><li><a href="#dns-resource-records-rrs">DNS Resource Records (RRs)</a><ul><li><a href="#nslookup-dig">nslookup, dig</a></li></ul></li><li><a href="#ip-ifconfig-ipconfig-nmcli">ip, ifconfig, ipconfig, nmcli</a></li><li><a href="#loopback-address-localhost">Loopback address, Localhost</a></li></ul></li><li><a href="#p2p-file-distribution">P2P File Distribution</a></li></ul></li><li><a href="#transport-layer-layer-4">Transport Layer (Layer 4)</a><ul><li><a href="#tcp-and-udp">TCP and UDP</a><ul><li><a href="#tcp">TCP</a></li><li><a href="#udp">UDP</a></li></ul></li><li><a href="#multiplexingdemultiplexing">Multiplexing/Demultiplexing</a><ul><li><a href="#segments-datagrams-messages-encapsulation">Segments, Datagrams, Messages (Encapsulation)</a></li><li><a href="#payload">Payload</a></li><li><a href="#demultiplexing">Demultiplexing</a></li><li><a href="#checksum">Checksum</a><ul><li><a href="#ones-complement">Ones’ Complement</a></li><li><a href="#twos-complement">Two’s Complement</a></li><li><a href="#endianness">Endianness</a></li></ul></li></ul></li><li><a href="#end-to-end-principle">End-to-End Principle</a></li><li><a href="#principles-of-reliable-data-transfer">Principles of Reliable Data Transfer</a></li><li><a href="#sequence-numbers">Sequence Numbers</a></li><li><a href="#utilization">Utilization</a></li><li><a href="#pipelining">Pipelining</a><ul><li><a href="#go-back-n-sliding-window-protocol">Go-Back-N (sliding-window protocol)</a><ul><li><a href="#sender">Sender</a></li><li><a href="#receiver">Receiver</a></li><li><a href="#gbn-vs-tcp">GBN vs. TCP</a></li></ul></li><li><a href="#selective-repeat">Selective Repeat</a><ul><li><a href="#sender-1">Sender</a></li><li><a href="#receiver-1">receiver</a></li><li><a href="#dilemma">Dilemma</a></li></ul></li></ul></li><li><a href="#tcp-1">TCP</a><ul><li><a href="#tcp-segment-format">TCP Segment Format</a></li><li><a href="#seq-and-ack-fields">Seq and ACK Fields</a></li><li><a href="#rtt-and-timeout">RTT and timeout</a></li><li><a href="#sender-2">Sender</a></li><li><a href="#receiver-2">Receiver</a></li><li><a href="#fast-retransmit">Fast Retransmit</a></li><li><a href="#tcp-implementation">TCP Implementation</a></li><li><a href="#flow-control">Flow Control</a><ul><li><a href="#implementation">Implementation</a></li></ul></li><li><a href="#connection-management-three-way-handshake">Connection Management: Three-Way Handshake</a><ul><li><a href="#establish-a-connection">Establish a connection</a></li><li><a href="#syn-flood-attack">SYN Flood Attack</a></li><li><a href="#close-a-connection">Close a connection</a></li><li><a href="#reset-segment">Reset Segment</a></li><li><a href="#not-covered">Not covered</a></li><li><a href="#nmap">nmap</a></li></ul></li></ul></li><li><a href="#congestion-control">Congestion Control</a><ul><li><a href="#approaches">Approaches</a></li></ul></li><li><a href="#tcp-congestion-control">TCP Congestion Control</a></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -1511,6 +1615,8 @@ dig www.google.com @dns2.p08.nsone.net
 <h2 id="tcp-1">TCP</h2>
 
 <ul>
+  <li><a href="https://www.youtube.com/watch?v=UYJP-6mhF6E&amp;list=PLm556dMNleHc1MWN5BX9B2XkwkNE2Djiu&amp;index=21">watch: Kurose</a></li>
+  <li>phth: mostly like GBN; K. Casey: mixture of both GBN and SR</li>
   <li>unicast (aka point-to-point aka one-to-one communication, i.e. one sender and one receiver)</li>
   <li>in-order byte stream (abstraction)
     <ul>
@@ -1552,7 +1658,7 @@ dig www.google.com @dns2.p08.nsone.net
 
 <ul>
   <li>“TCP options” field can have a variable length, and therefore, a “TCP header length” field is needed</li>
-  <li>Grey fields are not really used, in practice</li>
+  <li>Grey fields (URG for “urgent data”, PSH for “push data now”) are not really used, in practice</li>
 </ul>
 
 <p><img src="/assets/images/datkom/TCPsegment.png" alt="TCPsegment.png" /></p>
@@ -1586,6 +1692,23 @@ dig www.google.com @dns2.p08.nsone.net
   </li>
 </ul>
 
+<h3 id="sender-2">Sender</h3>
+
+<p><img src="/assets/images/datkom/tcp_sender.png" alt="tcp_sender.png" /></p>
+
+<h3 id="receiver-2">Receiver</h3>
+
+<p><img src="/assets/images/datkom/tcp_receiver.png" alt="tcp_receiver.png" /></p>
+
+<ul>
+  <li><a href="https://www.youtube.com/watch?v=UYJP-6mhF6E&amp;list=PLm556dMNleHc1MWN5BX9B2XkwkNE2Djiu&amp;index=21">watch: Kurose example scenarios</a></li>
+</ul>
+
+<h3 id="fast-retransmit">Fast Retransmit</h3>
+
+<p><strong>fast retransmit</strong>: resend <strong>unACKed segment with smallest Seq</strong> when <strong>three duplicate ACKs</strong> are received 
+    - three duplicate ACKs = segment following the segment that has been ACKed three times has been lost</p>
+
 <h3 id="tcp-implementation">TCP Implementation</h3>
 
 <ul>
@@ -1595,23 +1718,255 @@ dig www.google.com @dns2.p08.nsone.net
     </ul>
   </li>
   <li><strong>duplicate ACKs</strong> instead of NAKs</li>
-  <li><strong>fast retransmit</strong> when <strong>three duplicate ACKs</strong> are received (= segment following the segment that has been ACKed three times has been lost)</li>
 </ul>
 
-<h4 id="three-way-handshake">Three-Way Handshake</h4>
+<h3 id="flow-control">Flow Control</h3>
+
+<ul>
+  <li><a href="https://youtu.be/_WP9be9W3xE?list=PLLFIgriuZPAcCkmSTfcq7oaHcVy3rzEtc&amp;t=1856">watch: K. Casey</a></li>
+  <li>speed-matching service</li>
+</ul>
+
+<p><img src="/assets/images/datkom/flow_control.png" alt="flow_control.png" /></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">RcvBuffer</code>: there is that many bytes of buffer space</li>
+  <li><code class="language-plaintext highlighter-rouge">rwnd</code>: unused buffer space</li>
+</ul>
+
+<h4 id="implementation">Implementation</h4>
+
+<ul>
+  <li>receiver: every ACK contains an <code class="language-plaintext highlighter-rouge">rwnd</code> field</li>
+  <li>sender limits the number of unACKed bytes ($= ($<code class="language-plaintext highlighter-rouge">LastByteSent</code> $-$ <code class="language-plaintext highlighter-rouge">LastByteAcked</code>$)$, see yellow bars in Figure 5) to the size of the <code class="language-plaintext highlighter-rouge">rwnd</code></li>
+</ul>
+
+<p><img src="/assets/images/datkom/flow_control_implem.png" alt="flow_control_implem.png" /></p>
+
+<h3 id="connection-management-three-way-handshake">Connection Management: Three-Way Handshake</h3>
+
+<h4 id="establish-a-connection">Establish a connection</h4>
 
 <ul>
   <li>SYN segment, SYNACK segment, ACK segment</li>
+  <li>SYN packet
+    <ul>
+      <li>the client sends a SYN packet to the server</li>
+      <li><strong>Seq</strong> field is set to: client <strong>randomly</strong> chooses an initial sequence number <code class="language-plaintext highlighter-rouge">client_isn</code></li>
+      <li>does not contain any data</li>
+      <li><strong>SYN bit</strong> is set to 1</li>
+    </ul>
+  </li>
+  <li>SYN-ACK packet
+    <ul>
+      <li>the server responds with a SYN-ACK packet</li>
+      <li><strong>Seq</strong> field is set to: server <strong>randomly</strong> chooses its own initial sequence number <code class="language-plaintext highlighter-rouge">server_isn</code></li>
+      <li>the server allocates buffers and variables to the connection (see <a href="#syn-flood-attack">SYN Flood Attack</a>)</li>
+      <li>does not contain any data</li>
+      <li><strong>SYN bit</strong> is set to 1</li>
+      <li><strong>ACK</strong> field is set to <code class="language-plaintext highlighter-rouge">client_isn + 1</code></li>
+    </ul>
+  </li>
+  <li>ACK packet
+    <ul>
+      <li>the client saying “I am accepting your connection and starting the TCP connection”</li>
+      <li><strong>Seq</strong> field is set to <code class="language-plaintext highlighter-rouge">client_isn + 1</code></li>
+      <li>the client allocates buffers and variables to the connection</li>
+      <li>may contain data</li>
+      <li><strong>SYN bit</strong> is set to zero</li>
+      <li><strong>ACK</strong> field is set to <code class="language-plaintext highlighter-rouge">server_isn + 1</code></li>
+    </ul>
+  </li>
+  <li>In each future segment, the SYN bit will be set to zero</li>
+</ul>
+
+<h4 id="syn-flood-attack">SYN Flood Attack</h4>
+
+<ul>
   <li>SYN Flood Attack
     <ul>
       <li>solution: <a href="https://en.wikipedia.org/wiki/SYN_cookies">SYN Cookies</a>
         <ul>
-          <li>don’t allocate resources until ACK received (confirming that there is really a client out there)</li>
+          <li>don’t allocate “resources” (i.e. buffers and variables) until ACK (3rd handshake step) received (confirming that there is really a client out there)</li>
         </ul>
       </li>
     </ul>
   </li>
 </ul>
+
+<h4 id="close-a-connection">Close a connection</h4>
+
+<ul>
+  <li>4-step process: FIN, ACK, FIN, ACK
+    <ul>
+      <li>after the last ACK all resources in both hosts are <strong>deallocated</strong></li>
+    </ul>
+  </li>
+  <li><strong>shutdown/FIN segment</strong>: <code class="language-plaintext highlighter-rouge">FIN</code> bit set to 1</li>
+  <li><strong>timed wait</strong>: “lets the TCP client resend the final acknowledgment in case the ACK is lost”
+    <ul>
+      <li>time is implementation-dependent: typically 30 sec, 1 min or 2 min</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/images/datkom/tcp_close.png" alt="tcp_close.png" /></p>
+
+<h4 id="reset-segment">Reset Segment</h4>
+
+<ul>
+  <li>segment that has its <code class="language-plaintext highlighter-rouge">RST</code> flag bit set to 1</li>
+  <li><strong>event</strong>: when a host receives a TCP segment whose port numbers or source IP address <strong>do not match</strong> with any of the ongoing sockets in the host</li>
+  <li><strong>action</strong>: send a <strong>reset segment</strong> to the source
+    <ul>
+      <li>when a host sends a reset segment, it is telling the source “I don’t have a socket for that segment. Please do not resend the segment.”</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="not-covered">Not covered</h4>
+
+<ul>
+  <li>pathological scenarios, for example, when both sides of a connection want to initiate or shut down <strong>at the same time</strong></li>
+</ul>
+
+<h4 id="nmap">nmap</h4>
+
+<ul>
+  <li><strong>port scanner</strong></li>
+  <li>“case the joint” for
+    <ul>
+      <li>open TCP ports,</li>
+      <li>open UDP ports,</li>
+      <li>firewalls and their configurations,</li>
+      <li>versions of applications and operating systems</li>
+    </ul>
+  </li>
+  <li>most of this is done by manipulating TCP connection-management segments.</li>
+  <li>source: KR p.192 “Port Scanning”:
+    <ul>
+      <li><strong>For TCP</strong>, nmap sequentially scans ports, looking for ports that are accepting TCP connections.</li>
+      <li><strong>For UDP</strong>, nmap again sequentially scans ports, looking for UDP ports that respond to transmitted UDP segments.</li>
+      <li>In both cases, nmap <strong>returns a list of open, closed, or unreachable ports</strong>.</li>
+      <li>useful for <strong>system administrators</strong>, who are often interested in knowing which network applications are running on the hosts in their networks.</li>
+      <li>useful for <strong>attackers</strong>, in order to “case the joint” (i.e. checking which ports are open on target hosts)
+        <ul>
+          <li>now, IF an application has a known security flaw <strong>and</strong> is listening on an open port, THEN a remote user can execute arbitrary code on the vulnerable host!
+            <ul>
+              <li>e.g. Slammer worm</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>to explore port <code class="language-plaintext highlighter-rouge">portnumber</code> nmap sends a TCP SYN segment with destination port <code class="language-plaintext highlighter-rouge">portnumber</code></li>
+  <li>3 possible outcomes
+    <ul>
+      <li>SYNACK
+        <ul>
+          <li>target host is running an application with TCP port <code class="language-plaintext highlighter-rouge">portnumber</code></li>
+          <li>nmap returns <code class="language-plaintext highlighter-rouge">open</code></li>
+        </ul>
+      </li>
+      <li>RST
+        <ul>
+          <li>target host is <strong>not</strong> running an application with TCP port <code class="language-plaintext highlighter-rouge">portnumber</code></li>
+          <li>attacker at least knows that port <code class="language-plaintext highlighter-rouge">portnumber</code> is <strong>not blocked by any firewall</strong></li>
+        </ul>
+      </li>
+      <li>nothing
+        <ul>
+          <li>SYN segment was blocked by a firewall</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="congestion-control">Congestion Control</h2>
+
+<ul>
+  <li><a href="https://www.youtube.com/watch?v=Fm92xvIp6JY&amp;list=PLm556dMNleHc1MWN5BX9B2XkwkNE2Djiu&amp;index=23">watch: Kurose</a></li>
+  <li>revisit KR chapter 1.4 “Delay, Loss” (in particular, Figure 1.18 “Dependence of average queuing delay on traffic intensity”)</li>
+  <li>problems of congestion
+    <ul>
+      <li>we lose packets (because <a href="https://youtu.be/qL7ZGeSoQRM?list=PLLFIgriuZPAcCkmSTfcq7oaHcVy3rzEtc&amp;t=575">buffers overflow</a>, so that there is not enough room to store packets, see chapter 1.4 “Delay, Loss” K. Casey)</li>
+      <li>long delays (because of the queueing in the routers)</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>Figure 7</strong>: 2 connections (red line and blue line) are shared over a single hop, i.e. if the full link capacity is R each connection’s throughput is limited to at most R/2 
+<img src="/assets/images/datkom/congestion_scenario_1.png" alt="congestion_scenario_1.png" /></p>
+
+<ul>
+  <li>note about Figure 7: the senders <strong>may</strong> send at a rate higher than R/2 (because of the infinite buffer [= storage]), but the output rate $\lambda$ will not increase any further
+    <ul>
+      <li>Kurose video:
+        <ul>
+          <li>“if each sender would be sending at a rate faster than R/2 the throughput would simply max out at R/2 per flow” (deshalb der Knick im Graph)</li>
+          <li>“that’s because the router’s input and output links cannot carry more than R bps of traffic, R/2 for each of the two flows”</li>
+          <li>read KR 1.4 “Delay, Loss”</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>note about Figure 7: unlimited buffer, thus, queueing delay can go to infinity (for a <strong>limited</strong> buffer size the delay does not really approach infinity, instead packets will be dropped, see KR 1.4.2 “Packet loss”)</li>
+</ul>
+
+<p><img src="/assets/images/datkom/q_delay_1.png" alt="q_delay_1.png" />
+<img src="/assets/images/datkom/q_delay_2.png" alt="q_delay_2.png" />
+<img src="/assets/images/datkom/q_delay_3.png" alt="q_delay_3.png" /></p>
+
+<ul>
+  <li>costs of congestion:
+    <ul>
+      <li>scenario 1: Large <strong>queueing delays</strong> are experienced as the <strong>packet arrival rate</strong> approaches the <strong>link capacity</strong>.</li>
+      <li>scenario 2a: <strong>packet loss</strong>: sender must perform <strong>retransmissions</strong> in order to compensate for dropped (lost) packets due to buffer overflow</li>
+      <li>scenario 2b: <strong>premature time out of the sender</strong>: unneeded <strong>retransmissions</strong> by the sender in the face of large delays may cause a router to use its link bandwidth to forward unneeded copies of a packet</li>
+      <li>scenario 3: <strong>multiple hops</strong>: when a packet is dropped along a path, the transmission capacity that was used at each of the upstream links to forward that packet to the point at which it is dropped ends up having been wasted</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="approaches">Approaches</h3>
+
+<ul>
+  <li>End-to-end congestion control
+    <ul>
+      <li>presence of network congestion must be inferred by the end systems based only on observed network behavior (for example, packet loss and delay)</li>
+      <li>this is what default TCP does
+        <ul>
+          <li><strong>TCP segment loss</strong> as indication of network congestion (decreases window size accordingly)</li>
+          <li><strong>increased round-trip segment delay</strong> as indicator</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Network-assisted congestion control
+    <ul>
+      <li>routers provide explicit feedback to the sender and/or receiver regarding the congestion state</li>
+      <li>more recently, IP and TCP may also optionally implement network-assisted congestion control</li>
+      <li>two ways
+        <ul>
+          <li>
+            <ol>
+              <li>choke packet</li>
+            </ol>
+          </li>
+          <li>
+            <ol>
+              <li>Router marks/updates a field in a packet flowing from sender to receiver. When the receiver gets this marked packet the receiver notifies the sender of the congestion, so the sender can slow down. (Thus, this method takes a full RTT!)</li>
+            </ol>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="tcp-congestion-control">TCP Congestion Control</h2>
 
         
       </section>
@@ -1712,21 +2067,6 @@ dig www.google.com @dns2.p08.nsone.net
     </h2>
     
 
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-11-28T00:00:00+01:00">November 28, 2022</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
 
     <p class="archive__item-excerpt" itemprop="description">Latex
 
@@ -1754,21 +2094,6 @@ dig www.google.com @dns2.p08.nsone.net
     </h2>
     
 
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-10-10T00:00:00+02:00">October 10, 2022</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
 
     <p class="archive__item-excerpt" itemprop="description">For learning html.
 </p>
@@ -1795,21 +2120,6 @@ dig www.google.com @dns2.p08.nsone.net
     </h2>
     
 
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-10-06T00:00:00+02:00">October 6, 2022</time>
-      </span>
-    
-
-    
-
-    
-  </p>
-
 
     <p class="archive__item-excerpt" itemprop="description">For learning C++
 </p>
@@ -1835,21 +2145,6 @@ dig www.google.com @dns2.p08.nsone.net
       
     </h2>
     
-
-  <p class="page__meta">
-    
-      
-      <span class="page__meta-date">
-        <i class="far fa-calendar-alt" aria-hidden="true"></i>
-        
-        <time datetime="2022-10-04T00:00:00+02:00">October 4, 2022</time>
-      </span>
-    
-
-    
-
-    
-  </p>
 
 
     <p class="archive__item-excerpt" itemprop="description">Useful tips for using Android

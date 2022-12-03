@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-30T02:47:11+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Pharath Palesuvaran</title><subtitle>Deep Learning and Self-Driving Cars.</subtitle><author><name>Pharath Palesuvaran</name></author><entry><title type="html">Markdown Syntax Cheatsheet</title><link href="http://localhost:4000/cheatsheet/cheatsheet-markdown/" rel="alternate" type="text/html" title="Markdown Syntax Cheatsheet" /><published>2022-11-28T00:00:00+01:00</published><updated>2022-11-28T00:00:00+01:00</updated><id>http://localhost:4000/cheatsheet/cheatsheet-markdown</id><content type="html" xml:base="http://localhost:4000/cheatsheet/cheatsheet-markdown/">&lt;h2 id=&quot;latex&quot;&gt;Latex&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-12-01T06:19:02+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Pharath Palesuvaran</title><subtitle>Deep Learning and Self-Driving Cars.</subtitle><author><name>Pharath Palesuvaran</name></author><entry><title type="html">Markdown Syntax Cheatsheet</title><link href="http://localhost:4000/cheatsheet/cheatsheet-markdown/" rel="alternate" type="text/html" title="Markdown Syntax Cheatsheet" /><published>2022-11-28T00:00:00+01:00</published><updated>2022-11-28T00:00:00+01:00</updated><id>http://localhost:4000/cheatsheet/cheatsheet-markdown</id><content type="html" xml:base="http://localhost:4000/cheatsheet/cheatsheet-markdown/">&lt;h2 id=&quot;latex&quot;&gt;Latex&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;vim italics issue (because Latex uses underscores):
@@ -1791,6 +1791,8 @@ dig www.google.com @dns2.p08.nsone.net
 &lt;h2 id=&quot;tcp-1&quot;&gt;TCP&lt;/h2&gt;
 
 &lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=UYJP-6mhF6E&amp;amp;list=PLm556dMNleHc1MWN5BX9B2XkwkNE2Djiu&amp;amp;index=21&quot;&gt;watch: Kurose&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;phth: mostly like GBN; K. Casey: mixture of both GBN and SR&lt;/li&gt;
   &lt;li&gt;unicast (aka point-to-point aka one-to-one communication, i.e. one sender and one receiver)&lt;/li&gt;
   &lt;li&gt;in-order byte stream (abstraction)
     &lt;ul&gt;
@@ -1832,7 +1834,7 @@ dig www.google.com @dns2.p08.nsone.net
 
 &lt;ul&gt;
   &lt;li&gt;“TCP options” field can have a variable length, and therefore, a “TCP header length” field is needed&lt;/li&gt;
-  &lt;li&gt;Grey fields are not really used, in practice&lt;/li&gt;
+  &lt;li&gt;Grey fields (URG for “urgent data”, PSH for “push data now”) are not really used, in practice&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/datkom/TCPsegment.png&quot; alt=&quot;TCPsegment.png&quot; /&gt;&lt;/p&gt;
@@ -1866,6 +1868,23 @@ dig www.google.com @dns2.p08.nsone.net
   &lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;h3 id=&quot;sender-2&quot;&gt;Sender&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/datkom/tcp_sender.png&quot; alt=&quot;tcp_sender.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;receiver-2&quot;&gt;Receiver&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/datkom/tcp_receiver.png&quot; alt=&quot;tcp_receiver.png&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=UYJP-6mhF6E&amp;amp;list=PLm556dMNleHc1MWN5BX9B2XkwkNE2Djiu&amp;amp;index=21&quot;&gt;watch: Kurose example scenarios&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;fast-retransmit&quot;&gt;Fast Retransmit&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;fast retransmit&lt;/strong&gt;: resend &lt;strong&gt;unACKed segment with smallest Seq&lt;/strong&gt; when &lt;strong&gt;three duplicate ACKs&lt;/strong&gt; are received 
+    - three duplicate ACKs = segment following the segment that has been ACKed three times has been lost&lt;/p&gt;
+
 &lt;h3 id=&quot;tcp-implementation&quot;&gt;TCP Implementation&lt;/h3&gt;
 
 &lt;ul&gt;
@@ -1875,23 +1894,255 @@ dig www.google.com @dns2.p08.nsone.net
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;duplicate ACKs&lt;/strong&gt; instead of NAKs&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;fast retransmit&lt;/strong&gt; when &lt;strong&gt;three duplicate ACKs&lt;/strong&gt; are received (= segment following the segment that has been ACKed three times has been lost)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&quot;three-way-handshake&quot;&gt;Three-Way Handshake&lt;/h4&gt;
+&lt;h3 id=&quot;flow-control&quot;&gt;Flow Control&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://youtu.be/_WP9be9W3xE?list=PLLFIgriuZPAcCkmSTfcq7oaHcVy3rzEtc&amp;amp;t=1856&quot;&gt;watch: K. Casey&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;speed-matching service&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/datkom/flow_control.png&quot; alt=&quot;flow_control.png&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RcvBuffer&lt;/code&gt;: there is that many bytes of buffer space&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rwnd&lt;/code&gt;: unused buffer space&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;implementation&quot;&gt;Implementation&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;receiver: every ACK contains an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rwnd&lt;/code&gt; field&lt;/li&gt;
+  &lt;li&gt;sender limits the number of unACKed bytes ($= ($&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;LastByteSent&lt;/code&gt; $-$ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;LastByteAcked&lt;/code&gt;$)$, see yellow bars in Figure 5) to the size of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rwnd&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/datkom/flow_control_implem.png&quot; alt=&quot;flow_control_implem.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;connection-management-three-way-handshake&quot;&gt;Connection Management: Three-Way Handshake&lt;/h3&gt;
+
+&lt;h4 id=&quot;establish-a-connection&quot;&gt;Establish a connection&lt;/h4&gt;
 
 &lt;ul&gt;
   &lt;li&gt;SYN segment, SYNACK segment, ACK segment&lt;/li&gt;
+  &lt;li&gt;SYN packet
+    &lt;ul&gt;
+      &lt;li&gt;the client sends a SYN packet to the server&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Seq&lt;/strong&gt; field is set to: client &lt;strong&gt;randomly&lt;/strong&gt; chooses an initial sequence number &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;client_isn&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;does not contain any data&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;SYN bit&lt;/strong&gt; is set to 1&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;SYN-ACK packet
+    &lt;ul&gt;
+      &lt;li&gt;the server responds with a SYN-ACK packet&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Seq&lt;/strong&gt; field is set to: server &lt;strong&gt;randomly&lt;/strong&gt; chooses its own initial sequence number &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;server_isn&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;the server allocates buffers and variables to the connection (see &lt;a href=&quot;#syn-flood-attack&quot;&gt;SYN Flood Attack&lt;/a&gt;)&lt;/li&gt;
+      &lt;li&gt;does not contain any data&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;SYN bit&lt;/strong&gt; is set to 1&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;ACK&lt;/strong&gt; field is set to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;client_isn + 1&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;ACK packet
+    &lt;ul&gt;
+      &lt;li&gt;the client saying “I am accepting your connection and starting the TCP connection”&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Seq&lt;/strong&gt; field is set to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;client_isn + 1&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;the client allocates buffers and variables to the connection&lt;/li&gt;
+      &lt;li&gt;may contain data&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;SYN bit&lt;/strong&gt; is set to zero&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;ACK&lt;/strong&gt; field is set to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;server_isn + 1&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;In each future segment, the SYN bit will be set to zero&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;syn-flood-attack&quot;&gt;SYN Flood Attack&lt;/h4&gt;
+
+&lt;ul&gt;
   &lt;li&gt;SYN Flood Attack
     &lt;ul&gt;
       &lt;li&gt;solution: &lt;a href=&quot;https://en.wikipedia.org/wiki/SYN_cookies&quot;&gt;SYN Cookies&lt;/a&gt;
         &lt;ul&gt;
-          &lt;li&gt;don’t allocate resources until ACK received (confirming that there is really a client out there)&lt;/li&gt;
+          &lt;li&gt;don’t allocate “resources” (i.e. buffers and variables) until ACK (3rd handshake step) received (confirming that there is really a client out there)&lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Pharath Palesuvaran</name></author><category term="Notes" /><category term="datkom" /><category term="notes" /><summary type="html">For learning DatKom</summary></entry><entry><title type="html">Operating Systems Notes</title><link href="http://localhost:4000/notes/notes-OS/" rel="alternate" type="text/html" title="Operating Systems Notes" /><published>2022-09-22T00:00:00+02:00</published><updated>2022-09-22T00:00:00+02:00</updated><id>http://localhost:4000/notes/notes-OS</id><content type="html" xml:base="http://localhost:4000/notes/notes-OS/">&lt;h1 id=&quot;lectures&quot;&gt;Lectures&lt;/h1&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;close-a-connection&quot;&gt;Close a connection&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;4-step process: FIN, ACK, FIN, ACK
+    &lt;ul&gt;
+      &lt;li&gt;after the last ACK all resources in both hosts are &lt;strong&gt;deallocated&lt;/strong&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;shutdown/FIN segment&lt;/strong&gt;: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;FIN&lt;/code&gt; bit set to 1&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;timed wait&lt;/strong&gt;: “lets the TCP client resend the final acknowledgment in case the ACK is lost”
+    &lt;ul&gt;
+      &lt;li&gt;time is implementation-dependent: typically 30 sec, 1 min or 2 min&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/datkom/tcp_close.png&quot; alt=&quot;tcp_close.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;reset-segment&quot;&gt;Reset Segment&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;segment that has its &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RST&lt;/code&gt; flag bit set to 1&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;event&lt;/strong&gt;: when a host receives a TCP segment whose port numbers or source IP address &lt;strong&gt;do not match&lt;/strong&gt; with any of the ongoing sockets in the host&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;action&lt;/strong&gt;: send a &lt;strong&gt;reset segment&lt;/strong&gt; to the source
+    &lt;ul&gt;
+      &lt;li&gt;when a host sends a reset segment, it is telling the source “I don’t have a socket for that segment. Please do not resend the segment.”&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;not-covered&quot;&gt;Not covered&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;pathological scenarios, for example, when both sides of a connection want to initiate or shut down &lt;strong&gt;at the same time&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;nmap&quot;&gt;nmap&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;port scanner&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;“case the joint” for
+    &lt;ul&gt;
+      &lt;li&gt;open TCP ports,&lt;/li&gt;
+      &lt;li&gt;open UDP ports,&lt;/li&gt;
+      &lt;li&gt;firewalls and their configurations,&lt;/li&gt;
+      &lt;li&gt;versions of applications and operating systems&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;most of this is done by manipulating TCP connection-management segments.&lt;/li&gt;
+  &lt;li&gt;source: KR p.192 “Port Scanning”:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;For TCP&lt;/strong&gt;, nmap sequentially scans ports, looking for ports that are accepting TCP connections.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;For UDP&lt;/strong&gt;, nmap again sequentially scans ports, looking for UDP ports that respond to transmitted UDP segments.&lt;/li&gt;
+      &lt;li&gt;In both cases, nmap &lt;strong&gt;returns a list of open, closed, or unreachable ports&lt;/strong&gt;.&lt;/li&gt;
+      &lt;li&gt;useful for &lt;strong&gt;system administrators&lt;/strong&gt;, who are often interested in knowing which network applications are running on the hosts in their networks.&lt;/li&gt;
+      &lt;li&gt;useful for &lt;strong&gt;attackers&lt;/strong&gt;, in order to “case the joint” (i.e. checking which ports are open on target hosts)
+        &lt;ul&gt;
+          &lt;li&gt;now, IF an application has a known security flaw &lt;strong&gt;and&lt;/strong&gt; is listening on an open port, THEN a remote user can execute arbitrary code on the vulnerable host!
+            &lt;ul&gt;
+              &lt;li&gt;e.g. Slammer worm&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;to explore port &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;portnumber&lt;/code&gt; nmap sends a TCP SYN segment with destination port &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;portnumber&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;3 possible outcomes
+    &lt;ul&gt;
+      &lt;li&gt;SYNACK
+        &lt;ul&gt;
+          &lt;li&gt;target host is running an application with TCP port &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;portnumber&lt;/code&gt;&lt;/li&gt;
+          &lt;li&gt;nmap returns &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;open&lt;/code&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;RST
+        &lt;ul&gt;
+          &lt;li&gt;target host is &lt;strong&gt;not&lt;/strong&gt; running an application with TCP port &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;portnumber&lt;/code&gt;&lt;/li&gt;
+          &lt;li&gt;attacker at least knows that port &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;portnumber&lt;/code&gt; is &lt;strong&gt;not blocked by any firewall&lt;/strong&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;nothing
+        &lt;ul&gt;
+          &lt;li&gt;SYN segment was blocked by a firewall&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;congestion-control&quot;&gt;Congestion Control&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=Fm92xvIp6JY&amp;amp;list=PLm556dMNleHc1MWN5BX9B2XkwkNE2Djiu&amp;amp;index=23&quot;&gt;watch: Kurose&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;revisit KR chapter 1.4 “Delay, Loss” (in particular, Figure 1.18 “Dependence of average queuing delay on traffic intensity”)&lt;/li&gt;
+  &lt;li&gt;problems of congestion
+    &lt;ul&gt;
+      &lt;li&gt;we lose packets (because &lt;a href=&quot;https://youtu.be/qL7ZGeSoQRM?list=PLLFIgriuZPAcCkmSTfcq7oaHcVy3rzEtc&amp;amp;t=575&quot;&gt;buffers overflow&lt;/a&gt;, so that there is not enough room to store packets, see chapter 1.4 “Delay, Loss” K. Casey)&lt;/li&gt;
+      &lt;li&gt;long delays (because of the queueing in the routers)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Figure 7&lt;/strong&gt;: 2 connections (red line and blue line) are shared over a single hop, i.e. if the full link capacity is R each connection’s throughput is limited to at most R/2 
+&lt;img src=&quot;/assets/images/datkom/congestion_scenario_1.png&quot; alt=&quot;congestion_scenario_1.png&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;note about Figure 7: the senders &lt;strong&gt;may&lt;/strong&gt; send at a rate higher than R/2 (because of the infinite buffer [= storage]), but the output rate $\lambda$ will not increase any further
+    &lt;ul&gt;
+      &lt;li&gt;Kurose video:
+        &lt;ul&gt;
+          &lt;li&gt;“if each sender would be sending at a rate faster than R/2 the throughput would simply max out at R/2 per flow” (deshalb der Knick im Graph)&lt;/li&gt;
+          &lt;li&gt;“that’s because the router’s input and output links cannot carry more than R bps of traffic, R/2 for each of the two flows”&lt;/li&gt;
+          &lt;li&gt;read KR 1.4 “Delay, Loss”&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;note about Figure 7: unlimited buffer, thus, queueing delay can go to infinity (for a &lt;strong&gt;limited&lt;/strong&gt; buffer size the delay does not really approach infinity, instead packets will be dropped, see KR 1.4.2 “Packet loss”)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/datkom/q_delay_1.png&quot; alt=&quot;q_delay_1.png&quot; /&gt;
+&lt;img src=&quot;/assets/images/datkom/q_delay_2.png&quot; alt=&quot;q_delay_2.png&quot; /&gt;
+&lt;img src=&quot;/assets/images/datkom/q_delay_3.png&quot; alt=&quot;q_delay_3.png&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;costs of congestion:
+    &lt;ul&gt;
+      &lt;li&gt;scenario 1: Large &lt;strong&gt;queueing delays&lt;/strong&gt; are experienced as the &lt;strong&gt;packet arrival rate&lt;/strong&gt; approaches the &lt;strong&gt;link capacity&lt;/strong&gt;.&lt;/li&gt;
+      &lt;li&gt;scenario 2a: &lt;strong&gt;packet loss&lt;/strong&gt;: sender must perform &lt;strong&gt;retransmissions&lt;/strong&gt; in order to compensate for dropped (lost) packets due to buffer overflow&lt;/li&gt;
+      &lt;li&gt;scenario 2b: &lt;strong&gt;premature time out of the sender&lt;/strong&gt;: unneeded &lt;strong&gt;retransmissions&lt;/strong&gt; by the sender in the face of large delays may cause a router to use its link bandwidth to forward unneeded copies of a packet&lt;/li&gt;
+      &lt;li&gt;scenario 3: &lt;strong&gt;multiple hops&lt;/strong&gt;: when a packet is dropped along a path, the transmission capacity that was used at each of the upstream links to forward that packet to the point at which it is dropped ends up having been wasted&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;approaches&quot;&gt;Approaches&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;End-to-end congestion control
+    &lt;ul&gt;
+      &lt;li&gt;presence of network congestion must be inferred by the end systems based only on observed network behavior (for example, packet loss and delay)&lt;/li&gt;
+      &lt;li&gt;this is what default TCP does
+        &lt;ul&gt;
+          &lt;li&gt;&lt;strong&gt;TCP segment loss&lt;/strong&gt; as indication of network congestion (decreases window size accordingly)&lt;/li&gt;
+          &lt;li&gt;&lt;strong&gt;increased round-trip segment delay&lt;/strong&gt; as indicator&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Network-assisted congestion control
+    &lt;ul&gt;
+      &lt;li&gt;routers provide explicit feedback to the sender and/or receiver regarding the congestion state&lt;/li&gt;
+      &lt;li&gt;more recently, IP and TCP may also optionally implement network-assisted congestion control&lt;/li&gt;
+      &lt;li&gt;two ways
+        &lt;ul&gt;
+          &lt;li&gt;
+            &lt;ol&gt;
+              &lt;li&gt;choke packet&lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;ol&gt;
+              &lt;li&gt;Router marks/updates a field in a packet flowing from sender to receiver. When the receiver gets this marked packet the receiver notifies the sender of the congestion, so the sender can slow down. (Thus, this method takes a full RTT!)&lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;tcp-congestion-control&quot;&gt;TCP Congestion Control&lt;/h2&gt;</content><author><name>Pharath Palesuvaran</name></author><category term="Notes" /><category term="datkom" /><category term="notes" /><summary type="html">For learning DatKom; content mostly from Kurose, Ross &quot;Computer Networking&quot;.</summary></entry><entry><title type="html">Operating Systems Notes</title><link href="http://localhost:4000/notes/notes-OS/" rel="alternate" type="text/html" title="Operating Systems Notes" /><published>2022-09-22T00:00:00+02:00</published><updated>2022-09-22T00:00:00+02:00</updated><id>http://localhost:4000/notes/notes-OS</id><content type="html" xml:base="http://localhost:4000/notes/notes-OS/">&lt;h1 id=&quot;lectures&quot;&gt;Lectures&lt;/h1&gt;
 
 &lt;h2 id=&quot;i4-comsys-wehrle-sose&quot;&gt;i4 ComSys, Wehrle (SoSe)&lt;/h2&gt;
 

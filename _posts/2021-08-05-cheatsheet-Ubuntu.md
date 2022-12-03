@@ -20,6 +20,24 @@ tags:
     - Ubuntu 17.10+ assigns the X server to tty1 and a "dumb terminal" / "console" to tty2-7
         - older Ubuntus assign X server to tty7 instead of tty1!
 
+## Unattended Upgrade
+
+To see if there was an unattended upgrade check `/var/log/apt/history.log`. 
+
+If `nvidia-smi` does not show the usual output check `/var/log/apt/history.log` because Nvidia also does some unattended upgrades, e.g.
+
+```bash
+Start-Date: 2022-12-03  06:13:58
+Commandline: /usr/bin/unattended-upgrade
+Upgrade: libnvidia-compute-510:amd64 (510.85.02-0ubuntu0.20.04.1, 510.108.03-0ubuntu0.20.04.1), libnvidia-compute-510:i386 (510.85.02-0ubuntu0.20.04.1, 510.108.03-0ubuntu0.20.04.1), libnvidia-encode-510:amd64 (510.85.02-0ubuntu0.20.04.1, 510.108.03-0ubuntu0.20.04.1), libnvidia-encode-510:i386 (510.85.02-0ubuntu0.20.04.1, 510.108.03-0ubuntu0.20.04.1), nvidia-kernel-common-510:amd64 (510.85.02-0ubuntu1, 510.108.03-0ubuntu0.20.04.1), xserver-xorg-video-nvidia-510:amd64 (510.85.02-0ubuntu0.20.04.1, 510.108.03-0ubuntu0.20.04.1), libnvidia-gl-510:amd64 (510.85.02-0ubuntu0.20.04.1, 510.108.03-0ubuntu0.20.04.1), libnvidia-gl-510:i386 (510.85.02-0ubuntu0.20.04.1, 510.108.03-0ubuntu0.20.04.1), libnvidia-fbc1-510:amd64 (510.85.02-0ubuntu0.20.04.1, 510.108.03-0ubuntu0.20.04.1), libnvidia-decode-510:amd64 (510.85.02-0ubuntu0.20.04.1, 510.108.03-0ubuntu0.20.04.1), libnvidia-decode-510:i386 (510.85.02-0ubuntu0.20.04.1, 510.108.03-0ubuntu0.20.04.1), libnvidia-cfg1-510:amd64 (510.85.02-0ubuntu0.20.04.1, 510.108.03-0ubuntu0.20.04.1), nvidia-utils-510:amd64 (510.85.02-0ubuntu0.20.04.1, 510.108.03-0ubuntu0.20.04.1), nvidia-dkms-510:amd64 (510.85.02-0ubuntu1, 510.108.03-0ubuntu0.20.04.1), nvidia-compute-utils-510:amd64 (510.85.02-0ubuntu0.20.04.1, 510.108.03-0ubuntu0.20.04.1), nvidia-driver-510:amd64 (510.85.02-0ubuntu0.20.04.1, 510.108.03-0ubuntu0.20.04.1), libnvidia-extra-510:amd64 (510.85.02-0ubuntu0.20.04.1, 510.108.03-0ubuntu0.20.04.1), nvidia-kernel-source-510:amd64 (510.85.02-0ubuntu0.20.04.1, 510.108.03-0ubuntu0.20.04.1)
+End-Date: 2022-12-03  06:15:52
+
+Start-Date: 2022-12-03  06:16:02
+Commandline: /usr/bin/unattended-upgrade
+Upgrade: libnvidia-common-510:amd64 (510.85.02-0ubuntu1, 510.108.03-0ubuntu0.20.04.1)
+End-Date: 2022-12-03  06:16:03
+```
+
 # Creating Shortcuts
 
 ## For Bluetooth Settings Icon in Ubuntu Activities
