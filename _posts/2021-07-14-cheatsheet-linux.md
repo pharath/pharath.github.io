@@ -584,7 +584,7 @@ history \| grep command_to_search | search some pattern within the history gener
 
 <hr>
 
-script | start saving all input and output in the current terminal session in the file `typescript` (end recording via ctrl + d - this does not close the terminal here; use `script /path/to/mylogfile.txt` to save it in `/path/to/mylogfile.txt`). [source](https://askubuntu.com/a/557309)
+script | start saving all input and output in the current terminal session in the file `typescript` (end recording via ctrl + d - this does not close the terminal here; use `script /path/to/mylogfile.txt` to save it in `/path/to/mylogfile.txt`; `typescript` will be overwritten if you start `script` twice without providing a name!). [source](https://askubuntu.com/a/557309)
 
 # Unzipping
 
