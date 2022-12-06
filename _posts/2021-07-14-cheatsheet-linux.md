@@ -582,6 +582,10 @@ tee | read from standard input and write to both standard output **and** files [
 history | get a list of the last 1000 commands 
 history \| grep command_to_search | search some pattern within the history generated list
 
+<hr>
+
+script | start saving all input and output in the current terminal session in the file `typescript` (end recording via ctrl + d; use `script /path/to/mylogfile.txt` to save it in `/path/to/mylogfile.txt`). [source](https://askubuntu.com/a/557309)
+
 # Unzipping
 
 | command | description |

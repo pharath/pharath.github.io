@@ -2,6 +2,10 @@
 title: "Git Cheatsheet"
 read_time: false
 excerpt: "Some essential git commands"
+header:
+  teaser: /assets/images/git_logo.png
+  overlay_image: /assets/images/git_logo.png
+  overlay_filter: 0.5 
 toc: true
 toc_sticky: true
 categories:
