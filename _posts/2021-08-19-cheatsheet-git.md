@@ -85,6 +85,7 @@ git reset --hard *SHA-1* | reset to a previous state **locally** (**Warning**: `
 | command | description |
 | :---: | :---: |
 `git checkout -- some_file` | undo changes to `some_file` in the local repository and get the latest `some_file` version from git instead
+`git checkout HEAD path/to/file path/to/another_file` | [stackoverflow](https://stackoverflow.com/a/8735590/12282296)
 
 ## Undo local changes
 
@@ -129,11 +130,17 @@ The **golden rule of git rebase** is to never use it on *public* branches.
 
 # git stash
 
-- way to pull, but make sure that the local files are not overwritten by the remote
-- [Explanation](https://stackoverflow.com/questions/19216411/how-do-i-pull-files-from-remote-without-overwriting-local-files)
-    - (1) `git stash`
-    - (2) `git pull`
-    - (3) `git stash pop`
+- use case 1: way to pull, but make sure that the local files are not overwritten by the remote
+    - [Explanation](https://stackoverflow.com/questions/19216411/how-do-i-pull-files-from-remote-without-overwriting-local-files)
+        - (1) `git stash`
+        - (2) `git pull`
+        - (3) `git stash pop`
+- use case 2: If you have uncommitted changes, but the first command doesn't work, then save your uncommitted changes with `git stash` [stackoverflow](https://stackoverflow.com/a/2125738/12282296):
+```bash
+git stash
+git reset --hard HEAD
+git stash pop
+```
 
 # git checkout
 
