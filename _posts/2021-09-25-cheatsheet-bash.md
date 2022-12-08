@@ -44,6 +44,33 @@ $ true || echo "OK"
 $
 ```
 
+## Exit Codes
+
+Exit code of the last command:
+
+```bash
+$ echo $?
+```
+
+## If
+
+### Command as condition
+
+You can specify commands as a condition of `if`. If the command returns `0` in its exitcode that means that the condition is `true`; otherwise `false`. [source](https://stackoverflow.com/a/11287896/12282296)
+
+```bash
+$ if /bin/true; then echo that is true; fi
+that is true
+$ if /bin/false; then echo that is true; fi
+$
+```
+
+### Not
+
+```bash
+if ! grep -q sysa /etc/passwd ; then
+```
+
 ## Was bedeutet $# in einem bash script? (s. [askubuntu post](https://askubuntu.com/questions/939620/what-does-mean-in-bash))
 
 Zum Beispiel:
