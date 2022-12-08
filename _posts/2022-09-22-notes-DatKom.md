@@ -982,7 +982,10 @@ Examples of this principle:
 
 - [watch: Kurose](https://www.youtube.com/watch?v=Fm92xvIp6JY&list=PLm556dMNleHc1MWN5BX9B2XkwkNE2Djiu&index=23)
 - revisit KR chapter 1.4 "Delay, Loss" (in particular, Figure 1.18 "Dependence of average queuing delay on traffic intensity")
-    - traffic intensity $=\frac{La}{R}$, where $R=$link bandwidth, $L=$packet length and $a=$average packet arrival rate
+    - traffic intensity $=\frac{La}{R}$ 
+        - $R=$link bandwidth
+        - $L=$packet length 
+        - $a=$average packet arrival rate
 - problems of congestion
     - we lose packets (because [buffers overflow](https://youtu.be/qL7ZGeSoQRM?list=PLLFIgriuZPAcCkmSTfcq7oaHcVy3rzEtc&t=575), so that there is not enough room to store packets, see chapter 1.4 "Delay, Loss" K. Casey)
     - long delays (because of the queueing in the routers)
