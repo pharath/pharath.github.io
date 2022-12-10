@@ -1076,7 +1076,7 @@ Examples of this principle:
 
 - **End-to-end** congestion control
     - **required** for TCP
-    - presence of network congestion must be inferred by the end systems based only on observed network behavior (for example, packet loss and delay)
+    - presence of network congestion must be inferred by the end systems based only on observed network behavior (for example, via packet loss and delay)
     - this is what default TCP does
         - **TCP segment loss** as indication of network congestion (decreases window size accordingly)
         - **increased round-trip segment delay** as indicator
@@ -1099,6 +1099,13 @@ Examples of this principle:
 ![congestion_tcp_aimd_why.png](/assets/images/datkom/congestion_tcp_aimd_why.png)
 
 ![congestion_tcp_aimd_impl.png](/assets/images/datkom/congestion_tcp_aimd_impl.png)
+
+"Thus the sender's send rate is roughly `cwnd`/`RTT` bytes/sec. By adjusting the value of `cwnd`, the **sender** can therefore adjust the rate at which it sends data into its connection." (KR 3.7.1)
+- `cwnd`: congestion window
+
+More precisely:
+
+![congestion_constraint.png](/assets/images/datkom/congestion_constraint.png)
 
 #### Slow Start
 
