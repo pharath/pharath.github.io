@@ -1060,7 +1060,7 @@ Examples of this principle:
 ![delay_scenario2b.png](/assets/images/datkom/delay_scenario2b.png)
 
 - scenario 3: **multiple hops**: 
-    - when e.g. $\lambda_{in}_{}' \rightarrow \frac{R}{2}$ for the red flow, then this first hop traffic will crowd out the second hop traffic and eventually all other upstream routers, too
+    - when e.g. $\lambda_{in}_' \rightarrow \frac{R}{2}$ for the red flow, then this first hop traffic will crowd out the second hop traffic and eventually all other upstream routers, too
 
 ![delay_scenario3expl.png](/assets/images/datkom/delay_scenario3expl.png)
 
