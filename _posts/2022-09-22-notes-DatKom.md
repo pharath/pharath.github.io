@@ -156,6 +156,7 @@ printf "%d\n" 0xFF
 TODO
 
 ```bash
+telnet   # used for interactive communication with another host using the TELNET protocol (like ssh, but not encrypted, thus not secure)
 traceroute   # measuring roundtrip times (RTT)
 ip
 ifconfig
