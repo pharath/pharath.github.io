@@ -1171,6 +1171,25 @@ More precisely:
 
 - based on using RTT measurements (recall [RTT measurement](#rtt-and-timeout))
 
-![congestion_tcp_delaybased](/assets/images/datkom/congestion_tcp_delaybased.png)
+![congestion_tcp_delaybased.png](/assets/images/datkom/congestion_tcp_delaybased.png)
 
 Note: `cwnd` $\propto$ sender's send rate
+    - the sender controls his speed by setting `cwnd`
+
+![congestion_tcp_delaybased2.png](/assets/images/datkom/congestion_tcp_delaybased2.png)
+
+- BBR: "Bottleneck Bandwidth and Round-trip propagation time"
+    - used for tcp traffic on Google's internal network that interconnects its datacenters
+    - replaced CUBIC
+    - also deployed on Google and Youtube web servers
+
+### Network assisted approaches
+
+#### ECN
+
+- router "in between" sets two bits in IP header
+    - more precisely: 2 bits of the 8-bit **ToS field** ("type of service" field) in the IP header (IPv6 header)
+- receiver sets ECE bit on ACK segment
+    - more precisely: **C bit** and **E bit** in the TCP header
+
+![congestion_tcp_ecn](/assets/images/datkom/congestion_tcp_ecn.png)
