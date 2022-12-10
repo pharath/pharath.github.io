@@ -161,7 +161,39 @@ ip
 ifconfig
 ipconfig   # in Microsoft Windows
 systemd-resolve --flush-caches   # dns cache
+```
+
+### ports, firewall
+
+```bash
 nmap   # port scanning
+
+vim /etc/services   # port -> application map list
+
+# There are two major firewalls in Ubuntu: ufw and firewalld
+# always check both
+# phth: weil "iptables" Befehle zu kompliziert sind, hat man "ufw" und "firewalld" eingeführt
+
+# Uncomplicated Firewall (ufw) 
+# - frontend for "iptables" (https://wiki.ubuntu.com/UncomplicatedFirewall)
+ufw   # opening/closing ports
+sudo ufw allow 5201/tcp
+sudo ufw delete allow 5201/tcp   # https://stackoverflow.com/a/37620498/12282296
+sudo ufw enable   # always make sure ufw is enabled
+
+# firewalld 
+# - acts as an alternative to "nft" and "iptables" command line programs (https://en.wikipedia.org/wiki/Firewalld)
+service firewalld stop   # disable firewall (https://stackoverflow.com/a/51817241/12282296)
+firewall-cmd --version   # check version
+firewall-config   # gui for firewalld
+firewall-applet   # tray applet for firewalld (installing this will also install firewall-config)
+```
+
+### measurements
+
+```bash
+traceroute   # measuring roundtrip times (RTT)
+iperf   # measuring throughput (https://www.cyberciti.biz/faq/how-to-test-the-network-speedthroughput-between-two-linux-servers/)
 ```
 
 # Wireshark GUI meaning
@@ -1029,6 +1061,10 @@ Examples of this principle:
 
 - [watch: Kurose](https://www.youtube.com/watch?v=Fm92xvIp6JY&list=PLm556dMNleHc1MWN5BX9B2XkwkNE2Djiu&index=23)
 - revisit KR chapter 1.4 "Delay, Loss" (in particular, Figure 1.18 "Dependence of average queuing delay on [traffic intensity](#queueing-delay)")
+- key takeaways (phth):
+    - it's not all about maximizing **throughput**, but it's also about minimizing **delay**! Throughput and delay must be considered together!
+        - **Delay** (includes e.g. [queueing delay](#queueing-delay)) can be measured via RTT (`traceroute`)
+        - **Throughput** can be measured 
 - problems of congestion
     - we lose packets (because [buffers overflow](https://youtu.be/qL7ZGeSoQRM?list=PLLFIgriuZPAcCkmSTfcq7oaHcVy3rzEtc&t=575), so that there is not enough room to store packets, see chapter 1.4 "Delay, Loss" K. Casey)
     - long delays (because of the queueing in the routers)
