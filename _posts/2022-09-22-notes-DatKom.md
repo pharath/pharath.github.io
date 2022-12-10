@@ -1085,8 +1085,8 @@ Examples of this principle:
         - more recently, IP and TCP may also **optionally** implement network-assisted congestion control
     - routers provide explicit feedback to the sender and/or receiver regarding the congestion state
     - two ways
-        - (1) choke packet
-        - (2) Router marks/updates a field in a packet flowing from sender to receiver. When the receiver gets this marked packet the receiver notifies the sender of the congestion, so the sender can slow down. (Thus, this method takes a full RTT!)
+        - (1) direct feedback **from router to the sender** via "choke packet"
+        - (2) feedback **from receiver to the sender** (more common than (1)): Router marks/updates a field in a packet flowing from sender to receiver. When the receiver gets this marked packet the receiver notifies the sender of the congestion, so the sender can slow down. (Thus, this method takes a full RTT!)
 
 ## TCP Congestion Control
 
