@@ -1187,9 +1187,26 @@ Note: `cwnd` $\propto$ sender's send rate
 
 #### ECN
 
+- "Explicit Congestion Notification"
 - router "in between" sets two bits in IP header
     - more precisely: 2 bits of the 8-bit **ToS field** ("type of service" field) in the IP header (IPv6 header)
-- receiver sets ECE bit on ACK segment
+- receiver sets **ECE (Explicit Congestion Notification Echo) bit** on ACK segment
     - more precisely: **C bit** and **E bit** in the TCP header
+- from book: "The TCP sender, in turn, reacts to an ACK with a congestion indication by **halving the congestion window**, as it would react to a lost segment using fast retransmit, and sets the **CWR (Congestion Window Reduced) bit** in the header of the next transmitted TCP sender-to-receiver segment."
 
-![congestion_tcp_ecn](/assets/images/datkom/congestion_tcp_ecn.png)
+![congestion_tcp_ecn.png](/assets/images/datkom/congestion_tcp_ecn.png)
+
+Note: "chosen by operator" means there is no standardized method in the RFC's for how to set the ECN and ECE bits
+    - from book: "RFC 3168 does not provide a definition of when a router is congested; that decision is a configuration choice made possible by the router vendor, and decided by the network operator."
+
+## TCP Fairness
+
+- TCP **is** fair in the idealized scenario below, where only two connections (TCP sessions) are competing for throughput
+    - "fixed number of sessions": i.e. there is no other connection
+    - "only in congestion avoidance": (the bullet point is missing here probably) i.e. the router is always operating in congestion-avoidance mode
+
+![tcp_fairness_idealized.png](assets/images/datkom/tcp_fairness_idealized.png)
+
+- some web servers open up multiple parallel TCP connections allowing the web application to get more throughput than if it had just opened one connection
+
+![tcp_fairness.png](/assets/images/datkom/tcp_fairness.png)
