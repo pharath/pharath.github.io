@@ -1062,15 +1062,15 @@ Examples of this principle:
 - scenario 3: **multiple hops**: 
     - when e.g. $\lambda_{in}' \rightarrow \frac{R}{2}$ for the red flow, then this first hop traffic will crowd out the second hop traffic and eventually all other upstream routers, too
 
-![delay_scenario3expl.png](/assets/images/datkom/delay_scenario3expl.png)
+    ![delay_scenario3expl.png](/assets/images/datkom/delay_scenario3expl.png)
 
     - when a packet is dropped along a path, the transmission capacity that was used at each of the upstream links to forward that packet to the point at which it is dropped ends up having been wasted
 
-![delay_scenario3.png](/assets/images/datkom/delay_scenario3.png)
+    ![delay_scenario3.png](/assets/images/datkom/delay_scenario3.png)
 
     - "congestion collaps" phenomenon
 
-![delay_scenario3graph.png](/assets/images/datkom/delay_scenario3graph.png)
+    ![delay_scenario3graph.png](/assets/images/datkom/delay_scenario3graph.png)
 
 ### Approaches
 
@@ -1090,7 +1090,9 @@ Examples of this principle:
 
 ## TCP Congestion Control
 
-### AIMD
+### Loss based approaches
+
+#### AIMD
 
 ![congestion_tcp_aimd.png](/assets/images/datkom/congestion_tcp_aimd.png)
 
@@ -1098,18 +1100,24 @@ Examples of this principle:
 
 ![congestion_tcp_aimd_impl.png](/assets/images/datkom/congestion_tcp_aimd_impl.png)
 
-### Slow Start
+#### Slow Start
 
 ![congestion_tcp_slow_start.png](/assets/images/datkom/congestion_tcp_slow_start.png)
 
-### Transition: From Slow Start to AIMD
+#### Transition: From Slow Start to AIMD
 
 ![congestion_tcp_transition.png](/assets/images/datkom/congestion_tcp_transition.png)
 
-### TCP CUBIC
+#### TCP CUBIC
 
 - one of the most notable modifications to the original TCP
 
 ![congestion_tcp_cubic1.png](/assets/images/datkom/congestion_tcp_cubic1.png)
 
 ![congestion_tcp_cubic2.png](/assets/images/datkom/congestion_tcp_cubic2.png)
+
+- among the 5000 most popular web servers nearly 50% of them run a version of TCP CUBIC
+
+### Delay based approaches
+
+- based on using RTT measurements (recall [RTT measurement](#rtt-and-timeout))
