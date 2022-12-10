@@ -1060,13 +1060,15 @@ Examples of this principle:
 ![delay_scenario2b.png](/assets/images/datkom/delay_scenario2b.png)
 
 - scenario 3: **multiple hops**: 
-    - when e.g. $\lambda_{in}_' \rightarrow \frac{R}{2}$ for the red flow, then this first hop traffic will crowd out the second hop traffic and eventually all other upstream routers, too
+    - when e.g. $\lambda_\iffalse _{} \fi{in}' \rightarrow \frac{R}{2}$ for the red flow, then this first hop traffic will crowd out the second hop traffic and eventually all other upstream routers, too
 
 ![delay_scenario3expl.png](/assets/images/datkom/delay_scenario3expl.png)
 
     - when a packet is dropped along a path, the transmission capacity that was used at each of the upstream links to forward that packet to the point at which it is dropped ends up having been wasted
 
 ![delay_scenario3.png](/assets/images/datkom/delay_scenario3.png)
+
+    - "congestion collaps" phenomenon
 
 ![delay_scenario3graph.png](/assets/images/datkom/delay_scenario3graph.png)
 
