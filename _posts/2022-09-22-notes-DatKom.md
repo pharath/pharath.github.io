@@ -1206,7 +1206,7 @@ Note: "chosen by operator" means there is no standardized method in the RFC's fo
     - "fixed number of sessions": i.e. there is no other connection
     - "only in congestion avoidance": (the bullet point is missing here probably) i.e. the router is always operating in congestion-avoidance mode
 
-![tcp_fairness_idealized.png](assets/images/datkom/tcp_fairness_idealized.png)
+![tcp_fairness_idealized.png](/assets/images/datkom/tcp_fairness_idealized.png)
 
 - some web servers open up multiple parallel TCP connections allowing the web application to get more throughput than if it had just opened one connection
 
