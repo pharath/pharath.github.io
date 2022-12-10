@@ -294,6 +294,10 @@ history \| tail -n 30 | show last 30 commands
 
 - Check current shell type: `echo $0`
 - Check installed library: `ldconfig -p | grep libnvinfer_plugin.so`
+- Check PID of a window: 
+```bash
+xprop _NET_WM_PID | sed 's/_NET_WM_PID(CARDINAL) = //' | ps `cat`
+```
 
 # apt, apt-get, snap, dpkg, pkg-config
 

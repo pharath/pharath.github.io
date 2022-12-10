@@ -190,13 +190,41 @@ printf "%d\n" 0xFF
 
 # Delay and Loss
 
-- delay
+- packet delay
     - transmission delay
         - takes some time to put the bits on the wire (or whatever the medium is)
     - queueing delay
         - if there is a line, i.e. some packets are waiting to be sent, there will be a delay
-- loss
-    - arriving packets will be dropped by the router, if the queue is full, i.e. if there are no free buffers
+- packet loss
+    - arriving packets will be **dropped** by the router, if the queue is full, i.e. if there are no free buffers (= storage)
+
+## Queueing Delay
+
+- can vary from packet to packet 
+    - e.g., if 10 packets arrive at an empty queue at the same time, the first packet transmitted will suffer no queuing delay, while the last packet transmitted will suffer a relatively large queuing delay (while it waits for the other nine packets to be transmitted)
+    - therefore, one typically uses **statistical measures**, e.g.
+        - **average** queuing delay
+        - **variance** of queuing delay
+        - probability that the queuing delay exceeds some specified value
+- When is the queuing delay large and when is it insignificant? 
+    - depends on 
+        - the rate at which traffic arrives at the queue, 
+        - the transmission rate of the link, 
+        - the nature of the arriving traffic, 
+            - that is, whether the traffic arrives periodically or arrives in bursts.
+- measuring queueing delay: 
+    - traffic intensity $=\frac{La}{R}$ 
+        - $R=$link bandwidth
+        - $L=$packet length 
+        - $a=$average packet arrival rate
+    - see graph in Figure 7 bottom right:
+        - $= 0$: no delay
+        - $\gt 1$: queue increases without bound $\Rightarrow$ infinite delay
+        - $\leq 1$: depends on the **nature** of the arriving traffic
+            - **periodic**: $1$ packet every $\frac{L}{R}$ seconds: no delay
+            - **periodic bursts**: $N$ packets every $N \frac{L}{R}$ seconds: no delay for 1st packet, large delay for $N$th packet
+            - **real world**: random arrival
+- infinite delay does not really approach infinity, instead the router **drops** packets (packet loss) because there is no storage available
 
 # Application layer (Brief)
 
@@ -981,11 +1009,7 @@ Examples of this principle:
 ## Congestion Control
 
 - [watch: Kurose](https://www.youtube.com/watch?v=Fm92xvIp6JY&list=PLm556dMNleHc1MWN5BX9B2XkwkNE2Djiu&index=23)
-- revisit KR chapter 1.4 "Delay, Loss" (in particular, Figure 1.18 "Dependence of average queuing delay on traffic intensity")
-    - traffic intensity $=\frac{La}{R}$ 
-        - $R=$link bandwidth
-        - $L=$packet length 
-        - $a=$average packet arrival rate
+- revisit KR chapter 1.4 "Delay, Loss" (in particular, Figure 1.18 "Dependence of average queuing delay on [traffic intensity](#queueing-delay)")
 - problems of congestion
     - we lose packets (because [buffers overflow](https://youtu.be/qL7ZGeSoQRM?list=PLLFIgriuZPAcCkmSTfcq7oaHcVy3rzEtc&t=575), so that there is not enough room to store packets, see chapter 1.4 "Delay, Loss" K. Casey)
     - long delays (because of the queueing in the routers)
@@ -1021,7 +1045,7 @@ Examples of this principle:
     - routers provide explicit feedback to the sender and/or receiver regarding the congestion state
     - more recently, IP and TCP may also optionally implement network-assisted congestion control
     - two ways
-        - 1. choke packet
-        - 2. Router marks/updates a field in a packet flowing from sender to receiver. When the receiver gets this marked packet the receiver notifies the sender of the congestion, so the sender can slow down. (Thus, this method takes a full RTT!)
+        - (1) choke packet
+        - (2) Router marks/updates a field in a packet flowing from sender to receiver. When the receiver gets this marked packet the receiver notifies the sender of the congestion, so the sender can slow down. (Thus, this method takes a full RTT!)
 
 ## TCP Congestion Control
