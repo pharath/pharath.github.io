@@ -53,6 +53,9 @@ Plugin 'liuchengxu/vista.vim'
 
 " Delete/change/add parentheses/quotes/XML-tags/much more with ease
 Plugin 'tpope/vim-surround'
+
+" copying to the system clipboard with text-objects and motions
+Plugin 'christoomey/vim-system-copy'
 ```
 
 ## Install Autocomplete clang_complete 

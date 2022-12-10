@@ -151,6 +151,19 @@ Hex to decimal number:
 printf "%d\n" 0xFF
 ```
 
+## Tools
+
+TODO
+
+```bash
+traceroute   # measuring roundtrip times (RTT)
+ip
+ifconfig
+ipconfig   # in Microsoft Windows
+systemd-resolve --flush-caches   # dns cache
+nmap   # port scanning
+```
+
 # Wireshark GUI meaning
 
 ## The "Packet List" Pane
@@ -206,13 +219,14 @@ printf "%d\n" 0xFF
         - **average** queuing delay
         - **variance** of queuing delay
         - probability that the queuing delay exceeds some specified value
+        - Notice, that Figure 8 plots the **average** delay! The actual delay will vary from packet to packet.
 - When is the queuing delay large and when is it insignificant? 
     - depends on 
         - the rate at which traffic arrives at the queue, 
         - the transmission rate of the link, 
         - the nature of the arriving traffic, 
             - that is, whether the traffic arrives periodically or arrives in bursts.
-- measuring queueing delay: 
+- measuring queueing delay (see Figure 8): 
     - traffic intensity $=\frac{La}{R}$ 
         - $R=$link bandwidth
         - $L=$packet length 
@@ -224,7 +238,10 @@ printf "%d\n" 0xFF
             - **periodic**: $1$ packet every $\frac{L}{R}$ seconds: no delay
             - **periodic bursts**: $N$ packets every $N \frac{L}{R}$ seconds: no delay for 1st packet, large delay for $N$th packet
             - **real world**: random arrival
-- infinite delay does not really approach infinity, instead the router **drops** packets (packet loss) because there is no storage available
+- for $\gt 1$ the delay does not really approach infinity, instead the router **drops** packets (packet loss) because there is no storage available
+
+**Figure 8**: average queueing delay
+![queueing_delay.png](/assets/images/datkom/queueing_delay.png)
 
 # Application layer (Brief)
 
@@ -251,6 +268,8 @@ printf "%d\n" 0xFF
     - from wiki: "Voice and video traffic is generally transmitted using UDP"
 
 # Application Layer
+
+- Layer 7
 
 ## Web and HTTP
 
@@ -1028,11 +1047,28 @@ Examples of this principle:
 ![q_delay_2.png](/assets/images/datkom/q_delay_2.png)
 ![q_delay_3.png](/assets/images/datkom/q_delay_3.png)
 
-- costs of congestion:
-    - scenario 1: Large **queueing delays** are experienced as the **packet arrival rate** approaches the **link capacity**.
-    - scenario 2a: **packet loss**: sender must perform **retransmissions** in order to compensate for dropped (lost) packets due to buffer overflow
-    - scenario 2b: **premature time out of the sender**: unneeded **retransmissions** by the sender in the face of large delays may cause a router to use its link bandwidth to forward unneeded copies of a packet
-    - scenario 3: **multiple hops**: when a packet is dropped along a path, the transmission capacity that was used at each of the upstream links to forward that packet to the point at which it is dropped ends up having been wasted
+### Costs of Congestion
+
+- [watch: Kurose](https://www.youtube.com/watch?v=Fm92xvIp6JY&list=PLm556dMNleHc1MWN5BX9B2XkwkNE2Djiu&index=23)
+- scenario 1: Large **queueing delays** are experienced as the **packet arrival rate** approaches the **link capacity**.
+- scenario 2a: **packet loss**: sender must perform **retransmissions** in order to compensate for dropped (lost) packets due to buffer overflow
+
+![delay_scenario2a.png](/assets/images/datkom/delay_scenario2a.png)
+
+- scenario 2b: **premature time out of the sender**: unneeded **retransmissions** by the sender in the face of large delays may cause a router to use its link bandwidth to forward unneeded copies of a packet
+
+![delay_scenario2b.png](/assets/images/datkom/delay_scenario2b.png)
+
+- scenario 3: **multiple hops**: 
+    - when e.g. $\lambda_{in}_{}' \rightarrow \frac{R}{2}$ for the red flow, then this first hop traffic will crowd out the second hop traffic and eventually all other upstream routers, too
+
+![delay_scenario3.png](/assets/images/datkom/delay_scenario3.png)
+
+    - when a packet is dropped along a path, the transmission capacity that was used at each of the upstream links to forward that packet to the point at which it is dropped ends up having been wasted
+
+![delay_scenario3.png](/assets/images/datkom/delay_scenario3.png)
+
+![delay_scenario3.png](/assets/images/datkom/delay_scenario3.png)
 
 ### Approaches
 
