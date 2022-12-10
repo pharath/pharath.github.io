@@ -171,12 +171,14 @@ nmap   # port scanning
 vim /etc/services   # port -> application map list
 
 # There are two major firewalls in Ubuntu: ufw and firewalld
-# always check both
+# always check both!
 # phth: weil "iptables" Befehle zu kompliziert sind, hat man "ufw" und "firewalld" eingeführt
 
 # Uncomplicated Firewall (ufw) 
 # - frontend for "iptables" (https://wiki.ubuntu.com/UncomplicatedFirewall)
-# - in Ubuntu 20.04 ufw is disabled by default (why?: https://askubuntu.com/a/22739)
+# - in Ubuntu 20.04 ufw is disabled by default 
+#   - (why?: https://askubuntu.com/a/22739)
+#     - in Ubuntu all ports are closed by default, thus no firewall is necessary
 ufw   # opening/closing ports
 sudo ufw allow 5201/tcp
 sudo ufw delete allow 5201/tcp   # https://stackoverflow.com/a/37620498/12282296
@@ -184,6 +186,7 @@ sudo ufw enable   # always make sure ufw is enabled
 
 # firewalld 
 # - acts as an alternative to "nft" and "iptables" command line programs (https://en.wikipedia.org/wiki/Firewalld)
+# - in Ubuntu 20.04 firewalld is not installed by default
 service firewalld stop   # disable firewall (https://stackoverflow.com/a/51817241/12282296)
 firewall-cmd --version   # check version
 firewall-config   # gui for firewalld
@@ -194,7 +197,9 @@ firewall-applet   # tray applet for firewalld (installing this will also install
 
 ```bash
 traceroute   # measuring roundtrip times (RTT)
-iperf   # measuring throughput (https://www.cyberciti.biz/faq/how-to-test-the-network-speedthroughput-between-two-linux-servers/)
+
+# disable firewalld first!
+iperf3   # measuring throughput (https://www.cyberciti.biz/faq/how-to-test-the-network-speedthroughput-between-two-linux-servers/)
 ```
 
 # Wireshark GUI meaning
@@ -1165,3 +1170,7 @@ More precisely:
 ### Delay based approaches
 
 - based on using RTT measurements (recall [RTT measurement](#rtt-and-timeout))
+
+![congestion_tcp_delaybased](/assets/images/datkom/congestion_tcp_delaybased.png)
+
+Note: `cwnd` $\propto$ sender's send rate
