@@ -1098,4 +1098,10 @@ Examples of this principle:
 
 ![congestion_tcp_aimd_impl.png](/assets/images/datkom/congestion_tcp_aimd_impl.png)
 
-![congestion_tcp_aimd_slow_start.png](/assets/images/datkom/congestion_tcp_aimd_slow_start.png)
+### Slow Start
+
+![congestion_tcp_slow_start.png](/assets/images/datkom/congestion_tcp_slow_start.png)
+
+### Transition: From Slow Start to AIMD
+
+![congestion_tcp_transition.png](/assets/images/datkom/congestion_tcp_transition.png)
