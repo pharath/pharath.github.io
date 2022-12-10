@@ -176,6 +176,7 @@ vim /etc/services   # port -> application map list
 
 # Uncomplicated Firewall (ufw) 
 # - frontend for "iptables" (https://wiki.ubuntu.com/UncomplicatedFirewall)
+# - in Ubuntu 20.04 ufw is disabled by default (why?: https://askubuntu.com/a/22739)
 ufw   # opening/closing ports
 sudo ufw allow 5201/tcp
 sudo ufw delete allow 5201/tcp   # https://stackoverflow.com/a/37620498/12282296
