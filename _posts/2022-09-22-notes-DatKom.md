@@ -1074,16 +1074,28 @@ Examples of this principle:
 
 ### Approaches
 
-- End-to-end congestion control
+- **End-to-end** congestion control
+    - **required** for TCP
     - presence of network congestion must be inferred by the end systems based only on observed network behavior (for example, packet loss and delay)
     - this is what default TCP does
         - **TCP segment loss** as indication of network congestion (decreases window size accordingly)
         - **increased round-trip segment delay** as indicator
-- Network-assisted congestion control
+- **Network-assisted** congestion control
+    - **optional** for TCP
+        - more recently, IP and TCP may also **optionally** implement network-assisted congestion control
     - routers provide explicit feedback to the sender and/or receiver regarding the congestion state
-    - more recently, IP and TCP may also optionally implement network-assisted congestion control
     - two ways
         - (1) choke packet
         - (2) Router marks/updates a field in a packet flowing from sender to receiver. When the receiver gets this marked packet the receiver notifies the sender of the congestion, so the sender can slow down. (Thus, this method takes a full RTT!)
 
 ## TCP Congestion Control
+
+### AIMD
+
+![congestion_tcp_aimd.png](/assets/images/datkom/congestion_tcp_aimd.png)
+
+![congestion_tcp_aimd_why.png](/assets/images/datkom/congestion_tcp_aimd_why.png)
+
+![congestion_tcp_aimd_impl.png](/assets/images/datkom/congestion_tcp_aimd_impl.png)
+
+![congestion_tcp_aimd_slow_start.png](/assets/images/datkom/congestion_tcp_aimd_slow_start.png)
