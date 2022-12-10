@@ -1060,7 +1060,7 @@ Examples of this principle:
 ![delay_scenario2b.png](/assets/images/datkom/delay_scenario2b.png)
 
 - scenario 3: **multiple hops**: 
-    - when e.g. $\lambda_\iffalse _{} \fi{in}' \rightarrow \frac{R}{2}$ for the red flow, then this first hop traffic will crowd out the second hop traffic and eventually all other upstream routers, too
+    - when e.g. $\lambda_{in}' \rightarrow \frac{R}{2}$ for the red flow, then this first hop traffic will crowd out the second hop traffic and eventually all other upstream routers, too
 
 ![delay_scenario3expl.png](/assets/images/datkom/delay_scenario3expl.png)
 
@@ -1105,3 +1105,11 @@ Examples of this principle:
 ### Transition: From Slow Start to AIMD
 
 ![congestion_tcp_transition.png](/assets/images/datkom/congestion_tcp_transition.png)
+
+### TCP CUBIC
+
+- one of the most notable modifications to the original TCP
+
+![congestion_tcp_cubic1.png](/assets/images/datkom/congestion_tcp_cubic1.png)
+
+![congestion_tcp_cubic2.png](/assets/images/datkom/congestion_tcp_cubic2.png)
