@@ -539,10 +539,10 @@ whoami | print the user name associated with the current effective user ID
 `ls -ltr | vim -` | zeige Output eines Befehls in vim (ACHTUNG: Leerzeichen hinter "vim" nicht vergessen!)
 `Befehl | head -3` |	zeige oberste 3 Zeilen des Outputs
 `Befehl | tail -3` |
-du -sch ./folder \| sort -rh \| head -5	|	zeige disk usage (=size) of folder (-h für human readable; -s für zeige auch Subdirectories; -c für zeige grand total am Ende) (sort -rh für sortiere nach size, wobei -r für reverse und -h für compare human readable sizes)
-echo "blabla" >> *filename* | write output to file *filename*
-echo "blabla" \| tee *filename* | write output to file *filename*
-tee | read from standard input and write to both standard output **and** files [doc](http://manpages.ubuntu.com/manpages/bionic/man1/tee.1.html) (name derived from "T-junction", since `tee` is usually used in pipes)
+`du -sch ./folder | sort -rh | head -5` | zeige disk usage (=size) of folder (`-h` für human readable; `-s` für zeige auch Subdirectories; `-c` für zeige grand total am Ende) (`sort -rh` für sortiere nach size, wobei `-r` für reverse und `-h` für compare human readable sizes)
+`echo "blabla" >> filename` | write output to file *filename*
+`echo "blabla" | tee filename` | write output to file *filename*
+`tee` | read from standard input and write to both standard output **and** files [doc](http://manpages.ubuntu.com/manpages/bionic/man1/tee.1.html) (name derived from "T-junction", since `tee` is usually used in pipes)
 
 ### Open in File Browser
 
@@ -683,6 +683,7 @@ sudo hdparm -i /dev/sda |
 | command | description |
 | :---: | :---: |
 `du -sh *` | 
+`du -sch *` | `-c` to show grand total
 `du -sh * | sort -h` | 
 `du -sh * .[^.]*` | 
 `du -sh * .[^.]* | sort -h` | 
