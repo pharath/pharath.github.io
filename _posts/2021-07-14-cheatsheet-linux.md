@@ -684,7 +684,8 @@ sudo hdparm -i /dev/sda |
 | :---: | :---: |
 `du -sh *` | 
 `du -sch *` | `-c` to show grand total
-`du -sh * | sort -h` | 
+`du -sh * | sort -h` | "ascending": largest file in the last output line
+`du -sh * | sort -rh` | "descending": largest file in the first output line (`-r` for "reverse order")
 `du -sh * .[^.]*` | 
 `du -sh * .[^.]* | sort -h` | 
 `df -h` | to analyze the whole filesystem
