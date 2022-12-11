@@ -475,120 +475,104 @@ ctrl + q | unfreeze/unblock terminal
 
 | command | description |
 | :---: | :---: |
-echo Variable |		display content of the variable "Variable"
+echo Variable | display content of the variable "Variable"
+printenv | Print the values of the specified environment VARIABLE(s).
 echo $$ | display PID of current shell
 bash | start new bash shell instance in current bash shell (the new shell will have a different PID than the old one, check shell PID via `echo $$`)
 exec > some_file | redirect all shell output to some_file
 cat /etc/shells | list all shells
 chsh | change shell (you will be prompted to enter one of the shells in `cat /etc/shells`)
 
-<hr>
+### Running Multiple Commands
 
+| command | description |
+| :---: | :---: |
 do_something1 && do_something2_that_depended_on_something1 | only run "something2", if "something1" completes successfully
 do_something1; do_something2 | run "something2" irrespective of "something1"
 
-<hr>
+### PATH Variable
 	
-$PATH |			Variable, die alle Pfade enthält, in denen Shell-Programme/Shell-Befehle (ls, echo, df, nautilus, etc.) gesucht werden
+| command | description |
+| :---: | :---: |
+$PATH | Variable, die alle Pfade enthält, in denen Shell-Programme/Shell-Befehle (ls, echo, df, nautilus, etc.) gesucht werden
 which python3 |		
 whereis python3	|
+which *Shell-program* | display path of Shell-program
 
-<hr>
+### find
 
-find /opt/ -iname pattern |						find all files (hier: in dir /opt/ ), for which base of file name (path with leading dirs removed) matches shell pattern pattern (Achtung: pattern muss genau übereinstimmen! Falls Endung unbekannt, mit Sternchen `*` am Ende suchen, dh. `pattern*` statt `pattern` suchen (wie bei `ls` Befehl).
-find /opt/ -name pattern |						wie -iname, aber case-sensitive
-find /opt/ -iname pattern -type f |					nur files suchen
-find /opt/ -iname pattern -type d |					nur dirs suchen
+| command | description |
+| :---: | :---: |
+find /opt/ -iname pattern | find all files (hier: in dir /opt/ ), for which base of file name (path with leading dirs removed) matches shell pattern pattern (Achtung: pattern muss genau übereinstimmen! Falls Endung unbekannt, mit Sternchen `*` am Ende suchen, dh. `pattern*` statt `pattern` suchen (wie bei `ls` Befehl).
+find /opt/ -name pattern | wie -iname, aber case-sensitive
+find /opt/ -iname pattern -type f | nur files suchen
+find /opt/ -iname pattern -type d | nur dirs suchen
 find /opt/ ( -iname pattern1 -o -iname pattern2 ) |	-o für oder
-find /opt/ -size +1G |							nur files, die über 1GB groß sind
+find /opt/ -size +1G | nur files, die über 1GB groß sind
 
-<hr>
+### sed
 
+| command | description |
+| :---: | :---: |
 sed 's/unix/linux/' geekfile.txt | replaces the word 'unix' with 'linux' in the file 'geekfile.txt'. `sed` is mostly used to replace text in a file. Examples: see [here](https://www.geeksforgeeks.org/sed-command-in-linux-unix-with-examples/).
 
-<hr>
+### Shortcuts
 
-which *Shell-program*	| display path of Shell-program
+| command | description |
+| :---: | :---: |
+fn + links | scrolle nach ganz oben
+cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen will)
 
-<hr>
+### tty, terminal session management
 
-fn + links	|		scrolle nach ganz oben
-
-<hr>
-
-cmd + oben	|	focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen will)
-
-<hr>
-
-tty	|			zeigt Namen des aktiven terminals
-
-<hr>
-
+| command | description |
+| :---: | :---: |
+tty	| zeigt Namen des aktiven terminals
 ls -ltr /dev/ttys\*	| zeigt Namen aller aktiven terminals 
+last | zeige letzte terminal logins
+whoami | print the user name associated with the current effective user ID 
 
-<hr>
+### redirection, sort, head, tail
 
-last | 				zeige letzte terminal logins
-
-<hr>
-
-vim &lt;(ls -ltr)	|	zeige Output eines Befehls in vim (ACHTUNG: Leerzeichen hinter “vim” nicht vergessen!)
-|oder:
-ls -ltr \| vim - |
-
-<hr>
-
-Befehl \| head -3 |	zeige oberste 3 Zeilen des Outputs
-
-<hr>
-
-Befehl \| tail -3 |
-
-<hr>
-
+| command | description |
+| :---: | :---: |
+`ls -ltr | vim -` | zeige Output eines Befehls in vim (ACHTUNG: Leerzeichen hinter "vim" nicht vergessen!)
+`Befehl | head -3` |	zeige oberste 3 Zeilen des Outputs
+`Befehl | tail -3` |
 du -sch ./folder \| sort -rh \| head -5	|	zeige disk usage (=size) of folder (-h für human readable; -s für zeige auch Subdirectories; -c für zeige grand total am Ende) (sort -rh für sortiere nach size, wobei -r für reverse und -h für compare human readable sizes)
-
-<hr>
-
-whoami	|		print the user name associated with the current effective user ID 
-
-<hr>
-
-nautilus .	|	öffne current directory in File Browser
-
-<hr>
-
-\`# ein comment\` |	Kommentar in command line
-
-<hr>
-
-pwd		|		zeige current working directory
-
-<hr>
-
-mkdir -p /file/subfile/subsubfile	|	erstellt file und subfile automatisch, falls sie noch nicht existieren
-
-<hr>
-
-**Tipp:** | IMMER -iv BENUTZEN ! (-i für bestätigen, -v für ausgeführte Aktion zeigen)
-mv -iv |
-rm -iv |
-cp -iv |
-
-<hr>
-
 echo "blabla" >> *filename* | write output to file *filename*
 echo "blabla" \| tee *filename* | write output to file *filename*
 tee | read from standard input and write to both standard output **and** files [doc](http://manpages.ubuntu.com/manpages/bionic/man1/tee.1.html) (name derived from "T-junction", since `tee` is usually used in pipes)
 
-<hr>
+### Open in File Browser
 
-history | get a list of the last 1000 commands 
-history \| grep command_to_search | search some pattern within the history generated list
+| command | description |
+| :---: | :---: |
+nautilus .	|	öffne current directory in File Browser
 
-<hr>
+### comments
 
-script | start saving all input and output in the current terminal session in the file `typescript` (end recording via ctrl + d - this does not close the terminal here; use `script /path/to/mylogfile.txt` to save it in `/path/to/mylogfile.txt`; `typescript` will be overwritten if you start `script` twice without providing a name!). [source](https://askubuntu.com/a/557309)
+| command | description |
+| :---: | :---: |
+\`# ein comment\` |	Kommentar in command line
+
+### File Operations
+
+| command | description |
+| :---: | :---: |
+pwd | zeige current working directory
+mkdir -p /file/subfile/subsubfile	|	erstellt file und subfile automatisch, falls sie noch nicht existieren
+mv -iv | **Tipp:** | IMMER -iv BENUTZEN ! (-i für bestätigen, -v für ausgeführte Aktion zeigen)
+rm -iv | **Tipp:** | IMMER -iv BENUTZEN ! (-i für bestätigen, -v für ausgeführte Aktion zeigen)
+cp -iv | **Tipp:** | IMMER -iv BENUTZEN ! (-i für bestätigen, -v für ausgeführte Aktion zeigen)
+
+### history, script
+
+| command | description |
+| :---: | :---: |
+`history` | get a list of the last 1000 commands 
+`history | grep command_to_search` | search some pattern within the history generated list
+`script` | start saving all input and output in the current terminal session in the file `typescript` (end recording via ctrl + d - this does not close the terminal here; use `script /path/to/mylogfile.txt` to save it in `/path/to/mylogfile.txt`; `typescript` will be overwritten if you start `script` twice without providing a name!). [source](https://askubuntu.com/a/557309)
 
 # Unzipping
 
