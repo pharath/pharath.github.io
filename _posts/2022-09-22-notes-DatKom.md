@@ -182,6 +182,13 @@ History of MSS: [superuser](https://superuser.com/a/1652039)
 On Ubuntu3060 the TCP Wireshark Lab trace showed `[TCP Segment Len: 2896]` which was larger than the MTU on Ubuntu3060 which was `1500`!
 - This is because tso/gso was turned on. See [Segmentation Offload](#segmentation-offload). When I turned it off, Wireshark showed `[TCP Segment Len: 1448]`.
 
+More precisely: from [stackoverflow](https://stackoverflow.com/a/54595283/12282296):
+
+```bash
+# the MSS shrinks when IP/TCP options are added
+MSS = MTU - (20 + len(IP Options)) - (20 + len(TCP Options))
+```
+
 #### Segmentation Offload
 
 sources: 
