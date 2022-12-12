@@ -163,6 +163,37 @@ ifconfig
 ipconfig   # in Microsoft Windows
 systemd-resolve --flush-caches   # dns cache
 ```
+### configuration
+
+#### MTU, MSS
+
+```bash
+ifconfig | grep mtu   # MTU size (https://linuxhint.com/how-to-change-mtu-size-in-linux/)
+ip a | grep mtu
+ifconfig wlo1 mtu 1000 up   # change MTU size of interface "wlo1" to 1000 bytes (https://linuxhint.com/how-to-change-mtu-size-in-linux/)
+```
+
+History of MSS: [superuser](https://superuser.com/a/1652039)
+- MSS = MTU - IPHeaderLen - TCPHeaderLen
+- IP headers are 20 bytes long
+- typical TCP headers are 32 bytes long now
+    - resulting in a typical **1448 byte** TCP MSS on a standard 1500 byte MTU Ethernet network (like Ubuntu3060)
+
+On Ubuntu3060 the TCP Wireshark Lab trace showed `[TCP Segment Len: 2896]` which was larger than the MTU on Ubuntu3060 which was `1500`!
+- This is because tso/gso was turned on. See [Segmentation Offload](#segmentation-offload). When I turned it off, Wireshark showed `[TCP Segment Len: 1448]`.
+
+#### Segmentation Offload
+
+sources: 
+- [https://rtodto.net/generic_segmentation_offload_and_wireshark/](https://rtodto.net/generic_segmentation_offload_and_wireshark/)
+- [stackoverflow](https://stackoverflow.com/a/8017355/12282296)
+
+```bash
+ethtool -k wlo1   # display current settings for interface "wlo1"
+sudo ethtool -K wlo1 gso off   # turn off gso
+sudo ethtool -K wlo1 tso off   # turn off tso
+sudo ethtool -K wlo1 tx-tcp-mangleid-segmentation on
+```
 
 ### ports, firewall
 
@@ -203,6 +234,15 @@ traceroute   # measuring roundtrip times (RTT)
 iperf3   # measuring throughput (https://www.cyberciti.biz/faq/how-to-test-the-network-speedthroughput-between-two-linux-servers/)
 ```
 
+### tshark
+
+phth: "Wireshark in command line."
+
+[source](https://manpages.ubuntu.com/manpages/xenial/man1/tshark.1.html): 
+- TShark is a network protocol analyzer. 
+- It lets you capture packet data from a live network, or read packets from a previously saved capture file, either printing a decoded form of those packets to the standard output or writing the packets to a file.
+- TShark is able to detect, read and write the same capture files that are supported by Wireshark.
+
 # Wireshark
 
 ## Wireshark GUI meaning
@@ -216,13 +256,13 @@ iperf3   # measuring throughput (https://www.cyberciti.biz/faq/how-to-test-the-n
 
 - Statistics &rarr; TCP Stream Graph &rarr; Round Trip Time Graph
 - plots the RTT for each of the TCP segments sent
-- the plotted RTT values are in the `[SEQ/ACK analysis]` &rarr; `[The RTT to ACK the segment was: x.xxx seconds]` field
+- the plotted RTT values are in the field `[SEQ/ACK analysis]` &rarr; `[The RTT to ACK the segment was: x.xxx seconds]` (only visible in ACKs)
     - see [stackoverflow](https://stackoverflow.com/a/51661704/12282296)
 
 ## Time-Sequence-Graph (Stevens)
 
 - plots **sequence numbers** with respect to **time**
-- if there are **no** retransmitted segments, the sequence numbers from the source to the destination should be **increasing monotonically** with respect to time
+- if there are **no retransmitted segments**, the sequence numbers from the source to the destination should be **increasing monotonically** with respect to time
 
 ## Measure Throughput
 
@@ -636,6 +676,10 @@ The **transport layer** just connects processes to the **network layer**. The tr
     - We say **TCP segment** is the protocol data unit which consists of a **TCP header** and an **application data piece (packet)** which comes from the (upper) **Application Layer**. **Transport layer data** is generally named as **segment** and **network layer data unit** is named as **datagram**, but when we use UDP as transport layer protocol we don't say UDP segment, instead, we say UDP datagram. I think this is because we do not segmentate UDP data unit (segmentation is made in transport layer when we use TCP).
 - **encapsulation**: 
     - a datagram encapsulates a segment which encapsulates a message
+- from TCP Wireshark Lab: 
+    - why `TCP Segment Len: 1460` ?
+        - typically, the interface card limits the **length of the maximum IP datagram** to **1500 bytes**, and there is a minimum of 40 bytes of **TCP/IP header data** 
+- see MSS
 
 ### Payload
 
