@@ -118,7 +118,7 @@ Yeah, here I have one more slide showing just our depth predictions for some of 
 
 And as you might be familiar, the gap is quickly closing in state-of-the-art approaches. If you give yourself Lidar and how well you can do versus if you do not have lidar, but you just use vision techniques and you use pseudo lidar approaches, then that gap is quickly shrinking in academia. And we see a lot of this as well internally. 
 
-## Outlook: Software 2.0 Planner
+# Outlook: Software 2.0 Planner
 
 Finally, I've shown you sort of how this software 2.0 stack is expanding through the code it's eating some of the you know occupancy tracker like techniques. The logical conclusion of that, of course, is there's still a **perception system** that creates explicit predictions and those explicit predictions are 
 1. shown in the instrument cluster and 
@@ -126,7 +126,7 @@ Finally, I've shown you sort of how this software 2.0 stack is expanding through
 And this **policy** is still **in the land of 1.0**, where for us and for many others as well, where you have **explicit planner** that takes all the predictions and drives on that. The problem with that is your **explicit** predictions are basically doomed to never be good enough and **never be complete**. And so **writing these planners** is extremely difficult, error-prone, lots of hyperparameters, very tricky. And so the logical conclusion of this, of course, is that we'd like to train our networks to actually do a lot of this **planning inside the network**. 
 In particular, **we have huge data sets of people driving** cars so when people drive cars and they steer the wheel they're actually **data labeling** for you. They're showing you how to drive through any into any intersection or any other kind of place. 
 
-## Self-supervised Learning, Contrastive Learning
+# Self-supervised Learning, Contrastive Learning
 
 And the other thing I'll say is like most of what I've described so far this relies primarily on self super part on the supervised learning with the exception of depth where we massage and create massive data set but but we've seen recently with the use of for example contrasted losses and things like that there's a lot of progress today in cell supervised learning and so we'd like to leverage some of that in a team here's an example of just some videos we have probably the most interesting largest data set of videos these are coming from cameras and so we've been really looking into some of these cell surprise techniques to speed up the process and to speed up the rate at which we learn from very little supervised data so we don't have to collect like tens hundreds of thousands of examples of except right turn we can do it we prefer not to. 
 
