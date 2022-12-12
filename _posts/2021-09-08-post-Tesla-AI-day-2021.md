@@ -145,7 +145,7 @@ Watch [Youtube: t=3781](https://youtu.be/j0z4FweCy4M?t=3781)
 
 This also improved a lot of our object detection. So, for example, here in this video I'm showing single camera predictions in **orange** and multi-camera predictions in **blue**. And basically, if you can't predict these cars, if you are only seeing a tiny sliver of a car, your detections are not going to be very good and their positions are not going to be good. But a **multi-camera network** does not have an issue. 
 
-![largeVehicleCameraStruggle.gif](/assets/images/teslaAIDay/largeVehicleCameraStruggle.gif)
+Watch [Youtube: t=3800](https://youtu.be/j0z4FweCy4M?t=3800)
 
 Here's another video from a more nominal sort of situation. And we see that, as these cars in this tight space cross camera boundaries, there's a lot of jank that enters into the predictions and basically the whole setup just doesn't make sense, especially for very large vehicles like this one. And we can see that the **multi-camera networks** struggle significantly less with these kinds of predictions. 
 
