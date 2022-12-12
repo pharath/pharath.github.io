@@ -203,12 +203,32 @@ traceroute   # measuring roundtrip times (RTT)
 iperf3   # measuring throughput (https://www.cyberciti.biz/faq/how-to-test-the-network-speedthroughput-between-two-linux-servers/)
 ```
 
-# Wireshark GUI meaning
+# Wireshark
 
-## The "Packet List" Pane
+## Wireshark GUI meaning
+
+### The "Packet List" Pane
 
 - the lines in the **"No." column** connecting the selected packet with other packets ([see Table 3.16. Related packet symbols](https://www.wireshark.org/docs/wsug_html_chunked/ChUsePacketListPaneSection.html))
     - DNS packets that use the **same port numbers**. Wireshark treats them as belonging to the **same conversation** and draws a line connecting them.
+
+## RTT Graph
+
+- Statistics &rarr; TCP Stream Graph &rarr; Round Trip Time Graph
+- plots the RTT for each of the TCP segments sent
+- the plotted RTT values are in the `[SEQ/ACK analysis]` &rarr; `[The RTT to ACK the segment was: x.xxx seconds]` field
+    - see [stackoverflow](https://stackoverflow.com/a/51661704/12282296)
+
+## Time-Sequence-Graph (Stevens)
+
+- plots **sequence numbers** with respect to **time**
+- if there are **no** retransmitted segments, the sequence numbers from the source to the destination should be **increasing monotonically** with respect to time
+
+## Measure Throughput
+
+- **total data**: difference between the **sequence number** of the *first TCP segment* and the acknowledged **sequence number** of the *last ACK*
+- **total transmission time**: difference of the **time instant** of the *first TCP segment* and the **time instant** of the *last ACK*
+- **throughput** = total data / total transmission time
 
 # Multiplexing
 
