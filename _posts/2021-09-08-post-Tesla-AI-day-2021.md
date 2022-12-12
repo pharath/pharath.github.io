@@ -137,11 +137,11 @@ So, one more thing. You have to be careful with some of the details here, when y
 
 So, this is what that would look like. We insert a new layer right above the image rectification layer. It's a function of **camera calibration** and it translates all of the images into a **virtual common camera**. So, if you were to average up a lot of repeater images, for example, which faced at the back you would without doing this you would get a kind of a blur. But **after doing the rectification** transformation you see that the back mirror gets really crisp. So, once you do this this **improves the performance** quite a bit. 
 
-![whereToLookTransformer.gif](/assets/images/teslaAIDay/whereToLookTransformer.gif)
+Watch [Youtube: t=3755](https://youtu.be/j0z4FweCy4M?t=3755)
 
 So, here are some of the results. So, on the **left** we are seeing what we had before and on the **right** we're now seeing significantly improved predictions coming directly out of the neural net. This is a **multi-camera network** predicting directly in vector space. And you can see that it's basically night and day. You can actually drive on this. And this took some time and some engineering and incredible work from the AI team to actually get this to work and deploy and make it efficient in the car. 
 
-![SinglecamVSMulticam.gif](/assets/images/teslaAIDay/SinglecamVSMulticam.gif)
+Watch [Youtube: t=3781](https://youtu.be/j0z4FweCy4M?t=3781)
 
 This also improved a lot of our object detection. So, for example, here in this video I'm showing single camera predictions in **orange** and multi-camera predictions in **blue**. And basically, if you can't predict these cars, if you are only seeing a tiny sliver of a car, your detections are not going to be very good and their positions are not going to be good. But a **multi-camera network** does not have an issue. 
 
