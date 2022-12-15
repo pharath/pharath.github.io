@@ -793,6 +793,7 @@ Rsync patterns: [stackexchange](https://unix.stackexchange.com/a/2503)
 `rsync -a --exclude=".*"` | excludes hidden files and directories
 `rsync -a --exclude=".*/"` | exclude hidden directories only
 `rsync -av --progress sourcefolder /destinationfolder --exclude thefoldertoexclude` | exclude `thefoldertoexclude`
+`rsync -av --progress sourcefolder /destinationfolder --exclude thefoldertoexclude --exclude anotherfoldertoexclude` | you can use `-exclude` multiple times ([stackoverflow](https://stackoverflow.com/a/14789400/12282296))
 `rsync -av --progress ../../kitcar-gazebo-simulation/ ./kitcar-gazebo-simulation/ --exclude '*.bag'` | exclude all files ending with `.bag` in the current directory, no recursive traversal ([patterns](https://unix.stackexchange.com/a/2503))
 
 ### Resume partially scp-transferred files using Rsync
