@@ -783,12 +783,17 @@ scp -rv Macbook:"~/Desktop/Uni/FS1/Essential\ Astrophysics\ WS1819" ~/Desktop/ |
 
 ## rsync
 
+Rsync patterns: [stackexchange](https://unix.stackexchange.com/a/2503)
+
 | command | description |
 | :---: | :---: |
-rsync -a *source* *destination* | copy directory (**Warning**: -r tag does not copy some stuff, e.g. symlinks)
+`rsync -a *source* *destination*` | copy directory (**Warning**: `-r` tag does not copy some stuff, e.g. symlinks)
+`rsync -av --progress` | show progress report
 `rsync -a --exclude="SomeDirForPythonInstall"` | exclude directory "SomeDirForPythonInstall"
 `rsync -a --exclude=".*"` | excludes hidden files and directories
 `rsync -a --exclude=".*/"` | exclude hidden directories only
+`rsync -av --progress sourcefolder /destinationfolder --exclude thefoldertoexclude` | exclude `thefoldertoexclude`
+`rsync -av --progress ../../kitcar-gazebo-simulation/ ./kitcar-gazebo-simulation/ --exclude '*.bag'` | exclude all files ending with `.bag` in the current directory, no recursive traversal ([patterns](https://unix.stackexchange.com/a/2503))
 
 ### Resume partially scp-transferred files using Rsync
 
