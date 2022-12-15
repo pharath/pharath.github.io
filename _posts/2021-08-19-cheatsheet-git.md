@@ -151,8 +151,8 @@ git stash apply
 ```
 
 **Note**: `git stash` by default does not stash untracked and ignored files. ([stackoverflow](https://stackoverflow.com/a/835561/12282296))
-    - Use `--all` to include these, too. 
-    - Use `--include-untracked` aka `-u` to include untracked files only.
+- Use `--all` to include untracked and ignored files. 
+- Use `--include-untracked` aka `-u` to include untracked files only.
 
 # git checkout
 
