@@ -36,6 +36,12 @@ sudo docker ps -a | -a flag: Show all containers (default shows just running)
 sudo docker images | show all images
 sudo docker system df | Show docker disk usage (size of all images together)
 
+## Free up Storage
+
+See
+- `docker builder prune` (see [builder](#builder))
+- [Remove dangling Images](#remove-dangling-images)
+
 ## docker commit
 
 | :---: | :---: |
@@ -77,6 +83,47 @@ sudo docker exec -it 6b594d9d60cc bash | start bash in container 6b594d9d60cc
 
 | :---: | :---: |
 sudo docker build --no-cache -t deep\_braket:v1 . | `-t`: REPO name and TAG name of image; `--no-cache`: [explanation](https://stackoverflow.com/a/35595021), ohne diesen flag wird Layer Caching benutzt (image updated die alte image-Version sozusagen nur und hat dependencies zur alten image-Version; die alte image-Version kann also nicht gelöscht werden!); `.`: location of Dockerfile
+
+## builder
+
+| :---: | :---: |
+docker builder prune | Remove build cache (phth: e.g. to free up space when using `docker compose` repeatedly) ([doc](https://docs.docker.com/engine/reference/commandline/builder_prune/))
+
+## compose
+
+| :---: | :---: |
+docker compose build *SomeServiceName* | Build or rebuild services ([doc](https://docs.docker.com/engine/reference/commandline/compose_build/))
+docker compose build *SomeServiceName* | Build or rebuild services ([doc](https://docs.docker.com/engine/reference/commandline/compose_build/))
+docker compose build --no-cache *SomeServiceName* | Do not use cache when building the image
+
+A `docker-compose.yaml` example:
+```yaml
+version: '3.8'
+services:
+  base:
+    image: kitcar-sim:base
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+  cml:
+    image: ${IMAGE_URL}/ci:${CI_IMAGE_TAG_CML}
+    depends_on:
+    - base
+    build:
+      context: ../
+      dockerfile: docker/DockerfileCML
+      args:
+        PARENT: ${IMAGE_URL}/ci:${CI_IMAGE_TAG}
+  kitcar-ros:
+    image: kitcar-sim:kitcar-ros
+    depends_on:
+    - base
+    build:
+      context: ../
+      dockerfile: docker/DockerfileROS
+      args:
+        PARENT: kitcar-sim:base
+```
 
 ## top
 
