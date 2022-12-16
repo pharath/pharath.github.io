@@ -247,10 +247,28 @@ phth: "Wireshark in command line."
 
 [source](https://manpages.ubuntu.com/manpages/xenial/man1/tshark.1.html): 
 - TShark is a network protocol analyzer. 
-- It lets you capture packet data from a live network, or read packets from a previously saved capture file, either printing a decoded form of those packets to the standard output or writing the packets to a file.
-- TShark is able to detect, read and write the same capture files that are supported by Wireshark.
+- It lets you capture packet data from a live network, or read packets from a previously saved capture file, either printing a decoded form of those packets **to the standard output** or writing the packets **to a file**.
+- TShark is able to detect, read and write the same capture files that are supported by **Wireshark**.
+
+#### Get the Field Name
+
+- right click on a field and select "Copy" &rarr; "Field Name" to get the field names for `tshark` syntax 
+    - e.g. doing this on `[The RTT to ACK the segment was: 0.000048281 seconds]` will give you `tcp.analysis.ack_rtt`
+
+#### Examples
+
+```bash
+tshark -r myfile.pcap -Y 'ip.addr == AA.BB.CC.DD' -T fields -e tcp.analysis.ack_rtt
+```
+
+- from [stackoverflow](https://stackoverflow.com/a/36181666/12282296):
+    - to get the values of the RTT calculated by wireshark/tshark
 
 # Wireshark
+
+## Must-Knows
+
+- right click on a field and select "Apply as Column" to quickly see that fields value for all packets in the "Packet List" pane
 
 ## Wireshark GUI meaning
 
@@ -259,23 +277,41 @@ phth: "Wireshark in command line."
 - the lines in the **"No." column** connecting the selected packet with other packets ([see Table 3.16. Related packet symbols](https://www.wireshark.org/docs/wsug_html_chunked/ChUsePacketListPaneSection.html))
     - DNS packets that use the **same port numbers**. Wireshark treats them as belonging to the **same conversation** and draws a line connecting them.
 
-## RTT Graph
+## TCP
+
+### RTT Graph
 
 - Statistics &rarr; TCP Stream Graph &rarr; Round Trip Time Graph
 - plots the RTT for each of the TCP segments sent
 - the plotted RTT values are in the field `[SEQ/ACK analysis]` &rarr; `[The RTT to ACK the segment was: x.xxx seconds]` (only visible in ACKs)
     - see [stackoverflow](https://stackoverflow.com/a/51661704/12282296)
 
-## Time-Sequence-Graph (Stevens)
+### Time-Sequence-Graph (Stevens)
 
 - plots **sequence numbers** with respect to **time**
 - if there are **no retransmitted segments**, the sequence numbers from the source to the destination should be **increasing monotonically** with respect to time
 
-## Measure Throughput
+### Time-Sequence-Graph (tcptrace)
+
+- [watch](https://www.youtube.com/watch?v=yUmACeSmT7o)
+    - helps to see congestion and `rwnd`
+
+### Measure Throughput
 
 - **total data**: difference between the **sequence number** of the *first TCP segment* and the acknowledged **sequence number** of the *last ACK*
 - **total transmission time**: difference of the **time instant** of the *first TCP segment* and the **time instant** of the *last ACK*
 - **throughput** = total data / total transmission time
+
+### Fields
+
+- `[SEQ/ACK analysis]`: 
+    - **for ACKs**: contains e.g.
+        - `[This is an ACK to the segment in frame: 98]` (**must**: right click &rarr; "Apply as Column")
+        - `[The RTT to ACK the segment was: 0.000048281 seconds]`
+    - **for SEQs**: contains e.g.
+        - `[Bytes in flight: 5120]`, i.e. "outstanding data" (for Wireshark Lab TCP "estimate cwnd" task: "Apply as Column")
+- `[Calculated window size: xyz]`: `rwnd` size (advertized by the receiver to the sender)
+    - nowadays, much more data is transferred, so that the `Window size value` is scaled by `[Window size scaling factor: xyz]`, i.e. `rwnd = [Calculated window size: 64256] = [Window size scaling factor: xyz] * Window size value`
 
 # Multiplexing
 
@@ -1044,8 +1080,8 @@ Examples of this principle:
 
 ![flow_control.png](/assets/images/datkom/flow_control.png)
 
-- `RcvBuffer`: there is that many bytes of buffer space
-- `rwnd`: unused buffer space
+- `RcvBuffer`: used **and** unused buffer space (in bytes) 
+- `rwnd`: unused buffer space (in Wireshark: `Window size value`)
 
 #### Implementation
 
