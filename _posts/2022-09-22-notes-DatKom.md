@@ -322,7 +322,11 @@ tshark -r myfile.pcap -Y 'ip.addr == AA.BB.CC.DD' -T fields -e tcp.analysis.ack_
         - `[Bytes in flight: 5120]`, i.e. "outstanding data" (for Wireshark Lab TCP "estimate cwnd" task: "Apply as Column")
     - **for "Bad TCP" packets** (black colored packets, red font): contains e.g.
         - `[TCP Analysis Flags]`
-            - `[Expert Info (Warning/Sequence): TCP window specified by the receiver is now completely full]`
+            - in `[TCP Window Full]` packets:
+                - `[Expert Info (Warning/Sequence): TCP window specified by the receiver is now completely full]`
+            - in `[TCP ZeroWindow]` packets:
+                - `[Expert Info (Warning/Sequence): TCP Zero Window segment]`
+                - Note: `[TCP ZeroWindow]` packets are followed by `[TCP window update]` packets, i.e. the receiver saying to the sender "I freed my receive window. You can start sending to me again.". Only then the sender is allowed to proceed.
 - `[Calculated window size: xyz]`: the `rwnd` size (advertized by the receiver to the sender)
     - nowadays, much more data is transferred, so that the `Window size value` is scaled by `[Window size scaling factor: xyz]`, i.e. `rwnd = [Calculated window size: 64256] = [Window size scaling factor: xyz] * Window size value`
 
@@ -735,7 +739,7 @@ The **transport layer** just connects processes to the **network layer**. The tr
 - from TCP Wireshark Lab: 
     - why `TCP Segment Len: 1460` ?
         - typically, the interface card limits the **length of the maximum IP datagram** to **1500 bytes**, and there is a minimum of 40 bytes of **TCP/IP header data** 
-- see MSS
+- see [MSS](#mtu-mss)
 
 ### Payload
 
@@ -1028,7 +1032,7 @@ Examples of this principle:
         - overhead associated with setting up the connection
 - full duplex data
     - bi-directional data flow in same connection
-    - MSS: maximum segment size
+    - [MSS](#mtu-mss): maximum segment size
         - Wireshark: there is an `MSS=` in the `[SYN]` packet "Info" column or `[SYN, ACK]` packet "Info" column
 - cumulative ACKs
 - [pipelining](#pipelining)
@@ -1081,7 +1085,7 @@ Examples of this principle:
 **fast retransmit**: resend **unACKed segment with smallest Seq** when **three duplicate ACKs** are received 
     - three duplicate ACKs = segment following the segment that has been ACKed three times has been lost
     - Wireshark: [watch](https://www.youtube.com/watch?v=IRXP1vJ6-vM)
-        - after getting **three** `[TCP Dup ACK]` from the receiver (3 `[TCP Dup ACK]` = receiver says to the sender "something went missing"), the sender triggers a `[TCP Fast Retransmission]`
+        - after getting **three** `[TCP Dup ACK]` from the receiver (3 `[TCP Dup ACK]` = receiver says to the sender "something went missing" &rarr; packet loss), the sender triggers a `[TCP Fast Retransmission]`
         - after the 3 `[TCP Dup ACK]` packets and the `[TCP Fast Retransmission]` packet there will be a lot of other `[TCP Dup ACK]`. They are for all the other packets that arrived, but should have arrived actually **after** the lost packet.
         - filter by `tcp.analysis.flags` to quickly jump to `[TCP Dup ACK]` and `[TCP Fast Retransmission]` packets (black packets in the "Packet List" pane)
         - after a Fast Retransmit the `cwnd` will be **reset** to a small MSS number and will build up again (see video)
@@ -1104,8 +1108,9 @@ From KR book.
         - GBN would retransmit **this packet and all following packets**. 
         - TCP would only retransmit **the packet for which the ACK was lost**.
 - TCP **with SACKs** and **selective retransmissions** looks a lot like SR protocol
-    - SACK: acknowledge out-of-order segments selectively
+    - SACK: selective acknowledgment, acknowledge out-of-order segments selectively
         - **Wireshark**: to see if SACKs are **enabled** look if there is a `SACK_PERM=1` in the `[SYN]` packet "Info" column or `[SYN, ACK]` packet "Info" column
+        - [watch](https://youtu.be/yUmACeSmT7o?t=416)
     - selective retransmission: skipping the retransmission of segments that have already been selectively acknowledged
 - Thus, TCP is a **hybrid of GBN and SR protocols**
 
@@ -1123,6 +1128,7 @@ From KR book.
 
 - receiver: every ACK contains an `rwnd` field
 - sender limits the number of unACKed bytes ($= ($`LastByteSent` $-$ `LastByteAcked`$)$, see yellow bars in Figure 5) to the size of the `rwnd`
+    - Wireshark: [watch](https://www.youtube.com/watch?v=x_5HlKEIViA)
 
 ![flow_control_implem.png](/assets/images/datkom/flow_control_implem.png)
 
@@ -1289,6 +1295,7 @@ From KR book.
 "Thus the sender's send rate is roughly `cwnd`/`RTT` bytes/sec. By adjusting the value of `cwnd`, the **sender** can therefore adjust the rate at which it sends data into its connection." (KR 3.7.1)
 - `cwnd`: congestion window 
     - internal parameter of the sending machine, not directly visible in Wireshark!
+- Wireshark: [watch](https://www.youtube.com/watch?v=IRXP1vJ6-vM)
 
 More precisely:
 
