@@ -355,8 +355,8 @@ tshark -r myfile.pcap -Y 'ip.addr == AA.BB.CC.DD' -T fields -e tcp.analysis.ack_
     - **for SEQs**: contains e.g.
         - `[Bytes in flight: 5120]`, i.e. "outstanding data" (for Wireshark Lab TCP "estimate cwnd" task: "Apply as Column")
             - Ubuntu3060: builds up in MSS units after the handshake, i.e. it starts with 2 MSS (2896 bytes), 4 MSS (5792 bytes), 6 MSS (8688 bytes), etc.
-                - [watch](https://www.youtube.com/watch?v=IRXP1vJ6-vM)
-                - [watch](https://www.youtube.com/watch?v=9lJ0vsA40is)
+                - [watch](https://www.youtube.com/watch?v=IRXP1vJ6-vM): "TCP congestion control"
+                - [watch](https://www.youtube.com/watch?v=9lJ0vsA40is): "Bytes in flight"
                     - "Statistics" &rarr; "TCP Stream Graphs" &rarr; "Window Scaling" shows `rwnd` (green line) vs "[Bytes in flight:]" (blue points) (see Figure 9) 
                 - after some bytes have been ACKed this number is not a multiple of the MSS size!
     - **for "Bad TCP" packets** (black colored packets, red font): contains e.g.
@@ -1077,6 +1077,7 @@ Examples of this principle:
     - [MSS](#mtu-mss): maximum segment size
         - Wireshark: there is an `MSS=` in the `[SYN]` packet "Info" column or `[SYN, ACK]` packet "Info" column
 - cumulative ACKs
+    - the **sender assumes** that this ACK with sequence number $n$ indicates that **all packets** with a sequence number **up to and including** $n$ **have been correctly received** at the receiver (therefore "cumulative")
 - [pipelining](#pipelining)
     - better utilization of the network
     - TCP congestion and flow control set window size
