@@ -320,6 +320,9 @@ tshark -r myfile.pcap -Y 'ip.addr == AA.BB.CC.DD' -T fields -e tcp.analysis.ack_
         - `[The RTT to ACK the segment was: 0.000048281 seconds]`
     - **for SEQs**: contains e.g.
         - `[Bytes in flight: 5120]`, i.e. "outstanding data" (for Wireshark Lab TCP "estimate cwnd" task: "Apply as Column")
+            - Ubuntu3060: builds up in MSS units after the handshake, i.e. it starts with 2 MSS (2896 bytes), 4 MSS (5792 bytes), 6 MSS (8688 bytes), etc.
+                - [watch](https://www.youtube.com/watch?v=IRXP1vJ6-vM)
+                - after some bytes have been ACKed this number is not a multiple of the MSS size!
     - **for "Bad TCP" packets** (black colored packets, red font): contains e.g.
         - `[TCP Analysis Flags]`
             - in `[TCP Window Full]` packets:
@@ -1082,7 +1085,7 @@ Examples of this principle:
 
 ### Fast Retransmit
 
-**fast retransmit**: resend **unACKed segment with smallest Seq** when **three duplicate ACKs** are received 
+- **fast retransmit**: resend **unACKed segment with smallest Seq** when **three duplicate ACKs** are received 
     - three duplicate ACKs = segment following the segment that has been ACKed three times has been lost
     - Wireshark: [watch](https://www.youtube.com/watch?v=IRXP1vJ6-vM)
         - after getting **three** `[TCP Dup ACK]` from the receiver (3 `[TCP Dup ACK]` = receiver says to the sender "something went missing" &rarr; packet loss), the sender triggers a `[TCP Fast Retransmission]`
