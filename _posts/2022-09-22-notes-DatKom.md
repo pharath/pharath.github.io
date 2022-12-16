@@ -229,13 +229,15 @@ sudo ufw enable   # always make sure ufw is enabled
 # firewalld 
 # - acts as an alternative to "nft" and "iptables" command line programs (https://en.wikipedia.org/wiki/Firewalld)
 # - in Ubuntu 20.04 firewalld is not installed by default
+systemctl status firewalld.service
+service firewalld status   # same as "systemctl status firewalld.service"
 service firewalld stop   # disable firewall (https://stackoverflow.com/a/51817241/12282296)
 firewall-cmd --version   # check version
 firewall-config   # gui for firewalld
 firewall-applet   # tray applet for firewalld (installing this will also install firewall-config)
 ```
 
-### measurements
+### Measurements
 
 ```bash
 traceroute   # measuring roundtrip times (RTT)
@@ -247,7 +249,39 @@ iperf3   # measuring throughput (https://www.cyberciti.biz/faq/how-to-test-the-n
 #### Throughput testing (iperf3)
 
 TODO
-- `iperf3`
+
+First, disable any firewall. See [ports, firewall](#ports-firewall).
+
+On the server (receiver):
+
+```bash
+# iperf SERVER MODE
+iperf3 -s
+```
+
+On the client (sender):
+
+```bash
+# iperf CLIENT MODE
+# -c: The client mode can be started using the -c command-line option, which also
+#     requires a host to which iperf3 should connect.  The host can be speci‐
+#     fied by hostname, IPv4 literal, or IPv6 literal:
+#
+#            iperf3 -c iperf3.example.com
+#
+#            iperf3 -c 192.0.2.1
+#
+#            iperf3 -c 2001:db8::1
+#
+iperf3 -c server
+
+# -p: If the iperf3 server is running on a non-default TCP  port,  that  port
+#     number needs to be specified on the client as well:
+#
+iperf3 -c server -p port
+```
+
+Capture with Wireshark on the sending side!
 
 ### tshark
 
@@ -322,6 +356,8 @@ tshark -r myfile.pcap -Y 'ip.addr == AA.BB.CC.DD' -T fields -e tcp.analysis.ack_
         - `[Bytes in flight: 5120]`, i.e. "outstanding data" (for Wireshark Lab TCP "estimate cwnd" task: "Apply as Column")
             - Ubuntu3060: builds up in MSS units after the handshake, i.e. it starts with 2 MSS (2896 bytes), 4 MSS (5792 bytes), 6 MSS (8688 bytes), etc.
                 - [watch](https://www.youtube.com/watch?v=IRXP1vJ6-vM)
+                - [watch](https://www.youtube.com/watch?v=9lJ0vsA40is)
+                    - "Statistics" &rarr; "TCP Stream Graphs" &rarr; "Window Scaling" shows `rwnd` (green line) vs "[Bytes in flight:]" (blue points) (see Figure 9) 
                 - after some bytes have been ACKed this number is not a multiple of the MSS size!
     - **for "Bad TCP" packets** (black colored packets, red font): contains e.g.
         - `[TCP Analysis Flags]`
@@ -332,6 +368,9 @@ tshark -r myfile.pcap -Y 'ip.addr == AA.BB.CC.DD' -T fields -e tcp.analysis.ack_
                 - Note: `[TCP ZeroWindow]` packets are followed by `[TCP window update]` packets, i.e. the receiver saying to the sender "I freed my receive window. You can start sending to me again.". Only then the sender is allowed to proceed.
 - `[Calculated window size: xyz]`: the `rwnd` size (advertized by the receiver to the sender)
     - nowadays, much more data is transferred, so that the `Window size value` is scaled by `[Window size scaling factor: xyz]`, i.e. `rwnd = [Calculated window size: 64256] = [Window size scaling factor: xyz] * Window size value`
+
+**Figure 9**: "Window Scaling" Graph, shows a simple throughput test via `iperf3` (see [throughput testing (iperf3)](#throughput-testing-iperf3))
+![wireshark_tcp_window_scaling.png](/assets/images/datkom/wireshark_tcp_window_scaling.png)
 
 # Multiplexing
 
