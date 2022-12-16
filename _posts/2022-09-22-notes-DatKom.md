@@ -277,6 +277,7 @@ tshark -r myfile.pcap -Y 'ip.addr == AA.BB.CC.DD' -T fields -e tcp.analysis.ack_
 ## Must-Knows
 
 - right click on a field and select "Apply as Column" to quickly see that fields value for all packets in the "Packet List" pane
+- View/Layout: "Edit" &rarr; "Preferences ..." &rarr; "Appearance" &rarr; "Layout"
 
 ## Wireshark GUI meaning
 
@@ -1079,6 +1080,12 @@ Examples of this principle:
 
 **fast retransmit**: resend **unACKed segment with smallest Seq** when **three duplicate ACKs** are received 
     - three duplicate ACKs = segment following the segment that has been ACKed three times has been lost
+    - Wireshark: [watch](https://www.youtube.com/watch?v=IRXP1vJ6-vM)
+        - after getting **three** `[TCP Dup ACK]` from the receiver (3 `[TCP Dup ACK]` = receiver says to the sender "something went missing"), the sender triggers a `[TCP Fast Retransmission]`
+        - after the 3 `[TCP Dup ACK]` packets and the `[TCP Fast Retransmission]` packet there will be a lot of other `[TCP Dup ACK]`. They are for all the other packets that arrived, but should have arrived actually **after** the lost packet.
+        - filter by `tcp.analysis.flags` to quickly jump to `[TCP Dup ACK]` and `[TCP Fast Retransmission]` packets (black packets in the "Packet List" pane)
+        - after a Fast Retransmit the `cwnd` will be **reset** to a small MSS number and will build up again (see video)
+            - the build up speed depends on the used algorithm (e.g. in [TCP Slow Start](#slow-start) `cwnd` will grow exponentially)
 
 ### TCP Implementation
 
@@ -1090,12 +1097,17 @@ Examples of this principle:
 
 From KR book.
 
-- TCP looks a lot like a GBN-style protocol
+- TCP (without SACKs) looks a lot like a GBN-style protocol
 - differences:
     1. Many TCP implementations will **buffer correctly received but out-of-order segments**
     2. When N packets are sent and arrive, but the ACK for one of these packets (not the last one!) gets lost. 
         - GBN would retransmit **this packet and all following packets**. 
         - TCP would only retransmit **the packet for which the ACK was lost**.
+- TCP **with SACKs** and **selective retransmissions** looks a lot like SR protocol
+    - SACK: acknowledge out-of-order segments selectively
+        - **Wireshark**: to see if SACKs are **enabled** look if there is a `SACK_PERM=1` in the `[SYN]` packet "Info" column or `[SYN, ACK]` packet "Info" column
+    - selective retransmission: skipping the retransmission of segments that have already been selectively acknowledged
+- Thus, TCP is a **hybrid of GBN and SR protocols**
 
 ### Flow Control
 
@@ -1275,7 +1287,8 @@ From KR book.
 ![congestion_tcp_aimd_impl.png](/assets/images/datkom/congestion_tcp_aimd_impl.png)
 
 "Thus the sender's send rate is roughly `cwnd`/`RTT` bytes/sec. By adjusting the value of `cwnd`, the **sender** can therefore adjust the rate at which it sends data into its connection." (KR 3.7.1)
-- `cwnd`: congestion window
+- `cwnd`: congestion window 
+    - internal parameter of the sending machine, not directly visible in Wireshark!
 
 More precisely:
 
@@ -1288,6 +1301,12 @@ More precisely:
 #### Transition: From Slow Start to AIMD
 
 ![congestion_tcp_transition.png](/assets/images/datkom/congestion_tcp_transition.png)
+
+- `ssthresh`: slow start threshold (internal parameter of the sending machine, not directly visible in Wireshark!)
+- Wireshark: [watch](https://www.youtube.com/watch?v=IRXP1vJ6-vM)
+    - **either** the `rwnd` makes the sender "pull the break" 
+    - **or** the network cannot handle as much data as the sender is putting out there on the wire (see [Fast Retransmit](#fast-retransmit))
+- see also Wireshark TCP Lab "congestion window" estimate task
 
 #### TCP CUBIC
 
