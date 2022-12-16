@@ -173,6 +173,9 @@ ip a | grep mtu
 ifconfig wlo1 mtu 1000 up   # change MTU size of interface "wlo1" to 1000 bytes (https://linuxhint.com/how-to-change-mtu-size-in-linux/)
 ```
 
+Wireshark:
+- there is an `MSS=` in the `[SYN]` packet "Info" column or `[SYN, ACK]` packet "Info" column
+
 History of MSS: [superuser](https://superuser.com/a/1652039)
 - MSS = MTU - IPHeaderLen - TCPHeaderLen
 - IP headers are 20 bytes long
@@ -241,6 +244,11 @@ traceroute   # measuring roundtrip times (RTT)
 iperf3   # measuring throughput (https://www.cyberciti.biz/faq/how-to-test-the-network-speedthroughput-between-two-linux-servers/)
 ```
 
+#### Throughput testing (iperf3)
+
+TODO
+- `iperf3`
+
 ### tshark
 
 phth: "Wireshark in command line."
@@ -295,6 +303,7 @@ tshark -r myfile.pcap -Y 'ip.addr == AA.BB.CC.DD' -T fields -e tcp.analysis.ack_
 
 - [watch](https://www.youtube.com/watch?v=yUmACeSmT7o)
     - helps to see congestion and `rwnd`
+    - helps to see lost packets, retransmissions, SACKs
 
 ### Measure Throughput
 
@@ -310,7 +319,10 @@ tshark -r myfile.pcap -Y 'ip.addr == AA.BB.CC.DD' -T fields -e tcp.analysis.ack_
         - `[The RTT to ACK the segment was: 0.000048281 seconds]`
     - **for SEQs**: contains e.g.
         - `[Bytes in flight: 5120]`, i.e. "outstanding data" (for Wireshark Lab TCP "estimate cwnd" task: "Apply as Column")
-- `[Calculated window size: xyz]`: `rwnd` size (advertized by the receiver to the sender)
+    - **for "Bad TCP" packets** (black colored packets, red font): contains e.g.
+        - `[TCP Analysis Flags]`
+            - `[Expert Info (Warning/Sequence): TCP window specified by the receiver is now completely full]`
+- `[Calculated window size: xyz]`: the `rwnd` size (advertized by the receiver to the sender)
     - nowadays, much more data is transferred, so that the `Window size value` is scaled by `[Window size scaling factor: xyz]`, i.e. `rwnd = [Calculated window size: 64256] = [Window size scaling factor: xyz] * Window size value`
 
 # Multiplexing
@@ -1016,6 +1028,7 @@ Examples of this principle:
 - full duplex data
     - bi-directional data flow in same connection
     - MSS: maximum segment size
+        - Wireshark: there is an `MSS=` in the `[SYN]` packet "Info" column or `[SYN, ACK]` packet "Info" column
 - cumulative ACKs
 - [pipelining](#pipelining)
     - better utilization of the network
@@ -1072,6 +1085,17 @@ Examples of this principle:
 - KR238: RFC recommended TCP **timer** implementations use only a **single** retransmission timer, even if there are multiple transmitted but not yet acknowledged segments
     - because timer management can require considerable overhead
 - **duplicate ACKs** instead of NAKs
+
+### Is TCP a GBN or an SR protocol?
+
+From KR book.
+
+- TCP looks a lot like a GBN-style protocol
+- differences:
+    1. Many TCP implementations will **buffer correctly received but out-of-order segments**
+    2. When N packets are sent and arrive, but the ACK for one of these packets (not the last one!) gets lost. 
+        - GBN would retransmit **this packet and all following packets**. 
+        - TCP would only retransmit **the packet for which the ACK was lost**.
 
 ### Flow Control
 
