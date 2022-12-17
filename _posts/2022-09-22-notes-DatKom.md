@@ -1344,7 +1344,9 @@ From KR book.
 "Thus the sender's send rate is roughly `cwnd`/`RTT` bytes/sec. By adjusting the value of `cwnd`, the **sender** can therefore adjust the rate at which it sends data into its connection." (KR 3.7.1)
 - `cwnd`: congestion window 
     - internal parameter of the sending machine, not directly visible in Wireshark!
-- Wireshark: [watch](https://www.youtube.com/watch?v=IRXP1vJ6-vM)
+- Wireshark: 
+    - [watch](https://www.youtube.com/watch?v=IRXP1vJ6-vM)
+    - see in this [packetlife post](https://packetlife.net/blog/2011/jul/5/tcp-slow-start/)
 
 More precisely:
 
@@ -1353,6 +1355,10 @@ More precisely:
 #### Slow Start
 
 ![congestion_tcp_slow_start.png](/assets/images/datkom/congestion_tcp_slow_start.png)
+
+Wireshark: 
+- see in this [packetlife post](https://packetlife.net/blog/2011/jul/5/tcp-slow-start/)
+- see in this [networkers-online.com post](https://networkers-online.com/p/tcp-protocol-slow-start)
 
 #### Transition: From Slow Start to AIMD
 
