@@ -340,6 +340,11 @@ tshark -r myfile.pcap -Y 'ip.addr == AA.BB.CC.DD' -T fields -e tcp.analysis.ack_
     - helps to see congestion and `rwnd`
     - helps to see lost packets, retransmissions, SACKs
 
+### "Window Scaling" Graph
+
+- "Statistics" &rarr; "TCP Stream Graphs" &rarr; "Window Scaling" shows `rwnd` (green line) and "[Bytes in flight:]" (blue points) (see Figure 9) 
+- [watch](https://www.youtube.com/watch?v=9lJ0vsA40is): "Bytes in flight"
+
 ### Measure Throughput
 
 - **total data**: difference between the **sequence number** of the *first TCP segment* and the acknowledged **sequence number** of the *last ACK*
@@ -354,13 +359,12 @@ tshark -r myfile.pcap -Y 'ip.addr == AA.BB.CC.DD' -T fields -e tcp.analysis.ack_
         - `[The RTT to ACK the segment was: 0.000048281 seconds]`
     - **for SEQs**: contains e.g.
         - `[Bytes in flight: 5120]`, i.e. "outstanding data" (for Wireshark Lab TCP "estimate cwnd" task: "Apply as Column")
-            - can be used to estimate a lower bound for the `cwnd` size (see Wireshark Lab TCP)
+            - can be used to estimate a **lower bound** for the `cwnd` size (see Wireshark Lab TCP)
                 - [watch](https://www.youtube.com/watch?v=IRXP1vJ6-vM): "TCP congestion control"
             - Ubuntu3060: builds up in MSS units after the handshake, i.e. it starts with 2 MSS (2896 bytes), 4 MSS (5792 bytes), 6 MSS (8688 bytes), etc.
-            - "Window Scaling" Graph
+                - after some bytes have been ACKed this number is not a multiple of the MSS size any more!
+            - the ["Window Scaling" Graph](#window-scaling-graph) visualizes this field
                 - [watch](https://www.youtube.com/watch?v=9lJ0vsA40is): "Bytes in flight"
-                    - "Statistics" &rarr; "TCP Stream Graphs" &rarr; "Window Scaling" shows `rwnd` (green line) vs "[Bytes in flight:]" (blue points) (see Figure 9) 
-                - after some bytes have been ACKed this number is not a multiple of the MSS size!
     - **for "Bad TCP" packets** (black colored packets, red font): contains e.g.
         - `[TCP Analysis Flags]`
             - in `[TCP Window Full]` packets:
