@@ -47,7 +47,7 @@ git checkout tags/\<tag name\>	|		checkout a specific tag
 git fetch	|
 git checkout solution/2\_foundations	|
 git submodule init |
-git submodule update |
+git submodule update --progress | `submodule update` by default does not show any cloning progress, use `--progress` to show the cloning progress
 git config --get remote.origin.url | get only the URL of the current remote
 git remote show [remote-name] command | get more details about a particular remote
 git remote show origin | get more details about the current remote
@@ -295,10 +295,11 @@ git push origin HEAD:main
 
 # submodules
 
-## populate a repository's submodules
+## Populate a repository's submodules
 
 1. `git submodule init`
-2. `git submodule update`
+2. `git submodule update --progress`
+    - use `--progress` to display a cloning progress report
 
 # Troubleshooting/Errors
 
