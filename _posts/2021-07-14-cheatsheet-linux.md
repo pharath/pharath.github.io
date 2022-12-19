@@ -30,7 +30,7 @@ ffmpeg -i source.mp4 -ss 00:00:00 -t 00:00:00 -vcodec copy -acodec copy outsplic
 
 <hr>
 
-sudo apt install imagemagick | 
+sudo apt install imagemagick | image editing, converting, compressing, etc.
 convert path/to/image.png -resize 640x path/to/output_image.png | compress an `image.png` by resizing / scaling down ([source](https://askubuntu.com/a/781588))
 convert path/to/image.png -quality 50% path/to/output_image.png | compress an `image.png` by reducing its quality ([source](https://askubuntu.com/a/781588))
 
