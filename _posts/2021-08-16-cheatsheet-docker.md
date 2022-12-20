@@ -2,6 +2,8 @@
 title: "Docker Notes"
 read_time: false
 excerpt_separator: "<!--more-->"
+toc: true
+toc_sticky: true
 categories:
   - Notes
 tags:
