@@ -624,6 +624,7 @@ lsblk |
 | command | description |
 | :---: | :---: |
 cat /etc/os-release	 |	Ubuntu Version (lang)
+cat /etc/lsb-release |	Ubuntu Version (lang)
 lsb_release -a | Ubuntu Version (kurz)
 lsb_release -cs | Ubuntu Version (e.g. "focal")
 hostnamectl | Ubuntu Version (mittel) mit Linux Kernel Version
