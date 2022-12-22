@@ -37,7 +37,7 @@ git push origin --delete *remote/branch* | delete remote branch *remote/branch*
 git show-branch -a | show/list all branches **and commits** (local and remote)
 git show-branch -r | show/list all branches **and commits** (only remote)
 git checkout \<existing\_branch\> | switch to an existing branch (or: git switch *branch*)
-git checkout -b \<new\_branch\> | switch to a non-existing branch (or: git switch -c *branch*); subsequently, `git push origin <new_branch>` to create `new_branch` in remote, too. 
+git checkout -b \<new\_branch\> | switch to a non-existing branch (or: git switch -c *branch*); subsequently, `git push --set-upstream origin <new_branch>` to create `new_branch` in the remote (on github.com), too. Here, the `--set-upstream` flag will make the local `<new_branch>` track the remote `remotes/origin/<new_branch>` (w/o this flag git does not know where to push the `new_branch`).
 git reflog |	view history of checkout operations
 git log	|	view history of commits
 git revert \<commit-hash\>	| commit \<commit-hash\> rückgängig machen
