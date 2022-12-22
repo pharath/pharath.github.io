@@ -37,7 +37,7 @@ git push origin --delete *remote/branch* | delete remote branch *remote/branch*
 git show-branch -a | show/list all branches **and commits** (local and remote)
 git show-branch -r | show/list all branches **and commits** (only remote)
 git checkout \<existing\_branch\> | switch to an existing branch (or: git switch *branch*)
-git checkout -b \<new\_branch\> | switch to a non-existing branch (or: git switch -c *branch*)
+git checkout -b \<new\_branch\> | switch to a non-existing branch (or: git switch -c *branch*); subsequently, `git push origin <new_branch>` to create `new_branch` in remote, too. 
 git reflog |	view history of checkout operations
 git log	|	view history of commits
 git revert \<commit-hash\>	| commit \<commit-hash\> rückgängig machen
