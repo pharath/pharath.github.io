@@ -18,6 +18,7 @@ tags:
 # Terminology
 
 **remote** = remote-repository (e.g. in `git push *remote* *branch*`)
+**PAT** = Personal Access Token (see [youtube: PATs and their scopes](https://www.youtube.com/watch?v=SzrETQdGzBM&t=49s))
 
 # Basics
 
