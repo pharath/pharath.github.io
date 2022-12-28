@@ -118,7 +118,8 @@ Using "`system`" as a version name would reset the selection to your system-prov
 
 | command | description |
 | :---: | :---: |
-pip show *package* | show location of *package*
+pip show *package* | show location of *package* (and other package information)
+pip install -h | show install options/settings
 
 ## Install packages
 
@@ -208,6 +209,12 @@ conda activate myenv |
 conda install --file requirements.txt |
 conda deactivate |
 conda remove --name myenv --all |
+
+# Python Language
+
+## relative imports
+
+- if there is a `from .somemodule import somefunc` (the dot is important!) in a Python file `somepackage/somefile.py`, you have to run it via `python3 -m somepackage.somefile` or else the relative import will fail
 
 # repl
 

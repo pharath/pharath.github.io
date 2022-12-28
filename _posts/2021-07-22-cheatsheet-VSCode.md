@@ -23,7 +23,7 @@ tags:
     - Doxygen Documentation Generator
     - CMake
     - CMake Tools
-    - Python
+    - Python (for debugging)
     - Pylance
     - Jupyter
     - Jupyter Keymap
@@ -109,7 +109,7 @@ shift + alt + DownArrow | copy line down
 
 # Git
 
-Symbols next to the filename in each tab:
+Symbols next to the filename in each vscode tab:
 
 | symbol | meaning |
 | :---: | :---: |
@@ -120,3 +120,10 @@ Symbols next to the filename in each tab:
 **C** | Conflict (There is a conflict in the file)
 **R** | Renamed (The file has been renamed)
 **S** | Submodule (In repository exists another subrepository)
+
+# Python
+
+## venv
+
+- to work in a `venv`:
+    - Use the "**Python: Select Interpreter**" command from the **Command Palette** (ctrl + shift + p)
