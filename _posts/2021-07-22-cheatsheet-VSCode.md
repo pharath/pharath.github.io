@@ -52,6 +52,7 @@ tags:
 
 | command | description |
 | :---: | :---: |
+ctrl + k ctrl + s | all shortcuts
 ctrl + alt + v | toggle vim mode (this custom shortcut must have been configured previously) 
 ctrl + w | close current tab
 ctrl + o | open file
@@ -67,6 +68,8 @@ ctrl + w | close current editor group (after all tabs in this group have been cl
 alt + 1 | focus first tab in current editor group
 alt + 2 | focus second tab in current editor group, usw.
 ctrl + j | show panel (problems, output, terminal, debug console)
+ctrl + ö | view: toggle terminal
+ctrl + shift + y | view: toggle debug console
 ctrl + b | show side bar (file explorer)
 
 ## Fold
@@ -122,6 +125,15 @@ Symbols next to the filename in each vscode tab:
 **S** | Submodule (In repository exists another subrepository)
 
 # Python
+
+## Debugging
+
+- most important shortcuts: 
+    - Basics: see "Menu" &rarr; "Run" (Alt + R)
+    - Toggle **Debug Console**: ctrl + shift + Y
+
+To get out of `for` loops:
+- "Command Palette" &rarr; "Debug: Run to Cursor"
 
 ## venv
 
