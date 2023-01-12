@@ -795,7 +795,8 @@ Rsync patterns: [stackexchange](https://unix.stackexchange.com/a/2503)
 | command | description |
 | :---: | :---: |
 `rsync -a *source* *destination*` | copy directory (**Warning**: `-r` tag does not copy some stuff, e.g. symlinks)
-`rsync -av --progress` | show progress report
+`rsync -aR *source* *destination*` | `-R` or `--relative`: similar to `cp -r`, `*destination*` will be the **root of** the destination
+`rsync -aRv --progress` | show progress report
 `rsync -a --exclude="SomeDirForPythonInstall"` | exclude directory "SomeDirForPythonInstall"
 `rsync -a --exclude=".*"` | excludes hidden files and directories
 `rsync -a --exclude=".*/"` | exclude hidden directories only
