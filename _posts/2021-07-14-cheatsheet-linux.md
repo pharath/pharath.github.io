@@ -671,13 +671,35 @@ cat /proc/version |
 cat /proc/scsi/scsi |
 cat /proc/partitions |
 
-## Hard disk
+## Storage, Hard Disk, HDD, SSD
 
 | command | description |
 | :---: | :---: |
-sudo hdparm -i /dev/sda |
+hdparm | get statistics about the hard disk, alter writing intervals, acoustic management, and DMA settings. It can also set parameters related to drive caches, sleep mode, power management, acoustic management, and DMA settings
+sudo hdparm -I /dev/sda | Request **identification info** directly from the drive, which is displayed in a new expanded format with considerably more detail than with the older `-i` option. (source: `man hdparm -I`); may differ from information provided by `-i` option! (source: `man hdparm -i`)
 
-## Disk Usage
+### Eject
+
+1. press on eject button for all partitions in nautilus
+2. open gnome-disks
+3. press on stop button below all partitions, if any partition is still mounted (else no stop button should be available)
+4. press power off button in the top bar (only after all partitions have been unmounted in step 3!)
+5. disk LED will be turned off now
+6. close gnome-disks via alt + F4
+
+| command | description |
+| :---: | :---: |
+sudo eject /media/SDD |
+
+Troubleshooting:
+
+1. `One or more applications are keeping the volume busy`
+
+| command | description |
+| :---: | :---: |
+sudo fuser -mv /media/SDD | displays all processes accessing `/media/SDD`, where the `m` tells it to look on the given location, the `v` switches the output to a human readable list instead of just a bunch of PIDs. [askubuntu](https://askubuntu.com/a/578631)
+
+### Disk Usage
 
 - [FAQ](https://unix.stackexchange.com/a/120312)
     - How much disk space does a file use?
