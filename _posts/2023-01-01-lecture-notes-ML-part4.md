@@ -120,12 +120,32 @@ from Wiki:
 - The **architecture** is "almost identical" to the original transformer implementation in **Vaswani et al. (2017)**.
 - In 2019, **Google** announced that it had begun leveraging BERT in its **search engine**, and by late 2020 it was using BERT in almost every English-language query.
 
+#### ClinicalBERT
+
+- [source](https://medium.com/nwamaka-imasogie/clinicalbert-using-deep-learning-transformer-model-to-predict-hospital-readmission-c82ff0e4bb03):
+    - ClinicalBERT is a Bidirectional Transformer. 
+    - ClinicalBERT is a **modified BERT model**: Specifically, the representations are learned using medical notes and further processed for downstream clinical tasks. 
+    - ClinicalBERT is **pretrained on patient clinical notes/EHR** and then can be used for downstream predictive tasks.
+
 ### GPT-3 (by OpenAI)
 
 from Wiki:
 - The architecture is a **standard transformer network** (with a few engineering tweaks) with the unprecedented size of 2048-token-long context and 175 billion parameters (requiring 800 GB of storage). 
 - The training method is "generative pretraining", meaning that it is **trained to predict what the next token is**. 
 - The model demonstrated **strong few-shot learning** on many text-based tasks.
+
+### GPT-3 vs. BERT
+
+from [Kaggle](https://www.kaggle.com/code/residentmario/notes-on-gpt-2-and-bert-models):
+- GPT-2 works like a traditional language model is that it takes word vectors and input and produces estimates for the probability of the next word as outputs. It is **auto-regressive** in nature: each token in the sentence has the context of the previous words. Thus GPT-2 works **one token at a time**. 
+    - **autoregressive**: A statistical model is autoregressive if it predicts future values based on past values. For example, an autoregressive model might seek to predict a stock's future prices based on its past performance. [investopedia](https://www.investopedia.com/terms/a/autoregressive.asp)
+- BERT, by contrast, is **not auto-regressive**. It uses the entire surrounding context **all-at-once**.
+
+from [source](https://datascience.stackexchange.com/a/104655/115254):
+- BERT is an **encoder-only** model trained with the masked language-modeling objective and operates **non-autoregressively**. 
+- GPT-2 is a **decode-only** model trained using the left-to-right language objective and operates **autoregressively**. 
+- Other than that, there are only technical differences in hyper-parameters, but no other conceptual differences.
+- BERT (other masked LMs) could also be used for zero- or few-shot learning, but in a slightly different way. There is a method called PET (Pattern-Exploiting Training). It uses the language modeling abilities of BERT via templates.
 
 ## Multi-modal learning
 
@@ -192,6 +212,17 @@ from Wiki:
     - scans of lymph node sections
     - tumor detection
     - binary label: presence of metastatic tissue
+- MS-COCO
+    - the resource most used for **image captioning** was the MS-COCO dataset, containing around 100k images and 5-way image-caption annotations (produced by paid annotators)
+- Conceptual Captions (Google)
+    - successor of MS-COCO
+    - 3 million images, paired with natural-language captions. 
+    - In contrast with the curated style of the MS-COCO images, Conceptual Captions images and their raw descriptions are harvested **from the web**
+- Visual Genome
+    - contains VQA data in a multi-choice setting. 
+    - consists of 100k images from MSCOCO with 2 million QA pairs
+    - 17 questions per image on average
+    - 6 question types: What, Where, When, Who, Why and How
 
 #### Natural Distribution Shift
 
@@ -243,3 +274,16 @@ from Wiki:
 - understand BERT: james briggs video
 - VLP zhou
 - Although CLIP can flexibly generate zero-shot classifiers for a wide variety of tasks and datasets, CLIP is still **limited to choosing from only those concepts in a given zero-shot classifier**. This is a significant restriction compared to a truly flexible approach like image captioning which could generate novel outputs
+
+# Semantic Optical Flow
+
+- [paper](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Sevilla-Lara_Optical_Flow_With_CVPR_2016_paper.pdf)
+- [arxiv](https://arxiv.org/abs/1603.03911)
+- [watch: Nvidia](https://www.youtube.com/watch?v=QwmBSTWgr_s)
+- What do the colors (in the optical flow image) mean?
+    - direction of the motion: color (according to the wheel)
+    - magnitude of the motion: saturation
+- traditional CV method: DiscreteFlow
+    - very blurry (especially on motion boundaries and in untextured regions)
+- new semantic segmentation method: Semantic Optical Flow / Semantic Flow
+    - clear edges

@@ -27,6 +27,9 @@ hardinfo | hardware info
 ffmpeg | mp4 to mp3 converter
 ffmpeg -i foo.mp4 bar.mp3 | convert foo.mp4 to bar.mp3
 ffmpeg -i source.mp4 -ss 00:00:00 -t 00:00:00 -vcodec copy -acodec copy outsplice.mp4 | crop source.mp4 from start time `-ss` to time `-t`
+ffmpeg -i input.mov -qscale 0 output.mp4 | convert input.mov to output.mp4
+ffmpeg -i input.mp4 -ss 00:05:20 -t 00:10:00 -c:v copy -c:a copy output1.mp4 | take the input video input.mp4, and cut out 10 minutes from it starting from 00:05:20 (5 minutes and 20 second mark), i.e. the output video will be from 00:05:20 to 00:15:20. If you specify a duration that will result in a stop time that is beyond the length of the input video, the output video will end where the input video ends. [source](https://shotstack.io/learn/use-ffmpeg-to-trim-video/)
+ffmpeg -i input.mp4 -ss 00:05:10 -to 00:15:30 -c:v copy -c:a copy output2.mp4 | uses `-to` to specify an exact time to cut to from the starting position. The cut video will be from 00:05:10 to 00:15:30, resulting in a 10 minutes and 20 seconds video. If you specify a time `-to` that is longer than the input video, e.g. `-to 00:35:00` when the input video is 20 minutes long, the cut video will end where the input video ends. If you specify a `-to` that is smaller than `-ss`, then the command won't run. You'll get the following error: `Error: -to value smaller than -ss; aborting.` [source](https://shotstack.io/learn/use-ffmpeg-to-trim-video/)
 
 <hr>
 
@@ -672,6 +675,12 @@ cat /proc/scsi/scsi |
 cat /proc/partitions |
 
 ## Storage, Hard Disk, HDD, SSD
+
+Must knows:
+- SSD
+    - [fragmentation](https://superuser.com/questions/97071/do-ssds-get-fragmented-and-if-they-do-is-that-an-issue)
+    - [wear leveling](https://en.wikipedia.org/wiki/Wear_leveling)
+    - [wear leveling](https://www.dell.com/support/kbdoc/de-de/000137999/hard-drive-why-do-solid-state-devices-ssd-wear-out?lang=en): As the term suggests, **wear leveling** provides a method for distributing program and erase cycles uniformly throughout all of the memory blocks within the SSD. This prevents continuous program and erase cycles to the same memory block, resulting in greater extended life to the overall NAND flash memory.
 
 | command | description |
 | :---: | :---: |
