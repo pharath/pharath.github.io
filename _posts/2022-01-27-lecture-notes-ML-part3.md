@@ -16,7 +16,7 @@ tags:
   - lecture_notes
   - notes
   - ml
-  - cv
+  - computervision
 toc: true
 toc_label: "Contents"
 

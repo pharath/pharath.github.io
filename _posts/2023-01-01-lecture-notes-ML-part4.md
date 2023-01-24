@@ -224,6 +224,15 @@ from [source](https://datascience.stackexchange.com/a/104655/115254):
     - 17 questions per image on average
     - 6 question types: What, Where, When, Who, Why and How
 
+OCR:
+- SST and SST-2
+    - Stanford Sentiment Treebank
+    - sentiment analysis (sentiment classification)
+    - data: movie review phrases 
+    - label: "positive", "negative", "neutral", "somewhat positive", "somewhat negative" (in SST-2: only "positive" and "negative")
+    - What does the "2" mean?: SST-2 is a **binary** version of SST and Movie Review dataset (the neutral class was removed), that is, the data was classified only into positive and negative classes.
+    - Binary classification experiments on full sentences (negative or somewhat negative vs somewhat positive or positive with neutral sentences discarded) refer to the dataset as **SST-2** or **SST binary**.
+
 #### Natural Distribution Shift
 
 - "anti-causal learning", "dataset bias", "the tank legend" or "the Clever Hans effect"
