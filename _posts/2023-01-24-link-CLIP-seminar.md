@@ -8,7 +8,7 @@ header:
   overlay_filter: 0.6
   actions:
     - label: "Download the Seminar Report"
-      url: "https://drive.google.com/uc?print=false&id=1xy1eD2ECbWUCubYoKIy5WWbkhOuTL1or"
+      url: "https://drive.google.com/uc?print=false&id=1NoEiYGBEX0jLKT4MEpz3d-brf3oOWc7_"
 categories:
   - computervision
 tags:
@@ -24,4 +24,4 @@ Although using natural language supervision for image representation learning ha
 
 # References
 
-<a name="CLIP"></a> \[Radford et al. 2021\]: Alec Radford, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh, Sandhini Agarwal, Girish Sastry, Amanda Askell, Pamela Mishkin, Jack Clark, Gretchen Krueger, and Ilya Sutskever. Learning transferable visual models from natural language supervision. In Marina Meila and Tong Zhang, editors, *Proceedings of the 38th International Conference on Machine Learning*, volume 139 of *Proceedings of Machine Learning Research*, pages 8748–8763. PMLR, 18–24 Jul 2021. [view on arxiv](https://arxiv.org/abs/2103.00020)
+<a name="CLIP"></a> \[Radford et al. 2021\]: Alec Radford, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh, Sandhini Agarwal, Girish Sastry, Amanda Askell, Pamela Mishkin, Jack Clark, Gretchen Krueger, and Ilya Sutskever. Learning transferable visual models from natural language supervision. In Marina Meila and Tong Zhang, editors, *Proceedings of the 38th International Conference on Machine Learning*, volume 139 of *Proceedings of Machine Learning Research*, pages 8748–8763. PMLR, 18–24 Jul 2021. [arxiv](https://arxiv.org/abs/2103.00020)
