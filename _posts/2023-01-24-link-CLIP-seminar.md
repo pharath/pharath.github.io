@@ -8,7 +8,7 @@ header:
   overlay_filter: 0.6
   actions:
     - label: "Download the Seminar Report"
-      url: "https://drive.google.com/uc?print=false&id=1OlRTjMv-6Wg0KOZ_ZVlFxc6QdOqUJUkt"
+      url: "https://drive.google.com/uc?print=false&id=1xy1eD2ECbWUCubYoKIy5WWbkhOuTL1or"
 categories:
   - computervision
 tags:
