@@ -8,7 +8,7 @@ header:
   overlay_filter: 0.6
   actions:
     - label: "Download the Seminar Report"
-      url: "https://raw.githubusercontent.com/pharath/home/master/assets/pdfs/seminar_report_topic_05_CLIP_fourth.pdf"
+      url: "https://drive.google.com/uc?print=false&id=1OlRTjMv-6Wg0KOZ_ZVlFxc6QdOqUJUkt"
 categories:
   - computervision
 tags:

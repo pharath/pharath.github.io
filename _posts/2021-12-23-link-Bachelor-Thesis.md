@@ -8,7 +8,7 @@ header:
   overlay_filter: 0.6
   actions:
     - label: "Download the Bachelor Thesis"
-      url: "https://raw.githubusercontent.com/pharath/home/master/assets/pdfs/Bachelorarbeit_Pharath_Palesuvaran_final.pdf"
+      url: "https://drive.google.com/uc?print=false&id=1wsLIxVjJbFHkRH9ED6KbvCC2bEZNFH2b"
 categories:
   - Bachelor_Thesis
 tags:
