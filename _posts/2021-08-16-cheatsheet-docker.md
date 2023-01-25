@@ -28,8 +28,14 @@ xhost +local:root |	enable GUI for docker
 
 ## docker login
 
-docker login registry.git.rwth-aachen.de |
+| :---: | :---: |
+docker login registry.git.rwth-aachen.de | do not forget to logout !
 docker pull |
+
+## docker logout
+
+| :---: | :---: |
+docker logout registry.git.rwth-aachen.de | 
 
 ## Images/Storage Info
 
@@ -167,6 +173,7 @@ docker login registry.git.rwth-aachen.de | login to Container Registry
 docker image tag galaxis_simulation:phth-8 registry.git.rwth-aachen.de/pharath/gitlab_backups/galaxis_simulation:phth-8 | tag local image "galaxis_simulation:phth-8" (Note: the tag registry.git.rwth-aachen.de/pharath/gitlab_backups/galaxis_simulation:phth-8 must have this form!)
 docker tag galaxis_simulation:phth-8 registry.git.rwth-aachen.de/pharath/gitlab_backups/galaxis_simulation:phth-8 | see `docker image tag`
 docker push registry.git.rwth-aachen.de/pharath/gitlab_backups/galaxis_simulation:phth-8 | push image to Gitlab Container Registry
+docker logout registry.git.rwth-aachen.de | logout
 
 ## Check if GUIs work in a Linux container
 
