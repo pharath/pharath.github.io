@@ -27,7 +27,7 @@ tags:
 # Search
 
 - **frontier** of the search tree: set of unexpanded nodes
-- **redundant** path: a sub-optimal way to get to the same state, e.g. a path containing a cycle
+- **redundant path**: a sub-optimal way to get to the same state, e.g. a path containing a cycle
 - graph search: 
     - checks for redundant paths (keeps a table of reached states)
 - tree-like search: 
@@ -109,3 +109,26 @@ tags:
 ## Greedy Best-first Search
 
 - evaluation function $f(n)=h(n)$
+
+# Games
+
+## Minimax
+
+- **minimax value**: the utility (for MAX) of being in that state (assuming that both players play optimally from there to the end of the game)
+- How to determine the minimax value of a state?
+    - The minimax value of a **terminal state** is just its utility
+    - In a **non-terminal state**, MAX prefers to move to a state of maximum value when it is MAX's turn to move, and MIN prefers a state of minimum value
+
+## Suboptimal opponent
+
+- if MIN does not play optimally, then MAX will do at least as well as against an optimal player, possibly better
+
+## Alpha-Beta Pruning
+
+- watch lecture
+- see book
+
+## Expectiminimax
+
+- watch lecture
+- see book

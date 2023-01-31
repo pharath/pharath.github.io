@@ -207,11 +207,38 @@ mimeopen -d myfile.pdf
 
 will give you a list of applications that can open the file, and (the `-d` flag) will also update the default application for you. *Note*: After running this command the default works for `mimeopen myfile.pdf` only. `xdg-open myfile.pdf` and `nautilus` defaults need to be specified via `xdg-mime default some_app some_filetype` (see above)!
 
+# Pager
+
+## Nano
+
+- `M-U` means "Meta Key" + <kbd>Alt</kbd>. The "Meta key" is not present on most keyboards. (Its use in software is for primarily historical reasons.) Usually, the meta key is emulated by another key on your keyboard. On Windows and Linux, it is usually the <kbd>Alt</kbd> key. On Mac OS X, that key (aka <kbd>Option</kbd>) already has other uses, and so <kbd>Escape</kbd> is used instead.
+
+## Most
+
+- set `most` as default pager is `.bashrc` to get coloured `man` pages
+
 # Converter
 
 ## pptx (or ppt) to pdf
 
 - `libreoffice --headless --invisible --convert-to pdf *.ppt`
+
+# Sound
+
+List all microphones:
+```bash
+sudo arecord -l
+```
+
+Record an audio file `/tmp/test-mic.wav` with 10s duration, where `hw:2,0` means using **card** `2` and **device** `0` (as shown by `arecord -l`):
+```bash
+arecord -f cd -c 1 -d 10 --device="hw:2,0" /tmp/test-mic.wav
+```
+
+Play an audio file `/tmp/test-mic.wav`:
+```bash
+aplay `/tmp/test-mic.wav`
+```
 
 # Webcam
 
@@ -221,7 +248,3 @@ will give you a list of applications that can open the file, and (the `-d` flag)
 
 - caused by 50Hz vs 60Hz powerline frequency differences (see [source](https://blog.christophersmart.com/2017/02/07/fixing-webcam-flicker-in-linux-with-udev/))
     - **solution**: try `v4l2-ctl --set-ctrl power_line_frequency=0` or `v4l2-ctl --set-ctrl power_line_frequency=1`
-
-# Nano
-
-- `M-U` means "Meta Key" + <kbd>Alt</kbd>. The "Meta key" is not present on most keyboards. (Its use in software is for primarily historical reasons.) Usually, the meta key is emulated by another key on your keyboard. On Windows and Linux, it is usually the <kbd>Alt</kbd> key. On Mac OS X, that key (aka <kbd>Option</kbd>) already has other uses, and so <kbd>Escape</kbd> is used instead.

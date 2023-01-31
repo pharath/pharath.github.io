@@ -151,6 +151,17 @@ Hex to decimal number:
 printf "%d\n" 0xFF
 ```
 
+## Basics
+
+```bash
+hostname   # show or set the system's host name
+hostname -I   # Display all network addresses of the host.
+domainname   # show or set the system's NIS/YP domain name
+ypdomainname   # show or set the system's NIS/YP domain name
+nisdomainname   # show or set the system's NIS/YP domain name
+dnsdomainname   # show the system's DNS domain name
+```
+
 ## Tools
 
 TODO
@@ -163,6 +174,7 @@ ifconfig
 ipconfig   # in Microsoft Windows
 systemd-resolve --flush-caches   # dns cache
 ```
+
 ### configuration
 
 #### MTU, MSS
