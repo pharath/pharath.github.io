@@ -132,3 +132,28 @@ tags:
 
 - watch lecture
 - see book
+
+# Knowledge Representation
+
+## Model checking
+
+- enumerating models and showing that the sentence must hold in all models
+
+## Theorem Proving
+
+- applying rules of inference directly to the sentences in our knowledge base to construct a proof of the desired sentence **without consulting models**
+- **more efficient** than model checking, **if** the number of models is large but the length of the proof is short
+
+### Logical Equivalence
+
+- two sentences $\alpha$ and $\beta$ are **logically equivalent** if they are true **in the same set of models**
+
+### Validity 
+
+- A sentence is **valid** if it is **true in all models**
+- valid sentence = tautology
+- every valid sentence is logically equivalent to *True*
+
+### deduction theorem
+
+

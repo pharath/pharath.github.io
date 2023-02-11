@@ -120,6 +120,7 @@ Using "`system`" as a version name would reset the selection to your system-prov
 | :---: | :---: |
 pip show *package* | show location of *package* (and other package information)
 pip install -h | show install options/settings
+python3 -m pip install --upgrade pip | upgrade pip (old pip versions cause many errors, always upgrade pip first and keep pip updated!)
 
 ## Install packages
 

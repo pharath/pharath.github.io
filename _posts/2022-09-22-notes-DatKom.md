@@ -654,15 +654,17 @@ nslookup www.google.com dns2.p08.nsone.net
 dig www.google.com @dns2.p08.nsone.net
 ```
 
-### ip, ifconfig, ipconfig, nmcli
+### ip, ifconfig, ipconfig, nmcli, iwconfig
 
 - `ipconfig` is a Windows command, it displays slightly different information than `ifconfig` and `ip`
 - `ifconfig` is deprecated, use `ip`
+- `sudo ifconfig wlo1 10.14.14.29 netmask 255.255.255.0` set an ip address (if you leave out the `netmask 255.255.255.0`, then the netmask will change!)
 - `ip a`, `ip address`, `ip address show`
 - `ip r` default gateway/router address
 - `nmcli dev show wlo1` show gateway and DNS servers for device `wlo1`
 - `nmcli dev status` get device names and their status types
 - `systemd-resolve --status | grep Current`: currently used DNS server IP address ([source](https://linuxconfig.org/how-to-find-my-ip-address-on-ubuntu-20-04-focal-fossa-linux))
+- `sudo iwconfig wlan1 essid "myWifi" key "s:password"` (without quotation marks) associate the wifi device with the Access Point
 
 ### Loopback address, Localhost
 

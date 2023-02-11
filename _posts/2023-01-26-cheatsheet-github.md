@@ -15,6 +15,11 @@ tags:
   - cheatsheet
 ---
 
+# SSH Keys
+
+- generate the ssh key on your local machine: `ssh-keygen -o -t rsa -C "ssh@github.com"`, where `-C "comment"` is just a comment/description 
+- `cat ~/.ssh/id_rsa.pub` and copy and paste the full output into the **key** field on **github.com** &rarr; **Account Settings** &rarr; **SSH Keys**
+
 # Github Actions
 
 ## Compress Images

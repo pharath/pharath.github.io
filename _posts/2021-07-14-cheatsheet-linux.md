@@ -648,12 +648,12 @@ uname -o | Prints the operating system information
 | :---: | :---: |
 lscpu |
 lshw |
-hwinfo —short |
+hwinfo --short |
 lspci |
 lsscsi |
 lsusb |
 inxi -Fx |
-lsblk |
+lsblk | see all drives attached to your system, including their sizes and partitions
 df -H |
 pydf |
 sudo fdisk -l |
@@ -673,6 +673,24 @@ cat /proc/meminfo |
 cat /proc/version |
 cat /proc/scsi/scsi |
 cat /proc/partitions |
+
+## Udev
+
+**Udev** is the **Linux subsystem** that supplies your computer with **device events**. In plain English, that means it's the code that **detects** when you have things **plugged into** your computer, like a network card, external hard drives (including USB thumb drives), mouses, keyboards, joysticks and gamepads, DVD-ROM drives, and so on.
+- **udev scripting**: see [tutorial](https://opensource.com/article/18/11/udev)
+    - how to create a udev script triggered by some **udev event**, such as plugging in a specific thumb drive
+
+| command | description |
+| :---: | :---: |
+`udevadm monitor` | tap into udev in real time and see what it sees when you plug in different devices. The monitor function prints received events for: `UDEV`: the event udev sends out after rule processing, `KERNEL`: the kernel uevent
+`udevadm control --reload` | should load all rules (but reboot if you want to be sure)
+
+## Display
+
+| command | description |
+| :---: | :---: |
+`xrandr` | list all display modes; set the size, orientation and/or reflection of the outputs for a screen; can also set the screen size
+`xrandr --fb 2560x1440` | set the screen resolution, when no physical display is connected (e.g. when connecting to Jetson AGX via Teamviewer or VNCviewer, put this in `/etc/xdg/autostart/resolution_screen_teamviewer.sh`, `chmod +x /etc/xdg/autostart/resolution_screen_teamviewer.sh`, create `/etc/xdg/autostart/resolution_screen_teamviewer.desktop` and reboot and connect via Teamviewer again)
 
 ## Storage, Hard Disk, HDD, SSD
 
