@@ -24,6 +24,7 @@ TODO: Could not make it work for **private** git repos yet.
 - `pip install dvc` 
     - if it gives `ERROR: Could not build wheels for pygit2 which use PEP 517 and cannot be installed directly`, **fix**: upgrade `pip` to the latest version!
 - `pip install 'dvc[gdrive]'`
+- `dvc completion -s bash | sudo tee /etc/bash_completion.d/dvc` to activate **bash autocompletion**, then restart your terminal
 
 # Basics
 
