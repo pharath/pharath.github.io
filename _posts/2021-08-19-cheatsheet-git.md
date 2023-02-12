@@ -44,12 +44,13 @@ git checkout -b \<new\_branch\> | switch to a non-existing branch (or: git switc
 `git branch --set-upstream my_branch origin/my_branch` | make the **local** `my_branch` track the **remote** `origin/my_branch` (similar to `git push --set-upstream origin <new_branch>`)
 git reflog |	view history of checkout operations
 git log	|	view history of commits
-git revert \<commit-hash\>	| commit \<commit-hash\> rückgängig machen
+`git revert <commit-hash>`	| commit `<commit-hash>` rückgängig machen
 git tag -l	|	list all tags
-git -c 'versionsort.suffix=-' ls-remote --tags --sort='v:refname' \<repository\> | list all tags of \<repository\>
-git checkout tags/\<tag name\>	|		checkout a specific tag
+`git -c 'versionsort.suffix=-' ls-remote --tags --sort='v:refname' <repository>` | list all tags of `<repository>`
+`git checkout tags/<tag name>`	|		checkout a specific tag
+`git clone --depth 1 --branch <tag_name> <repo_url>` | clone a specific tag; `--depth 1` is optional but if you only need the state at that one revision, you probably want to skip downloading all the history up to that revision.
 git fetch	|
-git checkout solution/2\_foundations	|
+`git checkout solution/2_foundations`	|
 git submodule init |
 git submodule update --progress | `submodule update` by default does not show any cloning progress, use `--progress` to show the cloning progress
 git config --get remote.origin.url | get only the URL of the current remote

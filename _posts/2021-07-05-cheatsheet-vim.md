@@ -302,6 +302,23 @@ ctrl + r	|		redo
 ctrl - k *digraph_id* | to type special characters that are not on the keyboard
 :dig | list all digraphs (see :h digraph)
 
+### Copy, Paste
+
+```bash
+" copying to the system clipboard with text-objects and motions
+Plugin 'christoomey/vim-system-copy'
+```
+
+| command | description |
+| :---: | :---: |
+cp | copy
+cv | paste
+cpiw | copy word
+cP | copy line
+cV | paste line
+cpi' | copy inside single quotes to system clipboard
+cvi' | paste inside single quotes from system clipboard
+
 ### Mehrere Zeilen auskommentieren
 
 [how-to-comment-and-uncomment-multiple-line-vi-terminal-editor](https://discuss.devopscube.com/t/how-to-comment-and-uncomment-multiple-line-vi-terminal-editor/64)

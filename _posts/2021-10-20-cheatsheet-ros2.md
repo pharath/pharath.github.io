@@ -114,7 +114,7 @@ $ ros2 run turtlesim turtlesim_node
 
 - Packages declare their dependencies in the **package.xml** file. This command walks through those declarations and installs the ones that are missing. 
     - **Best practice**: check for dependencies every time you clone: 
-        - From the root of your workspace (`dev_ws`), run the following command: `rosdep install -i --from-path src --rosdistro eloquent -y`
+        - From the root of your workspace (`dev_ws`), run the following command: `rosdep install -i --from-path src --rosdistro eloquent -y` (`--ignore-src` means to ignore installing dependencies, even if a rosdep key exists, if the package itself is also in the workspace.)
 - `rosdep update`
 - `rosdep install`
     - `rosdep install --from-paths /opt/ros/eloquent/share --ignore-src --rosdistro eloquent -y --skip-keys "console_bridge fastcdr fastrtps libopensplice67 libopensplice69 osrf_testing_tools_cpp poco_vendor rmw_connext_cpp rosidl_typesupport_connext_c rosidl_typesupport_connext_cpp rti-connext-dds-5.3.1 tinyxml_vendor tinyxml2_vendor urdfdom urdfdom_headers"`

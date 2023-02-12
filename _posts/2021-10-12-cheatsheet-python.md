@@ -256,3 +256,11 @@ pip show torch | show the location of package "torch" (there you can find the so
 - [functools.partial documentation](https://docs.python.org/3/library/functools.html#functools.partial)
 - definiert eine neue Funktion `new_function`, die genau das gleiche macht wie `some_function`
     - Praktisch, um bestimmte Argumente einer Funktion festzulegen, damit sie nicht wieder eingegeben werden müssen: zB `basetwo = partial(int, base=2)` um nicht jedes mal `base=2` eingeben zu müssen um binäre Zahlen in Dezimalzahlen umzuwandeln
+
+# Coding Tricks
+
+## Python Script cannot be killed
+
+`ps ax | grep python`, find the PID of your running script and then run `kill <PID>`
+
+or: `ps ax | grep python | cut -c1-5 | xargs kill -9`

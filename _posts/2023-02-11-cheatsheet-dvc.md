@@ -43,6 +43,8 @@ git commit -m "Add raw data"
 # add dvc remote (cloud storage)
 dvc remote add -d storage gdrive://<copy repo id from browser url>
 git commit .dvc/config -m "Configure remote storage"
+
+# push data
 dvc push
 cat data/.gitignore   # confirm that data is not tracked by git
 
@@ -57,6 +59,8 @@ dvc pull
 cp -iv data/data.xml /tmp/data.xml
 cat /tmp/data.xml >> data/data.xml
 ls -lh data/
+
+# push the new dataset version
 dvc add data/data.xml
 git add data/data.xml.dvc 
 git commit -m "Dataset updates"

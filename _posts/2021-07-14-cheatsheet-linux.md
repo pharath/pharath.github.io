@@ -746,7 +746,7 @@ sudo fuser -mv /media/SDD | displays all processes accessing `/media/SDD`, where
 `du -sh * .[^.]* | sort -h` | 
 `df -h` | to analyze the whole filesystem
 
-## Webcam
+## Camera
 
 | command | description |
 | :---: | :---: |
@@ -755,9 +755,12 @@ sudo fuser -mv /media/SDD | displays all processes accessing `/media/SDD`, where
 `mplayer tv://device=/dev/video0` | check, if device `/dev/video0` is the webcam
 `gst-launch-1.0 v4l2src device=/dev/video2 name=cam_src ! videoconvert ! videoscale ! video/x-raw,format=RGB ! queue ! videoconvert ! ximagesink name=img_origin` | check, if device `/dev/video2` is the webcam
 `v4l2-ctl --list-devices` | list cameras
+`v4l2-ctl -d /dev/video0 --list-ctrls` | show all settings
 `v4l2-ctl -L -d /dev/videoN` | list available settings of camera `/dev/videoN`
+`v4l2-ctl -d /dev/video0 --list-formats-ext` | show all supported camera resolutions
 `v4l2-ctl --set-ctrl power_line_frequency=0 -d /dev/videoN` | set powerline frequency (50Hz vs 60Hz) of camera `/dev/videoN`
 `v4l2-ctl -d /dev/video2 --list-formats-ext` | check supported pixel formats, fps and resolutions of camera `/dev/video2`
+`v4l2-ctl --device /dev/video3 --set-ctrl=zoom_absolute=120` | zoom in
 
 # GPU information
 

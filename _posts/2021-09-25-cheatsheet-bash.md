@@ -12,9 +12,7 @@ tags:
   - cheatsheet
 ---
 
-# bash syntax
-
-## Shebang
+# Shebang
 
 beste Erklärung: [askubuntu discussion](https://stackoverflow.com/questions/7670303/purpose-of-usr-bin-python3-shebang/7670338#7670338)
 
@@ -25,7 +23,14 @@ In computing, a shebang is the character sequence consisting of the characters n
 When a text file with a shebang is used as if it is an executable in a Unix-like operating system, the program loader mechanism parses the rest of the file's initial line as an interpreter directive. The loader executes the specified interpreter program, passing to it as an argument the path that was initially used when attempting to run the script, so that the program may use the file as input data.[8] For example, if a script is named with the path path/to/script, and it starts with the following line, #!/bin/sh, then the program loader is instructed to run the program /bin/sh, passing path/to/script as the first argument. In Linux, this behavior is the result of both kernel and user-space code.[9] 
 The shebang line is usually ignored by the interpreter, because the "#" character is a comment marker in many scripting languages; some language interpreters that do not use the hash mark to begin comments still may ignore the shebang line in recognition of its purpose.[10] 
 
-## Double-ampersand vs semicolon
+# No-op Command
+
+Colon: `:`
+
+from [bash manual](https://www.gnu.org/software/bash/manual/html_node/Bourne-Shell-Builtins.html#Bourne-Shell-Builtins):
+- "Do nothing beyond expanding arguments and performing redirections. The return status is zero."
+
+# Double-ampersand vs semicolon
 
 - semicolon: run the command no matter what the exit status of the previous command is
 - double-ampersand: only run the command if the previous command is a success
@@ -44,17 +49,9 @@ $ true || echo "OK"
 $
 ```
 
-## Exit Codes
+# If
 
-Exit code of the last command:
-
-```bash
-$ echo $?
-```
-
-## If
-
-### Command as condition
+## Command as condition
 
 You can specify commands as a condition of `if`. If the command returns `0` in its exitcode that means that the condition is `true`; otherwise `false`. [source](https://stackoverflow.com/a/11287896/12282296)
 
@@ -65,13 +62,13 @@ $ if /bin/false; then echo that is true; fi
 $
 ```
 
-### Not
+## Not
 
 ```bash
 if ! grep -q sysa /etc/passwd ; then
 ```
 
-## Was bedeutet $# in einem bash script? (s. [askubuntu post](https://askubuntu.com/questions/939620/what-does-mean-in-bash))
+# Was bedeutet $# in einem bash script? (s. [askubuntu post](https://askubuntu.com/questions/939620/what-does-mean-in-bash))
 
 Zum Beispiel:
 
@@ -81,7 +78,7 @@ if [[ $# -gt 0 ]]; then
 
 `$#` steht für: number of arguments (wie `argc` in C)
 
-## Vergleichsoperatoren
+# Vergleichsoperatoren
 
 ```bash
 if [[ $# -gt 0 ]]; then
@@ -92,30 +89,30 @@ fi
 `-gt` für "greater than" (ie der `>` operator) in der condition
 `-eq` für "equal to" (ie der `=` operator)
 
-## Standard Stream Redirection: stdin, stdout and stderr
+# Standard Stream Redirection: stdin, stdout and stderr
 
 - see "[What is /dev/null](https://linuxhint.com/what_is_dev_null/)"
 
-### File Descriptor (part of POSIX API)
+## File Descriptor (part of POSIX API)
 
 - see [file descriptor](https://en.wikipedia.org/wiki/File_descriptor)
 - Each Unix process should have three standard POSIX file descriptors, corresponding to the three standard streams: `stdin`, `stdout` and `stderr`.
 - Each file descriptor has a **non**-negative integer value: `stdin`: 0, `stdout`: 1, `stderr`: 2.
 
-### Redirect stderr to a text file
+## Redirect stderr to a text file
 
 - `asdfadsa 2> error.txt`
 
-### Redirect stdout to a text file
+## Redirect stdout to a text file
 
 - **Note:** If no file descriptor value is specified, bash will use `stdout` (i.e. file descriptor value `1`) by default.
 - `echo "Hello World" > log.txt`
 
-### Redirect stderr AND stdout to /dev/null
+## Redirect stderr AND stdout to /dev/null
 
 - `grep -r hello /sys/ &> /dev/null`
 
-### Redirect ALL output to /dev/null
+## Redirect ALL output to /dev/null
 
 - In certain situations, the output may not be useful at all. Using redirection, we can dump all the output into the void:
   - `> /dev/null 2>&1`
@@ -123,44 +120,24 @@ fi
     - `2>&1` redirects `stderr` (file descriptor value: `2`) to `stdout` (file descriptor value: `1`)
 - phth note: `> /dev/null 2>&1` idea came from `~/git/geohot/openpilot/update_requirements.sh`
 
+# Test
+
+There are two syntaxes for using the test command.
+
+```bash
+test EXPRESSION
+[ EXPRESSION ]
+```
+
+Note that in the case of `[`, there is a space at both ends of the `EXPRESSION`.
+- e.g. `test 1 -eq 2 && echo "true" || echo "false"` &rarr; `false`
+- alternatively: `$ [ 1 -eq 2 ] && echo "true" || echo "false"`
+
 # Job control
 
 ## List running jobs
 
 - `jobs -l` (also shows the `jobID`s)
-
-## Exit codes
-
-**Important**: Exit codes, in general, depend on the shell used! Different shells have different exit codes!
-
-### Bash
-
-From Bash manual:
-> When a command terminates on a fatal signal whose number is N, Bash uses the value 128+N as the exit status
-These **signal numbers** are given below for each signal.
-
-## ctrl - c
-
-- sends the signal `SIGINT` (signal number: 2, bash exit code: 130)
-    - **note**: Exit code 130 can mean either `SIGINT` or `_exit(130)` in bash! `SIGINT` and `_exit(130)` are not the same (more details on [stackoverflow](https://unix.stackexchange.com/a/386856)).
-- like `kill -SIGINT [processPID]` (**Note**: `kill` sends the `SIGTERM` (termination) signal by default unless you specify the signal to send.)
-- can be intercepted by a program so it can clean its self up before exiting, or not exit at all
-
-## ctrl - z
-
-- suspends a running process
-- sends a `SIGTSTP`
-- like `kill -TSTP [processid]`
-- cannot be intercepted by the program
-- **note**: the process will **halt**, so if you want it to continue running in the background use `bg`!
-
-## ctrl - s
-
-- sends a `SIGSTOP`
-
-## ctrl - q 
-
-- sends a `SIGCONT`
 
 ## bg
 
@@ -183,3 +160,47 @@ These **signal numbers** are given below for each signal.
     - `nohup gedit &`, now if the terminal dies `gedit` will **not** be closed!
 - use case:
     - wenn man z.B. per `ssh` auf einem fremden Rechner arbeitet und dort einen langwierigen Prozess starten möchte, die ssh-Verbindung aber während des Prozesses nicht permanent aktiv sein soll, weil man etwa den eigenen Rechner ausschalten möchte
+
+# Exit codes
+
+**Important**: Exit codes, in general, depend on the shell used! Different shells have different exit codes!
+
+## Bash
+
+Exit code of the **last command**:
+
+```bash
+$ echo $?
+```
+
+Exit Codes With Special Meanings: see [link](https://tldp.org/LDP/abs/html/exitcodes.html)
+
+### Signal numbers
+
+From Bash manual:
+> When a command terminates on a fatal signal whose number is N, Bash uses the value 128+N as the exit status
+These **signal numbers** are given below for each signal.
+
+#### ctrl - c
+
+- sends the signal `SIGINT` (signal number: 2, bash exit code: 130)
+    - **note**: Exit code 130 can mean either `SIGINT` or `_exit(130)` in bash! `SIGINT` and `_exit(130)` are not the same (more details on [stackoverflow](https://unix.stackexchange.com/a/386856)).
+- like `kill -SIGINT [processPID]` (**Note**: `kill` sends the `SIGTERM` (termination) signal by default unless you specify the signal to send.)
+- can be intercepted by a program so it can clean its self up before exiting, or not exit at all
+
+#### ctrl - z
+
+- suspends a running process
+- sends a `SIGTSTP`
+- like `kill -TSTP [processid]`
+- cannot be intercepted by the program
+- **note**: the process will **halt**, so if you want it to continue running in the background use `bg`!
+
+#### ctrl - s
+
+- sends a `SIGSTOP`
+
+#### ctrl - q 
+
+- sends a `SIGCONT`
+
