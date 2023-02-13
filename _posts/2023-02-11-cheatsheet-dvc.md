@@ -28,6 +28,8 @@ TODO: Could not make it work for **private** git repos yet.
 
 # Basics
 
+Watch: [official YouTube tutorials](https://www.youtube.com/watch?v=kLKBcPonMYw&list=PL7WG7YrwYcnDb0qdPl9-KEStsL-3oaEjg)
+
 ```bash
 # initialize a new git repo and dvc repo
 git init 

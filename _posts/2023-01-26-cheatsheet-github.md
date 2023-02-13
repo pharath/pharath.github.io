@@ -26,3 +26,7 @@ tags:
 
 - [Calibre Image Actions](https://github.com/marketplace/actions/image-actions)
     - see demo on `feature/compressImage` branch
+
+# Storage Limits
+
+see [stackoverflow](https://stackoverflow.com/questions/38768454/repository-size-limits-for-github-com)

@@ -269,6 +269,13 @@ and you will be prompted to enter pw again.
 
 # Create a new repository on the command line
 
+Install gh CLI first: [installation instructions](https://github.com/cli/cli/blob/trunk/docs/install_linux.md)
+
+```bash
+gh auth login
+gh repo create
+```
+
 ```bash
 echo "# documentation" >> README.md
 git init
