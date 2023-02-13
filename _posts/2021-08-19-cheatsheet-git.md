@@ -68,13 +68,28 @@ git remote update origin --prune | To update the local list of remote branches
 
 # Reset/undo changes
 
-## Git Operations
+## Undo git add
 
 | command | description |
 | :---: | :---: |
 git reset | undo `git add`
 
-## Commits
+## Undo local Branch delete
+
+see [stackoverflow](https://stackoverflow.com/a/4025983/12282296)
+
+```bash
+user@MY-PC /C/MyRepo (master)
+$ git branch -D master2
+Deleted branch master2 (was 130d7ba).    <-- This is the SHA1 we need to restore it!
+
+user@MY-PC /C/MyRepo (master)
+$ git branch master2 130d7ba
+```
+
+Use `git reflog` to find the `SHA1` of the last commit of the branch.
+
+## Undo Commits
 
 | command | description |
 | :---: | :---: |
@@ -85,7 +100,7 @@ git reset --soft HEAD~1 | HEAD~ and HEAD~1 are the same
 git reset --soft *SHA-1* | reset to a previous state **locally** (`--soft`: safe way)
 git reset --hard *SHA-1* | reset to a previous state **locally** (**Warning**: `--hard`: All changes will be lost.)
 
-## Specific Files
+## Undo Changes to Specific Files
 
 | command | description |
 | :---: | :---: |

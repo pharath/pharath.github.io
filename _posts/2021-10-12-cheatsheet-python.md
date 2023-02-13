@@ -257,6 +257,12 @@ pip show torch | show the location of package "torch" (there you can find the so
 - definiert eine neue Funktion `new_function`, die genau das gleiche macht wie `some_function`
     - Praktisch, um bestimmte Argumente einer Funktion festzulegen, damit sie nicht wieder eingegeben werden müssen: zB `basetwo = partial(int, base=2)` um nicht jedes mal `base=2` eingeben zu müssen um binäre Zahlen in Dezimalzahlen umzuwandeln
 
+## sys
+
+`sys.path`
+- [doc](https://docs.python.org/3/library/sys.html#sys.path)
+- A list of strings that specifies the search path for modules. Initialized from the environment variable `PYTHONPATH`, plus an installation-dependent default.
+
 # Coding Tricks
 
 ## Python Script cannot be killed

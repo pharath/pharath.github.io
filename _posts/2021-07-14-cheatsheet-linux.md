@@ -188,7 +188,7 @@ ocrmypdf | `ocrmypdf in.pdf out.pdf`
 
 <hr>
 
-ipad_charge | [github link](https://github.com/mkorenkov/ipad_charge/wiki) automatically start charging ipad when connected to ubuntu
+`ipad_charge` | [github link](https://github.com/mkorenkov/ipad_charge/wiki) automatically start charging ipad when connected to ubuntu
 
 <hr>
 
@@ -254,7 +254,7 @@ type \<some_alias\> | check the meaning of a specific alias
 
 | command | description |
 | :---: | :---: |
-ctrl + r + Suchbegriff	|	reverse search (mehrmals ctrl + r drücken, um zwischen den Suchbegriff enthaltenden commands auszuwählen, danach “->” um zu übernehmen bzw “enter” um auszuführen)
+ctrl + r + Suchbegriff	|	reverse search (mehrmals ctrl + r drücken, um zwischen den Suchbegriff enthaltenden commands auszuwählen, danach `->` um zu übernehmen bzw `Enter` um auszuführen)
 
 <hr>
 
@@ -298,6 +298,16 @@ readlink -f foo.bar | get path to file "foo.bar" (like `pwd` + foo.bar)
 
 ls \| wc -l | count files in a directory
 history \| tail -n 30 | show last 30 commands
+
+# diff
+
+Differences between two directory trees
+
+| command | description |
+| :---: | :---: |
+`diff -r dir1/ dir2/` | outputs exactly what the differences are between corresponding files
+`diff -qr dir1/ dir2/` | just getting a list of corresponding files whose content differs
+`diff -qrN dir1/ dir2/` | to see differences for files that may not exist in either directory
 
 # Checks
 
