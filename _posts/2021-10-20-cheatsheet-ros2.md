@@ -10,6 +10,7 @@ tags:
   - cheatsheet
 toc: true
 toc_sticky: true
+
 ---
 
 # Install ROS2
@@ -220,9 +221,9 @@ Source: [http://gazebosim.org/tutorials?tut=build_model](http://gazebosim.org/tu
 
 # Troubleshooting
 
-- `rosnode kill -a; killall -9 rosmaster; killall -9 roscore`, if nodes do not stop automatically
-
 ## Errors 
+
+### Error 1
 
 ```bash
 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o: In function `_start':
@@ -237,6 +238,8 @@ Failed   <<< galaxis_HoughLines_pkg [12.8s, exited with code 2]
 
 - this simply means you forgot to write a `main.cpp` or a `main()` function for your ROS node
 
+### Error 2
+
 ```bash
 /home/galaxis/.local/lib/python3.6/site-packages/setuptools/command/install.py:37: 
 SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip and other standards-based tools.
@@ -245,3 +248,13 @@ SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip 
 - install `pip install setuptools==58.2.0`
 - make sure you have underscores in `setup.cfg` file and not the '-'
 - see [solution answers.ros.org](https://answers.ros.org/question/396439/setuptoolsdeprecationwarning-setuppy-install-is-deprecated-use-build-and-pip-and-other-standards-based-tools/?answer=400052#post-id-400052)
+
+### Error 3
+
+```bash
+[0.191s] WARNING:colcon.colcon_ros.prefix_path.ament:The path '/root/docker_volume/ds_ws/install/subscriber_pkg' in the environment variable AMENT_PREFIX_PATH doesn't exist
+[0.191s] WARNING:colcon.colcon_ros.prefix_path.ament:The path '/root/docker_volume/ds_ws/install/single_stream_pkg' in the environment variable AMENT_PREFIX_PATH doesn't exist
+[0.191s] WARNING:colcon.colcon_ros.prefix_path.ament:The path '/root/docker_volume/ds_ws/install/multi_stream_pkg' in the environment variable AMENT_PREFIX_PATH doesn't exist
+```
+
+- **problem**: You are compiling in a shell in which you have run `source install/setup.bash` before

@@ -9,6 +9,7 @@ tags:
   - cheatsheet
 toc: true
 toc_sticky: true
+
 ---
 
 # ROS Packages
@@ -282,3 +283,8 @@ alternativ zu `ros::spin()`:
     r.sleep();			// r ist ein ros::Rate Objekt (s. 1. Zeile)
   }
 ```
+
+# Troubleshooting
+
+- `rosnode kill -a; killall -9 rosmaster; killall -9 roscore`, if nodes do not stop automatically
+

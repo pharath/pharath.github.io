@@ -754,6 +754,11 @@ sudo fuser -mv /media/SDD | displays all processes accessing `/media/SDD`, where
 `du -sh * | sort -rh` | "descending": largest file in the first output line (`-r` for "reverse order")
 `du -sh * .[^.]*` | 
 `du -sh * .[^.]* | sort -h` | 
+`du -h -d 1 *` | `-d 1` or `--max-depth=1` display the sizes of only the directories immediately within the specified path. If we were to specify 2 it would go a level further.
+`du -h -d 1 -t 1G /` | show the sizes of all first level directories larger than 1GB within the root `/` path
+
+| command | description |
+| :---: | :---: |
 `df -h` | to analyze the whole filesystem
 
 ## Camera
