@@ -38,7 +38,7 @@ dvc init
 # create dvc repo
 mkdir data
 dvc get https://github.com/iterative/dataset-registry get-started/data.xml -o data/data.xml
-dvc add data/data.xml
+dvc add data/data.xml   # like "git add" + "git commit" together; use "dvc add --no-commit" flag to avoid committing
 git add data/.gitignore data/data.xml.dvc
 git commit -m "Add raw data"
 
@@ -47,6 +47,7 @@ dvc remote add -d storage gdrive://<copy repo id from browser url>
 git commit .dvc/config -m "Configure remote storage"
 
 # push data
+git push   # always "git push" before "dvc push", otherwise you will forget "git push" because "dvc push" can take a long time
 dvc push
 cat data/.gitignore   # confirm that data is not tracked by git
 
@@ -66,6 +67,7 @@ ls -lh data/
 dvc add data/data.xml
 git add data/data.xml.dvc 
 git commit -m "Dataset updates"
+git push   # always "git push" before "dvc push", otherwise you will forget "git push" because "dvc push" can take a long time
 dvc push
 ```
 
