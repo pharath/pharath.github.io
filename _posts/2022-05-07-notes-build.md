@@ -18,7 +18,15 @@ toc_label: "Contents"
 - [purpose of configure scripts](https://en.wikipedia.org/wiki/Configure_script)
 - [check "failed" warnings](https://github.com/edenhill/librdkafka/issues/370#issuecomment-142095337)
 
-# Makefile
+# make
+
+Using less cores:
+```bash
+N_Cores=$(( $(nproc --all) / 2 ))
+make -j $N_Cores
+```
+
+## Makefile
 
 `VAR ?= VALUE`
 - set to a value only if `VAR` not already set

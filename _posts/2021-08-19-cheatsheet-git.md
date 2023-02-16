@@ -118,6 +118,11 @@ git restore . | discard all unstaged files in current working directory
 git checkout -- path/to/file/to/revert | see `git restore path/to/file/to/revert`
 git restore path/to/file/to/revert | discard a specific unstaged file
 
+## Remove modified `__pycache__/` and `.pyc` Files from `git status`
+
+`git checkout path/to/__pycache__/`
+`git checkout *.pyc`
+
 # git rebase vs git merge
 
 - [Explanation 1](https://poanchen.github.io/blog/2020/09/19/what-to-do-when-git-branch-has-diverged)

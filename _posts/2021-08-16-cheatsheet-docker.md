@@ -13,6 +13,16 @@ tags:
 
 # docker
 
+## Compare images using `docker history`
+
+```bash
+# compare tag-1 and tag-2
+docker history nvcr.io/nvidia/deepstream:tag-1 > hist_tag-1.txt
+docker history nvcr.io/nvidia/deepstream:tag-2 > hist_tag-2.txt
+vimdiff hist_tag-1.txt hist_tag-2.txt
+# in vim press ctrl + w J to get horizonally split viewports
+```
+
 ## Location on System
 
 | command | description |
@@ -53,9 +63,9 @@ See
 ## docker commit
 
 | :---: | :---: |
-sudo docker commit 308aeb468339 tensorflow/tensorflow:latest-gpu-jupyter_braket | [Schritte](https://stackoverflow.com/a/64532554), i.e. `docker commit CONTAINER_ID NEW_IMAGE_NAME`
-docker commit -m "added test file" eloquent_lehmann | commit with commit message
-docker history \<image hash\> | view commit messages
+`sudo docker commit 308aeb468339 tensorflow/tensorflow:latest-gpu-jupyter_braket` | [Schritte](https://stackoverflow.com/a/64532554), i.e. `docker commit CONTAINER_ID NEW_IMAGE_NAME`
+`docker commit -m "added test file" eloquent_lehmann` | commit with commit message
+`docker history <image hash>` | view commit messages
 
 ## remove
 

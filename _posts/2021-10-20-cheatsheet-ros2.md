@@ -126,7 +126,24 @@ $ ros2 run turtlesim turtlesim_node
 
 - `sudo apt install python3-colcon-common-extensions`
 
+## list
+
+```bash
+$ mkdir -p /tmp/workspace/src     # Make a workspace directory with a src subdirectory
+$ cd /tmp/workspace               # Change directory to the workspace root
+$ <...>                           # Populate the `src` directory with packages
+$ colcon list                     # List all packages in the workspace
+$ colcon graph                    # List all packages in the workspace in topological order
+                                  # and visualize their dependencies
+```
+
 ## build
+
+```bash
+$ colcon build                    # Build all packages in the workspace
+$ colcon build --packages-select <name-of-pkg>
+$ colcon build --packages-up-to <name-of-pkg>
+```
 
 ### arguments
 
@@ -141,6 +158,15 @@ $ ros2 run turtlesim turtlesim_node
 - `--cmake-args -DCMAKE_BUILD_TYPE=Release`
 - `--parallel-workers NUMBER` [doc](https://colcon.readthedocs.io/en/released/reference/executor-arguments.html)
     - The maximum number of jobs to process in parallel. The default value is the number of logical CPU cores as reported by `os.cpu_count()`.
+
+## test
+
+```bash
+$ colcon test                     # Test all packages in the workspace
+$ colcon test-result --all        # Enumerate all test results
+$ . install/local_setup.bash      # Setup the environment to use the built packages
+$ <...>                           # Use the built packages
+```
 
 # ros2 pkg
 

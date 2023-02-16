@@ -213,7 +213,7 @@ ctrl + g | show current file name
 | command | description |
 | :---: | :---: |
 `:w` |
-`:sav(eas)` new_file_name | save as new_file_name and set new_file_name as current file (`:sav` and `:saveas` are the same)
+`:sav(eas) new_file_name` | save as `new_file_name` and set `new_file_name` as current file (`:sav` and `:saveas` are the same)
 
 ## Navigation
 
@@ -231,8 +231,8 @@ ctrl - - | zoom out (anschließend ctrl + w, =)
 vi -o /path/to/file1 /path/to/file2	|	öffne 2 files in split screen
 ctrl + w, s	|	öffne neuen split window horizontal
 ctrl + w, v	|	öffne neuen split window vertical (oder besser: `:Lexplore`)
-<kbd>ctrl</kbd> + <kbd>w</kbd> <kbd>t</kbd>, <kbd>ctrl</kbd> + <kbd>w</kbd> <kbd>K</kbd> |    change two vertically split windows to horizonally split
-<kbd>ctrl</kbd> + <kbd>w</kbd> <kbd>t</kbd>, <kbd>ctrl</kbd> + <kbd>w</kbd> <kbd>H</kbd> |    change two horizonally split windows to vertically split
+ctrl + w J |    change two vertically split windows to horizonally split
+ctrl + w H |    change two horizonally split windows to vertically split
 ctrl + w, &lt;h j k l&gt;|	change active viewport
 ctrl + r		|	rotate viewport (zum Anordnen der viewports)
 ctrl + R |
@@ -245,8 +245,8 @@ ctrl + w, &lt;	|	decrease active viewport size (für 8 Einheiten Verkleinerung: 
 | command | description |
 | :---: | :---: |
 h j k l |			links hoch runter rechts
-/irgend_ein_wort | suche irgend_ein_wort vorwärts (springt zum ersten solchen Wort, drücke n für nächstes Wort und N für previous occurrence)
-?irgend_ein_wort | suche irgend_ein_wort rückwärts
+`/irgend_ein_wort` | suche `irgend_ein_wort` vorwärts (springt zum ersten solchen Wort, drücke n für nächstes Wort und N für previous occurrence)
+`?irgend_ein_wort` | suche `irgend_ein_wort` rückwärts
 0	|			spring zu Zeilenanfang
 $	|			spring zu Zeilenende
 H   |           spring zu top of page ("**H**igh")
