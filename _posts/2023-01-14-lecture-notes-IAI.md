@@ -3,8 +3,8 @@ title: "Introduction to Artificial Intelligence - Notes"
 read_time: false
 excerpt: "For learning Introduction to AI; content mostly from RWTH lecture Introduction to Artificial Intelligence by G. Lakemeyer."
 header:
-  teaser: /assets/images/C_logo.png
-  overlay_image: /assets/images/C_logo.png
+  teaser: /assets/images/iai/iai_teaser.png
+  overlay_image: /assets/images/iai/iai_teaser.png
   overlay_filter: 0.5 
 toc: true
 toc_label: "Contents"
