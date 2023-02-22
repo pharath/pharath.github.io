@@ -201,6 +201,59 @@ A real life example can be a scenario of a waiter and a kitchen to wash dishes. 
 - [ros doc](https://docs.ros.org/en/foxy/Tutorials/Logging-and-logger-configuration.html)
     - `ros2 run logging_demo logging_demo_main --ros-args --log-level debug`
 
+# API
+
+## Subscriber
+
+- [rclcpp::Node::create_subscription](https://docs.ros2.org/bouncy/api/rclcpp/classrclcpp_1_1_node.html#a2978c294db9f39677020d76d5bb14d53)
+    - [Lambda](https://stackoverflow.com/a/57533337/12282296)
+
+## Time
+
+- see [Using time](https://docs.ros.org/en/foxy/Tutorials/Intermediate/Tf2/Learning-About-Tf2-And-Time-Cpp.html)
+
+## QoS
+
+- [Key Concepts](https://surfertas.github.io/ros2/2019/08/17/ros2-qos.html)
+- [`qos_profiles.h`](https://docs.ros2.org/crystal/api/rmw/qos__profiles_8h_source.html)
+
+# Packages
+
+## `image_transport`
+
+Examples:
+- [`image_transport::create_subscription`](https://github.com/ros-perception/image_common/issues/156#issuecomment-1013601024)
+
+Publisher:
+```cpp
+// from: https://answers.ros.org/question/403966/how-to-initialize-image_transport-using-rclcpp/
+
+class CamPublisher_ : public rclcpp::Node
+{
+protected:
+    rclcpp::Node::SharedPtr node_handle_;
+    image_transport::ImageTransport image_transport_;
+    image_transport::Publisher image_publisher_;
+    ...
+public:
+    CamPublisher_() :
+            Node("camera"),
+            // create the shared_ptr node handle for this node.
+            node_handle_(std::shared_ptr<CamPublisher_>(this, [](auto *) {})),
+            image_transport_(node_handle_),
+            image_publisher_(image_transport.advertise("image", 10)
+    {
+        ....
+    }
+    void convert_and_publish(const cv::Mat& frame)
+    {
+        sensor_msgs::msg::Image msg;
+        ....
+        image_publisher_->publish(msg);
+    }
+}
+```
+
 # Gazebo
 
 ## reopen the GUI window
@@ -214,7 +267,7 @@ I.e. simply reopen the GUI by entering the command `gzclient`.
 
 ## adding models
 
-- `wget -q -R *index.html*,*.tar.gz --no-parent -r -x -nH http://models.gazebosim.org/cardboard_box/` download model cardboard_box
+- `wget -q -R *index.html*,*.tar.gz --no-parent -r -x -nH http://models.gazebosim.org/cardboard_box/` download model `cardboard_box`
 
 ## Xacro Macros (.xacro)
 

@@ -332,7 +332,7 @@ xprop _NET_WM_PID | sed 's/_NET_WM_PID(CARDINAL) = //' | ps `cat`
     - Once the download is finished it calls `dpkg` to install all those files, satisfying all the dependencies.
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 sudo apt update			|
 sudo apt [-y] upgrade		|	-y oder —yes für automatic yes to prompts	
 apt --help |
@@ -341,9 +341,16 @@ sudo apt-mark auto $PACKAGES | mark $PACKAGES as "automatically installed", if a
 
 ## apt
 
+### Include directories for C++
+
+- `/usr/local/include/`
+    - e.g. `/usr/local/include/opencv4/opencv2/`
+- `/opt/`
+    - e.g. `/opt/ros/`
+
 ### PPAs
 
-**Personal Package Archives (PPAs)** are software repositories designed for Ubuntu users and are easier to install than other third-party repositories. PPAs are often used to distribute pre-release software so that it can be tested. [[source](https://help.ubuntu.com/stable/ubuntu-help/addremove-ppa.html.en)]
+**Personal Package Archives (PPAs)** are software repositories designed for Ubuntu users and are easier to install than other third-party repositories. PPAs are often used to distribute pre-release software so that it can be tested. ([source](https://help.ubuntu.com/stable/ubuntu-help/addremove-ppa.html.en))
 
 Adding PPAs:
 

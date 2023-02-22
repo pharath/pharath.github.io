@@ -23,40 +23,49 @@ tags:
 # Basics
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 `git rm file1.txt` | remove the file from the Git repository **and the filesystem**
 `git rm --cached file1.txt` | remove the file only from the Git repository and not remove it from the filesystem
 `git add -u :/` | `git rm` all files after accidentally `rm` those files
 
 | command | description |
-| :---: | :---: |
-git clone --recurse-submodules repo \<Ziel directory\> | 
-git branch -a | show/list all branches (local and remote)
-git branch -r | show/list all branches (only remote)
-git branch -d *local_branch* | delete local branch *local_branch*
-git push origin --delete *remote/branch* | delete remote branch *remote/branch*
-git show-branch -a | show/list all branches **and commits** (local and remote)
-git show-branch -r | show/list all branches **and commits** (only remote)
-git checkout \<existing\_branch\> | switch to an existing branch (or: git switch *branch*)
-git checkout -b \<new\_branch\> | switch to a non-existing branch (or: git switch -c *branch*); subsequently, `git push --set-upstream origin <new_branch>` to create `new_branch` in the remote (on github.com), too. Here, the `--set-upstream` flag will make the local `<new_branch>` track the remote `remotes/origin/<new_branch>` (w/o this flag git does not know where to push the `new_branch`).
-`git push --set-upstream origin <new_branch>` | push to a locally newly created branch (see "git checkout -b \<new\_branch\>") that does not yet exist on remote (i.e. on github.com)
+| :--- | :--- |
+`git clone --recurse-submodules repo <Ziel directory>` | 
+`git branch -a` | show/list all branches (local and remote)
+`git branch -r` | show/list all branches (only remote)
+`git branch -d *local_branch*` | delete local branch *local_branch*
+`git push origin --delete *remote/branch*` | delete remote branch *remote/branch*
+`git show-branch -a` | show/list all branches **and commits** (local and remote)
+`git show-branch -r` | show/list all branches **and commits** (only remote)
+`git checkout <existing_branch>` | switch to an existing branch (or: git switch *branch*)
+`git checkout -b <new_branch>` | switch to a non-existing branch (or: `git switch -c *branch*`); subsequently, `git push --set-upstream origin <new_branch>` to create `new_branch` in the remote (on github.com), too. Here, the `--set-upstream` flag will make the local `<new_branch>` track the remote `remotes/origin/<new_branch>` (w/o this flag git does not know where to push the `new_branch`).
+`git push --set-upstream origin <new_branch>` | push to a locally newly created branch (see `git checkout -b <new_branch>`) that does not yet exist on remote (i.e. on github.com)
 `git branch -vv` | show which **local branches** track which **remote branches**, useful e.g. when you are creating and setting up new branches
 `git branch --set-upstream my_branch origin/my_branch` | make the **local** `my_branch` track the **remote** `origin/my_branch` (similar to `git push --set-upstream origin <new_branch>`)
-git reflog |	view history of checkout operations
-git log	|	view history of commits
+`git reflog` | view history of checkout operations
+`git log`	| view history of commits ([more commands](#git-log))
 `git revert <commit-hash>`	| commit `<commit-hash>` rückgängig machen
-git tag -l	|	list all tags
+`git tag -l`	| list all tags
 `git -c 'versionsort.suffix=-' ls-remote --tags --sort='v:refname' <repository>` | list all tags of `<repository>`
-`git checkout tags/<tag name>`	|		checkout a specific tag
+`git checkout tags/<tag name>`	| checkout a specific tag
 `git clone --depth 1 --branch <tag_name> <repo_url>` | clone a specific tag; `--depth 1` is optional but if you only need the state at that one revision, you probably want to skip downloading all the history up to that revision.
-git fetch	|
-`git checkout solution/2_foundations`	|
-git submodule init |
-git submodule update --progress | `submodule update` by default does not show any cloning progress, use `--progress` to show the cloning progress
-git config --get remote.origin.url | get only the URL of the current remote
-git remote show [remote-name] command | get more details about a particular remote
-git remote show origin | get more details about the current remote
-git remote update origin --prune | To update the local list of remote branches
+`git fetch` |
+`git checkout solution/2_foundations` |
+`git submodule init` |
+`git submodule update --progress` | `submodule update` by default does not show any cloning progress, use `--progress` to show the cloning progress
+`git config --get remote.origin.url` | get only the URL of the current remote
+`git remote show [remote-name] command` | get more details about a particular remote
+`git remote show origin` | get more details about the current remote
+`git remote update origin --prune` | To update the local list of remote branches
+
+## git log
+
+| command | description |
+| :--- | :--- |
+`git log -- filename` | commit history of a file
+`git log -p -- filename` | Like `git log`, but shows the file content that changed, as well. Generates the patches for each log entry.
+`git show HEAD` | just the diff for a specific commit
+`gitk [filename]` | To browse the changes visually
 
 ## pull vs fetch vs update
 
@@ -144,10 +153,10 @@ and have 2 and 1 different commits each, respectively.
 | command | description |
 | :---: | :---: |
 git merge main | advantage: non-destructive operation; disadvantage: non-linear git history
-git rebase main | advantage: linear project history; disadvantage: destructive operation (remember ["Golden Rule of git rebase"](#golden_rule))
+git rebase main | advantage: linear project history; disadvantage: destructive operation (remember ["Golden Rule of git rebase"](#golden-rule-of-git-rebase))
 git rebase -i main | interactive rebasing
 
-## Golden Rule of git rebase<a name="golden_rule"></a>
+## Golden Rule of git rebase
 
 The **golden rule of git rebase** is to never use it on *public* branches.
 - d.h. Branches auf denen andere Leute arbeiten.

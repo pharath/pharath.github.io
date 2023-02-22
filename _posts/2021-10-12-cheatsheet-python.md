@@ -270,3 +270,11 @@ pip show torch | show the location of package "torch" (there you can find the so
 `ps ax | grep python`, find the PID of your running script and then run `kill <PID>`
 
 or: `ps ax | grep python | cut -c1-5 | xargs kill -9`
+
+# Using C++
+
+## Create Python bindings of existing C++ code
+
+see 
+- [pybind11](https://github.com/pybind/pybind11)
+- [Boost.Python](https://www.boost.org/doc/libs/1_58_0/libs/python/doc/)
