@@ -197,7 +197,7 @@ tags:
     - i.e. we can show $\alpha \vDash \beta$ by proving that $(\alpha \Rightarrow \beta)$ is equivalent to `true`
 
 **Satisfiability**
-- A sentence is satisfiable if it is `true` in, or satisfied by, **some** model
+- A sentence is **satisfiable** if it is `true` in, or satisfied by, **some** model
 - can be checked by enumerating the possible models until one is found that satisfies the sentence (**SAT problem**, NP-complete)
 - $\alpha$ is satisfiable iff $\neg \alpha$ is not valid
 - $\alpha$ is valid iff $\neg \alpha$ is unsatisfiable
@@ -256,6 +256,17 @@ Proof can be seen as **search problem** (see section [Search](#search))
     - empty clause: $\text{KB}$ entails $\alpha$ 
 - Note: The empty clause is equivalent to `false` because a disjunction is `true` only if at least one of its disjuncts is `true`. This is why the resolution algorithm is a **proof by contradiction**.
 
+**More efficient** inference algorithm:
+- **definite clause**: disjunction of literals of which **exactly one is positive**
+- **Horn clause**: disjunction of literals of which **at most one is positive** (&rarr; all definite clauses are Horn clauses)
+    - Horn clauses are **closed under resolution**
+    - Deciding entailment with Horn clauses can be done in **time** that is **linear** in the size of the knowledge base.
+    - Inference with Horn clauses can be done through the **forward-chaining** and **backward-chaining** algorithms
+        - easy for humans to follow 
+        - e.g. basis for **logic programming**
+- **goal clause**: clauses with no positive literals
+- **k-CNF sentence**: CNF sentence where each clause has **at most k literals**
+
 ## FOL
 
 - unlike in propositional logic, models in FOL have **objects** in them
@@ -302,18 +313,44 @@ Proof can be seen as **search problem** (see section [Search](#search))
 
 ## Inference in FOL
 
-algorithms that can answer any answerable first-order logic question
+- algorithms that can answer any answerable first-order logic question
 
-### Propostional vs First-Order Inference
+### Propositional vs First-Order Inference
 
+- **ground term**: a term without variables
+- **substitution**: e.g. {$x/\text{Father}(\text{John})$} is also a substitution, i.e. **substituting with functions** is allowed (see 9.1 intro)
 - Inference rules for quantifiers 
     - **Universal Instantiation rule**: we can infer any sentence obtained by substituting a **ground term** (a term without variables) for a universally quantified variable
     - **Existential Instantiation rule**: replaces an existentially quantified variable with a single new **constant symbol** (aka **Skolem constant**)
         - the new constant symbol **must not** already belong to another object
-- how to reduce first-order inference to propositional inference
+- **propositionalization**: reduce first-order inference to propositional inference
+    - apply UI using all possible substitutions
+    - replace ground atomic sentences, such as *King(John)*, with proposition symbols, such as *JohnIsKing*
+    - apply any of the complete **propositional algorithms** to obtain conclusions such as *JohnIsEvil*, which is equivalent to *Evil(John)*
+- **problem with propositionalization**: when the knowledge base includes a **function symbol**, the set of possible ground-term substitutions is infinite
+    - **Herbrand's Theorem**: If a sentence is entailed by the original, first-order KB, then there is a proof involving just a **finite subset** of the propositionalized knowledge base.
+    - We can find this subset!
+- propositionalization is **complete**: any entailed sentence can be proved (using propositionalization)
+    - **But**: we cannot tell if the sentence is entailed or not in the first place (in FOL entailment is **semidecidable**)
+        - i.e. the proof procedure can go on and on but we will not know whether it is **stuck in a loop** or whether the proof is just about to pop out
 
 ### Unification
 
-inference rules that work directly with first-order sentences
+- inference rules that work directly with first-order sentences
 
 ### Resolution-based Theorem Proving
+
+**Every sentence** of first-order logic can be converted into an inferentially equivalent **CNF sentence**.
+
+### Herbrand's Theorem
+
+**Herbrand universe**: If $S$ is a set of clauses, then $H_S$, is the **set of all ground terms** constructible from 
+- the function symbols in $S$
+- the constant symbols in $S$
+**Saturation $P(S)$**: the set of **all ground clauses** obtained by applying all possible consistent substitutions of ground terms in $P$ for variables in $S$
+**Herbrand Base**: the **saturation** of a set $S$ of clauses with respect to its Herbrand universe
+
+**Herbrand's Theorem**: If a set $S$ of clauses is [unsatisfiable](#theorem-proving), then there exists a finite subset of $H_S(S)$ that is also unsatisfiable.
+- **Lakemeyer lecture**: $S$ is satisfiable iff the Herbrand base is satisfiable
+
+
