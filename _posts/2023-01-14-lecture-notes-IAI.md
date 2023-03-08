@@ -139,14 +139,21 @@ tags:
 ## Definitions
 
 **Bound Variable**: e.g. the variable is bound **by an existential quantifier**
+
 **Free Variable**: if the variable is **not bound**
+
 **Sentence**: wff without free variables
+
 **Knowledge Base**: a set of sentences.
+
 **Sound** aka **Truth-preserving**: An inference algorithm that derives only entailed sentences. An unsound inference procedure essentially makes things up as it goes along. E.g. model checking is sound (if the space of models is finite).
+
 **Complete**: an inference algorithm is complete if it can derive any sentence that is entailed
+
 **Logical Reasoning**: inference is performed in the **representation space** (on "syntax"), but it must correspond to the **real world space** aspects, i.e. what we infer in the **representation space** must also make sense in the **real world space** (see Fig. 7.6)
 - "if KB is true in the real world, then any sentence alpha derived from KB by a sound inference procedure is also true in the real world"
 - in fact, the conclusions in the representation space must be true in **any** world in which the premises are true
+
 **Grounding**: how do we know that KB is true in the real world? E.g. truth of percept sentences like "there is a smell in `[1,2]`".
 - philosophical question
 - the agent's **sensors** define if a percept sentence is true
@@ -156,16 +163,23 @@ tags:
 
 **semantics**: rules for determining the truth of a sentence with respect to a particular model
 - In propositional logic, truth values are computed **recursively**.
+
 **syntax**: the structure of allowable sentences
+
 **propositional logic**: defines the syntax and the semantics
 - In propositional logic, a model simply sets the truth value - true or false - for every proposition symbol
+
 **model**: assignment of a fixed truth value (`true` or `false`) for every propositional symbol
 - **m satisfies alpha** or **m is a model of alpha**: if a sentence alpha is true in model m (lowercase m)
 - **notation**: M(alpha) = set of **all** models of alpha
 - With $N$ proposition symbols, there are $2^N$ possible models
+
 **atomic sentences**: single propositional symbol
+
 **complex sentences**: constructed from simpler sentences, using parentheses and operators called **logical connectives**
+
 **logical connectives**: not, and, or, implies, iff
+
 **implication** or **rule** or **if-then statement**
 - **premise** or **antecedent**
 - **conclusion** or **consequent**
@@ -174,6 +188,7 @@ tags:
 - any implication is `true` whenever its antecedent is `false`
     - e.g. "5 is even implies Sam is smart" is `true`
 - an implication is `false` only if P is `true` but Q is `false`
+
 **iff** or **biconditional**
 
 ## Model checking
