@@ -242,6 +242,21 @@ or if you want to see already added changes
 git diff --cached myfile.txt
 ```
 
+## See changes in all files
+
+```bash
+git log --stat   # like the summary shown by "git pull"
+git whatchanged
+```
+
+```bash
+git diff --stat
+git diff --numstat
+git diff --shortstat
+git diff --dirstat
+git diff --name-status
+```
+
 ## Compare files on disk
 
 ```bash

@@ -1,7 +1,7 @@
 ---
 title: "Introduction to Artificial Intelligence - Notes"
 read_time: false
-excerpt: "For learning Introduction to AI; content mostly from RWTH lecture Introduction to Artificial Intelligence by G. Lakemeyer."
+excerpt: "For learning Introduction to AI; content mostly from \"Artificial Intelligence: A Modern Approach\" by Peter Norvig and Stuart J. Russell and \"RWTH lecture Introduction to Artificial Intelligence\" by G. Lakemeyer."
 header:
   teaser: /assets/images/iai/iai_teaser.png
   overlay_image: /assets/images/iai/iai_teaser.png
@@ -138,6 +138,9 @@ tags:
 
 ## Definitions
 
+**Bound Variable**: e.g. the variable is bound **by an existential quantifier**
+**Free Variable**: if the variable is **not bound**
+**Sentence**: wff without free variables
 **Knowledge Base**: a set of sentences.
 **Sound** aka **Truth-preserving**: An inference algorithm that derives only entailed sentences. An unsound inference procedure essentially makes things up as it goes along. E.g. model checking is sound (if the space of models is finite).
 **Complete**: an inference algorithm is complete if it can derive any sentence that is entailed
@@ -149,7 +152,7 @@ tags:
 - the agent's **sensors** define if a percept sentence is true
 - "the meaning and truth of percept sentences are **defined by** the processes of sensing and sentence construction that produce them"
 
-### Propostional Logic
+### Propositional Logic
 
 **semantics**: rules for determining the truth of a sentence with respect to a particular model
 - In propositional logic, truth values are computed **recursively**.
@@ -319,6 +322,7 @@ Proof can be seen as **search problem** (see section [Search](#search))
 
 - **ground term**: a term without variables
 - **substitution**: e.g. {$x/\text{Father}(\text{John})$} is also a substitution, i.e. **substituting with functions** is allowed (see 9.1 intro)
+    - only substitute [free variables](#definitions), not the bound variables!
 - Inference rules for quantifiers 
     - **Universal Instantiation rule**: we can infer any sentence obtained by substituting a **ground term** (a term without variables) for a universally quantified variable
     - **Existential Instantiation rule**: replaces an existentially quantified variable with a single new **constant symbol** (aka **Skolem constant**)
@@ -342,6 +346,20 @@ Proof can be seen as **search problem** (see section [Search](#search))
 
 **Every sentence** of first-order logic can be converted into an inferentially equivalent **CNF sentence**.
 
+### CNF for FOL
+
+- Eliminate implications
+- Move $\lnot$ inwards
+- Standardize variables
+- Skolemize
+- Drop universal quantifiers
+- Distribute $\lor$ over $\land$
+- Apply resolution: first-order literals are complementary if one **unifies** with the negation of the other
+- factoring: 
+    - i.e. removal of redundant literals
+    - **first-order factoring** reduces two literals to one if they are **unifiable**. 
+    - The unifier must be applied to the entire clause
+
 ### Herbrand's Theorem
 
 **Herbrand universe**: If $S$ is a set of clauses, then $H_S$, is the **set of all ground terms** constructible from 
@@ -352,5 +370,3 @@ Proof can be seen as **search problem** (see section [Search](#search))
 
 **Herbrand's Theorem**: If a set $S$ of clauses is [unsatisfiable](#theorem-proving), then there exists a finite subset of $H_S(S)$ that is also unsatisfiable.
 - **Lakemeyer lecture**: $S$ is satisfiable iff the Herbrand base is satisfiable
-
-
