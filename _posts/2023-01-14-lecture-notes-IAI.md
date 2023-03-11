@@ -122,7 +122,7 @@ tags:
 
 - evaluation function $f(n)=h(n)$
 - complete in finite state spaces, but **not** in infinite ones
-- time and space (worst-case): $\mathcal{O}(|V|)$ ideally, where $V$ is the number of vertices
+- time and space (worst-case): $\mathcal{O}(\lvert V \rvert)$ ideally, where $V$ is the number of vertices
 
 ## $A^\ast$ Search
 
