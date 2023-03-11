@@ -32,7 +32,9 @@ tags:
 - graph search: 
     - checks for redundant paths (keeps a table of reached states)
 - tree-like search: 
-    - does not check for redundant paths (does **not** keep a table of reached states)
+    - does **not** check for redundant paths (does **not** keep a table of reached states)
+
+# Uninformed Search
 
 ## Best-first Search
 
@@ -47,7 +49,7 @@ tags:
 - time **and** space complexity: $\mathcal{O}(b^{d+1})$ 
     - The memory requirements are a bigger problem than time
 
-## Uniform Cost Search, Dijkstra's Algorithm
+## Uniform Cost Search, Dijkstra's Algorithm, Cheapest-first Search
 
 - waves of uniform path-cost
 - best-first search where $f(n)$ is the path-cost of the node
@@ -114,6 +116,8 @@ tags:
 ## Comparison
 
 ![search_algorithms.png](/assets/images/iai/search_algorithms.png)
+
+**Note**: The table gives the Dijkstra algorithm's **worst-case** time and space complexity: $C^\ast$ is the cost of the optimal solution, $\epsilon$ is a lower bound on the cost of each action, with $\epsilon > 0$
 
 # Games
 
