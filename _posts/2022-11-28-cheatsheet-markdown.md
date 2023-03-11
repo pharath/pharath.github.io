@@ -20,4 +20,5 @@ tags:
 
 ## Syntax Highlighting
 
-see [list of languages](https://support.codebasehq.com/articles/tips-tricks/syntax-highlighting-in-markdown)
+- see [list of languages 1](https://support.codebasehq.com/articles/tips-tricks/syntax-highlighting-in-markdown)
+- see [list of languages 2](https://docs.readme.com/rdmd/docs/code-blocks#language-support)

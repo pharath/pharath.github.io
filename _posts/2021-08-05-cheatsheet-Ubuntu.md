@@ -161,7 +161,7 @@ gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true
 gsettings set org.gnome.shell.extensions.dash-to-dock intellihide true
 ```
 
-# Default Applications
+# Set Default Applications
 
 ## Config files
 
@@ -248,3 +248,143 @@ aplay `/tmp/test-mic.wav`
 
 - caused by 50Hz vs 60Hz powerline frequency differences (see [source](https://blog.christophersmart.com/2017/02/07/fixing-webcam-flicker-in-linux-with-udev/))
     - **solution**: try `v4l2-ctl --set-ctrl power_line_frequency=0` or `v4l2-ctl --set-ctrl power_line_frequency=1`
+
+# PDF Reader
+
+## Okular
+
+```bash
+/usr/share/okular/tools.xml
+```
+
+Examples:
+```xml
+<annotation type="GeomSquare" width="1" color="#FF6868" />
+```
+
+```xml
+<tool type="note-linked" id="1">
+    <engine hoverIcon="tool-note" type="PickPoint" color="#ffff88">
+        <annotation icon="Note" type="Text" color="#ffff88" />
+    </engine>
+    <shortcut>1</shortcut>
+</tool>,
+<tool type="note-inline" id="2" name="Inline Left 14 Mono">
+    <engine hoverIcon="tool-note-inline" block="true" type="PickPoint" color="#ffffdd">
+        <annotation opacity="0.85" type="FreeText" color="#ffffdd"
+            font="Monospace\\,14\\,-1\\,5\\,50\\,0\\,0\\,0\\,0\\,0" />
+    </engine>
+    <shortcut>2</shortcut>
+</tool>,
+<tool type="highlight" id="3">
+    <engine type="TextSelector" color="#ffff00">
+        <annotation type="Highlight" color="#ffff00" />
+    </engine>
+    <shortcut>3</shortcut>
+</tool>,
+<tool type="highlight" id="4" name="Highlighter (pale)">
+    <engine type="TextSelector" color="#ffff00">
+        <annotation opacity="0.3" type="Highlight" color="#ffff00" />
+    </engine>
+    <shortcut>4</shortcut>
+</tool>,
+<tool type="underline" id="5">
+    <engine type="TextSelector" color="#000000">
+        <annotation type="Underline" color="#000000" />
+    </engine>
+    <shortcut>5</shortcut>
+</tool>,
+<tool type="underline" id="6">
+    <engine type="TextSelector" color="#da0000">
+        <annotation opacity="0.7" type="Underline" color="#da0000" />
+    </engine>
+    <shortcut>6</shortcut>
+</tool>,
+<tool type="straight-line" id="7">
+    <engine points="2" type="PolyLine" color="#ff4a26">
+        <annotation width="4" opacity="0.8" type="Line" color="#ff4a26" />
+    </engine>
+    <shortcut>7</shortcut>
+</tool>,
+<tool type="rectangle" id="8">
+    <engine block="true" type="PickPoint" color="#ffff00">
+        <annotation width="5" opacity="0.1" innerColor="#ffff00" type="GeomSquare" color="#ffff00" />
+    </engine>
+    <shortcut>8</shortcut>
+</tool>,
+<tool type="ellipse" id="9">
+    <engine block="true" type="PickPoint" color="#00ffff">
+        <annotation width="5" type="GeomCircle" color="#00ffff" />
+    </engine>
+    <shortcut>9</shortcut>
+</tool>,
+<tool type="ink" id="10" name="Freehand Line (2.0\\, black)">
+    <engine type="SmoothLine" color="#000000">
+        <annotation width="2" type="Ink" color="#000000" />
+    </engine>
+</tool>,
+<tool type="ink" id="11" name="Freehand Line (2.0\\, Red)">
+    <engine type="SmoothLine" color="#ff0000">
+        <annotation width="2" type="Ink" color="#ff0000" />
+    </engine>
+</tool>,
+<tool type="polygon" id="12">
+    <engine points="-1" type="PolyLine" color="#007eee">
+        <annotation width="1" type="Line" color="#007eee" />
+    </engine>
+</tool>,
+<tool type="ink" id="13" name="Freehand Line (1.0\\, blue)">
+    <engine type="SmoothLine" color="#0000ff">
+        <annotation width="2" type="Ink" color="#0000ff" />
+    </engine>
+</tool>,
+<tool type="stamp" id="14">
+    <engine hoverIcon="bookmarks" size="64" block="true" type="PickPoint">
+        <annotation opacity="0.5" icon="bookmarks" type="Stamp" />
+    </engine>
+</tool>,
+<tool type="strikeout" id="15">
+    <engine type="TextSelector" color="#c00000">
+        <annotation opacity="0.8" type="StrikeOut" color="#c00000" />
+    </engine>
+</tool>,
+<tool type="rectangle" id="16">
+    <engine block="true" type="PickPoint" color="#ff0000">
+        <annotation width="5" opacity="0.1" innerColor="#ffff00" type="GeomSquare" color="#ff0000" />
+    </engine>
+</tool>,
+<tool type="note-inline" id="17" name="Heading Centre 48 Opaque">
+    <engine hoverIcon="tool-note-inline" block="true" type="PickPoint" color="#ffffff">
+        <annotation type="FreeText" color="#ffffff"
+            font="Sans Serif\\,48\\,-1\\,5\\,50\\,0\\,0\\,0\\,0\\,0" align="1" />
+    </engine>
+</tool>,
+<tool type="note-inline" id="18" name="Inline Center 12">
+    <engine hoverIcon="tool-note-inline" block="true" type="PickPoint" color="#ffffee">
+        <annotation opacity="0.85" type="FreeText" color="#ffffee"
+            font="Sans Serif\\,12\\,-1\\,5\\,50\\,0\\,0\\,0\\,0\\,0" align="1" />
+    </engine>
+</tool>,
+<tool type="polygon" id="19" name="Red Filled Polygon">
+    <engine points="-1" type="PolyLine" color="#ff4a26">
+        <annotation width="1" opacity="0.8" innerColor="#ff4a26" type="Line" color="#ff4a26" />
+    </engine>
+</tool>,
+<tool type="polygon" id="20" name="Whiteout Poly">
+    <engine points="-1" type="PolyLine" color="#ffffff">
+        <annotation width="1" innerColor="#ffffff" type="Line" color="#ffffff" />
+    </engine>
+</tool>,
+<tool type="note-inline" id="21" name="Inline Left 10 Mono">
+    <engine hoverIcon="tool-note-inline" block="true" type="PickPoint" color="#ffffdd">
+        <annotation opacity="0.85" type="FreeText" color="#ffffdd"
+            font="Monospace\\,10\\,-1\\,5\\,50\\,0\\,0\\,0\\,0\\,0" />
+    </engine>
+</tool>,
+<tool type="note-inline" id="22" name="Inline Left 6 Mono">
+    <engine hoverIcon="tool-note-inline" block="true" type="PickPoint" color="#ffffdd">
+        <annotation type="FreeText" color="#ffffdd"
+            font="Monospace\\,6\\,-1\\,5\\,50\\,0\\,0\\,0\\,0\\,0" />
+    </engine>
+</tool>
+```

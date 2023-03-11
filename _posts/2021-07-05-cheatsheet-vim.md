@@ -76,17 +76,17 @@ Plugin 'christoomey/vim-system-copy'
 | command | description |
 | :---: | :---: |
 :h | Hilfe (in Hilfe Cursor auf Tag zB \|syntax.txt\| platzieren ctrl + alt + 6 und ctrl + alt + 6 um auf content zu springen)
-:h i_CTRL-R	| lookup meaning of CTRL-R in insert mode (deshalb das i_ prefix; v_ prefix für visual mode usw. s. Tabelle unten drunter) |
-help :u	|		Manual zu ‘:u’ Befehl (im Manual kann man zB via Befehl ’:v’ zu dem ‘:v’ springen; Ganz oben im Manual steht wie man im Manual navigiert)
+`:h i_CTRL-R` | lookup meaning of CTRL-R in insert mode (deshalb das `i_` prefix; `v_` prefix für visual mode usw. s. Tabelle unten drunter)
+help :u	| Manual zu `:u` Befehl (im Manual kann man zB via Befehl `:v` zu dem `:v` springen; Ganz oben im Manual steht wie man im Manual navigiert)
 
 ![Screenshot_table](https://i.ibb.co/jw1X1nH/Screen-Shot-2021-06-10-at-3-51-04-AM-2.png)
 
 | command | description |
 | :---: | :---: |
-:h Q\_&lt;tab&gt; |
-:h quickref	| und dann eg /_sc um auf Q_sc tag zu springen
+`:h Q_<tab>` |
+:h quickref	| und dann eg `_sc` um auf `Q_sc` tag zu springen
 ctrl + ] (während cursor auf einem tag)	|		springe zu selected tag
-/pattern |	zB /^i springt zur nächsten Zeile, die mit i anfängt
+/pattern |	zB `/^i` springt zur nächsten Zeile, die mit i anfängt
 ctrl + e, d, y, u |
 
 # regex/regexp
@@ -191,7 +191,7 @@ ctrl + w N | scroll in a terminal tab
 :b LongFileName\<hit tab to find a match\> | short form of `:buffer very/very/long/path/to/a/veryVeryLongFileName.txt` (**note**: `:b` command can also take a **substring** of the name of the file, thus `LongFileName` instead of `veryVeryLongFileName`!)
 :b SubstringOfFilename\<hit tab to find a match\> |
 :b 5 | switch to buffer 5 (see file-number map in the `:ls` list)
-:bd | Unload buffer `[N]` (default: current buffer) and delete it from the buffer list. If the buffer was changed, this fails, unless when `[!]` is specified, in which case changes are lost. The file remains unaffected.
+`:bd [N]` | Unload buffer `[N]` (default: current buffer) and delete it from the buffer list. If the buffer was changed, this fails, unless when `[!]` is specified, in which case changes are lost. The file remains unaffected.
 
 ## File Open, Close, Suspend, Name, Refresh
 

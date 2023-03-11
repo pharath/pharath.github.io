@@ -111,6 +111,10 @@ tags:
 
 - evaluation function $f(n)=h(n)$
 
+## Comparison
+
+![search_algorithms.png](/assets/images/iai/search_algorithms.png)
+
 # Games
 
 ## Minimax
