@@ -117,7 +117,7 @@ tags:
 
 ![search_algorithms.png](/assets/images/iai/search_algorithms.png)
 
-**Note**: The table gives the Dijkstra algorithm's **worst-case** time and space complexity: $C^\ast$ is the cost of the optimal solution, $\epsilon$ is a lower bound on the cost of each action, with $\epsilon > 0$
+**Note**: The table gives the Dijkstra algorithm's **worst-case** time and space complexity: $C^\ast$ is the cost of the optimal solution, $\epsilon$ is a lower bound on the cost of each action, with $\epsilon > 0$. When all action costs are equal $C^\ast / \epsilon = d$, i.e. uniform cost search is similar to BFS.
 
 # Games
 
