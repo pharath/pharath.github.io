@@ -33,6 +33,7 @@ tags:
     - checks for redundant paths (keeps a table of reached states)
 - tree-like search: 
     - does **not** check for redundant paths (does **not** keep a table of reached states)
+- **branching factor**: number of successors of a node that need to be considered
 
 # Uninformed Search
 
@@ -109,15 +110,30 @@ tags:
     - Operators not always reversible
     - Sometimes there are very **many goal states**, e.g. chess
 
-## Greedy Best-first Search
-
-- evaluation function $f(n)=h(n)$
-
 ## Comparison
 
 ![search_algorithms.png](/assets/images/iai/search_algorithms.png)
 
 **Note**: The table gives the Dijkstra algorithm's **worst-case** time and space complexity: $C^\ast$ is the cost of the optimal solution, $\epsilon$ is a lower bound on the cost of each action, with $\epsilon > 0$. When all action costs are equal $C^\ast / \epsilon = d$, i.e. uniform cost search is similar to BFS.
+
+# Informed Search / Heuristic Search
+
+## Greedy Best-first Search
+
+- evaluation function $f(n)=h(n)$
+- complete in finite state spaces, but **not** in infinite ones
+- time and space (worst-case): $\mathcal{O}(|V|)$ ideally, where $V$ is the number of vertices
+
+## $A^\ast$ Search
+
+- evaluation function $f(n)=g(n) + h(n)$
+- $f(n)$: cost of the full path
+- $g(n)$: cost from the initial state to node n
+- $h(n)$: *estimated* cost from node n to a goal state
+- an **admissible heuristic** is one that *never overestimates* the cost to reach a goal
+- $h$ **must** be admissible for $A^\ast$
+- cost-optimal (can be proved)
+    - with an inadmissible heuristic $A^\ast$ **may or may not** be cost-optimal
 
 # Games
 
