@@ -120,8 +120,8 @@ tags:
 
 ## Greedy Best-first Search
 
-- evaluation function $f(n)=h(n)$
-- complete in finite state spaces, but **not** in infinite ones
+- evaluation function $f(n)=h(n)$ (like $A^\ast$ without $g(n)$)
+- **complete** in finite state spaces, but **not** in infinite ones
 - time and space (worst-case): $\mathcal{O}(\lvert V \rvert)$ ideally, where $V$ is the number of vertices
 
 ## $A^\ast$ Search
@@ -132,7 +132,8 @@ tags:
 - $h(n)$: *estimated* cost from node n to a goal state
 - an **admissible heuristic** is one that *never overestimates* the cost to reach a goal
 - $h$ **must** be admissible for $A^\ast$
-- cost-optimal (can be proved)
+- **complete**, on any finite acyclic state space
+- **cost-optimal** if the heuristic is admissible
     - with an inadmissible heuristic $A^\ast$ **may or may not** be cost-optimal
 
 # Games
