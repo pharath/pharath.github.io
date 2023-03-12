@@ -67,6 +67,7 @@ tags:
 - space: $\mathcal{O}(b \cdot m)$, where $m$: max depth
 - time: $\mathcal{O}(b^m)$
 - **not cost-optimal**; it returns the first solution it finds, even if it is not cheapest
+- **complete**: when the state space is finite or, more generally, when the diameter of the state space (the maximal distance between any two states reachable by actions) is finite.
 - **incomplete**: can get stuck going down an infinite path ($m=\infty$), even if there are no cycles
 - then why use it?
     - much smaller needs for memory than BFS
@@ -170,6 +171,7 @@ tags:
 **Sentence**: wff without free variables
 
 **Knowledge Base**: a set of sentences.
+- **closed world assumption**: the only sentences that are true are those that are entailed by the knowledge base
 
 **Sound** aka **Truth-preserving**: An inference algorithm that derives only entailed sentences. An unsound inference procedure essentially makes things up as it goes along. E.g. model checking is sound (if the space of models is finite).
 
@@ -348,6 +350,7 @@ Proof can be seen as **search problem** (see section [Search](#search))
 - **variable**
     - lowercase letters
 - **ground term**: a term with no variables
+- **unique names assumption**: every constant and every ground term refers to a distinct object
 - **assertion**: a sentence added to a KB by using `TELL`
 - **query** or **goal**: a question asked with `ASK`
     - Generally speaking, any query that is logically entailed by the knowledge base should be answered with `true`
@@ -410,3 +413,15 @@ Proof can be seen as **search problem** (see section [Search](#search))
 
 **Herbrand's Theorem**: If a set $S$ of clauses is [unsatisfiable](#theorem-proving), then there exists a finite subset of $H_S(S)$ that is also unsatisfiable.
 - **Lakemeyer lecture**: $S$ is satisfiable iff the Herbrand base is satisfiable
+
+## Logic Programming, Prolog
+
+- Prolog is the most widely used logic programming language. 
+- It is used primarily 
+    - as a rapid-prototyping language and 
+    - for symbol-manipulation tasks such as 
+        - writing compilers (Van Roy, 1990) and 
+        - parsing natural language (Pereira and Warren, 1980). 
+    - Many **expert systems** have been written in Prolog for legal, medical, financial, and other domains
+- for constraint satisfaction / constraint programming: 
+    - The first language created expressly with **intrinsic support** for constraint programming was Prolog.
