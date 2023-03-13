@@ -178,12 +178,15 @@ tags:
 - effectiveness (time and space complexity) depends on the **ordering** of the nodes
     - if leaf nodes are random: $\mathcal{O}((b/\log{b})^m)$ for $b>1000$ ($b>1000$ does not apply for most games!)
     - try to first examine the successors that are likely to be best: best case time: $\mathcal{O}(b^{m/2})$ (i.e. compared to Minimax Search: effective branching factor $\sqrt{b}$ instead of $b$)
-    - in practice: With random move ordering: $\mathcal{O}(b^{3m/4})$
+    - in practice: With random move ordering: $\mathcal{O}(b^{3m/4})$ for moderate $b$
 
 ## Expectiminimax
 
 - watch lecture
 - see book
+- **chance nodes** (compute the expected value)
+- **terminal nodes** (work the same way as before in Minimax Search)
+- **MIN and MAX nodes** (work the same way as before in Minimax Search)
 
 # Knowledge Representation
 
