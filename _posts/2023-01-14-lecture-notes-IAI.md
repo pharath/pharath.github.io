@@ -139,21 +139,46 @@ tags:
 
 # Games
 
-## Minimax
+## Minimax Search
 
 - **minimax value**: the utility (for MAX) of being in that state (assuming that both players play optimally from there to the end of the game)
 - How to determine the minimax value of a state?
-    - The minimax value of a **terminal state** is just its utility
-    - In a **non-terminal state**, MAX prefers to move to a state of maximum value when it is MAX's turn to move, and MIN prefers a state of minimum value
+    - The minimax value of a 
+        - **terminal state** is just its utility
+        - **non-terminal state**, 
+            - MAX prefers to move to a state of maximum value when it is MAX's turn to move, and 
+            - MIN prefers a state of minimum value
+- a [ Depth-first Search ](#depth-first-search)
+    - therefore, the time and space complexities are the same as for DFS
+    - space: $\mathcal{O}(b \cdot m)$, where $m$: max depth
+    - time: $\mathcal{O}(b^m)$
+- **evaluation function**: 
+    - must be easy to compute
+    - must accurately reflect the **probability of winning**
+        - if there are multiple paths with the same evaluation function value, then the evaluation function reflects the probability of winning **averaged over all positions** with the same evaluation function value
+    - usually a weighted linear functions (assumes that the criteria are **independent** of each other!)
+    - e.g. in chess: "material advantage": f1=number of white knights, w1=3, f2=number of white pawns, ... etc.
+- quiescent state:
+    - those which do not lead to dramatic subsequent changes
+- when to CUT OFF search?
+    - if the state is **not** quiescent, the evaluation function is misleading &rarr; Must **not** CUT OFF search here! Must look ahead further!
+        - e.g. in chess: "material advantage" can be misleading
+        - **problem**: it is not always possible to look ahead further
+            - e.g. in chess: "Horizon problem" (delay tactics)
 
 ## Suboptimal opponent
 
 - if MIN does not play optimally, then MAX will do at least as well as against an optimal player, possibly better
 
-## Alpha-Beta Pruning
+## Alpha-Beta Search
 
 - watch lecture
 - see book
+- [ Minimax Search ](#minimax-search) with **Alpha-Beta Pruning**
+- effectiveness (time and space complexity) depends on the **ordering** of the nodes
+    - if leaf nodes are random: $\mathcal{O}((b/\log{b})^m)$ for $b>1000$ ($b>1000$ does not apply for most games!)
+    - try to first examine the successors that are likely to be best: best case time: $\mathcal{O}(b^{m/2})$ (i.e. compared to Minimax Search: effective branching factor $\sqrt{b}$ instead of $b$)
+    - in practice: With random move ordering: $\mathcal{O}(b^{3m/4})$
 
 ## Expectiminimax
 

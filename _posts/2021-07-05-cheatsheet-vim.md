@@ -107,9 +107,10 @@ ctrl + e, d, y, u |
 
 | command | description |
 | :---: | :---: |
-vim .  |			öffne netrw in current dir
+vim .  | öffne netrw in current dir
 vim -r *file.swp* | restore *file.swp*
-vim -u vimrc-file file | use another vimrc-file (to specify other .vim location `set runtimepath` in .vimrc, further details below in section "General facts/Change default .vim .vimrc location")
+vim -u vimrc-file file | use another `.vimrc` (to specify other `.vim` location `set runtimepath` in `.vimrc`, further details below in section "General facts/Change default `.vim` `.vimrc` location")
+vim --clean file | start clean without loading `.vimrc`
 
 # netrw
 
@@ -264,7 +265,8 @@ shift + g | 		Jump to end of file
 g + g |			Jump to first line of file
 ctrl + o | Jump to previous cursor position
 ctrl + i | Jump to next cursor position
-ctrl + ] | Jump to definition (if ctags is installed)
+ctrl + ] | Jump to definition (if `ctags` is installed)
+% | Jump to a matching opening or closing parenthesis, bracket or curly brace
 
 ### URLs
 
@@ -375,3 +377,28 @@ Press CTRL + S to freeze vim and press CTRL + Q to unfreeze.
 - start vim with `vim -u path/to/new/.vimrc some_other_file` 
     - or create alias e.g. `vvim` for `vim -u path/to/new/.vimrc`
     - or create `.bash_aliases` file with content `alias vvim="vim -u .vimrc"` and source it on startup using `source .bash_aliases` command
+
+# Neovim
+
+## Setup
+
+Use `https://github.com/nvim-lua/kickstart.nvim`.
+
+## Configuration
+
+see `~/.config/nvim/`
+
+## Plugins
+
+`tpope/vim-surround`
+- to delete/change/add parentheses/quotes/XML-tags/much more with ease
+- markdown:
+    - **bold**: use 2 times surround with `*`
+
+`nvim-cmp`
+- settings: see `cmp.setup` in `init.lua`
+- changes: in `cmp.setup` add
+```bash
+['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item(), {'i','c'}),
+['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item(), {'i','c'}),
+```
