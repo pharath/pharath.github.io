@@ -137,6 +137,32 @@ tags:
 - **cost-optimal** if the heuristic is admissible
     - with an inadmissible heuristic $A^\ast$ **may or may not** be cost-optimal
 
+# Local Search
+
+## Hill-climbing Search, Greedy Local Search
+
+- keeps track of one current state
+- steepest ascent: on each iteration moves to the neighboring state with highest value
+- difficulties:
+    - Local maxima: can get stuck in local maxima
+    - Ridges: sequence of local maxima that is very difficult for greedy algorithms to navigate
+    - Plateaus: can get lost wandering on the plateau
+- **incomplete**: success depends on the shape of the state-space landscape (see point "difficulties")
+- **not optimal**: solution may not be the best solution (global maximum), but rather a local maximum
+- random-restart hill climbing: 
+    - series of hill-climbing searches from randomly generated initial states, until a goal is found
+    - **incomplete**: but complete with probability 1, because it will **likely** eventually generate a goal state as the initial state given enough restarts (but success is still not guaranteed!)
+
+## Simulated Annealing
+
+- start by shaking hard (i.e., at a high temperature) and then gradually reduce the intensity of the shaking (i.e., lower the temperature)
+- similar to hill climbing, but instead of picking the best move, it picks a random move. 
+    - If the move improves the situation, it is always accepted. 
+    - Otherwise, the algorithm accepts the move with some probability less than 1 
+        - this probability is proportional to the Boltzmann distribution: 
+            - 1. E dependence: probability decreases exponentially with the badness of the move, i.e. the amount $\Delta E$ by which the evaluation is worsened, 
+            - 2. T dependence: bad moves are more likely to be allowed at the start when T is high, and they become more unlikely as T decreases)
+
 # Games
 
 ## Minimax Search
