@@ -110,6 +110,7 @@ tags:
 - problems:
     - Operators not always reversible
     - Sometimes there are very **many goal states**, e.g. chess
+        - from which one should we start the backward search?
 
 ## Comparison
 
