@@ -47,7 +47,7 @@ tags:
 - best-first search where $f(n)$ is the depth of the node
 - **complete**: always finds a solution with a minimal number of actions (shallowest solution)
 - **cost-optimal**: for problems where all actions have the identical non-negative cost
-- time **and** space complexity: $\mathcal{O}(b^{d+1})$ 
+- time **and** space complexity: $\mathcal{O}(b^{d+1})$ (with "late goal test"), $\mathcal{O}(b^{d})$ (with "early goal test")
     - The memory requirements are a bigger problem than time
 
 ## Uniform Cost Search, Dijkstra's Algorithm, Cheapest-first Search
