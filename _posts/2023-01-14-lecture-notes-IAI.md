@@ -136,6 +136,11 @@ tags:
 - **cost-optimal** if the heuristic is admissible
     - with an inadmissible heuristic $A^\ast$ **may or may not** be cost-optimal
 
+## $\text{IDA}^\ast$ Search
+
+- the cutoff value is the smallest f-cost of any node that exceeded the cutoff on the previous iteration
+- see [example](https://www.geeksforgeeks.org/iterative-deepening-a-algorithm-ida-artificial-intelligence/)
+
 # Local Search
 
 ## Hill-climbing Search, Greedy Local Search
@@ -294,11 +299,14 @@ tags:
 - $\alpha \vDash \beta$ iff $\alpha \Rightarrow \beta$ 
     - i.e. we can show $\alpha \vDash \beta$ by proving that $(\alpha \Rightarrow \beta)$ is equivalent to `true`
 
-**Satisfiability**
+**Satisfiability** (in **propositional** logic!)
 - A sentence is **satisfiable** if it is `true` in, or satisfied by, **some** model
 - can be checked by enumerating the possible models until one is found that satisfies the sentence (**SAT problem**, NP-complete)
+    - **NP-complete** problem: Although a solution to an NP-complete problem can be **verified** "quickly" (in polynomial time), there is no known way to **find** a solution quickly (all known algorithms need exponential time).
 - $\alpha$ is satisfiable iff $\neg \alpha$ is not valid
 - $\alpha$ is valid iff $\neg \alpha$ is unsatisfiable
+- **For propositional formulae**, satisfiability is **decidable**
+- **For FOL**, satisfiability is **undecidable**. Furthermore, satisfiability is **not semi-decidable**.
 
 **Proof by contradiction** aka **Reductio ad absurdum** (mathematics)
 - $\alpha \vDash \beta$ iff $(\alpha \land \neg \beta)$ is unsatisfiable
@@ -340,12 +348,13 @@ Proof can be seen as **search problem** (see section [Search](#search))
 - resolve only one pair of complementary literals at a time
 - the resulting clause should contain only one copy of each literal
     - **factoring**: removal of multiple copies of literals
-- yields a **complete inference algorithm** when coupled with any complete search algorithm
+- yields a **complete inference algorithm** when coupled with any complete search algorithm (e.g. **BFS**)
 - A resolution-based theorem prover can, for any sentences $\alpha$ and $\beta$ in propositional logic, decide whether $\alpha \vDash \beta$.
 - every sentence of propositional logic is logically equivalent to a conjunction of clauses
 - **CNF** or **conjunctive normal form**: a sentence expressed as a conjunction of clauses is "in CNF"
 
-**Resolution Algorithm**:
+### Resolution Algorithm
+
 - $(\text{KB} \land \neg\alpha)$ is converted into CNF
 - the resolution rule is applied to the resulting clauses
 - Each pair that contains complementary literals is resolved to produce a new clause, which is added to the set if it is not already present. 
@@ -353,6 +362,9 @@ Proof can be seen as **search problem** (see section [Search](#search))
     - no new clauses: $\text{KB}$ does not entail $\alpha$
     - empty clause: $\text{KB}$ entails $\alpha$ 
 - Note: The empty clause is equivalent to `false` because a disjunction is `true` only if at least one of its disjuncts is `true`. This is why the resolution algorithm is a **proof by contradiction**.
+- Resolution is **complete** when restricted to MGUs.
+- time: exponential $\mathcal{O}(2^n)$ (in the worst case), where $n$ is the number of clauses
+    - no polynomial time algorithm found yet (but it is not proven that such an algorithm does not exist)
 
 **More efficient** inference algorithm:
 - **definite clause**: disjunction of literals of which **exactly one is positive**
@@ -440,7 +452,7 @@ Proof can be seen as **search problem** (see section [Search](#search))
 
 ### Resolution-based Theorem Proving
 
-**Every sentence** of first-order logic can be converted into an inferentially equivalent **CNF sentence**.
+- **Every sentence** of first-order logic can be converted into an inferentially equivalent **CNF sentence**.
 
 ### CNF for FOL
 
