@@ -301,8 +301,16 @@ and you will be prompted to enter pw again.
 Install gh CLI first: [installation instructions](https://github.com/cli/cli/blob/trunk/docs/install_linux.md)
 
 ```bash
+# Read the man pages!
+man gh
+man gh-repo
+man gh-repo-create
+```
+
+```bash
 gh auth login
 gh repo create
+gh repo list
 ```
 
 ```bash

@@ -227,28 +227,32 @@ sudo snap install pdftk | use `pdftk full-pdf.pdf cat 12-15 output outfile_p12-1
 `apt-cache show fzf` | will show `Refer /usr/share/doc/fzf/README.Debian for quick instructions on how to add keybindings for Bash, Zsh, Fish to call fzf.`
 `vim /usr/share/doc/fzf/README.Debian` | how to `source` fzf
 
+# Dotfiles
+
+**Versioning**: see [atlassian.com](https://www.atlassian.com/git/tutorials/dotfiles)
+
 # My aliases
 
 `alias listssids='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/local/bin/airport'`
 
-In ~/.bashrc (Ubuntu default):
+In `~/.bashrc` (Ubuntu default):
 `alias l='ls -CF'` <br />
 `alias la='ls -A'` <br />
 `alias ll='ls -alF'` <br />
-(die restlichen Ubuntu alias gehen nicht bei Macbook Pro Mid 2010 wegen Doppelbindestrich Argument —color=auto)
+(die restlichen Ubuntu alias gehen nicht bei Macbook Pro Mid 2010 wegen Doppelbindestrich Argument `--color=auto`)
 
-In ~/.bash_aliases:
+In `~/.bash_aliases`:
 
 `alias phth_ticker='ticker --config ~/snap/ticker/common/.ticker.yaml'`
 
 | command | description |
 | :---: | :---: |
-alias | List all aliases
-type \<some_alias\> | check the meaning of a specific alias
+`alias` | List all aliases
+`type some_alias` | check the meaning of a specific alias
 
 # System Folder
 
-~/.local/share/Trash/files | `rm FILE` command moves `FILE` to this location
+`~/.local/share/Trash/files` | `rm FILE` command moves `FILE` to this location
 
 # General commands
 
@@ -800,12 +804,16 @@ wget -A pdf,jpg -m -p -E -k -K -np http://site/path/ | get all pdfs and jpgs fro
 wget --accept pdf,jpg --mirror --page-requisites --adjust-extension --convert-links --backup-converted --no-parent http://site/path/ | same as above using long option names
 curl -s https://checkip.amazonaws.com		|			-s für silent
 
-# gpg
+# gpg, apt-key
+
+**Note**: Do not forget to remove the respective sources list in `/etc/apt/sources.list.d/` as well.
 
 | command | description |
-| :---: | :---: |
-gpg --list-keys | list your keys
+| :--- | :--- |
+gpg --list-keys | list your keys (will list only the ones stored in `~/.gnugpg`, but not the ones stored in `/etc/apt/trusted.gpg.d/`, see [stackoverflow](https://askubuntu.com/a/1262753))
 gpg --delete-keys A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | delete key A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 from keyring
+apt-key list |
+sudo apt-key del "27B2 5BF6 36CF 72B4 334D  AC98 F84C B847 29F1 B545" | it is safer to use the whole fingerprint, the keyid could have duplicates (at least when you use PGP for emails, I read you should share your whole fingerprint and not just the keyid)
 
 # cron
 
