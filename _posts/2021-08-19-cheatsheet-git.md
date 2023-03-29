@@ -265,6 +265,19 @@ git diff origin/exercise/4_ros_node_cpp..origin/solution/4_ros_node_cpp
 git diff --no-index file1.txt file2.txt
 ```
 
+## Compare files between commits
+
+Syntax:
+```bash
+git diff [--options] <commit> <commit> [--] [<path>...]
+```
+
+```bash
+git diff HEAD^^ HEAD main.c
+git diff HEAD^^..HEAD -- main.c
+git diff HEAD~2 HEAD -- main.c
+```
+
 ## Compare commits
 
 ```bash

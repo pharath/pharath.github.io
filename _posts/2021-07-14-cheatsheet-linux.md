@@ -18,7 +18,7 @@ tags:
 # Apps
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 htop | activity monitor (sieht besser aus als "top")
 hardinfo | hardware info
 
@@ -246,7 +246,7 @@ In `~/.bash_aliases`:
 `alias phth_ticker='ticker --config ~/snap/ticker/common/.ticker.yaml'`
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 `alias` | List all aliases
 `type some_alias` | check the meaning of a specific alias
 
@@ -257,7 +257,7 @@ In `~/.bash_aliases`:
 # General commands
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 ctrl + r + Suchbegriff	|	reverse search (mehrmals ctrl + r drücken, um zwischen den Suchbegriff enthaltenden commands auszuwählen, danach `->` um zu übernehmen bzw `Enter` um auszuführen)
 
 <hr>
@@ -308,7 +308,7 @@ history \| tail -n 30 | show last 30 commands
 Differences between two directory trees
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 `diff -r dir1/ dir2/` | outputs exactly what the differences are between corresponding files
 `diff -qr dir1/ dir2/` | just getting a list of corresponding files whose content differs
 `diff -qrN dir1/ dir2/` | to see differences for files that may not exist in either directory
@@ -375,34 +375,34 @@ You can also remove PPAs by deleting the `.list` files from `/etc/apt/sources.li
 ### Install
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 sudo apt install ./name.deb | install a .deb file
 `sudo apt-get install <package name>=<version>` | install a specific version
 
 ### Uninstall
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 sudo apt purge ... | Removing packages with `sudo apt purge ...` or `sudo apt --purge remove ...` will remove them and all their global (i.e., systemwide) configuration files. This is usually what people mean when they talk about completely removing a package. **This does not remove packages that were installed as dependencies**, when you installed the package you're now removing. Assuming those packages aren't dependencies of any other packages, and that you haven't marked them as manually installed, you can remove the dependencies with `sudo apt autoremove` or (if you want to delete their systemwide configuration files too) `sudo apt --purge autoremove`.
 sudo apt --purge remove ... | see `sudo apt purge ...`
 
 ### Check
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 `apt-cache policy <package name>` | shows installed package version and also all the available versions in the repository according to the version of Ubuntu in which you are running
 
 ### apt-mark
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 `sudo apt-mark hold package_name` | hold packages (i.e. do not upgrade, remove or modify `package_name`)
 `sudo apt-mark unhold package_name` | unhold "held" packages 
 
 ## dpkg
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 | sudo dpkg -l \| less	| list all installed dpkg packages [meaning of tags ii, rc, ...](https://askubuntu.com/questions/18804/what-do-the-various-dpkg-flags-like-ii-rc-mean)
 
 <hr>
@@ -415,7 +415,7 @@ sudo dpkg-query -s package	| prüfe ob package installiert ist (ACHTUNG regexp: 
 see also [how-to-show-history-of-installed-packages](https://www.linuxuprising.com/2019/01/how-to-show-history-of-installed.html)
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 grep " install \\| remove " /var/log/dpkg.log |			list recently installed OR removed packages (in the current month)
 grep " install " /var/log/dpkg.log.1 |		list recently installed packages (in the previous month)
 zgrep " install " /var/log/dpkg.log.2.gz |	list recently installed packages (go back 2 months, same for >2 months)
@@ -441,7 +441,7 @@ sudo vim /var/lib/dpkg/info/nvidia-cuda-toolkit.list | in /var/lib/dpkg/info/ si
 - see `man snap` for details
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 snap list |
 snap find *package* |
 sudo snap install *package* |
@@ -451,7 +451,7 @@ sudo snap remove --purge *package* |
 ## pkg-config
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 | man pkg-config | description of all pkg-config flags
 | pkg-config --libs-only-l json-c | was man im CMakeLists.txt in `target_link_libraries` eintragen muss (hier: `-ljson-c` Achtung: das `-l` muss auch im CMakeLists.txt rein!)
 | pkg-config --libs-only-L json-c | location of .so library file (hier: in ubuntu 18.04: findet er nicht, ist aber in `/lib/x86_64-linux-gnu`; in ubuntu 20.04: `-L/usr/local/lib`) (see also: [difference .so vs .a libraries](https://stackoverflow.com/a/9810368/12282296)) (muss nicht in CMakeLists.txt rein, s. [Minimalbsp](https://github.com/pharath/home/tree/master/assets/_code_examples/jsonc))
@@ -460,7 +460,7 @@ sudo snap remove --purge *package* |
 # chmod, Groups
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 chmod *permissions file* |     is an abbreviation of change mode. A files mode is the set of permissions attached to it that control access. Zu *permissions*: s. [here](https://askubuntu.com/tags/chmod/info).
 
 <hr>
@@ -493,7 +493,7 @@ newgrp docker |			log out and log back in so that group membership is re-evaluat
 ![jumping with command line cursor](/home/assets/images/moving_cli.png)
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 ctrl + w | delete the word in front of the cursor
 alt + d | delete the word after the cursor
 ctrl + a | jump to the beginning of the line
@@ -504,7 +504,7 @@ ctrl + q | unfreeze/unblock terminal
 ## terminal commands and bash scripting
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 echo Variable | display content of the variable "Variable"
 printenv | Print the values of the specified environment VARIABLE(s).
 echo $$ | display PID of current shell
@@ -516,14 +516,14 @@ chsh | change shell (you will be prompted to enter one of the shells in `cat /et
 ### Running Multiple Commands
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 do_something1 && do_something2_that_depended_on_something1 | only run "something2", if "something1" completes successfully
 do_something1; do_something2 | run "something2" irrespective of "something1"
 
 ### PATH Variable
 	
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 $PATH | Variable, die alle Pfade enthält, in denen Shell-Programme/Shell-Befehle (ls, echo, df, nautilus, etc.) gesucht werden
 which python3 |		
 whereis python3	|
@@ -532,7 +532,7 @@ which *Shell-program* | display path of Shell-program
 ### find
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 find /opt/ -iname pattern | find all files (hier: in dir /opt/ ), for which base of file name (path with leading dirs removed) matches shell pattern pattern (Achtung: pattern muss genau übereinstimmen! Falls Endung unbekannt, mit Sternchen `*` am Ende suchen, dh. `pattern*` statt `pattern` suchen (wie bei `ls` Befehl).
 find /opt/ -name pattern | wie -iname, aber case-sensitive
 find /opt/ -iname pattern -type f | nur files suchen
@@ -540,23 +540,29 @@ find /opt/ -iname pattern -type d | nur dirs suchen
 find /opt/ ( -iname pattern1 -o -iname pattern2 ) |	-o für oder
 find /opt/ -size +1G | nur files, die über 1GB groß sind
 
+### grep
+
+`grep -rn -e 'nvidia' /var/log/apt/history.log*` | r: recursively look at all files in the folder, n: show line numbers, e: regex pattern, here: `nvidia` (w/o this some regex patterns will not work)
+`grep -rnw -e 'nvidia' /var/log/apt/history.log*` | w: match whole words only (i.e. if the pattern `nvidia` is a substring of a word, it is not matched)
+`grep -r -E 'orange|mango' .` | logical OR operator
+
 ### sed
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 sed 's/unix/linux/' geekfile.txt | replaces the word 'unix' with 'linux' in the file 'geekfile.txt'. `sed` is mostly used to replace text in a file. Examples: see [here](https://www.geeksforgeeks.org/sed-command-in-linux-unix-with-examples/).
 
 ### Shortcuts
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 fn + links | scrolle nach ganz oben
 cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen will)
 
 ### tty, terminal session management
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 tty	| zeigt Namen des aktiven terminals
 ls -ltr /dev/ttys\*	| zeigt Namen aller aktiven terminals 
 last | zeige letzte terminal logins
@@ -565,7 +571,7 @@ whoami | print the user name associated with the current effective user ID
 ### redirection, sort, head, tail
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 `ls -ltr | vim -` | zeige Output eines Befehls in vim (ACHTUNG: Leerzeichen hinter "vim" nicht vergessen!)
 `Befehl | head -3` |	zeige oberste 3 Zeilen des Outputs
 `Befehl | tail -3` |
@@ -577,19 +583,19 @@ whoami | print the user name associated with the current effective user ID
 ### Open in File Browser
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 nautilus .	|	öffne current directory in File Browser
 
 ### comments
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 \`# ein comment\` |	Kommentar in command line
 
 ### File Operations
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 pwd | zeige current working directory
 mkdir -p /file/subfile/subsubfile	|	erstellt file und subfile automatisch, falls sie noch nicht existieren
 mv -iv | **Tipp:** | IMMER -iv BENUTZEN ! (-i für bestätigen, -v für ausgeführte Aktion zeigen)
@@ -599,7 +605,7 @@ cp -iv | **Tipp:** | IMMER -iv BENUTZEN ! (-i für bestätigen, -v für ausgefü
 ### history, script
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 `history` | get a list of the last 1000 commands 
 `history | grep command_to_search` | search some pattern within the history generated list
 `script` | start saving all input and output in the current terminal session in the file `typescript` (end recording via ctrl + d - this does not close the terminal here; use `script /path/to/mylogfile.txt` to save it in `/path/to/mylogfile.txt`; `typescript` will be overwritten if you start `script` twice without providing a name!). [source](https://askubuntu.com/a/557309)
@@ -607,7 +613,7 @@ cp -iv | **Tipp:** | IMMER -iv BENUTZEN ! (-i für bestätigen, -v für ausgefü
 # Unzipping
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 unzip file -d destination	|	unzip to destination
 tar -C ./data/ -zxvf ~/Downloads/mnist.tgz | für .tgz (wobei -C target_location -zxvf source.tgz), .tar.gz
 oder andersrum: |
@@ -618,14 +624,14 @@ tar -C ~/ -xvf tor-browser-linux64-10.5.2_en-US.tar.xz | für .tar.xz
 # Manage Drives (hard drive, usb flash drive)
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 diskutil list |
 diskutil info /dev/disk2s2 |
 
 <hr>
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 sudo diskutil mountDisk /dev/disk2s2 | (Partitionsname disk2s2 steht in rechter Spalte bei diskutil list; /dev/disk2 mounted alle Unterpartitionen)
 sudo diskutil umountDisk /dev/disk2s2 |
 mount_ntfs -o r “/Volumes/Volume node” | (r für read-only; rw für read-write (NICHT MACHEN! Es gibt einen Grund warum das bei Mac per default nicht geht!)
@@ -633,7 +639,7 @@ mount_ntfs -o r “/Volumes/Volume node” | (r für read-only; rw für read-wri
 <hr>
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 df		|		zeige alle Laufwerke, ganz rechts steht die Location mit dem Inhalt des Datenträgers (zB /media/bra-ket/UBUNTU 20_0)
 sudo fdisk -l	|	wie df, aber mehr Details
 lsusb |
@@ -646,7 +652,7 @@ lsblk |
 **Note**: `lsb_release` and `uname` may report different Kernel versions!
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 cat /etc/os-release	 |	Ubuntu Version (lang)
 cat /etc/lsb-release |	Ubuntu Version (lang)
 lsb_release -a | Ubuntu Version (kurz)
@@ -666,7 +672,7 @@ uname -o | Prints the operating system information
 ## Hardware
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 lscpu |
 lshw |
 hwinfo --short |
@@ -682,13 +688,13 @@ mount \| column -t |
 free -m |
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 sudo dmidecode -t processor |
 sudo dmidecode -t memory |
 sudo dmidecode -t bios |
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 cat /proc/cpuinfo |
 cat /proc/meminfo |
 cat /proc/version |
@@ -702,14 +708,14 @@ cat /proc/partitions |
     - how to create a udev script triggered by some **udev event**, such as plugging in a specific thumb drive
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 `udevadm monitor` | tap into udev in real time and see what it sees when you plug in different devices. The monitor function prints received events for: `UDEV`: the event udev sends out after rule processing, `KERNEL`: the kernel uevent
 `udevadm control --reload` | should load all rules (but reboot if you want to be sure)
 
 ## Display
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 `xrandr` | list all display modes; set the size, orientation and/or reflection of the outputs for a screen; can also set the screen size
 `xrandr --fb 2560x1440` | set the screen resolution, when no physical display is connected (e.g. when connecting to Jetson AGX via Teamviewer or VNCviewer, put this in `/etc/xdg/autostart/resolution_screen_teamviewer.sh`, `chmod +x /etc/xdg/autostart/resolution_screen_teamviewer.sh`, create `/etc/xdg/autostart/resolution_screen_teamviewer.desktop` and reboot and connect via Teamviewer again)
 
@@ -722,7 +728,7 @@ Must knows:
     - [wear leveling](https://www.dell.com/support/kbdoc/de-de/000137999/hard-drive-why-do-solid-state-devices-ssd-wear-out?lang=en): As the term suggests, **wear leveling** provides a method for distributing program and erase cycles uniformly throughout all of the memory blocks within the SSD. This prevents continuous program and erase cycles to the same memory block, resulting in greater extended life to the overall NAND flash memory.
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 hdparm | get statistics about the hard disk, alter writing intervals, acoustic management, and DMA settings. It can also set parameters related to drive caches, sleep mode, power management, acoustic management, and DMA settings
 sudo hdparm -I /dev/sda | Request **identification info** directly from the drive, which is displayed in a new expanded format with considerably more detail than with the older `-i` option. (source: `man hdparm -I`); may differ from information provided by `-i` option! (source: `man hdparm -i`)
 
@@ -736,7 +742,7 @@ sudo hdparm -I /dev/sda | Request **identification info** directly from the driv
 6. close gnome-disks via alt + F4
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 sudo eject /media/SDD |
 
 Troubleshooting:
@@ -744,7 +750,7 @@ Troubleshooting:
 1. `One or more applications are keeping the volume busy`
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 sudo fuser -mv /media/SDD | displays all processes accessing `/media/SDD`, where the `m` tells it to look on the given location, the `v` switches the output to a human readable list instead of just a bunch of PIDs. [askubuntu](https://askubuntu.com/a/578631)
 
 ### Disk Usage
@@ -758,7 +764,7 @@ sudo fuser -mv /media/SDD | displays all processes accessing `/media/SDD`, where
 - [Why du and df display different values](http://linuxshellaccount.blogspot.com/2008/12/why-du-and-df-display-different-values.html)
     
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 `du -sh *` | 
 `du -sch *` | `-c` to show grand total
 `du -sh * | sort -h` | "ascending": largest file in the last output line
@@ -769,13 +775,13 @@ sudo fuser -mv /media/SDD | displays all processes accessing `/media/SDD`, where
 `du -h -d 1 -t 1G /` | show the sizes of all first level directories larger than 1GB within the root `/` path
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 `df -h` | to analyze the whole filesystem
 
 ## Camera
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 `mpv /dev/video0` | check, if device `/dev/video0` is the webcam
 `vlc v4l2:///dev/video0` | check, if device `/dev/video0` is the webcam
 `mplayer tv://device=/dev/video0` | check, if device `/dev/video0` is the webcam
@@ -791,14 +797,14 @@ sudo fuser -mv /media/SDD | displays all processes accessing `/media/SDD`, where
 # GPU information
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 nvidia-smi -q -d temperature | temperature info including critical temperature values, shutdown temperature etc.
 nvidia-smi --query-gpu=name --format=csv | get GPU name
 
 # Retrieval commands curl und wget:
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 wget -O output_file -q https://checkip.amazonaws.com -P DESTINATION	|	-O output_file: benutze Minuszeichen “-“ statt output_file wenn output direkt in Terminal erscheinen soll; -q für quiet; -P für Zielordner
 wget -A pdf,jpg -m -p -E -k -K -np http://site/path/ | get all pdfs and jpgs from site
 wget --accept pdf,jpg --mirror --page-requisites --adjust-extension --convert-links --backup-converted --no-parent http://site/path/ | same as above using long option names
@@ -820,20 +826,20 @@ sudo apt-key del "27B2 5BF6 36CF 72B4 334D  AC98 F84C B847 29F1 B545" | it is sa
 The software utility cron also known as cron job is a time-based job scheduler in Unix-like computer operating systems. Users who set up and maintain software environments use cron to schedule jobs to run periodically at fixed times, dates, or intervals.
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 crontab -e | opens a file in which jobs can be specified (read this file for more info)
 
 # network
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 sudo netstat -lpn \| grep :8889 | zeigt pid des Prozesses auf port 8889 (port kann dann mit `kill \<pid\>` frei gemacht werden)
 ss | 
 
 ## ssh
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 w | list all ssh sessions
 ssh bra-ket@10.14.14.60 | installiere vorher openssh-server auf beiden Computern
 firefox -no-remote -no-xshm | display firefox on local client (no -X or -Y flag needed in previous ssh command)
@@ -865,7 +871,7 @@ ssh-keygen -R 10.14.14.92 | remove 10.14.14.92 from .ssh/known_hosts (falls aus 
 **Achtung:** Spaces müssen im path **DOPPELT** escapet werden ! (s. [hier](https://stackoverflow.com/a/20364170/12282296))
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 scp *source* *target* | immer Anführungszeichen um den *source* Pfad setzen!
 scp -rv Macbook:"~/Desktop/Uni/FS1/Essential\ Astrophysics\ WS1819" ~/Desktop/ | spaces DOPPELT escapen (hier: 1. mit " **UND** 2. mit \) 
 `scp -r [!.]* source target` | exclude hidden files
@@ -875,7 +881,7 @@ scp -rv Macbook:"~/Desktop/Uni/FS1/Essential\ Astrophysics\ WS1819" ~/Desktop/ |
 Rsync patterns: [stackexchange](https://unix.stackexchange.com/a/2503)
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 `rsync -a *source* *destination*` | copy directory (**Warning**: `-r` tag does not copy some stuff, e.g. symlinks)
 `rsync -aR *source* *destination*` | `-R` or `--relative`: similar to `cp -r`, `*destination*` will be the **root of** the destination
 `rsync -aRv --progress` | show progress report
@@ -891,7 +897,7 @@ Rsync patterns: [stackexchange](https://unix.stackexchange.com/a/2503)
 [source](https://ostechnix.com/how-to-resume-partially-downloaded-or-transferred-files-using-rsync/)
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 `rsync -P -rsh=ssh ubuntu.iso sk@192.168.225.22:/home/sk/` | resume partially transferred file `ubuntu.iso`
 `rsync --partial -rsh=ssh ubuntu.iso sk@192.168.225.22:/home/sk/` | see above
 `rsync -avP ubuntu.iso sk@192.168.225.22:/home/sk/` | see above

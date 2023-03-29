@@ -74,7 +74,7 @@ Plugin 'christoomey/vim-system-copy'
 # help
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 :h | Hilfe (in Hilfe Cursor auf Tag zB \|syntax.txt\| platzieren ctrl + alt + 6 und ctrl + alt + 6 um auf content zu springen)
 `:h i_CTRL-R` | lookup meaning of CTRL-R in insert mode (deshalb das `i_` prefix; `v_` prefix für visual mode usw. s. Tabelle unten drunter)
 help :u	| Manual zu `:u` Befehl (im Manual kann man zB via Befehl `:v` zu dem `:v` springen; Ganz oben im Manual steht wie man im Manual navigiert)
@@ -82,7 +82,7 @@ help :u	| Manual zu `:u` Befehl (im Manual kann man zB via Befehl `:v` zu dem `:
 ![Screenshot_table](https://i.ibb.co/jw1X1nH/Screen-Shot-2021-06-10-at-3-51-04-AM-2.png)
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 `:h Q_<tab>` |
 :h quickref	| und dann eg `_sc` um auf `Q_sc` tag zu springen
 ctrl + ] (während cursor auf einem tag)	|		springe zu selected tag
@@ -94,7 +94,7 @@ ctrl + e, d, y, u |
 (Achtung: in Windows manchmal bisschen anders s. [https://superuser.com/a/518231](https://superuser.com/a/518231)
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 `^`	| vim: jump to the first non-blank character of the line; regexp: beginning of line ( praktisch für netrw: zB für jump to nächstem Ordner der mit "i" anfängt: /^i )
 `\n` oder `\r` | linebreak (man kann damit auch linebreaks suchen und mit einem whitespace (ie einfach 1x Leertaste) ersetzen)
 `:%s/pattern/replace/g`	| find pattern (regexp) and replace with replace (Achtung: Sonderzeichen (eg. Klammern, Punkt, ...) muss ein `\` vorangestellt werden! [The basic construct of the command is `s#search#replace#`. Sometimes you see it as `s///`. The `%` before the `s` tells the regex to work on all lines in the vim buffer, not just the current. The space followed by `\+` matches one or more spaces. The trailing `g` tells the regex to match multiple times in a single line.]
@@ -106,7 +106,7 @@ ctrl + e, d, y, u |
 # Von Shell aus
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 vim .  | öffne netrw in current dir
 vim -r *file.swp* | restore *file.swp*
 vim -u vimrc-file file | use another `.vimrc` (to specify other `.vim` location `set runtimepath` in `.vimrc`, further details below in section "General facts/Change default `.vim` `.vimrc` location")
@@ -115,7 +115,7 @@ vim --clean file | start clean without loading `.vimrc`
 # netrw
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 F1	|			help
 i	|			change listing style
 d	|			new directory
@@ -127,14 +127,14 @@ r	|			reverse current sort order
 # Compile, Run
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 :!g++ -g -Wall % |	compile current file (% steht für current file)
 :!./a.out	|		(after :!g++ -g -Wall %) execute compiled file a.out
 
 # In COMMAND mode
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 a | gehe in INSERT modus
 :terminal | open a terminal in Vim
 ctrl+w capital N | in terminal mode: enable scrolling (move around with cursor) in vim terminal mode (press i or a to resume using terminal as before)
@@ -142,7 +142,7 @@ ctrl+w capital N | in terminal mode: enable scrolling (move around with cursor) 
 ## Vim Settings
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 :syntax on |
 :set number |
 :set nonumber |
@@ -154,7 +154,7 @@ ctrl+w capital N | in terminal mode: enable scrolling (move around with cursor) 
 ### Syntax highlighting
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 |:set filetype=cmake | wenn Syntax nicht automatisch aktiviert wird, diesen Befehl ausführen
 |:scriptnames | To find out which files Vim has actually loaded. Generally, only the last one listed is "active", and even it may not be if you've turned syntax highlighting off. 
 |:echo b:current_syntax | To see the syntax currently in effect. 
@@ -164,14 +164,14 @@ ctrl+w capital N | in terminal mode: enable scrolling (move around with cursor) 
 ## Vim Sessions
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 :mks ~/.vim-sessions/some-project-session.vim | save vim session
 :so ~/.vim-sessions/some-project-session.vim | restore vim session
 
 ## Tabs
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 :gt | next Tab
 :gT | previous Tab
 :tabe . | open netrw in a new Tab
@@ -183,7 +183,7 @@ ctrl + w N | scroll in a terminal tab
 ## Buffers
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 :ls | get the buffer number of all files edited in this session
 :files | see `:ls`
 :buffers | see `:ls`
@@ -197,7 +197,7 @@ ctrl + w N | scroll in a terminal tab
 ## File Open, Close, Suspend, Name, Refresh
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 shift + z q	| wie `:q!`
 ctrl + w q	| wie `:q` (ohne `!`), schließe aktiven split window
 shift + z z	| wie `:x` ( dasselbe wie `:wq`, aber `:wq` überschreibt auch wenn keine modification [nur wichtig, falls modification times matter] )
@@ -212,14 +212,14 @@ ctrl + g | show current file name
 ## File Saving
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 `:w` |
 `:sav(eas) new_file_name` | save as `new_file_name` and set `new_file_name` as current file (`:sav` and `:saveas` are the same)
 
 ## Navigation
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 ctrl + e	| 		scroll window one line down
 ctrl + y	|		scroll window one line up 
 ctrl + + | zoom in (anschließend ctrl + w, =)
@@ -228,7 +228,7 @@ ctrl - - | zoom out (anschließend ctrl + w, =)
 ### Viewports
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 vi -o /path/to/file1 /path/to/file2	|	öffne 2 files in split screen
 ctrl + w, s	|	öffne neuen split window horizontal
 ctrl + w, v	|	öffne neuen split window vertical (oder besser: `:Lexplore`)
@@ -244,7 +244,7 @@ ctrl + w, &lt;	|	decrease active viewport size (für 8 Einheiten Verkleinerung: 
 ### Jump
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 h j k l |			links hoch runter rechts
 `/irgend_ein_wort` | suche `irgend_ein_wort` vorwärts (springt zum ersten solchen Wort, drücke n für nächstes Wort und N für previous occurrence)
 `?irgend_ein_wort` | suche `irgend_ein_wort` rückwärts
@@ -268,17 +268,17 @@ ctrl + i | Jump to next cursor position
 ctrl + ] | Jump to definition (if `ctags` is installed)
 % | Jump to a matching opening or closing parenthesis, bracket or curly brace
 
-### URLs
+### URLs, links
 
 | command | description |
-| :---: | :---: |
-gx | in normal mode: open the URL under the cursor in Firefox
-gx | in visual mode: open the (manually) selected URL in Firefox
+| :--- | :--- |
+gx | in normal mode: open the URL/link under the cursor in Firefox
+gx | in visual mode: open the (manually) selected URL/link in Firefox
 
 ## Write
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 v	|			markieren
 Shift + v	|		Zeile markieren
 x	|			cut
@@ -295,10 +295,10 @@ y w	|			yank to the start of next word
 y i w		|		yank current word
 y y	|			yank current line
 y %		|		yank to the matching character (useful to copy text betw matching brackets {}, [], () )
-&gt;&gt;		|		indent (in Insert mode: ctrl + t)
-&lt;&lt;		|		unindent (in Insert mode: ctrl + d)
-10&lt;&lt;	|		unindent 10 lines
-&lt;%		|		unindent betw matching brackets {}, [], ()
+`> >`		|		indent (in Insert mode: ctrl + t)
+`< <`		|		unindent (in Insert mode: ctrl + d)
+`10 < <`	|		unindent 10 lines
+`< %`		|		unindent betw matching brackets {}, [], ()
 u oder :u	|		undo last change
 ctrl + r	|		redo
 ctrl - k *digraph_id* | to type special characters that are not on the keyboard
@@ -306,13 +306,19 @@ ctrl - k *digraph_id* | to type special characters that are not on the keyboard
 
 ### Copy, Paste
 
+#### Using Vim Registers
+
+Use `"+y` to copy the selection to the system clipboard.
+
+#### Using a Plugin
+
 ```bash
 " copying to the system clipboard with text-objects and motions
 Plugin 'christoomey/vim-system-copy'
 ```
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 cp | copy
 cv | paste
 cpiw | copy word
@@ -333,14 +339,14 @@ cvi' | paste inside single quotes from system clipboard
 # In INSERT mode
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 Esc | gehe in command mode
 
 ## Avoid the escape key: 
 [vim.fandom.com](https://vim.fandom.com/wiki/Avoid_the_escape_key#Avoiding_the_Esc_key)
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 ctrl + c | gehe in command mode **<span style="color:red">Achtung:</span>** abbreviations funktionieren hier nicht im Ggs. zu dem "Esc" command mode
 alt + normal mode command | führt "normal mode command" im INSERT mode aus
 ctrl + o + (cmd)	|	switch to command mode for one command (gut für zB ctrl + o + $ oder andere Jump-commands) **<span style="color:red">Note:</span>** cmd nur bei Mac
@@ -348,7 +354,7 @@ ctrl + o + (cmd)	|	switch to command mode for one command (gut für zB ctrl + o 
 ## Schreiben
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 ctrl + x und danach ctrl + o	|	Omnicompletion (navigiere in Dropdown hoch/runter mit ctrl + p/ctrl + n)
 ctrl + p	|		completion with previous matching pattern
 ctrl + n 	|		completion with next matching pattern
@@ -380,13 +386,28 @@ Press CTRL + S to freeze vim and press CTRL + Q to unfreeze.
 
 # Neovim
 
-## Setup
+## Install
 
-Use `https://github.com/nvim-lua/kickstart.nvim`.
+Install the Debian package `nvim-linux64.deb` from `https://github.com/neovim/neovim/releases`:
+
+```bash
+sudo apt install ./nvim-linux64.deb
+```
+
+**Note**: Do **not** install from the `apt` package repository because there are only older `nvim` versions.
 
 ## Configuration
 
-see `~/.config/nvim/`
+```bash
+mkdir $HOME/.cfg/
+git clone --bare https://github.com/pharath/dotfiles.git $HOME/.cfg/
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+config checkout   # before running this command, remove all the existing dotfiles that would be overwritten otherwise
+```
+
+This is a modified version of `https://github.com/nvim-lua/kickstart.nvim`.
+
+See `~/.config/nvim/`.
 
 ## Plugins
 

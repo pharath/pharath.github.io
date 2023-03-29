@@ -50,6 +50,33 @@ $ true || echo "OK"
 $
 ```
 
+# Variables
+
+## `export` vs setting a variable
+
+see [baeldung.com](https://www.baeldung.com/linux/bash-variables-export)
+
+```bash
+$ MYVAR=1729
+$ export MYVAR=1729
+```
+
+The first definition creates a variable named MYVAR and assigns it the value 1729. **This is a shell variable**.
+
+**The second definition with the export command** is another way of defining a variable. It creates a variable named MYVAR, assigns it the value 1729, and marks it for export to all child processes created from that shell. **This is an environment variable**.
+
+The main difference between these two is that the `export` command makes the variable available to all the subsequent commands executed in that shell. This command does that by setting the export attribute for the shell variable `MYVAR`. **The export attribute marks MYVAR for automatic export to the environment of the child processes created by the subsequent commands**:
+```bash
+$ export MYVAR=1729
+$ echo $MYVAR
+1729
+$ bash    # Open a new child shell
+$ echo $MYVAR
+1729
+```
+
+**Note:** We can access bash environment variables only one way; the parent shell exports its variables to the child shell's environment, but **the child shell can't export variables back to the parent shell**.
+
 # If
 
 ## Command as condition

@@ -16,7 +16,7 @@ toc_label: "Contents"
 
 ## Profile Directory
 
-about:support -> "Profile Directory" -> "Open Directory" Button
+about:support &rarr; "Profile Directory" &rarr; "Open Directory" Button
 
 ## History
 

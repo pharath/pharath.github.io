@@ -15,6 +15,14 @@ tags:
   - cheatsheet
 ---
 
+# Shortcuts
+
+see [docs.github.com](https://docs.github.com/en/get-started/using-github/keyboard-shortcuts)
+
+Blacklist `github.com` in the vimium extension settings. 
+
+press the `?` key on the github.com site to show all shortcuts
+
 # SSH Keys
 
 - generate the ssh key on your local machine: `ssh-keygen -o -t rsa -C "ssh@github.com"`, where `-C "comment"` is just a comment/description 

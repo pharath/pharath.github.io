@@ -116,6 +116,43 @@ gsettings set org.gnome.shell.extensions.dash-to-dock isolate-workspaces true
 
 see [NoAnnoyance v2](https://extensions.gnome.org/extension/2182/noannoyance/)
 
+# Tracker
+
+see [wiki.ubuntuusers.de](https://wiki.ubuntuusers.de/Tracker/)
+
+## Troubleshooting
+
+Try everything on [this page](https://www.tobiasheide.de/hoher-cpu-verbrauch-durch-tracker-miner-fs-unter-ubuntu-20-04/).
+
+Show the Tracker status:
+```bash
+$ tracker status
+Currently indexed: 1458 files, 227 folders
+Remaining space on database partition: 7,4 GB (5,92%)
+Data is still being indexed: Estimated less than one second left
+```
+
+To see **where** Tracker hangs (here: see the last line in the output below):
+```bash
+$ tracker daemon
+Store:
+27 Mär 2023, 01:02:26:  ✗     Store                - Unavailable
+
+Miners:
+27 Mär 2023, 01:02:26:  ✗     Extractor            - Not running or is a disabled plugin
+27 Mär 2023, 01:02:26:    1%  File System          - Crawling recursively directory 'file:///home/bra-ket/Desktop/react/tutorial/node_modules/@jest/expect-utils' 
+```
+
+Last time the solution was:
+
+```bash
+Über GUI Konfigurieren
+
+Aufruf über Einstellungen -> Suchen. Dort gibt es oben in der Titelleiste den Button "Orte durchsuchen" über den Konfiguriert werden kann welche Verzeichnisse durchsucht werden sollen. Diesen Button habe ich die ersten Male auf der Einstellungsseite völlig übersehen.
+```
+
+In this GUI excluding the "Home" folder stopped `tracker-miner-fs` which was stuck (see above in the output of "tracker daemon") and had about `95%` CPU in `htop`.
+
 # Appearance
 
 ## Restart GUI
