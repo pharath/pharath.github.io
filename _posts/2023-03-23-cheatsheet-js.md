@@ -15,7 +15,30 @@ tags:
 
 - [React State Management, Components](https://www.digitalocean.com/community/tutorials/how-to-manage-state-on-react-class-components#step-1-%E2%80%94-creating-an-empty-project)
 
-# JavaScript
+# JavaScript (aka ECMAScript aka ES)
+
+- ES6 = ECMAScript 6 = ECMAScript 2015
+
+## Implementations
+
+- V8
+  - from [Wikipedia](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)):
+    - developed by the Chromium Project for Google Chrome and Chromium web browsers
+    - V8 compiles ECMAScript directly to native machine code using **just-in-time compilation** before executing it
+    - The compiled code is additionally **optimized** (and re-optimized) dynamically **at runtime**, based on heuristics of the code's execution profile. 
+    - **Optimization techniques** used include 
+      - inlining
+      - elision of expensive runtime properties
+      - inline caching.
+    - used in
+      - Chromium-based web browsers
+      - Firefox - parts of V8 ported to the browser for regular expressions parsing
+      - many more apps (see [Wikipedia](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)))
+
+## Formatting, Syntax Highlighting
+
+- Install `javascript` syntax highlighting using `nvim-treesitter`.
+- Install `javascript` formatting using `coc-prettier`.
 
 ## Arrays
 
@@ -194,4 +217,11 @@ Full-stack React framework.
 
 # NextAuth.js
 
+# TypeScript
 
+- a **strict syntactical superset** of JavaScript
+- adds optional **static typing** to the language
+- designed for the development of large applications
+- transpiles to JavaScript
+- As it is a superset of JavaScript, existing JavaScript programs are also valid TypeScript programs. 
+- developed and maintained by Microsoft

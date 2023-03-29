@@ -254,7 +254,7 @@ H   |           spring zu top of page ("**H**igh")
 L   |           spring zu bottom of page ("**L**ow")
 b	|			spring zu Wortanfang
 e	|			spring zu Wortende
-\* |				jump to next occurrence of the word under the cursor (then navigate back and forth with "n" and "shift + n")
+`*` |				jump to next occurrence of the word under the cursor (then navigate back and forth with "n" and "shift + n")
 f x |				spring zum nächsten "x" in der Zeile (repeat mit ";", reverse mit ",")
 ctrl + d	|		spring 1/2 window nach unten
 ctrl + u	|		spring 1/2 window nach oben
@@ -266,7 +266,10 @@ g + g |			Jump to first line of file
 ctrl + o | Jump to previous cursor position
 ctrl + i | Jump to next cursor position
 ctrl + ] | Jump to definition (if `ctags` is installed)
-% | Jump to a matching opening or closing parenthesis, bracket or curly brace
+`%` | Jump to a matching opening or closing parenthesis, bracket or curly brace, when the cursor is positioned on one of them
+`[{` or `]}` | Jump to outer curly brackets, see [vi.stackexcange](https://vi.stackexchange.com/a/16854)
+`[(` or `])` | Jump to outer parenthesis, see [vi.stackexcange](https://vi.stackexchange.com/a/16854)
+`[%` or `]%` | Jump to outer bracket, see [vi.stackexcange](https://vi.stackexchange.com/a/16854) (works only if the plugins "matchit" and "match-up" are installed) 
 
 ### URLs, links
 
@@ -289,7 +292,8 @@ d w|				delete (=cut) to the start of next word
 d i w		|		delete (=cut) current word
 5 d w		|	delete (=cut) next 5 words
 d d	|			delete (=cut) current line
-d %	|			delete (=cut) betw matching brackets {}, [], ()
+d %	|			delete (=cut) betw matching brackets `{}`, `[]`, `()`
+d i (   |                       delete (=cut) betw matching brackets `()`, see [stackoverflow](https://stackoverflow.com/a/405450)
 d $	|			delete (=cut) to end of line
 y w	|			yank to the start of next word
 y i w		|		yank current word
@@ -423,3 +427,98 @@ See `~/.config/nvim/`.
 ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item(), {'i','c'}),
 ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item(), {'i','c'}),
 ```
+
+## Syntax Highlighting
+
+### nvim-treesitter
+
+In order to install a language just add the language to the `ensure_installed` list in the `init.lua` file and close and re-open the `init.lua` file. E.g. to install `javascript` syntax highlighting:
+```lua
+-- [[ Configure Treesitter ]]
+-- See `:help nvim-treesitter`
+require('nvim-treesitter.configs').setup {
+  -- Add languages to be installed here that you want installed for treesitter
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'help', 'vim', 'javascript' },
+
+  -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
+  auto_install = false,
+
+  highlight = { enable = true },
+  indent = { enable = true, disable = { 'python' } },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = '<c-space>',
+      node_incremental = '<c-space>',
+      scope_incremental = '<c-s>',
+      node_decremental = '<M-space>',
+    },
+  },
+  textobjects = {
+    select = {
+      enable = true,
+      lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+      keymaps = {
+        -- You can use the capture groups defined in textobjects.scm
+        ['aa'] = '@parameter.outer',
+        ['ia'] = '@parameter.inner',
+        ['af'] = '@function.outer',
+        ['if'] = '@function.inner',
+        ['ac'] = '@class.outer',
+        ['ic'] = '@class.inner',
+      },
+    },
+    move = {
+      enable = true,
+      set_jumps = true, -- whether to set jumps in the jumplist
+      goto_next_start = {
+        [']m'] = '@function.outer',
+        [']]'] = '@class.outer',
+      },
+      goto_next_end = {
+        [']M'] = '@function.outer',
+        [']['] = '@class.outer',
+      },
+      goto_previous_start = {
+        ['[m'] = '@function.outer',
+        ['[['] = '@class.outer',
+      },
+      goto_previous_end = {
+        ['[M'] = '@function.outer',
+        ['[]'] = '@class.outer',
+      },
+    },
+    swap = {
+      enable = true,
+      swap_next = {
+        ['<leader>a'] = '@parameter.inner',
+      },
+      swap_previous = {
+        ['<leader>A'] = '@parameter.inner',
+      },
+    },
+  },
+}
+```
+
+## Formatting
+
+### coc.nvim
+
+[doc: coc.nvim](https://github.com/neoclide/coc.nvim)
+
+### coc-prettier
+
+[doc: coc-prettier](https://github.com/neoclide/coc-prettier)
+
+[doc: prettier](https://prettier.io/docs/en/install.html)
+
+Install locally:
+```bash
+npm install prettier -D --save-exact
+echo {} > .prettierrc.json
+cp -iv .gitignore .prettierignore
+```
+
+Format shortcuts: see `nvim/init.lua`
+
