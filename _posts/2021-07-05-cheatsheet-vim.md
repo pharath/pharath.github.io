@@ -75,9 +75,10 @@ Plugin 'christoomey/vim-system-copy'
 
 | command | description |
 | :--- | :--- |
-:h | Hilfe (in Hilfe Cursor auf Tag zB \|syntax.txt\| platzieren ctrl + alt + 6 und ctrl + alt + 6 um auf content zu springen)
+`:h` | Hilfe (in Hilfe Cursor auf Tag zB \|syntax.txt\| platzieren ctrl + alt + 6 und ctrl + alt + 6 um auf content zu springen)
 `:h i_CTRL-R` | lookup meaning of CTRL-R in insert mode (deshalb das `i_` prefix; `v_` prefix für visual mode usw. s. Tabelle unten drunter)
-help :u	| Manual zu `:u` Befehl (im Manual kann man zB via Befehl `:v` zu dem `:v` springen; Ganz oben im Manual steht wie man im Manual navigiert)
+`:h :u`	| Manual zu `:u` Befehl (im Manual kann man zB via Befehl `:v` zu dem `:v` springen; Ganz oben im Manual steht wie man im Manual navigiert)
+`:h key-notation` | vim key notation
 
 ![Screenshot_table](https://i.ibb.co/jw1X1nH/Screen-Shot-2021-06-10-at-3-51-04-AM-2.png)
 

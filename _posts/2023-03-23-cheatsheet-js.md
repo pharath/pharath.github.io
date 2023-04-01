@@ -17,7 +17,14 @@ tags:
 
 # JavaScript (aka ECMAScript aka ES)
 
+## Versions, Revisions
+
 - ES6 = ECMAScript 6 = ECMAScript 2015
+  - arrow functions
+
+## Crash Course
+
+see [YouTube](https://www.youtube.com/watch?v=hdI2bqOjy3c) ([Code](https://embed.plnkr.co/plunk/8ujYdL1BxZftGoS4Cf14))
 
 ## Implementations
 
@@ -39,6 +46,22 @@ tags:
 
 - Install `javascript` syntax highlighting using `nvim-treesitter`.
 - Install `javascript` formatting using `coc-prettier`.
+
+## Numbers
+
+### Number.prototype.toLocaleString
+
+```js
+const currencyOptions = {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+}
+
+total.toLocaleString(undefined, currencyOptions)
+```
+- Convert `total` from a number to a string with two decimal places. 
+- this will also convert the number to a string according to the numerical conventions that match the browser's locale
+- Use `undefined` as the first argument to `toLocaleString` to use the system locale rather than specifying a locale
 
 ## Arrays
 
@@ -113,6 +136,65 @@ console.log(sumWithInitial);
 // Expected output: 10
 ```
 
+### Array.prototype.indexOf
+
+```js
+array1.indexOf(x)
+```
+- index of the **first instance** of `x` in an `array1`
+- return `-1` if `x` is not present
+
+## Functions
+
+### Anonymous Functions
+
+From [javascripttutorial.net](https://www.javascripttutorial.net/javascript-anonymous-functions/):
+
+An anonymous function is a function without a name.
+```js
+(function () {
+   //...
+});
+```
+
+An anonymous function is not accessible after its initial creation. Therefore, you often need to assign it to a variable:
+```js
+let show = function () {
+    console.log('Anonymous function');
+};
+
+show();
+```
+In this example, the anonymous function has no name between the `function` keyword and parentheses `()`.
+
+#### Arrow Function Notation
+
+ES6 introduced **arrow function** expressions that provide a shorthand for declaring anonymous functions.
+```js
+let show = () => console.log('Anonymous function');
+```
+
+From [w3schools](https://www.w3schools.com/js/js_arrow_function.asp):
+If you have **only one parameter** (here: `val`), you can skip the parentheses as well:
+```js
+hello = (val) => "Hello " + val;
+// instead, you can use
+hello = val => "Hello " + val;
+```
+
+#### Anonymous Functions as arguments
+
+In practice, you often pass anonymous functions as arguments to other functions:
+```js
+setTimeout(function() {
+    console.log('Execute later after 1 second')
+}, 1000);
+```
+
+## Event Handler
+
+- `<button onClick={function}>`
+
 # JSX
 
 aka JavaScript Syntax Extension (sometimes referred to as **JavaScript XML**)
@@ -131,6 +213,8 @@ aka JavaScript Syntax Extension (sometimes referred to as **JavaScript XML**)
     - class-based state management
     - Hooks
     - Redux (third-party library)
+  - React may optimize code by calling actions asynchronously
+    - make sure that your function has access to the most up-to-date state
 
 ## create-react-app
 
@@ -163,14 +247,50 @@ nvim src/index.js   # change line to: `import App from './components/App/App';`
 
 ## Hooks
 
-- Hooks are a broad set of tools that **run custom functions when a component's props change**. 
+- Hooks are functions
+- Hooks **are triggered** 
+  - by other actions
+  - when a component's props change
+- Hooks **are used to**
+  - create data
+  - to trigger further changes
 - Since this method of state management doesn't require you to use classes, developers can use Hooks to write **shorter**, **more readable** code that is **easy to share and maintain**. 
 - One of the main differences between Hooks and class-based state management is that there is no single object that holds all of the state. Instead, you can break up state into multiple pieces that you can update independently.
 
-## Redux Toolkit
+### useState
+
+- a function
+- takes the initial state as an argument and returns an array with two items
+- syntax: `const [variable, setFunction] = useState(defaultValue);`
+  - event handler function: the event handler function (i.e. the `function` in `onClick={function}`) must have the same scope as the `setFunction`, therefore the event handler function must be defined inside the component function
+    - if you define the arrow function **inside of a prop** (i.e. substitute `function` in `onClick={function}` with the definition of `function`), React will 
+      1. create a new function in every re-render
+      2. which triggers a prop change
+      3. which causes the component to re-render
+    - if you define the arrow function **outside of a prop**, you can use the `useCallback` Hook which will **memoize (cache) the function** 
+      - this gives better performance than defining the function **inside of a prop**
+    - as a rule, the higher a component is likely to be in a tree, the greater the need for memoization.
+
+### useContext
+
+### useReducer
+
+- specially designed to update the state based on the current state, in a manner similar to the `.reduce` array method 
+- The `useReducer` Hook is similar to `useState`, but when you initialize the Hook, you pass in **a function the Hook will run** when you change the state along with the initial data
+- The function - referred to as the **reducer** - takes **two arguments**: 
+  - the state
+  - The other argument is what you will supply when you call the update function.
+- A common pattern in reducer functions is to pass an **object as the second argument** that contains 
+  - the **name of the action** and 
+  - **the data** for the action. 
+  - Inside the reducer, you can then update the total based on the action.
+
+## Redux
 
 - a method of state management
 - a third-party library
+- also follows the React **Hook naming convention**, i.e. Redux Hooks also start with the prefix `use...`
+  - e.g. `useSelector`, `useStore`
 
 ## Best Practice
 
