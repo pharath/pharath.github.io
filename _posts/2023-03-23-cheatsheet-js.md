@@ -207,7 +207,7 @@ aka JavaScript Syntax Extension (sometimes referred to as **JavaScript XML**)
 
 # React
 
-- JavaScript **library** (not framework)
+- JavaScript UI **library** (not framework)
 - **state management**: In React development, keeping track of how your application data changes over time is called state management.
   - common state management methods:
     - class-based state management
@@ -245,6 +245,22 @@ mv src/App.* src/components/App/   # Move all of the App files into that directo
 nvim src/index.js   # change line to: `import App from './components/App/App';`
 ```
 
+### Templates
+
+- [list of create-react-app (cra) templates](https://www.npmjs.com/search?q=cra-template-*)
+- [official React doc source code](https://github.com/reactjs/react.dev)
+
+### Docusaurus
+
+Creates a documentation page in React that is easy to maintain.
+
+Create a blank template:
+```bash
+npm init docusaurus@latest
+```
+
+E.g. the [create-react-app doc](https://create-react-app.dev/) was built using Docusaurus (see [source code on github](https://github.com/facebook/create-react-app/tree/main/docusaurus)).
+
 ## Hooks
 
 - Hooks are functions
@@ -256,6 +272,10 @@ nvim src/index.js   # change line to: `import App from './components/App/App';`
   - to trigger further changes
 - Since this method of state management doesn't require you to use classes, developers can use Hooks to write **shorter**, **more readable** code that is **easy to share and maintain**. 
 - One of the main differences between Hooks and class-based state management is that there is no single object that holds all of the state. Instead, you can break up state into multiple pieces that you can update independently.
+
+### Built-in Hooks
+
+- **Built-in React Hooks**: see [API Reference](https://react.dev/reference/react)
 
 ### useState
 
@@ -296,6 +316,8 @@ nvim src/index.js   # change line to: `import App from './components/App/App';`
 
 - It is best to only add information to `state` that you expect to change
   - This way, the information in `state` will be easier to keep track of as your application scales.
+- minimize the different pieces of state by only saving related data in one place
+  - In other words, try to avoid double references to the same data
 
 # Node.js
 

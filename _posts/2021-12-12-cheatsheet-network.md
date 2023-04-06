@@ -162,3 +162,21 @@ kill some_pid # pid steht in der Spalte ganz rechts, zB. in "1239526/ssh" ist di
 # beenden. Denn port auf HPC Seite (hier: 8889) wird automatisch frei beim Beenden von jupyter, aber port auf meinem PC (hier: 8888) nicht!
 ```
 **Achtung**: Schau, dass die ports frei sind (mit `(sudo) netstat -lpn |grep :8889` die PID suchen und mit `kill ABCDEF` port frei machen)! Sonst anderen port probieren.
+
+# Router
+
+## Troubleshooting
+
+### 2.4 GHz vs. 5 GHz, "Frequenzband" Settings
+
+- **Problem**: das WLAN Netz wird nicht angezeigt 
+  - **Solution**: das 2.4 GHz Band einschalten
+- 2.4 GHz
+  - auch geeignet für **ältere Geräte**
+  - höhere Reichweite als 5 GHz
+  - kann durch Bluetooth Wellen gestört werden
+- 5 GHz (new)
+  - **ältere Geräte** unterstützen dieses Frequenzband **nicht**!
+  - stabiler als 2.4 GHz
+  - geringere Reichweite als 2.4 GHz
+  - kommt manchmal nicht durch Wände

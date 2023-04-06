@@ -228,6 +228,28 @@ git reset --soft HEAD~; git reset # get all stashed untracked .gitignore files b
 
 # git diff
 
+## Side-by-Side View
+
+For `nvim -d`: Paste this into your `~/.gitconfig`:
+```bash
+[difftool]
+    prompt = true
+[diff]
+    tool = nvimdiff
+[difftool "nvimdiff"]
+    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+```
+
+For `vimdiff`:
+```bash
+git config --global diff.tool vimdiff
+```
+
+After this you can use either `nvim -d` or `vimdiff` as the difftool by running
+```bash
+git difftool   # accepts the same arguments as "git diff"
+```
+
 ## See changes in one file
 
 If you want to see what you haven't git added yet:
@@ -256,6 +278,25 @@ git diff --shortstat
 git diff --dirstat
 git diff --name-status
 ```
+
+## Compare two Branches
+
+Get list of files that are different between branches (here we compare `master` to `dev` branch):
+
+```bash
+git diff --name-status master..dev
+```
+
+Then inspect changes for a particular file:
+
+```bash
+git diff master..dev /path/to/file
+
+# if e.g. vimdiff has been configured as the difftool (see section "Side-by-Side View"):
+git difftool -y master..dev /path/to/file   
+```
+
+The `-y` flag automatically confirms the prompt to open the diff in the editor.
 
 ## Compare files on disk
 

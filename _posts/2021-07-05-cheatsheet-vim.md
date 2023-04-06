@@ -271,6 +271,8 @@ ctrl + ] | Jump to definition (if `ctags` is installed)
 `[{` or `]}` | Jump to outer curly brackets, see [vi.stackexcange](https://vi.stackexchange.com/a/16854)
 `[(` or `])` | Jump to outer parenthesis, see [vi.stackexcange](https://vi.stackexchange.com/a/16854)
 `[%` or `]%` | Jump to outer bracket, see [vi.stackexcange](https://vi.stackexchange.com/a/16854) (works only if the plugins "matchit" and "match-up" are installed) 
+`{` or `}` | jump forwards or backwards between blank lines which should be enough to move between closed blocks (e.g. jump to the next function).
+`ma` and `<backtick>a` | set mark and jump to the set mark (why useful?: A mark is persistent no matter how long you are in the file, as opposed to `<C-o>`.)
 
 ### URLs, links
 
