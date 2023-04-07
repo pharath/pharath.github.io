@@ -912,7 +912,7 @@ source: [Goodfellow_2016](#Goodfellow_2016)
 
 ##### Code experiment
 
-- vanishing gradients problem: [code example](https://github.com/pharath/home/tree/master/_posts_html/Weight%20Initialization%20in%20Neural%20Networks%20A%20Journey%20From%20the%20Basics%20to%20Kaiming%20%7C%20by%20James%20Dellinger%20%7C%20Towards%20Data%20Science) (download this directory and view the html file locally, else it does not work)
+- vanishing gradients problem: [code example](https://drive.google.com/drive/folders/1o7WHrhB01ECBtZA9kYdrJptreljllg9F?usp=share_link) (download this directory and view the html file locally, else it does not work)
 
 ##### Leibe
 
