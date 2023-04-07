@@ -71,6 +71,12 @@ If you want it to open a terminal window when you run it (if you needed to add i
 Terminal=true
 ```
 
+## Nautilus
+
+Press `F4` to open the current directory in the terminal:
+- see [askubuntu](https://askubuntu.com/a/696901)
+    - **note**: do not forget `chmod +x Terminal`
+
 # Network
 
 ## On the server computer:

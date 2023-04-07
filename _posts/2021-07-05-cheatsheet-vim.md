@@ -94,6 +94,14 @@ ctrl + e, d, y, u |
 
 (Achtung: in Windows manchmal bisschen anders s. [https://superuser.com/a/518231](https://superuser.com/a/518231)
 
+## Trick
+
+Use [regexr.com](https://regexr.com/) to ...
+- **read regex**: paste the regex expression you want to understand into the "Expression" field and read the "Tools" field. This field will show what each symbol in the expression means.
+- **write regex**: write something into the "Expression" field and see if it works by looking into the "Text/Tests" field with the example text.
+
+## In Vim
+
 | command | description |
 | :--- | :--- |
 `^`	| vim: jump to the first non-blank character of the line; regexp: beginning of line ( praktisch für netrw: zB für jump to nächstem Ordner der mit "i" anfängt: /^i )
@@ -151,6 +159,7 @@ ctrl+w capital N | in terminal mode: enable scrolling (move around with cursor) 
 :set nohlsearch |
 :filetype indent plugin on |
 :so $VIMRUNTIME/syntax/python.vim | aktiviere Python Syntax
+:echo $VIMRUNTIME | show the content of the `VIMRUNTIME` variable (e.g. syntax files are in the `VIMRUNTIME/syntax/` directory)
 
 ### Syntax highlighting
 
@@ -524,4 +533,26 @@ cp -iv .gitignore .prettierignore
 ```
 
 Format shortcuts: see `nvim/init.lua`
+
+## Markdown
+
+### LaTeX
+
+To avoid that LaTeX equations surrounded by `$` symbols are displayed in italic font follow these steps:
+
+In `/usr/share/nvim/runtime/syntax/markdown.vim` add:
+```vim
+97 exe 'syn region markdownLatex matchgroup=markdownLatexDelimiter start="\S\@<=\$\|\$\S\@=" end="\S\@<=\$\|\$\S\@=" skip="\\\$" contains=markdownLineStart,@Spell' . s:concealends
+```
+
+and
+```vim
+161 hi def link markdownLatexDelimiter        markdownLatex
+```
+
+## Copy, Paste
+
+### Using Vim Registers
+
+Use `"+y` to copy the selection to the system clipboard.
 

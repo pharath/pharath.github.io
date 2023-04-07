@@ -390,6 +390,16 @@ tshark -r myfile.pcap -Y 'ip.addr == AA.BB.CC.DD' -T fields -e tcp.analysis.ack_
 **Figure 9**: "Window Scaling" Graph, shows a simple throughput test via `iperf3` (see [throughput testing (iperf3)](#throughput-testing-iperf3))
 ![wireshark_tcp_window_scaling.png](/assets/images/datkom/wireshark_tcp_window_scaling.png)
 
+# OSI Model
+
+- **Layer 1**: Physical layer
+- **Layer 2**: Data link layer
+- **Layer 3**: Network layer
+- **Layer 4**: Transport layer
+- **Layer 5**: Session layer
+- **Layer 6**: Presentation layer
+- **Layer 7**: Application layer
+
 # Multiplexing
 
 ## Circuit Switching (TDM or FDM)
@@ -486,9 +496,7 @@ tshark -r myfile.pcap -Y 'ip.addr == AA.BB.CC.DD' -T fields -e tcp.analysis.ack_
 - **note**: UDP is faster and gives you more control over the trade-offs you want to make than TCP. If you need reliability, flow control or congestion control you could implement it yourself at the application layer. For some apps UDP makes more sense, e.g. internet telephony, streaming video.
     - from wiki: "Voice and video traffic is generally transmitted using UDP"
 
-# Application Layer
-
-- Layer 7
+# Application Layer (Layer 7)
 
 ## Web and HTTP
 
@@ -690,7 +698,17 @@ At the time (1986), the internet was completely classful and nobody really gave 
 
 ## P2P File Distribution
 
-TODO
+**Peer-to-peer (P2P)** computing or networking is a **distributed** application architecture that partitions tasks or workloads between peers. 
+- **Peers** are equally privileged, equipotent participants in the network. 
+- They are said to form a **peer-to-peer network** of **nodes**.
+- Peers make a portion of their **resources**, such as processing power, disk storage or network bandwidth, directly available to other network participants, without the need for central coordination by servers or stable hosts. 
+- Peers are both suppliers **and** consumers of resources, in contrast to the traditional **client–server model** in which the consumption and supply of resources are divided.
+
+### RTSP, WebRTC
+
+- Real Time Streaming Protocol
+- P2P video chat
+    - ready-to-use **WebRTC**/RTSP server ( [rtsp-simple-server](https://github.com/aler9/mediamtx) )
 
 # Transport Layer (Layer 4)
 

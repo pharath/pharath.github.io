@@ -105,7 +105,7 @@ Use `git reflog` to find the `SHA1` of the last commit of the branch.
 git reflog | get SHA-1 list of previous states
 git reset --soft HEAD~ | undo last commit **locally** (`--soft`: safe way)
 git push origin +HEAD | reset the **remote's** last commit to the **local's** last commit (**Note**: `HEAD` always points to the last commit.)
-git reset --soft HEAD~1 | HEAD~ and HEAD~1 are the same
+git reset --soft HEAD~1 | `HEAD~` and `HEAD~1` are the same; `HEAD` and `HEAD~0` are the same
 git reset --soft *SHA-1* | reset to a previous state **locally** (`--soft`: safe way)
 git reset --hard *SHA-1* | reset to a previous state **locally** (**Warning**: `--hard`: All changes will be lost.)
 
