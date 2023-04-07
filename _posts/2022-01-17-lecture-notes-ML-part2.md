@@ -742,7 +742,7 @@ source: [Goodfellow_2016](#Goodfellow_2016)
             - biases the updates in a particular direction
             - As a result, these weights can only all decrease or all increase **together** for a given input pattern. 
                 - Thus, if a weight vector must change direction it can only do so by **zigzagging** which is inefficient and thus very slow.
-                ![normalization](/assets/images/optimization/normalization.JPG)
+                ![normalization](https://i.ibb.co/2PzwFnW/normalization.jpg)
         - In the above example, the inputs were all positive. However, **in general, any shift of the average input away from zero will bias the updates in a particular direction** and thus slow down learning. 
         - Therefore, it is good to **shift the inputs so that the average over the training set is close to zero**. 
             - This heuristic should be applied **at all layers** which means that we want the average of the outputs of a node to be close to zero because these outputs are the inputs to the next layer [19], chapter 10. 
