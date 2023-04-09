@@ -13,7 +13,12 @@ tags:
 
 # Tutorials
 
-- [React State Management, Components](https://www.digitalocean.com/community/tutorials/how-to-manage-state-on-react-class-components#step-1-%E2%80%94-creating-an-empty-project)
+React
+- [Props](https://www.digitalocean.com/community/tutorials/how-to-customize-react-components-with-props) <!--- TODO -->
+- [Class-based State Management, Components](https://www.digitalocean.com/community/tutorials/how-to-manage-state-on-react-class-components#step-1-%E2%80%94-creating-an-empty-project)
+- [Hooks](https://www.digitalocean.com/community/tutorials/how-to-manage-state-with-hooks-on-react-components)
+- [Web APIs](https://www.digitalocean.com/community/tutorials/how-to-call-web-apis-with-the-useeffect-hook-in-react) <!--- TODO -->
+- [Login Authentication](https://www.digitalocean.com/community/tutorials/how-to-add-login-authentication-to-react-applications) <!--- TODO -->
 
 # JavaScript (aka ECMAScript aka ES)
 
@@ -32,6 +37,14 @@ see [YouTube](https://www.youtube.com/watch?v=hdI2bqOjy3c) ([Code](https://embed
   - from [Wikipedia](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)):
     - developed by the Chromium Project for Google Chrome and Chromium web browsers
     - V8 compiles ECMAScript directly to native machine code using **just-in-time compilation** before executing it
+      - **JIT compilation** aka dynamic compilation ( [source](https://www.freecodecamp.org/news/just-in-time-compilation-explained/) )
+        - a method for improving the performance of **interpreted** programs
+        - During execution the program may be compiled into native code to improve its performance. 
+        - Advantages:
+          - Dynamic compilation has some advantages over static compilation. 
+          - When running `Java` or `C#` applications, the runtime environment can **profile** the application while it is being run. 
+          - This allows for more optimized code to be generated.
+          - If the behavior of the application changes while it is running, the runtime environment can recompile the code.
     - The compiled code is additionally **optimized** (and re-optimized) dynamically **at runtime**, based on heuristics of the code's execution profile. 
     - **Optimization techniques** used include 
       - inlining
@@ -357,7 +370,49 @@ npm install -g npx
 
 Full-stack React framework.
 
+[Wikipedia](https://en.wikipedia.org/wiki/Next.js)
+- an open-source web development framework created by the private company Vercel providing React-based web applications with server-side rendering and static website generation.
+- React documentation mentions Next.js among "Recommended Toolchains" advising it to developers when "building a server-rendered website with Node.js". 
+- Where traditional React apps can only render their content in the **client-side** browser, Next.js extends this functionality to include applications rendered on the **server-side**. 
+
 # NextAuth.js
+
+# Deploy
+
+## AWS
+
+### SST
+
+[github](https://github.com/serverless-stack/sst)
+
+[docs.sst](https://docs.sst.dev/what-is-sst)
+- SST is a framework that makes it easy to build modern full-stack applications **on AWS**.
+- frontend:
+  - **Deploy** a serverless **Next.js**, Remix, Astro, or Solid app **to your AWS account** and add any backend feature to it.
+- backend:
+  - SST has constructs for most backend features. And you can even **use any AWS service** in your app.
+
+[Tutorials](https://sst.dev/guide.html#table-of-contents)
+- [Overview of the tutorial's demo app](https://sst.dev/chapters/what-does-this-guide-cover.html)
+- build the backend
+  - [serverless](https://sst.dev/chapters/what-is-serverless.html)
+    - **serverless (aka FaaS)**: Serverless computing (or serverless for short), is an execution model where the cloud provider (AWS, Azure, or Google Cloud) is responsible for executing a piece of code by dynamically allocating the resources. And only charging for the amount of resources used to run the code. 
+    - **Events**: The code is typically run inside **stateless containers** that can be **triggered by** a variety of **events** including 
+      - http requests, 
+      - database events, 
+      - queuing services, 
+      - monitoring alerts, 
+      - file uploads, 
+      - scheduled events (cron jobs), 
+      - etc. 
+    - **FaaS**: The code that is sent to the cloud provider for execution is usually in the form of a **function**. Hence serverless is sometimes referred to as "*Functions as a Service*" or "*FaaS*". 
+    - **Major offerings**: Following are the **FaaS offerings** of the **major cloud providers**:
+      - AWS: AWS Lambda
+      - Microsoft Azure: Azure Functions
+      - Google Cloud: Cloud Functions
+- build the frontend
+  - [Setting up a React app](https://sst.dev/chapters/create-a-new-reactjs-app.html) (uses `create-react-app`)
+  - [Login page](https://sst.dev/chapters/create-a-login-page.html)
 
 # TypeScript
 

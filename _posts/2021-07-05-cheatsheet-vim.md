@@ -250,6 +250,8 @@ ctrl + R |
 ctrl + w, q	|	wie `:q` (ohne `!`), schließe aktiven split window
 ctrl + w, =	|	resize viewports to be of equal size
 ctrl + w, &lt;	|	decrease active viewport size (für 8 Einheiten Verkleinerung: ctrl + w, 8, &lt;)
+ctrl + w, o     |       close all the other splits except the active one (same as `:only`)
+`:qa`, `:qa!`   |       close all splits ("quit all")
 
 ### Jump
 

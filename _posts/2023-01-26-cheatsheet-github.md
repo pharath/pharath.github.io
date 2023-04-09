@@ -47,3 +47,20 @@ see article ["Git"]({% post_url 2021-08-19-cheatsheet-git %}#create-a-new-reposi
 gh auth login
 gh repo create
 ```
+
+## gh repo
+
+```bash
+gh repo view -h
+
+gh repo view -b some_branch
+
+# name of the repository
+gh repo view --json name -q ".name"
+
+# owner/repository
+gh repo view --json nameWithOwner -q ".nameWithOwner"
+
+# the complete url
+gh repo view --json url -q ".url"
+```

@@ -22,52 +22,79 @@ tags:
 
 # Basics
 
+## git rm, git add
+
 | command | description |
 | :--- | :--- |
 `git rm file1.txt` | remove the file from the Git repository **and the filesystem**
 `git rm --cached file1.txt` | remove the file only from the Git repository and not remove it from the filesystem
 `git add -u :/` | `git rm` all files after accidentally `rm` those files
 
+## git clone
+
 | command | description |
 | :--- | :--- |
 `git clone --recurse-submodules repo <Ziel directory>` | 
+
+## git branch, git checkout
+
+| command | description |
+| :--- | :--- |
 `git branch -a` | show/list all branches (local and remote)
 `git branch -r` | show/list all branches (only remote)
 `git branch -d *local_branch*` | delete local branch *local_branch*
 `git push origin --delete *remote/branch*` | delete remote branch *remote/branch*
-`git show-branch -a` | show/list all branches **and commits** (local and remote)
-`git show-branch -r` | show/list all branches **and commits** (only remote)
-`git checkout <existing_branch>` | switch to an existing branch (or: git switch *branch*)
-`git checkout -b <new_branch>` | switch to a non-existing branch (or: `git switch -c *branch*`); subsequently, `git push --set-upstream origin <new_branch>` to create `new_branch` in the remote (on github.com), too. Here, the `--set-upstream` flag will make the local `<new_branch>` track the remote `remotes/origin/<new_branch>` (w/o this flag git does not know where to push the `new_branch`).
+`git checkout <existing_branch>` | switch to an existing branch
+`git switch *branch*` | switch to an existing branch (since Git v2.23)
+`git checkout -b <new_branch>` | switch to a non-existing branch; subsequently, `git push --set-upstream origin <new_branch>` to create `new_branch` in the remote (on github.com), too. Here, the `--set-upstream` flag will make the local `<new_branch>` track the remote `remotes/origin/<new_branch>` (w/o this flag git does not know where to push the `new_branch`).
+`git switch -c *branch*` | switch to a non-existing branch (since Git v2.23)
 `git push --set-upstream origin <new_branch>` | push to a locally newly created branch (see `git checkout -b <new_branch>`) that does not yet exist on remote (i.e. on github.com)
 `git branch -vv` | show which **local branches** track which **remote branches**, useful e.g. when you are creating and setting up new branches
 `git branch --set-upstream my_branch origin/my_branch` | make the **local** `my_branch` track the **remote** `origin/my_branch` (similar to `git push --set-upstream origin <new_branch>`)
-`git reflog` | view history of checkout operations
-`git log`	| view history of commits ([more commands](#git-log))
-`git revert <commit-hash>`	| commit `<commit-hash>` rückgängig machen
-`git tag -l`	| list all tags
+
+## git show-branch
+
+| command | description |
+| :--- | :--- |
+`git show-branch -a` | show/list all branches **and the last commit message** (local and remote)
+`git show-branch -r` | show/list all branches **and the last commit message** (only remote)
+
+## Tags
+
+| command | description |
+| :--- | :--- |
+`git tag -l` | list all tags
 `git -c 'versionsort.suffix=-' ls-remote --tags --sort='v:refname' <repository>` | list all tags of `<repository>`
 `git checkout tags/<tag name>`	| checkout a specific tag
 `git clone --depth 1 --branch <tag_name> <repo_url>` | clone a specific tag; `--depth 1` is optional but if you only need the state at that one revision, you probably want to skip downloading all the history up to that revision.
-`git fetch` |
-`git checkout solution/2_foundations` |
-`git submodule init` |
-`git submodule update --progress` | `submodule update` by default does not show any cloning progress, use `--progress` to show the cloning progress
+
+## git remote
+
+| command | description |
+| :--- | :--- |
 `git config --get remote.origin.url` | get only the URL of the current remote
 `git remote show [remote-name] command` | get more details about a particular remote
 `git remote show origin` | get more details about the current remote
 `git remote update origin --prune` | To update the local list of remote branches
 
+## git reflog
+
+| command | description |
+| :--- | :--- |
+`git reflog` | view history of `git checkout` operations
+`git revert <commit-hash>` | commit `<commit-hash>` rückgängig machen
+
 ## git log
 
 | command | description |
 | :--- | :--- |
+`git log` | view history of commits ([more commands](#git-log))
 `git log -- filename` | commit history of a file
 `git log -p -- filename` | Like `git log`, but shows the file content that changed, as well. Generates the patches for each log entry.
 `git show HEAD` | just the diff for a specific commit
 `gitk [filename]` | To browse the changes visually
 
-## pull vs fetch vs update
+## git pull vs fetch vs update
 
 [source](https://stackoverflow.com/a/17712553):
 
@@ -230,7 +257,7 @@ git reset --soft HEAD~; git reset # get all stashed untracked .gitignore files b
 
 ## Side-by-Side View
 
-For `nvim -d`: Paste this into your `~/.gitconfig`:
+For `nvimdiff` ( aka `nvim -d` ): Paste this into your `~/.gitconfig`:
 ```bash
 [difftool]
     prompt = true
@@ -239,10 +266,12 @@ For `nvim -d`: Paste this into your `~/.gitconfig`:
 [difftool "nvimdiff"]
     cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 ```
+Then run `git config --global difftool.prompt false`.
 
 For `vimdiff`:
 ```bash
 git config --global diff.tool vimdiff
+git config --global difftool.prompt false
 ```
 
 After this you can use either `nvim -d` or `vimdiff` as the difftool by running
@@ -296,7 +325,7 @@ git diff master..dev /path/to/file
 git difftool -y master..dev /path/to/file   
 ```
 
-The `-y` flag automatically confirms the prompt to open the diff in the editor.
+The `-y` flag automatically confirms the prompt to open the diff in the editor. Use `git config --global difftool.prompt false` to turn off these prompts.
 
 ## Compare files on disk
 
