@@ -427,12 +427,26 @@ This is a modified version of `https://github.com/nvim-lua/kickstart.nvim`.
 
 See `~/.config/nvim/`.
 
+## Font
+
+Install [nerd-fonts](https://github.com/ryanoasis/nerd-fonts#linux):
+```bash
+mkdir -p ~/.local/share/fonts
+cd ~/.local/share/fonts
+```
+
+In this directory download [Hack Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/Hack.zip), then run
+```bash
+unzip Hack.zip
+rm Hack.zip LICENSE.md readme.md
+```
+
+In the Ubuntu terminal profile settings set `Hack Nerd Font Regular` as the terminal font.
+
 ## Plugins
 
 `tpope/vim-surround`
-- to delete/change/add parentheses/quotes/XML-tags/much more with ease
-- markdown:
-    - **bold**: use 2 times surround with `*`
+- to delete/change/add parentheses/quotes/XML-tags
 
 `nvim-cmp`
 - settings: see `cmp.setup` in `init.lua`
@@ -441,6 +455,10 @@ See `~/.config/nvim/`.
 ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item(), {'i','c'}),
 ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item(), {'i','c'}),
 ```
+
+`nvim-tree/nvim-tree.lua`
+- [doc](https://docs.rockylinux.org/books/nvchad/nvchad_ui/nvimtree/)
+- press `g ?` to show all shortcuts
 
 ## Syntax Highlighting
 
