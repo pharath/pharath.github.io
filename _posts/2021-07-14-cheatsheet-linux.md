@@ -55,14 +55,6 @@ docker |
 
 <hr>
 
-retext markdown_file.md	|			edit markdown_file.md
-retext —preview markdown_file.md |		preview markdown_file.md
-|**Tipp:**| Shortcuts: s. Menu -> File und Edit
-ctrl + e |								preview on/off
-ctrl + l |								live preview on/off (die live updates brauchen manchmal bisschen)
-
-<hr>
-
 eog	|			picture viewer (shortcuts: https://help.gnome.org/users/eog/stable/index.html.en)
 
 <hr>
@@ -72,7 +64,7 @@ pinta	|		picture editor (shortcuts: https://www.pinta-project.com/user-guide/sho
 <hr>
 
 gedit |			texteditor
-zum Lesen:	| unter F10/Preferences/Font & Colors/ Font ändern zu “TeX Gyre Termes Math Regular”
+zum Lesen:	| unter F10/Preferences/Font & Colors/ Font ändern zu "TeX Gyre Termes Math Regular"
 ctrl + h	|		find and replace (halte im “Find & Replace”-Fenster `alt` gedrückt für schnelle Auswahl der Optionen)
 F10	|			menu (u.a. Shortcuts)
 F1	|			help, Shortcut overview
@@ -83,8 +75,8 @@ kazam |			screen recorder
 
 <hr>
 
-joplin |			Notes
-alt + entsprechende Taste im menu |				im Menu stehen alle Shortcuts !
+joplin | Notes
+alt + entsprechende Taste im menu | im Menu stehen alle Shortcuts !
 ctrl + l |			change view (editor/markdown viewer/both)
 F10	|			show all notebooks sidebar
 F11	|			show all Notes sidebar
@@ -905,5 +897,22 @@ Rsync patterns: [stackexchange](https://unix.stackexchange.com/a/2503)
 
 # tree
 
-tree -H ./ > result.html | save directory tree to file 
-firefox ./result.html | view html tree created by `tree` command
+| command | description |
+| :--- | :--- |
+`tree -H ./ > result.html` | save directory tree to file 
+`firefox ./result.html` | view html tree created by `tree` command
+
+# Markdown
+
+## retext
+
+**Note**: Install the old `markdown` package version `python3.8 -m pip install markdown==3.2` first.
+
+| command | description |
+| :--- | :--- |
+`retext markdown_file.md` | edit markdown_file.md
+`retext --preview markdown_file.md` | preview `markdown_file.md`
+|**Tipp:**| Shortcuts: s. Menu &rarr; File und Edit
+ctrl + e | preview on/off
+ctrl + l | live preview on/off (die live updates brauchen manchmal bisschen)
+
