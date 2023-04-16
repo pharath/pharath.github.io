@@ -23,7 +23,7 @@ tags:
 - 'rip-rip/clang_complete' (install: see [below](#install-autocomplete-clang_complete))
 - for `junegunn/fzf`: when this plugin asks for downloading the executable, confirm with "y"
 
-```bash
+```vim
 " braket Plugins
 
 Plugin 'NLKNguyen/papercolor-theme'
@@ -79,6 +79,7 @@ Plugin 'christoomey/vim-system-copy'
 `:h i_CTRL-R` | lookup meaning of CTRL-R in insert mode (deshalb das `i_` prefix; `v_` prefix für visual mode usw. s. Tabelle unten drunter)
 `:h :u`	| Manual zu `:u` Befehl (im Manual kann man zB via Befehl `:v` zu dem `:v` springen; Ganz oben im Manual steht wie man im Manual navigiert)
 `:h key-notation` | vim key notation
+`:map`, `:nmap`, `:vmap`, `:imap` | list all keymaps
 
 ![Screenshot_table](https://i.ibb.co/jw1X1nH/Screen-Shot-2021-06-10-at-3-51-04-AM-2.png)
 
@@ -165,18 +166,18 @@ ctrl+w capital N | in terminal mode: enable scrolling (move around with cursor) 
 
 | command | description |
 | :--- | :--- |
-|:set filetype=cmake | wenn Syntax nicht automatisch aktiviert wird, diesen Befehl ausführen
-|:scriptnames | To find out which files Vim has actually loaded. Generally, only the last one listed is "active", and even it may not be if you've turned syntax highlighting off. 
-|:echo b:current_syntax | To see the syntax currently in effect. 
-|:syntax list | To see the syntax items currently in effect. This may help if syntax items from more than one syntax file are in effect.
-|:setlocal syntax? | The syntax for the current buffer can be queried via this command. It usually (but not necessarily) corresponds to the buffer's filetype (`:setlocal filetype?`).
+|`:set filetype=cmake` | wenn Syntax nicht automatisch aktiviert wird, diesen Befehl ausführen
+|`:scriptnames` | To find out which files Vim has actually loaded. Generally, only the last one listed is "active", and even it may not be if you've turned syntax highlighting off. 
+|`:echo b:current_syntax` | To see the syntax currently in effect. 
+|`:syntax list` | To see the syntax items currently in effect. This may help if syntax items from more than one syntax file are in effect.
+|`:setlocal syntax?` | The syntax for the current buffer can be queried via this command. It usually (but not necessarily) corresponds to the buffer's filetype (`:setlocal filetype?`).
 
 ## Vim Sessions
 
 | command | description |
 | :--- | :--- |
-:mks ~/.vim-sessions/some-project-session.vim | save vim session
-:so ~/.vim-sessions/some-project-session.vim | restore vim session
+`:mks ~/.vim-sessions/some-project-session.vim` | save vim session
+`:so ~/.vim-sessions/some-project-session.vim` | restore vim session
 
 ## Tabs
 
@@ -421,11 +422,24 @@ mkdir $HOME/.cfg/
 git clone --bare https://github.com/pharath/dotfiles.git $HOME/.cfg/
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 config checkout   # before running this command, remove all the existing dotfiles that would be overwritten otherwise
+config config core.excludesFile '~/.gitignore'
 ```
 
-This is a modified version of `https://github.com/nvim-lua/kickstart.nvim`.
+**Note**: `~/.config/nvim/` is a modified version of `https://github.com/nvim-lua/kickstart.nvim`.
 
-See `~/.config/nvim/`.
+Finally, in neovim run:
+```bash
+:CocInstall coc-prettier
+```
+
+Install ripgrep on Ubuntu: 
+- e.g. for ripgrep 13.0.0 run:
+```bash
+$ curl -LO https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_13.0.0_amd64.deb
+$ sudo dpkg -i ripgrep_13.0.0_amd64.deb
+```
+
+For more details see `~/.config/nvim/` (which is in the git repository).
 
 ## Font
 
@@ -447,6 +461,7 @@ In the Ubuntu terminal profile settings set `Hack Nerd Font Regular` as the term
 
 `tpope/vim-surround`
 - to delete/change/add parentheses/quotes/XML-tags
+- `ysiw"`: surround the word under the cursor with `"` (without selecting this word)
 
 `nvim-cmp`
 - settings: see `cmp.setup` in `init.lua`
@@ -537,9 +552,15 @@ require('nvim-treesitter.configs').setup {
 
 ### coc.nvim
 
+Nodejs extension host for vim and neovim, load extensions like VSCode and host language servers.
+
 [doc: coc.nvim](https://github.com/neoclide/coc.nvim)
 
 ### coc-prettier
+
+Prerequisites: Install the `coc.nvim` plugin in neovim.
+
+Install: Run `:CocInstall coc-prettier`.
 
 [doc: coc-prettier](https://github.com/neoclide/coc-prettier)
 
@@ -569,10 +590,4 @@ and
 ```vim
 161 hi def link markdownLatexDelimiter        markdownLatex
 ```
-
-## Copy, Paste
-
-### Using Vim Registers
-
-Use `"+y` to copy the selection to the system clipboard.
 

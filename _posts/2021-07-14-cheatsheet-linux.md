@@ -487,6 +487,7 @@ newgrp docker |			log out and log back in so that group membership is re-evaluat
 | command | description |
 | :--- | :--- |
 ctrl + w | delete the word in front of the cursor
+esc + backspace | delete a part of a path in front of the cursor (e.g. to get from `this/is/some/path` to `this/is/some/`)
 alt + d | delete the word after the cursor
 ctrl + a | jump to the beginning of the line
 ctrl + e | jump to the end of the line
@@ -501,7 +502,7 @@ echo Variable | display content of the variable "Variable"
 printenv | Print the values of the specified environment VARIABLE(s).
 echo $$ | display PID of current shell
 bash | start new bash shell instance in current bash shell (the new shell will have a different PID than the old one, check shell PID via `echo $$`)
-exec > some_file | redirect all shell output to some_file
+`exec > some_file` | redirect all shell output to `some_file`
 cat /etc/shells | list all shells
 chsh | change shell (you will be prompted to enter one of the shells in `cat /etc/shells`)
 
@@ -509,8 +510,8 @@ chsh | change shell (you will be prompted to enter one of the shells in `cat /et
 
 | command | description |
 | :--- | :--- |
-do_something1 && do_something2_that_depended_on_something1 | only run "something2", if "something1" completes successfully
-do_something1; do_something2 | run "something2" irrespective of "something1"
+`do_something1 && do_something2_that_depended_on_something1` | only run "something2", if "something1" completes successfully
+`do_something1; do_something2` | run "something2" irrespective of "something1"
 
 ### PATH Variable
 	

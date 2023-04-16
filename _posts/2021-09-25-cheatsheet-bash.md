@@ -24,6 +24,15 @@ When a text file with a shebang is used as if it is an executable in a Unix-like
 
 The **shebang line** is usually **ignored by the interpreter**, because the "`#`" character is a **comment marker** in many scripting languages; some language interpreters that do not use the hash mark to begin comments still may ignore the shebang line in recognition of its purpose.
 
+# Command Substitution
+
+Syntax: `$(command substitution)`
+
+Nested Variables:
+```bash
+DIRNAME="$(dirname "$FILE")"
+```
+
 # No-op Command
 
 Colon: `:`

@@ -1,5 +1,5 @@
 ---
-title: "Markdown Syntax Cheatsheet"
+title: "Markdown Cheatsheet"
 read_time: false
 toc: true
 toc_label: "Contents"
@@ -12,11 +12,13 @@ tags:
 
 ---
 
-## Latex
+## Latex in vim
 
 - vim italics issue (because Latex uses underscores):
     - vim will **display** italic text **as italics** as long as the environment variable `TERM` is set to `xterm-256color` (looks ugly!)
     - if `TERM` is not set to anything, vim will **highlight** the italic text (looks even more ugly!)
+
+- **solution**: see [here]({% post_url 2021-07-05-cheatsheet-vim %}#latex)
 
 ## Syntax Highlighting
 

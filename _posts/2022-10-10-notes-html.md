@@ -17,6 +17,12 @@ tags:
 
 ---
 
+# Terminology
+
+- **Markup language**: a text-encoding system consisting of a set of symbols inserted in a text document to control its structure, formatting, or the relationship between its parts. [Wikipedia](https://en.wikipedia.org/wiki/Markup_language)
+    - Markup is often used to control the display of the document or to enrich its content to facilitating automated processing.
+    - e.g. HTML (HyperText Markup Language), TeX, LaTeX, XML
+
 # Jekyll
 
 Jekyll is written in Ruby.
@@ -57,12 +63,6 @@ cd myblog
 bundle exec jekyll serve
 ```
 
-## Latex
-
-$$\LaTeX$$
-
-Just a sample algorithmn
-
 ## Linking to posts
 
 see [Jekyll documentation](https://jekyllrb.com/docs/liquid/tags/#linking-to-posts)
@@ -81,6 +81,13 @@ Liquid Exception: Liquid syntax error (line 194): Variable 'double-{-without-whi
              Error: Run jekyll build --trace for more information.
 ```
 - do **not** use \{\{, use \{ \{, i.e. there **must** be a whitespace between the two curly brackets!
+
+# `<p>` tag
+
+Attributes: 
+- id: `<p id="demo"></p>`, [explained]( https://www.dofactory.com/html/p/id )
+    - assigns an identifier to the paragraph.
+    - The identifier must be unique across the page.
 
 # Anchor Points
 
@@ -103,3 +110,11 @@ Note that prior to HTML5, the name attribute was used in the anchor tag, but is 
 	</svg>
 </a>
 ```
+
+# iframe
+
+An inline frame (iframe) is a HTML element that loads another HTML page within the document. It essentially puts another webpage within the parent page. They are commonly used for advertisements, embedded videos, web analytics and interactive content. [source](https://www.techtarget.com/whatis/definition/IFrame-Inline-Frame)
+
+"`<iframe>` tag specifies an inline frame. An inline frame is used to embed another document within the current HTML document." [w3schools](https://www.w3schools.com/tags/tag_iframe.ASP)
+
+

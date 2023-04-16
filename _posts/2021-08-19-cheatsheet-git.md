@@ -19,6 +19,11 @@ tags:
 
 **remote** = remote-repository (e.g. in `git push *remote* *branch*`)
 **PAT** = Personal Access Token (see [youtube: PATs and their scopes](https://www.youtube.com/watch?v=SzrETQdGzBM&t=49s))
+**index** = Staging Directory (`.index/`) (see [explanation](https://www.javatpoint.com/git-index))
+    - There are three places in Git where file changes can reside, and these are 
+        - working directory, 
+        - staging area, 
+        - the repository.
 
 # Basics
 
@@ -101,6 +106,16 @@ tags:
 - `git remote update` will update all of your branches set to track remote ones, but not merge any changes in.
 - `git fetch` will update only the branch you're on, but not merge any changes in.
 - `git pull` will update and merge any remote changes of the current branch you're on. This would be the one you use to update a local branch.
+
+## .gitignore
+
+[source](https://git-scm.com/docs/gitignore)
+
+Git normally checks `gitignore` patterns from multiple sources, with the following order of precedence, from highest to lowest 
+- Patterns read from the command line
+- Patterns read from a `.gitignore` file
+- Patterns read from `$GIT_DIR/info/exclude`
+- Patterns read from the file specified by the configuration variable `core.excludesFile`
 
 # Reset/undo changes
 
@@ -327,10 +342,11 @@ git difftool -y master..dev /path/to/file
 
 The `-y` flag automatically confirms the prompt to open the diff in the editor. Use `git config --global difftool.prompt false` to turn off these prompts.
 
-## Compare files on disk
+## Compare files on disk, `--no-index`
 
 ```bash
 git diff origin/exercise/4_ros_node_cpp..origin/solution/4_ros_node_cpp
+
 # compare two arbitrary files on disk
 git diff --no-index file1.txt file2.txt
 ```
@@ -356,6 +372,14 @@ git diff HEAD^ HEAD
 
 # Syntax: git diff COMMIT~ COMMIT (vergleicht COMMIT mit dessen ancestor)
 git diff 2326473e602be4b90b46f6b6afc7315ff1d09a17~ 2326473e602be4b90b46f6b6afc7315ff1d09a17
+```
+
+## Compare two different files between different commits
+
+[stackoverflow](https://stackoverflow.com/a/16683184)
+
+```bash
+git diff HEAD:full/path/to/foo HEAD~:full/path/to/bar
 ```
 
 # Git Credential Helper, Storing Git Passwords
@@ -447,6 +471,20 @@ git push origin HEAD:main
 1. `git submodule init`
 2. `git submodule update --progress`
     - use `--progress` to display a cloning progress report
+
+# git gc
+
+Generally speaking you shouldn't be running garbage collection manually. It is a bad habit to get into and git does garbage collection when needed anyways. [stackoverflow comment under an answer](https://stackoverflow.com/a/18515113)
+
+## Dangling Objects
+
+Run `git fsck` in your repo to see all dangling objects.
+
+**Types** of dangling objects ( [stackoverflow](https://stackoverflow.com/a/22226373) ):
+- **Dangling blob** = A change that made it to the staging area/index, but never got committed. One thing that is amazing with Git is that once it gets added to the staging area, you can always get it back because these blobs behave like commits in that they have a hash too!!
+- **Dangling commit** = A commit that isn't directly linked to by any child commit, branch, tag or other reference. You can get these back too!
+
+E.g. if you run `git add .` and it takes very long, so that you have to press `ctrl + c` and run `git reset`, then there will be many **dangling blobs** after running this `git reset`.
 
 # Troubleshooting/Errors
 
