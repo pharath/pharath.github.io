@@ -80,6 +80,7 @@ Plugin 'christoomey/vim-system-copy'
 `:h :u`	| Manual zu `:u` Befehl (im Manual kann man zB via Befehl `:v` zu dem `:v` springen; Ganz oben im Manual steht wie man im Manual navigiert)
 `:h key-notation` | vim key notation
 `:map`, `:nmap`, `:vmap`, `:imap` | list all keymaps
+`:map <someKey>`, `:nmap <someKey>` | list all keymaps with `<someKey>`
 
 ![Screenshot_table](https://i.ibb.co/jw1X1nH/Screen-Shot-2021-06-10-at-3-51-04-AM-2.png)
 
@@ -88,8 +89,12 @@ Plugin 'christoomey/vim-system-copy'
 `:h Q_<tab>` |
 :h quickref	| und dann eg `_sc` um auf `Q_sc` tag zu springen
 ctrl + ] (während cursor auf einem tag)	|		springe zu selected tag
-/pattern |	zB `/^i` springt zur nächsten Zeile, die mit i anfängt
+`/pattern` |	zB `/^i` springt zur nächsten Zeile, die mit i anfängt
 ctrl + e, d, y, u |
+`:h coc-nvim.txt` | 
+`:h telescope.<tab>` |
+`:h lsp<tab>` |
+`:h comment.config` |
 
 # regex/regexp
 
@@ -107,7 +112,8 @@ Use [regexr.com](https://regexr.com/) to ...
 | :--- | :--- |
 `^`	| vim: jump to the first non-blank character of the line; regexp: beginning of line ( praktisch für netrw: zB für jump to nächstem Ordner der mit "i" anfängt: /^i )
 `\n` oder `\r` | linebreak (man kann damit auch linebreaks suchen und mit einem whitespace (ie einfach 1x Leertaste) ersetzen)
-`:%s/pattern/replace/g`	| find pattern (regexp) and replace with replace (Achtung: Sonderzeichen (eg. Klammern, Punkt, ...) muss ein `\` vorangestellt werden! [The basic construct of the command is `s#search#replace#`. Sometimes you see it as `s///`. The `%` before the `s` tells the regex to work on all lines in the vim buffer, not just the current. The space followed by `\+` matches one or more spaces. The trailing `g` tells the regex to match multiple times in a single line.]
+`:%s/pattern/replace/g`	| find pattern (regexp) and replace with replace. The basic construct of the command is `s#search#replace#`. `%`: tells the regex to work on **all lines** in the vim buffer. `g`: match multiple times in a single line. **Achtung**: Sonderzeichen (eg. Klammern, Punkt, ...) muss ein `\` vorangestellt werden!
+`:s///` | find and replace **just on the current line**. 
 `:%s/  /    /g`	| replace two spaces with four spaces
 `:g/pattern/d` | remove all lines containing "pattern"
 `^\R`  | blank line (exact empty line)
@@ -297,21 +303,26 @@ gx | in visual mode: open the (manually) selected URL/link in Firefox
 
 | command | description |
 | :--- | :--- |
-v	|			markieren
-Shift + v	|		Zeile markieren
+v	|			select
+Shift + v	|		select line
 x	|			cut
 p		|		paste
 :r !xsel | paste from clipboard
 o	|			insert new line below
-d w|				delete (=cut) to the start of next word
+d w     |			delete (=cut) to the start of next word
 d i w		|		delete (=cut) current word
-5 d w		|	delete (=cut) next 5 words
+d 3 i w		|		delete (=cut) next 3 `iw` objects ("space" also counts as an object!)
+d 3 a w         |               delete (=cut) next 3 `aw` objects ("space" does **not** count as an object!)
+5 d w		|	        delete (=cut) next 5 words
 d d	|			delete (=cut) current line
 d %	|			delete (=cut) betw matching brackets `{}`, `[]`, `()`
 d i (   |                       delete (=cut) betw matching brackets `()`, see [stackoverflow](https://stackoverflow.com/a/405450)
 d $	|			delete (=cut) to end of line
+y l     |                       yank the symbol under the cursor
 y w	|			yank to the start of next word
 y i w		|		yank current word
+y 3 i w		|		yank next 3 `iw` objects ("space" also counts as an object!)
+y 3 a w		|		yank next 3 `aw` objects ("space" does **not** count as an object!)
 y y	|			yank current line
 y %		|		yank to the matching character (useful to copy text betw matching brackets {}, [], () )
 `> >`		|		indent (in Insert mode: ctrl + t)
@@ -405,6 +416,10 @@ Press CTRL + S to freeze vim and press CTRL + Q to unfreeze.
 
 # Neovim
 
+## Opinion
+
+- [vim9script problem](https://www.youtube.com/watch?v=p0Q3oDY9A5s&t=172s)
+
 ## Install
 
 Install the Debian package `nvim-linux64.deb` from `https://github.com/neovim/neovim/releases`:
@@ -430,6 +445,19 @@ config config core.excludesFile '~/.gitignore'
 Finally, in neovim run:
 ```bash
 :CocInstall coc-prettier
+
+# For coc-tsserver (javascript, jsx, TypeScript, etc):
+# Note: this will give 2 hover popups because nvim kickstart already has a TypeScript LSP
+#
+# coc lsp vs native lsp: 
+# reddit: https://www.reddit.com/r/neovim/comments/rr6npy/question_coc_vs_lsp_whats_exactly_the_difference/
+# chris@machine: https://www.youtube.com/watch?v=190HoB0pVro&t=22s
+
+# :CocInstall coc-json   # required for :CocConfig
+# :CocConfig
+# # :CocConfig will open "coc-settings.json", look if "suggest.completionItemKindLabels" is set
+# # (if not copy https://www.chiarulli.me/Neovim/26-lsp-symbols/)
+# :CocInstall coc-tsserver
 ```
 
 Install ripgrep on Ubuntu: 

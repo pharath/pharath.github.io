@@ -18,6 +18,20 @@ toc_label: "Contents"
 - [purpose of configure scripts](https://en.wikipedia.org/wiki/Configure_script)
 - [check "failed" warnings](https://github.com/edenhill/librdkafka/issues/370#issuecomment-142095337)
 
+## Workflow
+
+```bash
+mkdir build/
+cd build/
+``` 
+Then 
+- run `../configure`,
+- check in the output which dependencies are missing,
+- if `libXYZ` is missing, install `sudo apt install libXYZ libXYZ-dev` (`libXYZ-dev` is necessary for the headers)
+- run `../configure` again
+- check in the output which dependencies are missing now,
+- ... etc., until `../configure` finishes without errors
+
 # gcc, g++
 
 ## Flags
@@ -318,3 +332,10 @@ The `package.xml` must contain all **dependencies** and a bit of **metadata**
 ### `CMakeLists.txt` in `ament_cmake`
 
 The `CMakeLists.txt` contains the commands to build package **executables** and **libraries**.
+
+# Autotools
+
+Before running `../configure` run
+```bash
+autoreconf -i
+```

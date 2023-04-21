@@ -87,6 +87,26 @@ npm init docusaurus@latest
 
 E.g. the [create-react-app doc](https://create-react-app.dev/) was built using Docusaurus (see [source code on github](https://github.com/facebook/create-react-app/tree/main/docusaurus)).
 
+# setState()
+
+[doc with examples](https://legacy.reactjs.org/docs/state-and-lifecycle.html#using-state-correctly)
+
+[doc](https://react.dev/reference/react/Component#setstate)
+
+3 things you should know about `setState()`
+
+From [doc with examples](https://legacy.reactjs.org/docs/state-and-lifecycle.html#using-state-correctly):
+1. Do not modify state directly
+  - use [spread]({% post_url 2023-03-23-notes-js.md %}#spread) for copying arrays
+  - [read](https://legacy.reactjs.org/docs/state-and-lifecycle.html#do-not-modify-state-directly)
+  - "The only place where you can assign `this.state` is the constructor."
+    - if you assign it somewhere else, the component will not re-render
+2. State updates may be asynchronous
+  - React may **batch** multiple `setState()` calls into a single update for performance.
+  - Because `this.props` and `this.state` may be updated asynchronously, you should **not** rely on their values for calculating the next state.
+3. State updates are **merged**
+  - `setState()` merges the **specified** new variables into the current state and **does not modify the not-specified variables**
+
 # Hooks
 
 - since React 16
@@ -134,6 +154,78 @@ E.g. the [create-react-app doc](https://create-react-app.dev/) was built using D
   - **the data** for the action. 
   - Inside the reducer, you can then update the total based on the action.
 
+# Basics
+
+## Lists and Keys
+
+In JavaScript:
+```js
+const numbers = [1, 2, 3, 4, 5];
+const doubled = numbers.map((number) => number * 2);
+console.log(doubled);
+```
+
+The same in React:
+```jsx
+const numbers = [1, 2, 3, 4, 5];
+const listItems = numbers.map((numbers) =>
+  <li>{numbers}</li>
+);
+
+const root = ReactDOM.createRoot(document.getElementById('root')); 
+root.render(<ul>{listItems}</ul>);
+```
+
+Render this inside a React component:
+```jsx
+function NumberList(props) {
+  const numbers = props.numbers;
+  const listItems = numbers.map((number) =>
+    <li>{number}</li>  
+  );
+  return (
+    <ul>{listItems}</ul>  
+  );
+}
+
+const numbers = [1, 2, 3, 4, 5];
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<NumberList numbers={numbers} />);
+```
+
+This will give a warning that a `key` should be provided for list items.
+
+Add a `key`:
+```jsx
+function NumberList(props) {
+  const numbers = props.numbers;
+  const listItems = numbers.map((number) =>
+    <li key={number.toString()}>
+      {number}
+    </li>
+  );
+  return (
+    <ul>{listItems}</ul>
+  );
+}
+```
+
+[Best Practices for keys](https://legacy.reactjs.org/docs/lists-and-keys.html#keys).
+- "We don't recommend using **indexes** for keys if the order of items may change. This can negatively impact performance and may cause issues with component state."
+
+# JSX
+
+AKA **JavaScript Syntax Extension**, (**JavaScript XML**)
+- looks like HTML
+- **React components** are typically written using JSX (but can also be written in pure JavaScript)
+  - JSX provides a way to **structure component rendering**
+- JSX is created by Meta (formerly Facebook). 
+- **XHP**: JSX is similar to another extension syntax created by Meta for PHP called XHP. 
+
+## Using JavaScript inside of JSX
+
+- wrap the code in curly braces
+
 # Redux
 
 - a method of state management
@@ -148,3 +240,14 @@ E.g. the [create-react-app doc](https://create-react-app.dev/) was built using D
 - minimize the different pieces of state by only saving related data in one place
   - In other words, try to avoid double references to the same data
 
+# Performance
+
+## Lazy Loading
+
+From [Wiki](https://en.wikipedia.org/wiki/Lazy_loading):
+- also known as **asynchronous loading**
+- a **design pattern** commonly used in computer programming and **mostly in web design and development** to defer initialization of an object until the point at which it is needed. 
+- It can contribute to efficiency in the program's operation if properly and appropriately used. 
+- This makes it ideal in use cases where network content is accessed and initialization times are to be kept at a minimum, such as in the case of **web pages**. 
+  - For **example**, deferring loading of images on a web page until they are needed can make the initial display of the web page faster. 
+- The opposite of lazy loading is **eager loading**.

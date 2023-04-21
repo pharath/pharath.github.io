@@ -109,6 +109,12 @@ CriticalPowerAction=HybridSleep
 
 # Gnome Shell
 
+## Extensions
+
+[extensions.gnome.org](https://extensions.gnome.org/)
+
+Here you can manage all extensions installed on your machine.
+
 ## Launch new instance when there is no instance open ON CURRENT WORKSPACE
 
 E.g. if a `gedit` instance is already open on some workspace, if you open a new instance, Ubuntu will always switch to that workspace first before opening the new instance which is presumably not what you want.
@@ -291,6 +297,44 @@ aplay `/tmp/test-mic.wav`
 
 - caused by 50Hz vs 60Hz powerline frequency differences (see [source](https://blog.christophersmart.com/2017/02/07/fixing-webcam-flicker-in-linux-with-udev/))
     - **solution**: try `v4l2-ctl --set-ctrl power_line_frequency=0` or `v4l2-ctl --set-ctrl power_line_frequency=1`
+
+# rofi
+
+## Install
+
+Follow the steps in [autotools](https://github.com/davatorium/rofi/blob/master/INSTALL.md#autotools) and [checkout](https://github.com/davatorium/rofi/blob/master/INSTALL.md#install-a-checkout-from-git).
+ 
+```bash
+git clone --recursive https://github.com/DaveDavenport/rofi
+cd rofi
+git checkout tags/1.7.5
+autoreconf -i
+mkdir build
+cd build/
+# run this multiple times to check which dependencies are missing until 
+# you have installed all missing dependencies
+../configure --disable-check
+make
+sudo make install
+```
+
+Select `sidebar by Qball` theme with "Rofi Theme Selector" (type "Rofi Theme Selector" in Ubuntu "Activities overview").
+
+`sudo nvim /usr/local/share/rofi/themes/sidebar.rasi` and change
+```css
+window {
+    height:   100%;
+    //width: 30em;
+    width: 100%;
+    location: west;
+    anchor:   west;
+    border:  0px 2px 0px 0px;
+    text-color: @lightwhite;
+}
+```
+
+In Ubuntu Settings create a new Shortcut (press `'+'` button at the bottom to create a custom shortcut): 
+- bind `super + b` to command `rofi -show bookmarksTree`.
 
 # PDF Reader
 

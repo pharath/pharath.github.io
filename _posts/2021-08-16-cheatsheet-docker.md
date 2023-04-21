@@ -11,6 +11,66 @@ tags:
   - notes
 ---
 
+# Docker Hub
+
+## Limits
+
+- There's now a *rate limit* for pulling images from Docker Hub (unauthenticated users: 100 pulls per 6 hours, logged in users with free account: 200 pulls for the same period and paid accounts aren't limited).
+- **Starting 1-Nov-2020** there's now a *retention limit* for container images hosted on free Docker Hub accounts. When an image didn't receive any activity (i.e. a pull) for 6 months it will get automatically deleted.
+
+**Update 29-Oct-2020**: Docker have just announced that the retention limit part will be delayed until mid 2021. So for now inactive images on Docker Hub won't get deleted automatically. (The rate limit part will be in effect starting 2-Nov-2020 though).
+
+## API
+
+### Examples
+
+Set the username, password (and organization) and run the following script:
+
+```bash
+#!/bin/bash
+
+# Example for the Docker Hub V2 API
+# Returns all images and tags associated with a Docker Hub organization account.
+# Requires 'jq': https://stedolan.github.io/jq/
+
+# set username, password, and organization
+UNAME="blackteamatters"
+UPASS=""
+ORG=""
+
+# -------
+
+set -e
+echo
+
+# get token
+echo "Retrieving token ..."
+TOKEN=$(curl -s -H "Content-Type: application/json" -X POST -d '{"username": "'${UNAME}'", "password": "'${UPASS}'"}' https://hub.docker.com/v2/users/login/ | jq -r .token)
+
+# get list of repositories
+echo "Retrieving repository list ..."
+# for an organization
+#REPO_LIST=$(curl -s -H "Authorization: JWT ${TOKEN}" https://hub.docker.com/v2/repositories/${ORG}/?page_size=100 | jq -r '.results|.[]|.name')
+# for a user
+curl -s -H "Authorization: JWT ${TOKEN}" https://hub.docker.com/v2/repositories/${UNAME}/?page_size=100 | jq -r '.results|.[]|.name'
+
+## output images & tags
+#echo
+#echo "Images and tags for organization: ${ORG}"
+#echo
+#for i in ${REPO_LIST}
+#do
+#  echo "${i}:"
+#  # tags
+#  IMAGE_TAGS=$(curl -s -H "Authorization: JWT ${TOKEN}" https://hub.docker.com/v2/repositories/${ORG}/${i}/tags/?page_size=100 | jq -r '.results|.[]|.name')
+#  for j in ${IMAGE_TAGS}
+#  do
+#    echo "  - ${j}"
+#  done
+#  echo
+#done
+```
+
 # docker
 
 ## Compare images using `docker history`
@@ -26,30 +86,58 @@ vimdiff hist_tag-1.txt hist_tag-2.txt
 ## Location on System
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 sudo ls /var/lib/docker/overlay2 | hier ist der Großteil aller docker image Daten
 sudo du -sh $(ls /var/lib/docker/) | list size of all files and dirs in /var/lib/docker/
 
 ## X11 Forwarding
 
-| :---: | :---: |
+| :--- | :--- |
 xhost + | enable GUI for docker
 xhost +local:root |	enable GUI for docker
 
 ## docker login
 
-| :---: | :---: |
+| :--- | :--- |
 docker login registry.git.rwth-aachen.de | do not forget to logout !
 docker pull |
 
+About `docker login`:
+
+From [stackoverflow](https://stackoverflow.com/a/36023944):
+An `auths` entry/node is added to the `~/.docker/config.json` file (this also works for private registries) after you succesfully login:
+
+```json
+{
+    "auths": {
+            "https://index.docker.io/v1/": {}
+    },
+    ...
+```
+
+When logging out, this entry is then removed:
+
+```bash
+$ docker logout
+Removing login credentials for https://index.docker.io/v1/
+```
+
+Content of docker `config.json` after:
+
+```json
+{
+    "auths": {},
+    ...
+```
+
 ## docker logout
 
-| :---: | :---: |
+| :--- | :--- |
 docker logout registry.git.rwth-aachen.de | 
 
 ## Images/Storage Info
 
-| :---: | :---: |
+| :--- | :--- |
 sudo docker ps -a | -a flag: Show all containers (default shows just running)
 sudo docker images | show all images
 sudo docker system df | Show docker disk usage (size of all images together)
@@ -62,21 +150,21 @@ See
 
 ## docker commit
 
-| :---: | :---: |
+| :--- | :--- |
 `sudo docker commit 308aeb468339 tensorflow/tensorflow:latest-gpu-jupyter_braket` | [Schritte](https://stackoverflow.com/a/64532554), i.e. `docker commit CONTAINER_ID NEW_IMAGE_NAME`
 `docker commit -m "added test file" eloquent_lehmann` | commit with commit message
 `docker history <image hash>` | view commit messages
 
 ## remove
 
-| :---: | :---: |
+| :--- | :--- |
 sudo docker image rm 1ff0175b5104 | remove image with id 1ff0175b5104 
 sudo docker rmi 1ff0175b5104 | alias for `docker image rm` [source](https://stackoverflow.com/a/63035352), see also [doc](http://manpages.ubuntu.com/manpages/bionic/man1/docker-rmi.1.html)
 sudo docker rmi "image with more than 1 tag" | If your image is tagged with more than one tag, then `docker rmi` will remove the tag, but not the image.
 
 ## container
 
-| :---: | :---: |
+| :--- | :--- |
 sudo docker container ls -a |
 docker container inspect container_id | zeige container info (u.a. **Bindings** [= Ordner, deren Inhalte host und container sharen])
 sudo docker container stop 1ff0175b5104 | stoppt den container nur (dh. container Status: "Exited"), aber `docker ps -a` zeigt den container noch!
@@ -85,7 +173,7 @@ sudo docker container kill 1ff0175b5104 | killt den container (Unterschied zu `d
 
 ## run
 
-| :---: | :---: |
+| :--- | :--- |
 sudo docker run -d ... | start a container in detached mode [docs](https://docs.docker.com/engine/reference/run/#detached--d)
 sudo docker run --rm ... | Automatically remove the container when it exits
 docker run --name test -it *image_name* | This example runs a container named test using the image *image_name*. The `-it` instructs Docker to allocate a pseudo-TTY connected to the container's stdin; creating an interactive bash shell in the container.
@@ -94,22 +182,22 @@ docker run -e "TERM=xterm-256color" ... | enable color output in docker bash ter
 
 ## exec
 
-| :---: | :---: |
+| :--- | :--- |
 sudo docker exec -it 6b594d9d60cc bash | start bash in container 6b594d9d60cc 
 
 ## build
 
-| :---: | :---: |
+| :--- | :--- |
 sudo docker build --no-cache -t deep\_braket:v1 . | `-t`: REPO name and TAG name of image; `--no-cache`: [explanation](https://stackoverflow.com/a/35595021), ohne diesen flag wird Layer Caching benutzt (image updated die alte image-Version sozusagen nur und hat dependencies zur alten image-Version; die alte image-Version kann also nicht gelöscht werden!); `.`: location of Dockerfile
 
 ## builder
 
-| :---: | :---: |
+| :--- | :--- |
 docker builder prune | Remove build cache (phth: e.g. to free up space when using `docker compose` repeatedly) ([doc](https://docs.docker.com/engine/reference/commandline/builder_prune/))
 
 ## compose
 
-| :---: | :---: |
+| :--- | :--- |
 docker compose build *SomeServiceName* | Build or rebuild services ([doc](https://docs.docker.com/engine/reference/commandline/compose_build/))
 docker compose build *SomeServiceName* | Build or rebuild services ([doc](https://docs.docker.com/engine/reference/commandline/compose_build/))
 docker compose build --no-cache *SomeServiceName* | Do not use cache when building the image
@@ -145,25 +233,54 @@ services:
 
 ## top
 
-| :---: | :---: |
+| :--- | :--- |
 sudo docker top 6b594d9d60cc | see all processes (incl. pids) in container 6b594d9d60cc 
 
 ## attach/detach
 
-| :---: | :---: |
+| :--- | :--- |
 docker attach *double-tab* | attach to running container (double-tab shows names of running containers or use container id)
 ctrl-p ctrl-q | detach from container
 
 ## volume
 
-| :---: | :---: |
+| :--- | :--- |
 [docker volume overview](https://www.baeldung.com/ops/docker-volumes) | 
-docker volume create data_volume_name |
-docker volume ls |
-docker volume inspect volume_hash |
-docker volume rm data_volume_name | remove one or more volumes individually
-docker volume prune | remove all the unused volumes
-docker run -v data-volume:/var/opt/project bash:latest bash -c "ls /var/opt/project" | start a container with a volume using the -v option. The -v option contains three components, separated by colons: 1. Source directory or volume name, 2. Mount point within the container, 3. (Optional) *ro* if the mount is to be read-only
+`docker volume create data_volume_name` |
+`docker volume ls` |
+`docker volume inspect volume_hash` |
+`docker volume rm data_volume_name` | remove one or more volumes individually
+`docker volume prune` | remove all the unused volumes
+`docker run -v data-volume:/var/opt/project bash:latest bash -c "ls /var/opt/project"` | start a container with a volume using the -v option. The -v option contains three components, separated by colons: 1. Source directory or volume name, 2. Mount point within the container, 3. (Optional) *ro* if the mount is to be read-only
+
+## Store Images on an external hard disk
+
+**TODO**: `docker pull` fails with error: `failed to register layer: ApplyLayer exit status 1 stdout:  stderr: open /var/lib/dpkg/info/gcc-8-base:amd64.list: invalid argument` after running the following commands
+
+```bash
+$ sudo systemctl stop docker.service
+$ sudo systemctl stop docker.socket
+
+# Create the new location (e.g. on a hard disk)
+$ sudo mkdir -p "/media/bra-ket/Seagate Portable Drive/docker-data/"
+
+# Edit
+$ sudo nvim /lib/systemd/system/docker.service
+# Change
+ExecStart=/usr/bin/dockerd -H fd://
+# to (note: this was wrong in the post on linuxconfig.org)
+ExecStart=/usr/bin/dockerd --data-root="/media/bra-ket/Seagate Portable Drive/docker-data/" -H fd://
+
+# if you want to move existing images to the new location
+$ sudo rsync -aqxP /var/lib/docker/ /new/path/docker
+
+# Restart dockerd
+$ sudo systemctl daemon-reload
+$ sudo systemctl start docker
+
+# Check to make sure that the Docker service is utilizing the new directory location
+$ ps aux | grep -i docker | grep -v grep
+```
 
 ## Remove dangling images
 
@@ -171,14 +288,14 @@ docker run -v data-volume:/var/opt/project bash:latest bash -c "ls /var/opt/proj
 In `docker images` wird das alte image dann \<none\> genannt (sowohl REPOSITORY als auch TAG) [source](https://stackoverflow.com/a/40791752)
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 docker images --filter dangling=true | lists all images that are dangling and has no pointer to it
 docker rmi `` `docker images --filter dangling=true -q` `` | Removes all those images.
 
 ## Gitlab Container Registry
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 docker login registry.git.rwth-aachen.de | login to Container Registry
 docker image tag galaxis_simulation:phth-8 registry.git.rwth-aachen.de/pharath/gitlab_backups/galaxis_simulation:phth-8 | tag local image "galaxis_simulation:phth-8" (Note: the tag registry.git.rwth-aachen.de/pharath/gitlab_backups/galaxis_simulation:phth-8 must have this form!)
 docker tag galaxis_simulation:phth-8 registry.git.rwth-aachen.de/pharath/gitlab_backups/galaxis_simulation:phth-8 | see `docker image tag`

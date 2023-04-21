@@ -52,6 +52,17 @@ cmd + shift + t	| open recently closed tab
 cmd + shift + b | hide/show bookmarks toolbar
 alt + b (linux: ctrl + alt + b) | hide/show bookmark search plus pane
 ctrl + shift + m | show mobile version of website
+ctrl + u | view source
+ctrl + shift + k | web console
+ctrl + shift + j | [browser console](#browser-console) 
+
+## Browser Console
+
+[doc](https://firefox-source-docs.mozilla.org/devtools-user/browser_console/index.html)
+
+The Browser Console is like the Web Console, but applied to the **whole browser** rather than a single content tab.
+
+So it logs the same sorts of information as the Web Console - network requests, JavaScript, CSS, and security errors and warnings, and messages explicitly logged by JavaScript code. However, rather than logging this information for a single content tab, it logs information for **all** content tabs, for add-ons, and for the browser’s own code.
 
 # Addons
 

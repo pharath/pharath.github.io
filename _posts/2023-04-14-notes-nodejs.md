@@ -49,6 +49,22 @@ Node Package Manager.
 `npm Uninstall pkg` | Uninstall a package
 `npm init` | this tells npm to make a file in your folder called `package.json` that is going to help you organise these dependencies.
 
+### Semantic Versioning
+
+- [watch](https://www.youtube.com/watch?v=kK4Meix58R4)
+- [read](https://docs.npmjs.com/about-semantic-versioning)
+
+New package versions may contain different "**kinds of updates**"
+- "patch" 
+- "minor release" 
+- "major release"
+
+SemVer is a way to communicate
+- as a package **publisher**:
+  - to indicate **in the SemVer version number** which of the above "kinds of updates" the new published package version contains
+- as a package **user**:
+  - to limit **via the SemVer version number** which "kind of package updates" will be accepted when we update dependencies
+
 ## npx
 
 ```bash

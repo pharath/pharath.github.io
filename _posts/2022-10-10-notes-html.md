@@ -23,6 +23,21 @@ tags:
     - Markup is often used to control the display of the document or to enrich its content to facilitating automated processing.
     - e.g. HTML (HyperText Markup Language), TeX, LaTeX, XML
 
+# Tags
+
+[Description List](https://www.w3schools.com/tags/tag_dl.asp):
+- `<dl>`: description list
+- `<dt>`: description term/name
+- `<dd>`: description
+
+[Division](https://www.w3schools.com/tags/tag_div.ASP):
+- `<div>`: division
+- The `<div>` tag defines a division or a section in an HTML document.
+- The `<div>` tag is used as a container for HTML elements - which is then styled with CSS or manipulated with JavaScript.
+- The `<div>` tag is easily styled by using the class or id attribute.
+- Any sort of content can be put inside the `<div>` tag! 
+- **Note**: By default, browsers always place a line break before and after the `<div>` element.
+
 # Jekyll
 
 Jekyll is written in Ruby.
@@ -117,4 +132,25 @@ An inline frame (iframe) is a HTML element that loads another HTML page within t
 
 "`<iframe>` tag specifies an inline frame. An inline frame is used to embed another document within the current HTML document." [w3schools](https://www.w3schools.com/tags/tag_iframe.ASP)
 
+# Firefox bookmarks
 
+To indent firefox `.bookmarks` add this CSS style: 
+- note: the `<meta>` tags must come **after** the `<style>` tags
+  - otherwise the `Content-Security-Policy` (CSP) in the HTML head will prevent **all** CSS code in the HTML document from loading
+    - however, you can still allow some CSS code, see examples in [CSP: style-src](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/style-src)
+
+```html
+<head>
+  <style type="text/css">
+    dl dl {
+      margin-left:0.5in;
+      }
+  </style>
+  <meta>
+    ...
+  </meta>
+</head>
+<body>
+  ...
+</body>
+```
