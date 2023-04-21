@@ -31,6 +31,139 @@ Then
 - run `../configure` again
 - check in the output which dependencies are missing now,
 - ... etc., until `../configure` finishes without errors
+  - usually there will be some message like `Now type 'make' to build` at the end
+
+## Options
+
+Often `../configure` can be run with some flags.
+
+Example:
+```bash
+../configure --disable-check
+```
+- if the `check` package is a dependency (Can be disabled using the `--disable-check` configure flag) 
+  - `check` is used for **build-time tests** and does not affect functionality.
+
+## Example Output
+
+When all dependencies are met:
+```bash
+bra-ket@braket-pc:~/git/rofi/build$ ../configure --disable-check 
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking whether gcc understands -c and -o together... yes
+checking for flex... flex
+checking lex output file root... lex.yy
+checking lex library... -lfl
+checking whether yytext is a pointer... yes
+checking for bison... bison -y
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for egrep... /usr/bin/grep -E
+checking if bison is the parser generator... yes
+checking for a sed that does not truncate output... /usr/bin/sed
+checking for gawk... no
+checking for mawk... mawk
+checking for flex version... 2.6.4
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /usr/bin/mkdir -p
+checking whether make sets $(MAKE)... yes
+checking whether make supports the include directive... yes (GNU style)
+checking whether make supports nested variables... yes
+checking dependency style of gcc... gcc3
+checking whether make supports nested variables... (cached) yes
+checking whether we are using the GNU C compiler... (cached) yes
+checking whether gcc accepts -g... (cached) yes
+checking for gcc option to accept ISO C89... (cached) none needed
+checking whether gcc understands -c and -o together... (cached) yes
+checking for gcc option to accept ISO C99... none needed
+checking how to run the C preprocessor... gcc -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking minix/config.h usability... no
+checking minix/config.h presence... no
+checking for minix/config.h... no
+checking whether it is safe to define __EXTENSIONS__... yes
+checking for ranlib... ranlib
+checking for ar... ar
+checking the archiver (ar) interface... ar
+checking for getline... yes
+checking for open... yes
+checking for sysconf... yes
+checking for strtok_r... yes
+checking for flock... yes
+checking for ftruncate... yes
+checking for fcntl... yes
+checking for setlocale... yes
+checking for atexit... yes
+checking for glob... yes
+checking for readdir... yes
+checking math.h usability... yes
+checking math.h presence... yes
+checking for math.h... yes
+checking for library containing floor... -lm
+checking for library containing ceil... none required
+checking for library containing round... none required
+checking sysexits.h usability... yes
+checking sysexits.h presence... yes
+checking for sysexits.h... yes
+checking setjmp.h usability... yes
+checking setjmp.h presence... yes
+checking for setjmp.h... yes
+checking for pkg-config... /usr/bin/pkg-config
+checking pkg-config is at least version 0.9.0... yes
+checking for _NKUTILS_INTERNAL_XKBCOMMON... yes
+checking for _NKUTILS_INTERNAL_GIO... yes
+checking for _NKUTILS_INTERNAL_GOBJECT... yes
+checking for glib... yes
+checking for GW_XCB_INTERNAL... yes
+checking for stdlib.h... (cached) yes
+checking for pango... yes
+checking for cairo... yes
+checking for libsn... yes
+checking for gdkpixbuf... yes
+checking for pkg-config... (cached) /usr/bin/pkg-config
+checking pkg-config is at least version 0.16... yes
+checking for GLIB... yes
+checking for GLIB - version >= 2.0.0... yes (version 2.64.6)
+checking that generated files are newer than configure... done
+checking locale.h usability... yes
+checking locale.h presence... yes
+checking for locale.h... yes
+checking for _NKUTILS_INTERNAL_GLIB... yes
+checking for _NKUTILS_INTERNAL_TEST... yes
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating doc/rofi.doxy
+config.status: creating pkgconfig/rofi.pc
+config.status: creating config.h
+config.status: executing depfiles commands
+
+-------------------------------------
+Desktop File drun            Enabled
+Window switcher mode         Enabled
+Asan address sanitize        Disabled
+Code Coverage                Disabled
+Check based tests            Disabled
+-------------------------------------
+Now type 'make' to build
+
+```
 
 # gcc, g++
 

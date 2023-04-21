@@ -17,10 +17,10 @@ tags:
 
 # Plugins
 
-- 'VundleVim/Vundle.vim'
+- `VundleVim/Vundle.vim`
     - **install**: add `Plugin 'github_repo_name'` to `.vimrc`, `PluginInstall`
     - **uninstall**: remove `Plugin 'github_repo_name'` from `.vimrc`, `PluginUpdate`, restart vim, `PluginClean`
-- 'rip-rip/clang_complete' (install: see [below](#install-autocomplete-clang_complete))
+- `rip-rip/clang_complete` (install: see [below](#install-autocomplete-clang_complete))
 - for `junegunn/fzf`: when this plugin asks for downloading the executable, confirm with "y"
 
 ```vim
