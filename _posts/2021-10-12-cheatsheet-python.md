@@ -136,6 +136,19 @@ pip install -q,	--quiet | Give less output. Option is additive, and can be used 
 pip install pip-autoremove | utility to remove a package plus unused dependencies
 pip-autoremove *package* | remove a package plus unused dependencies (install `pip install pip-autoremove` first)
 
+
+# pipx
+
+- `pipx` relies on `pip` (and `venv`)
+
+## pipx vs npx
+
+- Both can run cli tools (`npx` will search for them in `node_modules`, and if not found run in a temporary environment. `pipx` run will search in `__pypackages__` and if not found run in a temporary environment)
+- `npx` works with JavaScript and `pipx` works with Python
+- Both tools attempt to make running executables written in a dynamic language (JS/Python) as easy as possible
+- `pipx` can also install tools globally; `npx` cannot
+    - `npx` looks into the local `/node_modules` folder for the package and if it can't find it, it will download and run it **without** having that package globally installed. [source](https://blog.scottlogic.com/2018/04/05/npx-the-npm-package-runner.html)
+
 # venv (python3)
 
 - **Warning:** Do not move or copy the `env` folder to other locations! Always re-create environments by using `python3 -m venv env` and re-installing all packages from a `requirements.txt` file. 
