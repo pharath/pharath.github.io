@@ -15,7 +15,6 @@
   animation-delay: 0.15s;
 
   @include breakpoint($x-large) {
-    max-width: $max-width;
   }
 }
 
@@ -35,16 +34,18 @@ body {
   flex: 1 0 auto;
 }
 
+/* "Breakpoints are customizable widths that determine how your responsive layout behaves across device or viewport sizes"
+   (see https://getbootstrap.com/docs/5.0/layout/breakpoints/) */
 .page {
   @include breakpoint($large) {
-    float: right;
+    float: left;
     width: calc(100% - #{$right-sidebar-width-narrow});
-    padding-right: $right-sidebar-width-narrow;
+    padding-right: 0;
   }
 
   @include breakpoint($x-large) {
     width: calc(100% - #{$right-sidebar-width});
-    padding-right: $right-sidebar-width;
+    padding-right: 0;
   }
 
   .page__inner-wrap {
