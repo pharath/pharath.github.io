@@ -97,7 +97,7 @@ E.g. the [create-react-app doc](https://create-react-app.dev/) was built using D
 
 From [doc with examples](https://legacy.reactjs.org/docs/state-and-lifecycle.html#using-state-correctly):
 1. Do not modify state directly
-  - use [spread]({% post_url 2023-03-23-notes-js.md %}#spread) for copying arrays
+  - use [spread]({% post_url 2023-03-23-notes-js %}#spread) for copying arrays
   - [read](https://legacy.reactjs.org/docs/state-and-lifecycle.html#do-not-modify-state-directly)
   - "The only place where you can assign `this.state` is the constructor."
     - if you assign it somewhere else, the component will not re-render
