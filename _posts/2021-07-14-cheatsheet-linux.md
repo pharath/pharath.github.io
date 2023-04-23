@@ -794,14 +794,17 @@ sudo fuser -mv /media/SDD | displays all processes accessing `/media/SDD`, where
 nvidia-smi -q -d temperature | temperature info including critical temperature values, shutdown temperature etc.
 nvidia-smi --query-gpu=name --format=csv | get GPU name
 
-# Retrieval commands curl und wget:
+# curl, wget
+
+`curl` and `wget` are retrieval commands.
 
 | command | description |
 | :--- | :--- |
-wget -O output_file -q https://checkip.amazonaws.com -P DESTINATION	|	-O output_file: benutze Minuszeichen “-“ statt output_file wenn output direkt in Terminal erscheinen soll; -q für quiet; -P für Zielordner
-wget -A pdf,jpg -m -p -E -k -K -np http://site/path/ | get all pdfs and jpgs from site
-wget --accept pdf,jpg --mirror --page-requisites --adjust-extension --convert-links --backup-converted --no-parent http://site/path/ | same as above using long option names
-curl -s https://checkip.amazonaws.com		|			-s für silent
+`wget -nc` | `-nc` for "do not overwrite existing files"
+`wget -O output_file -q https://checkip.amazonaws.com -P DESTINATION` | `-O output_file`: benutze Minuszeichen "-" statt `output_file` wenn output direkt in Terminal erscheinen soll; `-q` für quiet; `-P` für Zielordner
+`wget -A pdf,jpg -m -p -E -k -K -np http://site/path/` | get all pdfs and jpgs from site
+`wget --accept pdf,jpg --mirror --page-requisites --adjust-extension --convert-links --backup-converted --no-parent http://site/path/` | same as above using long option names
+`curl -s https://checkip.amazonaws.com` | `-s` für silent
 
 # gpg, apt-key
 

@@ -73,24 +73,44 @@ Plugin 'christoomey/vim-system-copy'
 
 # help
 
+## navigation
+
 | command | description |
 | :--- | :--- |
-`:h` | Hilfe (in Hilfe Cursor auf Tag zB \|syntax.txt\| platzieren ctrl + alt + 6 und ctrl + alt + 6 um auf content zu springen)
-`:h i_CTRL-R` | lookup meaning of CTRL-R in insert mode (deshalb das `i_` prefix; `v_` prefix für visual mode usw. s. Tabelle unten drunter)
-`:h :u`	| Manual zu `:u` Befehl (im Manual kann man zB via Befehl `:v` zu dem `:v` springen; Ganz oben im Manual steht wie man im Manual navigiert)
-`:h key-notation` | vim key notation
-`:map`, `:nmap`, `:vmap`, `:imap` | list all keymaps
-`:map <someKey>`, `:nmap <someKey>` | list all keymaps with `<someKey>`
+`gO` | show **table of contents**
+`:h tag` | vim tags
+`ctrl + ]` (während cursor auf einem tag)	| springe zu selected tag
+`ctrl + t` | jump back after pressing `ctrl + ]`
+`/pattern` | zB `/^i` springt zur nächsten Zeile, die mit i anfängt
+`/|.\{-}|` | jump to next tag on the same help page
+
+## vim commands
+
+| command | description |
+| :--- | :--- |
+`:h` | help
+`:h :u`	| Manual zu `:u` Befehl (im Manual kann man zB via Befehl `:v` zu dem `:v` springen)
+`:h Q_<tab>` |
+`:h quickref`	| und dann eg `_sc` um auf `Q_sc` tag zu springen
 
 ![Screenshot_table](https://i.ibb.co/jw1X1nH/Screen-Shot-2021-06-10-at-3-51-04-AM-2.png)
 
+## keymaps
+
 | command | description |
 | :--- | :--- |
-`:h Q_<tab>` |
-:h quickref	| und dann eg `_sc` um auf `Q_sc` tag zu springen
-ctrl + ] (während cursor auf einem tag)	|		springe zu selected tag
-`/pattern` |	zB `/^i` springt zur nächsten Zeile, die mit i anfängt
-ctrl + e, d, y, u |
+`:h key-notation` | vim key notation
+`:h index` | list of all vim **default** keymaps
+`:map`, `:nmap`, `:vmap`, `:imap` | list all **custom** keymaps
+`:map <someKey>`, `:nmap <someKey>` | list all keymaps with `<someKey>`
+`:filter pattern imap` |
+`:h map-which-keys` | to see which keys are **not** mapped
+`:h i_CTRL-R` | lookup meaning of CTRL-R in insert mode (deshalb das `i_` prefix; `v_` prefix für visual mode usw. s. Tabelle unten drunter)
+
+## Plugins
+
+| command | description |
+| :--- | :--- |
 `:h coc-nvim.txt` | 
 `:h telescope.<tab>` |
 `:h lsp<tab>` |

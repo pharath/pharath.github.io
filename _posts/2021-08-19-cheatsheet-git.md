@@ -34,6 +34,7 @@ tags:
 `git rm file1.txt` | remove the file from the Git repository **and the filesystem**
 `git rm --cached file1.txt` | remove the file only from the Git repository and not remove it from the filesystem
 `git add -u :/` | `git rm` all files after accidentally `rm` those files
+`git add --all -- ':!./Gemfile' ':!./_config.yml' ':!./_layouts/*.bak' ':!./_sass/*.bak'` | **exclude files** from `git add`
 
 ## git clone
 
@@ -146,7 +147,7 @@ Use `git reflog` to find the `SHA1` of the last commit of the branch.
 | :---: | :---: |
 git reflog | get SHA-1 list of previous states
 git reset --soft HEAD~ | undo last commit **locally** (`--soft`: safe way)
-git push origin +HEAD | reset the **remote's** last commit to the **local's** last commit (**Note**: `HEAD` always points to the last commit.)
+git push origin +HEAD | reset the **remote's** last commit to the **local's** last commit (**Note**: `HEAD` always points to the last commit. The `+` indicates a force-push, like the `-f` flag, see [stackoverflow](https://stackoverflow.com/a/25937833).)
 git reset --soft HEAD~1 | `HEAD~` and `HEAD~1` are the same; `HEAD` and `HEAD~0` are the same
 git reset --soft *SHA-1* | reset to a previous state **locally** (`--soft`: safe way)
 git reset --hard *SHA-1* | reset to a previous state **locally** (**Warning**: `--hard`: All changes will be lost.)
@@ -381,6 +382,30 @@ git diff 2326473e602be4b90b46f6b6afc7315ff1d09a17~ 2326473e602be4b90b46f6b6afc73
 ```bash
 git diff HEAD:full/path/to/foo HEAD~:full/path/to/bar
 ```
+
+## diff-filter
+
+From `man git-diff`:
+
+`git diff --diff-filter=[ACDMRTUXB*]`
+
+Select only files that are
+- `A` Added
+- `C` Copied
+- `D` Deleted
+- `M` Modified
+- `R` Renamed
+- `T` have their type (mode) changed
+- `U` Unmerged
+- `X` Unknown
+- `B` have had their pairing Broken
+- `*` All-or-none
+
+Any combination of the filter characters may be used.
+
+When `*` (All-or-none) is added to the combination, all paths are selected if there is any file that matches other criteria in the comparison; if there is no file that matches other criteria, nothing is selected.
+
+Also, these upper-case letters can be **downcased** to **exclude**. E.g. `--diff-filter=ad` excludes added and deleted paths.
 
 # Git Credential Helper, Storing Git Passwords
 
