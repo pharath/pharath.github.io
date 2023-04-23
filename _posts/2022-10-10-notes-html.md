@@ -38,6 +38,28 @@ tags:
 - Any sort of content can be put inside the `<div>` tag! 
 - **Note**: By default, browsers always place a line break before and after the `<div>` element.
 
+[Horizontal Rule](https://www.w3schools.com/tags/tag_hr.asp)
+- `<hr>`: horizontal rule
+- thematic break in an HTML page (e.g. a shift of topic)
+- used to separate content (or define a change)
+- `<hr style="height:2px;border-width:0;color:gray;background-color:gray">`
+
+# Ruby
+
+## gem
+
+| command | description |
+| :---: | :---: |
+`gem list` | list gems
+`gem query --local` | list all locally installed gems
+
+## bundle
+
+| command | description |
+| :---: | :---: |
+`bundle install` | install all missing gems
+`bundle info [gemname]` | to see where a bundled gem is installed
+
 # Jekyll
 
 Jekyll is written in Ruby.
