@@ -125,6 +125,7 @@ Git normally checks `gitignore` patterns from multiple sources, with the followi
 | command | description |
 | :---: | :---: |
 git reset | undo `git add`
+git restore --staged file | discard a `file` **in the index** (= "added" file) without overwriting the same file **in the working tree**. `man git restore`: "Specifying `--staged` will only restore the index" and **not** the working tree!
 
 ## Undo local Branch delete
 
@@ -166,7 +167,8 @@ git reset --hard *SHA-1* | reset to a previous state **locally** (**Warning**: `
 | command | description |
 | :---: | :---: |
 git checkout -- . | see `git restore .`
-git restore . | discard all unstaged files in current working directory
+git restore --worktree file | `man git restore`: "If neither option (`--worktree` or `--staged`) is specified, **by default** the working tree is restored. Specifying `--staged` will only restore the index. Specifying both restores both."
+git restore . | discard **all unstaged** files in current working directory
 git checkout -- path/to/file/to/revert | see `git restore path/to/file/to/revert`
 git restore path/to/file/to/revert | discard a specific unstaged file
 

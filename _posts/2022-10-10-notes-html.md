@@ -46,6 +46,21 @@ tags:
 
 # Ruby
 
+[Ruby vs Ruby on Rails](https://www.netguru.com/blog/ruby-versus-ruby-on-rails)
+- Rails: 
+    - a **web application development framework** and 
+    - is based on the **Model View Controller (MVC)** architecture
+    - Ruby and Ruby on Rails sound similar because **Ruby on Rails was programmed in Ruby** and then released to the public in 2005, 10 years after Ruby.
+    - Ruby on Rails is mostly used for 
+        - building web applications and 
+        - server side scripting, 
+        - but it can also be used to develop interface scripts.
+- Ruby: 
+    - an open source, **object oriented scripting language** designed with simplicity as a core focus, and is known for its ability to build online applications quickly.
+    - Ruby was **written in C language**
+    - very popular choice amongst web application development professionals
+    - can also be used on the **back end** for data science and memory management purposes
+
 ## gem
 
 | command | description |

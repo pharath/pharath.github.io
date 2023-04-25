@@ -502,6 +502,23 @@ tshark -r myfile.pcap -Y 'ip.addr == AA.BB.CC.DD' -T fields -e tcp.analysis.ack_
 
 TODO
 
+### WebSocket
+
+WebSocket [Wikipedia](https://en.wikipedia.org/wiki/WebSocket):
+- a computer **communications protocol**, providing full-duplex communication channels over a single TCP connection.
+- the corresponding API: "WebSocket**s**"
+    - **a living standard** maintained by the WHATWG and 
+    - a successor to "The WebSocket API" from the W3C
+
+WebSocket vs HTTP, [Wikipedia](https://en.wikipedia.org/wiki/WebSocket):
+- WebSocket is distinct from HTTP. 
+- Both protocols are located at **layer 7** in the OSI model and depend on TCP at layer 4. 
+- Although they are different, RFC 6455 states that WebSocket "is designed 
+    - to **work over HTTP ports 443 and 80** as well as 
+    - to **support HTTP proxies and intermediaries**", thus making it **compatible with HTTP**. 
+- To achieve compatibility, the WebSocket handshake **uses the HTTP Upgrade header** to change from the HTTP protocol to the WebSocket protocol.
+- The WebSocket protocol enables interaction between a web browser (or other client application) and a web server **with lower overhead than** half-duplex alternatives such as **HTTP polling**, facilitating real-time data transfer from and to the server.
+
 ## Email
 
 ### SMTP
