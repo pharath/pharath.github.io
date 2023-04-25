@@ -20,7 +20,7 @@ description:
   #Write an awesome description for your new site here. You can edit this
   #line in _config.yml. It will appear in your document head meta (for
   #Google search results) and in your feed.xml site description.
-  "Deep Learning and Self-Driving Cars."
+  "Physics, Deep Learning and Self-Driving Cars."
 twitter_username: pharath_one
 github_username: pharath
 minimal_mistakes_skin: default
@@ -30,7 +30,7 @@ search: true
 # TODO: "teaser:" will also appear in the search results. But we only want to
 # set a default teaser in the "You May Also Enjoy" section.
 #teaser: /assets/images/mario-question.png
-logo: "/assets/images/pytorch-logo.png"
+logo: "/assets/images/car.png"
 
 # Build settings
 markdown: kramdown
