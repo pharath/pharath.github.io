@@ -1,9 +1,0 @@
-<h1 id="install-pytorch">Install pytorch</h1>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">conda install pytorch torchvision torchaudio cudatoolkit=11.1 -c pytorch -c nvidia</code> (official von pytorch.org)
-    <ul>
-      <li><strong>Achtung</strong>: Skip cudatoolkit=11.1 Download mit <code class="language-plaintext highlighter-rouge">ctrl + c</code>, wenn der Download nicht startet und downloade erst Rest. Google den genauen Namen des cudatoolkit package z.B. <code class="language-plaintext highlighter-rouge">linux-64/cudatoolkit-11.1.74-h6bb024c_0.tar.bz2</code> und downloade dieses package manuell von https://anaconda.org/nvidia/cudatoolkit/files. Installiere <code class="language-plaintext highlighter-rouge">linux-64/cudatoolkit-11.1.74-h6bb024c_0.tar.bz2</code> manuell mit <code class="language-plaintext highlighter-rouge">conda install path/to/package/cudatoolkit-11.1.74-h6bb024c_0.tar.bz2</code> und führe dann nochmal <code class="language-plaintext highlighter-rouge">conda install pytorch torchvision torchaudio cudatoolkit=11.1 -c pytorch -c nvidia</code> aus.</li>
-    </ul>
-  </li>
-</ul>
