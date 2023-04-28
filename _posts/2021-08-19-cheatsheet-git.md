@@ -90,7 +90,7 @@ tags:
 `git reflog` | view history of `git checkout` operations
 `git revert <commit-hash>` | commit `<commit-hash>` rückgängig machen
 
-## git log
+## git log, git shortlog
 
 | command | description |
 | :--- | :--- |
@@ -99,6 +99,7 @@ tags:
 `git log -p -- filename` | Like `git log`, but shows the file content that changed, as well. Generates the patches for each log entry.
 `git show HEAD` | just the diff for a specific commit
 `gitk [filename]` | To browse the changes visually
+`git shortlog` | show the commit messages only
 
 ## git pull vs fetch vs update
 
@@ -177,7 +178,16 @@ git restore path/to/file/to/revert | discard a specific unstaged file
 `git checkout path/to/__pycache__/`
 `git checkout *.pyc`
 
-# git rebase vs git merge
+# Rewriting History
+
+## git rebase
+
+- "sowas wie `git merge`"
+- [atlassian.com](https://www.atlassian.com/git/tutorials/rewriting-history/git-rebase)
+    - The primary reason for rebasing is to **maintain a linear project history**. 
+        - For **example**, consider a situation where the `main` branch has progressed since you started working on a `feature` branch. You want to get the latest updates to the `main` branch in your `feature` branch, but you want to keep your branch's history clean so it appears as if you've been working off the latest `main` branch. This gives the later benefit of a clean merge of your `feature` branch back into the `main` branch.
+
+## git rebase vs git merge
 
 - [Explanation 1](https://poanchen.github.io/blog/2020/09/19/what-to-do-when-git-branch-has-diverged)
 - [Explanation 2](https://www.atlassian.com/git/tutorials/merging-vs-rebasing):
@@ -310,6 +320,18 @@ or if you want to see already added changes
 ```bash
 git diff --cached myfile.txt
 ```
+
+### Last Change of a File
+
+```bash
+git log -p [-m] [--follow] [-1] <file>
+```
+
+where `[]` means "optional". 
+- `-1` shows **only the most recent** change to the specified file, otherwise, **all** non-zero diffs of that file are shown. 
+- `--follow` is required to see changes that occurred prior to a rename.
+- `-m` causes merge commits to include the diff content (otherwise these just show the commit message, as if `-p` were not specified).
+- See [stackoverflow](https://stackoverflow.com/a/22412252).
 
 ## See changes in all files
 
