@@ -21,9 +21,10 @@ tags:
 | :--- | :--- |
 htop | activity monitor (sieht besser aus als "top")
 hardinfo | hardware info
+ncdu | like `du -sh`, but more convenient (because avoids typing)
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 ffmpeg | mp4 to mp3 converter
 ffmpeg -i foo.mp4 bar.mp3 | convert foo.mp4 to bar.mp3
 ffmpeg -i source.mp4 -ss 00:00:00 -t 00:00:00 -vcodec copy -acodec copy outsplice.mp4 | crop source.mp4 from start time `-ss` to time `-t`
@@ -31,50 +32,50 @@ ffmpeg -i input.mov -qscale 0 output.mp4 | convert input.mov to output.mp4
 ffmpeg -i input.mp4 -ss 00:05:20 -t 00:10:00 -c:v copy -c:a copy output1.mp4 | take the input video input.mp4, and cut out 10 minutes from it starting from 00:05:20 (5 minutes and 20 second mark), i.e. the output video will be from 00:05:20 to 00:15:20. If you specify a duration that will result in a stop time that is beyond the length of the input video, the output video will end where the input video ends. [source](https://shotstack.io/learn/use-ffmpeg-to-trim-video/)
 ffmpeg -i input.mp4 -ss 00:05:10 -to 00:15:30 -c:v copy -c:a copy output2.mp4 | uses `-to` to specify an exact time to cut to from the starting position. The cut video will be from 00:05:10 to 00:15:30, resulting in a 10 minutes and 20 seconds video. If you specify a time `-to` that is longer than the input video, e.g. `-to 00:35:00` when the input video is 20 minutes long, the cut video will end where the input video ends. If you specify a `-to` that is smaller than `-ss`, then the command won't run. You'll get the following error: `Error: -to value smaller than -ss; aborting.` [source](https://shotstack.io/learn/use-ffmpeg-to-trim-video/)
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 sudo apt install imagemagick | image editing, converting, compressing, etc.
 convert path/to/image.png -resize 640x path/to/output_image.png | compress an `image.png` by resizing / scaling down ([source](https://askubuntu.com/a/781588))
 convert path/to/image.png -quality 50% path/to/output_image.png | compress an `image.png` by reducing its quality ([source](https://askubuntu.com/a/781588))
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 pyTranscriber | generates subtitles for `.mp3` files via Google Speech Recognition API using Autosub (GUI)
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 goldendict |		dict for fast lookup (ctrl + c + c)
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 pycharm-community |
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 docker |
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 eog	|			picture viewer (shortcuts: https://help.gnome.org/users/eog/stable/index.html.en)
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 pinta	|		picture editor (shortcuts: https://www.pinta-project.com/user-guide/shortcuts/)
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 gedit |			texteditor
 zum Lesen:	| unter F10/Preferences/Font & Colors/ Font ändern zu "TeX Gyre Termes Math Regular"
 ctrl + h	|		find and replace (halte im “Find & Replace”-Fenster `alt` gedrückt für schnelle Auswahl der Optionen)
 F10	|			menu (u.a. Shortcuts)
 F1	|			help, Shortcut overview
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 kazam |			screen recorder
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 joplin | Notes
 alt + entsprechende Taste im menu | im Menu stehen alle Shortcuts !
 ctrl + l |			change view (editor/markdown viewer/both)
@@ -84,137 +85,137 @@ ctrl + shift + l |		focus note selection
 ctrl + shift + b |	focus body
 ctrl + shift + n |	focus title
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 dconf-editor | zB `gsettings set org.gnome.desktop.interface clock-show-weekday true` geht irgendwie nicht, stattdessen in dconf-editor zu org.gnome.desktop.interface navigieren und clock-show-weekday aktivieren. 
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 lm-sensors | get CPU temperature (using command `sensors`)
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 telegram-desktop | Telegram
 zoom-client |
 discord |
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 ticker | stock monitor
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 Tor-Browser-Bundle Webdownload | installation: see [here](https://wiki.ubuntuusers.de/Tor/Installation/#Tor-Browser-Bundle-Webdownload)
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 inxi -Fxz |        inxi  - Command line system information script for console and IRC
 inxi -G | get Graphics info, eg. display resolution, GPU, etc.
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 cuda | [installation](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#removing-cuda-tk-and-driver) via .deb file 
 nvidia-cuda-toolkit | manuell installiert mit `sudo apt install nvidia-cuda-toolkit`, nachdem cuda per .deb file installiert wurde 
 nvidia-docker2 | [installation](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 droidcam | use Android smartphone cam as Ubuntu webcam
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 psensor | Unter "sensor preferences" im Tab "Application Indicator" das Kästchen "Display sensor in the label" aktivieren, damit ein bestimmter Wert im System Tray angezeigt wird.
 conky | see [configuration](https://linuxconfig.org/ubuntu-20-04-system-monitoring-with-conky-widgets)
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 mailspring | mail client similar to Apple Mail
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 peek | screen2gif recorder
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 sqlite3 | A command line interface for SQLite version 3
 sqlitebrowser | light GUI editor for SQLite databases
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 sudo apt-get install gnome-tweaks | GNOME tweak tool
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 sudo apt-get install dconf-editor | dconf editor
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 plank | dock similar to macOS
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 whatsapp-for-linux | whatsapp
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 1. sudo apt-get install compiz compiz-gnome compiz-plugins-extra | compiz Fenstermanager dependencies
 2. sudo apt install compizconfig-settings-manager | compiz Fenstermanager
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 doxygen | create class diagram for C++ projects (Doxygen  is  a  documentation system for C++, C, Java, Objective-C, IDL (Corba and Microsoft flavors), Fortran, Python, VHDL and to some extent PHP, C#, and D.)
 doxywizard | a tool to configure and run doxygen on your source files
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 qt5 | installiere via offline installer `qt-opensource-linux-x64-5.9.5.run`, weil qtcreator nur so automatisch qt konfiguriert (s. bookmarks in CS\/coding\/docker\/)
 qtcreator | for GUI development
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 python2.7 | einfach per `apt install python2.7` installieren (Achtung: some apps also need `python2.7-dev`!); starten per `python2.7` (nur `python2` geht nicht!)
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 ocrmypdf | `ocrmypdf in.pdf out.pdf`
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 `ipad_charge` | [github link](https://github.com/mkorenkov/ipad_charge/wiki) automatically start charging ipad when connected to ubuntu
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 (nicht mehr) sudo apt install powerline | maybe install https://github.com/powerline/fonts, if symbols (e.g. branch symbol in git repo) are not displayed correctly	
 sudo apt install fish | install fish shell (add `exec fish` in `.bashrc` to start automatically; in `fish_config` theme `fish default` wählen)
 curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install \| fish | install oh my fish (necessary for bobthefish)
 omf install bobthefish | install powerline in fish
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 sudo snap install postman | http client 
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 dive | for docker image dependencies tree (see [github repo](https://github.com/wagoodman/dive))
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 barrier | share keyboard and mouse between multiple computers (client-server model) [**Note:** uncheck "enable SSL" box in barrier "Menu" -> "Change Settings" (on all devices)]
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 backgroundremover | `pip install backgroundremover` and then download `u2net.pth` from `https://drive.google.com/uc?id=1ao1ovG1Qtx4b7EoskHXmi2E9rp5CHLcZ` (or `https://drive.google.com/file/d/1ao1ovG1Qtx4b7EoskHXmi2E9rp5CHLcZ/view`) and save it as `/home/bra-ket/.u2net/u2net.pth`
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 v4l2-ctl | for setting webcam powerline frequency (see below)
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 sudo snap install pdftk | use `pdftk full-pdf.pdf cat 12-15 output outfile_p12-15.pdf` to save pages 12-15 from `full-pdf.pdf` in `outfile_p12-15.pdf`
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 `sudo apt install fzf` | general-purpose command-line fuzzy finder
 `apt-cache show fzf` | will show `Refer /usr/share/doc/fzf/README.Debian for quick instructions on how to add keybindings for Bash, Zsh, Fish to call fzf.`
 `vim /usr/share/doc/fzf/README.Debian` | how to `source` fzf
