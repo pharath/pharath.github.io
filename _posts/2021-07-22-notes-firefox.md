@@ -86,3 +86,4 @@ So it logs the same sorts of information as the Web Console - network requests, 
 - Tab Session Manager
 - Grammarly: Grammar Checker and Writing App
 - Fast Tab Switcher
+- Auto Tab Discard by tlintspr
