@@ -907,6 +907,42 @@ Rsync patterns: [stackexchange](https://unix.stackexchange.com/a/2503)
 `tree -H ./ > result.html` | save directory tree to file 
 `firefox ./result.html` | view html tree created by `tree` command
 
+# xmodmap, xev
+
+**Deprecated**, use `setxkbmap` instead.
+
+Use 
+```bash
+$ xev
+``` 
+
+to find the keycode of a key. Then, in order to remap this key, run e.g.
+```bash
+Syntax: xmodmap -e "keycode [keyNumber] = [normal] [shift] [NoIdea] [NoIdea] [altGr] [shift+altGr]"
+$ xmodmap -e "keycode 48 = bracketright braceright NoSymbol NoSymbol adiaeresis Adiaeresis"
+$ xmodmap -e "keycode 47 = bracketleft braceleft NoSymbol NoSymbol odiaeresis Odiaeresis"
+$ xmodmap -e "keycode 45 = 0x06b 0x04b"
+```
+
+**Note**: You can look up `[keyNumber]` under [keysymdef.h](https://cs.gmu.edu/~sean/stuff/n800/keyboard/keysymdef.h).
+
+Alternatively, create:
+```bash
+# .Xmodmap in $HOME/ directory
+
+keycode 47 = bracketleft braceleft NoSymbol NoSymbol odiaeresis Odiaeresis
+keycode 48 = bracketright braceright NoSymbol NoSymbol adiaeresis Adiaeresis
+```
+
+then in your `.bashrc` add
+```bash
+xmodmap ~/.Xmodmap
+```
+
+This will load these maps automatically after reboot.
+
+TODO: The `xmodmap ~/.Xmodmap` in your `.bashrc` is executed every time a new terminal instance is launched which is **bad for terminal startup time**. Find another solution.
+
 # Markdown
 
 ## retext
