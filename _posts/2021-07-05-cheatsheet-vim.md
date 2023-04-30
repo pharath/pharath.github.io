@@ -116,6 +116,19 @@ Plugin 'christoomey/vim-system-copy'
 `:h lsp<tab>` |
 `:h comment.config` |
 
+# Highlight Groups
+
+- setting hi group in lua: [link](https://www.reddit.com/r/neovim/comments/sihuq7/psa_now_you_can_set_global_highlight_groups_ie/)
+- change the color of folders in the output of the `ls` command: [link](https://askubuntu.com/a/466203)
+  - meaning of the `LS_COLORS` variable: "The first number is the style (1=bold), followed by a semicolon, and then the actual number of the color."
+- terminal `xterm` highlight groups [source](https://unix.stackexchange.com/a/172674): 
+```bash
+# get the terminal's background color rgb
+printf '\033]11;?\007'
+# get the terminal's foreground color rgb
+printf '\033]10;?\007'
+```
+
 # regex/regexp
 
 (Achtung: in Windows manchmal bisschen anders s. [https://superuser.com/a/518231](https://superuser.com/a/518231)
@@ -523,9 +536,18 @@ In the Ubuntu terminal profile settings set `Hack Nerd Font Regular` as the term
 - [doc](https://docs.rockylinux.org/books/nvchad/nvchad_ui/nvimtree/)
 - press `g ?` to show all shortcuts
 
+`toggleterm`
+- use `3<c-\>` to create and toggle terminal "3"
+
 `lazygit`
+- install:
+  - `wget https://github.com/jesseduffield/lazygit/releases/download/v0.37.0/lazygit_0.37.0_Linux_x86_64.tar.gz`
+  - untar and `mv -iv lazygit /usr/local/bin/`
 - set a custom pager: [doc](https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Pagers.md)
   - install `delta` (Note: use an older release, if `sudo apt install ./git-delta_0.14.0_amd64.deb` shows [errors](https://github.com/dandavison/delta/issues/1250); my currently used version: [link](https://github.com/dandavison/delta/releases/download/0.14.0/git-delta_0.14.0_amd64.deb))
+- how to handle the `dotfiles` repo: [issue](https://github.com/jesseduffield/lazygit/discussions/1201)
+  - `lazygit --git-dir=$HOME/.cfg/ --work-tree=$HOME`
+  - note: `<leader>gd` triggers this command in my config
 
 ## Syntax Highlighting
 
