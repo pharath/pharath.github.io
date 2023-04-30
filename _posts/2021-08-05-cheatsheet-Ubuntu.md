@@ -220,6 +220,14 @@ gsettings set org.gnome.shell.extensions.dash-to-dock intellihide true
 
 ## Change default app
 
+### Using xdg-settings
+
+```bash
+xdg-settings set default-web-browser firefox.desktop
+```
+
+### Using xdg-mime
+
 ```bash
 xdg-mime default some_app some_filetype
 ```
@@ -249,6 +257,12 @@ update-desktop-database ~/.local/share/applications
 There should be a new line `x-scheme-handler/mailto=mailspring_mailspring.desktop` in `~/.config/mimeapps.list` now.
 
 ## "Open with ..." and set default app for a given file
+
+### For xdg-open
+
+`xdg-mime default some_app some_filetype` (see above)
+
+### For mimeopen
 
 ```bash
 mimeopen -d myfile.pdf
