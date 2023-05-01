@@ -1,10 +1,11 @@
 ---
-title: "Notes"
+title: "Team Galaxis Notes"
 read_time: false
 excerpt_separator: "<!--more-->"
 categories:
   - Notes 
 tags:
+  - galaxis
   - notes
 
 ---
