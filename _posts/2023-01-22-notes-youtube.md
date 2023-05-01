@@ -1,11 +1,7 @@
 ---
-title: "Notes about YouTube"
+title: "YouTube Notes"
 read_time: false
 excerpt: "Some YouTube essentials"
-header:
-  teaser: /assets/images/linux_teaser.jpg
-  overlay_image: /assets/images/linux_teaser.jpg
-  overlay_filter: 0.5 
 toc: true
 toc_sticky: true
 categories:
