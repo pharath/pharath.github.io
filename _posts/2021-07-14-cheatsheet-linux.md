@@ -555,10 +555,16 @@ cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen 
 
 ### tty, terminal session management
 
+From [stackexchange](https://unix.stackexchange.com/a/21294):
+- A `tty` is a native terminal device, the backend is either hardware or kernel emulated.
+- A `pty` (pseudo terminal device) is a terminal device which is emulated by an other program (example: `xterm`, `screen`, or `ssh` are such programs). 
+- A `pts` is the slave part of a `pty`.
+- **More info**: see [stackexchange](https://unix.stackexchange.com/a/21294) and `man pty`
+
 | command | description |
 | :--- | :--- |
 tty	| zeigt Namen des aktiven terminals
-ls -ltr /dev/ttys\*	| zeigt Namen aller aktiven terminals 
+`ls -ltr /dev/ttys*`	| zeigt Namen aller aktiven terminals 
 last | zeige letzte terminal logins
 whoami | print the user name associated with the current effective user ID 
 

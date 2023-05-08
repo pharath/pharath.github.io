@@ -478,19 +478,6 @@ config config core.excludesFile '~/.gitignore'
 Finally, in neovim run:
 ```bash
 :CocInstall coc-prettier
-
-# For coc-tsserver (javascript, jsx, TypeScript, etc):
-# Note: this will give 2 hover popups because nvim kickstart already has a TypeScript LSP
-#
-# coc lsp vs native lsp: 
-# reddit: https://www.reddit.com/r/neovim/comments/rr6npy/question_coc_vs_lsp_whats_exactly_the_difference/
-# chris@machine: https://www.youtube.com/watch?v=190HoB0pVro&t=22s
-
-# :CocInstall coc-json   # required for :CocConfig
-# :CocConfig
-# # :CocConfig will open "coc-settings.json", look if "suggest.completionItemKindLabels" is set
-# # (if not copy https://www.chiarulli.me/Neovim/26-lsp-symbols/)
-# :CocInstall coc-tsserver
 ```
 
 Install ripgrep on Ubuntu: 
@@ -501,6 +488,33 @@ $ sudo dpkg -i ripgrep_13.0.0_amd64.deb
 ```
 
 For more details see `~/.config/nvim/` (which is in the git repository).
+
+### LSP
+
+coc lsp vs native lsp: 
+- reddit: [reddit](https://www.reddit.com/r/neovim/comments/rr6npy/question_coc_vs_lsp_whats_exactly_the_difference/)
+- `chris@machine`: [youtube](https://www.youtube.com/watch?v=190HoB0pVro&t=22s)
+
+For **coc-tsserver** (javascript, jsx, TypeScript, etc):
+- Note: this will give 2 hover popups because nvim kickstart already has a TypeScript LSP
+
+```bash
+# :CocInstall coc-json   # required for :CocConfig
+# :CocConfig
+# # :CocConfig will open "coc-settings.json", look if "suggest.completionItemKindLabels" is set
+# # (if not copy https://www.chiarulli.me/Neovim/26-lsp-symbols/)
+# :CocInstall coc-tsserver
+```
+
+For **clangd**:
+- configuration: see [github](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#clangd)
+- open a `.cpp` file, run `:LspInstall` (without arguments) and select `clangd`
+- each project needs a `compile_commands.json` (JSON compilation database) in the root of your source tree ([compile_commands.json, clangd doc](https://clangd.llvm.org/installation#compile_commandsjson))
+  - if your project has a `Makefile` only, then the `compile_commands.json` can be generated with `bear` (`sudo apt install bear`)
+    - to generate the `compile_commands.json` run `make clean; bear make` 
+      - **Note**: the `--` in `make clean; bear -- make` is deprecated (see [issue](https://github.com/rizsotto/Bear/issues/202))
+    - [bear github](https://github.com/rizsotto/Bear)
+- project configuration file: `.clangd` (in the root of the project)
 
 ## Font
 

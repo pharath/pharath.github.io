@@ -12,6 +12,48 @@ tags:
   - cheatsheet
 ---
 
+# Profiling
+
+## Check the Execution Time 
+
+`time COMMAND`
+- e.g. `time source ./.bashrc`
+
+## Give verbose output with timestamps and linenumbers
+
+From [https://stackoverflow.com/a/4338046](https://stackoverflow.com/a/4338046):
+
+**With modifying** the script:
+
+Add
+```bash
+#!/bin/bash -x
+# Note the -x flag above, it is required for this to work
+PS4='+ $(date "+%s.%N ($LINENO) ")'
+```
+at the beginning of your script.
+
+**Without modifying** the script:
+```bash
+PS4='+ $(date "+%s.%N ($LINENO) ")' bash -x .bashrc
+```
+
+or:
+```bash
+PS4='+ $EPOCHREALTIME ($LINENO) ' bash -x .bashrc
+```
+
+Note: `PS4` is a special variable used by `set -x` to prefix tracing output. ([more](https://www.thegeekstuff.com/2008/09/bash-shell-take-control-of-ps1-ps2-ps3-ps4-and-prompt_command/))
+
+## Step through Bash scripts
+
+From [stackexchange](https://unix.stackexchange.com/a/39672):
+
+It's not exactly profiling, but you can trace your script as it runs. 
+- Put `set -xv` before the section you want to trace and `set +xv` after the section. 
+- `set -x` enables xtrace, which will show every line that executes. 
+- `set -v` enables verbose mode, which will also show lines that may have an effect, but are not executed, such as variable assignment.
+
 # Shebang
 
 beste Erklärung: [askubuntu discussion](https://stackoverflow.com/questions/7670303/purpose-of-usr-bin-python3-shebang/7670338#7670338)
