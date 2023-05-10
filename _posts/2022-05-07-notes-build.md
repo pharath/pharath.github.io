@@ -205,12 +205,12 @@ make -j $N_Cores
 `VAR ?= VALUE`
 - set to a value only if `VAR` not already set
 
-## CMake
+# CMake
 
 **Note**: You must always link shared libraries (`.so` files) **and** include header files. [best stackoverflow explanation](https://stackoverflow.com/a/1186836/12282296)
 - i.e. just linking an `.so` library does **not** automatically make all the header files of this library available! `include_directories` must be specified for the header files.
 
-### Basic Workflow
+## Basic Workflow
 
 ```bash
 mkdir build
@@ -221,7 +221,7 @@ sudo make install
 sudo make uninstall   # only possible if you specified an uninstall target in CMakeLists.txt
 ```
 
-### Understand Shared Libraries (.so files)
+## Understand Shared Libraries (.so files)
 
 [Best Tutorial](https://www.cprogramming.com/tutorial/shared-libraries-linux-gcc.html)
 
@@ -299,7 +299,7 @@ This is a shared library test...
 Hello, I am a shared library
 ```
 
-### Think in modules! (Best CMakeLists.txt Intro!)
+## Think in modules! (Best CMakeLists.txt Intro!)
 
 **Start simple** and then complicate the project further!
 
@@ -307,7 +307,7 @@ See this [stackoverflow](https://stackoverflow.com/a/39600062/12282296) post!
 
 Simple example project: [stackoverflow](https://stackoverflow.com/a/45843676/12282296)
 
-### Quick Uninstall
+## Quick Uninstall
 
 from [stackoverflow](https://stackoverflow.com/questions/41471620/cmake-support-make-uninstall):
 
@@ -318,13 +318,13 @@ So just run:
 xargs rm < install_manifest.txt
 ```
 
-### Add an Uninstall Target, uninstall.cmake
+## Add an Uninstall Target, uninstall.cmake
 
 Add an uninstall target to the CMAKE generated Makefile:
 
 see [github gist](https://gist.github.com/royvandam/3033428)
 
-### Show Variables
+## Show Variables
 
 see [stackoverflow](https://stackoverflow.com/a/42658058/12282296)
 
@@ -344,7 +344,7 @@ cat log/latest_build/events.log
 ```
 and search through all the `StdoutLine`s to see the value of `VAR`.
 
-### Check if a library is installed
+## Check if a library is installed
 
 From [stackoverflow](https://serverfault.com/questions/54736/how-to-check-if-a-library-is-installed):
 
@@ -357,7 +357,7 @@ pkg-config --list-all | grep jpeg
 dpkg -l | grep libjpeg
 ```
 
-### pkg-config
+## pkg-config
 
 see [Overview](https://linuxhint.com/pkg-config-linux-command/)
 
@@ -369,13 +369,13 @@ see [Overview](https://linuxhint.com/pkg-config-linux-command/)
 `pkg-config opencv4 --modversion` | check the version of a library
 `pkg-config mylib --cflags-only-I` | only yields the include paths in Cflags
 
-#### pkg-config in g++
+### pkg-config in g++
 
 ```bash
 g++ myprogram.cpp `pkg-config --libs opencv` -o myprogram
 ```
 
-#### pkg-config file in CMake
+### pkg-config file in CMake
 
 From [stackoverflow](https://stackoverflow.com/a/45843676/12282296):
 
@@ -386,7 +386,7 @@ You may also export a pkg-config file. This file allows a third-party applicatio
 
 Example: OpenCV: `/usr/local/lib/pkgconfig/opencv.pc` (see [stackoverflow](https://stackoverflow.com/a/10420608/12282296))
 
-### cmake config file
+## cmake config file
 
 [doc](https://cmake.org/cmake/help/latest/manual/cmake-packages.7.html#package-configuration-file)
 
@@ -400,13 +400,13 @@ Example: [OpenCV](https://github.com/opencv/opencv/blob/master/cmake/templates/O
 #    target_link_libraries(MY_TARGET_NAME ${OpenCV_LIBS})
 ```
 
-### `include_directories` vs. `target_include_directories`
+## `include_directories` vs. `target_include_directories`
 
 [stackoverflow](https://stackoverflow.com/a/31969632/12282296)
 
 E.g. if you have a CMakeLists.txt that builds two ROS nodes, then it will have two targets. If **both** targets use the include directories use `include_directories`. If **only one of them** uses the include directories use `target_include_directories`.
 
-### `set_target_properties`
+## `set_target_properties`
 
 Specifies which public header files should be installed when running `sudo make install`. The install location is specified by 
 ```bash
@@ -421,7 +421,7 @@ set_target_properties(galaxis_lib PROPERTIES
     PUBLIC_HEADER "${HEADERS}")
 ```
 
-### `find_library`
+## `find_library`
 
 From [stackoverflow](https://stackoverflow.com/a/41909627/12282296):
 
@@ -435,7 +435,7 @@ find_library(FOO_LIB foo)
 
 also see [stackoverflow](https://stackoverflow.com/a/40776072/12282296)
 
-### Troubleshooting
+## Troubleshooting
 
 ```bash
 /tmp/ccsulwjG.o: In function cv::String::~String()':
@@ -445,7 +445,7 @@ also see [stackoverflow](https://stackoverflow.com/a/40776072/12282296)
 - A linker error. 
 - Set dependencies, like `-lopencv_core -lopencv_highgui -lopencv_imgproc`.
 
-## `ament_cmake`
+# `ament_cmake` (ROS 2)
 
 [doc](https://docs.ros.org/en/foxy/How-To-Guides/Ament-CMake-Documentation.html)
 
@@ -454,7 +454,7 @@ also see [stackoverflow](https://stackoverflow.com/a/40776072/12282296)
 
 A basic CMake outline can be produced using `ros2 pkg create <package_name>` on the command line. The basic build information is then gathered in two files: the `package.xml` and the `CMakeLists.txt`. 
 
-### `package.xml` in `ament_cmake`
+## `package.xml` in `ament_cmake`
 
 The `package.xml` must contain all **dependencies** and a bit of **metadata** 
 - to allow colcon to find the correct **build order** for your packages, 
@@ -462,13 +462,52 @@ The `package.xml` must contain all **dependencies** and a bit of **metadata**
 - provide the information for a **release** with [bloom](https://pypi.org/project/bloom/). 
     - note: **Bloom** is a release automation tool.
 
-### `CMakeLists.txt` in `ament_cmake`
+## `CMakeLists.txt` in `ament_cmake`
 
 The `CMakeLists.txt` contains the commands to build package **executables** and **libraries**.
 
 # Autotools
 
+Wikipedia: 
+- **GNU Autotools** (aka **GNU Build System**) 
+- a suite of programming tools designed to assist in making source code packages **portable to many Unix-like systems**.
+- Autotools consists of the GNU utility programs 
+  - Autoconf, 
+  - Automake, and 
+  - Libtool. 
+
+## Overview
+
+Wikipedia:
+
+Autoconf
+- **Autoconf** generates a configure script based on the contents of a `configure.ac` file, which characterizes a particular body of source code. 
+- The `configure` script, when run, scans the build environment and generates a subordinate `config.status` script 
+- which, in turn, converts other input files and most commonly `Makefile.in` into output files (`Makefile`), which are appropriate for that build environment. 
+- Finally, the `make` program uses `Makefile` to generate executable programs from source code.
+
+Automake
+- **Automake** helps to create portable `Makefiles`, which are in turn processed with the `make` utility. 
+- It takes its input as `Makefile.am`, and turns it into `Makefile.in`, which is used by the `configure` script to generate the file `Makefile` output. 
+- It also performs **automatic dependency tracking**; 
+  - every time a source file is compiled, the list of dependencies (e.g., C header files) is recorded. 
+  - Later, any time make is run and a dependency appears to have changed, the dependent files will be rebuilt.
+
+Libtool
+- **Libtool** helps manage the creation of static and dynamic libraries **on various Unix-like operating systems**. 
+- Libtool accomplishes this by abstracting the library-creation process, hiding differences between various systems (e.g. Linux systems vs. Solaris).
+
+## Usage
+
 Before running `../configure` run
 ```bash
 autoreconf -i
+```
+
+# Bear
+
+Bear is a tool that generates a [compilation database](https://clang.llvm.org/docs/JSONCompilationDatabase.html) (`compile_commands.json`) for clang tooling. 
+
+```bash
+sudo apt install bear
 ```
