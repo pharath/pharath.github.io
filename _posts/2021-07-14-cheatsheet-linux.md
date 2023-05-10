@@ -253,32 +253,45 @@ In `~/.bash_aliases`:
 | :--- | :--- |
 ctrl + r + Suchbegriff	|	reverse search (mehrmals ctrl + r drücken, um zwischen den Suchbegriff enthaltenden commands auszuwählen, danach `->` um zu übernehmen bzw `Enter` um auszuführen)
 
-<hr>
+## Root
 
-sudo -i	|				run single command with root privileges (does not require root password !)
-sudo -s		|			run single command with root privileges (does not require root password !) + do not change user and working directory
+| command | description |
+| :--- | :--- |
+sudo -i	| run single command with root privileges (does not require root password !)
+sudo -s | run single command with root privileges (does not require root password !) + do not change user and working directory
+su | switches to super user (root user) (requires root password !) (in Ubuntu: root account disabled by default for improved security)
 
-<hr>
+## Nohup
 
-*some_command* & | run process *some_command* in the background
-nohup gedit & | start gedit in the background AND do not stop gedit, when shell is stopped. (Dies war ein einfaches Beispiel, aber es macht den eigentlichen Nutzen klar, wenn man z.B. per SSH auf einem fremden Rechner arbeitet und dort einen langwierigen Prozess starten möchte, die ssh-Verbindung aber während des Prozesses nicht permanent aktiv sein soll, weil man etwa den eigenen Rechner ausschalten möchte.)
+| command | description |
+| :--- | :--- |
+`some_command &` | run process `some_command` in the background
+`nohup gedit &` | start gedit in the background AND do not stop gedit, when shell is stopped. (Dies war ein einfaches Beispiel, aber es macht den eigentlichen Nutzen klar, wenn man z.B. per SSH auf einem fremden Rechner arbeitet und dort einen langwierigen Prozess starten möchte, die ssh-Verbindung aber während des Prozesses nicht permanent aktiv sein soll, weil man etwa den eigenen Rechner ausschalten möchte.)
 
-<hr>
+## symlinks
 
-su	|					switches to super user (root user) (requires root password !) (in Ubuntu: root account disabled by default for improved security)
+Main advantages: 
+- when you need to have a folder in multiple locations on your machine
+    - **Saves storage** by avoiding duplicate folders on the machine
+    - **Better versioning** by avoiding duplicate folders on the machine
 
-<hr>
+| command | description |
+| :--- | :--- |
+`ln -s path/to/existing/FILE path/to/LINK` | create a symlink to a **file** (no `/` at the end of the paths!)
+`ln -s path/to/existing/DIR path/to/LINK` | create a symlink to a **directory** (no `/` at the end of the paths!)
+`readlink -f LINK` | show symlink target \[**ACHTUNG**: das heißt **nicht**, dass das target auch existiert, s.i [LINK](https://serverfault.com/a/76049) !\] 
 
-ln -s FILE LINK | create symlink
-readlink -f LINK | show symlink target \[**ACHTUNG**: das heißt **nicht**, dass das target auch existiert, s.i [LINK](https://serverfault.com/a/76049) !\] 
+## Open Files from the Terminal
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 xdg-open file	|			open file using default application
 gio open file		|		same as xdg-open, but depends on what desktop the user has installed, whereas xdg-open is desktop agnostic
 
-<hr>
+## Process Management
 
+| command | description |
+| :--- | :--- |
 top	| activity monitor
 ps | wie `top`, aber keine real-time updates (dh. nur ein snapshot)
 echo $$ | show PID of current shell
@@ -286,15 +299,19 @@ kill *PID* | stop process with id *PID*, sends SIGTERM (i.e. kills gracefully) (
 pkill *process_name* | stop all processes containing *process_name* (which is a regular expression), sends SIGTERM (i.e. kills gracefully), *Warning:* use `pgrep` first to check which processes will be killed
 pgrep *process_name* | list all PIDs containing *process_name* (which is a regular expression)
 
-<hr>
+## Get Paths
 
+| command | description |
+| :--- | :--- |
 realpath foo.bar | get path to file "foo.bar" (like `pwd` + foo.bar)
 readlink -f foo.bar | get path to file "foo.bar" (like `pwd` + foo.bar)
 
-<hr>
+## Redirection, Pipe Tricks
 
-ls \| wc -l | count files in a directory
-history \| tail -n 30 | show last 30 commands
+| command | description |
+| :--- | :--- |
+`ls | wc -l` | count files in a directory
+`history | tail -n 30` | show last 30 commands
 
 # diff
 
