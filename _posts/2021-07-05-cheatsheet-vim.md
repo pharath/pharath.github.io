@@ -549,6 +549,16 @@ In the Ubuntu terminal profile settings set `Hack Nerd Font Regular` as the term
 `nvim-tree/nvim-tree.lua`
 - [doc](https://docs.rockylinux.org/books/nvchad/nvchad_ui/nvimtree/)
 - press `g ?` to show all shortcuts
+- Git Integration
+  - Icon indicates when a file is:
+    - ✗  unstaged or folder is dirty
+    - ✓  staged
+    - ★  new file
+    - ✓ ✗ partially staged
+    - ✓ ★ new file staged
+    - ✓ ★ ✗ new file staged and has unstaged modifications
+    - ═  merging
+    - ➜  renamed
 
 `toggleterm`
 - use `3<c-\>` to create and toggle terminal "3"
