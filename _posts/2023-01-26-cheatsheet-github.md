@@ -53,6 +53,8 @@ gh repo create
 ```bash
 gh repo view -h
 
+gh repo view dotfiles   # no "pharath/" prefix needed for "dotfiles"!
+
 gh repo view -b some_branch
 
 # name of the repository
