@@ -511,3 +511,7 @@ Bear is a tool that generates a [compilation database](https://clang.llvm.org/do
 ```bash
 sudo apt install bear
 ```
+
+## Generate a Compilation Database
+
+Bear is just **one** tool that can generate a compilation database. [How to generate a compilation database in CMake, Clang, Ninja](https://www.jetbrains.com/help/clion/compilation-database.html#compdb_generate).
