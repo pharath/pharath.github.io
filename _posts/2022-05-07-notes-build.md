@@ -515,3 +515,14 @@ sudo apt install bear
 ## Generate a Compilation Database
 
 Bear is just **one** tool that can generate a compilation database. [How to generate a compilation database in CMake, Clang, Ninja](https://www.jetbrains.com/help/clion/compilation-database.html#compdb_generate).
+
+# clang
+
+## .clangd (project configuration file, yaml)
+
+- e.g. to suppress the warning `In included file: main file cannot be included recursively when building a preamble` add 
+```yml
+Diagnostics:
+  Suppress: 'pp_including_mainfile_in_preamble'
+```
+to `.clangd`
