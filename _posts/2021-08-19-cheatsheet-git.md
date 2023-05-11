@@ -33,8 +33,10 @@ tags:
 | :--- | :--- |
 `git rm file1.txt` | remove the file from the Git repository **and the filesystem**
 `git rm --cached file1.txt` | remove the file only from the Git repository and not remove it from the filesystem
+`git add` | synonoym for `git stage` (since 2008), see [stackoverflow](https://stackoverflow.com/a/34175877)
 `git add -u :/` | `git rm` all files after accidentally `rm` those files
 `git add --all -- ':!./Gemfile' ':!./_config.yml' ':!./_layouts/*.bak' ':!./_sass/*.bak'` | **exclude files** from `git add`
+`git stage` | synonoym for `git add` (since 2008), see [stackoverflow](https://stackoverflow.com/a/34175877)
 
 ## git clone
 
@@ -42,7 +44,7 @@ tags:
 | :--- | :--- |
 `git clone --recurse-submodules repo <Ziel directory>` | 
 
-## git branch, git checkout
+## git branch
 
 | command | description |
 | :--- | :--- |
@@ -50,13 +52,20 @@ tags:
 `git branch -r` | show/list all branches (only remote)
 `git branch -d *local_branch*` | delete local branch *local_branch*
 `git push origin --delete *remote/branch*` | delete remote branch *remote/branch*
+`git branch -m new_name` | rename branch (`--move`)
+`git branch -M new_name` | force rename branch (`--move --force`), ie rename even if the branch name exists
+`git branch -vv` | show which **local branches** track which **remote branches**, useful e.g. when you are creating and setting up new branches
+`git branch --set-upstream my_branch origin/my_branch` | make the **local** `my_branch` track the **remote** `origin/my_branch` (similar to `git push --set-upstream origin <new_branch>`)
+
+## git checkout, git switch
+
+| command | description |
+| :--- | :--- |
 `git checkout <existing_branch>` | switch to an existing branch
 `git switch *branch*` | switch to an existing branch (since Git v2.23)
 `git checkout -b <new_branch>` | switch to a non-existing branch; subsequently, `git push --set-upstream origin <new_branch>` to create `new_branch` in the remote (on github.com), too. Here, the `--set-upstream` flag will make the local `<new_branch>` track the remote `remotes/origin/<new_branch>` (w/o this flag git does not know where to push the `new_branch`).
 `git switch -c *branch*` | switch to a non-existing branch (since Git v2.23)
 `git push --set-upstream origin <new_branch>` | push to a locally newly created branch (see `git checkout -b <new_branch>`) that does not yet exist on remote (i.e. on github.com)
-`git branch -vv` | show which **local branches** track which **remote branches**, useful e.g. when you are creating and setting up new branches
-`git branch --set-upstream my_branch origin/my_branch` | make the **local** `my_branch` track the **remote** `origin/my_branch` (similar to `git push --set-upstream origin <new_branch>`)
 
 ## git show-branch
 
@@ -465,16 +474,31 @@ man gh-repo-create
 
 ```bash
 gh auth login
-gh repo create
+gh repo create   # do not add anything, create an empty repo!
 gh repo list
+gh repo view dotfiles   # no "pharath/" prefix needed for "dotfiles"!
+# copy the repo url (needed for "git remote add")
 ```
 
 ```bash
 echo "# documentation" >> README.md
 git init
-git add README.md
+# Note: without this the initial commit will not be listed in "git log" and 
+# the branch will not be created ("git branch -a" will not show the branch)
+git add README.md   
+
+# from https://stackoverflow.com/a/42871621:
+# The branch "master" does not actually exist -- the branches don't get created until they have at least 
+# one commit (phth: this must be a non-empty commit!). 
+# Until the branch gets created, the branch only exists in ".git/HEAD", which explains why the "master" branch 
+# will disappear when you switch to "main".
+# either:
 git commit -m "first commit"
-git branch -M main
+git branch -m main
+# or: 
+git checkout -b main
+git commit -m "first commit"
+
 git remote add origin https://github.com/pharath/documentation.git
 git push -u origin main
 ```
