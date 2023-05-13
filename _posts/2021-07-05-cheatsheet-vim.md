@@ -648,6 +648,14 @@ require('nvim-treesitter.configs').setup {
 
 ## Formatting
 
+### C/C++
+
+```bash
+sudo apt install clang-format
+```
+
+Then use [vim-clang-format](https://github.com/rhysd/vim-clang-format).
+
 ### coc.nvim
 
 Nodejs extension host for vim and neovim, load extensions like VSCode and host language servers.
