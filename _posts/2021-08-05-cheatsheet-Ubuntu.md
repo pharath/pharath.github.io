@@ -115,6 +115,39 @@ CriticalPowerAction=HybridSleep
 
 Here you can manage all extensions installed on your machine.
 
+### Installed Extensions
+
+List installed extensions using 
+```bash
+# all
+gnome-extensions list
+
+# locally installed
+ls .local/share/gnome-shell/extensions/
+
+# system wide installed
+ls /usr/share/gnome-shell/extensions/
+```
+
+```bash
+# local
+compiz-alike-magic-lamp-effect@hermes83.github.com
+harddiskled@bijidroid.gmail.com
+jiggle@jeffchannell.com
+noannoyance@daase.net
+panel-osd@berend.de.schouwer.gmail.com
+switchWorkSpace@sun.wxg@gmail.com
+user-theme@gnome-shell-extensions.gcampax.github.com
+weeks-start-on-monday@extensions.gnome-shell.fifi.org
+```
+
+```bash
+# system wide
+desktop-icons@csoriano
+ubuntu-appindicators@ubuntu.com
+ubuntu-dock@ubuntu.com
+```
+
 ## Launch new instance when there is no instance open ON CURRENT WORKSPACE
 
 E.g. if a `gedit` instance is already open on some workspace, if you open a new instance, Ubuntu will always switch to that workspace first before opening the new instance which is presumably not what you want.
@@ -127,6 +160,10 @@ gsettings set org.gnome.shell.extensions.dash-to-dock isolate-workspaces true
 ## Remove "Window is ready" popup and focus window
 
 see [NoAnnoyance v2](https://extensions.gnome.org/extension/2182/noannoyance/)
+
+## Switch Workspace with Ctrl+AboveTab
+
+see [Switch Workspace](https://extensions.gnome.org/extension/1231/switch-workspace/)
 
 # Tracker
 
