@@ -202,8 +202,37 @@ make -j $N_Cores
 
 ## Makefile
 
+Source: [doc](https://www.gnu.org/software/make/manual/make.html#Recipes)
+
+### Rule
+
+- A **rule** appears in the makefile and says 
+  - when and how to remake certain files, called the rule's **targets** (most often only one per rule). 
+  - It lists the other files that are the **prerequisites** of the target, 
+  - and the **recipe** to use to create or update the target.
+- the `all` target (aka "default goal")
+  - The **order of rules** is not significant, except for determining the **default goal**: the target for `make` to consider, if you do not otherwise specify one. The default goal is the **first target of the first rule** in the first makefile.
+    - (...) We usually write the makefile so that the first rule is the one for **compiling the entire program** or all the programs described by the makefile (often with a target called `all`).
+
+### Recipe
+
+The **recipe** of a rule consists of **one or more shell command lines** to be executed, one at a time, in the order they appear. Typically, the result of executing these commands is that the target of the rule is brought up to date.
+
+Users use many different shell programs, but recipes in makefiles are always interpreted by `/bin/sh` unless the makefile specifies otherwise.
+
+### Variables
+
 `VAR ?= VALUE`
 - set to a value only if `VAR` not already set
+
+### Phony Targets
+
+Common phony targets: `all`, `install`, `clean`, `distclean`, `TAGS`, `info`, `check`
+
+see [simple explanation](https://stackoverflow.com/a/2145605)
+- in comments:
+  - @eSKay: 'why is it called 'phony'?' -- because it's not a real target. That is, the target name isn't a file that is produced by the commands of that target. - Bernard
+  - "phony" means fraudulent; fake; having a misleading appearance
 
 # CMake
 
@@ -510,16 +539,28 @@ Bear is a tool that generates a [compilation database](https://clang.llvm.org/do
 
 ```bash
 sudo apt install bear
+bear make   # generates the compile_commands.json file
 ```
 
-## Generate a Compilation Database
+## Other Tools to Generate a Compilation Database
 
 Bear is just **one** tool that can generate a compilation database. [How to generate a compilation database in CMake, Clang, Ninja](https://www.jetbrains.com/help/clion/compilation-database.html#compdb_generate).
 
 # clang
 
-## .clangd (project configuration file, yaml)
+- a C++ compiler
 
+## clangd
+
+`clangd` is a **language server**.
+- `clangd` is based on the **Clang C++ compiler**
+
+### .clangd file
+
+- a project configuration file
+- yaml format
+
+Use cases:
 - e.g. to suppress the warning `In included file: main file cannot be included recursively when building a preamble` add 
 ```yml
 Diagnostics:
