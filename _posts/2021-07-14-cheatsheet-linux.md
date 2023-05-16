@@ -220,6 +220,11 @@ sudo snap install pdftk | use `pdftk full-pdf.pdf cat 12-15 output outfile_p12-1
 `apt-cache show fzf` | will show `Refer /usr/share/doc/fzf/README.Debian for quick instructions on how to add keybindings for Bash, Zsh, Fish to call fzf.`
 `vim /usr/share/doc/fzf/README.Debian` | how to `source` fzf
 
+| command | description |
+| :--- | :--- |
+`sudo apt install fd-find` | fast alternative to `find`
+`ln -s $(which fdfind) ~/.local/bin/fd` | because the binary name `fd` is already used by another package
+
 # Dotfiles
 
 **Versioning**: see [atlassian.com](https://www.atlassian.com/git/tutorials/dotfiles)
