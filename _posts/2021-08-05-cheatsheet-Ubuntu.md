@@ -132,6 +132,7 @@ ls /usr/share/gnome-shell/extensions/
 ```bash
 # local
 compiz-alike-magic-lamp-effect@hermes83.github.com
+disableworkspaceanim@owilliams.mixxx.org
 harddiskled@bijidroid.gmail.com
 jiggle@jeffchannell.com
 noannoyance@daase.net
