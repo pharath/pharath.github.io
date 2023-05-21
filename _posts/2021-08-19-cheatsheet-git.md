@@ -63,9 +63,10 @@ tags:
 | :--- | :--- |
 `git checkout <existing_branch>` | switch to an existing branch
 `git switch *branch*` | switch to an existing branch (since Git v2.23)
-`git checkout -b <new_branch>` | switch to a non-existing branch; subsequently, `git push --set-upstream origin <new_branch>` to create `new_branch` in the remote (on github.com), too. Here, the `--set-upstream` flag will make the local `<new_branch>` track the remote `remotes/origin/<new_branch>` (w/o this flag git does not know where to push the `new_branch`).
+`git checkout -b <new_branch>` | switch to a non-existing branch; subsequently, `git push --set-upstream origin <new_branch>` to create `new_branch` in the remote (on github.com). 
+`git checkout -b <new_branch> <old_branch>` | create `<new_branch>` off `<old_branch>`
 `git switch -c *branch*` | switch to a non-existing branch (since Git v2.23)
-`git push --set-upstream origin <new_branch>` | push to a locally newly created branch (see `git checkout -b <new_branch>`) that does not yet exist on remote (i.e. on github.com)
+`git push --set-upstream origin <new_branch>` | push to a locally newly created branch (see `git checkout -b <new_branch>`) that does not yet exist on remote (i.e. on github.com). `--set-upstream`: will make the local `<new_branch>` track the remote `remotes/origin/<new_branch>` (w/o this flag git does not know where to push the `new_branch`).
 
 ## git show-branch
 
