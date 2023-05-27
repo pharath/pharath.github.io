@@ -45,7 +45,8 @@ Node Package Manager.
 | command | description |
 | :--- | :--- |
 `npm i -g npm` | **Do not run this! Use `nvm` instead.** Update `npm`.
-`npm install pkg` | install a package
+`npm install` (in a package directory, no arguments) | Install the dependencies to the local `node_modules` folder. In global mode (ie, with `-g` or `--global` appended to the command), it installs the current package context (ie, the current working directory) as a global package. By default, `npm install` will install all modules listed as dependencies in `package.json`.
+`npm install` | see [doc](https://docs.npmjs.com/cli/v9/commands/npm-install)
 `npm Uninstall pkg` | Uninstall a package
 `npm init` | this tells npm to make a file in your folder called `package.json` that is going to help you organise these dependencies.
 
