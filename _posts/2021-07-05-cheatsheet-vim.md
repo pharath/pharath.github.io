@@ -412,18 +412,18 @@ Esc | gehe in command mode
 | :--- | :--- |
 ctrl + c | gehe in command mode **<span style="color:red">Achtung:</span>** abbreviations funktionieren hier nicht im Ggs. zu dem "Esc" command mode
 alt + normal mode command | führt "normal mode command" im INSERT mode aus
-ctrl + o + (cmd)	|	switch to command mode for one command (gut für zB ctrl + o + $ oder andere Jump-commands) **<span style="color:red">Note:</span>** cmd nur bei Mac
+ctrl + o + (cmd) | switch to command mode for one command (gut für zB ctrl + o + `$` oder andere Jump-commands) **<span style="color:red">Note:</span>** cmd nur bei Mac
 
 ## Schreiben
 
 | command | description |
 | :--- | :--- |
-ctrl + x und danach ctrl + o	|	Omnicompletion (navigiere in Dropdown hoch/runter mit ctrl + p/ctrl + n)
-ctrl + p	|		completion with previous matching pattern
-ctrl + n 	|		completion with next matching pattern
-ctrl + t		|	indent
-ctrl + d		|	unindent
-ctrl + r dann % | insert current file name
+ctrl + x und danach ctrl + o | Omnicompletion (navigiere in Dropdown hoch/runter mit ctrl + p/ctrl + n)
+ctrl + p | completion with previous matching pattern
+ctrl + n | completion with next matching pattern
+ctrl + t | indent
+ctrl + d | unindent
+ctrl + r dann `%` | insert current file name
 
 # General facts
 
@@ -515,6 +515,9 @@ For **clangd**:
       - **Note**: the `--` in `make clean; bear -- make` is deprecated (see [issue](https://github.com/rizsotto/Bear/issues/202))
     - [bear github](https://github.com/rizsotto/Bear)
 - project configuration file: `.clangd` (in the root of the project)
+
+For **spectral** (json LSP):
+- open a json file, run `:LspInstall` and select `spectral`
 
 ## Font
 
