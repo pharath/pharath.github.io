@@ -41,8 +41,8 @@ toc_label: "Contents"
 # pyenv
 
 - For Python version management, e.g. 
-	- if you want to use multiple python versions on the same machine
-	- if a project requires an older python version
+    - if you want to use multiple python versions on the same machine
+    - if a project requires an older python version
 - `pipenv install` (see below) will automatically install a python version using `pyenv`, if the project requires it 
 
 ## Prerequisites
@@ -136,6 +136,20 @@ pip install -q,	--quiet | Give less output. Option is additive, and can be used 
 pip install pip-autoremove | utility to remove a package plus unused dependencies
 pip-autoremove *package* | remove a package plus unused dependencies (install `pip install pip-autoremove` first)
 
+## pip config
+
+| command | description |
+| :---: | :---: |
+pip config list | show all current settings. (There are multiple config files, see [doc](https://pip.pypa.io/en/stable/topics/configuration/#configuration-files))
+
+## pip cache
+
+[doc](https://pip.pypa.io/en/stable/topics/caching/)
+
+| command | description |
+| :---: | :---: |
+pip cache -h | help
+pip cache dir | show cache folder
 
 # pipx
 
@@ -172,8 +186,21 @@ virtualenv -p /home/username/opt/python-2.7.15/bin/python venv | create a virtua
 
 | command | description |
 | :---: | :---: |
-pip install -r requirements.txt | install all packages from a `requirements.txt` file
+`pip install -r requirements.txt` | install all packages from a `requirements.txt` file
+
+## pip freeze
+
+- `pip freeze` has some issues
+    - a better tool for generating `requirements.txt`: [pip-compile](https://github.com/jazzband/pip-tools?ref=alexo.dev)
+
+| command | description |
+| :---: | :---: |
 pip freeze > requirements.txt | write all packages in the current environment to a `requirements.txt` file (**Note**: [freeze vs. pipreqs](https://stackoverflow.com/a/31684470): `freeze` saves all packages in the environment including those that you don't use in your current project!)
+
+Problems:
+- `pkg_resources==0.0.0`
+    - `pip freeze` also includes `pkg_resources==0.0.0` in the `requirements.txt` which can cause errors, when running `pip install -r requirements.txt`
+        - you can safely remove this line (see [stackoverflow](https://stackoverflow.com/questions/39577984/what-is-pkg-resources-0-0-0-in-output-of-pip-freeze-command))
 
 # pipenv
 
@@ -275,6 +302,12 @@ pip show torch | show the location of package "torch" (there you can find the so
 `sys.path`
 - [doc](https://docs.python.org/3/library/sys.html#sys.path)
 - A list of strings that specifies the search path for modules. Initialized from the environment variable `PYTHONPATH`, plus an installation-dependent default.
+
+## setuptools
+
+### setup.py
+
+- package name: [underscores converted to dashes](https://github.com/pypa/setuptools/issues/2522)
 
 # Coding Tricks
 
