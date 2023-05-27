@@ -11,7 +11,6 @@ tags:
   - cheatsheet
 ---
 
-
 # Important
 
 TODO: Could not make it work for **private** git repos yet.
@@ -46,6 +45,9 @@ mkdir data
 # clone a file
 dvc get https://github.com/iterative/dataset-registry get-started/data.xml -o data/data.xml
 # add a directory
+dvc add mydir/
+# add each file in a directory individually 
+# (Don't use this! Not needed!) (see https://dvc.org/doc/command-reference/add#adding-entire-directories)
 dvc add -R mydir/
 # add a file
 dvc add data/data.xml   # like "git add" + "git commit" together; use "dvc add --no-commit" flag to avoid committing
@@ -107,16 +109,145 @@ To get a `git`-like behavior:
 
 | command | description |
 | :--- | :--- |
-`dvc add -R mydir/` | adds subdirectories of `mydir/` recursively (by default, `dvc add` does not!)
+`dvc add mydir/` | adds directory `mydir/`
+`dvc add -R mydir/` | adds each file in subdirectories of `mydir/` recursively (Don't use this! Not needed! See [doc](https://dvc.org/doc/command-reference/add#adding-entire-directories))
+
+# dvc list url path
+
+The following commands will only work when
+- you are **inside a DVC repo** (outside a DVC repo you will only see the files and folders that have a corresponding `.dvc` file)
+- a **default** remote (`dvc remote default`) containing the target is set for the current DVC repo ([doc](https://dvc.org/doc/command-reference/remote/default))
+
+```bash
+dvc list . .
+dvc list . data/augmented/data_11_19.v4i.darknet/
+dvc list -R . data/augmented/data_11_19.v4i.darknet/
+```
+
+# dvc pull
+
+- Downloads tracked files or directories from remote storage based on the current `dvc.yaml` and `.dvc` files, and makes them visible **in the workspace** (i.e. in the git repo folder).
+- Downloads tracked data from a dvc remote **to the cache**.
+
+```bash
+dvc pull data/raw_not_augmented/data_11_19.v6i.darknet/train/
+```
+
+# dvc get url path
+
+- Downloads a file or directory tracked by DVC or by Git into the current working directory.
+- This file or directory must be found in a `dvc.yaml` or `.dvc` file of the repo.
+
+`dvc get` is like `wget` or `curl`.
+
+Get the folder `data/raw_not_augmented/data_11_19.v6i.darknet/`:
+```bash
+cd path/to/gitlab/dvc/repo/
+dvc get . data/raw_not_augmented/data_11_19.v6i.darknet/
+```
+
+# dvc config
+
+**Important:** This configuration is specific to the Git repository of the dataset (it is not set globally)!
+
+Your **repo** configuration should look similar to this:
+
+```bash
+$ dvc config -l
+
+remote.galaxisgdrive.url=gdrive://1-7B_Sg8rX0IjozvJy31j4La4xiGB_rrw
+core.remote=galaxisgdrive
+remote.galaxisgdrive.gdrive_user_credentials_file=/home/bra-ket/.gdrive/myremote-credentials.json
+remote.galaxisgdrive.gdrive_acknowledge_abuse=true
+```
+
+If your configuration doesn't look like this, you have to go through the authorization process first (see [Authorization](#authorization)).
 
 # dvc remote
 
+**Important:** DVC remotes are set for each Git repository individually! I.e. the output of `dvc remote list` depends on your current working directory.
+
 ## Authorization
 
+### Google Drive
+
+**Important:** If you have any authorization issues, chances are that your GDrive token has expired. Re-run the following command followed by `dvc pull`. A browser window should pop up and GDrive will prompt you to log in again (also see [Troubleshooting](#problem-1)).
+
 ```bash
+# Set "myremote" to your specific remote's name
 dvc remote modify myremote --local gdrive_user_credentials_file ~/.gdrive/myremote-credentials.json
 ```
-- this is necessary e.g. if you are adding a remote from a different GDrive account than the first remote
+- this is necessary e.g. if 
+  - you want to configure `remote.yourremote.gdrive_user_credentials_file` for your dvc repo
+  - you are adding a remote from a different GDrive account than the first remote
+  - you want to refresh your expired GDrive access token (see [Troubleshooting](#problem-1))
+    - see `"token_expiry": "2023-05-17T04:00:13Z",` field in `~/.gdrive/myremote-credentials.json`
 - **IMPORTANT**: Add `~/.gdrive/myremote-credentials.json` to `.gitignore`! Don't commit it!
   - the `--local` flag writes to `.dvc/config.local` which is in `.dvc/.gitignore`
 - [dvc doc - GDrive Authorization](https://dvc.org/doc/user-guide/data-management/remote-storage/google-drive#authorization)
+
+```bash
+# Set "myremote" to your specific remote's name
+dvc remote modify myremote gdrive_acknowledge_abuse true
+```
+- see [Troubleshooting](#problem-2)
+- see [dvc doc](https://dvc.org/doc/user-guide/data-management/remote-storage/google-drive#authorization)
+
+# Troubleshooting
+
+## Problem 1
+
+```bash
+ERROR: unexpected error - : <HttpError 404 when requesting https://www.googleapis.com/drive/v2/files/1-7B_Sg8rX0IjozvJy31j4La4xiGB_rrw?fields=driveId&supportsAllDrives=true&alt=json returned "File not found: 1-7B_Sg8rX0IjozvJy31j4La4xiGB_rrw". Details: "[{'message': 'File not found: 1-7B_Sg8rX0IjozvJy31j4La4xiGB_rrw', 'domain': 'global', 'reason': 'notFound', 'location': 'file', 'locationType': 'other'}]">
+
+Having any troubles? Hit us up at https://dvc.org/support, we are always happy to help!
+```
+
+**Problem**:
+
+The `remote.yourremote.gdrive_user_credentials_file` field is probably not set for your repo (check with `dvc config -l`).
+
+**Solution**:
+
+See [Authorization GDrive](#google-drive)
+
+## Problem 2
+
+```bash
+ERROR: failed to transfer '22a1a2931c8370d3aeedd7183606fd7f' - <HttpError 403 when requesting https://www.googleapis.com/drive/v2/files/1B1qrTj9XDcz5ywlZHnnbrghQIElgIImm?acknowledgeAbuse=false&alt=media returned "This file has been identified as malware or spam and cannot be downloaded". Details: "[{'message': 'This file has been identified as malware or spam and cannot be downloaded', 'domain': 'global', 'reason': 'abuse'}]">                                            
+ERROR: failed to pull data from the cloud - 1 files failed to download
+```
+
+**Solution**:
+
+Set `dvc remote modify myremote gdrive_acknowledge_abuse true`
+- **Note**: If you set this, you should use the latest `dvc` version. Older `dvc` versions will start throwing strange errors. Also make sure you have installed `pip install dvc[gdrive]`.
+
+## Problem 3
+
+```bash
+ERROR: configuration error - config file error: extra keys not allowed @ data['remote']['galaxisgdrive']['drive_acknowledge_abuse']
+```
+
+Solution:
+- typo, you forgot "`g`" in front of "`drive_acknowledge_abuse`": use `['gdrive_acknowledge_abuse']` instead of `['drive_acknowledge_abuse']` 
+
+## Problem 4
+
+```bash
+(env) bra-ket@braket-pc:~/git/Galaxis/object-detection-2023/training_code$ dvc list . data/
+ERROR: failed to list '.' - Current operation was unsuccessful because '/home/bra-ket/git/Galaxis/object-detection-2023/training_code/test_dvc/dvc-det-2023/models/10feb23_v3tiny' requires existing cache on 'local' remote. See <https://man.dvc.org/config#cache> for information on how to set up remote cache.
+```
+
+Solution:
+- You are probably not in a DVC repo. Check, if you are in a DVC repo.
+
+## Problem 5
+
+```bash
+(env) bra-ket@braket-pc:~/git/Galaxis/object-detection-2023/dvc-det-2023/data$ dvc list . data/
+ERROR: unexpected error - [Errno 2] No such file or directory: '/home/bra-ket/git/Galaxis/object-detection-2023/dvc-det-2023/data/data'
+```
+
+Solution:
+- `data/` does not exist in the current directory. Run `dvc list . .` to list the contents of the current directory.
