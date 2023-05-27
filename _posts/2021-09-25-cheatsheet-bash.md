@@ -187,6 +187,12 @@ fi
 - **Note:** If no file descriptor value is specified, bash will use `stdout` (i.e. file descriptor value `1`) by default.
 - `echo "Hello World" > log.txt`
 
+## Redirect to /dev/null
+
+- Send the output to `/dev/null`: `command 1> /dev/null`.
+- Send the error to `/dev/null`: `command 2> /dev/null`.
+- Send both output and error to `/dev/null`: `command 2>&1 /dev/null`.
+
 ## Redirect stderr AND stdout to /dev/null
 
 - `grep -r hello /sys/ &> /dev/null`
