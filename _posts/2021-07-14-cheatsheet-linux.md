@@ -420,8 +420,8 @@ sudo apt --purge remove ... | see `sudo apt purge ...`
 | :--- | :--- |
 | sudo dpkg -l \| less	| list all installed dpkg packages [meaning of tags ii, rc, ...](https://askubuntu.com/questions/18804/what-do-the-various-dpkg-flags-like-ii-rc-mean)
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 |**Tipp:**|AM BESTEN DIE FOLGENDEN 3 ALLE AUSFÜHREN, DA JEDER EINEN ANDEREN OUTPUT HAT !
 sudo dpkg -l package	|		confirm whether package is already installed (wenn nicht installed, dann wird “no packages found matching package” angezeigt) (ACHTUNG: exakten Namen schreiben, zB “lua” findet “lua5.1” nicht !) 
 sudo dpkg -l \| grep package	|	confirm whether package is already installed (wenn nicht installed, dann wird nichts angezeigt) (ACHTUNG regexp: zB “lua” findet “lua5.1” ! )
@@ -436,19 +436,19 @@ grep " install " /var/log/dpkg.log.1 |		list recently installed packages (in the
 zgrep " install " /var/log/dpkg.log.2.gz |	list recently installed packages (go back 2 months, same for >2 months)
 vim /var/log/apt/history.log | view apt history
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 sudo dpkg -i package_file.deb |	install package_file.deb (alternative: `sudo apt install ./name.deb`)
 sudo dpkg -P *some_package* | purge *some_package*
 sudo dpkg -r *some_package* | remove *some_package*
 sudo apt remove package |		uninstall package_file.deb
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 dpkg -l \| grep ^..r   |   list all broken packages (**r** state (on the third field) means: reinst-required (package broken, reinstallation required))
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 sudo vim /var/lib/dpkg/info/nvidia-cuda-toolkit.list | in /var/lib/dpkg/info/ sind die installation files (.conffiles, .list, .md5sums) für alle packages (hier: nvidia-cuda-toolkit)
 
 ## snap
@@ -478,27 +478,27 @@ sudo snap remove --purge *package* |
 | :--- | :--- |
 chmod *permissions file* |     is an abbreviation of change mode. A files mode is the set of permissions attached to it that control access. Zu *permissions*: s. [here](https://askubuntu.com/tags/chmod/info).
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 groups |					list all groups the currently logged in user belongs to (first group is the primary group)
 groups user |				same as “groups”, but for specific user “user”
 id |						“
 id user	|				“
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 less /etc/group	|		view all groups present on the system
 cat /etc/group |			“
 getent group |				“
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 getent group docker |		list all members of group docker
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 sudo groupadd docker |		add new group docker
-sudo usermod -aG docker $USER |	add my user to the docker group
+`sudo usermod -aG docker $USER` |	add my user to the docker group
 newgrp docker |			log out and log back in so that group membership is re-evaluated (nach group Änderungen); wenn das nicht geht, reboot
 
 # bash
@@ -650,15 +650,11 @@ tar -C ~/ -xvf tor-browser-linux64-10.5.2_en-US.tar.xz | für .tar.xz
 diskutil list |
 diskutil info /dev/disk2s2 |
 
-<hr>
-
 | command | description |
 | :--- | :--- |
 sudo diskutil mountDisk /dev/disk2s2 | (Partitionsname disk2s2 steht in rechter Spalte bei diskutil list; /dev/disk2 mounted alle Unterpartitionen)
 sudo diskutil umountDisk /dev/disk2s2 |
 mount_ntfs -o r “/Volumes/Volume node” | (r für read-only; rw für read-write (NICHT MACHEN! Es gibt einen Grund warum das bei Mac per default nicht geht!)
-
-<hr>
 
 | command | description |
 | :--- | :--- |
@@ -877,18 +873,18 @@ firefox -no-remote -no-xshm | display firefox on local client (no -X or -Y flag 
       - Make sure X11 SSHD Forwarding Enabled
       - Make sure X11 client forwarding enabled
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 ssh -Y bra-ket@10.14.14.60 | display graphical output on trusted local client (**Caution**: may lead to security issues), [difference -X vs -Y flag](https://askubuntu.com/a/35518)
 ssh -X bra-ket@10.14.14.60 | display graphical output on untrusted local client, [difference -X vs -Y flag](https://askubuntu.com/a/35518)
 export DISPLAY=localhost:10.0 | set display (use `w` or `xauth list` to list diplays) ("**:0**" ist der server monitor; zB. "**localhost:10.0**" ist der client monitor, wobei localhost:=127.0.0.1 (127.0. 0.1 is the loopback Internet protocol (IP) address also referred to as the localhost. The address is used to establish an IP connection to the same machine or computer being used by the end-user. The same convention is defined for computers that support IPv6 addressing using the connotation of ::1.)
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 caffeinate -u | **for Mac**: prevent the system from sleeping and (-u for) prevent the system from sleeping [source](https://apple.stackexchange.com/questions/53802/waking-display-from-terminal-general-waking/161527)
 
-<hr>
-
+| command | description |
+| :--- | :--- |
 ssh-keygen -R 10.14.14.92 | remove 10.14.14.92 from .ssh/known_hosts (falls aus Versehen geaddet)
 
 ## scp
