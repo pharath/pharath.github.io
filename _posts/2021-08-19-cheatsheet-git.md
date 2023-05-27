@@ -546,6 +546,12 @@ git push origin HEAD:main
 2. `git submodule update --progress`
     - use `--progress` to display a cloning progress report
 
+## Add submodule
+
+```bash
+git submodule add <git repo url> path/to/submodule/folder/
+```
+
 # git gc
 
 Generally speaking you shouldn't be running garbage collection manually. It is a bad habit to get into and git does garbage collection when needed anyways. [stackoverflow comment under an answer](https://stackoverflow.com/a/18515113)
