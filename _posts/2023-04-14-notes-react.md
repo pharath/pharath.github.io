@@ -80,12 +80,46 @@ nvim src/index.js   # change line to: `import App from './components/App/App';`
 
 Creates a documentation page in React that is easy to maintain.
 
-Create a blank template:
+E.g. the [create-react-app doc](https://create-react-app.dev/) was built using Docusaurus (see [source code on github](https://github.com/facebook/create-react-app/tree/main/docusaurus)).
+
+### Installation
+
+For more details see [docusaurus doc](https://docusaurus.io/docs/installation#scaffold-project-website).
+
+```bash
+nvm install lts/hydrogen --latest-npm
+nvm alias default lts/hydrogen
+nvm use lts/hydrogen
+```
+
+### Generate a new Docusaurus Website
+
+```bash
+npx create-docusaurus@latest my-website classic
+```
+
+Or create a blank template:
 ```bash
 npm init docusaurus@latest
 ```
 
-E.g. the [create-react-app doc](https://create-react-app.dev/) was built using Docusaurus (see [source code on github](https://github.com/facebook/create-react-app/tree/main/docusaurus)).
+### Local Development
+
+```
+$ cd my-website/
+$ npm start
+```
+
+This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+
+### Local Build
+
+Always build it locally before you push it to Gitlab.
+
+```bash
+npm run build
+npm run serve
+```
 
 # setState()
 
