@@ -297,12 +297,13 @@ gio open file		|		same as xdg-open, but depends on what desktop the user has ins
 
 | command | description |
 | :--- | :--- |
-top	| activity monitor
+top | activity monitor
 ps | wie `top`, aber keine real-time updates (dh. nur ein snapshot)
-echo $$ | show PID of current shell
-kill *PID* | stop process with id *PID*, sends SIGTERM (i.e. kills gracefully) (see [notes bash]({% post_url 2021-09-25-cheatsheet-bash %}#job-control) and [kill doc](https://man7.org/linux/man-pages/man1/kill.1.html))
-pkill *process_name* | stop all processes containing *process_name* (which is a regular expression), sends SIGTERM (i.e. kills gracefully), *Warning:* use `pgrep` first to check which processes will be killed
-pgrep *process_name* | list all PIDs containing *process_name* (which is a regular expression)
+`ps -eo pid,lstart,cmd | grep 2127686` | start time of PID 2127686 
+`echo $$` | show PID of current shell
+`kill PID` | stop process with id *PID*, sends SIGTERM (i.e. kills gracefully) (see [notes bash]({% post_url 2021-09-25-cheatsheet-bash %}#job-control) and [kill doc](https://man7.org/linux/man-pages/man1/kill.1.html))
+`pkill process_name` | stop all processes containing *process_name* (which is a regular expression), sends SIGTERM (i.e. kills gracefully), *Warning:* use `pgrep` first to check which processes will be killed
+`pgrep process_name` | list all PIDs containing *process_name* (which is a regular expression)
 
 ## Get Paths
 
@@ -356,7 +357,7 @@ sudo apt update			|
 sudo apt [-y] upgrade		|	-y oder —yes für automatic yes to prompts	
 apt --help |
 sudo apt autoremove |   remove not needed packages (NOTE: This command will remove all unused packages (orphaned dependencies). Explicitly installed packages will remain.)
-sudo apt-mark auto $PACKAGES | mark $PACKAGES as "automatically installed", if accidentally marked as "manually installed"
+`sudo apt-mark auto $PACKAGES` | mark `$PACKAGES` as "automatically installed", if accidentally marked as "manually installed"
 
 ## apt
 
@@ -398,8 +399,10 @@ sudo apt install ./name.deb | install a .deb file
 
 | command | description |
 | :--- | :--- |
-sudo apt purge ... | Removing packages with `sudo apt purge ...` or `sudo apt --purge remove ...` will remove them and all their global (i.e., systemwide) configuration files. This is usually what people mean when they talk about completely removing a package. **This does not remove packages that were installed as dependencies**, when you installed the package you're now removing. Assuming those packages aren't dependencies of any other packages, and that you haven't marked them as manually installed, you can remove the dependencies with `sudo apt autoremove` or (if you want to delete their systemwide configuration files too) `sudo apt --purge autoremove`.
-sudo apt --purge remove ... | see `sudo apt purge ...`
+`sudo apt purge ...` | Removing packages with `sudo apt purge ...` or `sudo apt --purge remove ...` will remove them and all their global (i.e., systemwide) configuration files. This is usually what people mean when they talk about completely removing a package. **This does not remove packages that were installed as dependencies**, when you installed the package you're now removing. Assuming those packages aren't dependencies of any other packages, and that you haven't marked them as manually installed, you can remove the dependencies with `sudo apt autoremove` or (if you want to delete their systemwide configuration files too) `sudo apt --purge autoremove`.
+`sudo apt --purge remove ...` | see `sudo apt purge ...`
+`sudo apt autoremove` | remove the **dependencies** that are no longer needed
+`sudo apt --purge autoremove` | remove **systemwide configuration files and the dependencies** that are no longer needed
 
 ### Check
 
@@ -418,38 +421,38 @@ sudo apt --purge remove ... | see `sudo apt purge ...`
 
 | command | description |
 | :--- | :--- |
-| sudo dpkg -l \| less	| list all installed dpkg packages [meaning of tags ii, rc, ...](https://askubuntu.com/questions/18804/what-do-the-various-dpkg-flags-like-ii-rc-mean)
+`sudo dpkg -l | less`	| list all installed dpkg packages [meaning of tags ii, rc, ...](https://askubuntu.com/questions/18804/what-do-the-various-dpkg-flags-like-ii-rc-mean)
 
 | command | description |
 | :--- | :--- |
 |**Tipp:**|AM BESTEN DIE FOLGENDEN 3 ALLE AUSFÜHREN, DA JEDER EINEN ANDEREN OUTPUT HAT !
-sudo dpkg -l package	|		confirm whether package is already installed (wenn nicht installed, dann wird “no packages found matching package” angezeigt) (ACHTUNG: exakten Namen schreiben, zB “lua” findet “lua5.1” nicht !) 
-sudo dpkg -l \| grep package	|	confirm whether package is already installed (wenn nicht installed, dann wird nichts angezeigt) (ACHTUNG regexp: zB “lua” findet “lua5.1” ! )
-sudo dpkg-query -s package	| prüfe ob package installiert ist (ACHTUNG regexp: exakten Namen schreiben, zB “lua” findet “lua5.1” nicht !) und print weitere Informationen zum package
+`sudo dpkg -l package`	|		confirm whether package is already installed (wenn nicht installed, dann wird “no packages found matching package” angezeigt) (ACHTUNG: exakten Namen schreiben, zB “lua” findet “lua5.1” nicht !) 
+`sudo dpkg -l | grep package`	|	confirm whether package is already installed (wenn nicht installed, dann wird nichts angezeigt) (ACHTUNG regexp: zB “lua” findet “lua5.1” ! )
+`sudo dpkg-query -s package`	| prüfe ob package installiert ist (ACHTUNG regexp: exakten Namen schreiben, zB “lua” findet “lua5.1” nicht !) und print weitere Informationen zum package
 
 see also [how-to-show-history-of-installed-packages](https://www.linuxuprising.com/2019/01/how-to-show-history-of-installed.html)
 
 | command | description |
 | :--- | :--- |
-grep " install \\| remove " /var/log/dpkg.log |			list recently installed OR removed packages (in the current month)
-grep " install " /var/log/dpkg.log.1 |		list recently installed packages (in the previous month)
-zgrep " install " /var/log/dpkg.log.2.gz |	list recently installed packages (go back 2 months, same for >2 months)
-vim /var/log/apt/history.log | view apt history
+`grep " install \| remove " /var/log/dpkg.log` | list recently installed OR removed packages (in the current month)
+`grep " install " /var/log/dpkg.log.1` | list recently installed packages (in the previous month)
+`zgrep " install " /var/log/dpkg.log.2.gz` | list recently installed packages (go back 2 months, same for >2 months)
+`vim /var/log/apt/history.log` | view apt history
 
 | command | description |
 | :--- | :--- |
-sudo dpkg -i package_file.deb |	install package_file.deb (alternative: `sudo apt install ./name.deb`)
-sudo dpkg -P *some_package* | purge *some_package*
-sudo dpkg -r *some_package* | remove *some_package*
-sudo apt remove package |		uninstall package_file.deb
+`sudo dpkg -i package_file.deb` | install `package_file.deb` (alternative: `sudo apt install ./name.deb`)
+`sudo dpkg -P *some_package*` | purge `*some_package*`
+`sudo dpkg -r *some_package*` | remove `*some_package*`
+`sudo apt remove package` | uninstall `package_file.deb`
 
 | command | description |
 | :--- | :--- |
-dpkg -l \| grep ^..r   |   list all broken packages (**r** state (on the third field) means: reinst-required (package broken, reinstallation required))
+`dpkg -l | grep ^..r`   |   list all broken packages (**r** state (on the third field) means: reinst-required (package broken, reinstallation required))
 
 | command | description |
 | :--- | :--- |
-sudo vim /var/lib/dpkg/info/nvidia-cuda-toolkit.list | in /var/lib/dpkg/info/ sind die installation files (.conffiles, .list, .md5sums) für alle packages (hier: nvidia-cuda-toolkit)
+`sudo vim /var/lib/dpkg/info/nvidia-cuda-toolkit.list` | in `/var/lib/dpkg/info/` sind die installation files (`.conffiles`, `.list`, `.md5sums`) für alle packages (hier: `nvidia-cuda-toolkit`)
 
 ## snap
 
@@ -467,10 +470,25 @@ sudo snap remove --purge *package* |
 
 | command | description |
 | :--- | :--- |
-| man pkg-config | description of all pkg-config flags
-| pkg-config --libs-only-l json-c | was man im CMakeLists.txt in `target_link_libraries` eintragen muss (hier: `-ljson-c` Achtung: das `-l` muss auch im CMakeLists.txt rein!)
-| pkg-config --libs-only-L json-c | location of .so library file (hier: in ubuntu 18.04: findet er nicht, ist aber in `/lib/x86_64-linux-gnu`; in ubuntu 20.04: `-L/usr/local/lib`) (see also: [difference .so vs .a libraries](https://stackoverflow.com/a/9810368/12282296)) (muss nicht in CMakeLists.txt rein, s. [Minimalbsp](https://github.com/pharath/home/tree/master/assets/_code_examples/jsonc))
-| pkg-config --cflags json-c | include paths of the corresponding library with .h header files (hier: in ubuntu 18.04: `-I/usr/include/json-c`; in ubuntu 20.04: `-I/usr/local/include -I/usr/local/include/json-c`) (muss nicht in CMakeLists.txt rein)
+`man pkg-config` | description of all pkg-config flags
+`pkg-config --libs-only-l json-c` | was man im CMakeLists.txt in `target_link_libraries` eintragen muss (hier: `-ljson-c` Achtung: das `-l` muss auch im CMakeLists.txt rein!)
+`pkg-config --libs-only-L json-c` | location of .so library file (hier: in ubuntu 18.04: findet er nicht, ist aber in `/lib/x86_64-linux-gnu`; in ubuntu 20.04: `-L/usr/local/lib`) (see also: [difference .so vs .a libraries](https://stackoverflow.com/a/9810368/12282296)) (muss nicht in CMakeLists.txt rein, s. [Minimalbsp](https://github.com/pharath/home/tree/master/assets/_code_examples/jsonc))
+`pkg-config --cflags json-c` | include paths of the corresponding library with .h header files (hier: in ubuntu 18.04: `-I/usr/include/json-c`; in ubuntu 20.04: `-I/usr/local/include -I/usr/local/include/json-c`) (muss nicht in CMakeLists.txt rein)
+
+# tty, terminal session management
+
+From [stackexchange](https://unix.stackexchange.com/a/21294):
+- A `tty` is a native terminal device, the backend is either hardware or kernel emulated.
+- A `pty` (pseudo terminal device) is a terminal device which is emulated by an other program (example: `xterm`, `screen`, or `ssh` are such programs). 
+- A `pts` is the slave part of a `pty`.
+- **More info**: see [stackexchange](https://unix.stackexchange.com/a/21294) and `man pty`
+
+| command | description |
+| :--- | :--- |
+`tty`	| zeigt Namen des aktiven terminals
+`ls -ltr /dev/ttys*`	| zeigt Namen aller aktiven terminals 
+`last` | zeige letzte terminal logins
+`whoami` | print the user name associated with the current effective user ID 
 
 # chmod, Groups
 
@@ -516,18 +534,37 @@ ctrl + a | jump to the beginning of the line
 ctrl + e | jump to the end of the line
 ctrl + s | freeze/block terminal
 ctrl + q | unfreeze/unblock terminal
+fn + links | scrolle nach ganz oben
+cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen will)
 
 ## terminal commands and bash scripting
 
+### Shell
+
 | command | description |
 | :--- | :--- |
-echo Variable | display content of the variable "Variable"
-printenv | Print the values of the specified environment VARIABLE(s).
-echo $$ | display PID of current shell
-bash | start new bash shell instance in current bash shell (the new shell will have a different PID than the old one, check shell PID via `echo $$`)
-`exec > some_file` | redirect all shell output to `some_file`
-cat /etc/shells | list all shells
-chsh | change shell (you will be prompted to enter one of the shells in `cat /etc/shells`)
+`echo $$` | display PID of current shell
+`bash` | start new bash shell instance in current bash shell (the new shell will have a different PID than the old one, check shell PID via `echo $$`)
+`cat /etc/shells` | list all shells
+`chsh` | change shell (you will be prompted to enter one of the shells in `cat /etc/shells`)
+
+### env, PATH
+	
+| command | description |
+| :--- | :--- |
+`printenv` | Print the values of the specified environment VARIABLE(s).
+`env` | show all environment variables
+`env NAME=VALUE` | Set each NAME to VALUE in the environment
+`echo $PATH` | Variable, die alle Pfade enthält, in denen Shell-Programme/Shell-Befehle (ls, echo, df, nautilus, etc.) gesucht werden
+`echo $Variable` | display content of the variable "`Variable`"
+
+### Finding Program Paths
+
+| command | description |
+| :--- | :--- |
+`which <program>` | show the path of a program
+`which python3` |		
+`whereis python3` |
 
 ### Running Multiple Commands
 
@@ -536,25 +573,18 @@ chsh | change shell (you will be prompted to enter one of the shells in `cat /et
 `do_something1 && do_something2_that_depended_on_something1` | only run "something2", if "something1" completes successfully
 `do_something1; do_something2` | run "something2" irrespective of "something1"
 
-### PATH Variable
-	
-| command | description |
-| :--- | :--- |
-$PATH | Variable, die alle Pfade enthält, in denen Shell-Programme/Shell-Befehle (ls, echo, df, nautilus, etc.) gesucht werden
-which python3 |		
-whereis python3	|
-which *Shell-program* | display path of Shell-program
-
-### find
+### find, locate
 
 | command | description |
 | :--- | :--- |
-find /opt/ -iname pattern | find all files (hier: in dir /opt/ ), for which base of file name (path with leading dirs removed) matches shell pattern pattern (Achtung: pattern muss genau übereinstimmen! Falls Endung unbekannt, mit Sternchen `*` am Ende suchen, dh. `pattern*` statt `pattern` suchen (wie bei `ls` Befehl).
-find /opt/ -name pattern | wie -iname, aber case-sensitive
-find /opt/ -iname pattern -type f | nur files suchen
-find /opt/ -iname pattern -type d | nur dirs suchen
-find /opt/ ( -iname pattern1 -o -iname pattern2 ) |	-o für oder
-find /opt/ -size +1G | nur files, die über 1GB groß sind
+`find /opt/ -iname pattern` | find all files (hier: in dir `/opt/` ), for which base of file name (path with leading dirs removed) matches shell pattern `pattern` (Achtung: `pattern` muss genau übereinstimmen! Falls Endung unbekannt, mit Sternchen `*` am Ende suchen, dh. `pattern*` statt `pattern` suchen (wie bei `ls` Befehl).
+`find /opt/ -name pattern` | wie -iname, aber case-sensitive
+`find /opt/ -iname pattern -type f` | nur files suchen
+`find /opt/ -iname pattern -type d` | nur dirs suchen
+`find /opt/ ( -iname pattern1 -o -iname pattern2 )` | `-o` für oder
+`find /opt/ -size +1G` | nur files, die über 1GB groß sind
+`locate <file>` | faster than find, but uses a database which must be updated via `sudo updatedb` to find recent changes
+`sudo updatedb` | update the `locate` command's database
 
 ### grep
 
@@ -564,36 +594,28 @@ find /opt/ -size +1G | nur files, die über 1GB groß sind
 
 ### sed
 
-| command | description |
-| :--- | :--- |
-sed 's/unix/linux/' geekfile.txt | replaces the word 'unix' with 'linux' in the file 'geekfile.txt'. `sed` is mostly used to replace text in a file. Examples: see [here](https://www.geeksforgeeks.org/sed-command-in-linux-unix-with-examples/).
-
-### Shortcuts
+- for line-based input
+- "Sed uses basic regular expressions (BRE). In a BRE, in order to have them treated literally, the characters `$.*[\^` need to be quoted by preceding them by a backslash, except inside character sets (`[…]`). Letters, digits and `(){}+?|` must not be quoted (you can get away with quoting some of these in some implementations)." ([more](https://unix.stackexchange.com/a/33005))
 
 | command | description |
 | :--- | :--- |
-fn + links | scrolle nach ganz oben
-cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen will)
+`sed 's/unix/linux/' geekfile.txt` | replaces the word 'unix' with 'linux' in the file 'geekfile.txt'. `sed` is mostly used to replace text in a file. Examples: see [here](https://www.geeksforgeeks.org/sed-command-in-linux-unix-with-examples/).
+`sed -E` | use extended (ERE) regular expression syntax
 
-### tty, terminal session management
+### tr
 
-From [stackexchange](https://unix.stackexchange.com/a/21294):
-- A `tty` is a native terminal device, the backend is either hardware or kernel emulated.
-- A `pty` (pseudo terminal device) is a terminal device which is emulated by an other program (example: `xterm`, `screen`, or `ssh` are such programs). 
-- A `pts` is the slave part of a `pty`.
-- **More info**: see [stackexchange](https://unix.stackexchange.com/a/21294) and `man pty`
+- hard to replace `\n` with `sed`, `tr` is better here ([stackoverflow](https://stackoverflow.com/a/1252010))
 
 | command | description |
 | :--- | :--- |
-tty	| zeigt Namen des aktiven terminals
-`ls -ltr /dev/ttys*`	| zeigt Namen aller aktiven terminals 
-last | zeige letzte terminal logins
-whoami | print the user name associated with the current effective user ID 
+`tr '\n' ' '` | replace all `\n` with spaces
+`tr -d '\n'` | delete all `\n`
 
 ### redirection, sort, head, tail
 
 | command | description |
 | :--- | :--- |
+`exec > some_file` | redirect all shell output to `some_file`
 `ls -ltr | vim -` | zeige Output eines Befehls in vim (ACHTUNG: Leerzeichen hinter "vim" nicht vergessen!)
 `Befehl | head -3` |	zeige oberste 3 Zeilen des Outputs
 `Befehl | tail -3` |
@@ -623,6 +645,7 @@ mkdir -p /file/subfile/subsubfile	|	erstellt file und subfile automatisch, falls
 mv -iv | **Tipp:** | IMMER -iv BENUTZEN ! (-i für bestätigen, -v für ausgeführte Aktion zeigen)
 rm -iv | **Tipp:** | IMMER -iv BENUTZEN ! (-i für bestätigen, -v für ausgeführte Aktion zeigen)
 cp -iv | **Tipp:** | IMMER -iv BENUTZEN ! (-i für bestätigen, -v für ausgeführte Aktion zeigen)
+cp -a | attempts to make a copy that's as close to the original as possible: same directory tree, same file types, same contents, same metadata (times, permissions, extended attributes, etc.). Always use `cp -a` instead of `cp -r`. (see [cp -a vs cp -r](https://unix.stackexchange.com/a/44981))
 
 ### history, script
 
@@ -780,7 +803,7 @@ sudo fuser -mv /media/SDD | displays all processes accessing `/media/SDD`, where
     - What's using the space on my disk?
 - [Why is there a discrepancy in disk usage reported by df and du?](https://unix.stackexchange.com/questions/9612/why-is-there-a-discrepancy-in-disk-usage-reported-by-df-and-du)
 - [Why du and df display different values](http://linuxshellaccount.blogspot.com/2008/12/why-du-and-df-display-different-values.html)
-    
+
 | command | description |
 | :--- | :--- |
 `du -sh *` | 
