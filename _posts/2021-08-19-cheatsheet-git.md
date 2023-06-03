@@ -18,7 +18,9 @@ tags:
 # Terminology
 
 **remote** = remote-repository (e.g. in `git push *remote* *branch*`)
+
 **PAT** = Personal Access Token (see [youtube: PATs and their scopes](https://www.youtube.com/watch?v=SzrETQdGzBM&t=49s))
+
 **index** = Staging Directory (`.index/`) (see [explanation](https://www.javatpoint.com/git-index))
     - There are three places in Git where file changes can reside, and these are 
         - working directory, 
@@ -88,7 +90,8 @@ tags:
 
 | command | description |
 | :--- | :--- |
-`git config --get remote.origin.url` | get only the URL of the current remote
+`git remote get-url origin` | get only the URL of the remote `origin`
+`git remote set-url origin https://git.rwth-aachen.de/mygroup/myreponame.git` | set the URL of the remote `origin`
 `git remote show [remote-name] command` | get more details about a particular remote
 `git remote show origin` | get more details about the current remote
 `git remote update origin --prune` | To update the local list of remote branches
@@ -440,6 +443,13 @@ Any combination of the filter characters may be used.
 When `*` (All-or-none) is added to the combination, all paths are selected if there is any file that matches other criteria in the comparison; if there is no file that matches other criteria, nothing is selected.
 
 Also, these upper-case letters can be **downcased** to **exclude**. E.g. `--diff-filter=ad` excludes added and deleted paths.
+
+# git config
+
+| command | description |
+| :---: | :---: |
+`git config -l` | list the current git settings
+`git config --get remote.origin.url` | get only the URL of the remote `origin`
 
 # Git Credential Helper, Storing Git Passwords
 
