@@ -21,6 +21,16 @@ last_modified_at: 2022-04-17T16:00:52-04:00
 
 ---
 
+# TensorRT vs CUDNN
+
+[forums.developer.nvidia.com](https://forums.developer.nvidia.com/t/tensorrt-vs-cudnn/155931):
+
+"The performance should be the same."
+
+"cuDNN is a operation level API and user will need to convert the model layer by layer. TensorRT provide several parsers and can support most public dnn model format directly."
+
+"YES. **TensorRT internally use cuDNN** for inference but with some extension."
+
 # Install
 
 - WARNING: `apt upgrade` maybe upgrades `libcudnn8` which removes all tensorrt libs! `apt-mark hold` all `libcudnn8` packages before installation!
