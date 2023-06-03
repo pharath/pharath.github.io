@@ -101,6 +101,12 @@ git commit data/data.xml.dvc -m "Revert dataset updates"   # to keep the changes
 
 # dvc add
 
+Undo `dvc add`: ([doc](https://dvc.org/doc/user-guide/how-to/stop-tracking-data#how-to-stop-tracking-data))
+```bash
+dvc remove data.dvc   # the .dvc file must be removed, not the data itself!
+dvc gc -w   # clear the cache
+```
+
 Behaves like `git add` + `git commit` together.
 
 To get a `git`-like behavior:
@@ -133,8 +139,9 @@ dvc list -R . data/augmented/data_11_19.v4i.darknet/
 dvc pull data/raw_not_augmented/data_11_19.v6i.darknet/train/
 ```
 
-# dvc get url path
+# dvc get
 
+- Syntax: `dvc get url path`
 - Downloads a file or directory tracked by DVC or by Git into the current working directory.
 - This file or directory must be found in a `dvc.yaml` or `.dvc` file of the repo.
 
@@ -192,6 +199,10 @@ dvc remote modify myremote gdrive_acknowledge_abuse true
 ```
 - see [Troubleshooting](#problem-2)
 - see [dvc doc](https://dvc.org/doc/user-guide/data-management/remote-storage/google-drive#authorization)
+
+# dvc move
+
+- creates the destination directory, if it does not exist (ie. `mkdir` is not necessary! See example in [doc](https://dvc.org/doc/command-reference/move#example-move-a-directory))
 
 # Troubleshooting
 
