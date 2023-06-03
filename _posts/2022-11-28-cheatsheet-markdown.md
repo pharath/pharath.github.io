@@ -24,3 +24,11 @@ tags:
 
 - see [list of languages 1](https://support.codebasehq.com/articles/tips-tricks/syntax-highlighting-in-markdown)
 - see [list of languages 2](https://docs.readme.com/rdmd/docs/code-blocks#language-support)
+
+## Common issues in vim
+
+- the following characters must be escaped or in a code block:
+  - `_` 
+  - `$`
+  - asterisk `*`
+  - hash `#`
