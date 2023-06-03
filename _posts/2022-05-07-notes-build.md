@@ -567,3 +567,10 @@ Diagnostics:
   Suppress: 'pp_including_mainfile_in_preamble'
 ```
 to `.clangd`
+
+# Troubleshooting
+
+## General
+
+- `was not declared`, `is not a member of ...` and other header related errors
+  - Check if ROS2 packages that have the same name as packages in your ROS2 workspace have been installed via `apt install` (e.g. `ros-eloquent-some-package`). The headers of `apt` packages may be included instead of the headers of ROS2 packages in your ROS2 workspace, so that there will be some include conflicts.
