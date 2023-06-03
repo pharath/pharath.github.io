@@ -267,13 +267,20 @@ Exit code of the **last command**:
 $ echo $?
 ```
 
-Exit Codes With Special Meanings: see [link](https://tldp.org/LDP/abs/html/exitcodes.html)
+- Exit Codes With Special Meanings: see [link](https://tldp.org/LDP/abs/html/exitcodes.html)
+- Only use 64-113 as user-defined exit codes: see [link](https://tldp.org/LDP/abs/html/exitcodes.html)
 
 ### Signal numbers
 
-From Bash manual:
-> When a command terminates on a fatal signal whose number is N, Bash uses the value 128+N as the exit status
+`man bash`:
+```bash
+When a command terminates on a fatal signal whose number is N, Bash uses the value 128+N as the exit status
+```
+
 These **signal numbers** are given below for each signal.
+
+See also:
+- Zombie (&rarr; Operating Systems Notes)
 
 #### ctrl - c
 
