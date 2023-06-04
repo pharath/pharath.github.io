@@ -34,9 +34,13 @@ ffmpeg -i input.mp4 -ss 00:05:10 -to 00:15:30 -c:v copy -c:a copy output2.mp4 | 
 
 | command | description |
 | :--- | :--- |
-sudo apt install imagemagick | image editing, converting, compressing, etc.
-convert path/to/image.png -resize 640x path/to/output_image.png | compress an `image.png` by resizing / scaling down ([source](https://askubuntu.com/a/781588))
-convert path/to/image.png -quality 50% path/to/output_image.png | compress an `image.png` by reducing its quality ([source](https://askubuntu.com/a/781588))
+`sudo apt install imagemagick` | image editing, converting, compressing, etc.
+`convert path/to/image.png -resize 640x path/to/output_image.png` | compress an `image.png` by resizing / scaling down ([source](https://askubuntu.com/a/781588))
+`convert path/to/image.png -quality 50% path/to/output_image.png` | compress an `image.png` by reducing its quality ([source](https://askubuntu.com/a/781588))
+`sudo apt install poppler-utils` | install `pdftoppm`
+`pdftoppm -png myfile.pdf > myfile.png` | convert **single page** PDF with poppler
+`pdftoppm -png myfile.pdf myfile` | converts **multipage** PDF with poppler
+`pdftoppm -jpeg myfile.pdf > myfile.jpg` | convert pdf to jpeg
 
 | command | description |
 | :--- | :--- |
