@@ -309,6 +309,11 @@ gio open file | same as xdg-open, but depends on what desktop the user has insta
 `pkill process_name` | stop all processes containing `process_name` (which is a regular expression), sends SIGTERM (i.e. kills gracefully), *Warning:* use `pgrep` first to check which processes will be killed
 `pgrep process_name` | list all PIDs containing `process_name` (which is a regular expression)
 
+Check PID of a window: 
+```bash
+xprop _NET_WM_PID | sed 's/_NET_WM_PID(CARDINAL) = //' | ps `cat`
+```
+
 ## Get Paths
 
 | command | description |
@@ -332,15 +337,6 @@ Differences between two directory trees
 `diff -r dir1/ dir2/` | outputs exactly what the differences are between corresponding files
 `diff -qr dir1/ dir2/` | just getting a list of corresponding files whose content differs
 `diff -qrN dir1/ dir2/` | to see differences for files that may not exist in either directory
-
-# Checks
-
-- Check current shell type: `echo $0`
-- Check installed library: `ldconfig -p | grep libnvinfer_plugin.so`
-- Check PID of a window: 
-```bash
-xprop _NET_WM_PID | sed 's/_NET_WM_PID(CARDINAL) = //' | ps `cat`
-```
 
 # apt, apt-get, snap, dpkg, pkg-config
 
@@ -408,11 +404,12 @@ sudo apt install ./name.deb | install a .deb file
 `sudo apt autoremove` | remove the **dependencies** that are no longer needed
 `sudo apt --purge autoremove` | remove **systemwide configuration files and the dependencies** that are no longer needed
 
-### Check
+### apt-cache
 
 | command | description |
 | :--- | :--- |
 `apt-cache policy <package name>` | shows installed package version and also all the available versions in the repository according to the version of Ubuntu in which you are running
+`apt-cache search <package_name>` | find specific package names
 
 ### apt-mark
 
@@ -498,30 +495,30 @@ From [stackexchange](https://unix.stackexchange.com/a/21294):
 
 | command | description |
 | :--- | :--- |
-chmod *permissions file* |     is an abbreviation of change mode. A files mode is the set of permissions attached to it that control access. Zu *permissions*: s. [here](https://askubuntu.com/tags/chmod/info).
+chmod *permissions file* | is an abbreviation of change mode. A files mode is the set of permissions attached to it that control access. Zu *permissions*: s. [here](https://askubuntu.com/tags/chmod/info).
 
 | command | description |
 | :--- | :--- |
-groups |					list all groups the currently logged in user belongs to (first group is the primary group)
-groups user |				same as “groups”, but for specific user “user”
-id |						“
-id user	|				“
+groups | list all groups the currently logged in user belongs to (first group is the primary group)
+groups user | same as “groups”, but for specific user “user”
+id | “
+id user	| “
 
 | command | description |
 | :--- | :--- |
-less /etc/group	|		view all groups present on the system
-cat /etc/group |			“
-getent group |				“
+less /etc/group	| view all groups present on the system
+cat /etc/group | “
+getent group | “
 
 | command | description |
 | :--- | :--- |
-getent group docker |		list all members of group docker
+getent group docker | list all members of group docker
 
 | command | description |
 | :--- | :--- |
-sudo groupadd docker |		add new group docker
-`sudo usermod -aG docker $USER` |	add my user to the docker group
-newgrp docker |			log out and log back in so that group membership is re-evaluated (nach group Änderungen); wenn das nicht geht, reboot
+sudo groupadd docker | add new group docker
+`sudo usermod -aG docker $USER` | add my user to the docker group
+newgrp docker | log out and log back in so that group membership is re-evaluated (nach group Änderungen); wenn das nicht geht, reboot
 
 # bash
 
@@ -548,6 +545,7 @@ cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen 
 | command | description |
 | :--- | :--- |
 `echo $$` | display PID of current shell
+`echo $0` | check current shell type
 `bash` | start new bash shell instance in current bash shell (the new shell will have a different PID than the old one, check shell PID via `echo $$`)
 `cat /etc/shells` | list all shells
 `chsh` | change shell (you will be prompted to enter one of the shells in `cat /etc/shells`)
@@ -881,8 +879,8 @@ crontab -e | opens a file in which jobs can be specified (read this file for mor
 
 | command | description |
 | :--- | :--- |
-sudo netstat -lpn \| grep :8889 | zeigt pid des Prozesses auf port 8889 (port kann dann mit `kill \<pid\>` frei gemacht werden)
-ss | 
+`sudo netstat -lpn | grep :8889` | zeigt pid des Prozesses auf port 8889 (port kann dann mit `kill \<pid\>` frei gemacht werden)
+`ss` | 
 
 ## ssh
 
