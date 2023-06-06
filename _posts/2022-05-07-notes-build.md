@@ -23,7 +23,8 @@ toc_label: "Contents"
 ```bash
 mkdir build/
 cd build/
-``` 
+```
+
 Then 
 - run `../configure`,
 - check in the output which dependencies are missing,
@@ -162,7 +163,6 @@ Code Coverage                Disabled
 Check based tests            Disabled
 -------------------------------------
 Now type 'make' to build
-
 ```
 
 # gcc, g++
@@ -248,6 +248,13 @@ cmake ..
 make   # or to get more information: `make VERBOSE=1`
 sudo make install
 sudo make uninstall   # only possible if you specified an uninstall target in CMakeLists.txt
+```
+
+## ccmake
+
+Install:
+```bash
+sudo apt install cmake-curses-gui
 ```
 
 ## Understand Shared Libraries (.so files)
@@ -379,6 +386,7 @@ From [stackoverflow](https://serverfault.com/questions/54736/how-to-check-if-a-l
 
 ```bash
 ldconfig -p | grep libjpeg
+ldconfig -p | grep libnvinfer_plugin.so
 ```
 
 ```bash
