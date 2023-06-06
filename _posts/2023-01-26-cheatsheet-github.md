@@ -33,7 +33,7 @@ press the `?` key on the github.com site to show all shortcuts
 ## Compress Images
 
 - [Calibre Image Actions](https://github.com/marketplace/actions/image-actions)
-    - see demo on `feature/compressImage` branch
+  - see demo on `feature/compressImage` branch
 
 # Storage Limits
 
