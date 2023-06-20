@@ -232,12 +232,35 @@ The **golden rule of git rebase** is to never use it on *public* branches.
 
 # git stash
 
-- use case 1: way to pull, but make sure that the local files are not overwritten by the remote
-    - [Explanation](https://stackoverflow.com/questions/19216411/how-do-i-pull-files-from-remote-without-overwriting-local-files)
-        - (1) `git stash`
-        - (2) `git pull`
-        - (3) `git stash pop`
-- use case 2: If you have uncommitted changes, but the first command doesn't work, then save your uncommitted changes with `git stash` [stackoverflow](https://stackoverflow.com/a/2125738/12282296):
+- [git stash basics](https://opensource.com/article/21/4/git-stash)
+
+| command | description |
+| :---: | :---: |
+git stash | stash uncommitted changes (staged and unstaged files)
+git stash -u | stash untracked files
+git stash -a | stash untracked files and ignored files
+git stash -p | stash specific files
+git stash pop | removes the changes from the stash **AND** reapplies them to the working copy
+git stash pop stash@{1} | by default: `pop stash@{0}`
+git stash apply | only reapplies changes to the working copy
+git stash list |
+`git stash save "remove semi-colon from schema"` | add a description to the stash
+git stash clear | remove all stashes
+git stash drop stash@{1} | remove `stash@{1}`
+git stash show stash@{1} | view the diff of the stash
+git stash show stash@{0} -p | view a more detailed diff of the stash
+
+## git pull despite having uncommitted changes
+
+- pull, but make sure that the local files are not overwritten by the remote
+  - [Explanation](https://stackoverflow.com/questions/19216411/how-do-i-pull-files-from-remote-without-overwriting-local-files)
+    - (1) `git stash`
+    - (2) `git pull`
+    - (3) `git stash pop`
+
+## git reset despite having uncommitted changes
+
+- If you have uncommitted changes, but `git reset HEAD` doesn't work, then save your uncommitted changes with `git stash` [stackoverflow](https://stackoverflow.com/a/2125738/12282296):
 ```bash
 git stash
 git reset --hard HEAD
