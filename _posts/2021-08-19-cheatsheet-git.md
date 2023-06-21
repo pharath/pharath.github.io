@@ -110,6 +110,7 @@ tags:
 `git log` | view history of commits ([more commands](#git-log))
 `git log -- filename` | commit history of a file
 `git log -p -- filename` | Like `git log`, but shows the file content that changed, as well. Generates the patches for each log entry.
+`git log --all` | all commits of all branches, tags and other refs (why `--all` isn't the default: you normally won't want that. For instance, if you're on branch `master`, and you run `git log`, you typically aren't interested in the history of any feature branches, you typically want to see the history of `master`, [stackoverflow](https://stackoverflow.com/a/29756754))
 `git show HEAD` | just the diff for a specific commit
 `gitk [filename]` | To browse the changes visually
 `git shortlog` | show the commit messages only
