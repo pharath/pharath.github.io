@@ -520,6 +520,23 @@ sudo groupadd docker | add new group docker
 `sudo usermod -aG docker $USER` | add my user to the docker group
 newgrp docker | log out and log back in so that group membership is re-evaluated (nach group Änderungen); wenn das nicht geht, reboot
 
+# useradd, usermod, deluser
+
+source: [baeldung](https://www.baeldung.com/linux/change-default-home-directory)
+
+Run these commands as `root` user. Run them in TTY mode (press e.g. ctrl + alt + F3).
+
+| command | description |
+| :--- | :--- |
+`sudo passwd root` | set the root's password
+`ctrl + alt + f1` or `ctrl + alt + f2` ... | switch the TTY in order to log in as `root`
+`sudo useradd -m baeldung` | creating a user called baeldung, in the default way
+`sudo useradd -m -d /home/baeldung baeldung` | (**important:** do not use a slash character at the end of `/home/baeldung`, otherwise the terminal will show `/home/baeldung` instead of the `~` symbol at the start of each line !) create a user and set the location for the home directory at the same time
+`sudo usermod -d /usr/baeldung baeldung` | change the user's home directory to `/usr/baeldung`
+`sudo usermod -m -d /usr/baeldung baeldung` | also move the existing content to the new location
+`startx` | start the Ubuntu GUI when you are in the tty
+`sudo deluser --remove-home userName` | delete user `userName`
+
 # bash
 
 ## terminal shortcuts
