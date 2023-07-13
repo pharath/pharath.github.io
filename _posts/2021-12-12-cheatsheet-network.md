@@ -156,12 +156,12 @@ ssh -N -f -L localhost:8888:localhost:8889 -l no411606 login-g.hpc.itc.rwth-aach
 # 2.2. Als Passwort im Browser den Token aus der jupyterlab URL (im Output zum command “jupyter lab --no-browser --port=8889”) im HPC Terminal rauskopieren und einfügen
 # 2.3. Passwort/Token bestätigen und jupyterlab startet.
 # 3. Beim beenden: auf meinem PC: mit 
-sudo netstat -lpn |grep :8888 
+sudo netstat -lpn | grep :8888 
 # pid suchen und mit 
 kill some_pid # pid steht in der Spalte ganz rechts, zB. in "1239526/ssh" ist die pid vor dem slash
 # beenden. Denn port auf HPC Seite (hier: 8889) wird automatisch frei beim Beenden von jupyter, aber port auf meinem PC (hier: 8888) nicht!
 ```
-**Achtung**: Schau, dass die ports frei sind (mit `(sudo) netstat -lpn |grep :8889` die PID suchen und mit `kill ABCDEF` port frei machen)! Sonst anderen port probieren.
+**Achtung**: Schau, dass die ports frei sind (mit `(sudo) netstat -lpn | grep :8889` die PID suchen und mit `kill ABCDEF` port frei machen)! Sonst anderen port probieren.
 
 # Router
 

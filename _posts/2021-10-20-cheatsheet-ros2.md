@@ -156,6 +156,8 @@ $ colcon build --packages-up-to <name-of-pkg>
     - "saves you from having to rebuild every time you tweak python scripts"
 - `--event-handlers console_direct+` shows console output while building (can otherwise be found in the log directory)
 - `--cmake-args -DCMAKE_BUILD_TYPE=Release`
+  - Each CMake argument needs to be quoted separately, [source](https://github.com/colcon/colcon-core/issues/18#issuecomment-382459664):
+    - e.g. `colcon build --symlink-install --cmake-args ' -DSECURITY=1' ' -DBUILD_TESTING=1' --event-handler console_cohesion+ --build-base $ROS2_WS/build_debug_isolated --install-base $ROS2_WS/install_debug_isolated --cmake-args ' -DCMAKE_BUILD_TYPE=Debug'`
 - `--parallel-workers NUMBER` [doc](https://colcon.readthedocs.io/en/released/reference/executor-arguments.html)
     - The maximum number of jobs to process in parallel. The default value is the number of logical CPU cores as reported by `os.cpu_count()`.
 

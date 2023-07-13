@@ -562,6 +562,8 @@ In the Ubuntu terminal profile settings set `Hack Nerd Font Regular` as the term
     - ✓ ★ ✗ new file staged and has unstaged modifications
     - ═  merging
     - ➜  renamed
+- does NOT show folders and files that are in `.gitignore`
+  - press "I" to show them
 
 `toggleterm`
 - use `3<c-\>` to create and toggle terminal "3"
@@ -699,6 +701,10 @@ and
 ```vim
 161 hi def link markdownLatexDelimiter        markdownLatex
 ```
+
+## Swap Files
+
+- location: in `~/.local/state/nvim/swap//`
 
 # Vimium
 

@@ -363,6 +363,11 @@ pip show torch | show the location of package "torch" (there you can find the so
 
 - package name: [underscores converted to dashes](https://github.com/pypa/setuptools/issues/2522)
 
+## protobuf
+
+- **WARNING**: each `protobuf` version runs only under specific Python versions, install it via `python3.Y -m pip install protobuf=X.Y.Z`
+  - otherwise you will get the error: `protobuf requires Python '>=3.7' but the running Python is 3.6.4`, [stackoverflow](https://stackoverflow.com/a/75080916)
+
 # Coding Tricks
 
 ## Python Script cannot be killed

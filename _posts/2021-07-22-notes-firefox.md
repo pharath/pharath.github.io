@@ -55,6 +55,7 @@ ctrl + shift + m | show mobile version of website
 ctrl + u | view source
 ctrl + shift + k | web console
 ctrl + shift + j | [browser console](#browser-console) 
+shift + esc | Process Manager
 
 ## Browser Console
 

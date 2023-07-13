@@ -229,6 +229,10 @@ sudo snap install pdftk | use `pdftk full-pdf.pdf cat 12-15 output outfile_p12-1
 `sudo apt install fd-find` | fast alternative to `find`
 `ln -s $(which fdfind) ~/.local/bin/fd` | because the binary name `fd` is already used by another package
 
+| command | description |
+| :--- | :--- |
+`sudo apt install keepass2` | password manager
+
 # Dotfiles
 
 **Versioning**: see [atlassian.com](https://www.atlassian.com/git/tutorials/dotfiles)
@@ -303,7 +307,7 @@ gio open file | same as xdg-open, but depends on what desktop the user has insta
 | :--- | :--- |
 `top` | activity monitor
 `ps` | wie `top`, aber keine real-time updates (dh. nur ein snapshot)
-`ps -eo pid,lstart,cmd | grep 2127686` | start time of PID 2127686 
+`ps -eo pid,lstart,cmd | grep 2127686` | start time of PID 2127686 (e.g. to get terminal start time, run `echo $$`, and then this command)
 `echo $$` | show PID of current shell
 `kill PID` | stop process with id `PID`, sends SIGTERM (i.e. kills gracefully) (see [notes bash]({% post_url 2021-09-25-cheatsheet-bash %}#job-control) and [kill doc](https://man7.org/linux/man-pages/man1/kill.1.html))
 `pkill process_name` | stop all processes containing `process_name` (which is a regular expression), sends SIGTERM (i.e. kills gracefully), *Warning:* use `pgrep` first to check which processes will be killed
@@ -479,15 +483,15 @@ sudo snap remove --purge *package* |
 # tty, terminal session management
 
 From [stackexchange](https://unix.stackexchange.com/a/21294):
-- A `tty` is a native terminal device, the backend is either hardware or kernel emulated.
-- A `pty` (pseudo terminal device) is a terminal device which is emulated by an other program (example: `xterm`, `screen`, or `ssh` are such programs). 
+- A `tty` (teletype) is a native terminal device, the backend is either **hardware or kernel emulated**.
+- A `pty` (pseudo-tty) is a terminal device which is **emulated by another program** (example: `xterm`, `screen`, or `ssh` are such programs). 
 - A `pts` is the slave part of a `pty`.
 - **More info**: see [stackexchange](https://unix.stackexchange.com/a/21294) and `man pty`
 
 | command | description |
 | :--- | :--- |
-`tty`	| zeigt Namen des aktiven terminals
-`ls -ltr /dev/ttys*`	| zeigt Namen aller aktiven terminals 
+`tty` | zeigt Namen des aktiven terminals
+`ls -ltr /dev/ttys*` | zeigt Namen aller aktiven terminals 
 `last` | zeige letzte terminal logins
 `whoami` | print the user name associated with the current effective user ID 
 
@@ -495,7 +499,7 @@ From [stackexchange](https://unix.stackexchange.com/a/21294):
 
 | command | description |
 | :--- | :--- |
-chmod *permissions file* | is an abbreviation of change mode. A files mode is the set of permissions attached to it that control access. Zu *permissions*: s. [here](https://askubuntu.com/tags/chmod/info).
+chmod *permissions-file* | is an abbreviation of change mode. A file's mode is the set of permissions attached to it that control access. Zu *permissions*: s. [here](https://askubuntu.com/tags/chmod/info).
 
 | command | description |
 | :--- | :--- |
@@ -518,7 +522,7 @@ getent group docker | list all members of group docker
 | :--- | :--- |
 sudo groupadd docker | add new group docker
 `sudo usermod -aG docker $USER` | add my user to the docker group
-newgrp docker | log out and log back in so that group membership is re-evaluated (nach group Änderungen); wenn das nicht geht, reboot
+newgrp docker | log out and log back in so that group membership is re-evaluated (nach group Aenderungen); wenn das nicht geht, reboot
 
 # useradd, usermod, deluser
 
@@ -541,7 +545,7 @@ Run these commands as `root` user. Run them in TTY mode (press e.g. ctrl + alt +
 
 ## terminal shortcuts
 
-![jumping with command line cursor](/home/assets/images/moving_cli.png)
+![jumping with command line cursor](/assets/images/moving_cli.png)
 
 | command | description |
 | :--- | :--- |
@@ -603,6 +607,7 @@ cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen 
 `find /opt/ ( -iname pattern1 -o -iname pattern2 )` | `-o` für oder
 `find /opt/ -size +1G` | nur files, die über 1GB groß sind
 `locate <file>` | faster than find, but uses a database which must be updated via `sudo updatedb` to find recent changes
+`locate -i <file>` | case insensitive
 `sudo updatedb` | update the `locate` command's database
 
 ### grep
@@ -653,18 +658,33 @@ nautilus .	|	öffne current directory in File Browser
 
 | command | description |
 | :--- | :--- |
-\`# ein comment\` |	Kommentar in command line
+`# ein comment` | Kommentar in command line
+
+### Folder Operations
+
+| command | description |
+| :--- | :--- |
+pwd | zeige current working directory
+cd path/to/somedir |
+mkdir -p /folder/subfolder/subsubfolder	| erstellt folder und subfolder automatisch, falls sie noch nicht existieren
+cp -a | attempts to make a copy that's as close to the original as possible: same directory tree, same file types, same contents, same metadata (times, permissions, extended attributes, etc.). Always use `cp -a` instead of `cp -r`. (see [cp -a vs cp -r](https://unix.stackexchange.com/a/44981))
+
+| command | description |
+| :--- | :--- |
+`dirs` | print the directory stack (left to right)
+`dirs -v` | print the directory stack (one entry per line), prefixing each entry with its index in the stack, [doc](https://www.gnu.org/software/bash/manual/html_node/Directory-Stack-Builtins.html#Directory-Stack-Builtins)
+`pushd path/to/somedir` | Adds a directory to the top of the directory stack, [doc](https://www.gnu.org/software/bash/manual/html_node/Directory-Stack-Builtins.html#Directory-Stack-Builtins)
+`pushd +N` | Brings the Nth directory (counting from the left of the list printed by dirs, starting with zero) to the top of the list by rotating the stack, [doc](https://www.gnu.org/software/bash/manual/html_node/Directory-Stack-Builtins.html#Directory-Stack-Builtins)
+`popd +N` | Removes the Nth directory (counting from the left of the list printed by dirs), starting with zero, from the stack, [doc](https://www.gnu.org/software/bash/manual/html_node/Directory-Stack-Builtins.html#Directory-Stack-Builtins)
+`popd -N` | like `popd +N`, but counting from the right
 
 ### File Operations
 
 | command | description |
 | :--- | :--- |
-pwd | zeige current working directory
-mkdir -p /file/subfile/subsubfile	|	erstellt file und subfile automatisch, falls sie noch nicht existieren
-mv -iv | **Tipp:** | IMMER -iv BENUTZEN ! (-i für bestätigen, -v für ausgeführte Aktion zeigen)
-rm -iv | **Tipp:** | IMMER -iv BENUTZEN ! (-i für bestätigen, -v für ausgeführte Aktion zeigen)
-cp -iv | **Tipp:** | IMMER -iv BENUTZEN ! (-i für bestätigen, -v für ausgeführte Aktion zeigen)
-cp -a | attempts to make a copy that's as close to the original as possible: same directory tree, same file types, same contents, same metadata (times, permissions, extended attributes, etc.). Always use `cp -a` instead of `cp -r`. (see [cp -a vs cp -r](https://unix.stackexchange.com/a/44981))
+mv -iv | **Tipp:** IMMER -iv BENUTZEN! (-i für bestätigen, -v für ausgeführte Aktion zeigen)
+rm -iv | **Tipp:** IMMER -iv BENUTZEN! (-i für bestätigen, -v für ausgeführte Aktion zeigen)
+cp -iv | **Tipp:** IMMER -iv BENUTZEN! (-i für bestätigen, -v für ausgeführte Aktion zeigen)
 
 ### history, script
 
@@ -685,26 +705,6 @@ tar -zxvf ~/Downloads/mnist.tgz -C ./data/ |
 tar -C ./data/ -jxvf ~/Downloads/datei.tar.bz2 | für .tar.bz2 (dh. -j flag statt -z flag)
 tar -C ~/ -xvf tor-browser-linux64-10.5.2_en-US.tar.xz | für .tar.xz
 
-# Manage Drives (hard drive, usb flash drive)
-
-| command | description |
-| :--- | :--- |
-diskutil list |
-diskutil info /dev/disk2s2 |
-
-| command | description |
-| :--- | :--- |
-sudo diskutil mountDisk /dev/disk2s2 | (Partitionsname disk2s2 steht in rechter Spalte bei diskutil list; /dev/disk2 mounted alle Unterpartitionen)
-sudo diskutil umountDisk /dev/disk2s2 |
-mount_ntfs -o r “/Volumes/Volume node” | (r für read-only; rw für read-write (NICHT MACHEN! Es gibt einen Grund warum das bei Mac per default nicht geht!)
-
-| command | description |
-| :--- | :--- |
-df		|		zeige alle Laufwerke, ganz rechts steht die Location mit dem Inhalt des Datenträgers (zB /media/bra-ket/UBUNTU 20_0)
-sudo fdisk -l	|	wie df, aber mehr Details
-lsusb |
-lsblk |
-
 # System information
 
 ## Software
@@ -713,10 +713,10 @@ lsblk |
 
 | command | description |
 | :--- | :--- |
-cat /etc/os-release	 |	Ubuntu Version (lang)
-cat /etc/lsb-release |	Ubuntu Version (lang)
-lsb_release -a | Ubuntu Version (kurz)
-lsb_release -cs | Ubuntu Version (e.g. "focal")
+cat /etc/os-release | Ubuntu Version (lang)
+cat /etc/lsb-release | Ubuntu Version (lang)
+`lsb_release -a` | Ubuntu Version (kurz)
+`lsb_release -cs` | Ubuntu Version (e.g. "focal")
 hostnamectl | Ubuntu Version (mittel) mit Linux Kernel Version
 uname --help | Returns the help manual for the uname command, including all available options.
 uname -a | Prints all information for the server/system you're on.
@@ -740,11 +740,11 @@ lspci |
 lsscsi |
 lsusb |
 inxi -Fx |
-lsblk | see all drives attached to your system, including their sizes and partitions
+lsblk | list [block devices](#block-device-vs-character-device), e.g. to see all drives attached to your system, including their sizes and partitions
 df -H |
 pydf |
 sudo fdisk -l |
-mount \| column -t |
+`mount | column -t` |
 free -m |
 
 | command | description |
@@ -779,6 +779,34 @@ cat /proc/partitions |
 `xrandr` | list all display modes; set the size, orientation and/or reflection of the outputs for a screen; can also set the screen size
 `xrandr --fb 2560x1440` | set the screen resolution, when no physical display is connected (e.g. when connecting to Jetson AGX via Teamviewer or VNCviewer, put this in `/etc/xdg/autostart/resolution_screen_teamviewer.sh`, `chmod +x /etc/xdg/autostart/resolution_screen_teamviewer.sh`, create `/etc/xdg/autostart/resolution_screen_teamviewer.desktop` and reboot and connect via Teamviewer again)
 
+# Manage Drives (hard drive, usb flash drive)
+
+| command | description |
+| :--- | :--- |
+diskutil list |
+diskutil info /dev/disk2s2 |
+
+| command | description |
+| :--- | :--- |
+sudo diskutil mountDisk /dev/disk2s2 | (Partitionsname disk2s2 steht in rechter Spalte bei diskutil list; /dev/disk2 mounted alle Unterpartitionen)
+sudo diskutil umountDisk /dev/disk2s2 |
+`mount_ntfs -o r "/Volumes/Volume node"` | (r für read-only; rw für read-write (NICHT MACHEN! Es gibt einen Grund warum das bei Mac per default nicht geht!)
+
+| command | description |
+| :--- | :--- |
+df | zeige alle Laufwerke, ganz rechts steht die Location mit dem Inhalt des Datenträgers (zB `/media/bra-ket/UBUNTU 20_0`)
+sudo fdisk -l | wie df, aber mehr Details
+lsusb | list usb devices
+lsblk | list [block devices](#block-device-vs-character-device)
+
+## Block Device vs. Character Device
+
+[unix.stackexchange](https://unix.stackexchange.com/a/259197):
+
+"Probably you will never be able to find a simple definition of this. But in the most general and simplistic way, if you compare a character device to a block device, you can say **the character device** gives you direct access to the hardware, as in you put in one byte, that byte gets to the hardware (of course it is not as simple as that in this day and age). Whereas, **the block device** reads from and writes to the device in blocks of different sizes. You can specify the block size but since the communication is a block at a time, there is a buffering time involved."
+
+"Think of a **block device** as a **hard disk** where you read and write one block of data at a time and, the **character device** is a **serial port**. You send one byte of data and other side receives that byte and then the next, and so forth and so on."
+
 ## Storage, Hard Disk, HDD, SSD
 
 Must knows:
@@ -789,10 +817,10 @@ Must knows:
 
 | command | description |
 | :--- | :--- |
-hdparm | get statistics about the hard disk, alter writing intervals, acoustic management, and DMA settings. It can also set parameters related to drive caches, sleep mode, power management, acoustic management, and DMA settings
-sudo hdparm -I /dev/sda | Request **identification info** directly from the drive, which is displayed in a new expanded format with considerably more detail than with the older `-i` option. (source: `man hdparm -I`); may differ from information provided by `-i` option! (source: `man hdparm -i`)
+`hdparm` | get statistics about the hard disk, alter writing intervals, acoustic management, and DMA settings. It can also set parameters related to drive caches, sleep mode, power management, acoustic management, and DMA settings
+`sudo hdparm -I /dev/sda` | Request **identification info** directly from the drive, which is displayed in a new expanded format with considerably more detail than with the older `-i` option. (source: `man hdparm -I`); may differ from information provided by `-i` option! (source: `man hdparm -i`)
 
-### Eject
+## Eject
 
 1. press on eject button for all partitions in nautilus
 2. open gnome-disks
@@ -813,7 +841,7 @@ Troubleshooting:
 | :--- | :--- |
 sudo fuser -mv /media/SDD | displays all processes accessing `/media/SDD`, where the `m` tells it to look on the given location, the `v` switches the output to a human readable list instead of just a bunch of PIDs. [askubuntu](https://askubuntu.com/a/578631)
 
-### Disk Usage
+## Disk Usage
 
 - [FAQ](https://unix.stackexchange.com/a/120312)
     - How much disk space does a file use?
@@ -838,7 +866,7 @@ sudo fuser -mv /media/SDD | displays all processes accessing `/media/SDD`, where
 | :--- | :--- |
 `df -h` | to analyze the whole filesystem
 
-## Camera
+# Camera
 
 | command | description |
 | :--- | :--- |
@@ -890,22 +918,33 @@ The software utility cron also known as cron job is a time-based job scheduler i
 
 | command | description |
 | :--- | :--- |
-crontab -e | opens a file in which jobs can be specified (read this file for more info)
+`crontab -e` | opens a file in which jobs can be specified (read this file for more info)
 
 # network
+
+## socket statistics
+
+"socket" (aka the 2-Tuple (IP, Port), see DatKom.md)
 
 | command | description |
 | :--- | :--- |
 `sudo netstat -lpn | grep :8889` | zeigt pid des Prozesses auf port 8889 (port kann dann mit `kill \<pid\>` frei gemacht werden)
-`ss` | 
+`ss` | `ss` is the new `netstat` (`ss` is faster, more human-readable and easier to use); displays stats for PACKET, TCP, UDP, DCCP, RAW, and Unix domain sockets, [linux.com](https://www.linux.com/topic/networking/introduction-ss-command/)
+
+## Download, Upload
+
+| command | description |
+| :--- | :--- |
+`md5sum file` | to check if the file `file` is not corrupted after transferring it (check if the `md5sum` is the same on both sides of the file transfer)
 
 ## ssh
 
 | command | description |
 | :--- | :--- |
-w | list all ssh sessions
-ssh bra-ket@10.14.14.60 | installiere vorher openssh-server auf beiden Computern
-firefox -no-remote -no-xshm | display firefox on local client (no -X or -Y flag needed in previous ssh command)
+`w` | list all ssh sessions
+`enter ~ .` | disconnect (when frozen), see `man ssh`, [stackoverflow](https://stackoverflow.com/questions/28981112/how-do-i-close-a-frozen-ssh-session)
+`ssh bra-ket@10.14.14.60` | installiere vorher openssh-server auf beiden Computern
+`firefox -no-remote -no-xshm` | display firefox on local client (no -X or -Y flag needed in previous ssh command)
 
 **Achtung**: 
 - erst in den Server einloggen und **dann** erst in den Computer einloggen, der die Internetverbindung des Servers benutzt !
@@ -915,19 +954,25 @@ firefox -no-remote -no-xshm | display firefox on local client (no -X or -Y flag 
       - Make sure X11 SSHD Forwarding Enabled
       - Make sure X11 client forwarding enabled
 
-| command | description |
-| :--- | :--- |
-ssh -Y bra-ket@10.14.14.60 | display graphical output on trusted local client (**Caution**: may lead to security issues), [difference -X vs -Y flag](https://askubuntu.com/a/35518)
-ssh -X bra-ket@10.14.14.60 | display graphical output on untrusted local client, [difference -X vs -Y flag](https://askubuntu.com/a/35518)
-export DISPLAY=localhost:10.0 | set display (use `w` or `xauth list` to list diplays) ("**:0**" ist der server monitor; zB. "**localhost:10.0**" ist der client monitor, wobei localhost:=127.0.0.1 (127.0. 0.1 is the loopback Internet protocol (IP) address also referred to as the localhost. The address is used to establish an IP connection to the same machine or computer being used by the end-user. The same convention is defined for computers that support IPv6 addressing using the connotation of ::1.)
+### Graphics/Display
 
 | command | description |
 | :--- | :--- |
-caffeinate -u | **for Mac**: prevent the system from sleeping and (-u for) prevent the system from sleeping [source](https://apple.stackexchange.com/questions/53802/waking-display-from-terminal-general-waking/161527)
+`ssh -Y bra-ket@10.14.14.60` | display graphical output on trusted local client (**Caution**: may lead to security issues), [difference -X vs -Y flag](https://askubuntu.com/a/35518)
+`ssh -X bra-ket@10.14.14.60` | display graphical output on **un**trusted local client, [difference -X vs -Y flag](https://askubuntu.com/a/35518)
+`export DISPLAY=localhost:10.0` | set display (use `w` or `xauth list` to list diplays) ("**:0**" ist der server monitor; zB. "**localhost:10.0**" ist der client monitor, wobei `localhost:=127.0.0.1` (`127.0.0.1` is the loopback Internet protocol (IP) address also referred to as the localhost. The address is used to establish an IP connection to the same machine or computer being used by the end-user. The same convention is defined for computers that support IPv6 addressing using the connotation of `::1`.)
+
+### On Macs
 
 | command | description |
 | :--- | :--- |
-ssh-keygen -R 10.14.14.92 | remove 10.14.14.92 from .ssh/known_hosts (falls aus Versehen geaddet)
+`caffeinate -u` | **for Mac**: prevent the system from sleeping and (-u for) prevent the system from sleeping [source](https://apple.stackexchange.com/questions/53802/waking-display-from-terminal-general-waking/161527)
+
+### ssh keys
+
+| command | description |
+| :--- | :--- |
+`ssh-keygen -R 10.14.14.92` | remove `10.14.14.92` from `.ssh/known_hosts` (falls aus Versehen geaddet)
 
 ## scp
 
@@ -936,7 +981,7 @@ ssh-keygen -R 10.14.14.92 | remove 10.14.14.92 from .ssh/known_hosts (falls aus 
 | command | description |
 | :--- | :--- |
 scp *source* *target* | immer Anführungszeichen um den *source* Pfad setzen!
-scp -rv Macbook:"~/Desktop/Uni/FS1/Essential\ Astrophysics\ WS1819" ~/Desktop/ | spaces DOPPELT escapen (hier: 1. mit " **UND** 2. mit \) 
+`scp -rv Macbook:"~/Desktop/Uni/FS1/Essential\ Astrophysics\ WS1819" ~/Desktop/` | spaces DOPPELT escapen (hier: 1. mit `"` **UND** 2. mit `\`) 
 `scp -r [!.]* source target` | exclude hidden files
 
 ## rsync
@@ -945,9 +990,14 @@ Rsync patterns: [stackexchange](https://unix.stackexchange.com/a/2503)
 
 | command | description |
 | :--- | :--- |
-`rsync -a *source* *destination*` | copy directory (**Warning**: `-r` tag does not copy some stuff, e.g. symlinks)
-`rsync -aR *source* *destination*` | `-R` or `--relative`: similar to `cp -r`, `*destination*` will be the **root of** the destination
-`rsync -aRv --progress` | show progress report
+`rsync -a path/to/source/ path/to/destination/` | copy directory; **note**: always use `/` at the end of the `path/to/source/` (**Warning**: `-a` better than `-r` because `-r` tag does not copy some stuff, e.g. symlinks)
+`rsync -avz *source* *destination*` | `-z` flag: compressing and transfer the files (comes in handy while transferring a huge amount of data over a slow internet connection)
+`rsync -av --progress` | show progress report
+
+### rsync exclude
+
+| command | description |
+| :--- | :--- |
 `rsync -a --exclude="SomeDirForPythonInstall"` | exclude directory "SomeDirForPythonInstall"
 `rsync -a --exclude=".*"` | excludes hidden files and directories
 `rsync -a --exclude=".*/"` | exclude hidden directories only

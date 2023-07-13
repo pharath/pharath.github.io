@@ -807,6 +807,8 @@ The **transport layer** just connects processes to the **network layer**. The tr
     - 16-bit number (0 to 65535)
     - **well-known ports 0 to 1023** (RFC 3232 which replaced RFC 1700)
         - http: 80
+        - https: 443
+        - ssh: 22
         - ftp: 21
         - smtp: 25
         - dns: 53

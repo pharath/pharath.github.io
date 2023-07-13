@@ -69,6 +69,8 @@ tags:
 `git checkout -b <new_branch> <old_branch>` | create `<new_branch>` off `<old_branch>`
 `git switch -c *branch*` | switch to a non-existing branch (since Git v2.23)
 `git push --set-upstream origin <new_branch>` | push to a locally newly created branch (see `git checkout -b <new_branch>`) that does not yet exist on remote (i.e. on github.com). `--set-upstream`: will make the local `<new_branch>` track the remote `remotes/origin/<new_branch>` (w/o this flag git does not know where to push the `new_branch`).
+`git checkout c5f567 -- file1/to/restore file2/to/restore` | get files from a specific commit `c5f567` (shortest SHA1: usually the first 7 hex digits are enough, [stackoverflow](https://stackoverflow.com/a/21015031))
+`git checkout c5f567~1 -- file1/to/restore file2/to/restore` | get files from the commit before a specific commit `c5f567`
 
 ## git show-branch
 
@@ -81,10 +83,20 @@ tags:
 
 | command | description |
 | :--- | :--- |
+`git tag <tag name>` | tag the current commit with `<tag name>`
+`git push origin v1.2` | push tag `v1.2`
+`git push --tags` | push all tags
 `git tag -l` | list all tags
 `git -c 'versionsort.suffix=-' ls-remote --tags --sort='v:refname' <repository>` | list all tags of `<repository>`
+`git checkout <tag name>` | checkout a specific tag
 `git checkout tags/<tag name>`	| checkout a specific tag
 `git clone --depth 1 --branch <tag_name> <repo_url>` | clone a specific tag; `--depth 1` is optional but if you only need the state at that one revision, you probably want to skip downloading all the history up to that revision.
+
+### Undo Pushing a Tag
+
+1. `git push origin :refs/tags/<tagname>` (Delete the tag on any remote before you push)
+2. `git tag -f <tagname>` (Replace the tag to reference the most recent commit)
+3. `git push origin --tags` (Push the tag to the remote origin)
 
 ## git remote
 
@@ -108,20 +120,25 @@ tags:
 | command | description |
 | :--- | :--- |
 `git log` | view history of commits ([more commands](#git-log))
+`git log --oneline` | show SHA1 + commit messages
+`git log --oneline filename` | get the commits that contain a specific file
 `git log -- filename` | commit history of a file
 `git log -p -- filename` | Like `git log`, but shows the file content that changed, as well. Generates the patches for each log entry.
 `git log --all` | all commits of all branches, tags and other refs (why `--all` isn't the default: you normally won't want that. For instance, if you're on branch `master`, and you run `git log`, you typically aren't interested in the history of any feature branches, you typically want to see the history of `master`, [stackoverflow](https://stackoverflow.com/a/29756754))
 `git show HEAD` | just the diff for a specific commit
 `gitk [filename]` | To browse the changes visually
-`git shortlog` | show the commit messages only
+`git shortlog` | show the commit messages grouped by author and title (for creating release announcements)
 
 ## git pull vs fetch vs update
 
 [source](https://stackoverflow.com/a/17712553):
 
 - `git remote update` will update all of your branches set to track remote ones, but not merge any changes in.
-- `git fetch` will update only the branch you're on, but not merge any changes in.
-- `git pull` will update and merge any remote changes of the current branch you're on. This would be the one you use to update a local branch.
+- `git fetch` will **update** only the branch you're on, but not merge any changes in.
+- `git pull` will **update** and **merge** any remote changes of the current branch you're on. This would be the one you use to update a local branch.
+  - like `git fetch` followed by `git merge`
+- `git pull --rebase`
+  - like `git fetch` followed by `git rebase`
 
 ## .gitignore
 
@@ -200,6 +217,7 @@ git restore path/to/file/to/revert | discard a specific unstaged file
 - [atlassian.com](https://www.atlassian.com/git/tutorials/rewriting-history/git-rebase)
     - The primary reason for rebasing is to **maintain a linear project history**. 
         - For **example**, consider a situation where the `main` branch has progressed since you started working on a `feature` branch. You want to get the latest updates to the `main` branch in your `feature` branch, but you want to keep your branch's history clean so it appears as if you've been working off the latest `main` branch. This gives the later benefit of a clean merge of your `feature` branch back into the `main` branch.
+- history: **CVS** and **Subversion** users routinely rebase their local changes on top of upstream work when they update before commit. **Git** just adds explicit separation between the commit and rebase steps. [source](https://stackoverflow.com/a/2452610)
 
 ## git rebase vs git merge
 
