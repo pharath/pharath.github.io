@@ -10,15 +10,84 @@ tags:
   - notes
 toc: true
 toc_label: "Contents"
+toc_sticky: true
 
 ---
 
-# configure Script
+# gcc, g++
+
+## Flags
+
+in [official doc](http://gcc.gnu.org/onlinedocs/gcc/)
+
+also see [Basic Overview](https://caiorss.github.io/C-Cpp-Notes/compiler-flags-options.html)
+
+### -c
+
+source: `man gcc`
+
+"Compile or assemble the source files, but **do not link**. The linking stage simply is not done. The ultimate output is in the form of an object file for each source file. By default, the object file name for a source file is made by replacing the suffix .c, .i, .s, etc., with .o. Unrecognized input files, not requiring compilation or assembly, are ignored."
+
+### -l
+
+Linking with a shared library (e.g. `-lfoo` links against `libfoo.so`).
+
+GCC first searches for libraries in `/usr/local/lib`, then in `/usr/lib`. Following that, it searches for libraries in the directories specified by the `-L` parameter, in the order specified on the command line. [source](https://www.cprogramming.com/tutorial/shared-libraries-linux-gcc.html#fn:gcclist)
+
+### -L
+
+Tell GCC where to find a shared library (e.g. `libfoo.so`).
+
+### -include
+
+Rarely used flag. Only relevant for some rare use cases: [stackoverflow](https://stackoverflow.com/questions/6089310/why-does-gcc-have-a-include-option).
+
+In [official doc](https://gcc.gnu.org/onlinedocs/gcc/Preprocessor-Options.html)
+
+### -I
+
+In [official doc](https://gcc.gnu.org/onlinedocs/gcc/Directory-Options.html#Directory-Options)
+
+Show default include directories:
+
+```bash
+# for C
+gcc -xc -E -v -
+
+# for C++
+gcc -xc++ -E -v -
+```
+
+see [How to tell g++ compiler where to search for include files?](https://stackoverflow.com/questions/15478005/how-to-tell-g-compiler-where-to-search-for-include-files)
+
+# ldconfig
+
+**source**: `man ldconfig`
+
+ldconfig - configure dynamic linker run-time bindings
+
+ldconfig creates the necessary links and cache to the most recent shared libraries found in the directories specified on the command line, in the file `/etc/ld.so.conf`, and in the trusted directories, `/lib` and `/usr/lib` (on some 64-bit architectures such as x86-64, `/lib` and `/usr/lib` are the trusted directories for 32-bit libraries, while `/lib64` and `/usr/lib64` are used for 64-bit libraries).
+
+The cache is used by the run-time linker, `ld.so` or `ld-linux.so`. ldconfig checks the header and filenames of the libraries it encounters when determining which versions should have their links updated. ldconfig should normally be run by the superuser as it may require write permission on some root owned directories and files.
+
+ldconfig will look only at files that are named `lib*.so*` (for regular shared objects) or `ld-*.so*` (for the dynamic loader itself).  Other files will be ignored.
+
+# ldd
+
+`man ldd`: ldd prints the shared objects (shared libraries) required by each program or shared object specified on the command line.
+
+Use cases:
+- `ldd test` shows which dependencies were not found.
+- `ldd test | grep foo` to check which **instance** of the shared library `libfoo.so` is used by the program `test`.
+
+# configure script
 
 - [purpose of configure scripts](https://en.wikipedia.org/wiki/Configure_script)
+  - "Using configure scripts is an automated method of **generating makefiles** before compilation to tailor the software to the system on which the executable is to be compiled and run."
 - [check "failed" warnings](https://github.com/edenhill/librdkafka/issues/370#issuecomment-142095337)
+  - The "failed" configure tests are not typically critical, they only try to find different alternatives, or to enable/disable certain futures. If a required test fails it will be very evident by a large error printout at the end of `./configure` execution.
 
-## Workflow
+## configure workflow
 
 ```bash
 mkdir build/
@@ -38,7 +107,10 @@ Then
 
 Often `../configure` can be run with some flags.
 
+Run `./configure --help` to show all options [stackoverflow](https://stackoverflow.com/a/6227907).
+
 Example:
+
 ```bash
 ../configure --disable-check
 ```
@@ -48,6 +120,7 @@ Example:
 ## Example Output
 
 When all dependencies are met:
+
 ```bash
 bra-ket@braket-pc:~/git/rofi/build$ ../configure --disable-check 
 checking for gcc... gcc
@@ -99,55 +172,7 @@ checking for unistd.h... yes
 checking minix/config.h usability... no
 checking minix/config.h presence... no
 checking for minix/config.h... no
-checking whether it is safe to define __EXTENSIONS__... yes
-checking for ranlib... ranlib
-checking for ar... ar
-checking the archiver (ar) interface... ar
-checking for getline... yes
-checking for open... yes
-checking for sysconf... yes
-checking for strtok_r... yes
-checking for flock... yes
-checking for ftruncate... yes
-checking for fcntl... yes
-checking for setlocale... yes
-checking for atexit... yes
-checking for glob... yes
-checking for readdir... yes
-checking math.h usability... yes
-checking math.h presence... yes
-checking for math.h... yes
-checking for library containing floor... -lm
-checking for library containing ceil... none required
-checking for library containing round... none required
-checking sysexits.h usability... yes
-checking sysexits.h presence... yes
-checking for sysexits.h... yes
-checking setjmp.h usability... yes
-checking setjmp.h presence... yes
-checking for setjmp.h... yes
-checking for pkg-config... /usr/bin/pkg-config
-checking pkg-config is at least version 0.9.0... yes
-checking for _NKUTILS_INTERNAL_XKBCOMMON... yes
-checking for _NKUTILS_INTERNAL_GIO... yes
-checking for _NKUTILS_INTERNAL_GOBJECT... yes
-checking for glib... yes
-checking for GW_XCB_INTERNAL... yes
-checking for stdlib.h... (cached) yes
-checking for pango... yes
-checking for cairo... yes
-checking for libsn... yes
-checking for gdkpixbuf... yes
-checking for pkg-config... (cached) /usr/bin/pkg-config
-checking pkg-config is at least version 0.16... yes
-checking for GLIB... yes
-checking for GLIB - version >= 2.0.0... yes (version 2.64.6)
-checking that generated files are newer than configure... done
-checking locale.h usability... yes
-checking locale.h presence... yes
-checking for locale.h... yes
-checking for _NKUTILS_INTERNAL_GLIB... yes
-checking for _NKUTILS_INTERNAL_TEST... yes
+...
 configure: creating ./config.status
 config.status: creating Makefile
 config.status: creating doc/rofi.doxy
@@ -164,33 +189,6 @@ Check based tests            Disabled
 -------------------------------------
 Now type 'make' to build
 ```
-
-# gcc, g++
-
-## Flags
-
-in [official doc](http://gcc.gnu.org/onlinedocs/gcc/)
-
-also see [Basic Overview](https://caiorss.github.io/C-Cpp-Notes/compiler-flags-options.html)
-
-### `-include`
-
-in [official doc](https://gcc.gnu.org/onlinedocs/gcc/Preprocessor-Options.html)
-
-### `-I`
-
-in [official doc](https://gcc.gnu.org/onlinedocs/gcc/Directory-Options.html#Directory-Options)
-
-Show default include directories:
-```bash
-# for C
-gcc -xc -E -v -
-
-# for C++
-gcc -xc++ -E -v -
-```
-
-see [How to tell g++ compiler where to search for include files?](https://stackoverflow.com/questions/15478005/how-to-tell-g-compiler-where-to-search-for-include-files)
 
 # make
 
@@ -257,13 +255,18 @@ Install:
 sudo apt install cmake-curses-gui
 ```
 
-## Understand Shared Libraries (.so files)
+## Statically Linked Libraries / Archives (.a files) vs Shared Libraries / Shared Objects (.so files)
+
+see [stackoverflow](https://stackoverflow.com/a/2649430)
+ 
+## Understanding Shared Libraries (.so files)
 
 [Best Tutorial](https://www.cprogramming.com/tutorial/shared-libraries-linux-gcc.html)
 
 Three files needed:
 
 File 1: foo.h:
+
 ```cpp	
 #ifndef foo_h__
 #define foo_h__
@@ -274,6 +277,7 @@ extern void foo(void);
 ```
 
 File 2: foo.c:
+
 ```cpp	
 #include <stdio.h>
  
@@ -285,6 +289,7 @@ void foo(void)
 ```
 
 File 3: main.c:
+
 ```cpp	
 #include <stdio.h>
 #include "foo.h"
