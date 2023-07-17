@@ -14,6 +14,14 @@ toc_sticky: true
 
 ---
 
+# Binary vs Executable
+
+[stackoverflow](https://stackoverflow.com/a/59826433):
+- An **executable** file is one which can be executed; you would run it on the commandline by writing the name of the file itself as the command.
+- A **binary** file is simply one in a binary (i.e. non-text) format.
+- **Binary files are not necessarily executable**, for example a library compiled to `.dll` or `.so` form is a binary but not an executable.
+- **Executable files are not necessarily binary**, for example a Python script in text form can be made executable on Unix systems by writing a shebang line `#!/usr/bin/python3` and setting the file's executable flag.
+
 # gcc, g++
 
 ## Flags
