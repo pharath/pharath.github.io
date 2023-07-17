@@ -465,6 +465,8 @@ sudo apt install ./nvim-linux64.deb
 
 ## Configuration
 
+### Nvim
+
 ```bash
 mkdir $HOME/.cfg/
 git clone --bare https://github.com/pharath/dotfiles.git $HOME/.cfg/
@@ -475,19 +477,23 @@ config config core.excludesFile '~/.gitignore'
 
 **Note**: `~/.config/nvim/` is a modified version of `https://github.com/nvim-lua/kickstart.nvim`.
 
-Finally, in neovim run:
+### Coc
+
+Install `coc-prettier`: in neovim run:
 ```bash
 :CocInstall coc-prettier
 ```
 
-Install ripgrep on Ubuntu: 
+Under `:CocList` &rarr; `sources` deregister all `sources` (otherwise Coc's autocompletion will show a popup, but we only want to use the vim default completion popup and the `nvim-cmp` popup).
+
+### ripgrep
+
+Install `ripgrep` on Ubuntu: 
 - e.g. for ripgrep 13.0.0 run:
 ```bash
 $ curl -LO https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_13.0.0_amd64.deb
 $ sudo dpkg -i ripgrep_13.0.0_amd64.deb
 ```
-
-For more details see `~/.config/nvim/` (which is in the git repository).
 
 ### LSP
 
@@ -516,8 +522,8 @@ For **clangd**:
     - [bear github](https://github.com/rizsotto/Bear)
 - project configuration file: `.clangd` (in the root of the project)
 
-For **spectral** (json LSP):
-- open a json file, run `:LspInstall` and select `spectral`
+For **spectral** (json LSP), **tailwindcss**, **bashls**:
+- open a json, css and bash file, run `:LspInstall` and select `spectral`, `tailwindcss` and `bashls` respectively
 
 ## Font
 
