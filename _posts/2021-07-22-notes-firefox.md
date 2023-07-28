@@ -88,3 +88,10 @@ So it logs the same sorts of information as the Web Console - network requests, 
 - Grammarly: Grammar Checker and Writing App
 - Fast Tab Switcher
 - Auto Tab Discard by tlintspr
+
+# Troubleshooting
+
+## Only Some Pages Load Others Do Not
+
+source: [support.mozilla.org](https://support.mozilla.org/en-US/kb/firefox-cant-load-websites-other-browsers-can#w_firefox-cannot-load-certain-websites)
+- **Solution:** Clear the **Cookies** and **Cache** for those Websites that do not load.
