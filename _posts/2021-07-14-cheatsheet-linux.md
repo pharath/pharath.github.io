@@ -608,6 +608,7 @@ cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen 
 `find /opt/ -size +1G` | nur files, die über 1GB groß sind
 `locate <file>` | faster than find, but uses a database which must be updated via `sudo updatedb` to find recent changes
 `locate -i <file>` | case insensitive
+`locate -b '\file.xyz'` | exact match (Note: the slash and the quotation marks are necessary)
 `sudo updatedb` | update the `locate` command's database
 
 ### grep
