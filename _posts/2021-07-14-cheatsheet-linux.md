@@ -535,7 +535,7 @@ Run these commands as `root` user. Run them in TTY mode (press e.g. ctrl + alt +
 `sudo passwd root` | set the root's password
 `ctrl + alt + f1` or `ctrl + alt + f2` ... | switch the TTY in order to log in as `root`
 `sudo useradd -m baeldung` | creating a user called baeldung, in the default way
-`sudo useradd -m -d /home/baeldung baeldung` | (**important:** do not use a slash character at the end of `/home/baeldung`, otherwise the terminal will show `/home/baeldung` instead of the `~` symbol at the start of each line !) create a user and set the location for the home directory at the same time
+`sudo useradd -m -d /home/baeldung baeldung` | (**important:** do not use a slash character at the end of `/home/baeldung`, otherwise the terminal will show `/home/baeldung` instead of the `~` symbol at the start of each line !) create a user and set the location for the `home` directory at the same time
 `sudo usermod -d /usr/baeldung baeldung` | change the user's home directory to `/usr/baeldung`
 `sudo usermod -m -d /usr/baeldung baeldung` | also move the existing content to the new location
 `startx` | start the Ubuntu GUI when you are in the tty
@@ -854,6 +854,7 @@ sudo fuser -mv /media/SDD | displays all processes accessing `/media/SDD`, where
 
 | command | description |
 | :--- | :--- |
+ncdu | like `du -sh`, but more convenient (because avoids typing)
 `du -sh *` | 
 `du -sch *` | `-c` to show grand total
 `du -sh * | sort -h` | "ascending": largest file in the last output line
