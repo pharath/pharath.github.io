@@ -588,7 +588,17 @@ In the Ubuntu terminal profile settings set `Hack Nerd Font Regular` as the term
 
 ### nvim-treesitter
 
-In order to install a language just add the language to the `ensure_installed` list in the `init.lua` file and close and re-open the `init.lua` file. E.g. to install `javascript` syntax highlighting:
+Manually installing a language parser:
+- to support a specific feature for a specific language requires both 
+  - a parser for that language and 
+  - an appropriate language-specific query file for that feature
+- `:TSInstall parserName` (install a specific parser)
+- `:TSInstallInfo` (list all installed parsers)
+- `:TSUninstall parserName`
+
+Automatically installing a language parser (on startup):
+
+In order to install a language (automatically on startup) just add the language to the `ensure_installed` list in the `init.lua` file and close and re-open the `init.lua` file. E.g. to install `javascript` syntax highlighting:
 ```lua
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -693,6 +703,10 @@ cp -iv .gitignore .prettierignore
 Format shortcuts: see `nvim/init.lua`
 
 ## Markdown
+
+### markdownlint
+
+If you really need this: `:CocInstall coc-markdownlint`
 
 ### LaTeX
 
