@@ -486,6 +486,20 @@ When `*` (All-or-none) is added to the combination, all paths are selected if th
 
 Also, these upper-case letters can be **downcased** to **exclude**. E.g. `--diff-filter=ad` excludes added and deleted paths.
 
+# git grep
+
+[stackoverflow](https://stackoverflow.com/a/2929502)
+
+| command | description |
+| :---: | :---: |
+`git grep <regexp>` | Search working tree for text matching regular expression `regexp`
+`git grep -e <regexp1> [--or] -e <regexp2>` | Search working tree for lines of text matching regular expression `regexp1` or `regexp2`
+`git grep -l -e <regexp1> --and -e <regexp2>` | Search working tree for lines of text matching regular expression `regexp1` and `regexp2`, reporting file paths only
+`git grep -l --all-match -e <regexp1> -e <regexp2>` | Search working tree for files that have lines of text matching regular expression `regexp1` and lines of text matching regular expression `regexp2`
+`git diff --unified=0 \| grep <pattern>` | Search working tree for changed lines of text matching `pattern`
+`git grep <regexp> $(git rev-list --all)` | Search all revisions for text matching regular expression `regexp`
+`git grep <regexp> $(git rev-list <rev1>..<rev2>)` | Search all revisions between `rev1` and `rev2` for text matching regular expression `regexp`
+
 # git config
 
 | command | description |
