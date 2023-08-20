@@ -96,6 +96,35 @@ int main () {
 
 **Template Parameter**: In C++ this can be achieved using **template parameters**. A template parameter is a special kind of parameter that can be used to pass a type as argument: just like regular function parameters can be used to pass values to a function, template parameters allow to pass also types to a function. These function templates can use these parameters as if they were any other regular type.
 
+### Non-type Template Parameters
+
+- represents a value rather than a type
+- specified by using a specific type name instead of the `class` or `typename` keyword
+- may be 
+  - an **integral type**
+    - An argument bound to a nontype integral parameter **must** be a **constant** expression.
+  - a **pointer** or (lvalue) **reference** to an object or to a function type (see Lippman 14.8.3)
+    - Arguments bound to a pointer or reference nontype parameter **must** have **static** lifetime
+    - A pointer parameter can also be instantiated by `nullptr` or a zero-valued constant expression
+- is a constant value inside the template definition
+  - thus, can be used when constant expressions are required, eg. to specify the size of an array
+
+```cpp
+// trick to pass variable size arrays:
+template<unsigned N, unsigned M>
+int compare(const char (&p1)[N], const char (&p2)[M])
+{
+  return strcmp(p1, p2);
+}
+
+// when we call
+compare("hi", "mom")
+
+// the compiler will instantiate:
+// (Recall: the compiler inserts a null terminator at the end of a string literal)
+int compare(const char (&p1)[3], const char (&p2)[4])
+```
+
 ## Class Templates
 
 [source](https://www.geeksforgeeks.org/templates-cpp/):
