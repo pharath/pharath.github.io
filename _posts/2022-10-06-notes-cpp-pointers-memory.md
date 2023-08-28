@@ -1,5 +1,5 @@
 ---
-title: "C++ Notes - Dynamic Memory"
+title: "C++ Notes - Pointers and Dynamic Memory"
 read_time: false
 excerpt: "For learning C++"
 header:
@@ -13,164 +13,12 @@ categories:
     - Notes
 tags:
     - c++
+    - pointers
     - smartpointers
     - dynamicmemory
     - notes
 
 ---
-
-# References
-
-## Lvalue References
-
-- aka **lvalue references**
-- from [isocpp](https://isocpp.org/wiki/faq/references#reseating-refs):
-  - Unlike a pointer, once a reference is bound to an object, it can not be "reseated" to another object. 
-  - The reference itself isn't an object 
-    - it has no identity; 
-    - taking the address of a reference gives you the address of the referent; 
-    - remember: the reference **is** its referent
-- idea
-  - Normally, when you use a reference, you do not use the address-of operator. You simply use the reference as you would use the target variable.
-    - references are **aliases** for their target
-  - enables the function to change the object being referred to
-
-```cpp
-int intOne;
-int &rSomeRef = intOne;
-intOne = 5;
-
-// intOne: 5
-// rSomeRef: 5
-// &intOne: 0x3500
-// &rSomeRef: 0x3500
-```
-
-- references (unlike other variables)
-  - must be initialized when they are declared
-  - cannot be reassigned
-- space **before** the address-of operator is **required**
-- usually "the type of a reference must match the type of the object to which it refers"
-  - 2 exceptions:
-    - 1) "we can initialize a reference to const from any expression that can be converted to the type of the reference" (see [reference to const](#reference-to-const))
-
-### reference to const 
-
-- aka "`const` reference", "lvalue reference to a `const` value"
-- `X const& x` is equivalent to `const X& x`, and `X const* x` is equivalent to `const X* x`. (see [isocpp.org](https://isocpp.org/wiki/faq/const-correctness#const-ref-nonsense))
-- Unlike an ordinary reference, a reference to `const` cannot be used to change the object to which the reference is bound
-- "we can **initialize** a reference to `const` from any expression that can be converted to the type of the reference"
-  - we can bind a reference to `const` to 
-    - a nonconst object, 
-    - a literal, or 
-    - a more general expression
-    - an object of a different type (in this case, the reference is bound to a [temporary](#temporaries) object, see p.62)
-- "Binding a reference to `const` to an object says nothing about whether the underlying object itself is `const`."
-  - ie. the underlying object cannot be changed by using the reference to `const`, but it might be changed by other means
-- binding a **non-const** reference to a [temporary](#temporaries) is illegal in C++, only **const** references may be bound to a temporary (see p.62)
-
-```cpp
-const int ci = 1024;
-const int &r1 = ci;     // ok: both reference and underlying object are const
-r1 = 42;                // error: r1 is a reference to const
-int &r2 = ci;           // error: nonconst reference to a const object
-
-// Initialization and References to const:
-int i = 42;
-const int &r1 = i;        // we can bind a const int& to a plain int object
-const int &r2 = 42;       // ok: r1 is a reference to const
-const int &r3 = r1 * 2;   // ok: r3 is a reference to const
-int &r4 = r * 2;          // error: r4 is a plain, non const reference
-
-// Temporaries and References to const:
-// see examples in section "Temporaries"
-
-// A Reference to const May Refer to an Object That Is Not const:
-int i = 42;
-int &r1 = i;          // r1 bound to i
-const int &r2 = i;    // r2 also bound to i; but cannot be used to change i
-r1 = 0;               // r1 is not const; i is now 0
-r2 = 0;               // error: r2 is a reference to const
-```
-
-### const references
-
-- usually refers to [reference to const](#reference-to-const)
-
-From [isocpp.org](https://isocpp.org/wiki/faq/const-correctness#const-ref-nonsense):
-- references are always `const`
-- `X& const x` is functionally equivalent to `X& x`. Since you're gaining nothing by adding the `const` after the `&`, you shouldn't add it: it will confuse people — the `const` will make some people think that the `X` is const, as if you had said `const X& x`.
-
-## Rvalue References
-
-- introduced by the new standard to support move operations
-- a reference that must be bound to an rvalue
-- obtained by using `&&`
-- may be bound only to an object that is about to be destroyed
-  - so that we are free to "move" resources from an rvalue reference to another object
-- rvalue and lvalue references have the opposite **binding properties**:
-
-```cpp
-int i = 42;
-int &r = i;             // ok: r refers to i
-int &&rr = i;           // error: cannot bind an rvalue reference to an lvalue
-int &r2 = i * 42;       // error: i * 42 is an rvalue
-const int &r3 = i * 42; // ok: we can bind a reference to const to an rvalue
-int &&rr2 = i * 42;     // ok: bind rr2 to the result of the multiplication
-```
-
-Examples of expressions that return
-- lvalues
-  - Functions that return lvalue references
-  - operators
-    - assignment
-    - subscript
-    - dereference
-    - prefix increment/decrement (`++i`)
-  - Variable expressions
-- rvalues (prvalues)
-  - Functions that return a nonreference type
-  - operators
-    - arithmetic
-    - relational
-    - bitwise
-    - postfix increment/decrement (`i++`)
-  - literals
-
-- rvalue references refer to objects that are about to be destroyed
-- **ephemeral** vs **persistent**: 
-  - lvalues have persistent state, whereas **rvalues** are either **literals** or **temporary objects**
-- code that uses an rvalue reference is free to take over value/resources/state from the object to which the reference refers
-  - "steal" value/resources/state from the object (rhs) bound to an rvalue reference (lhs)
-- you **cannot** directly bind an rvalue reference **to a variable**, even if that variable was defined as an rvalue reference type
-
-```cpp
-int &&rr1 = 42;         // ok: literals are rvalues
-// Error:
-int &&rr2 = rr1;        // error: the expression rr1 is an lvalue!
-```
-
-## Reference to Pointer
-
-From [stackoverflow](https://stackoverflow.com/a/1898556):
-- a reference to a pointer is like a reference to any other variable
-
-```cpp
-void fun(int*& ref_to_ptr)
-{
-    ref_to_ptr = 0; // set the "passed" pointer to 0
-    // if the pointer is not passed by ref,
-    // then only the copy(parameter) you received is set to 0,
-    // but the original pointer(outside the function) is not affected.
-}
-```
-
-## Pointer to Reference
-
-From [stackoverflow](https://stackoverflow.com/a/1898556):
-- A pointer to reference is illegal in C++
-  - because - unlike a pointer - a reference is just a concept that allows the programmer to make **aliases** of something else.
-- A pointer is a **place in memory** that has the address of something else, but a reference is NOT.
 
 # Pointer
 
@@ -233,54 +81,98 @@ return 0;
 
 ## Nullpointer
 
-- [Bjarne Stroustrup comment](https://www.stroustrup.com/bs_faq2.html#null)
-- ([g++ doc](https://gcc.gnu.org/onlinedocs/libstdc++/manual/support.html#std.support.types.null))
-- `NULL` ist definiert als [macro](https://gcc.gnu.org/onlinedocs/cpp/Macros.html) (i.e. a piece of code in a program that is replaced by the value of the macro; a macro is defined by `#define` directive; whenever a macro name is encountered by the [preprocessor](https://en.wikipedia.org/wiki/Preprocessor), it replaces the name with the definition of the macro): 
-  - From [cppreference](https://en.cppreference.com/w/cpp/types/NULL):
+### Do not use NULL
+
+- `NULL` is defined as a [macro](https://gcc.gnu.org/onlinedocs/cpp/Macros.html) (i.e. a piece of code in a program that is replaced by the value of the macro; a macro is defined by `#define` directive; whenever a macro name is encountered by the [preprocessor](https://en.wikipedia.org/wiki/Preprocessor), it replaces the name with the definition of the macro):
+  - unlike `nullptr`, `NULL` is **not** a built-in constant
+  - defined in multiple headers, eg. `<cstddef>`, `<clocale>`, `<cstdio>`, etc.
+  - the definition of this macro depends on the C++ implementation that is used
+  - some **possible** implementations ([cppreference](https://en.cppreference.com/w/cpp/types/NULL)):
     ```cpp
     #define NULL 0
     //since C++11
     #define NULL nullptr
+    // in g++
+    #define NULL __null     // where "__null" is almost equivalent to the integer literal "0"
     ```
-  - dh `NULL` und `0` waren früher **dasselbe** [bis C++11] und jetzt sind `NULL` und `nullptr` **dasselbe** (aber how come [implicit cast difference](#implicit-cast-of-null-and-nullptr)?)
+  - For **g++**, `NULL` is `#define`'d to be `__null`, a magic keyword extension of g++ that is slightly safer than a plain integer., [gcc.gnu.org](https://gcc.gnu.org/onlinedocs/libstdc++/manual/support.html#std.support.types.null)
 - "Unless you need to be compatible with C++98/C++03 or C you should prefer to use `nullptr` instead of `NULL`." ([g++ doc](https://gcc.gnu.org/onlinedocs/libstdc++/manual/support.html#std.support.types.null))
+- [Bjarne Stroustrup comment](https://www.stroustrup.com/bs_faq2.html#null)
+  - I prefer to avoid macros, so I use `0`.
+  - If you have to name the null pointer, call it `nullptr`.
 
 ### Implicit Cast of NULL and nullptr
 
 #### To Pointer Types
 
 - `NULL` und `nullptr` beide implicitly convertible to any **pointer** type
-  - A **null pointer** constant (see `NULL`), can be converted to any **pointer** type [i.e. type with asterisk `*`], and the result is the null pointer value of that type. ([cppreference](https://en.cppreference.com/w/cpp/language/implicit_conversion))
+  - A **null pointer** constant (see `NULL`), can be converted to any **pointer** type (i.e. type with asterisk `*`), and the result is the null pointer value of that type. ([cppreference](https://en.cppreference.com/w/cpp/language/implicit_conversion))
 
 #### To Integral Types
 
-- Unlike `NULL`, `nullptr` is **not** implicitly convertible or comparable to integral types [e.g. `int`, `char`] ([geeksforgeeks](https://www.geeksforgeeks.org/understanding-nullptr-c/))
-  - `int x = NULL` geht; 
-  - `int x = nullptr` geht **nicht**!
-- `nullptr` is of type `nullptr_t`, which is implicitly convertible and comparable to any pointer type or pointer-to-member type. **It is not implicitly convertible or comparable to integral types** [e.g. `int`, `char`], **except for** `bool`. ([C++11](https://en.wikipedia.org/wiki/C%2B%2B11#Null_pointer_constant))
+- Unlike `NULL`, `nullptr` is **not** implicitly convertible or comparable to integral types (e.g. `int`, `char`) ([geeksforgeeks](https://www.geeksforgeeks.org/understanding-nullptr-c/))
+  - `int x = NULL` works; 
+  - `int x = nullptr` does **not** work!
+- from [C++11](https://en.wikipedia.org/wiki/C%2B%2B11#Null_pointer_constant):
+  - `nullptr` is of type `nullptr_t`, which is implicitly convertible and comparable to any 
+    - pointer type or
+    - pointer-to-member type
+  - It is **not** implicitly convertible or comparable to 
+    - integral types (e.g. `int`, `char`), **except for** `bool`
 
-### Type of NULL and nullptr
+### Type of NULL
 
-In C++11 hat `NULL` den type `nullptr_t` 
-- `nullptr_t` "is a distinct type that is not itself a pointer type or a pointer to member type." ([doc](https://en.cppreference.com/w/cpp/types/nullptr_t))
+The type of `NULL` depends on the C++ implementation.
+
+- Some implementations define `NULL` as the compiler extension `__null` with following properties, [cppreference](https://en.cppreference.com/w/cpp/types/NULL):
+  - `__null` is equivalent to a zero-valued integer literal (and thus compatible with the C++ standard) and has the same size as `void*`, e.g. it is equivalent to `0` (on ILP32 platforms) /`0L` (on LP64 platforms);
+  - conversion from `__null` to an arithmetic type, including the type of `__null` itself, may trigger a warning.
+
+~In C++11 hat `NULL` den type `nullptr_t`~ (depends on the C++ implementation)
 
 "In C, the macro `NULL` may have the type `void*`, but that is not allowed in C++." ([cppreference](https://en.cppreference.com/w/cpp/types/NULL))
 - how come?: [stackoverflow](https://stackoverflow.com/a/69057243)
-- soll heißen: `NULL` hat in C++ **absichtlich nicht (wie in C)** den Type `void*`, weil there is no **implicit cast** from `void*` to any other type in C++ (in C wäre das aber möglich!). Bis C++11 war `NULL` das [integer literal](https://en.cppreference.com/w/cpp/language/integer_literal) "`0`", konnte damit also einen der integer literal types (s. Tabelle in [integer literal](https://en.cppreference.com/w/cpp/language/integer_literal)) haben. Seit C++11 hat `NULL` den type `nullptr_t` ([doc](https://en.cppreference.com/w/cpp/types/nullptr_t)).
+- soll heißen: `NULL` hat in C++ **absichtlich nicht (wie in C)** den Type `void*`, weil "there is no **implicit cast** from `void*` to any other type in C++" (in C wäre das aber möglich!). 
+  - Seit C++11 **kann** `NULL` den type `nullptr_t` haben, muss aber nicht ([cppreference](https://en.cppreference.com/w/cpp/types/nullptr_t)).
 
-dh zB
+### Type of nullptr
+
+"`nullptr_t` is the type of the null pointer literal, `nullptr`." ([cppreference](https://en.cppreference.com/w/cpp/types/nullptr_t))
+
+`nullptr_t` ([cppreference](https://en.cppreference.com/w/cpp/types/nullptr_t)):
+- is the type of the null pointer literal, `nullptr`.
+- is a distinct type that is not itself a pointer type or a pointer to member type. 
+- its values 
+  - are **null pointer constants** and 
+  - may be implicitly converted to any pointer and pointer to member type.
+- `sizeof(std::nullptr_t)` is equal to `sizeof(void *)`.
+
 ```cpp
+// Problem: there is no **implicit cast** from `void*` to any other type in C++
 void* ptr = nullptr; 
 int foo = *ptr;    // this implicit cast is not allowed in C++
 ```
-gibt einen Compiler Error `error: ‘void*’ is not a pointer-to-object type` (**fix**: use a different type (a "pointer-to-object" type) instead of `void*` -  `void*` is a "pointer-to-nothing")
+gives a compiler error `error: ‘void*’ is not a pointer-to-object type`.
 
-Aber 
 ```cpp
+// Fix: use a different type (a "pointer-to-object" type) instead of `void*` - `void*` is a "pointer-to-nothing"
 char* ptr = nullptr; 
 int foo = *ptr;
 ```
-gibt keinen Compiler Error, weil `char*` ein pointer-to-object type ist.
+does **not** give a compiler error because `char*` is a pointer-to-object type.
+
+### Type of `__null`
+
+"`__null` is a g++ internal thing that serves roughly the same purpose as the standard `nullptr` added in C++11 (acting consistently as a pointer, never an integer).", [stackoverflow](https://stackoverflow.com/a/53963689)
+
+From [cppreference](https://en.cppreference.com/w/cpp/types/NULL):
+- `__null` is equivalent to a zero-valued integer literal (and thus compatible with the C++ standard) and has the same size as `void*`, e.g. it is equivalent to `0` (on ILP32 platforms) /`0L` (on LP64 platforms);
+- conversion from `__null` to an arithmetic type, including the type of `__null` itself, may trigger a warning.
+
+From [stackoverflow](https://stackoverflow.com/a/8783589):
+- The implementation of `__null` is as a `g++` internal.
+- You won't find it in a header file or anything like that.
+- Basically, it works like `reinterpret_cast<void *>(0)`.
 
 # Arrays
 

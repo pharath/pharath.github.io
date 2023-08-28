@@ -23,7 +23,7 @@ tags:
 ## scope
 
 cppreference:
-- **scope**: Each **name** that appears in a C++ program is only visible in some possibly discontiguous portion of the source code called its scope.
+- **scope**: Each **name** that appears in a C++ program is only visible in some possibly discontiguous portion of the source code called its **scope**.
 - **block scope**: 
   - The **potential scope** of a name declared in a **block (compound statement)** begins at the point of declaration and ends at the end of the block.
   - **Actual scope** is the same as potential scope unless an identical name is declared in a **nested block**, in which case the potential scope of the name in the nested block is excluded from the actual scope of the name in the enclosing block.
@@ -69,13 +69,14 @@ Inside class definitions:
 
 ## Parameter List
 
-Parameter names declared in function declarations are usually for only self-documenting purposes. They are used (but remain optional) in function definitions.
+Parameter **names** declared in function declarations are usually for only self-documenting purposes. They are used (but remain optional) in function definitions.
 
-The type of each function parameter in the parameter list is determined according to the following rules:
+The **type** of each function parameter in the parameter list is determined according to the following rules:
 1) First, `decl-specifier-seq` and the `declarator` are combined as in any **declaration** (&rarr; see "Definitions") to determine the type.
 2) If the type is "array of T" or "array of unknown bound of T", it is replaced by the type "pointer to T".
-3) If the type is a function type F, it is replaced by the type "pointer to F".
-4) **Top-level cv-qualifiers** are dropped from the parameter type (This adjustment only affects the function type, but doesn't modify the property of the parameter: `int f(const int p, decltype(p)*);` and `int f(int, const int*);` declare the same function).
+3) If the type is a "function type F", it is replaced by the type "pointer to F".
+4) **Top-level cv-qualifiers** are dropped from the parameter type 
+  - (This adjustment only affects the function type, but doesn't modify the property of the parameter: `int f(const int p, decltype(p)*);` and `int f(int, const int*);` declare the same function).
 
 Because of these rules, the following function declarations declare exactly the same function:
 
@@ -329,3 +330,117 @@ const string &manip()
 }
 ```
 
+## Pointers to Functions
+
+- a pointer that denotes a function rather than an object
+- points to a particular type (like any other pointer)
+- a **function's type** is determined by 
+  - its return type and 
+  - the types of its parameters
+  - note: the function's name is **not** part of its type
+
+```cpp
+// compares lengths of two strings
+bool lengthCompare(const string &, const string &);
+```
+
+### Declare
+
+```cpp
+// pf points to a function returning bool that takes two const string references
+bool (*pf)(const string &, const string &); // uninitialized
+```
+
+```cpp
+// important: the parentheses around *pf are necessary:
+// because the following line declares a function named pf that returns a bool*
+bool *pf(const string &, const string &);
+```
+
+### Usage
+
+- when we use the name of a function as a value, the function is automatically converted to a pointer
+
+```cpp
+pf = lengthCompare; // pf now points to the function named lengthCompare
+pf = &lengthCompare; // equivalent assignment: address-of operator is optional
+```
+
+- to call the function to which the pointer points (no need to dereference the pointer!)
+
+```cpp
+bool b1 = pf("hello", "goodbye"); // calls lengthCompare
+bool b2 = (*pf)("hello", "goodbye"); // equivalent call
+bool b3 = lengthCompare("hello", "goodbye"); // equivalent call
+```
+
+### Assignment
+
+- there is **no implicit conversion** between pointers to one function type and pointers to another function type
+- as usual, we can **assign** 
+  - `nullptr` or 
+  - a zero-valued integer constant expression
+
+```cpp
+string::size_type sumLength(const string&, const string&);
+bool cstringCompare(const char*, const char*);
+pf = 0;               // ok: pf points to no function
+pf = sumLength;       // error: return type differs
+pf = cstringCompare;  // error: parameter types differ
+pf = lengthCompare;   // ok: function and pointer types match exactly
+```
+
+### Overloading
+
+The compiler uses the **type of the pointer** to determine which overloaded function to use
+- the type of the pointer **must match** one of the overloaded functions **exactly**!
+
+```cpp
+// declare a pointer to an overloaded function
+void ff(int*);
+void ff(unsigned int);
+void (*pf1)(unsigned int) = ff; // pf1 points to ff(unsigned)
+
+// the type of the pointer must match one of the overloaded functions exactly
+void (*pf2)(int) = ff;      // error: no ff with a matching parameter list
+double (*pf3)(int*) = ff;   // error: return type of ff and pf3 don't match
+```
+
+### Return a Function
+
+- we can't return a function type but **can** return a **pointer to** a function type
+
+### Return a Pointer to Function
+
+- we can't return a function type but **can** return a **pointer to** a function type
+- the easiest way to declare a function that returns a pointer to function is by using a **type alias**:
+
+```cpp
+using F = int(int*, int);       // F is a function type, not a pointer
+using PF = int(*)(int*, int);   // PF is a pointer type
+
+PF f1(int);   // ok: PF is a pointer to function; f1 returns a pointer to function
+F f1(int);    // error: F is a function type; f1 can’t return a function
+F *f1(int);   // ok: explicitly specify that the return type is a pointer to function
+```
+
+- other ways to return a pointer to function:
+
+```cpp
+// declare f1 directly
+int (*f1(int))(int*, int);      // f1 returns a pointer, pointer points to a function, that function returns an int
+
+// using a trailing return
+auto f1(int) -> int (*)(int*, int);
+```
+
+- we can use `decltype` to simplify writing a function pointer return type
+  - remember, `decltype` returns a function type, not a **pointer to** function type, ie. we must add a `*`:
+
+```cpp
+string::size_type sumLength(const string&, const string&);
+string::size_type largerLength(const string&, const string&);
+// depending on the value of its string parameter,
+// getFcn returns a pointer to sumLength or to largerLength
+decltype(sumLength) *getFcn(const string &);
+```

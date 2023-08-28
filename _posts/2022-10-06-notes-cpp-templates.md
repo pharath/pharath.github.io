@@ -25,6 +25,111 @@ tags:
 - templates "can be thought of as instructions to the compiler for generating classes or functions"
 - templates can make the code shorter and more manageable
 
+## Declaration
+
+- **template declaration**: 
+  - must include the template parameters (which need not be the same across the declaration(s) and the definition)
+  - **best practice:** 
+    - declarations for all the templates needed by a given file usually should appear together at the beginning of a file before any code that uses those names
+
+```cpp
+// all three uses of calc refer to the same function template
+template <typename T> T calc(const T&, const T&); // declaration
+template <typename U> U calc(const U&, const U&); // declaration
+// definition of the template
+template <typename Type>
+Type calc(const Type& a, const Type& b) { /* . . . */ }
+```
+
+## Definition
+
+- **template definition**: 
+  - the declaration of a class template or function template is called a **definition** if it has a body (VJ10.2)
+  - declaration and the definition of a given template must have the same number and kind (i.e., type or nontype) of parameters
+
+## typename
+
+- when using class members that are types
+
+**Problem:**
+- in nontemplate code,
+  - when we write `string::size_type`, the compiler has the definition of `string` and can see that `size_type` is a type
+- but in template code, 
+  - Assuming T is a template type parameter, 
+  - When the compiler sees code such as `T::mem` it won't know until instantiation time whether `mem` is a type or a `static` data member
+  - eg. `T::size_type * p;` can be either 
+    - a definition of a variable named `p`
+    - multiplying a `static` data member named `size_type` by a variable named `p`
+
+**Solution:**
+- By default, the language assumes that a name accessed through the scope operator is **not** a type
+  - as a result, we must explicitly tell the compiler that the name is a type by using `typename` (not `class`!)
+
+```cpp
+template <typename T>
+typename T::value_type top(const T& c)
+{
+  if (!c.empty())
+    return c.back();
+  else
+    return typename T::value_type();
+}
+```
+
+## Terminology
+
+
+
+## Default Template Arguments
+
+- possible for both function and class templates
+- a template parameter may have a default argument only if all of the parameters to its right also have default argument
+  - **for function templates:** default value can be anywhere (given the rest can be deduced)
+- Whenever we use a **class template**, we must always follow the template's name with brackets
+  - if we want to use the defaults, we must put an **empty bracket pair** following the template's nam
+- in example
+  - `F` represents the type of a callable object
+  - function parameter `f` will be bound to a callable object
+  - `f` will be a default-initialized object of type `F`
+  - type of `T` is deduced as `Sales_data`
+  - `F` is deduced as the type of `compareIsbn`
+  - when `compare` is called with three arguments, 
+    - the type of the third argument must be a callable object that
+      - returns a type that is convertible to `bool` and
+      - takes arguments of a type compatible with the types of the first two arguments
+
+```cpp
+// function templates with default args:
+
+// compare has a default template argument, less<T>
+// and a default function argument, F()
+template <typename T, typename F = less<T>>
+int compare(const T &v1, const T &v2, F f = F())
+{
+  if (f(v1, v2)) return -1;
+  if (f(v2, v1)) return 1;
+  return 0;
+}
+
+// users may supply their own comparison operation but are not required to do so:
+bool i = compare(0, 42); // uses less; i is -1
+// result depends on the isbns in item1 and item2
+Sales_data item1(cin), item2(cin);
+bool j = compare(item1, item2, compareIsbn);
+
+// class templates with default args:
+
+template <class T = int> class Numbers { // by default T is int
+  public:
+  Numbers(T v = 0): val(v) { }
+  // various operations on numbers
+  private:
+  T val;
+};
+Numbers<long double> lots_of_precision;
+Numbers<> average_precision; // empty <> says we want the default type
+```
+
 ## Type Traits
 
 - aka type transformation
@@ -96,6 +201,21 @@ int main () {
 
 **Template Parameter**: In C++ this can be achieved using **template parameters**. A template parameter is a special kind of parameter that can be used to pass a type as argument: just like regular function parameters can be used to pass values to a function, template parameters allow to pass also types to a function. These function templates can use these parameters as if they were any other regular type.
 
+### Order of Execution
+
+From [cppreference](https://en.cppreference.com/w/cpp/language/template_argument_deduction):
+
+"Template argument deduction takes place **after** the function template name lookup (which may involve argument-dependent lookup) and **before** template argument substitution (which may involve SFINAE) and overload resolution."
+
+ie.
+
+1. function template name lookup (which may involve argument-dependent lookup)
+2. template argument deduction
+3. template argument substitution (which may involve SFINAE)
+4. overload resolution
+
+(this is also the order in which they are presented in [cppreference](https://en.cppreference.com/w/cpp/language/function_template))
+
 ### Non-type Template Parameters
 
 - represents a value rather than a type
@@ -125,51 +245,181 @@ compare("hi", "mom")
 int compare(const char (&p1)[3], const char (&p2)[4])
 ```
 
-## Class Templates
-
-[source](https://www.geeksforgeeks.org/templates-cpp/):
-- to create a single class to work with different data types
-- useful when a class defines something that is independent of the data type. 
-  - Can be useful for classes like LinkedList, BinaryTree, Stack, Queue, Array, etc.
+VJ15.10.3: 
+- "using **deduced** nontype parameters in function templates"
 
 ```cpp
-// C++ Program to implement
-// template Array class
+// deduce the type of the parameter N of function template f<>() from the type of the nontype parameter of S
+template<auto N> struct S {};
+template<auto N> int f(S<N> p);
+S<42> x;
+int r = f(x);
+```
+
+### Instantiation
+
+From [cppreference](https://en.cppreference.com/w/cpp/language/function_template#Function_template_instantiation): 
+- A function template by itself is **not a type, or a function, or any other entity**. 
+- No code is generated from a source file that contains only template definitions. 
+- In order for any code to appear, a template must be **instantiated**: 
+  - the template arguments must be determined so that the compiler can generate an actual function (or class, from a class template).
+
+There are two forms of instantiation:
+- **explicit** instantiation
+- **implicit** instantiation
+
+#### Explicit Instantiation
+
+- for "controlling" instantiations
+- WITH `extern` it is an (explicit) instantiation **declaration**
+- WITHOUT `extern` it is an (explicit) instantiation **definition**
+- When the compiler sees an `extern` template declaration, it will **not** generate code for that instantiation in that file
+  - `extern` is a promise that there will be a non`extern` use of that instantiation elsewhere in the program
+  - "An explicit instantiation declaration (an extern template) prevents implicit instantiations", [cppreference](https://en.cppreference.com/w/cpp/language/function_template#Function_template_instantiation)
+
+```cpp
+// instantiation declaration and definition
+extern template class Blob<string>;             // declaration
+template int compare(const int&, const int&);   // definition
+```
+
+For a given instantiation 
+- there may be several `extern` declarations 
+- there must be **exactly one** definition
+
+```cpp
+// Syntax:
+
+// Explicit Instantiation Definition
+template return-type name < argument-list > ( parameter-list ) ; 	        // (1) 	
+template return-type name ( parameter-list ) ; 	                            // (2) 	
+// Explicit Instantiation Declaration
+extern template return-type name < argument-list > ( parameter-list ) ; 	// (3) 	(since C++11)
+extern template return-type name ( parameter-list ) ; 	                    // (4) 	(since C++11)
+```
+
+```cpp
+// examples from cppreference:
+
+template<typename T>
+void f(T s)
+{
+    std::cout << s << '\n';
+}
+ 
+template void f<double>(double); // instantiates f<double>(double)
+template void f<>(char);         // instantiates f<char>(char), template argument deduced
+template void f(int);            // instantiates f<int>(int), template argument deduced
+```
+
+#### Implicit Instantiation
+
+cppreference:
+- **implicit instantiation** occurs when
+  - code refers to a function in context that requires the **function definition** to exist **AND** this particular **function has not been explicitly instantiated**
+- The list of **template arguments** does not have to be supplied if it can be **deduced from context**.
+
+```cpp
 #include <iostream>
-using namespace std;
-
-template <typename T> class Array {
-private:
-    T* ptr;
-    int size;
-
-public:
-    Array(T arr[], int s);
-    void print();
-};
-
-template <typename T> Array<T>::Array(T arr[], int s)
+ 
+template<typename T>
+void f(T s)
 {
-    ptr = new T[s];
-    size = s;
-    for (int i = 0; i < size; i++)
-        ptr[i] = arr[i];
+    std::cout << s << '\n';
 }
-
-template <typename T> void Array<T>::print()
-{
-    for (int i = 0; i < size; i++)
-        cout << " " << *(ptr + i);
-    cout << endl;
-}
-
+ 
 int main()
 {
-    int arr[5] = { 1, 2, 3, 4, 5 };
-    Array<int> a(arr, 5);
-    a.print();
-    return 0;
+    f<double>(1); // instantiates and calls f<double>(double)
+    f<>('a');     // instantiates and calls f<char>(char)
+    f(7);         // instantiates and calls f<int>(int)
+    void (*pf)(std::string) = f; // instantiates f<string>(string)
+    pf("∇");                     // calls f<string>(string)
 }
+```
+
+## Class Templates
+
+### Scope of T
+
+- **Begin** of scope of T is just after `template <typename T>`
+- **End** of scope of T is at the end of the class definition (after the semicolon)
+
+### Class-Template Member Functions
+
+#### Syntax
+
+```cpp
+// Given a nontemplate member function
+ret_type StrBlob::member_name(parm_list)
+
+// the corresponding class template member will look like
+template <typename T>
+ret_type Blob<T>::member_name(parm_list)
+```
+
+**Inside** the scope of the class template itself, we may use the name of the template **without arguments**.
+- see Notes "Classes" &rarr; "Scope"
+- example:
+
+```cpp
+// postfix: increment/decrement the object but return the unchanged value
+template <typename T>
+BlobPtr<T> BlobPtr<T>::operator++(int)
+{
+  // no check needed here; the call to prefix increment will do the check
+  BlobPtr ret = *this; // save the current value
+  ++*this;          // advance one element; prefix ++ checks the increment
+  return ret;       // return the saved state
+}
+```
+
+#### Instantiation
+
+By default, a member function of a class template is instantiated **only if** the program uses that member function.
+
+**Example 1**:
+
+The following example instantiates the `Blob<int>` class and three of its member functions:
+- `operator[]`, 
+- `size`, and 
+- the `initializer_list<int>` constructor.
+
+```cpp
+// instantiates Blob<int> and the initializer_list<int> constructor
+Blob<int> squares = {0,1,2,3,4,5,6,7,8,9};
+// instantiates Blob<int>::size() const
+for (size_t i = 0; i != squares.size(); ++i)
+    squares[i] = i*i; // instantiates Blob<int>::operator[](size_t)
+```
+
+**Example 2**:
+
+Lets us instantiate a class with a type that may not meet the requirements for some of the template's operations.
+- eg. for instantiation of [vectors](#constraints-on-types-that-a-container-can-hold)
+
+### Friends
+
+For a **nontemplate** class:
+
+```cpp
+// forward declaration necessary to befriend a specific instantiation of a template
+// (because, recall, a friend declaration is not a declaration)
+template <typename T> class Pal;
+class C {
+  friend class Pal<C>;                      // specific friendship
+  template <typename T> friend class Pal2;  // general friendship
+};
+```
+
+For a class template:
+
+```cpp
+template <typename T> class Pal;
+template <typename T> class C2 { 
+  friend class Pal<T>;                      // specific friendship
+  template <typename X> friend class Pal2;  // general friendship
+};
 ```
 
 ### Containers
@@ -178,6 +428,22 @@ int main()
 - each container is defined in a header file with the same name as the type
 - containers are class templates (3.3)
 - container types: see ["Types"](#types)
+
+#### Constraints on Types That a Container Can Hold
+
+We can define a container for a type that does **not** support an operation-specific **requirement**
+- but we can use an operation only if the element type meets that operation's requirements
+- eg. some classes do not have a default constructor, so that we cannot construct such containers using only an element count:
+  - **operation**: construct a container using only an element count
+  - **requirement**: element type must have default constructor
+
+```cpp
+// assume noDefault is a type without a default constructor
+vector<noDefault> v1(10, init);   // ok: element initializer supplied
+vector<noDefault> v2(10);         // error: must supply an element initializer
+```
+
+This is enabled by the fact that members are instantiated only if we use them (see [class templates](#class-templates)).
 
 #### std::array
 
