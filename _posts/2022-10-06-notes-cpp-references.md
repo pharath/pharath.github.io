@@ -177,17 +177,38 @@ From [stackoverflow](https://stackoverflow.com/a/1898556):
   - However, note that it does not automatically forward. 
   - The term does not describe what it is but what it is typically used for.
 
+### Forwarding Reference vs Rvalue Reference
+
+`X&&` for a specific type `X`
+- declares a parameter to be an **rvalue reference**
+- it can **only** be bound to a movable object (a **prvalue**, such as a temporary object, and an **xvalue**, such as an object passed with `std::move()`)
+  - see move constructor and move-assignment operator
+- it is **always** mutable
+- you can **always** "steal" its value
+
+`T&&` for a template parameter `T`
+- declares a **forwarding reference** (also called universal reference)
+- it can be bound to a mutable, immutable (i.e., `const`), or movable object
+  - see `f(T&& val)` in [Perfect Forwarding](#perfect-forwarding)
+- it is mutable or immutable
+  - `const` is never dropped!
+- you can **sometimes** "steal" its value
+
+### `remove_reference_t`
+
+**Problem**: References must be initialized. Therefore, the following function template itself won't work properly with lvalue arguments.
+
 ```cpp
-// Problem: References must be initialized.
-// Therefore, the following function template itself won't work properly with lvalue arguments.
 template<typename T> void f(T&& p) // p is a forwarding reference
 {
   T x; // for passed lvalues, x is a reference
   ...
 }
+```
 
-// To deal with this situation, the std::remove_reference type trait is 
-// frequently used to ensure that x is not a reference
+**Solution**: To deal with this situation, the `std::remove_reference` type trait is frequently used to ensure that `x` is not a reference
+
+```cpp
 template<typename T> void f(T&& p) // p is a forwarding reference
 {
   std::remove_reference_t<T> x; // x is never a reference
@@ -201,14 +222,14 @@ template<typename T> void f(T&& p) // p is a forwarding reference
   - modifiable objects forwarded as modifiable
   - preserve constness
   - movable objects forwarded as movable
-- called **perfect forwarding**, because the result of calling `g()` indirectly through `forwardToG()` will be the same as if the code called `g()` directly
-- No additional copies are made
+- called **perfect forwarding**, because the result of calling `g()` indirectly through `f()` (or `forwardToG()` respectively) will be the same as if the code called `g()` directly
+- no additional copies are made
 
-Ways to forward a call of `f()` to a corresponding function `g()`:
+Forward a call of `f()` to a corresponding function `g()`:
+
+Without templates, we would have to program all three cases for `f()` separately:
 
 ```cpp
-// without templates, we have to program all three cases for f() separately
-
 #include <utility>
 #include <iostream>
 
@@ -216,24 +237,24 @@ class X {
   ...
 };
 
-void g (X&) {
+void g(X&) {
   std::cout << "g() for variable\n";
 }
-void g (X const&) {
+void g(X const&) {
   std::cout << "g() for constant\n";
 }
-void g (X&&) {
+void g(X&&) {
   std::cout << "g() for movable object\n";
 }
 
 // let f() forward argument val to g():
-void f (X& val) {
+void f(X& val) {
   g(val);                 // val is non-const lvalue => calls g(X&)
 }
-void f (X const& val) {
+void f(X const& val) {
   g(val);                 // val is const lvalue => calls g(X const&)
 }
-void f (X&& val) {
+void f(X&& val) {
   g(std::move(val));      // val is non-const lvalue => needs std::move() to call g(X&&)
                           // without move() g(X&) would be called
 }
@@ -250,9 +271,9 @@ int main()
 }
 ```
 
-```cpp
-// perfect forward arguments
+The same using **perfect forwarding** to forward arguments:
 
+```cpp
 #include <utility>
 #include <iostream>
 
@@ -260,19 +281,19 @@ class X {
   ...
 };
 
-void g (X&) {
+void g(X&) {
   std::cout << "g() for variable\n";
 }
-void g (X const&) {
+void g(X const&) {
   std::cout << "g() for constant\n";
 }
-void g (X&&) {
+void g(X&&) {
   std::cout << "g() for movable object\n";
 }
 
 // let f() perfect forward argument val to g():
 template<typename T>
-void f (T&& val) {
+void f(T&& val) {
   g(std::forward<T>(val)); // call the right g() for any passed argument val
 }
 
@@ -288,12 +309,11 @@ int main()
 }
 ```
 
-In the following example, the expression `x` will **always** be an **lvalue** (recall: variables are lvalues).
-- The `static_cast` casts `x` to its original type and lvalue- or rvalue-ness, thereby achieving perfect forwarding.
+Forward the argument along to another function `g()`:
+- **problem**: the expression `x` will **always** be an **lvalue** (recall: variables are lvalues)
+- **solution**: the `static_cast` casts `x` to its original type and lvalue- or rvalue-ness, thereby achieving perfect forwarding
 
 ```cpp
-// "forward" the argument along to another function g()
-
 class C {
   ...
 };
@@ -317,12 +337,14 @@ void foo()
   forwardToG(C());            // eventually calls g(C&&)
   forwardToG(std::move(v));   // eventually calls g(C&&)
 }
+```
 
-// better:
-// std::forward<>() (in header <utility>) should be used in place of "static_cast" for perfect forwarding
-// - better documents the programmer's intent
-// - prevents errors (such as omitting one &)
+**best practice:** 
+- use `std::forward<>()` (in header `<utility>`) instead of `static_cast` for perfect forwarding
+  - better documents the programmer's intent
+  - prevents errors (such as omitting one `&`)
 
+```cpp
 #include <utility>
 
 template<typename T> 
@@ -331,4 +353,3 @@ void forwardToG(T&& x)
   g(std::forward<T>(x)); // forward x to g()
 }
 ```
-
