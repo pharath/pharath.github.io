@@ -584,16 +584,16 @@ StrVec::StrVec(StrVec &&s) noexcept // move won't throw any exceptions
 }
 ```
 
-- `noexcept`
-  - a way to promise that a function does not throw any exceptions
-  - move constructors and move assignment operators that cannot throw exceptions **should** be marked as `noexcept`
-  - why is `noexcept` needed?
-    - unless the library knows that our move constructor will not throw, it will do **extra work** to cater to the possibliity that moving an object of our class type might throw.
-    - without `noexcept` (specified on the element type's move constructor), in circumstances such as `vector<elementType>` reallocation, eg. when we call `push_back`, `vector<elementType>` **MUST** use `elementType`'s copy constructor instead of `elementType`'s move constructor
-      - why "MUST"? - because `vector` guarantees that if an exception happens when we call `push_back`, the `vector` itself will be left unchanged (however, using a move constructor changes the `vector` itself and may possibly throw an exception)
-        - (similarly, other **library containers** also provide guarantees as to what they do if an exception happens)
-      - `vector` reallocation happens 
-      - more detailed explanation (see p.536)
+`noexcept`
+- a way to promise that a function does not throw any exceptions
+- move constructors and move assignment operators that cannot throw exceptions **should** be marked as `noexcept`
+- why is `noexcept` needed?
+  - unless the library knows that our move constructor will not throw, it will do **extra work** to cater to the possibliity that moving an object of our class type might throw.
+  - without `noexcept` (specified on the element type's move constructor), in circumstances such as `vector<elementType>` reallocation, eg. when we call `push_back`, `vector<elementType>` **MUST** use `elementType`'s copy constructor instead of `elementType`'s move constructor
+    - why "MUST"? - because `vector` guarantees that if an exception happens when we call `push_back`, the `vector` itself will be left unchanged (however, using a move constructor changes the `vector` itself and may possibly throw an exception)
+      - (similarly, other **library containers** also provide guarantees as to what they do if an exception happens)
+    - `vector` reallocation happens 
+    - more detailed explanation (see p.536)
 
 ```cpp
 // must specify on both:
