@@ -32,8 +32,8 @@ type-constraint(optional) auto                    // (1) 	(since C++11)
 type-constraint(optional) decltype ( auto ) 	  // (2) 	(since C++14)
 ```
 
-1) type is deduced using the rules for **template argument deduction**.
-2) type is `decltype(expr)`, where `expr` is the initializer or ones used in return statements.
+1. type is deduced using the rules for **template argument deduction**.
+2. type is `decltype(expr)`, where `expr` is the initializer or ones used in return statements.
 
 ## auto
 
@@ -79,9 +79,8 @@ decltype ( expression )       // (2)    (since C++11)
 ```
 
 Inspects
-
-1) the declared type of an **entity** (no parentheses!)
-2) the type and value category of an **expression**
+1. the declared type of an **entity** (no parentheses!)
+2. the type and value category of an **expression**
 
 Note: "entity" is eg. a variable, function, enumerator, or data member (VJ15.10.2)
 
