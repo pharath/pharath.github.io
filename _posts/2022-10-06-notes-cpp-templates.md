@@ -49,7 +49,7 @@ Type calc(const Type& a, const Type& b) { /* . . . */ }
 
 ## typename
 
-- when using class members that are types
+- to explicitly tell the compiler that the name is a type
 
 **Problem:**
 - in nontemplate code,
@@ -76,9 +76,10 @@ typename T::value_type top(const T& c)
 }
 ```
 
-## Terminology
+### typename vs class
 
-
+- `class` can be misleading (not only class types can be substituted for `T`), you should prefer the use of `typename`
+- `typename` came relatively late in the evolution of the C++98 standard
 
 ## Default Template Arguments
 
