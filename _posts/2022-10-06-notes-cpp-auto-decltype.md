@@ -19,17 +19,38 @@ tags:
 
 ---
 
+## Placeholder type specifiers
+
+cppreference:
+- "For **variables**, specifies that the type of the variable that is being declared will be automatically deduced from its initializer."
+- "For **functions**, specifies that the return type will be deduced from its return statements. (since C++14)"
+
+Syntax:
+
+```cpp
+type-constraint(optional) auto                    // (1) 	(since C++11)
+type-constraint(optional) decltype ( auto ) 	  // (2) 	(since C++14)
+```
+
+1) type is deduced using the rules for **template argument deduction**.
+2) type is `decltype(expr)`, where `expr` is the initializer or ones used in return statements.
+
 ## auto
 
-- uses the **rules** for **template argument deduction** to determine the type of interest (VJp301)
 - tells the compiler to deduce the type from the initializer
   - thus, a variable that uses `auto` must have an initializer
-- type that the compiler infers for `auto` is not always exactly the same as the initializer's type
-  - references
-    - compiler uses the referred object's type, and not the reference type
-  - top-level `const`s
-    - ignored
+- uses the **rules** for **template argument deduction** to determine the type of interest (VJp301)
+  - **therefore**, the type that the compiler infers for `auto` is not always exactly the same as the initializer's type
+    - references: compiler uses the referred object's type, and not the reference type
+    - top-level `const`s: ignored
+- as parameter type (C++20)
+- as return type
+- in trailing return syntax, eg. `auto f() -> int`
+
+cppreference:
 - "in the type specifier sequence of a variable: `auto x = expr;` as a type specifier. The type is deduced from the initializer."
+- "If the placeholder type specifier is `auto` (...), the variable type is deduced from the initializer using the rules for **template argument deduction** from a function call (...)."
+  - "For example, given `const auto& i = expr;`, the type of `i` is exactly the type of the argument `u` in an imaginary template `template<class U> void f(const U& u)` if the function call `f(expr)` was compiled."
 - "If the placeholder type specifier is used **to declare multiple variables**, the deduced types must match."
   - "For example, the declaration `auto i = 0, d = 0.0;` is ill-formed, while the declaration `auto i = 0, *p = &i;` is well-formed and the `auto` is deduced as `int`."
 - "In **direct-list-initialization** (but not in copy-list-initialization), when deducing the meaning of the `auto` from a **braced-init-list**, the braced-init-list must contain **only one element**, and the type of `auto` will be the type of that element:"
@@ -44,10 +65,10 @@ auto x3{3};    // x3 is int
                // (before N3922 x2 and x3 were both std::initializer_list<int>)
 
 // from: https://mariusbancila.ro/blog/2017/04/13/cpp17-new-rules-for-auto-deduction-from-braced-init-list/
-auto a = {42};   // std::initializer_list<int>
-auto b {42};     // int
-auto c = {1, 2}; // std::initializer_list<int>   // therefore, quote: "but not in copy-list-initialization"
-auto d {1, 2};   // error, too many 
+auto a = {42};    // std::initializer_list<int>
+auto b{42};       // int
+auto c = {1, 2};  // std::initializer_list<int>   // therefore, quote: "but not in copy-list-initialization"
+auto d{1, 2};     // error, too many 
 ```
 
 ## decltype

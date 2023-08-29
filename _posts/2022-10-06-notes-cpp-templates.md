@@ -345,7 +345,7 @@ int main()
 - **Begin** of scope of T is just after `template <typename T>`
 - **End** of scope of T is at the end of the class definition (after the semicolon)
 
-### Class-Template Member Functions
+### Member Functions
 
 #### Syntax
 
@@ -420,6 +420,65 @@ template <typename T> class C2 {
   friend class Pal<T>;                      // specific friendship
   template <typename X> friend class Pal2;  // general friendship
 };
+```
+
+### Typedefs
+
+- we can define a `typedef` that refers to an instantiation of a class template
+- we **cannot** define a `typedef` that refers to a template
+
+```cpp
+typedef Blob<string> StrBlob;
+```
+
+### Type Aliases
+
+```cpp
+template<typename T>
+using twin = pair<T, T>;
+```
+
+which can be used as
+
+```cpp
+// better than using "pair<string, string>" because "string" has to be specified only once
+twin<string> authors; // authors is a pair<string, string>
+```
+
+We can also **fix** one or more template parameters
+
+```cpp
+template <typename T>
+using partNo = pair<T, unsigned>;
+```
+
+### static members
+
+- mostly like for any other (nontemplate) class
+  - a `static` member function is instantiated only if it is used in a program
+  - access a `static` member of a class template 
+    - through an object of the class type or 
+    - by using the scope operator to access the member directly
+- there is a distinct object **for each instantiation** of a class template
+  - eg. all objects of type `Foo<X>` share the same `ctr` object and `count` function, but there is a distinct `ctr` and `count` for objects of type `Foo<Y>`
+
+```cpp
+template <typename T> 
+class Foo {
+  public:
+    static std::size_t count() { return ctr; }
+    // other interface members
+  private:
+    static std::size_t ctr;
+    // other implementation members
+};
+```
+
+**Defining** a static data member:
+
+```cpp
+template <typename T>
+size_t Foo<T>::ctr = 0; // define and initialize ctr
 ```
 
 ### Containers
