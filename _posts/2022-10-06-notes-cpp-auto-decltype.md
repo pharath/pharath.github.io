@@ -78,9 +78,10 @@ decltype ( entity )           // (1)    (since C++11)
 decltype ( expression )       // (2)    (since C++11)
 ```
 
-Inspects 
-1) the declared type of an **entity** (no parentheses!) or
-2) the type and value category of an **expression**.
+Inspects
+
+1) the declared type of an **entity** (no parentheses!)
+2) the type and value category of an **expression**
 
 Note: "entity" is eg. a variable, function, enumerator, or data member (VJ15.10.2)
 
