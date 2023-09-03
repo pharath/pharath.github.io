@@ -44,6 +44,35 @@ std::cout << "string" << std::endl
 Writing `endl` has the effect of ending the current line and **flushing the buffer** associated with that device. Flushing the buffer ensures that all the output the program has generated so far is actually written to the output stream, rather than sitting in memory waiting to be written.
 - **Best practice**: Programmers often add **print statements** during debugging. Such statements should **always flush the stream**. Otherwise, if the program crashes, output may be left in the buffer, leading to incorrect inferences about where the program crashed.
 
+## std::flush
+
+**Example**: see day 17: `flush.cpp`
+
+From [Quora](https://www.quora.com/What-does-it-mean-that-endl-flushes-buffer-in-C):
+
+When a program writes an output it does not (normally) writes directly on the device queue: it writes (= converts into text) into a buffer with a predefined capacity. The actual copy towards the output device will happen only when the buffer is full. When this happens the buffer is copied towards the device (eventually applying any required trans-coding) and then set back into its on "empty" state to be refilled with further output. When all that happens the buffer is said to be "flushed".
+
+This works fine when you need to write a large amount of data, but there may be cases when this is not desirable:
+
+- if you finished write a consistent amount of data, you may want to be sure nothing is still waiting to be written before going over, so you explicitly ask for a flush.
+- If you are prompting a message to a user, you want to be sure it will be immediately visible (not waiting for something happening in the future ...)
+
+Now, the expression `<<endl;` is equivalent to `<<'\n'<<flush` (it spits out a new-line character and calls the `flush` function, which in turn forces the buffer to be ... flushed)
+
+## std::endl vs std::flush
+
+From [stackoverflow](https://stackoverflow.com/a/59310447):
+
+"`std::endl` is the equivalent of `std::cout.put('\n'); std::cout.flush();`"
+
+## When does std::cout flush?
+
+**Example:** see day 17 `when_flush.cpp`
+
+From [stackoverflow](https://stackoverflow.com/a/22345401):
+
+"There is no strict rule by the standard - only that `endl` WILL flush, but the implementation may flush at any time it "likes"."
+
 # Time
 
 - in `<chrono>`
