@@ -24,6 +24,7 @@ tags:
 - templates are **not** functions or classes
 - templates "can be thought of as instructions to the compiler for generating classes or functions"
 - templates can make the code shorter and more manageable
+- provide support for **parameterized types** (see "Definitions" &rarr; "Parameterized Types")
 
 ## Declaration
 
@@ -339,6 +340,47 @@ int main()
 }
 ```
 
+### Specialization
+
+- a separate definition of the template in which one or more template parameters are specified to have particular types
+- useful, when 
+  - the general definition might not compile or might do the wrong thing
+  - we want to take advantage of some specific knowledge to write more efficient code than would be instantiated from the template
+- When we define a specialization, the function parameter type(s) **must match** the corresponding types in a previously declared template
+  - important for `const T` and `const T&` function parameters:
+    - The const version of a pointer type (eg. `double*`) is a **constant pointer** (`double* const`) (as distinct from a pointer to const), see code example below
+- **best practice:**
+  - Templates and their specializations should be declared in the same header file. 
+  - Declarations for all the templates with a given name should appear **first**, followed by any specializations of those templates.
+    - be careful: errors in declaration order between a template and its specializations are easy to make but hard to find
+- "Function **partial specialization** is **not allowed** yet as per the standard. (...) In the case of a function templates, only **full specialization** is allowed by the C++ standard.", [stackoverflow](https://stackoverflow.com/a/8061522)
+
+```cpp
+// Assume the general definition of this "compare" template is not appropriate 
+// for a particular type, namely, character pointers
+template <typename T> int compare(const T&, const T&);
+
+// specialization:
+// we want: special version of "compare" to handle 
+// pointers to character arrays, and therefore, we know "T" must be "const char*"
+// Which Function Parameter to use?:
+// "T" is "const char*" => so "const T&" is "const char* const&"
+template <>
+int compare(const char* const &p1, const char* const &p2)
+{
+  return strcmp(p1, p2);
+}
+
+// ... whereas a specialization to handle doubles would look like this:
+// Which Function Parameter to use?:
+// - "T" is "double" => so "const T&" is "const double&"
+template <>
+int compare(const double &p1, const double &p2)
+{
+  return strcmp(p1, p2);
+}
+```
+
 ## Class Templates
 
 ### Scope of T
@@ -589,8 +631,6 @@ Generic programming:
 
 ## Variadic Templates
 
-TODO
-
 - a template function or class that can take a varying number of parameters. 
 - The varying parameters are known as a **parameter pack**.
 - There are two kinds of parameter packs:
@@ -600,10 +640,8 @@ TODO
 
 ```cpp
 // "Args" is a template parameter pack; "rest" is a function parameter pack
-// "Args" represents zero or more template type parameters
-// "rest" represents zero or more function parameters
-template <typename T, typename... Args>
-void foo(const T &t, const Args& ... rest);
+template <typename T, typename... Args>       // "Args" represents zero or more template type parameters
+void foo(const T &t, const Args& ... rest);   // "rest" represents zero or more function parameters
 ```
 
 Example:
@@ -626,3 +664,124 @@ void foo(const char(&)[3]);
 // - remaining arguments (if any) provide the number of, and types for, the additional arguments to the function
 ```
 
+### sizeof... Operator
+
+- returns a constant expression
+- does not evaluate its argument
+
+```cpp
+template<typename ... Args> 
+void g(Args ... args) {
+  cout << sizeof...(Args) << endl; // number of type parameters
+  cout << sizeof...(args) << endl; // number of function parameters
+}
+```
+
+### Variadic Function Templates
+
+- used when we know neither the **number** nor the **types** of the arguments we want to process
+- variadic functions are often **recursive**
+
+**Example:**
+
+```cpp
+// function to end the recursion and print the last element
+// this function must be declared before the variadic version of print is defined
+template<typename T>
+ostream &print(ostream &os, const T &t)
+{
+  return os << t; // no separator after the last element in the pack
+}
+// this version of print will be called for all but the last element in the pack
+template <typename T, typename... Args>
+ostream &print(ostream &os, const T &t, const Args&... rest)
+{
+  os << t << ", ";              // print the first argument
+  return print(os, rest...);    // recursive call; print the other arguments
+}
+```
+
+For `print(cout, i, s, 42);` the recursion will execute as follows:
+
+Call | t | rest...
+:---: | :---: | :---: |
+print(cout, i, s, 42) | i | s, 42
+print(cout, s, 42) | s | 42
+print(cout, 42) calls the nonvariadic version of print | | 
+
+- for the **last call** in the recursion, `print(cout, 42)`, **both** versions of `print` are viable
+  - both functions provide an equally good match for the call. 
+  - However, a nonvariadic template is **more specialized** than a variadic template (see "Overloading and Templates"), so the nonvariadic version is chosen for this call
+- when the nonvariadic version of `print` is not declared **before** the variadic version, the variadic function will recurse indefinitely
+
+### Pack Expansion
+
+**In the example above:**
+
+```cpp
+// - the pattern is "const Args&"
+// - the pattern is applied to each element in the template parameter pack "Args"
+print(cout, i, s, 42); // two parameters in the pack
+
+// This call is instantiated as 
+ostream& print(ostream&, const int&, const string&, const int&);
+```
+
+```cpp
+// - the pattern is the name of the function parameter pack (i.e., rest)
+print(os, rest...)
+
+// this call is equivalent to
+print(os, s, 42);
+```
+
+More complicated patterns are also possible when we expand a function parameter pack:
+
+```cpp
+// call debug_rep on each argument in the call to print
+template <typename... Args>
+ostream &errorMsg(ostream &os, const Args&... rest)
+{
+  // print(os, debug_rep(a1), debug_rep(a2), ..., debug_rep(an)
+  return print(os, debug_rep(rest)...);
+}
+
+// Then
+errorMsg(cerr, fcnName, code.num(), otherData, "other", item);  // note: errorMsg() calls print()
+
+// ... will execute as if we had written
+print(cerr, debug_rep(fcnName), debug_rep(code.num()),
+            debug_rep(otherData), debug_rep("otherData"),
+            debug_rep(item));
+```
+
+Note: It is important where you put the ellipsis "`...`":
+
+```cpp
+// passes the pack to debug_rep; print(os, debug_rep(a1, a2, ..., an))
+print(os, debug_rep(rest...)); // error: no matching function to call
+
+// expands to
+print(cerr, debug_rep(fcnName, code.num(), otherData, "otherData", item));
+```
+
+### Forwarding
+
+Variadic functions often forward their parameters to other functions. Such functions typically have a form similar to:
+
+```cpp
+// fun has zero or more parameters each of which is
+// an rvalue reference to a template parameter type
+template<typename... Args>
+void fun(Args&&... args) // expands Args as a list of rvalue references
+{
+  // the argument to "work" expands both Args and args
+  work(std::forward<Args>(args)...);
+}
+
+// Then
+fun(10, 'c');
+
+// ... will execute as if we had written
+work(std::forward<int>(10), std::forward<char>(c))
+```
