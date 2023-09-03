@@ -111,6 +111,8 @@ Note that if the name of an object is parenthesized, it is treated as an ordinar
 Lippman:
 
 - returns the type of its operand
+- unlike `auto`, `decltype` returns the type of references and top-level `const`s
+- `decltype((variable))` is always a reference type, whereas `decltype(variable)` is a reference type only if `variable` is a reference
 - result is a reference type if the expression yields an lvalue, eg. if `p` is an `int*`
   - `decltype(*p)` is `int&` (because dereference yields an **lvalue**)
   - `decltype(&p)` is `int**` (because address-of operator yields a **prvalue**)
@@ -118,14 +120,17 @@ Lippman:
       - if `x` is an `int` then `&x` returns a `int*` (this is simply how the address-of operator is defined, see [Operators](#operators))
       - if `y` is an `int*` then `&y` returns a `int**`
 
+**For function calls:**
+
 ```cpp
 decltype(f()) sum = x; // sum has whatever type f returns
 ```
 
 - does not call `f`
 - uses the type that such a call **would** return as the type for `sum`
-- unlike `auto`, `decltype` returns the type of references and top-level `const`s
-- `decltype((variable))` is always a reference type, whereas `decltype(variable)` is a reference type only if `variable` is a reference
+
+**For arrays:**
+
 - `decltype(someArray)` does not automatically convert an array to its corresponding pointer type
   - ie. we must add a `*` (asterisk) in the following code:
 
@@ -134,6 +139,7 @@ decltype(f()) sum = x; // sum has whatever type f returns
 
 int odd[] = {1,3,5,7,9};
 int even[] = {0,2,4,6,8};
+
 // returns a pointer to an array of five int elements
 decltype(odd) *arrPtr(int i)
 {
@@ -141,7 +147,9 @@ decltype(odd) *arrPtr(int i)
 }
 ```
 
-- can be used to inspect types
+### Common Uses
+
+1) can be used to inspect types
 
 ```cpp
 // VJ15.10.2
@@ -161,17 +169,18 @@ void g (std::string&& s)
 }
 ```
 
-- `decltype` can also be useful when the value-producing `auto` deduction is not sufficient. 
+2) `decltype` can also be useful when the **"value-producing"** `auto` deduction is not sufficient.
+- ie. sometimes we want to produce **references** instead of values
 
 ```cpp
+// "Pointers Are Iterators" (Lippman, p118)
+
 // assume we have a variable "pos" of some unknown iterator type, and 
 // - we want to create a variable "element" that refers to the element stored by "pos". 
-// - we want to preserve the value- or reference-ness of the iterator's "operator*", ie.
+// - we want to preserve the value- or reference-ness of the iterator's "operator*"
 
-// (note: like T rules in TAD)
 auto element = *pos;          // will always make a COPY of the element, never a REFERENCE
 
-// (note: like T& rules in TAD)
 auto& element = *pos;         // will always make a REFERENCE to the element, never a COPY
 // (While standard container iterators (are required to) always produce REFERENCES, this is 
 // not the case for all iterators!).
@@ -180,15 +189,17 @@ auto& element = *pos;         // will always make a REFERENCE to the element, ne
 // the iterator's "operator*" is preserved:
 decltype(*pos) element = *pos;
 
-// without code duplication
+// better: without code duplication
 decltype(auto) element = *pos;
 ```
+
+Note: This is why `decltype(auto)` is frequently used for return types (see "decltype(auto)" &rarr; "Common Uses" &rarr; (1)).
 
 ### decltype(auto)
 
 Like `auto`
 - a **placeholder type**
-- type of a variable, return type, or template argument is determined from the type of the associated expression (initializer, return value, or template argument)
+- type of a variable, return type, or template argument is determined from the type of the associated expression (initializer, return value, or template argument) (VJ15.10.3)
 
 Unlike `auto`
 - actual type is determined by applying the `decltype` construct directly to the expression
@@ -199,18 +210,20 @@ int const& ref = i;       // ref has type int const& and refers to i
 
 auto x = ref;             // x has type int and is a new independent object
 decltype(auto) y = ref;   // y has type int const& and also refers to i
-// this avoids code duplication like:
-// decltype(ref) y = ref;
+```
 
-// auto vs decltype(auto) 
+Sometimes `auto` creates copies, whereas `decltype(auto)` doesn't:
+
+```cpp
+// auto vs decltype(auto)
 // for vector indexing:
 std::vector<int> v = { 42 };
 auto x = v[0];            // x denotes a new object of type int
-decltype(auto) y = v[0];  // y is a reference (type int&) (because v[0] is an lvalue and for lvalues 
-                          //   the "decltype() rules" (see section "decltype") say "T" becomes "T&")
+decltype(auto) y = v[0];  // y is a reference (type int&)
+// because v[0] is an lvalue and for lvalues "decltype()" returns "T&"
 ```
 
-Does not allow specifiers or declarator operators that modify its type:
+Does not allow **specifiers** or **declarator operators** that modify its type:
 
 ```cpp
 decltype(auto)* p = (void*)nullptr;   // invalid
@@ -218,48 +231,68 @@ int const N = 100;
 decltype(auto) const NN = N*N;        // invalid
 ```
 
+#### Parentheses Problem
+
 **Parentheses** in the initializer may be significant (since they are significant for the `decltype` construct):
 
 ```cpp
 int x;
 decltype(auto) z = x;                 // object of type int
 decltype(auto) r = (x);               // reference of type int&
+```
 
+For the same reason, in the following example `return r` will return **by value**, whereas `return (r)` will return **by reference**:
+
+```cpp
 // in particular, parentheses can have a severe impact on the validity of return statements
+// (because the return expression is used to initialize a temporary of type decltype(auto) at the call site)
 int g();
 ...
 decltype(auto) f() {
   int r = g();
-  return (r);                         // run-time ERROR: returns reference to temporary
-  // phth: 
+  return (r);                         // run-time ERROR: returns a reference to a local object
   // - read functions.md -> "return" first!
-  // - here, under the hood the return statement initializes a temporary temp like this:
-  // 
-  // `decltype(auto) temp = (r);       // reference of type int&`
   //
-  // - this "temp" is the result of the function call
+  // - under the hood the return statement initializes a temporary "temp" like this:
+  // 
+  // `decltype(auto) temp = (r);       // decltype(expression) -> "temp" is a reference of type int&`
+  //
+  // - thus, "temp" is a reference that is BOUND TO the local object r
+  // - this "temp" is the result of the function call f()
+  // - decltype(auto) is deduced to int&, ie. f() returns "by reference"
   // 
   // Problem: 
-  // - r is a local object, scope of r ends when leaving f()
+  // - r is a local object
   //   - thus, r will get destroyed after the "return (r);"
-  //     - because "All temporary objects are destroyed as the last step in evaluating 
-  //       the full-expression that (lexically) contains the point where they were created"
-  // - thus, the result of the function call f() will be an int& type reference to a destroyed object (dangling reference)
+  // - thus, "temp" will refer to a destroyed object (dangling reference)
+  //
+  // Solution:
+  // - use "return r;" (ie. WITHOUT parentheses)
+  // - because then, the return statement initializes a temporary "temp2" like this:
+  //
+  // `decltype(auto) temp2 = r;       // decltype(entity) -> "temp2" is an int`
+  // 
+  // - thus, "temp2" is an int and the local object r is COPIED TO "temp2" before it gets destroyed
+  // - decltype(auto) is deduced to int, ie. f() returns "by value"
+  // - "temp2" (the result of f()) itself will be destroyed at the end of the full-expression in which it was 
+  //   created, but, until then, it will not be a "dangling reference"
 }
 ```
 
-It is frequently convenient **for return types**:
+#### Common Uses
+
+TODO: einfach merken: `decltype(auto)` will always correctly return by value or by reference (depending on which of these two is appropriate for each situation)
+
+1) It is frequently convenient **for return types**:
 
 ```cpp
-// first read:
-// - the "decltype(*pos) element = *pos;" example in the section about "decltype(expr)" (without the "auto")
+// - first read cpp-functions.md -> "return"
+// - then read the "Parentheses Problem" example above
+// - then read VJ15.10.2: the "decltype(*pos) element = *pos;" example in the section about "decltype(expr)" (without the "auto")
 //
-// the desired behavior of the `operator[]` function below:
-// - If container[idx] produces an lvalue: reference type (return by reference)
-// - If container[idx] produces an prvalue: object type (return by value, ie. return a copy)
-//   - return by reference would result in a dangling reference
-//
-// It would be harder to implement this behavior without decltype(auto).
+// we want:
+// - If container[idx] is an lvalue: return by reference
+// - If container[idx] is a prvalue: return by value, ie. return a copy
 template<typename C> class Adapt
 {
   C container;
@@ -271,6 +304,38 @@ template<typename C> class Adapt
 ```
 
 ### declval
+
+cppreference:
+
+- Converts any type `T` to a reference type, making it possible to use member functions in the operand of the `decltype` specifier without the need to go through constructors.
+- `std::declval` is commonly used in templates where acceptable template parameters may have no constructor in common, but have the same member function whose return type is needed.
+
+```cpp
+#include <iostream>
+#include <utility>
+ 
+struct Default
+{
+    int foo() const { return 1; }
+};
+ 
+struct NonDefault
+{
+    NonDefault() = delete;
+    int foo() const { return 1; }
+};
+ 
+int main()
+{
+    decltype(Default().foo()) n1 = 1;                   // type of n1 is int
+//  decltype(NonDefault().foo()) n2 = n1;               // error: no default constructor
+    decltype(std::declval<NonDefault>().foo()) n2 = n1; // type of n2 is int
+    std::cout << "n1 = " << n1 << '\n'
+              << "n2 = " << n2 << '\n';
+}
+```
+
+VJ:
 
 - **main intended use**: in `decltype` and `sizeof` constructs
 - a function template 
@@ -296,8 +361,8 @@ RT max (T1 a, T2 b)
 }
 
 // Note:
-// - we can also implement max() WITHOUT declval, but this requires that we are 
-//   able to call default constructors for the passed types
+// we can also implement max() WITHOUT declval, but this requires that we are 
+// able to call default constructors for the passed types:
 #include <type_traits>
 template<typename T1, typename T2,
          typename RT = std::decay_t<decltype(true ? T1() : T2())>>
@@ -306,4 +371,3 @@ RT max (T1 a, T2 b)
   return b < a ? a : b;
 }
 ```
-
