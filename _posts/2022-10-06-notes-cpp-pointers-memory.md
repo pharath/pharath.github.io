@@ -176,28 +176,129 @@ From [stackoverflow](https://stackoverflow.com/a/8783589):
 
 # Arrays
 
-- are a compound type
+- a **compound type**
 - the **dimension** must be a **constant expression**
 - cannot use `auto` to deduce the type
 - elements in an array are **default initialized**
   - thus, an array of built-in type that is defined inside a function will have undefined values.
-- An **array name without brackets** is a pointer to the array's first element (JA202)
-  - You can also use the expression `&data[0]` to obtain the address of the array's first element (JA202)
-  - The name of an array is a **pointer constant**; it can't be changed and remains fixed for the entire time the program executes (JA202)
-    - You can, however, declare a pointer variable and initialize it to point at the array:
+
+## Default Initialization
 
 ```cpp
-int array[100], *p_array;
-/* additional code goes here */
-p_array = array;
+unsigned cnt = 42;          // not a constant expression
+constexpr unsigned sz = 42; // constant expression
+
+int arr[10];                  // array of ten ints
+int *parr[sz];                // array of 42 pointers to int
+string bad[cnt];              // error: cnt is not a constant expression
+string strs[get_size()];      // ok if get_size is constexpr, error otherwise
 ```
 
-- C-style arrays do not support Copy or Assignment (but `std::array` does!)
+## List Initialization
+
+- If the dimension is greater than the number of initializers
+  - the initializers are used for the first elements 
+  - remaining elements are value initialized
+
+```cpp
+const unsigned sz = 3;
+int ia1[sz] = {0,1,2};          // array of three ints with values 0, 1, 2
+int a2[] = {0, 1, 2};           // an array of dimension 3
+int a3[5] = {0, 1, 2};          // equivalent to a3[] = {0, 1, 2, 0, 0}
+string a4[3] = {"hi", "bye"};   // same as a4[] = {"hi", "bye", ""}
+int a5[2] = {0,1,2};            // error: too many initializers
+```
+
+## Array Name
+
+From [stackoverflow](https://stackoverflow.com/a/2351595):
+
+It's not a pointer, const or otherwise, and it's not anything else, it's an array.
+
+To see a difference:
+
+```cpp
+int a[10];
+int *const b = a;
+
+std::cout << sizeof(a); // prints "40" on my machine.
+std::cout << sizeof(b); // prints "4" on my machine.
+```
+
+Clearly a and b are not the same type, since they have different sizes.
+
+In most contexts, an array name "decays" to a pointer to its own first element. You can think of this as an automatic conversion. The result is an rvalue, meaning that it's "just" a pointer value, and can't be assigned to, similar to when a function name decays to a function pointer. Doesn't mean it's "const" as such, but it's not assignable.
+
+From JA202:
+
+An **array name without brackets** is a pointer to the array's first element
+- You can also use the expression `&data[0]` to obtain the address of the array's first element
+
+## Copy
+
+- C-style arrays do not support Copy Initialization or Assignment (but `std::array` does!)
 
 ```cpp
 int a[] = {0, 1, 2};  // array of three ints
-int a2[] = a;         // error: cannot initialize one array with another
-a2 = a;               // error: cannot assign one array to another
+int a2[] = a;         // error: cannot copy initialize one array with another
+a2 = a;               // error: cannot copy assign one array to another
+```
+
+## Compiler Substitution of Array Name
+
+Lippman:
+
+**special property 1** of arrays: in most places when we use an array, the compiler automatically substitutes a pointer to the first element
+
+```cpp
+string nums[] = {"one", "two", "three"}; // array of strings
+string *p = &nums[0]; // p points to the first element in nums
+
+// Because of special property 1:
+string *p2 = nums; // equivalent to p2 = &nums[0]
+```
+
+## Pointers are Iterators
+
+pointers that address elements in an array have additional operations
+- pointers to array elements support the same operations as **iterators** on `vectors` or `strings`
+
+```cpp
+int arr[] = {0,1,2,3,4,5,6,7,8,9};
+int *p = arr; // p points to the first element in arr
+++p; // p points to arr[1]
+```
+
+**special property 2** of arrays: we can take the address of the nonexistent element one past the last element of an array ("off-the-end pointer")
+- the only thing we can do with this element is take its address
+- we may not dereference or increment an off-the-end pointer
+
+```cpp
+int *e = &arr[10]; // pointer just past the last element in arr
+```
+
+Print the elements in an array:
+
+```cpp
+// print the elements in arr
+for (int *b = arr; b != e; ++b)
+  cout << *b << endl; // print the elements in arr
+```
+
+Computing an off-the-end pointer is error-prone. Instead, use `begin` and `end` (defined in `<iterator>`):
+
+```cpp
+#include <iterator>
+
+int ia[] = {0,1,2,3,4,5,6,7,8,9}; // ia is an array of ten ints
+int *beg = begin(ia); // pointer to the first element in ia
+int *last = end(ia); // pointer one past the last element in ia
+
+// pbeg points to the first and pend points just past the last element in arr
+int *pbeg = begin(arr), *pend = end(arr);
+// find the first negative element, stopping if we’ve seen all the elements
+while (pbeg != pend && *pbeg >= 0)
+  ++pbeg;
 ```
 
 ## Pointer Arithmetic
@@ -217,8 +318,13 @@ int *p2 = arr + 10;         // error: arr has only 5 elements; p2 has undefined 
 // distance between two pointers (to elements of the same array):
 // - return type: `ptrdiff_t` (a machine-specific type, in <cstddef> header)
 auto n = end(arr) - begin(arr);     // n is 5, the number of elements in arr
+```
 
-// "compare pointers" using relational operators:
+- "compare pointers" using relational operators:
+
+```cpp
+constexpr size_t sz = 5;
+int arr[sz] = {1,2,3,4,5};
 
 // eg. traverse the elements in arr
 int *b = arr, *e = arr + sz;
@@ -234,21 +340,25 @@ int *p = &i, *e = &sz;
 while (p < e)
 ```
 
-- pointer arithmetic is also valid 
-  - for null pointers
-    - If `p` is a null pointer, we can add or subtract an integral constant expression whose value is `0` to `p`.
-    - We can also subtract two null pointers from one another, in which case the result is `0`.
-  - for pointers that point to an object that is not an array.
-    - the pointers must point to the same object, or one past that object. 
+pointer arithmetic is also valid ...
+- for null pointers
+  - If `p` is a null pointer, we can add or subtract an integral constant expression whose value is `0` to `p`.
+  - We can also subtract two null pointers from one another, in which case the result is `0`.
+- for pointers that point to an object that is not an array
+  - the pointers must point to the same object, or one past that object
 
 ## References and Pointers to Arrays
 
 ```cpp
 int *ptrs[10];              // ptrs is an array of ten pointers to int
 int &refs[10] = /* ? */;    // error: no arrays of references
+
+int arr[10];
 int (*Parray)[10] = &arr;   // Parray points to an array of ten ints
-int (&arrRef)[10] = arr;    // arrRef refers to an array of ten ints
+int (&arrRef)[10] = arr;    // arrRef refers to an array of ten ints -> to pass array "by reference"
 ```
+
+## Pass an Array by Reference
 
 Similarly, we can pass a parameter that is a reference to an array:
 
@@ -262,13 +372,25 @@ void print(int (&arr)[10])   // the dimension is part of the type
 
 ## Returning a Pointer to an Array
 
+**Option 1:** using a type alias
+
 ```cpp
-// Option 1:
+typedef int arrT[10]; // arrT is a synonym for the type array of ten ints
+using arrT = int[10]; // equivalent declaration of arrT
+arrT* func(int i); // func returns a pointer to an array of ten ints
+```
+
+**Option 2:**
+
+```cpp
 // Type (*function(parameter_list))[dimension]
 int (*func(int i))[10];
+```
 
-// Option 2: trailing return type syntax:
-// fcn takes an int argument and returns a pointer to an array of ten ints
+**Option 3:** trailing return type syntax:
+
+```cpp
+// func takes an int argument and returns a pointer to an array of ten ints
 auto func(int i) -> int(*)[10];
 ```
 
@@ -890,3 +1012,88 @@ Wikipedia
   - resource **deallocation** (release) is done during object destruction (specifically finalization), by the **destructor**
   - In other words, resource acquisition must succeed for initialization to succeed.
 
+# Dynamic Memory and Arrays
+
+**two ways** to allocate an array of objects at once:
+
+1. a second kind of new expression that allocates and initializes an array of objects
+2. a template class named `allocator` that lets us separate allocation from initialization
+  - using an `allocator` generally provides better performance and more flexible memory management
+
+- **Warning:** Classes that allocate dynamic arrays must define **their own** copy, assignment and destruction
+  - **best practice:** use containers (easier, faster and safer)
+
+## new
+
+- it is **legal** to dynamically allocate an empty array
+  - even though we cannot create an array variable of size 0
+
+```cpp
+char arr[0];              // error: cannot define a zero-length array
+char *cp = new char[0];   // ok: but cp can't be dereferenced
+```
+
+## allocator
+
+- like `new`, but `allocator` decouples memory **allocation** from **object construction**
+- allocates raw, **unconstructed** memory
+- a template
+- cppreference: "The `std::allocator` class template is the default *Allocator* **used by all standard library containers** if no user-specified allocator is provided."
+
+```cpp
+// define an allocator
+allocator<string> alloc;            // object that can allocate strings
+auto const p = alloc.allocate(n);   // allocate n unconstructed strings
+```
+
+### construct
+
+We use this unconstructed memory from `allocate()` by constructing objects in that memory:
+
+The `construct(p, args)` member takes:
+
+1. a pointer `p`
+  - `construct` constructs an element at the location given by the pointer
+2. zero or more additional arguments `args`
+  - are used to **initialize** the object being constructed
+  - if `args` are of class type
+    - `args` are passed to a constructor for type T
+
+```cpp
+auto q = p; // q will point to one past the last constructed element
+alloc.construct(q++);               // *q is the empty string
+alloc.construct(q++, 10, 'c');      // *q is cccccccccc
+alloc.construct(q++, "hi");         // *q is hi!
+```
+
+Using unconstructed memory is undefined:
+
+```cpp
+cout << *p << endl; // ok: uses the string output operator
+cout << *q << endl; // disaster: q points to unconstructed memory!
+```
+
+### destroy
+
+After using the constructed elements they must be destroyed:
+
+```cpp
+while (q != p)
+  alloc.destroy(--q); // free the strings we actually allocated
+```
+
+**Warning:** Destroy only elements that are actually constructed.
+
+### deallocate
+
+Once the elements have been destroyed, return the memory to the system:
+
+```cpp
+alloc.deallocate(p, n);
+```
+
+The pointer `p` 
+- must not be null
+- must point to memory allocated by `allocate`
+
+The size argument `n` must be the same size as used in the call to `allocate` that obtained the memory.
