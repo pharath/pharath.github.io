@@ -300,12 +300,61 @@ void error_msg(ErrCode e, initializer_list<string> il)
 
 ## return
 
-- Values are returned in exactly the same way as variables and parameters are initialized: 
-  - The **return value** is used to **initialize** a **temporary** at the call site, and that temporary is the result of the function call.
+Values are returned in exactly the same way as variables and parameters are initialized: 
+- The **return value** is used to **initialize** a **temporary** at the call site, and that temporary is the result of the function call.
+  - if we return **by value**, the return value is **copied** to the call site
+  - if we return **by reference**, the return value is **not copied**
+
+### Return Statement
+
+1. terminates the function that is currently executing 
+2. returns control to the point from which the function was called
+
+2 forms:
+- `return;`
+- `return expression;`
+
+### void functions
+
+- a `return` with no value may be used **only in** a function that has a return type of `void`
+- functions that return `void` are not required to contain a `return`
+  - in a `void` function, an **implicit return** takes place after the function's last statement
+- the `return expression;` form may be used **only to** return the result of calling another function that returns `void`
+  - returning any other expression from a `void` function is a **compile-time error**
+
+### Return Value
+
+- must have
+  - the same type as the function return type, or 
+  - a type that can be implicitly converted to the function return type
+- every non-`void` function **must** return a value
+- a `return` with no value may be used **only in** a function that has a return type of `void`
+
+### Common Errors
+
+```cpp
+// incorrect return values, this code will not compile
+bool str_subrange(const string &str1, const string &str2)
+{
+  // same sizes: return normal equality test
+  if (str1.size() == str2.size())
+    return str1 == str2;      // ok: == returns bool
+  // find the size of the smaller string; conditional operator, see § 4.7 (p. 151)
+  auto size = (str1.size() < str2.size())
+              ? str1.size() : str2.size();
+  // look at each element up to the size of the smaller string
+  for (decltype(size) i = 0; i != size; ++i) {
+    if (str1[i] != str2[i])
+      return; // error #1: no return value; compiler should detect this error
+  }
+  // error #2: control might flow off the end of the function without a return
+  // the compiler might not detect this error -> what happens at run time is undefined
+}
+```
 
 ### Return a Reference
 
-Examples:
+- "Reference Returns Are Lvalues" (p226)
 
 ```cpp
 // Return a reference to the shorter of two strings:
@@ -315,9 +364,14 @@ const string &shorterString(const string &s1, const string &s2)
 {
   return s1.size() <= s2.size() ? s1 : s2;
 }
+// "Reference Returns Are Lvalues" (p226) -> if the return type was not const, we 
+// could ASSIGN TO the result of shorterString() like so:
+//shorterString("hi", "bye") = "X";     // error: return value is const
+```
 
-// Never Return a Reference or Pointer TO A LOCAL OBJECT:
+- "Never Return a Reference or Pointer to a Local Object" (Lippman)
 
+```cpp
 // disaster: this function returns a reference to a local object
 const string &manip()
 {
@@ -329,6 +383,14 @@ const string &manip()
     return "Empty";   // WRONG: "Empty" is a local temporary string
 }
 ```
+
+### Return an Array
+
+Lippman:
+- a function **cannot** return an array
+  - because we cannot copy an array (see "Arrays" &rarr; "Copy")
+- however, a function can return a pointer or a reference to an array
+  - see "cpp-pointers-memory.md" &rarr; "Returning a Pointer to an Array"
 
 ## Pointers to Functions
 
@@ -357,11 +419,12 @@ bool (*pf)(const string &, const string &); // uninitialized
 bool *pf(const string &, const string &);
 ```
 
-### Usage
+### Call a Function via a Pointer
 
 - when we use the name of a function as a value, the function is automatically converted to a pointer
 
 ```cpp
+// this is the pf declared above
 pf = lengthCompare; // pf now points to the function named lengthCompare
 pf = &lengthCompare; // equivalent assignment: address-of operator is optional
 ```
@@ -435,7 +498,7 @@ auto f1(int) -> int (*)(int*, int);
 ```
 
 - we can use `decltype` to simplify writing a function pointer return type
-  - remember, `decltype` returns a function type, not a **pointer to** function type, ie. we must add a `*`:
+  - remember, since `decltype` returns a function type, not a **pointer to** function type, we must add a `*`:
 
 ```cpp
 string::size_type sumLength(const string&, const string&);
@@ -443,4 +506,146 @@ string::size_type largerLength(const string&, const string&);
 // depending on the value of its string parameter,
 // getFcn returns a pointer to sumLength or to largerLength
 decltype(sumLength) *getFcn(const string &);
+```
+
+### Pointers to Member Functions
+
+#### Example
+
+```cpp
+// https://stackoverflow.com/a/1779703
+//
+// Just like .*, ->* is used with pointers to members.
+
+#include <iostream>
+
+struct foo {
+    void bar(void) { std::cout << "foo::bar" << std::endl; }
+    void baz(void) { std::cout << "foo::baz" << std::endl; }
+};
+
+int main(void) {
+    foo *obj = new foo;
+    void (foo::*ptr)(void);
+
+    ptr = &foo::bar;
+    (obj->*ptr)();
+    ptr = &foo::baz;
+    (obj->*ptr)();
+    return 0;
+}
+```
+
+#### Best practice
+
+From [isocpp](https://isocpp.org/wiki/faq/pointers-to-members#typedef-for-ptr-to-memfn):
+
+**Always** use a `typedef`:
+
+```cpp
+// sample class
+class Fred {
+public:
+  int f(char x, float y);
+  int g(char x, float y);
+  int h(char x, float y);
+  int i(char x, float y);
+  // ...
+};
+
+// - FredMemFn is the type name
+// - a pointer of that type points to any member of Fred that takes (char,float), such as Fred's f, g, h and i.
+typedef  int (Fred::*FredMemFn)(char x, float y);  // Please do this!
+```
+
+With that you can write:
+
+```cpp
+// declare a member-function pointer
+int main()
+{
+  FredMemFn p = &Fred::f;
+  // ...
+}
+
+// declare functions that receive member-function pointers
+void userCode(FredMemFn p)
+{ /*...*/ }
+
+// declare functions that return member-function pointers
+FredMemFn userCode()
+{ /*...*/ }
+```
+
+#### `.*` vs `->*`
+
+Member access operators: [cppreference](https://en.cppreference.com/w/cpp/language/operator_member_access)
+
+From [isocpp](https://isocpp.org/wiki/faq/pointers-to-members#dotstar-vs-arrowstar):
+
+- use `.*` when the left-hand argument is a **reference to an object**, and `->*` when it is a **pointer to an object**
+
+```cpp
+class Fred { /*...*/ };
+
+// this typedef is explained in section "Pointers to Member Functions"
+typedef  int (Fred::*FredMemFn)(int i, double d);  // use a typedef!!! please!!!
+
+void sample(Fred x, Fred& y, Fred* z, FredMemFn func)
+{
+  x.*func(42, 3.14);
+  y.*func(42, 3.14);
+  z->*func(42, 3.14);
+}
+```
+
+**Examples:**
+
+```cpp
+// https://stackoverflow.com/a/1779703
+// "What is ->* operator in C++?"
+
+// Just like .*, ->* is used with pointers to members
+
+#include <iostream>
+
+struct foo {
+    void bar(void) { std::cout << "foo::bar" << std::endl; }
+    void baz(void) { std::cout << "foo::baz" << std::endl; }
+};
+
+int main(void) {
+    foo *obj = new foo;         // we need an object (or pointer to an object) to call the member function later
+    void (foo::*ptr)(void);     // declare a pointer-to-member-function
+
+    ptr = &foo::bar;            // assign bar() to the pointer
+    (obj->*ptr)();              // call the member function "bar" on the object to which "obj" points
+    ptr = &foo::baz;
+    (obj->*ptr)();
+    return 0;
+}
+```
+
+```cpp
+// https://stackoverflow.com/a/6586248
+// "What are the pointer-to-member operators ->* and .* in C++?"
+
+//we have a class
+struct X
+{
+   void f() {}
+   void g() {}
+};
+
+typedef void (X::*pointer)();
+//ok, let's take a pointer and assign f to it.
+pointer somePointer = &X::f;
+//now I want to call somePointer. But for that, I need an object
+X x;
+//now I call the member function on x like this
+(x.*somePointer)(); //will call x.f()
+//now, suppose x is not an object but a pointer to object
+X* px = new X;
+//I want to call the memfun pointer on px. I use ->*
+(px ->* somePointer)(); //will call px->f();
 ```
