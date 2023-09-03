@@ -225,6 +225,8 @@ template<typename T> void f(T&& p) // p is a forwarding reference
 - called **perfect forwarding**, because the result of calling `g()` indirectly through `f()` (or `forwardToG()` respectively) will be the same as if the code called `g()` directly
 - no additional copies are made
 
+### Example with Naive Forwarding
+
 Forward a call of `f()` to a corresponding function `g()`:
 
 Without templates, we would have to program all three cases for `f()` separately:
@@ -271,6 +273,8 @@ int main()
 }
 ```
 
+### Example with Perfect Forwarding
+
 The same using **perfect forwarding** to forward arguments:
 
 ```cpp
@@ -309,6 +313,8 @@ int main()
 }
 ```
 
+### Forwarding Arguments using `static_cast<T&&>`
+
 Forward the argument along to another function `g()`:
 - **problem**: the expression `x` will **always** be an **lvalue** (recall: variables are lvalues)
 - **solution**: the `static_cast` casts `x` to its original type and lvalue- or rvalue-ness, thereby achieving perfect forwarding
@@ -339,6 +345,8 @@ void foo()
 }
 ```
 
+### Forwarding Arguments using `std::forward<T>`
+
 **best practice:** 
 - use `std::forward<>()` (in header `<utility>`) instead of `static_cast` for perfect forwarding
   - better documents the programmer's intent
@@ -353,3 +361,17 @@ void forwardToG(T&& x)
   g(std::forward<T>(x)); // forward x to g()
 }
 ```
+
+```cpp
+// std::forward<T&&> is essentially a static_cast
+// (but it is more convenient than a static_cast)
+template <typename T>
+T&& forward(std::remove_reference_t<T>& t) {
+    return static_cast<T&&>(t);
+}
+```
+
+Thus, preserving type information is a **two-step process**:
+
+1. To preserve type information **in the arguments**, we must define `forwardToG`'s function parameters as rvalue references to a template type parameter `T&&`.
+2. We must use `forward` to preserve the arguments' original types when `forwardToG` **passes those arguments** to `g`.
