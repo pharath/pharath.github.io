@@ -65,6 +65,7 @@ From [stackoverflow](https://stackoverflow.com/a/2837853):
 - Deleting a `nullptr` does not cause any change and no error.
 - You cannot delete a pointer to a local stack allocated variable:
 ```cpp
+// see delete.cpp (day 8)
 int x;
 int* ptr1 = &x;
 
@@ -194,6 +195,13 @@ string bad[cnt];              // error: cnt is not a constant expression
 string strs[get_size()];      // ok if get_size is constexpr, error otherwise
 ```
 
+## Value Initialization
+
+```cpp
+// Lip3.5.2
+unsigned scores[11] = {}; // 11 buckets, all value initialized to 0
+```
+
 ## List Initialization
 
 - If the dimension is greater than the number of initializers
@@ -236,7 +244,7 @@ An **array name without brackets** is a pointer to the array's first element
 
 ## Copy
 
-- C-style arrays do not support Copy Initialization or Assignment (but `std::array` does!)
+- C-style arrays do **not** support Copy Initialization or Assignment (but `std::array` does!)
 
 ```cpp
 int a[] = {0, 1, 2};  // array of three ints
@@ -248,7 +256,9 @@ a2 = a;               // error: cannot copy assign one array to another
 
 Lippman:
 
-**special property 1** of arrays: in most places when we use an array, the compiler automatically substitutes a pointer to the first element
+**special property 1** of arrays:
+
+In most places when we use an array, the compiler automatically substitutes a pointer to the first element
 
 ```cpp
 string nums[] = {"one", "two", "three"}; // array of strings
@@ -257,6 +267,31 @@ string *p = &nums[0]; // p points to the first element in nums
 // Because of special property 1:
 string *p2 = nums; // equivalent to p2 = &nums[0]
 ```
+
+## range for
+
+```cpp
+for (auto i : scores)
+  cout << i << " ";
+cout << endl;
+```
+
+## Subscript Operator
+
+- distinct from the subscript operator defined by the `std::vector` class' 
+- when we use a **variable to subscript** an array, we normally should define that variable to have type `size_t`
+- **MUST ALWAYS check that the subscript value is in range**
+  - Nothing stops a program from stepping across an array boundary
+  - It is possible for programs to compile and execute yet still be fatally wrong.
+
+### Buffer Overflow
+
+- an error that the compiler is unlikely to detect
+  - instead, the value we get at run time is undefined
+- most common source of security problems are **buffer overflow bugs**
+  - occur when a program fails to check a subscript and mistakenly uses memory **outside the range** of an array (or similar data structure)
+- to ensure that subscripts are in range is **avoid subscripting altogether** by using a range `for` whenever possible
+- occurs for arrays, `std::vector`
 
 ## Pointers are Iterators
 
@@ -269,7 +304,9 @@ int *p = arr; // p points to the first element in arr
 ++p; // p points to arr[1]
 ```
 
-**special property 2** of arrays: we can take the address of the nonexistent element one past the last element of an array ("off-the-end pointer")
+**special property 2** of arrays:
+
+We can take the address of the nonexistent element one past the last element of an array ("off-the-end pointer")
 - the only thing we can do with this element is take its address
 - we may not dereference or increment an off-the-end pointer
 
@@ -372,6 +409,8 @@ void print(int (&arr)[10])   // the dimension is part of the type
 
 ## Returning a Pointer to an Array
 
+- see also "functions.md" &rarr; "Return an Array"
+
 **Option 1:** using a type alias
 
 ```cpp
@@ -383,7 +422,7 @@ arrT* func(int i); // func returns a pointer to an array of ten ints
 **Option 2:**
 
 ```cpp
-// Type (*function(parameter_list))[dimension]
+// Syntax: Type (*function(parameter_list))[dimension]
 int (*func(int i))[10];
 ```
 
@@ -459,7 +498,7 @@ int *p2 = new (nothrow) int;    // if allocation fails, new returns a null point
 
 ## delete
 
-- The pointer we pass to delete must either
+- The pointer we pass to `delete` must either
   - point to dynamically allocated memory or
   - be a null pointer.
 - **Warning:** Most compilers will accept the following situations, even though they are **undefined**:
@@ -479,6 +518,8 @@ delete pi2;     // ok: it is always ok to delete a null pointer
 const int *pci = new const int(1024);
 delete pci;     // ok: deletes a const object
 ```
+
+- cppreference: If `expression` is not a null pointer (...), the `delete` expression invokes the **destructor** (if any) for the object that's being destroyed, or for every element of the array being destroyed (proceeding from the last element to the first element of the array).
 
 ## Common Problems
 
