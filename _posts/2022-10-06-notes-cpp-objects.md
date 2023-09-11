@@ -75,7 +75,9 @@ Examples:
 
 ### Value Initialization
 
-- "the initialization performed when an object is constructed with an **empty** initializer", i.e. `T()` or `T{}` or `T object{};`
+- the initialization performed when an object is constructed with an **empty** initializer, i.e. 
+  - 1) `T()`, `T{}` (nameless temporary)
+  - 4) `T object{};` (named object)
 - performed in these situations
   - 1) when a **nameless temporary** object is created with the initializer consisting of an empty pair of parentheses `T()` or braces `T{}`;
   - 2) when an object with dynamic storage duration is created by a **new-expression** with the initializer consisting of an empty pair of parentheses `new T()` or braces `new T{}`;
@@ -165,9 +167,10 @@ int units_sold = {0}; // since C++11 this is classified as "copy-list-initializa
 
 - "Initializes an object from explicit set of constructor arguments."
 - Syntax: see "Case 1, 2, etc." below
-- uses the **Copy Constructor**
+- uses the **Copy Constructor** (sometimes)
   - proof: see [Copy Constructor](#copy-constructor) &rarr; "called whenever an object is initialized (by **direct-initialization** ... ) ..."
   - for members of class type, not for built-in types (which do not have constructors)
+  - direct initialization selects by overload resolution, therefore, **any** other constructor (eg. move constructor, one of the converting constructors, etc.) may be selected as well!
 
 **Difference**: Direct vs Copy Initialization:
 - **direct initialization**: asks the compiler to "use ordinary function matching to **select the constructor** that best matches the arguments we provide"
