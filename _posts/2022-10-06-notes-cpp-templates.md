@@ -42,6 +42,24 @@ template <typename Type>
 Type calc(const Type& a, const Type& b) { /* . . . */ }
 ```
 
+### Template Parameter Name
+
+cppreference:
+
+- The name of the parameter is **optional**:
+
+```cpp
+// Declarations of the templates shown above:
+template<class>
+class My_vector;
+template<class = void>
+struct My_op_functor;
+template<typename...>
+class My_tuple;
+```
+
+- In the body of the template declaration, the name of a type parameter is a **typedef-name** which aliases the type supplied when the template is instantiated. 
+
 ## Definition
 
 - **template definition**: 
@@ -135,8 +153,10 @@ Numbers<> average_precision; // empty <> says we want the default type
 ## Type Traits
 
 - aka type transformation
+- are class templates (`struct` or `class`)
 - in the `type_traits` header
 - used for template metaprogramming
+- cppreference "Metaprogramming library": "Type traits define compile-time template-based interfaces to query the properties of types."
 
 ### `remove_reference` Class Template
 
@@ -167,6 +187,20 @@ auto fcn2(It beg, It end) ->
 {
   // process the range
   return *beg; // return a copy of an element from the range
+}
+```
+
+### Suffix `_t`
+
+- since C++14
+- an alias template for a [type member](#for-type-member-shortcuts)
+
+```cpp
+std::add_const_t<T>               // since C++14
+typename std::add_const<T>::type  // since C++11
+
+namespace std {
+  template<typename T> using add_const_t = typename add_const<T>::type;   // since C++14
 }
 ```
 
@@ -218,6 +252,13 @@ ie.
 
 (this is also the order in which they are presented in [cppreference](https://en.cppreference.com/w/cpp/language/function_template))
 
+### SFINAE
+
+- "SFINAE'ing out function templates"
+- aka "disabling function templates for certain constraints"
+- aka "ignoring function templates during overload resolution"
+- aka "function template shall not participate in overload resolution if" (phrase often used in the standard)
+
 ### Non-type Template Parameters
 
 - represents a value rather than a type
@@ -258,7 +299,7 @@ S<42> x;
 int r = f(x);
 ```
 
-### Instantiation
+### Instantiation (Implicit Specialization)
 
 From [cppreference](https://en.cppreference.com/w/cpp/language/function_template#Function_template_instantiation): 
 - A function template by itself is **not a type, or a function, or any other entity**. 
@@ -342,18 +383,24 @@ int main()
 
 ### Specialization
 
+- aka **"Explicit Specialization"**
 - a separate definition of the template in which one or more template parameters are specified to have particular types
 - useful, when 
   - the general definition might not compile or might do the wrong thing
   - we want to take advantage of some specific knowledge to write more efficient code than would be instantiated from the template
 - When we define a specialization, the function parameter type(s) **must match** the corresponding types in a previously declared template
-  - important for `const T` and `const T&` function parameters:
-    - The const version of a pointer type (eg. `double*`) is a **constant pointer** (`double* const`) (as distinct from a pointer to const), see code example below
+- cppreference: "When template arguments are provided, or, for function (and class (since C++17)) templates only, **deduced**, they are substituted for the template parameters to obtain a **specialization** of the template, that is, a specific type or a specific function lvalue."
 - **best practice:**
   - Templates and their specializations should be declared in the same header file. 
   - Declarations for all the templates with a given name should appear **first**, followed by any specializations of those templates.
     - be careful: errors in declaration order between a template and its specializations are easy to make but hard to find
-- "Function **partial specialization** is **not allowed** yet as per the standard. (...) In the case of a function templates, only **full specialization** is allowed by the C++ standard.", [stackoverflow](https://stackoverflow.com/a/8061522)
+
+#### Full Specialization
+
+- has **empty** angle brackets
+- When we define a specialization, the function parameter type(s) **must match** the corresponding types in a previously declared template
+  - Note: important for `const T` and `const T&` function parameters:
+    - The const version of a pointer type (eg. `double*`) is a **constant pointer** (`double* const`) (as distinct from a pointer to const), see code example below
 
 ```cpp
 // Assume the general definition of this "compare" template is not appropriate 
@@ -380,6 +427,13 @@ int compare(const double &p1, const double &p2)
   return strcmp(p1, p2);
 }
 ```
+
+#### Partial Specialization
+
+- "Function **partial specialization** is **not allowed** yet as per the standard. (...) In the case of a function templates, only **full specialization** is allowed by the C++ standard.", [stackoverflow](https://stackoverflow.com/a/8061522)
+- cppreference: Specializations may also be provided explicitly: 
+  - **full specializations** are allowed for class(, variable (since C++14)) and function templates,
+  - **partial specializations** are only allowed for class templates (and variable templates (since C++14)).
 
 ## Class Templates
 
@@ -495,6 +549,32 @@ template <typename T>
 using partNo = pair<T, unsigned>;
 ```
 
+#### For Type Member Shortcuts
+
+```cpp
+// After
+struct MyType {
+  typedef ... iterator;     // "iterator" is a type member
+  ...
+};
+
+// or:
+struct MyType {
+  using iterator = ...;     // "iterator" is a type member
+  ...
+};
+
+// a definition such as
+template<typename T>
+using MyTypeIterator = typename MyType<T>::iterator;      // abbreviates the type member "iterator"
+
+// allows to use
+MyTypeIterator<int> pos;
+
+// instead of
+typename MyType<T>::iterator pos;   // man spart sich den "member of" operator
+```
+
 ### static members
 
 - mostly like for any other (nontemplate) class
@@ -552,7 +632,13 @@ This is enabled by the fact that members are instantiated only if we use them (s
 - "a container that encapsulates **fixed size** arrays"
 - "an aggregate type"
 - "same semantics as a `struct` holding a **C-style array** `T[N]` as its only non-static data member."
-  - **But**: "Unlike a C-style array, it doesn't decay to `T*` automatically."
+  - **But**: Unlike a C-style array, 
+    - it doesn't decay to `T*` automatically
+    - it supports **copy initialization** from
+      - same size array
+      - same size `initializer_list`
+      - smaller size `initializer_list` (missing elements are value initialized)
+      - **not supported:** elements in a range, `C c(b,e)`
 
 #### std::vector
 
@@ -576,20 +662,32 @@ Element Access:
 
 `front`
 - "Returns a **reference to** the first element in the container."
-- "Calling front on an empty container causes undefined behavior."
+- "Calling `front` on an empty container causes undefined behavior."
 
 `back`
 - "Returns a **reference to** the last element in the container."
-- "Calling back on an empty container causes undefined behavior."
+- "Calling `back` on an empty container causes undefined behavior."
+
+By subscript:
+- type of a subscript is the corresponding `size_type` (eg. `vector<int>::size_type`)
+- **buffer overflow errors**: see the corresponding section in section "Arrays" (C-style)
+
+Add Elements:
+
+**Best practice:**
+- do not define a vector of a specific size
+  - often unnecessary - and can result in poorer performance - to define a vector of a specific size
+  - it is usually **more efficient** to define an empty vector and add elements as the values we need become known at run time
+- Starting with an **empty vector** is distinctly different from how built-in arrays are used in C or Java (where it is best to define a vector at its expected size)
 
 `push_back`
 - "Appends the given element value to the end of the container"
-- "If the new `size()` is greater than `capacity()` then all iterators and references (including the `end()` iterator) are invalidated. Otherwise only the end() iterator is invalidated."
+- "If the new `size()` is greater than `capacity()` then all iterators and references (including the `end()` iterator) are invalidated. Otherwise only the `end()` iterator is invalidated."
 
 `pop_back`
 - "Removes the last element of the container."
 - "Calling `pop_back` on an empty container results in undefined behavior."
-- "Iterators and references to the last element, as well as the end() iterator, are invalidated."
+- "Iterators and references to the last element, as well as the `end()` iterator, are invalidated."
 
 #### std::string
 
@@ -628,6 +726,85 @@ Generic programming:
   - use `!=` as a matter of habit
   - use iterators rather than subscripts
     - because only a few library types have the subscript operator
+
+### Specialization
+
+#### Partial Specialization
+
+- Differently from function templates, a class template specialization does not have to supply an argument for **every** template parameter
+- a partial specialization is itself a template
+- partial specialization has **the same name** as the template it specializes
+- the **template parameter list** includes an entry for each template parameter whose type is **not** completely **fixed**
+- **after the class name**, we specify **arguments** for the template **parameters we are specializing**
+  - these arguments are listed **inside angle brackets** following the template name
+  - the arguments correspond positionally to the parameters in the original template
+  - phth: whereas for (full specializations of) function templates we fix the function **call parameters** which don't need angle brackets
+
+```cpp
+// original, most general template (called the "primary template")
+template <class T> struct remove_reference {
+typedef T type;
+};
+// "partial specializations" that will be used for lvalue and rvalue references
+template <class T> struct remove_reference<T&>  // lvalue references
+  { typedef T type; };
+template <class T> struct remove_reference<T&&> // rvalue references
+  { typedef T type; };
+
+int i;
+remove_reference<decltype(42)>::type a;             // decltype(42) is int, uses the original template
+remove_reference<decltype(i)>::type b;              // decltype(i) is int&, uses first (T&) partial specialization
+remove_reference<decltype(std::move(i))>::type c;   // decltype(std::move(i)) is int&&, uses second (i.e., T&&) partial specialization
+```
+
+```cpp
+// cppreference
+
+template<class T1, class T2, int I>
+class A {};             // primary template
+ 
+template<class T, int I>
+class A<T, T*, I> {};   // #1: partial specialization where T2 is a pointer to T1
+ 
+template<class T, class T2, int I>
+class A<T*, T2, I> {};  // #2: partial specialization where T1 is a pointer
+ 
+template<class T>
+class A<int, T*, 5> {}; // #3: partial specialization where
+                        //     T1 is int, I is 5, and T2 is a pointer
+ 
+template<class X, class T, int I>
+class A<X, T*, I> {};   // #4: partial specialization where T2 is a pointer
+```
+
+**Specialization of specific Members only:**
+
+- we can specialize just specific member function(s)
+
+```cpp
+// Important:
+// - The other members of Foo<int> will be supplied by the Foo template
+template <typename T> struct Foo {
+  Foo(const T &t = T()): mem(t) { }
+  void Bar() { /* . . . */ }
+  T mem;
+  // other members of Foo
+};
+template<>
+void Foo<int>::Bar()    // we're specializing the Bar member of Foo<int>
+{
+  // do whatever specialized processing that applies to ints
+}
+
+// When we use Foo with int, members other than Bar are instantiated as usual
+Foo<int> fi;        // instantiates Foo<int>::Foo()
+fi.Bar();           // uses our specialization of Foo<int>::Bar()
+fi.otherMember();   // supplied by the Foo template
+
+// When we use Foo with any type other than int, members are instantiated as usual
+Foo<string> fs;     // instantiates Foo<string>::Foo()
+fs.Bar();           // instantiates Foo<string>::Bar()
+```
 
 ## Variadic Templates
 
@@ -784,4 +961,137 @@ fun(10, 'c');
 
 // ... will execute as if we had written
 work(std::forward<int>(10), std::forward<char>(c))
+```
+
+## Constraints
+
+### Requirement
+
+- an ELEMENT OF of the set `requirement-seq` in a [requires expression](#requires-expression)
+
+see `requirement-seq` in section "requires expression"
+
+#### Compound Requirement
+
+```cpp
+// Syntax
+{ expression } noexcept(optional) return-type-requirement(optional) ;
+```
+
+`return-type-requirement` - `-> type-constraint`
+
+3) If `return-type-requirement` is present, then:
+- a) Template arguments are substituted into the `return-type-requirement;`
+- b) `decltype((expression))` must satisfy the constraint imposed by the `type-constraint`. Otherwise, the enclosing **requires-expression** is `false`.
+
+```cpp
+// cppreference
+template<typename T>
+concept C2 = requires(T x)
+{
+    // the expression *x must be valid
+    // AND the type T::inner must be valid
+    // AND the result of *x must be convertible to T::inner
+    {*x} -> std::convertible_to<typename T::inner>;
+ 
+    // the expression x + 1 must be valid
+    // AND std::same_as<decltype((x + 1)), int> must be satisfied
+    // i.e., (x + 1) must be a prvalue of type int
+    {x + 1} -> std::same_as<int>;
+ 
+    // the expression x * 1 must be valid
+    // AND its result must be convertible to T
+    {x * 1} -> std::convertible_to<T>;
+};
+```
+
+### requires clause
+
+cppreference:
+
+The keyword `requires` is used to introduce a **requires-clause**, which specifies constraints on template arguments or on a function declaration.
+
+```cpp
+template<typename T>
+void f(T&&) requires Eq<T>; // can appear as the last element of a function declarator
+ 
+template<typename T> requires Addable<T> // or right after a template parameter list
+T add(T a, T b) { return a + b; }
+```
+
+In this case, the keyword `requires` must be followed by some constant expression (so it's possible to write `requires true`), but the intent is that 
+- a named concept (as in the example above) or 
+- a conjunction/disjunction of named concepts or 
+- a **requires expression** is used.
+
+### requires expression
+
+cppreference:
+
+Yields a prvalue expression of type `bool` that describes the constraints. 
+
+```cpp
+// Syntax
+requires { requirement-seq } 		
+requires ( parameter-list(optional) ) { requirement-seq } 		
+```
+
+- `parameter-list` - a comma-separated list of parameters like in a function declaration, except that default arguments are not allowed and it cannot end with an ellipsis
+- `requirement-seq` - sequence of **requirements**, each requirement is one of the following:
+  - simple requirement
+  - type requirements
+  - compound requirements
+  - nested requirements
+    - looks like a **requirement clause** inside a requirement expression (VJE.2, p743), but it is called "nested requirement"
+
+### requires clause vs requires expression
+
+- a requirement expression can appear inside a requirement clause, and vice versa
+- **remember**: a requires **clause**
+  - ~has no braces~
+  - appears typically 
+    - after a `template<typename>` or 
+    - as the last element of a function declarator
+    - inside a requirement expression ("nested requirement")
+
+```cpp
+// cppreference
+
+template<typename T>
+concept Addable = requires (T x) { x + x; }; // requires-expression
+ 
+template<typename T> requires Addable<T> // requires-clause, not requires-expression
+T add(T a, T b) { return a + b; }
+ 
+// a requires-clause containing a requires-expression
+template<typename T>
+    requires requires (T x) { x + x; } // ad-hoc constraint, note keyword used twice
+T add(T a, T b) { return a + b; }
+
+// VJE.2
+
+// a requires-expression containing a requires-clause
+template<typename Seq>
+concept Sequence = requires(Seq seq) {
+  typename Seq::iterator;
+  requires Iterator<typename Seq::iterator>;
+  { seq.begin() } -> Seq::iterator;
+  ...
+};
+```
+
+## Concepts
+
+cppreference:
+
+- A concept is a named set of requirements. 
+
+### Definition
+
+- The definition of a concept must appear at namespace scope.
+
+```cpp
+// Syntax
+template < template-parameter-list >
+concept concept-name attr(optional) = constraint-expression;
 ```
