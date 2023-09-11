@@ -24,6 +24,28 @@ toc_sticky: true
 
 # gcc, g++
 
+## Standards
+
+### Default Standard
+
+[stackoverflow](https://stackoverflow.com/a/44735016):
+
+Which C++ standard is the default when compiling with g++?
+
+If your version of g++ is later than 4.7 I think you can find the default version of C++ standard supported like so:
+
+```bash
+g++ -dM -E -x c++  /dev/null | grep -F __cplusplus
+```
+
+### Available Standards
+
+[stackoverflow](https://stackoverflow.com/a/65483397):
+
+```bash
+gcc -v --help 2> /dev/null | sed -n '/^ *-std=\([^<][^ ]\+\).*/ {s//\1/p}'
+```
+
 ## Flags
 
 in [official doc](http://gcc.gnu.org/onlinedocs/gcc/)
@@ -68,11 +90,25 @@ gcc -xc++ -E -v -
 
 see [How to tell g++ compiler where to search for include files?](https://stackoverflow.com/questions/15478005/how-to-tell-g-compiler-where-to-search-for-include-files)
 
+# ld
+
+**source**: `man ld`
+
+`ld` - The GNU linker
+
+`ld [options] objfile ...`
+
+`ld` combines a number of object and archive files, relocates their data and ties up symbol references. Usually the last step in compiling a program is to run `ld`.
+
+**source**: [stackoverflow](https://softwareengineering.stackexchange.com/a/226574)
+
+The name is actually short for "load", and "loader" was what linkers were originally called
+
 # ldconfig
 
 **source**: `man ldconfig`
 
-ldconfig - configure dynamic linker run-time bindings
+`ldconfig` - configure dynamic linker run-time bindings
 
 ldconfig creates the necessary links and cache to the most recent shared libraries found in the directories specified on the command line, in the file `/etc/ld.so.conf`, and in the trusted directories, `/lib` and `/usr/lib` (on some 64-bit architectures such as x86-64, `/lib` and `/usr/lib` are the trusted directories for 32-bit libraries, while `/lib64` and `/usr/lib64` are used for 64-bit libraries).
 
