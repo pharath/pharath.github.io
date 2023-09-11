@@ -128,6 +128,8 @@ tags:
 `git show HEAD` | just the diff for a specific commit
 `gitk [filename]` | To browse the changes visually
 `git shortlog` | show the commit messages grouped by author and title (for creating release announcements)
+`git show 35e32b6a00dec02ae7d7c45c6b7106779a124685` | find a commit given the commit hash
+`git log -p -1 35e32b6a00dec02ae7d7c45c6b7106779a124685` | find a commit given the commit hash
 
 ## git pull vs fetch vs update
 
