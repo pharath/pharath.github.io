@@ -653,6 +653,14 @@ BS
 - returns an **rvalue reference** (a reference to its argument from which we may move)
 - it is a kind of cast
 
+```cpp
+// possible implementation
+template <typename T>
+std::remove_reference_t<T>&& move(T&& t) {
+    return static_cast<std::remove_reference_t<T>&&>(t);
+}
+```
+
 #### Synthesized Move Constructor
 
 Conditions under which the compiler synthesizes:
