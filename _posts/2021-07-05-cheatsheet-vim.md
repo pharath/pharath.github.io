@@ -473,6 +473,7 @@ git clone --bare https://github.com/pharath/dotfiles.git $HOME/.cfg/
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 config checkout   # before running this command, remove all the existing dotfiles that would be overwritten otherwise
 config config core.excludesFile '~/.gitignore'
+config config core.editor nvim   # to open nvim when writing multi-line commit messages
 ```
 
 **Note**: `~/.config/nvim/` is a modified version of `https://github.com/nvim-lua/kickstart.nvim`.
