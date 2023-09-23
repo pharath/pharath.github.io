@@ -206,6 +206,20 @@ git restore . | discard **all unstaged** files in current working directory
 git checkout -- path/to/file/to/revert | see `git restore path/to/file/to/revert`
 git restore path/to/file/to/revert | discard a specific unstaged file
 
+## Undo git reset --hard
+
+`git fsck --lost-found`
+
+For **uncommitted** changes, run this command and git will create a new dir in your repo at `./.git/lost-found` and you might be able to find them in an `other` directory under `lost-found`.
+
+see 
+- [stackoverflow](https://stackoverflow.com/a/59846439/12282296)
+- [blog post](https://blog.agchapman.com/recovering-lost-commits-from-a-git-reset/)
+- [stackoverflow](https://stackoverflow.com/a/22370074/12282296)
+
+For **committed** changes, see
+- [stackoverflow](https://stackoverflow.com/a/21778/12282296)
+
 ## Remove modified `__pycache__/` and `.pyc` Files from `git status`
 
 `git checkout path/to/__pycache__/`
@@ -508,6 +522,7 @@ Also, these upper-case letters can be **downcased** to **exclude**. E.g. `--diff
 | :---: | :---: |
 `git config -l` | list the current git settings
 `git config --get remote.origin.url` | get only the URL of the remote `origin`
+`git config --global core.editor nvim` | set the default editor, see [git-scm](https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration#_basic_client_configuration)
 
 # Git Credential Helper, Storing Git Passwords
 
