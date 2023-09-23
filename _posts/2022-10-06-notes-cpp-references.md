@@ -22,18 +22,42 @@ tags:
 
 ## Lvalue References
 
-- from [isocpp](https://isocpp.org/wiki/faq/references#reseating-refs):
-  - Unlike a pointer, once a reference is bound to an object, it can not be "reseated" to another object. 
-  - The reference itself isn't an object 
-    - it has no identity; 
-    - taking the address of a reference gives you the address of the referent; 
-    - remember: the reference **is** its referent
+Lippman:
+
+- Ordinarily, when we initialize a variable, the value of the initializer is **copied** into the object we are creating
+- When we define a reference, instead of copying the initializer's value, we **bind** the reference to its initializer
+- Once initialized, a reference **remains bound to its initial object**
+- There is **no way to rebind** a reference to refer to a different object
+- Because there is no way to rebind a reference, references **must be initialized**
+
+Liberty:
+
 - idea
   - Normally, when you use a reference, you do not use the address-of operator. You simply use the reference as you would use the target variable.
     - references are **aliases** for their target
-  - enables the function to change the object being referred to
+  - **passing by reference** enables the function to change the object being referred to
+- references (unlike other variables)
+  - must be initialized when they are declared
+  - cannot be reassigned
+- ~~space **before** the address-of operator is **required**~~
+  - **wrong**: see counterexample from cppreference:
 
 ```cpp
+// https://en.cppreference.com/w/cpp/language/reference_initialization
+// - shows that the space before the "&" is NOT required
+double d = 2.0;
+double& rd = d;        // rd refers to d
+const double& rcd = d; // rcd refers to d
+```
+
+### Address of a Reference
+
+Liberty:
+
+- If you ask a reference for its address, it returns the **address of its target**.
+
+```cpp
+// address of a reference
 int intOne;
 int &rSomeRef = intOne;
 intOne = 5;
@@ -44,13 +68,48 @@ intOne = 5;
 // &rSomeRef: 0x3500
 ```
 
-- references (unlike other variables)
-  - must be initialized when they are declared
-  - cannot be reassigned
-- space **before** the address-of operator is **required**
-- usually "the type of a reference must match the type of the object to which it refers"
-  - 2 exceptions:
-    - 1) "we can initialize a reference to const from any expression that can be converted to the type of the reference" (see [reference to const](#reference-to-const))
+- from [isocpp](https://isocpp.org/wiki/faq/references#reseating-refs):
+  - Unlike a pointer, once a reference is bound to an object, it can not be "reseated" to another object. 
+  - The reference itself **isn't an object** 
+    - it **has no identity**
+    - taking the address of a reference gives you the **address of the referent**
+    - remember: the reference **is** its referent
+
+### Initialization
+
+Lippman:
+
+- usually "the type of a reference **must match the type of the object to which it refers**"
+  - two exceptions:
+    - 1) "we can initialize a reference to `const` from any expression that can be converted to the type of the reference" (see [reference to const](#reference-to-const))
+    - 2) ["classes related by inheritance"](#classes-related-by-inheritance)
+- a reference may be bound only to an object, **not** to a **literal** or to the result of a **more general expression**:
+
+```cpp
+int &refVal4 = 10;    // error: initializer must be an object
+double dval = 3.14;
+int &refVal5 = dval;  // error: initializer must be an int object
+```
+
+### Reference to Reference
+
+What does this mean?: "Because references are not objects, **we may not define a reference to a reference**.", (Lippman, p51)
+
+From [stackoverflow](https://stackoverflow.com/a/28359583/12282296):
+
+```cpp
+// https://stackoverflow.com/q/28359555/12282296
+int main(){
+  int ival=1024;
+  int &refVal=ival;
+  int &refVal2=refVal;
+  return 0;
+}
+```
+
+After `refVal` is initialized, whenever you mention its name, it behaves like the variable `ival` it refers to---its "referenceness" can no longer be detected (except by `decltype`). Therefore `refVal2` is simply initialized to refer to `ival` also.
+
+There is no type "**reference to reference** to `int`", `int&(&)`.
 
 ### reference to const 
 
@@ -97,10 +156,23 @@ r2 = 0;               // error: r2 is a reference to const
 
 From [isocpp.org](https://isocpp.org/wiki/faq/const-correctness#const-ref-nonsense):
 - references are always `const`
-- `X& const x` is functionally equivalent to `X& x`. Since you're gaining nothing by adding the `const` after the `&`, you shouldn't add it: it will confuse people — the `const` will make some people think that the `X` is const, as if you had said `const X& x`.
+- `X& const x` is functionally equivalent to `X& x`. Since you're gaining nothing by adding the `const` after the `&`, you shouldn't add it: it will confuse people - the `const` will make some people think that the `X` is const, as if you had said `const X& x`.
+
+### Classes Related By Inheritance
+
+Lip15.2.3:
+
+- we can bind a pointer or reference to a base-class type to an object of a type derived from that base class
+- examples:
+  - use a `Quote&` to refer to a `Bulk_quote` object
+  - assign the address of a `Bulk_quote` object to a `Quote*`
+- consequently, when we use a reference (or pointer) to a base-class type, we don't know the actual type of the object to which the pointer or reference is bound
+  - That object can be an object of the base class or it can be an object of a derived class
+- the **smart pointer classes** support this "derived-to-base conversion", too
 
 ## Rvalue References
 
+- "are primarily intended for use inside classes" (Lip2.3.1)
 - introduced by the new standard to support move operations
 - a reference that must be bound to an rvalue
 - obtained by using `&&`
@@ -157,9 +229,23 @@ From [stackoverflow](https://stackoverflow.com/a/1898556):
 void fun(int*& ref_to_ptr)
 {
     ref_to_ptr = 0; // set the "passed" pointer to 0
-    // if the pointer is not passed by ref,
+    // if the pointer is NOT passed by ref,
     // then only the copy(parameter) you received is set to 0,
     // but the original pointer(outside the function) is not affected.
+}
+```
+
+This is often useful when returning a pointer type data member:
+
+```cpp
+// whereas, if we would return the data member `_p` "by value", we 
+// cannot modify it (eg. to make `_p` point to another address)
+class X {
+  double* _p{nullptr};
+public:
+  double*& p() {    // return by reference
+    return _p;
+  }
 }
 ```
 
@@ -363,8 +449,8 @@ void forwardToG(T&& x)
 ```
 
 ```cpp
-// std::forward<T&&> is essentially a static_cast
-// (but it is more convenient than a static_cast)
+// std::forward<T> is essentially a static_cast<T&&>
+// (but it is more convenient than a static_cast<T&&>)
 template <typename T>
 T&& forward(std::remove_reference_t<T>& t) {
     return static_cast<T&&>(t);

@@ -80,9 +80,9 @@ decltype ( expression )       // (2)    (since C++11)
 
 Inspects
 1. the declared type of an **entity** (no parentheses!)
+  - Note: "entity" is eg. a variable, function, enumerator, or data member (VJ15.10.2)
+  - full list: see "cpp.md" &rarr; section "Entity"
 2. the type and value category of an **expression**
-
-Note: "entity" is eg. a variable, function, enumerator, or data member (VJ15.10.2)
 
 (1) If the argument is an **unparenthesized** id-expression or an **unparenthesized** class member access expression, then decltype yields the type of the **entity** named by this expression.
 

@@ -20,7 +20,7 @@ tags:
 
 # Functions
 
-## scope
+## Scope
 
 cppreference:
 - **scope**: Each **name** that appears in a C++ program is only visible in some possibly discontiguous portion of the source code called its **scope**.
@@ -48,7 +48,7 @@ Inside class definitions:
   - Hence, if a member function uses a name of a data member, this name is resolved as the data member defined inside the class.
     - ie. we do not have to specify the data member's scope via a `className::` prefix
 
-## inline functions
+## Inline Functions
 
 - A function specified as `inline` (usually) is expanded "in line" at each call. 
   - the word "usually" means that this expansion does not happen sometimes because the compiler can choose to ignore the `inline`! (see point below)
@@ -69,18 +69,24 @@ Inside class definitions:
 
 ## Parameter List
 
+From [cppreference](https://en.cppreference.com/w/cpp/language/function#Parameter_list):
+
 Parameter **names** declared in function declarations are usually for only self-documenting purposes. They are used (but remain optional) in function definitions.
 
 The **type** of each function parameter in the parameter list is determined according to the following rules:
-1) First, `decl-specifier-seq` and the `declarator` are combined as in any **declaration** (&rarr; see "Definitions") to determine the type.
-2) If the type is "array of T" or "array of unknown bound of T", it is replaced by the type "pointer to T".
-3) If the type is a "function type F", it is replaced by the type "pointer to F".
-4) **Top-level cv-qualifiers** are dropped from the parameter type 
-  - (This adjustment only affects the function type, but doesn't modify the property of the parameter: `int f(const int p, decltype(p)*);` and `int f(int, const int*);` declare the same function).
+1. First, `decl-specifier-seq` and the `declarator` are combined as in any **declaration** (&rarr; see "Definitions") to determine the type.
+2. If the type is "array of `T`" or "array of unknown bound of `T`", it is replaced by the type "pointer to `T`".
+3. If the type is a "function type `F`", it is replaced by the type "pointer to `F`".
+  - see [Return a Pointer to Function](#return-a-pointer-to-function)
+4. **Top-level cv-qualifiers** are dropped from the parameter type
+  - This adjustment **only** affects the **function type**, but doesn't modify the property of the parameter
+  - eg. `int f(const int p, decltype(p)*);` and `int f(int, const int*);` declare the same function.
 
 Because of these rules, the following function declarations declare exactly the same function:
 
 ```cpp
+// cppreference
+// rule 2. "array of `T`"
 int f(char s[3]);
 int f(char[]);
 int f(char* s);
@@ -91,8 +97,10 @@ int f(char* volatile s);
 The following declarations also declare exactly the same function:
 
 ```cpp
-// case 3): function type
+// cppreference
+// rule 3. "function type `F`"
 int f(int());
+int f(int (*)());   // phth
 int f(int (*g)());
 ```
 
@@ -116,28 +124,31 @@ int f(int (*g)());
 int f(int a, int b = a);          // Error: the parameter a used in a default argument
 ```
 
-## return values
+## Return Values
 
 ignoring return values:
 - "calling a function and ignoring the return result is *very* common", [stackoverflow](https://stackoverflow.com/a/38919156)
 - eg. `printf("hello\n");` ignores the return value, [stackoverflow](https://stackoverflow.com/a/38919103)
 
-## static functions
+## Static Functions
 
-- see [static members](#static-members)
+- see "objects.md" &rarr; "static members"
 - see [stackoverflow](https://stackoverflow.com/a/15235626)
+  - a `static` function is 
+    - often used as a class **member** function
+    - only very rarely used for a **free-standing** function
 
-## member functions
+## Member Functions
 
 - "member function bodies may use other members of their class regardless of where in the class those members appear" (see "compile order" in [Classes](#classes))
 - "code is interpreted as being inside the scope of the class" (ie. eg. no need to use `this` to access members)
 
-### implicit "this" parameter
+### Implicit "this" Parameter
 
 - a `total.isbn()` call is translated like a `Sales_data::isbn(&total)` call
   - "the compiler passes the address of `total` to the implicit `this` parameter" (as if `Sales_data::isbn(Sales_data *const this)` were the function definition, see `passing_by_reference.c` - Listing 9.6)
 
-### const member functions
+### const Member Functions
 
 "const member functions cannot change the object on which they are called."
 - "The purpose of that `const` is to **modify the type of** the implicit `this` pointer." (see [this](#this))
@@ -155,23 +166,77 @@ as if it were written as
 std::string Sales_data::isbn(const Sales_data *const this) { return this->bookNo; }
 ```
 
-[stackoverflow](https://stackoverflow.com/a/3141107)
-- A "`const` function", denoted with the keyword `const` after a function declaration, makes it a compiler error for this class function to change a member variable of the class. However, reading of a class variables is okay inside of the function, but writing inside of this function will generate a compiler error.
+- A "`const` function", denoted with the keyword `const` after a function declaration, makes it a compiler error for this class function to change a member variable of the class. However, reading of a class variables is okay inside of the function, but writing inside of this function will generate a compiler error., [stackoverflow](https://stackoverflow.com/a/3141107)
 
 ### inline member functions
 
 - member functions ...
-  - defined inside the class: automatically inline
+  - defined inside the class: automatically `inline`
   - defined outside the class: need to specify as `inline`
   - declared inside the class: need to specify as `inline`
-- inline member functions should be defined in the same header as the corresponding class definition (for the same reason as described for inline functions)
+- `inline` member functions should be defined in the same header as the corresponding class definition (for the same reason as described for `inline` functions)
 - it is legal to specify `inline` on both the declaration and the definition. 
   - **Best practice**: specifying `inline` only on the definition outside the class can make the class easier to read.
+
+### Move-enabled Members
+
+- Overloaded functions that distinguish between moving and copying a parameter typically have one version that takes a `const T&` and one that takes a `T&&.`
+
+```cpp
+// - can pass any object that can be converted to type X to this version
+// - copies data from its parameter
+void push_back(const X&); // copy: binds to any kind of X
+// - can pass only an rvalue that is not const to this version
+// - an exact match (and a better match) for nonconst rvalues and will be run when we pass a modifiable rvalue
+void push_back(X&&);      // move: binds only to modifiable rvalues of type X
+
+// These push_back functions could be eg. members of class StrVec:
+class StrVec {
+public:
+  void push_back(const std::string&); // copy the element
+  void push_back(std::string&&);      // move the element
+  // other members as before
+};
+
+// When we call push_back the type of the argument determines whether 
+// the new element is copied or moved into the container:
+StrVec vec;             // empty StrVec
+string s = "some string or another";
+vec.push_back(s);       // calls push_back(const string&)
+vec.push_back("done");  // calls push_back(string&&)
+```
+
+- Ordinarily, there is no need to define versions of the operation that take a `const X&&` or a (plain) `X&`.
+  - Usually, we pass an **rvalue reference** when we want to "steal" from the argument. In order to do so, the argument must not be `const`.
+  - Similarly, **copying** from an object should not change the object being copied. As a result, there is usually no need to define a version that take a (plain) `X&` parameter.
 
 ## Lambdas
 
 From [learn.microsoft](https://learn.microsoft.com/en-us/cpp/cpp/lambda-expressions-in-cpp?view=msvc-170):
 - In C++11 and later, a **lambda expression** - often called **a lambda** - is a convenient way of defining an anonymous function object (a closure) right at the location where it's invoked or passed as an argument to a function. Typically lambdas are used to encapsulate a few lines of code that are passed to algorithms or asynchronous functions.
+
+## Passing Call Parameters in and out of Functions
+
+phth:
+
+- "in" parameters are only passed to a function
+- "out" parameters are only returned from a function
+- "in-out" parameters are passed **and** also returned from a function
+
+From [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#fcall-parameter-passing):
+
+- F.15: Prefer simple and conventional ways of passing information
+  - when you use `move` semantics, "measure to ensure that it really is an improvement, and document/comment because the improvement might not be portable"
+  - The following table summarizes the advice in the following Guidelines, F.16-21. (see notes below the table)
+
+![summary](https://isocpp.github.io/CppCoreGuidelines/param-passing-advanced.png)
+
+- F.16: For "in" parameters, pass cheaply-copied types by value and others by reference to `const`
+- F.17: For "in-out" parameters, pass by reference to non-`const`
+- F.18: For "will-move-from" parameters, pass by `X&&` and `std::move` the parameter
+- F.19: For "forward" parameters, pass by `TP&&` and only `std::forward` the parameter
+- F.20: For "out" output values, prefer return values to output parameters
+- F.21: To return multiple "out" values, prefer returning a `struct` or `tuple`
 
 ## Return Value Optimization, RVO
 
@@ -298,7 +363,7 @@ void error_msg(ErrCode e, initializer_list<string> il)
 }
 ```
 
-## return
+## Return
 
 Values are returned in exactly the same way as variables and parameters are initialized: 
 - The **return value** is used to **initialize** a **temporary** at the call site, and that temporary is the result of the function call.
@@ -392,6 +457,10 @@ Lippman:
 - however, a function can return a pointer or a reference to an array
   - see "cpp-pointers-memory.md" &rarr; "Returning a Pointer to an Array"
 
+### Return a Function
+
+- we can't return a function type but **can** return a **pointer to** a function type (see [Return a Pointer to Function](#return-a-pointer-to-function))
+
 ## Pointers to Functions
 
 - a pointer that denotes a function rather than an object
@@ -479,6 +548,7 @@ double (*pf3)(int*) = ff;   // error: return type of ff and pf3 don't match
 - the easiest way to declare a function that returns a pointer to function is by using a **type alias**:
 
 ```cpp
+// alias declarations for function types
 using F = int(int*, int);       // F is a function type, not a pointer
 using PF = int(*)(int*, int);   // PF is a pointer type
 
@@ -648,4 +718,247 @@ X x;
 X* px = new X;
 //I want to call the memfun pointer on px. I use ->*
 (px ->* somePointer)(); //will call px->f();
+```
+
+# Function Objects
+
+- one kind of [callable object](#callable-objects)
+
+Lippman 14.8:
+
+- Function Objects are "objects of classes that define the **call operator**"
+  - Such objects "act like functions" because we can call them (see `absObj(i)`)
+  - Calling a function object runs its overloaded call operator
+
+```cpp
+struct absInt {
+  int operator()(int val) const {
+    return val < 0 ? -val : val;
+  }
+};
+
+int i = -42;
+absInt absObj;        // object that has a function-call operator
+int ui = absObj(i);   // passes i to absObj.operator()
+```
+
+## Usage
+
+- Function-object classes often contain data members that are used to **customize the operations in the call operator**:
+
+```cpp
+class PrintString {
+public:
+  PrintString(ostream &o = cout, char c = ' '):
+  os(o), sep(c) { }
+  void operator()(const string &s) const { os << s << sep; }
+private:
+  ostream &os;  // stream on which to write
+  char sep;     // character to print after each output
+};
+
+// Then we can
+// either use the defaults 
+// or supply our own values for the separator or output stream
+PrintString printer;  // uses the defaults; prints to cout
+printer(s);           // prints s followed by a space on cout
+PrintString errors(cerr, '\n');
+errors(s);            // prints s followed by a newline on cerr
+```
+
+- Function objects are most often used **as arguments to the generic algorithms**:
+
+```cpp
+for_each(vs.begin(), vs.end(), PrintString(cerr, ’\n’));
+```
+
+## Lambdas
+
+- lambdas are function objects
+
+## Library-defined Function Objects
+
+- a set of class templates that represent the arithmetic, relational, and logical operators
+- each class defines a **call operator** that applies the named operation
+- defined in the `functional` header
+
+```cpp
+plus<int> intAdd;         // function object that can add two int values
+negate<int> intNegate;    // function object that can negate an int value
+// uses intAdd::operator(int, int) to add 10 and 20
+int sum = intAdd(10, 20);         // equivalent to sum = 30
+sum = intNegate(intAdd(10, 20));  // equivalent to sum = -30
+// uses intNegate::operator(int) to generate -10 as the second parameter
+// to intAdd::operator(int, int)
+sum = intAdd(10, intNegate(10));  // sum = 0
+```
+
+### For Overriding the Default Algorithms
+
+- eg. to sort a vector in **descending** order (instead of ascending order)
+
+```cpp
+// passes a temporary function object that applies the > operator to two strings
+sort(svec.begin(), svec.end(), greater<string>());
+```
+
+- unlike their built-in operator counterparts, the library function objects will work for pointers, too
+  - eg. to sort a vector of pointers based on their addresses in memory
+    - this is not possible with the `<` operator (because comparing two unrelated pointers using `<` is undefined)
+
+```cpp
+// "<" operator VS. "less<T>" function object
+
+vector<string *> nameTable; // vector of pointers
+// error: the pointers in nameTable are unrelated, so < is undefined
+sort(nameTable.begin(), nameTable.end(),
+      [](string *a, string *b) { return a < b; });
+// ok: library guarantees that less on pointer types is well defined
+sort(nameTable.begin(), nameTable.end(), less<string*>());
+```
+
+- similarly, the **associative containers** use `less<key_type>` to order their elements
+  - as a result, we can
+    - define a `set` of pointers
+    - use a pointer as the key in a `map`
+
+# Callable Objects
+
+- examples:
+  - functions
+  - pointers to functions
+  - lambdas
+  - objects created by `bind`
+  - classes that overload the function-call operator ([Function Objects](#function-objects))
+- a callable object has a **type**
+  - eg.
+    - each **lambda** has its own unique (unnamed) class type
+    - **function** and **function-pointer** types vary by their return type and argument types
+
+## Call Signature
+
+- specifies
+  - the type returned by a call to the object
+  - the argument type(s) that must be passed in the call
+- two callable objects with different **types** may share **the same** call signature
+- a call signature corresponds to a **function type**
+
+```cpp
+int(int, int)
+```
+
+## Different Types Can Have the Same Call Signature
+
+```cpp
+// all of these callables share the same call signature: int(int, int)
+
+// ordinary function
+int add(int i, int j) { return i + j; }
+// lambda, which generates an unnamed function-object class
+auto mod = [](int i, int j) { return i % j; };
+// function-object class
+struct divide {
+  int operator()(int denominator, int divisor) {
+    return denominator / divisor;
+  }
+};
+```
+
+## `function` Class Template
+
+### Motivation: Function Table
+
+**Example:**
+- build a simple desk calculator
+  - implement a **function table** using a `map`
+    - use a `string` as the **key**
+    - use the function that implements each operator as the **value**
+    - index the `map` to call a specific operator
+
+```cpp
+// maps an operator to a pointer to a function taking two int s and returning an int
+map<string, int(*)(int,int)> binops;
+
+// ok: add is a pointer to function of the appropriate type
+binops.insert({"+", add}); // {"+", add} is a pair
+
+// error: mod is a lambda, and each lambda has its own class type
+binops.insert({"%", mod}); // error: mod is not a pointer to function
+```
+
+### `function`
+
+- is a [class template](https://en.cppreference.com/w/cpp/utility/functional/function)
+- creates a `function` type
+- defined in the `functional` header
+- must specify the **call signature** of the objects that this particular function type can represent:
+
+```cpp
+// to represent callable objects that return an int result and have two int parameters
+function<int(int, int)>
+```
+
+```cpp
+// use that type
+function<int(int, int)> f1 = add;               // function pointer
+function<int(int, int)> f2 = divide();          // object of a function-object class
+function<int(int, int)> f3 = [](int i, int j)   // lambda
+                             { return i * j; };
+cout << f1(4,2) << endl; // prints 6
+cout << f2(4,2) << endl; // prints 2
+cout << f3(4,2) << endl; // prints 8
+```
+
+- this solves the problem in section ["Motivation: Function Table"](#motivation-function-table)
+
+```cpp
+// table of callable objects corresponding to each binary operator
+// all the callables must take two ints and return an int
+// an element can be a function pointer, function object, or lambda
+map<string, function<int(int, int)>> binops;
+
+map<string, function<int(int, int)>> binops = {
+    {"+", add},                                 // function pointer
+    {"-", std::minus<int>()},                   // library function object
+    {"/", divide()},                            // user-defined function object
+    {"*", [](int i, int j) { return i * j; }},  // unnamed lambda
+    {"%", mod} };                               // named lambda object
+
+// note: underlying callable objects all have different types from one another
+
+// When we index binops, we get a reference to an object (not a copy of an 
+// object) of type function. The function type OVERLOADS the call operator.
+binops["+"](10, 5); // calls add(10, 5)
+binops["-"](10, 5); // uses the call operator of the minus<int> object
+binops["/"](10, 5); // uses the call operator of the divide object
+binops["*"](10, 5); // calls the lambda function object
+binops["%"](10, 5); // calls the lambda function object
+```
+
+### Overloaded Functions and `function`
+
+**Problem:**
+
+- we cannot (directly) store the name of an **overloaded** function in an object of type `function`
+
+```cpp
+// "add" is an overloaded function
+int add(int i, int j) { return i + j; }
+Sales_data add(const Sales_data&, const Sales_data&);
+
+map<string, function<int(int, int)>> binops;
+binops.insert( {"+", add} ); // error: which add? (-> ambiguous name)
+```
+
+**Solution:**
+
+```cpp
+// Option 1:
+// ok: store a function pointer
+int (*fp)(int,int) = add;     // pointer to the version of add that takes two ints
+binops.insert( {"+", fp} );   // ok: fp points to the right version of add
+
+// Option 2:
+// ok: use a lambda to disambiguate which version of add we want to use
+binops.insert( {"+", [](int a, int b) {return add(a, b);} } );
 ```

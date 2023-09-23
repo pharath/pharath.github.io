@@ -64,6 +64,7 @@ From [stackoverflow](https://stackoverflow.com/a/2837853):
 - Delete an array: `delete[] arrayName`
 - Deleting a `nullptr` does not cause any change and no error.
 - You cannot delete a pointer to a local stack allocated variable:
+
 ```cpp
 // see delete.cpp (day 8)
 int x;
@@ -129,7 +130,7 @@ The type of `NULL` depends on the C++ implementation.
   - `__null` is equivalent to a zero-valued integer literal (and thus compatible with the C++ standard) and has the same size as `void*`, e.g. it is equivalent to `0` (on ILP32 platforms) /`0L` (on LP64 platforms);
   - conversion from `__null` to an arithmetic type, including the type of `__null` itself, may trigger a warning.
 
-~In C++11 hat `NULL` den type `nullptr_t`~ (depends on the C++ implementation)
+~~In C++11 hat `NULL` den type `nullptr_t`~~ (depends on the C++ implementation)
 
 "In C, the macro `NULL` may have the type `void*`, but that is not allowed in C++." ([cppreference](https://en.cppreference.com/w/cpp/types/NULL))
 - how come?: [stackoverflow](https://stackoverflow.com/a/69057243)
@@ -183,7 +184,11 @@ From [stackoverflow](https://stackoverflow.com/a/8783589):
 - elements in an array are **default initialized**
   - thus, an array of built-in type that is defined inside a function will have undefined values.
 
-## Default Initialization
+## Initialization
+
+- examples: see `array_init.cpp` and `array_init_basics.cpp`
+
+### Default Initialization
 
 ```cpp
 unsigned cnt = 42;          // not a constant expression
@@ -195,18 +200,22 @@ string bad[cnt];              // error: cnt is not a constant expression
 string strs[get_size()];      // ok if get_size is constexpr, error otherwise
 ```
 
-## Value Initialization
+### Value Initialization
 
 ```cpp
+unsigned scores2[11]{};     // 11 buckets, all value initialized to 0
 // Lip3.5.2
-unsigned scores[11] = {}; // 11 buckets, all value initialized to 0
+unsigned scores[11] = {};   // 11 buckets, all value initialized to 0
+// actually, this is list initialization, but since in list initialization
+// the remaining elements are value initialized this is effectively
+// a value initialization of all elements
 ```
 
-## List Initialization
+### List Initialization
 
 - If the dimension is greater than the number of initializers
   - the initializers are used for the first elements 
-  - remaining elements are value initialized
+  - remaining elements are **value initialized**
 
 ```cpp
 const unsigned sz = 3;
@@ -407,6 +416,14 @@ void print(int (&arr)[10])   // the dimension is part of the type
 }
 ```
 
+## Return an Array
+
+Lippman:
+- a function **cannot** return an array
+  - because we cannot copy an array (see "Arrays" &rarr; "Copy")
+- however, a function can return a pointer or a reference to an array
+  - see "cpp-pointers-memory.md" &rarr; "Returning a Pointer to an Array"
+
 ## Returning a Pointer to an Array
 
 - see also "functions.md" &rarr; "Return an Array"
@@ -419,11 +436,14 @@ using arrT = int[10]; // equivalent declaration of arrT
 arrT* func(int i); // func returns a pointer to an array of ten ints
 ```
 
-**Option 2:**
+**Option 2:** function that returns a pointer to an array
 
 ```cpp
 // Syntax: Type (*function(parameter_list))[dimension]
 int (*func(int i))[10];
+// compare with: "int (*array)[10];"
+// -> aka a normal pointer-to-array (where "array" = "func(int i)"), like in section "References and Pointers to Arrays"
+// -> ie. "int (*)[10]" is the return type (proof: see "Option 3")
 ```
 
 **Option 3:** trailing return type syntax:
@@ -433,25 +453,38 @@ int (*func(int i))[10];
 auto func(int i) -> int(*)[10];
 ```
 
+**Option 4:** using `decltype`
+
+```cpp
+int odd[] = {1,3,5,7,9};
+int even[] = {0,2,4,6,8};
+// returns a pointer to an array of five int elements
+decltype(odd) *arrPtr(int i)
+{
+  return (i % 2) ? &odd : &even; // returns a pointer to the array
+}
+```
+
 # Dynamic Memory
 
-- managed through
-  - `new`: 
-    - allocates, and optionally initializes, an object in dynamic memory 
-    - returns a pointer to that object
-    - if the constructor throws an exception:
-      - "If initialization terminates by throwing an exception (e.g. from the **constructor**), if new-expression allocated any storage, it calls the appropriate deallocation function: `operator delete` for non-array type, `operator delete[]` for array type.", [cppreference](https://en.cppreference.com/w/cpp/language/new#Construction)
-  - `delete`
-    - takes a pointer to a dynamic object,
-    - destroys that object,
-    - frees the associated memory
+## Objects in Dynamic Memory
+
+- managed through `new` and `delete`
 - by default, dynamically allocated objects are **default initialized**
   - built-in or compound type: undefined value
   - class type: default constructor
 - we can also use
   - direct initialization
   - value initialization
-- **Best practice:** always initialize dynamically allocated objects
+- **Best practice:**
+  - always initialize dynamically allocated objects
+
+## new
+
+- allocates, constructs and optionally initializes, an object in dynamic memory
+- returns a pointer to that object
+- if the constructor throws an **exception**:
+  - "If initialization terminates by throwing an exception (e.g. from the **constructor**), if new-expression allocated any storage, it calls the appropriate deallocation function: `operator delete` for non-array type, `operator delete[]` for array type.", [cppreference](https://en.cppreference.com/w/cpp/language/new#Construction)
 
 ```cpp
 // default initialization
@@ -470,6 +503,11 @@ string *ps1 = new string; // default initialized to the empty string
 string *ps = new string(); // value initialized to the empty string
 int *pi1 = new int; // default initialized; *pi1 is undefined
 int *pi2 = new int(); // value initialized to 0; *pi2 is 0
+
+// auto: only with a single initializer inside parentheses!
+auto p1 = new auto(obj);    // p points to an object of the type of obj
+                            // that object is initialized from obj
+auto p2 = new auto{a,b,c};  // error: must use parentheses for the initializer
 
 // const objects:
 const int *pci = new const int(1024);   // allocate and initialize a const int
@@ -498,6 +536,10 @@ int *p2 = new (nothrow) int;    // if allocation fails, new returns a null point
 
 ## delete
 
+- `delete`
+  - takes a pointer to a dynamic object
+  - destroys that object
+  - frees the associated memory
 - The pointer we pass to `delete` must either
   - point to dynamically allocated memory or
   - be a null pointer.
@@ -519,21 +561,22 @@ const int *pci = new const int(1024);
 delete pci;     // ok: deletes a const object
 ```
 
-- cppreference: If `expression` is not a null pointer (...), the `delete` expression invokes the **destructor** (if any) for the object that's being destroyed, or for every element of the array being destroyed (proceeding from the last element to the first element of the array).
+- cppreference: "If `expression` is not a null pointer (...), the `delete` expression invokes the **destructor** (if any) for the object that's being destroyed, or for every element of the array being destroyed (proceeding from the last element to the first element of the array)."
 
 ## Common Problems
 
 1. Forgetting to delete memory &rarr; **"memory leak"**
   - Neglecting to delete dynamic memory is known as a memory leak, because the memory is never returned to the free store. 
   - Testing for memory leaks is difficult because they usually cannot be detected until the application is run for a long enough time to actually exhaust memory.
-2. Using an object after it has been deleted. 
+2. Using an object after it has been deleted &rarr; **"dangling pointer"**
+  - after the `delete`, the pointer becomes what is referred to as a **dangling pointer** (Lip, p462)
   - This error can sometimes be detected by making the pointer null after the delete.
-3. Deleting the same memory twice. 
+3. Deleting the same memory twice. &rarr; **"double disposal"**/**"double delete"**
   - This error can happen when two pointers address the same dynamically allocated object. 
   - If `delete` is applied to one of the pointers, then the object's memory is returned to the free store. 
   - If we subsequently `delete` the second pointer, then the free store may be corrupted.
 
-## Dangling Pointers
+### Dangling Pointers
 
 - one that refers to memory that once held an object but no longer does so
 - When we delete a pointer,
@@ -556,19 +599,16 @@ delete pci;     // ok: deletes a const object
 - `shared_ptr`: allows multiple pointers to refer to the same object
   - represents shared ownership (the last shared pointer's destructor destroys the object) (BS)
   - `weak_ptr`: companion class, a weak reference to an object managed by a `shared_ptr`
-- **best practice:**
-  - try to not use them
-  - try to use containers and other types that manage their resources
-  - in general, only when we really need pointer semantics:
-    - When we share an object
-    - When we refer to a polymorphic object
-    - A shared polymorphic object
+- smart pointers are **templates** (ie must supply type in angle brackets)
+- **default initialized** smart pointer hold a **null pointer**
 
 ### `shared_ptr` class
 
-- smart pointers are **templates** (ie must supply type in angle brackets)
-- **default initialized** smart pointer hold a **null pointer**
-- similar to `unique_ptr` except that `shared_ptrs` are **copied** rather than moved (BS)
+BS, p198
+
+- similar to `unique_ptr` except that `shared_ptr`s are **copied** rather than moved 
+  - `unique_ptr`s are "moved" &rarr; see section "Passing and Returning `unique_ptr`s"
+- an object is destroyed when the last of its `shared_ptr`s is destroyed
 
 Examples:
 
@@ -580,11 +620,16 @@ if (p1 && p1->empty())
   *p1 = "hi"; // if so, dereference p1 to assign a new value to that string
 ```
 
+slides:
+
+- twice the size of a raw pointer
+
 #### `make_shared`
 
 - **best practice:** `make_shared` is the preferred method for constructing an object and returning an appropriate smart pointer
   - BS: Creating an object using `new` and passing it to a `shared_ptr` is
     - more verbose
+      - therefore, less convenient
     - allows for mistakes
     - notably less efficient 
       - because it needs a separate allocation for the use count that is essential in the implementation of a `shared_ptr`
@@ -593,12 +638,19 @@ if (p1 && p1->empty())
   - returns a `shared_ptr` that points to that object
   - if we do not pass any arguments, then the object is **value initialized**
 
+cppreference:
+
 1) Constructs an object of type `T` and wraps it in a `std::shared_ptr` using `args` as the parameter list for the constructor of `T`.
 
 ```cpp
+// note: only the 1st template parameter refers to the type "T" of the "shared_ptr<T>",
+// the remaining template parameters "Args" refer to the type(s) of the 
+// arguments "args" passed to one of the constructors of type "T" (see Lip examples below)
 template< class T, class... Args >
 shared_ptr<T> make_shared( Args&&... args );
 ```
+
+Lip:
 
 Examples:
 
@@ -607,7 +659,7 @@ Examples:
 shared_ptr<int> p3 = make_shared<int>(42);
 // p4 points to a string with value 9999999999
 shared_ptr<string> p4 = make_shared<string>(10, '9');
-// p5 points to an int that is value initialized (§ 3.3.1 (p. 98)) to 0
+// p5 points to an int that is value initialized to 0
 shared_ptr<int> p5 = make_shared<int>();
 
 // ordinarily we use auto:
@@ -615,13 +667,19 @@ shared_ptr<int> p5 = make_shared<int>();
 auto p6 = make_shared<vector<string>>();
 ```
 
-- keeps track of how many other `shared_ptrs` point to the same object
+#### Copy and Assign `shared_ptr`s
+
+- copyable and movable
+
+Lippman:
+
+- keeps track of how many other `shared_ptr`s point to the same object
 - **reference count** (aka "use count"):
   - is **incremented** when we
     - copy a `shared_ptr`
     - use a `shared_ptr` to initialize another `shared_ptr`, 
     - use a `shared_ptr` as the right-hand operand of an assignment, 
-    - pass it to a function
+    - pass it to a function by value
     - return it from a function by value
   - is **decremented** when
     - we assign a new value to the `shared_ptr`
@@ -634,18 +692,52 @@ auto p6 = make_shared<vector<string>>();
 auto p = make_shared<int>(42); // object to which p points has one user
 auto q(p); // p and q point to the same object
 // object to which p and q point has two users
+
 auto r = make_shared<int>(42); // int to which r points has one user
 r = q; // assign to r, making it point to a different address
 // increase the use count for the object to which q points
 // reduce the use count of the object to which r had pointed
 // the object r had pointed to has no users; that object is automatically freed
+
+// Returns the number of objects sharing with p; may be a slow
+// operation, intended primarily for debugging purposes.
+p.use_count()
+// Returns true if p.use_count() is one; false otherwise.
+p.unique()
 ```
 
-- automatically destroys the object to which that `shared_ptr` points via the `shared_ptr` **destructor** (the destructor of the `shared_ptr` class)
+#### Move
+
+cppreference:
+
+```cpp
+shared_ptr( shared_ptr&& r ) noexcept; // (10) 
+
+// 10) Move-constructs a `shared_ptr` from `r`. After the construction, `*this` contains 
+//     a copy of the previous state of `r`, `r` is empty and its stored pointer is null.
+```
+
+Why moving instead of copying a `shared_ptr` is good: [stackoverflow](https://stackoverflow.com/questions/41871115/why-would-i-stdmove-an-stdshared-ptr)
+
+#### Empty `shared_ptr`
+
+- "A `shared_ptr` may also own no objects, in which case it is called **empty**", cppreference
+
+What does `use_count` return, if a `shared_ptr` owns no object?
+
+- "If there is no managed object, `0` is returned.", [cppreference](https://en.cppreference.com/w/cpp/memory/shared_ptr/use_count)
+
+#### Destroy `shared_ptr`s
+
+- automatically destroys the object to which that `shared_ptr` points via the destructor of the `shared_ptr` class, if the object's reference count goes to 0
 - the destructor of the `shared_ptr` class
   - frees the resources that an object has allocated (all destructors do this)
-  - decrements the reference count of the object to which that `shared_ptr` points
-- often used for [factory functions](#factory)
+  - reduce the use count of the object to which that `shared_ptr` points
+
+#### Factory Functions
+
+- `shared_ptr`s are often used for [factory functions](#factory)
+  - which are called "factory" because they "produce" a **new** object ("a product")
 
 ```cpp
 // factory returns a shared_ptr pointing to a dynamically allocated object
@@ -660,9 +752,10 @@ void use_factory(T arg)
 {
   shared_ptr<Foo> p = factory(arg);
   // use p
-} // p goes out of scope; the memory to which p points is automatically freed
+} // p goes out of scope => p is destroyed => its reference count is decremented; 
+  // the memory to which p points is automatically freed
 
-// - the return statement in use_factory returns a copy of p to its caller
+// - unlike above, here, the return statement in use_factory returns a copy of p to its caller
 //   - Copying a shared_ptr adds to the reference count of that object
 //   - therefore, the memory itself will not be freed (exactly, what we want!)
 shared_ptr<Foo> use_factory(T arg)
@@ -670,7 +763,8 @@ shared_ptr<Foo> use_factory(T arg)
   shared_ptr<Foo> p = factory(arg);
   // use p
   return p; // reference count is incremented when we return p
-} // p goes out of scope; the local variable/object p is destroyed; the memory to which p points is not freed
+} // p goes out of scope; the local variable/object p is destroyed => its reference count is decremented;
+  // the memory to which p points is not freed
 ```
 
 Note: The same does not work with dynamic objects managed through **built-in pointers**:
@@ -708,27 +802,75 @@ Foo* use_factory(T arg)
 }
 ```
 
-- make sure that `shared_ptrs` don't stay around after they are no longer needed
-  - The program will execute correctly but **may waste memory** if you neglect to destroy `shared_ptrs` that the program does not need
+#### Factory Functions vs Constructors
+
+read: [stackoverflow](https://stackoverflow.com/a/629006)
+
+- "They both are there to create instance of an object."
+- "So - for simple classes (value objects, etc.) constructor is just fine (you don't want to overengineer your application) but **for complex class hierarchies** factory method is a preferred way."
+
+related: [When Is Factory Class Better Than Calling Constructor?](https://methodpoet.com/factory-method-vs-constructor/)
+related: [List of "Design Patterns"](https://en.wikipedia.org/wiki/Design_Patterns#Patterns_by_type) (from the book written by the "Gang of Four")
+
+#### Destroy `shared_ptr`s that are not needed
+
+- make sure that `shared_ptr`s don't stay around after they are no longer needed
+  - The program will execute correctly but **may waste memory** if you neglect to destroy `shared_ptr`s that the program does not need
+  - example:
+    - if you put `shared_ptr`s in a container, and you subsequently need to use some, but not all, of the elements, remember to `erase` the elements you no longer need
 
 #### A Class with Resources That Have Dynamic Lifetime
 
+**Problem:** by default, `vector` makes "deep copies"
+
 ```cpp
+vector<string> v1; // empty vector
+{ // new scope
+  vector<string> v2 = {"a", "an", "the"};
+  v1 = v2; // copies the elements from v2 into v1
+} // v2 is destroyed, which destroys the elements in v2
+  // v1 has three elements, which are copies (ie "deep" copies) of the ones originally in v2
+```
+
+**We want:** "shallow copies"
+
+- define a class that uses dynamic memory in order to let several objects **share the same underlying data**
+
+```cpp
+Blob<string> b1; // empty Blob
+{ // new scope
+  Blob<string> b2 = {"a", "an", "the"};
+  b1 = b2; // b1 and b2 share the same elements
+} // b2 is destroyed, but the elements in b2 must not be destroyed
+  // b1 points to the elements originally created in b2
+```
+
+**Solution:** store the `vector` in dynamic memory
+
+```cpp
+// a vector class that "shallow copies", unlike the std::vector class
+
 class StrBlob {
   public:
     typedef std::vector<std::string>::size_type size_type;
+
     StrBlob();
     StrBlob(std::initializer_list<std::string> il);
+
     size_type size() const { return data->size(); }
     bool empty() const { return data->empty(); }
+
     // add and remove elements
     void push_back(const std::string &t) {data->push_back(t);}
     void pop_back();
+
     // element access
     std::string& front();
     std::string& back();
+
   private:
     std::shared_ptr<std::vector<std::string>> data;
+
     // throws msg if data[i] isn’t valid
     void check(size_type i, const std::string &msg) const;
 };
@@ -737,6 +879,12 @@ class StrBlob {
 StrBlob::StrBlob(): data(make_shared<vector<string>>()) { }
 StrBlob::StrBlob(initializer_list<string> il):
     data(make_shared<vector<string>>(il)) { }
+
+// copy, assign, destroy:
+// - use the default versions of the operations that copy, assign, and destroy objects of its type
+//   - memberwise: the default versions copy, assign, and destroy the object's members
+//     - StrBlob has only one data member, which is a shared_ptr
+//       - the vector allocated by StrBlob constructors is automatically destroyed when the reference count goes to 0
 
 // element access members
 void StrBlob::check(size_type i, const string &msg) const
@@ -760,15 +908,9 @@ void StrBlob::pop_back()
   check(0, "pop_back on empty StrBlob");
   data->pop_back();
 }
-
-// copy, assign, destroy:
-// - use the default versions of the operations that copy, assign, and destroy objects of its type
-//   - memberwise: the default versions copy, assign, and destroy the object's members
-//     - StrBlob has only one data member, which is a shared_ptr
-//       - the vector allocated by StrBlob constructors is automatically destroyed when the reference count goes to 0
 ```
 
-#### using "new"
+#### Using `shared_ptr`s with `new`
 
 ```cpp
 shared_ptr<double> p1; // shared_ptr that can point at a double
@@ -793,7 +935,7 @@ shared_ptr<int> clone(int p) {
 
 #### Do Not Mix Ordinary Pointers and Smart Pointers
 
-- General Rule: Once we give `shared_ptr` responsibility for a pointer, we should no longer use a built-in pointer to access the memory to which the `shared_ptr` now points.
+- **General Rule**: Once we give `shared_ptr` responsibility for a pointer, we should no longer use a built-in pointer to access the memory to which the `shared_ptr` now points.
 
 ```cpp
 // ptr is created and initialized when process is called
@@ -818,19 +960,23 @@ int j = *x;                   // undefined: x is a dangling pointer!
 
 - `get`
   - returns a built-in pointer to the object that the smart pointer is managing
-  - intended for cases when we need to pass a built-in pointer to **code that can't use a smart pointer**
-  - code that uses the return from `get` **must not delete that pointer**
-  - must not bind another smart pointer to the pointer returned by `get` (although the compiler will not complain)
+  - DO:
+    - intended for cases when we need to pass a built-in pointer to **code that can't use a smart pointer**
+  - DON'T:
+    - code that uses the return from `get` **must not delete that pointer**
+    - **must not bind another smart pointer** to the pointer returned by `get` (although the compiler will not complain)
 
 ```cpp
 shared_ptr<int> p(new int(42)); // reference count is 1 (there is only ONE reference count for both p and q)
-int *q = p.get(); // ok: but don't use q in any way that might delete its pointer
+int *q = p.get();               // ok: but don't use q in any way that might delete its pointer
 { // new block
-  // undefined: two independent shared_ptrs point to the same memory
+  // undefined: two independent "shared_ptr"s point to the same memory
   shared_ptr<int>(q);           // bind ANOTHER smart pointer to the pointer returned by `get`
-  // note: this does not explicitly call the constructor, instead this line creates a temporary unnamed object with type "shared_ptr", which is destroyed immediately after ";" (see https://stackoverflow.com/a/18892056)
+  // note: this does not explicitly call the constructor, instead this line creates
+  // a temporary unnamed object with type "shared_ptr", which is destroyed immediately
+  // after ";" (see https://stackoverflow.com/a/18892056)
 } // block ends, q is destroyed, and the memory to which q points is freed
-int foo = *p; // undefined; the memory to which p points was freed
+int foo = *p;                   // undefined; the memory to which p points was freed
 ```
 
 #### `reset`
@@ -838,22 +984,50 @@ int foo = *p; // undefined; the memory to which p points was freed
 - to assign a new pointer to a `shared_ptr`
 - updates the reference counts
   - if appropriate, deletes the object to which the `shared_ptr` points
-- often used together with `unique` to control changes to the object shared among several `shared_ptrs`
 
 ```cpp
 shared_ptr<int> p(new int(42));
 p = new int(1024);          // error: cannot assign a pointer to a shared_ptr
 p.reset(new int(1024));     // ok: p points to a new object
+```
 
+```cpp
+// from Table 12.3:
+// If p is the only shared_ptr pointing at its object, reset frees
+// p's existing object. If the optional built-in pointer q is passed,
+// makes p point to q, otherwise makes p null.
+p.reset()
+p.reset(q)
+```
+
+- often used together with `unique` to control changes to the object shared among several `shared_ptr`s
+
+```cpp
 if (!p.unique())          // Before changing the underlying object, we check whether we're the only user.
-  p.reset(new string(*p));    // we aren't alone; allocate a new "deep" copy (to which p points now); 
-                              // other users can continue using the original object to which p pointed
+  p.reset(new string(*p));    // we aren't alone; allocate a new "deep" copy (and let p point to it); 
+                              // reduce the use count of the object to which p had pointed;
+                              // other users can continue using the original object to which p had pointed
 *p += newVal; // now that we know we're the only pointer, okay to change this object
 ```
 
-#### Problems
+#### Other Ways to Define `shared_ptr`s
+
+```cpp
+// from Table 12.3
+
+// p manages the object to which the BUILT-IN POINTER q points;
+// q must point to memory allocated by "new" and must be
+// convertible to T*.
+shared_ptr<T> p(q)
+
+// p assumes ownership from the UNIQUE_PTR u; makes u null.
+shared_ptr<T> p(u)
+```
+
+#### Special Problems
 
 From lecture slides:
+
 ```cpp
 int i = std::atoi(argv[1]);
 // execution order: 
@@ -869,14 +1043,19 @@ catch (int&) { std::cout << "exception main\n"; }
 
 BS15.2.1:
 - in code below: 
-  - unlike `unique_ptr`, `shared_ptr` are copied rather than moved
+  - unlike `unique_ptr`, `shared_ptr` are **copied** rather than moved
   - in the code below `f()` or `g()` may spawn a task holding a copy of `fp` or in some other way store a copy that outlives `user()`
     - **problem**: makes the lifetime of the shared object hard to predict
+  - **best practice:** use `shared_ptr` only if you actually need shared ownership
 
 ```cpp
+// problem: lifetime of the shared object (an fstream) is hard to predict
+
 void f(shared_ptr<fstream>);
 void g(shared_ptr<fstream>);
 
+// cppreference:
+// ios_base is a multipurpose class that serves as the base class for all I/O stream classes.
 void user(const string& name, ios_base::openmode mode)
 {
   shared_ptr<fstream> fp {new fstream(name,mode)};
@@ -893,8 +1072,7 @@ void user(const string& name, ios_base::openmode mode)
 
 - "owns" the object to which it points
 - only one `unique_ptr` at a time can point to a given object
-- there is no library function comparable to `make_shared` that returns a `unique_ptr`
-  - instead, we bind it to a pointer returned by `new`
+- movable but not copyable
 - `release`
   - returns the pointer currently stored in the `unique_ptr` 
   - makes that `unique_ptr` null
@@ -903,12 +1081,26 @@ void user(const string& name, ios_base::openmode mode)
   - repositions the `unique_ptr` to point to the given pointer
   - if the `unique_ptr` is not null, then the object to which the `unique_ptr` had pointed is deleted
 
+BS15.2.1
+- A `unique_ptr` is a **handle to an individual object** (or an array) 
+  - in much the same way that a `vector` is a **handle to a sequence of objects**. 
+  - Both control the lifetime of other objects (using RAII) and
+  - both rely on **elimination of copying** (copy elision) or on **move semantics** to make `return` simple and efficient
+
+#### Declare, Initialize
+
 ```cpp
 // declaration
 unique_ptr<double> p1; // unique_ptr that can point at a double
 // must use the direct form of initialization
 unique_ptr<int> p2(new int(42)); // p2 points to int with value 42
+```
 
+#### Copy Control
+
+- movable but not copyable
+
+```cpp
 // does not support ordinary copy or assignment
 unique_ptr<string> p1(new string("Stegosaurus"));
 unique_ptr<string> p2(p1);  // error: no copy for unique_ptr
@@ -925,9 +1117,90 @@ p2.reset(p3.release()); // reset deletes the memory to which p2 had pointed
 p2.release(); // WRONG: p2 won't free the memory and we’ve lost the pointer
 auto p = p2.release(); // ok, but we must remember to delete(p)
 
-// Deletes the object to which p1 points; makes p1 null.
+// Deletes the object to which p1 points; makes p1 null. (from Table 12.4)
 p1 = nullptr
+// or equivalently:
+p1.reset()          // option 1
+p1.reset(nullptr)   // option 2
 ```
+
+#### `make_unique`
+
+- since C++14
+- in C++11: there is no library function comparable to `make_shared` that returns a `unique_ptr`
+  - instead, we bind it to a pointer returned by `new`
+
+```cpp
+struct S {
+  int i;
+  string s;
+  double d;
+  // ...
+};
+
+auto p1 = make_shared<S>(1,"Ankh Morpork",4.65); // p1 is a shared_ptr<S>
+auto p2 = make_unique<S>(2,"Oz",7.62);           // p2 is a unique_ptr<S>
+```
+
+#### `release`
+
+```cpp
+u.release()
+```
+
+- relinquishes control of the pointer `u` had held
+- returns the pointer `u` had held
+- makes `u` null
+
+#### `reset`
+
+```cpp
+// from Table 12.4:
+// Deletes the object to which u points;
+// If the built-in pointer q is supplied, makes u point to that object.
+// Otherwise makes u null.
+u.reset()         // makes "u" "equivalent to" nullptr (see Question 1 below)
+u.reset(q)
+u.reset(nullptr)
+```
+
+**Question 1:** What is the result of `u.reset()` without an argument?
+
+cppreference:
+
+```cpp
+void reset( pointer ptr = pointer() ) noexcept;     // (1)
+```
+
+- only `(1)` is important
+- `(2)` and `(3)` refer to `unique_ptr`s to **arrays**
+- `(1)` says that
+  - `reset`'s default argument is `pointer()`, ie. a nameless temporary of type `pointer`
+    - `pointer` is a **"member type"** (see [cppreference](https://en.cppreference.com/w/cpp/memory/unique_ptr#Member_types)) of class template `std::unique_ptr`
+      - `pointer` defaults to `T*` (see [cppreference](https://en.cppreference.com/w/cpp/memory/unique_ptr#Member_types))
+  - `reset` is a normal member function (not a template itself!)
+  - hence, if no argument is provided, `reset()` defaults to `reset(T*())` (reset to a **value initialized** nameless temporary of type `T*`)
+    - value initialization always zero-initializes first, so that built-in pointer types `T*` are reset to `(T*)0`
+    - since the C-style cast uses `static_cast` (here in this case), `(T*)0` returns `static_cast<T*>(0)`
+    - from `static_cast` cppreference: "returns the imaginary variable `Temp` initialized as if by `target-type Temp(expression);`"
+      - thus, `static_cast<T*>(0)` will return `T* Temp(0)`
+    - since `unique_ptr` requires that its member type `pointer` must be a `NullablePointer`
+      - thus, the type `T*` in `T* Temp(0)` must satisfy:
+
+```cpp
+// cppreference:
+// The type must satisfy the following additional expressions, given 
+// two values p and q that are of the type, and that np is a value 
+// of std::nullptr_t type (possibly const qualified): 
+
+Type p(np);   // Afterwards, p is equivalent to nullptr
+Type p = np;  // Afterwards, p is equivalent to nullptr
+```
+
+- thus, `Temp` in `T* Temp(0)` is equivalent to `nullptr`
+- thus, `u.reset()` without an argument will return `nullptr`
+
+#### Prevents Memory Leaks
 
 ```cpp
 // BS15.2.1: 
@@ -943,8 +1216,30 @@ void f(int i, int j)          // X* vs. unique_ptr<X>
   delete p;                   // destroy *p
 }
 // - we delete p, BUT we "forgot" to delete p if i<99 or if j<77
-// - only a "unique_ptr" ensures that its object is properly destroyed whichever way we exit f() (by throwing an exception, by executing return, or by "falling off the end")
+// - only a "unique_ptr" ensures that its object is properly destroyed whichever way 
+//   we exit f() (by throwing an exception, by executing return, or by "falling off the end")
+```
 
+#### Passing and Returning `unique_ptr`s
+
+- one exception to the rule that we cannot copy a `unique_ptr`:
+  - We can copy or assign a `unique_ptr` **that is about to be destroyed**
+- in the following cases, the compiler does a special kind of "copy", a "move":
+
+```cpp
+unique_ptr<int> clone(int p) {
+  // ok: explicitly create a unique_ptr<int> from int*
+  return unique_ptr<int>(new int(p));
+}
+
+// alternatively: return a copy of a local object
+unique_ptr<int> clone(int p) {
+  unique_ptr<int> ret(new int (p));
+  // . . .
+  return ret;
+}
+
+// from BS:
 // often used for passing free-store allocated objects in and out of functions
 unique_ptr<X> make_X(int i)
 // make an X and immediately give it to a unique_ptr
@@ -954,33 +1249,48 @@ unique_ptr<X> make_X(int i)
 }
 ```
 
-BS15.2.1
-- A `unique_ptr` is a **handle to an individual object** (or an array) 
-  - in much the same way that a `vector` is a **handle to a sequence of objects**. 
-  - Both control the lifetime of other objects (using RAII) and
-  - both rely on **elimination of copying** (copy elision) or on **move semantics** to make `return` simple and efficient
-
-#### `make_unique`
-
-```cpp
-struct S {
-  int i;
-  string s;
-  double d;
-  // ...
-};
-
-auto p1 = make_shared<S>(1,"Ankh Morpork",4.65); // p1 is a shared_ptr<S>
-auto p2 = make_unique<S>(2,"Oz",7.62);           // p2 is a unique_ptr<S>
-```
-
 ### `weak_ptr` class
 
-TODO
+- a companion class
+- points to an object that is managed by a `shared_ptr`
+  - binding a `weak_ptr` to a `shared_ptr` does not change the reference count of that `shared_ptr`
+  - an object will be deleted even if there are `weak_ptrs` pointing to it
+- hence, a smart pointer that does **not** control the lifetime of the object to which it points
+- we cannot use a `weak_ptr` to access its object directly
+
+```cpp
+// initialize a weak_ptr from a shared_ptr
+auto p = make_shared<int>(42);
+weak_ptr<int> wp(p); // wp weakly shares with p; use count in p is unchanged
+```
+
+#### `lock()`
+
+- to access a `weak_ptr`'s object, we must call `lock()`
+  - the `lock()` function checks whether the object to which the `weak_ptr` points still exists
+  - if so, `lock()` returns a `shared_ptr` to the shared object
+
+```cpp
+if (shared_ptr<int> np = wp.lock()) { // true if np is not null
+  // inside the if, np shares its object with p
+}
+```
 
 ### Best practices
 
-- Use `shared_ptr` only if you actually need shared ownership
+#### When to use Smart Pointers?
+
+BS15.2.1
+
+- try to not use them
+  - smart pointers do not address eg. **data races**
+  - smart pointers do not in themselves provide any **rules** for which of their owners can **read and/or write the shared object**
+- first, try to use **containers** and other types that manage their resources
+- in general, use them only when we really need pointer semantics:
+  - when we share an object &rarr; `shared_ptr`
+  - when there is an obvious single owner &rarr; `unique_ptr`
+  - when we refer to a polymorphic object &rarr; `unique_ptr`
+  - a shared polymorphic object &rarr; `shared_ptr`
 
 #### typedef smart pointer types
 
@@ -1026,6 +1336,7 @@ void g()
   - Constructor Acquires, Destructor Releases (CADRe)
   - Scope-Bound Resource Management (SBRM) (for the special case of automatic variables)
     - name because of "the basic use case where the lifetime of an RAII object ends due to scope exit"
+  - Destruction is Resource Release, [stackoverflow](https://stackoverflow.com/a/4258097)
 - read: [cppreference: raii](https://en.cppreference.com/w/cpp/language/raii)
 - RAII guarantees that 
   - the resource is available to any function that may access the object (resource availability is a **class invariant**, eliminating redundant runtime tests). 
@@ -1066,6 +1377,35 @@ Wikipedia
 
 ## new
 
+### Initialization
+
+- by default, **default initialized**
+- we can also
+  - **value initialize**
+  - **list initialize**
+    - initializers are used to initialize the first elements in the array
+    - If there are fewer initializers than elements, the remaining elements are value initialized
+    - If there are more initializers than the given size, then the new expression fails and no storage is allocated
+      - In this case, `new` throws an exception of type `bad_array_new_length` (in `new` header)
+- we **cannot** use `auto` to allocate an array
+
+```cpp
+// value initialization
+int *pia = new int[10];           // block of ten uninitialized ints
+int *pia2 = new int[10]();        // block of ten ints value initialized to 0
+string *psa = new string[10];     // block of ten empty strings
+string *psa2 = new string[10]();  // block of ten empty strings
+
+// list initialization
+// block of ten ints each initialized from the corresponding initializer
+int *pia3 = new int[10]{0,1,2,3,4,5,6,7,8,9};
+// block of ten strings; the first four are initialized from the given initializers
+// remaining elements are value initialized
+string *psa3 = new string[10]{"a", "an", "the", string(3,’x’)};
+```
+
+### Empty Arrays
+
 - it is **legal** to dynamically allocate an empty array
   - even though we cannot create an array variable of size 0
 
@@ -1073,6 +1413,16 @@ Wikipedia
 char arr[0];              // error: cannot define a zero-length array
 char *cp = new char[0];   // ok: but cp can't be dereferenced
 ```
+
+### begin and end
+
+- cannot call `begin` or `end`
+  - because when we use `new` to allocate an array, we get a pointer to the element type of the array **and not an array**
+
+### range for
+
+- cannot use a range `for`
+  - because when we use `new` to allocate an array, we get a pointer to the element type of the array **and not an array**
 
 ## allocator
 

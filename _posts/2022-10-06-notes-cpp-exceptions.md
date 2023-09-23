@@ -21,46 +21,28 @@ tags:
 # Exception Handling
 
 - best read: [isocpp](https://isocpp.org/wiki/faq/exceptions)
+- [cplusplus](https://cplusplus.com/doc/tutorial/exceptions/)
 
 ## Definitions
 
 - an exception is **raised** by **throwing** an expression
+- The **type of the thrown expression**, together with the current **call chain**, determines which **handler** will deal with the exception.
+  - The selected handler is the one nearest in the call chain that **matches** the **type of the thrown object**. 
+    - The **type and contents of that object** allow the throwing part of the program to inform the handling part about what went wrong.
 - **exception safe code:** code that properly "cleans up" during exception handling
   - must ensure that
     - objects are valid, 
     - resources don't leak, 
     - the program is restored to an appropriate state
 
-## Stack Unwinding
-
-- definition: [cppreference](https://en.cppreference.com/w/cpp/language/throw#Stack_unwinding)
-- the process
-  - that starts when an exception is thrown
-  - that continues up the chain of nested function calls until 
-    - a `catch` clause for the exception is found, or 
-    - the `main` function itself is exited without having found a matching `catch`
-- An exception that is not caught **terminates** the program.
-- **Object Destruction**: 
-  - from [cppreference](https://en.cppreference.com/w/cpp/language/throw#Stack_unwinding):
-    - "Once the exception object is constructed, the control flow works **backwards** (up the call stack) until it reaches the start of a `try` block, ..."
-    - "As the control flow moves up the call stack, destructors are invoked for all objects with automatic storage duration that are constructed, but not yet destroyed, since the corresponding try-block was entered, **in reverse order** of completion of their constructors."
-    - "If an exception is thrown **from a constructor** or (rare) from a destructor of an object (regardless of the object's storage duration), destructors are called for all fully-constructed non-static non-variant members and base classes, in reverse order of completion of their constructors."
-  - from Lippman:
-    - When a **block** is exited during stack unwinding, the compiler guarantees that objects created in that block are properly **destroyed**.
-    - If a local object is of 
-      - **class type**, the destructor for that object is called automatically.
-      - **built-in type**, the compiler does no work to destroy that object.
-        - this includes **raw pointers**: `int *a`, `MyClass *b` (note: `b` is a raw pointer, although `MyClass` is a class type)
-        - good [example](https://stackoverflow.com/a/3181111): "On you specific questions, when an exception is thrown in a constructor, all fully constructed subobjects will be destroyed. That means that in the case of `b` it will be destroyed, in the case of `c`, it being a raw pointer, nothing is done."
-
 ## throw Expression
 
 - **throw expressions**, which the detecting part uses to indicate that it encountered something it can't handle.
   - We say that a `throw` **raises** an exception.
 
-Example:
+### Why not use Return Codes?
 
-Naive way: by returning an error indicator (without `throw` expressions):
+**Naive way**: by returning an error indicator:
 
 ```cpp
 Sales_item item1, item2;
@@ -76,13 +58,13 @@ if (item1.isbn() == item2.isbn()) {
 }
 ```
 
-better: separate the part that adds the objects from the part that manages the interaction with a user:
+**Better**: separate the part that adds the objects from the part that manages the interaction with a user:
 - throw an expression (that is an **object** of type `runtime_error`)
 - throwing an exception 
-  - terminates the current function (calls `std::terminate` which itself calls `std::abort`) and
+  1. terminates the current function (calls `std::terminate` which itself calls `std::abort`) and
     - see [std::terminate](https://en.cppreference.com/w/cpp/error/terminate)
-  - transfers control to a **handler** that will know how to handle this error
-- Because the statements following a `throw` are not executed, a throw is like a `return`
+  2. transfers control to a **handler** that will know how to handle this error
+- Because the statements following a `throw` are not executed, a `throw` is like a `return`
   - It is usually part of a conditional statement or is the last (or only) statement in a function.
 - type `runtime_error`
   - in the `stdexcept` header
@@ -102,13 +84,14 @@ cout << item1 + item2 << endl;
   - A try block starts with the keyword `try` and ends with one or more `catch` clauses.
   - Exceptions thrown from code executed inside a `try` block are usually handled by one of the `catch` clauses.
   - Because they "handle" the exception, catch clauses are also known as **exception handlers**.
-- Following the `try` block is a list of one or more `catch` clauses. A `catch` consists of three parts: 
-  - the keyword `catch`, 
-  - the **declaration** of a (possibly unnamed) object within parentheses (referred to as an **exception declaration**),
-  - and a **block**.
+- Following the `try` block is a list of one or more `catch` clauses. 
+- A `catch` consists of three parts: 
+  1. the keyword `catch`, 
+  2. the **declaration** of a (possibly unnamed) object within parentheses (referred to as an **exception declaration**),
+  3. and a **block**.
     - When a `catch` is selected to handle an exception, the associated block is executed.
 - Once the `catch` finishes, execution continues with the statement immediately following the last `catch` clause of the `try` block
-- When a **handler** is entered, objects created along the call chain will have been destroyed.
+- When a **handler** is entered, objects created along the call chain will have been destroyed. (see [Stack Unwinding](#stack-unwinding))
 
 ```cpp
 try {
@@ -118,6 +101,24 @@ try {
 } catch (exception-declaration) {
   handler-statements
 } // ...
+```
+
+### Example
+
+```cpp
+// https://www.w3schools.com/cpp/cpp_exceptions.asp
+try {
+  int age = 15;
+  if (age >= 18) {
+    cout << "Access granted - you are old enough.";
+  } else {
+    throw (age);
+  }
+}
+catch (int myNum) {
+  cout << "Access denied - You must be at least 18 years old.\n";
+  cout << "Age is: " << myNum;
+} 
 ```
 
 ## Standard Exceptions
@@ -184,12 +185,6 @@ int main () {
 }
 ```
 
-## Matching
-
-- During the search for a matching `catch`, the `catch` that is found is **not** necessarily the one that matches the exception best. 
-  - Instead, the selected `catch` is **the first one** that matches the exception at all. 
-- As a consequence, in a list of `catch` clauses, the most specialized catch must appear first.
-
 ## Rethrow
 
 - a `throw` that is not followed by an expression ("empty" `throw`)
@@ -212,11 +207,14 @@ catch (my_error &eObj) {                // specifier must be a reference type (i
 
 ## Catch-All Handler
 
-- **informal:** to catch any unhandled exception
+- **use**:
+  - "The series of handlers is rather like a `switch` statement. **The handler marked** `(...)` is rather like a `default` (in a `switch` statement). Note, however, that there is no *fall through* from one handler to another as there is from one `case` to another.", [Stroustrup paper](https://www.stroustrup.com/except89.pdf)
+  - "This can be used as a **default handler** that catches all exceptions not caught by other handlers", [cplusplus](https://cplusplus.com/doc/tutorial/exceptions/)
 - to catch any exception that might occur, regardless of type
 - use an **ellipsis** for the exception declaration
 - A catch-all clause matches any type of exception
 - often used in combination with a [rethrow](#rethrow) expression
+  - again, to pass the exception out to another `catch`
 - If a `catch(...)` is used in combination with other catch clauses, **it must be last**.
   - Any `catch` that follows a catch-all can never be matched.
 
@@ -227,10 +225,70 @@ void manip() {
   }
   catch (...) {
     // work to partially handle the exception
-    throw;   // rethrow
+    // (eg. "delete" some object to free memory)
+    throw;    // rethrow (pass the exception to some
+              // other handler)
   }
 }
 ```
+
+related: [stackoverflow](https://stackoverflow.com/questions/2474429/does-throw-inside-a-catch-ellipsis-rethrow-the-original-error-in-c)
+
+## Stack Unwinding
+
+- **read: Lip, p773 "Stack Unwinding" !!!**
+- "the search for a matching `catch` clause"
+- the process
+  - that starts when an exception is thrown
+  - that continues up the chain of nested function calls until 
+    - a `catch` clause for the exception is found, or 
+      - **effect**: executing the code inside that `catch`. When the `catch` completes, execution continues at the point immediately after the last `catch` clause
+    - the `main` function itself is exited without having found a matching `catch`
+      - **effect**: the program calls the library `terminate` function
+- An exception that is **not** caught **terminates** the program.
+- definition: [cppreference](https://en.cppreference.com/w/cpp/language/throw#Stack_unwinding)
+
+### Matching
+
+- During the search for a matching `catch`, the `catch` that is found is **not** necessarily the one that matches the exception best. 
+  - Instead, the selected `catch` is **the first one** that matches the exception at all. 
+- As a consequence, in a list of `catch` clauses, the most specialized `catch` must appear first.
+
+### Object Destruction when Blocks are Exited
+
+- **read: Lip, p773 "Stack Unwinding" !!!**
+- from Lippman:
+  - Ordinarily, local objects are destroyed when the **block** in which they are created is exited. Stack unwinding is no exception.
+  - When a **block** is exited during stack unwinding, the compiler guarantees that objects created in that block are properly **destroyed**.
+  - If a local object is of 
+    - **class type**, the destructor for that object is called automatically.
+    - **built-in type**, the compiler does no work to destroy that object.
+      - this includes **raw pointers**: `int *a`, `MyClass *b` (note: `b` is a raw pointer, although `MyClass` is a class type)
+      - good [example](https://stackoverflow.com/a/3181111): "On you specific questions, when an exception is thrown in a constructor, all fully constructed subobjects will be destroyed. That means that in the case of `b` it will be destroyed, in the case of `c`, it being a raw pointer, nothing is done."
+- from [cppreference](https://en.cppreference.com/w/cpp/language/throw#Stack_unwinding):
+  - "Once the exception object is constructed, the control flow works **backwards** (up the call stack) until it reaches the start of a `try` block, ..."
+  - "As the control flow moves up the call stack, destructors are invoked for all objects with automatic storage duration that are constructed, but not yet destroyed, since the corresponding try-block was entered, **in reverse order** of completion of their constructors."
+  - "If an exception is thrown **from a constructor** or (rare) from a destructor of an object (regardless of the object's storage duration), destructors are called for all fully-constructed non-static non-variant members and base classes, in reverse order of completion of their constructors."
+
+### Uncaught Exceptions
+
+(to understand `destructor1.cpp`)
+
+**Question:** Why do we get `./a.out 1 : A()0 A()1 terminate called after throwing`?
+
+**Answer:** Because the destructors (here: `~A()0`) are **not** called until the catch is found.
+
+cppreference:
+
+"If an exception is thrown and not caught, including exceptions that escape (...) the `main` function (...), then `std::terminate` is called. It is implementation-defined whether any stack unwinding takes place for uncaught exceptions."
+
+From [stackoverflow](https://stackoverflow.com/questions/70792009/stack-unwinding-with-uncaught-exceptions):
+
+You seem to be under the impression that the destructors are called while searching for a matching `catch().` That does not have to be the case.
+
+Destructors from the current location in the program to the matching `catch()` end up getting called, but that does not need to start happening until the catch is found.
+
+The second block just states that if no catch is found, then the program is allowed to **immediately terminate** as soon as it makes that determination.
 
 ## Handle a Constructor that fails
 
@@ -240,8 +298,8 @@ Options:
 - 1) Throw an exception.
   - Constructors don't have a return type, so it's not possible to use return codes. 
   - **The best way** to signal constructor failure is therefore to throw an exception. 
-- 2) "zombie" state: If you don’t have the option of using exceptions, the "least bad" work-around is to put the object into a "zombie" state by setting an internal status bit so the object acts sort of like it's dead even though it is technically still alive.
+- 2) "zombie" state: If you don't have the option of using exceptions, the "least bad" work-around is to put the object into a "zombie" state by setting an internal status bit so the object acts sort of like it's dead even though it is technically still alive.
   - In practice the "zombie" thing gets pretty ugly.
 
-related: [Constructors throwing Exceptions](#constructors-throwing-exceptions)
+related: "Constructors throwing Exceptions" &rarr; Notes on "Classes"
 

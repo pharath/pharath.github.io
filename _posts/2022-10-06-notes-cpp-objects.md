@@ -83,23 +83,26 @@ Examples:
   - 2) when an object with dynamic storage duration is created by a **new-expression** with the initializer consisting of an empty pair of parentheses `new T()` or braces `new T{}`;
   - 3) when a non-static data member or a base class is initialized using a **member initializer** with an empty pair of parentheses `Class::Class(...) : member () { ... }` or braces `Class::Class(...) : member {} { ... }`;
   - 4) when a named object (automatic, static, or thread-local) is declared with the initializer consisting of a pair of braces. (since C++ 11)
-- **roughly**: 
-  - default initializes class types, 
-  - zero-initializes + default initializes all others
-  - therefore, safer than default initialization
-- **precisely**:
+- **effects**:
   - if `T` is a **class type** with a ...
-    - "user-provided default constructor" **or** "no default constructor": the object is [default-initialized](#default-initialization);
+    - "*user-provided*" **or** "*deleted* default constructor" **or** "*no* default constructor": the object is [default-initialized](#default-initialization);
+      - note: for "no default constructor" and "deleted default constructor" the compiler **tries to** default-initialize the object, but overload resolution (which happens during the default initialization of class type objects) cannot find a match and fails, so that the compiler will show an error ("`no matching function for call to ‘X::X()’`" or "`use of deleted function ‘X::X()’`" respectively)
     - "implicitly-defined" **or** "defaulted default constructor": all of the following 3 steps are performed in the following order:
       - 1) the object is [zero-initialized](#zero-initialization),
+        - ie. "each non-static data member is zero-initialized"
       - 2) the semantic constraints for default-initialization are checked, and 
-      - 3) if `T` has a non-trivial default constructor, the object is default-initialized;
+      - 3) if `T` has a [non-trivial default constructor](https://en.cppreference.com/w/cpp/language/default_constructor#Trivial_default_constructor), the object is default-initialized;
+        - "A **trivial default constructor** is a constructor that performs no action."
+          - basically, a synthesized default constructor that does not initialize any of its (non-static) members
   - if `T` is an **array type**, 
     - each element of the array is value-initialized;
   - otherwise, eg. **built-in type**, the object is [zero-initialized](#zero-initialization).
 - "References cannot be value-initialized"
 - "All standard containers (`std::vector`, `std::list`, etc.) value-initialize their elements when constructed with a single `size_type` argument"
-- Lippman p.132: "Initialization in which **built-in types** are initialized to zero and **class types** are initialized by the class's default constructor."
+
+Lippman:
+
+- "Initialization in which **built-in types** are initialized to zero and **class types** are initialized by the class's default constructor."
   - "Objects of a **class type** can be value initialized *only if* the class has a default constructor."
   - "Used to initialize a **container**'s elements when a size, but not an element initializer, is specified."
     - "Elements are initialized as **a copy of** this compiler-generated value."
@@ -108,9 +111,23 @@ Examples:
 
 - "Sets the initial value of an object to zero."
 - zero-initialization "does not have a dedicated syntax in the language", but other types of initialization perform zero-initialization
-- "If `T` is a **scalar type**, the object is initialized to the value obtained by **explicitly converting** the integer literal `0` (zero) to `T`"
+- If `T` is a non-union **class type**:
+  - all padding bits are initialized to zero bits,
+  - **each non-static data member** is zero-initialized,
+  - each non-virtual base class subobject is zero-initialized, and
+  - if the object is not a base class subobject, each virtual base class subobject is zero-initialized. 
+- If `T` is a **scalar type**, the object is initialized to the value obtained by **explicitly converting** the integer literal `0` (zero) to `T`
   - scalar types: "object types that are not array types or class types"
     - eg. pointers, arithmetic types (integral types, floating-point types), etc.
+- remember: "null pointer constant" **!=** "constant expression whose value is a null pointer"
+  - from [stackoverflow](https://stackoverflow.com/a/21387175):
+    - this difference usually only matters for the assignments in the code above
+  - from [stackoverflow](https://stackoverflow.com/a/59990291):
+    - **Null pointer constant**: Null pointer constant is either 
+      - `nullptr` (or any other prvalue of type `std::nullptr_t`), or 
+      - the integer literal of value `0`.
+
+read this: from [stackoverflow](https://stackoverflow.com/a/21387175)
 
 ```cpp
 // explicit conversions of "0":
@@ -120,12 +137,8 @@ long *b = (long *)0;   // ok, (long *)0 is a null pointer with appropriate type
 // invalid in C++:
 long *c = (void *)0;   // ok in C, invalid conversion in C++
 // In both C and C++, (int *)0 is a constant expression whose value is a null pointer. It is not, however, a "null pointer constant".
-long *d = (int *)0;    // invalid conversion in both C and C++
+long *d = (int *)0;    // invalid conversion in both C and C++ -> "(int *)0" is allowed, but "(int *)0" MUST be assigned to an "int*" object
 ```
-
-- merke: "null pointer constant" != "constant expression whose value is a null pointer"
-  - this difference usually only matters for the assignments in the code above, [stackoverflow](https://stackoverflow.com/a/21387175))
-  - **Null pointer constant**: "Null pointer constant is either `nullptr` (or any other prvalue of type `std::nullptr_t`), or integer literal of value `0`.", [stackoverflow](https://stackoverflow.com/a/59990291)
 
 ### Copy Initialization
 
@@ -211,6 +224,7 @@ Happens in **constructor initializer lists**:
   - better explanation: [learn.microsoft.com](https://learn.microsoft.com/en-us/cpp/cpp/initializers?view=msvc-170#direct-initialization)
   - here, **"base"** refers to the `BaseClass` when using inheritance (see **Example 2**)
     - because when using inheritance `BaseClass(initializer)` is in the constructor initializer list (like a member that is initialized)
+- **but**: an **empty** pair of parentheses or braces means that the member is initialized via **value initialization**
 
 ```cpp
 // "member" is direct initialized
@@ -349,11 +363,12 @@ T&& ref { arg1, arg2, ... };
 
 ### extern
 
-- `extern`: To obtain a declaration that is **not** also a definition, we add the `extern` keyword and must not provide an explicit initializer.
-- inside a function
-  - It is an error to provide an initializer on an `extern` 
-- outside a function 
-  - we can initialize an `extern`, however, this overrides the `extern`. The `extern` becomes a definition in this case.
+1. To obtain a declaration that is **not** also a definition, we add the `extern` keyword and must not provide an explicit initializer.
+  - inside a function
+    - it is an error to provide an initializer on an `extern` 
+  - outside a function 
+    - we can initialize an `extern`, however, this overrides the `extern`. The `extern` becomes a definition in this case.
+2. To prevent unnecessary template instantiations (see "Explicit Instantiation")
 
 ## Static typing
 
@@ -402,6 +417,7 @@ Type of `this`:
 
 - may call only `const` member functions
 - a `const` object does not assume its "constness" until after the constructor completes the object's initialization
+- must be initialized
 
 ## pointer to const
 
@@ -440,15 +456,16 @@ int *const curErr = &errNumb;   // curErr will always point to errNumb
   - can be `public` or `private`
   - type of a `static` data member can be `const`, reference, array, class type
   - etc ...
-- unlike other members
+- unlike other members, `static` data members and member functions
   - exist outside any object
-    - objects do **not** contain data associated with static data members
-  - static members are **shared by all** the objects of the class type
-  - static member functions
-    - do not have a `this` pointer
-    - may not be declared as `const`
+    - objects do **not** contain data associated with `static` data members
+  - `static` members are **shared by all** the objects of the class type
+- static member functions
+  - useful for managing `static` member variables
+  - do not have a `this` pointer
+  - may not be declared as `const`
 
-**Declaration:**
+#### Declaration
 
 ```cpp
 class Account {
@@ -464,23 +481,44 @@ class Account {
 };
 ```
 
-**Definition:**
+#### Access a static member
+
+- directly through the scope operator
+- through an object, reference, or pointer of the class type
 
 ```cpp
-// static member functions:
-// - do not repeat the "static" keyword outside the class body
+double r;
+r = Account::rate();    // access a static member using the scope operator
+
+Account ac1;
+Account *ac2 = &ac1;
+// equivalent ways to call the static member rate function
+r = ac1.rate();     // through an Account object or reference
+r = ac2->rate();    // through a pointer to an Account object
+```
+
+#### Definition
+
+**static member functions**:
+- do not repeat the "static" keyword outside the class body
+- can use `static` members directly, without the scope operator
+
+```cpp
 void Account::rate(double newRate)
 {
   interestRate = newRate;
 }
+```
 
-// static data members:
-// - not defined when we create objects
-// - not initialized by the class' constructors
-// - must be 
-//   - defined and initialized OUTSIDE the class body
-//   - declared, but NOT initialized inside the class body!
-//   - defined outside ANY function (like global variables)
+**static data members**:
+- not defined when we create objects
+- not initialized by the class' constructors
+- must be 
+  - defined and initialized OUTSIDE the class body
+  - declared, but NOT initialized inside the class body!
+  - defined outside ANY function (like global variables)
+
+```cpp
 double Account::interestRate = initRate();   // define and initialize a static class member
 // Once the class name is seen, the remainder of the definition is in the scope of the class
 // -> we can use "initRate" without qualification (even though it is private)
@@ -491,13 +529,12 @@ double Account::interestRate = initRate();   // define and initialize a static c
   - avoids double definitions
 
 **in-class initialization:**
-
-Usually you do **not** do this for static members, but
-- we can provide in-class initializers for static members that have `const` integral type
-- must do so for static members that are `constexpr`s of literal type
-  - the initializers must be constant expressions
-  - such members are themselves constant expressions
-- **important:** if an initializer is provided inside the class, the member's definition must not specify an initial value:
+- Usually you do **not** do this for static members, but
+  - we can provide in-class initializers for static members that have `const` integral type
+  - must do so for static members that are `constexpr`s of literal type
+    - the initializers must be constant expressions
+    - such members are themselves constant expressions
+  - **important:** if an initializer is provided inside the class, the member's definition must not specify an initial value:
 
 ```cpp
 // definition of a static member with no initializer
@@ -628,16 +665,20 @@ The lifetime of an object of type T **begins** when:
 - storage with the proper alignment and size for type T is obtained, **and**
 - its initialization (if any) is complete (including vacuous initialization), (...)
 
-The lifetime of an object o of type T **ends** when:
+The lifetime of an object `o` of type T **ends** when:
 - if T is a **non-class type**, the object is destroyed, or
 - if T is a **class type**, the destructor call starts, or
 - the storage which the object occupies is 
   - released, or is 
-  - reused by an object that is not nested within o.
+  - reused by an object that is not nested within `o`.
+
+### RAII
 
 **Resources** are bound to the **lifetime** of an object in [RAII](#raii)
-- "RAII is a C++ programming technique which **binds** the **life cycle** of a **resource** that must be acquired before use to the **lifetime** of an object." (cppreference)
+- "RAII is a C++ programming technique which **binds** the life cycle of a **resource** that must be acquired before use to the **lifetime** of an object." (cppreference)
   - eliminating **"naked new"** expressions
+
+### Examples
 
 - **Global objects:** 
   - allocated at program start-up and 
@@ -655,6 +696,44 @@ The lifetime of an object o of type T **ends** when:
 - **Temporaries:**
   - "A temporary exists until the end of the largest expression that encloses the expression for which it was created." (Lippman)
     - **phth:** ie. gets destroyed before the ";"
+
+## Lifetimes vs Storage Duration
+
+"Lifetime of an object is equal to or is nested within the **lifetime of its storage**, see storage duration.", [cppreference: Lifetime](https://en.cppreference.com/w/cpp/language/lifetime)
+
+## Storage Duration
+
+All objects in a program have one of the following **storage durations**:
+
+- **automatic** storage duration
+  - The storage for the object is allocated at the beginning of the enclosing code block and deallocated at the end.
+  - All local objects have this storage duration, except those declared `static`, `extern` or `thread_local`. 
+- **dynamic** storage duration
+  - The storage for the object is allocated and deallocated upon request by using dynamic memory allocation functions.
+- **static** storage duration
+  - The storage for the object is allocated when the program begins and deallocated when the program ends.
+  - Only one instance of the object exists.
+  - All objects declared at namespace scope (including global namespace) have this storage duration, plus those declared with `static` or `extern`.
+- **thread** storage duration (since C++11)
+  - The storage for the object is allocated when the thread begins and deallocated when the thread ends.
+  - Each thread has its own instance of the object.
+  - Only objects declared `thread_local` have this storage duration.
+  - `thread_local` can appear together with `static` or `extern` to adjust linkage.
+
+The storage duration of subobjects and reference members is that of their complete object. 
+
+### Storage Class Specifiers
+
+The storage class specifiers are a part of the `decl-specifier-seq` of a name's declaration syntax. Together with the scope of the name, they control two independent properties of the name: its **storage duration** and its **linkage**.
+
+- no specifier or `auto` (until C++11) - automatic storage duration.
+- `register` (until C++17) - automatic storage duration. Also hints to the compiler to place the object in the processor's register. (deprecated)
+- `static` - static or thread storage duration and internal linkage (or external linkage for static class members not in an anonymous namespace).
+- `extern` - static or thread storage duration and external linkage.
+- `thread_local` (since C++11) - thread storage duration.
+- `mutable` - does not affect storage duration or linkage. See `const`/`volatile` for the explanation.
+
+Only one storage class specifier may appear in a declaration (except that `thread_local` may be combined with `static` or with `extern` (since C++11)). 
 
 ## Anonymous Objects
 

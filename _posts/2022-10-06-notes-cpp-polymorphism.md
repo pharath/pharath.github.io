@@ -23,6 +23,8 @@ tags:
 1. function **overloading**
 2. templates
 3. virtual functions ( **overriding** )
+  - "The fact that the static and dynamic types of references and pointers can differ is the cornerstone of how C++ supports polymorphism" (Lip p605)
+    - see "classes.md" &rarr; "Inheritance" &rarr; "**Dynamic Binding**"
 
 From [source](https://www.geeksforgeeks.org/templates-cpp/):
 - "Both function overloading and templates are examples of **polymorphism** features of OOP."
@@ -50,15 +52,23 @@ From [stackoverflow](https://www.tutorialspoint.com/cplusplus/cpp_overloading.ht
 
 - "When a derived class creates a function with the same return type and signature as a member function in the base class, but with a new implementation, it is said to be **overriding** that function. When you make an object of the derived class, the correct function is called." (Day 12, J Liberty)
 
-## virtual
+## virtual Function Overriding
 
-- C++ allows **pointers to base classes** to be assigned to derived class objects `BaseClass* pBase = new DerivedClass;` (Day 12, J Liberty)
-  - `pBase` can invoke any method on `BaseClass`, but what we would like is for those methods that are overridden in `DerivedClass()` to call the correct function
-- phth: "normal" overriding (cf. above) is possible **without** the `virtual` (see Day 12, J Liberty), but, if a pointer to the base class is assigned to the derived class object, and we use this pointer to call an overridden function, the overriding will not work
+- related: "Inheritance" &rarr; "virtual"
+- related: "Inheritance" &rarr; "**Dynamic Binding**"
+  - "The function that is called is the one that corresponds to the dynamic type of the object bound to that pointer or reference" (Lip 15.3)
+- **pointers to base classes** can be assigned to derived class objects (Day 12, J Liberty):
+
+```cpp
+BaseClass* pBase = new DerivedClass;
+```
+
+- `pBase` can invoke any method on `BaseClass`, but what we would like is for those methods that are overridden in `DerivedClass()` to call the correct function
+- phth: overriding (see [above](#overriding)) is possible **without** the `virtual` (see Day 12, J Liberty), but, if a pointer to the base class is assigned to the derived class object, and we use this pointer to call an overridden function, the overriding will not work, ie. the `BaseClass` member function will be called instead of the `DerivedClass` member function
 
 [source](https://www.programiz.com/cpp-programming/virtual-functions):
-- A **virtual function** is a member function in the base class that we *expect* to redefine in derived classes.
-- Basically, a virtual function is used in the base class in order to ensure that the function is **overridden**. This especially applies to cases where a pointer of base class points to an object of a derived class.
+- "A **virtual function** is a member function in the base class that we *expect* to redefine in derived classes."
+- "Basically, a virtual function is used in the base class in order to ensure that the function is **overridden**. This especially applies to cases where a pointer of base class points to an object of a derived class."
 
 ```cpp
 // source: https://www.geeksforgeeks.org/virtual-functions-in-derived-classes-in-cpp/

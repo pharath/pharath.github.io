@@ -75,12 +75,37 @@ From [Why should we typedef a struct so often in C? - Stack Overflow](https://st
 
 ## Scope
 
-A class is a scope.
+**A class is a scope.**
 - therefore, when we define a member function **outside its class**, we must provide the **class name** as well as the function name
 - Outside of the class, the names of the members are hidden
 - Once the class name is seen, the remainder of the definition - including the **parameter list** and the **function body** - is **in** the scope of the class
   - As a result, we can refer to other class members **without qualification** (in the parameter list and in the function body)
-  - Note: The member function name and its return type, however, must be qualified.
+  - **BUT**: The **member function name** and its **return type**, however, must be qualified.
+
+## Namespace
+
+### ::ClassName
+
+From [stackoverflow](https://stackoverflow.com/questions/4269034/what-is-the-meaning-of-prepended-double-colon):
+
+This ensures that resolution occurs from the global namespace, instead of starting at the namespace you're currently in. For instance, if you had two different classes called `Configuration` as such:
+
+```cpp
+class Configuration; // class 1, in global namespace
+namespace MyApp
+{
+    class Configuration; // class 2, different from class 1
+    function blah()
+    {
+        // resolves to MyApp::Configuration, class 2
+        Configuration::doStuff(...) 
+        // resolves to top-level Configuration, class 1
+        ::Configuration::doStuff(...)
+    }
+}
+```
+
+Basically, it allows you to traverse up to the global namespace since your name might get clobbered by a new definition inside another namespace, in this case `MyApp`.
 
 ## Constructors
 
@@ -135,44 +160,79 @@ A class is a scope.
   - 2. to make sure that **class members** of **built-in types** or **compound types** cannot end up **uninitialized**
     - **in blocks**: objects of built-in or compound type that are defined inside a block have **undefined value** when they are default initialized (see ["Default Initialization"](#default-initialization))
   - 3. when the compiler cannot synthesize a default constructor
-- defaulted default constructor
+- **defaulted** default constructor
   - C++11
   - we can ask the compiler to generate the constructor for us by writing `= default` after the parameter list
     - this constructor does exactly the same work as the synthesized default constructor
 - **best practice:**
-  - "it is almost always right to provide a default constructor if other constructors are being defined."
+  - "it is almost always right to provide a default constructor if other constructors (that are not special member functions) are being defined." (Lip)
+  - "avoid explicit (= user-defined) implementation of default constructor" (from slides)
+    - ie. prefer either `= default` or a synthesized default constructor
 - see [default arguments](#default-arguments):
   - "A constructor that supplies default arguments **for all its parameters** also defines the default constructor." (7.5.1 "Default Arguments and Constructors")
 
 ### Constructor Initializer List
 
-In cppreference: **"member initializer list"**
+- either
+  - direct initialization (see "Case 3" &rarr; "Direct Initialization")
+    - recall: direct initialization selects by overload resolution
+  - value initialization (if **empty** pair of parentheses or braces)
+
+cppreference: (aka **"member initializer list"**)
+
 - "The body of a function definition of any constructor, before the opening brace of the compound statement (see [statements](#statements)), may include the **member initializer list**, whose syntax is the colon character `:`, followed by the comma-separated list of one or more member-initializers, each of which has the following syntax ..."
 - "Before the compound statement that forms the function body of the constructor begins executing, initialization of all direct bases, virtual bases, and non-static data members is finished. The **member initializer list** is the place where **non-default initialization** of these objects can be specified."
   - thus, all members omitted in the member initializer list are **default initialized**
 
-Omitted Members:
+#### Initialization vs Assignment
+
+- if you do not use constructor initializers, you do not **"initialize"** the members, but you **"assign"** values to the members (recall, in C++: assign != initialize) (7.5.1 "Constructors Revisited" &rarr; "Constructor Initializer List")
+
+#### Omitted Members
+
 - When a member is omitted from the constructor initializer list, it is implicitly initialized **using the same process as is used by the synthesized default constructor** (7.1.4 "Constructors" &rarr; "Constructor Initializer List")
   - **best practice:** 
-    - constructors should "use an in-class initializer if one exists and gives the member the correct value", i.e. "constructors should not override in-class initializers"
+    - constructors should "use an **in-class initializer** if one exists and gives the member the correct value", i.e. "constructors should not override in-class initializers"
     - **phth**: if there are no in-class initializers for a class **or** your compiler does not support in-class initializers, then **built-in types** must be explicitly initialized in the constructor initializer list (because otherwise they will be uninitialized, see "synthesized default constructor")
 - "If we do not explicitly initialize a member in the constructor initializer list, that member is **default initialized** before the constructor body starts executing" (7.5.1 "Constructors Revisited" &rarr; "Constructor Initializer List")
 
-Initialization vs Assignment:
-- if you do not use constructor initializers, you do not **"initialize"** the members, but you **"assign"** values to the members (recall, in C++: assign != initialize) (7.5.1 "Constructors Revisited" &rarr; "Constructor Initializer List")
+#### When constructor initializers are REQUIRED
 
-When constructor initializer is **required**:
 - "We **must** use the constructor initializer list to provide values for members that are ...
   - `const`, 
   - reference, or 
   - of a `class` type that does not have a default constructor."
 - **best practice**: By routinely using constructor initializers, you can avoid being surprised by compile-time errors when you have a class with a member that **requires** a constructor initializer
 
+#### Order of Member Initialization
+
 **best practice**:
-- order of member initialization
-  - write constructor initializers in the same order as the members are declared. 
-  - when possible, avoid using members to initialize other members.
-  - write member initializers to use the constructor's parameters rather than another data member from the same object (see example in 7.5.1)
+- write constructor initializers in the same order as the members are declared.
+- when possible, avoid using members to initialize other members.
+- write member initializers to use the constructor's parameters rather than another data member from the same object (see Example 2)
+
+**Example 1:**
+
+```cpp
+// the constructor initializer makes it appear as if j is initialized with val
+// and then j is used to initialize i. However, i is initialized first. The effect of this
+// initializer is to initialize i with the undefined value of j!
+class X {
+  int i;
+  int j;
+public:
+  // undefined: i is initialized before j
+  X(int val): j(val), i(j) { }
+};
+```
+
+**Example 2:**
+
+```cpp
+// clearer than Example 1
+// because the order in which i and j are initialized doesn't matter.
+X(int val): i(val), j(val) { }
+```
 
 ### Delegating Constructor
 
@@ -210,6 +270,27 @@ void f(vector<int>); // f’s parameter is copy initialized
 f(10); // error: can’t use an explicit constructor to copy an argument
 f(vector<int>(10)); // ok: directly construct a temporary vector from an int
 ```
+
+### Constructors throwing Exceptions
+
+From [isocpp](https://isocpp.org/wiki/faq/exceptions#selfcleaning-members):
+- Every data member inside your object should clean up its own mess
+- If a constructor throws an exception, the object's destructor is not run
+  - Therefore, if your object has already done something that needs to be undone (such as allocating some memory, opening a file, or locking a semaphore), this "stuff that needs to be undone" must be remembered by a data member inside the object.
+
+From [isocpp](https://isocpp.org/wiki/faq/exceptions#ctors-can-throw):
+- Note: if a constructor finishes by throwing an exception, the memory associated with the object itself is cleaned up - there is no memory leak
+- For example:
+
+```cpp
+void f()
+{
+  X x;             // If X::X() throws, the memory for x itself will not leak
+  Y* p = new Y();  // If Y::Y() throws, the memory for *p itself will not leak
+}
+```
+
+related: "Handle a Constructor that fails" &rarr; Notes on "Exception Handling"
 
 ## Copy Control
 
@@ -278,8 +359,13 @@ Defined as deleted (see p.508, 538), if
   - **built-in type**: copied directly (direct initialization)
   - **array**: copied elementwise (using direct initialization)
 - problem with pointer members:
+  - "Let the compiler generate the copy operations by `=default` **if they do not handle resources**." (from slides)
   - see [Memberwise Assignment Example](https://www.cs.mtsu.edu/~xyang/2170/copyconstructor.html)
-    - In class `StudentTestScores` the member `testScores` is a pointer. In `StudentTestScores student2 = student1;` `student2`'s `testScroes` member simply gets a **copy of the address** stored in `student1`'s `testScores` member. Both pointers will point to the same address.
+    - In class `StudentTestScores` the member `testScores` is a pointer. In `StudentTestScores student2 = student1;` `student2`'s `testScores` member simply gets a **copy of the address** stored in `student1`'s `testScores` member. Both pointers will point to the same address.
+      - thus, the `StudentTestScores` class provides **pointer-like** behavior, although we want **valuelike** behavior
+    - other examples for **pointer-like** vs **valuelike** behavior:
+      - `shared_ptr` class provides pointer-like behavior
+      - the library containers and `string` class have valuelike behavior
 
 ### Copy-Assignment Operator
 
@@ -462,6 +548,8 @@ Defined as deleted (p. 508), if
 - see "synthesized as deleted" in section ["delete"](#delete)
   - in essence, if a class has a **data member** that **cannot** be default constructed, copied, assigned, or destroyed, then the corresponding copy-control member will be a deleted function
 
+- prefer the (default) generated destructor to empty destructor. (from slides)
+
 #### Synthesized Destructor
 
 - is automatically defined for any class that does not define its own destructor
@@ -470,6 +558,7 @@ Defined as deleted (p. 508), if
 - members are automatically destroyed **AFTER** the (empty) destructor body is run
   - **Important**: Members are destroyed as part of the implicit destruction phase **that follows** the destructor body
 - example
+
 ```cpp
 // no work to do other than destroying the members, which happens automatically AFTER the destructor body
 ~Sales_data() { }   // equivalent to the synthesized `Sales_data` destructor
@@ -482,9 +571,26 @@ Defined as deleted (p. 508), if
 - in practice, because destructors free resources (and do not allocate &rarr; `bad_alloc` exception), it is **unlikely** that they will throw exceptions
   - All of the standard library types guarantee that their destructors will not raise an exception
 
-### Rule of Zero/Three/Five
+### Rule of 3/5/0
 
-- **Rule of Zero/Three/Five:** define all of the copy-control members or none (using the default for all)
+From [stackoverflow](https://stackoverflow.com/a/65455611/12282296):
+
+The full name of the rule is the **rule of 3/5/0**.
+
+It doesn't say "always provide all five". It says that you have to either provide the three, the five, or none of them.
+
+cppreference:
+
+- **rule of 3**: "If a class requires a user-defined destructor, a user-defined copy constructor, or a user-defined copy assignment operator, it almost certainly requires all three."
+- **rule of 5**: "any class for which move semantics are desirable, has to declare all five special member functions"
+  - "Because the presence of a user-defined (or `= default` or `= delete` declared) destructor, copy-constructor, or copy-assignment operator prevents implicit definition of the move constructor and the move assignment operator"
+  - "Unlike Rule of Three, failing to provide move constructor and move assignment is usually not an error, but a missed optimization opportunity."
+- **rule of 0**: "Classes that have custom destructors, copy/move constructors or copy/move assignment operators should deal exclusively with ownership (which follows from the Single Responsibility Principle). Other classes should not have custom destructors, copy/move constructors or copy/move assignment operators".
+  - "This rule also appears in the C++ Core Guidelines as [C.20: If you can avoid defining default operations, do](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rc-zero)."
+
+Lip:
+
+- **rule 0**: define all of the copy-control members or none (using the default for all)
   - it is unusual to need one without needing to define them all
 - **rule 1**: "Classes That Need Destructors Need Copy and Assignment"
   - decide first whether the class needs a destructor (often more obvious than the need for copy constructor or assignment operator)
@@ -493,6 +599,11 @@ Defined as deleted (p. 508), if
 - why these rules? &rarr; read examples in the book
 - **rule 3**: "When a class has a pointer member, it is usually a good idea to be explicit about copy and move operations" (BS6.1.1)
   - "Classes that define their own copy constructor and copy-assignment operator generally also benefit by defining the move operations" (Lippman)
+
+From slides:
+
+**Best practice:**
+- make intention explicit by use of `=default` and `=delete`
 
 ### Moving Objects
 
@@ -561,7 +672,7 @@ hasY hy, hy2 = std::move(hy); // error: move constructor is deleted
 - "The move constructor is typically called when an object is initialized (by **direct-initialization** or **copy-initialization**) from rvalue (xvalue or prvalue) (...) of the same type, including
   - **initialization**: `T a = std::move(b);` or `T a(std::move(b));`, where `b` is of type `T`;
   - **function argument passing**: `f(std::move(a));`, where a is of type `T` and `f` is `void f(T t);`
-  - **function return**: `return a;` inside a function such as `T f()`, where a is of type `T` which has a move constructor."
+  - **function return**: `return a;` inside a function such as `T f()`, where `a` is of type `T` which has a move constructor."
 - "Move constructors typically "steal" the resources held by the argument (e.g. pointers to dynamically-allocated objects, file descriptors, TCP sockets, I/O streams, running threads, etc.) rather than make copies of them, and leave the argument in some **valid** but otherwise indeterminate state."
   - **valid object**: see [move assignment operator](#move-assignment-operator)
 
@@ -664,17 +775,19 @@ std::remove_reference_t<T>&& move(T&& t) {
 #### Synthesized Move Constructor
 
 Conditions under which the compiler synthesizes:
-- **copy**:
+- **copy constructor**:
   - recall, **always** synthesized (if we do not declare our own **copy constructor** or **copy-assignment operator**)
-- **move**:
+- **move constructor**:
   - are **not** synthesized, if
     - a class defines its own copy constructor, copy-assignment operator, or destructor
       - thus, some classes do not have a move constructor or a move-assignment operator &rarr; copy is used in place of move
   - are synthesized, **only** if
-    - the class doesn't define any of its own copy-control members **and** every nonstatic data member of the class **can be moved**
-      - The compiler **can move**
-        - members of built-in type.
-        - members of a class type **if** the member's class has the corresponding move operation
+    - the class doesn't define any of its own copy-control members
+    - **and** every nonstatic data member of the class **can be moved**
+      - what means "can be moved"?
+        - The compiler **can move**
+          - members of built-in type.
+          - members of a class type **if** the member's class has the corresponding move operation
 
 ```cpp
 // the compiler will synthesize the move operations for X and hasX
@@ -783,24 +896,68 @@ Benefits of Encapsulation:
 
 ### Friends
 
+Lip 7.3.4:
+
 - A class can allow another class or function to **access its nonpublic members** by making that class or function a `friend`
-  - `friend` declarations 
+  - `friend` class and `friend` function declarations (see Example 1)
     - may appear only inside a class definition
     - may appear anywhere in the class
-  - `friend` function definitions
-    - `friend` function can be **defined** inside the class body (7.3.4)
-      - such functions are implicitly `inline`
+  - `friend` function definitions (see Example 2)
+    - a `friend` function can be **defined** inside the class body
+      - such functions
+        - are implicitly `inline` (like all member functions defined inside the class - although `friend` functions are not members)
+        - are implicitly assumed to be part of the surrounding scope
+        - are **not** declared in the surrounding scope, so we must still provide a declaration outside of the class
 - friends
   - are not members
   - are not affected by the access control of the section in which they are declared
 - A friend declaration **is not a general declaration** of the function. 
   - we must also declare the function **separately** from the friend declaration (some compilers do not require this, but this is best practice)
-  - **best practice**:
-    - group `friend` declarations together at the beginning or end of the class definition
-    - in addition to the `friend` declaration, declare each friend (outside the class) in the same header as the class
+- **best practice**:
+  - group `friend` declarations together at the beginning or end of the class definition
+  - in addition to the `friend` declaration, declare each `friend` (outside the class) in the same header as the class
 - friendship is not transitive
 
+**Example 1:**
+
+```cpp
+// Making class Window_mgr a friend
+class Screen {
+  // Window_mgr members can access the private parts of class Screen
+  friend class Window_mgr;
+  // . . . rest of the Screen class
+};
+
+// Making a member function a friend
+class Screen {
+  // Window_mgr::clear must have been declared before class Screen
+  friend void Window_mgr::clear(ScreenIndex);
+  // . . . rest of the Screen class
+};
+```
+
+**Example 2:**
+
+```cpp
+// a friend declaration is not a declaration
+struct X {
+  friend void f() { /* friend function can be defined in the class body */ }
+  X() { f(); }    // error: no declaration for f
+  void g();
+  void h();
+};
+void X::g() { return f(); }   // error: f hasn't been declared
+void f();                     // declares the function defined inside X
+void X::h() { return f(); }   // ok: declaration for f is now in scope
+```
+
+## Data Member
+
+TODO
+
 ## Member Function
+
+TODO
 
 ### Special Member Function
 
@@ -831,56 +988,228 @@ myScreen.move(4,0).set('#');
 
 - you can also call a member function based on whether 
 
-## Data Member
+## Member Type
 
-## Type Member
-
+- aka **Type Member**, in cppreference: **Member types** (append `#Member_types` in the URL of a class template)
 - a class can define its own (local) types
   - this type names may be either `public` or `private`
 - unlike ordinary members, members that define types **must appear before they are used**
   - **best practice**: as a result, type members usually appear **at the beginning of the class**
 
-## ::ClassName
+## Inheritance
 
-From [stackoverflow](https://stackoverflow.com/questions/4269034/what-is-the-meaning-of-prepended-double-colon):
+### Virtual Functions
 
-This ensures that resolution occurs from the global namespace, instead of starting at the namespace you're currently in. For instance, if you had two different classes called `Configuration` as such:
+- a base class distinguishes
+  - functions that are type dependent
+  - functions that it expects its derived classes to inherit without change
+- the base class defines as `virtual` those functions it expects its derived classes to define for themselves
+- a derived class **may** include the `virtual` keyword on these functions **but is not required** to do so
+- any non`static` member function, other than a constructor, may be `virtual`
+- the `virtual` keyword appears only on the declaration inside the class and may not be used on a function definition that appears outside the class body
+- a function that is declared as `virtual` in the base class is **implicitly** `virtual` in the derived classes as well
+- a `virtual` function must **always** be defined regardless of whether it is used (Lip 15.3)
 
 ```cpp
-class Configuration; // class 1, in global namespace
-namespace MyApp
+class Quote {
+public:
+  std::string isbn() const;
+  virtual double net_price(std::size_t n) const;
+};
+```
+
+### Class Derivation List
+
+- a **colon** followed by a comma-separated **list of base classes**
+- each of the base classes may have an optional **access specifier**
+
+```cpp
+class Bulk_quote : public Quote { // Bulk_quote inherits from Quote
+public:
+  double net_price(std::size_t) const override;
+};
+```
+
+### `override` Specifier
+
+- since C++11
+- `final` and `override` specifiers appear **after the parameter list** (including any `const` or reference qualifiers) and **after a trailing return**
+- lets a derived class explicitly note that it intends a member function to **override** a `virtual` that it inherits
+
+### Dynamic Binding
+
+Lip 15.1 - 15.3:
+
+- aka **run-time binding**
+  - "run-time" because the decision as to which version to run can't be made until run time
+- "dynamic binding happens when a `virtual` function is called **through a reference (or a pointer)** to a base class"
+  - "The function that is called is the one that corresponds to the dynamic type of the object bound to that pointer or reference" (Lip 15.3)
+- "Member functions that are **not** declared as `virtual` are resolved at compile time, not run time"
+
+```cpp
+// calculate and print the price for the given number of copies, applying any discounts
+double print_total(ostream &os,
+                   const Quote &item, size_t n)
 {
-    class Configuration; // class 2, different from class 1
-    function blah()
-    {
-        // resolves to MyApp::Configuration, class 2
-        Configuration::doStuff(...) 
-        // resolves to top-level Configuration, class 1
-        ::Configuration::doStuff(...)
-    }
+  // depending on the type of the object bound to the item parameter
+  // calls either Quote::net_price or Bulk_quote::net_price
+  double ret = item.net_price(n);
+  os << "ISBN: " << item.isbn() // calls Quote::isbn
+     << " # sold: " << n << " total due: " << ret << endl;
+  return ret;
 }
 ```
 
-Basically, it allows you to traverse up to the global namespace since your name might get clobbered by a new definition inside another namespace, in this case `MyApp`.
-
-## Constructors throwing Exceptions
-
-From [isocpp](https://isocpp.org/wiki/faq/exceptions#selfcleaning-members):
-- Every data member inside your object should clean up its own mess
-- If a constructor throws an exception, the object's destructor is not run
-  - Therefore, if your object has already done something that needs to be undone (such as allocating some memory, opening a file, or locking a semaphore), this "stuff that needs to be undone" must be remembered by a data member inside the object.
-
-From [isocpp](https://isocpp.org/wiki/faq/exceptions#ctors-can-throw):
-- Note: if a constructor finishes by throwing an exception, the memory associated with the object itself is cleaned up — there is no memory leak. 
-- For example:
+- because the `item` parameter is a **reference to** `Quote`, we can call this function on either a `Quote` object or a `Bulk_quote` object
+- because `net_price` is a `virtual` function, and because `print_total` calls `net_price` **through a reference**, the version of `net_price` that is run will depend on the type of the object that we pass to `print_total` (`bulk` is "dynamically bound" to `item`):
 
 ```cpp
-void f()
-{
-  X x;             // If X::X() throws, the memory for x itself will not leak
-  Y* p = new Y();  // If Y::Y() throws, the memory for *p itself will not leak
-}
+// basic has type Quote; bulk has type Bulk_quote
+print_total(cout, basic, 20); // calls Quote version of net_price
+print_total(cout, bulk, 20);  // calls Bulk_quote version of net_price
 ```
 
-related: [Handle a Constructor that fails](#handle-a-constructor-that-fails)
+- **note**: in the second `print_total` call, the **dynamic type** (run-time type) of the reference `item` in `print_total` differs from its **static type** (compile-time type)
+  - again, this works **only if**
+    1. `net_price` is a `virtual` function **AND**
+    2. the `net_price` call is made through a reference or pointer
 
+```cpp
+// "base" is an expression that has a plain - nonreference and 
+// nonpointer - type (unlike "item" in the example above)
+base = derived;     // copies the Quote part of derived into base
+base.net_price(20); // calls Quote::net_price; this call is resolved at compile time
+```
+
+### `protected` Access Specifier
+
+- like any other code that uses the base class, a derived class may access the `public` members of its base class but may not access the `private` members
+- when a base class has members that it wants to **let its derived classes use** while still prohibiting access to those same members by other users, we specify such members after a `protected` access specifier
+
+### Direct Base vs Indirect Base
+
+- A **direct base** class is named in the derivation list.
+- An **indirect base** is one that a derived class inherits through its direct base class.
+
+```cpp
+// In this hierarchy, Base is a direct base to D1 and an indirect base to D2. 
+
+class Base { /* . . . */ };
+class D1: public Base { /* . . . */ };
+class D2: public D1 { /* . . . */ };
+```
+
+- Each class inherits all the members of its **direct** base class.
+
+### `final` Specifier
+
+- to prevent a class from being used as a base
+- `final` and `override` specifiers appear **after the parameter list** (including any `const` or reference qualifiers) and **after a trailing return**
+
+```cpp
+class NoDerived final { /* */ };    // NoDerived can't be a base class
+class Base { /* */ };               // Last is final; we cannot inherit from Last
+class Last final : Base { /* */ };  // Last can't be a base class
+class Bad : NoDerived { /* */ };    // error: NoDerived is final
+class Bad2 : Last { /* */ };        // error: Last is final
+```
+
+- Any attempt to override a function that has been defined as `final` will be flagged as an error:
+
+```cpp
+struct B {
+  virtual void f1(int) const;
+  virtual void f2();
+  void f3();
+};
+struct D2 : B {
+  // inherits f2() and f3() from B and overrides f1(int)
+  void f1(int) const final; // subsequent classes can’t override f1(int)
+};
+struct D3 : D2 {
+  void f2();              // ok: overrides f2 inherited from the indirect base, B
+  void f1(int) const;     // error: D2 declared f2 as final
+};
+```
+
+### Pure Virtual Functions
+
+- a pure virtual function does not have to be defined
+  - **BUT:** we **can** provide a definition for a pure virtual. However, the function body must be defined **outside the class**.
+    - that is, we **cannot** provide a function body **inside the class**
+- specify that a virtual function is a **pure** virtual by writing `= 0` in place of a function body (i.e., **just before the semicolon** that ends the declaration)
+  - the `= 0` may appear **only on the declaration** of a virtual function in the class body
+
+**Example:**
+
+```cpp
+// class to hold the discount rate and quantity
+// derived classes will implement pricing strategies using these data
+class Disc_quote : public Quote {
+public:
+  Disc_quote() = default;
+  Disc_quote(const std::string& book, double price,
+            std::size_t qty, double disc):
+              Quote(book, price),
+              quantity(qty), discount(disc) { }
+  double net_price(std::size_t) const = 0;
+protected:
+  std::size_t quantity = 0;   // purchase size for the discount to apply
+  double discount = 0.0;      // fractional discount to apply
+};
+```
+
+- we cannot define objects of this type directly
+
+### Abstract Base Classes
+
+- a class containing (or inheriting without overridding) a [pure virtual function](#pure-virtual-functions)
+- defines an interface for subsequent classes to override
+- we cannot (directly) create objects of a type that is an abstract base class
+- we can define objects of classes that inherit from abstract base classes, so long as those classes override the pure virtual function(s)
+  - if they do not override the pure virtual functions those classes will be abstract as well
+
+```cpp
+// Disc_quote declares pure virtual functions, which Bulk_quote will override
+Disc_quote discounted;  // error: can't define a Disc_quote object
+Bulk_quote bulk;        // ok: Bulk_quote has no pure virtual functions
+```
+
+### Access Specifiers in the Derivation List
+
+- member access is controlled by
+  1. the access specifier for that member **in the base class**
+  2. the access specifier **in the derivation list** of the derived class
+
+```cpp
+// Neither Pub_Derv nor Priv_Derv may access the private member priv_mem!
+class Base {
+public:
+  void pub_mem(); // public member
+protected:           
+  int prot_mem;   // protected member
+private:             
+  char priv_mem;  // private member
+};
+struct Pub_Derv : public Base {
+  // ok: derived classes can access protected members
+  int f() { return prot_mem; }
+  // error: private members are inaccessible to derived classes
+  char g() { return priv_mem; }
+};
+struct Priv_Derv : private Base {
+  // private derivation doesn't affect access in the derived class
+  int f1() const { return prot_mem; }
+};
+```
+
+- the **derivation access specifier** has no effect on whether members (and friends) of a derived class may access the members of its own direct base class
+- the purpose of the **derivation access specifier** is to control the access that *users* of the derived class - including other classes derived from the derived class - have to the members inherited from `Base`:
+
+```cpp
+// When the inheritance is public, members retain their access specification:
+Pub_Derv d1;    // members inherited from Base are public
+Priv_Derv d2;   // members inherited from Base are private
+d1.pub_mem();   // ok: pub_mem is public in the derived class
+d2.pub_mem();   // error: pub_mem is private in the derived class
+```

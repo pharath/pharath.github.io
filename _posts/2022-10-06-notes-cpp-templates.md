@@ -20,11 +20,18 @@ tags:
 
 # Templates
 
-- **instantiation**: The process that the compiler uses to create classes or functions from templates
-- templates are **not** functions or classes
-- templates "can be thought of as instructions to the compiler for generating classes or functions"
-- templates can make the code shorter and more manageable
-- provide support for **parameterized types** (see "Definitions" &rarr; "Parameterized Types")
+- templates are **not** functions or classes (Lip)
+- templates "can be thought of as instructions to the compiler for generating classes or functions" (Lip)
+- **instantiation**: the process that the compiler uses to create classes or functions from templates (Lip)
+- are **recipes** to make things, e.g. classes or functions, with information to be specified later (slides)
+- are a **parametrized** description (slides)
+
+## Why use Templates?
+
+- templates protect from **code duplication**
+  - thus, templates can make the code shorter and more manageable
+- by using templates, we can avoid the use of **type erasure** or **macros** for generic programming
+- templates provide support for **parameterized types** (see "Definitions" &rarr; "Parameterized Types")
 
 ## Declaration
 
@@ -103,20 +110,27 @@ typename T::value_type top(const T& c)
 ## Default Template Arguments
 
 - possible for both function and class templates
-- a template parameter may have a default argument only if all of the parameters to its right also have default argument
+- a template parameter may have a default argument only if all of the parameters **to its right** also have default argument
   - **for function templates:** default value can be anywhere (given the rest can be deduced)
-- Whenever we use a **class template**, we must always follow the template's name with brackets
-  - if we want to use the defaults, we must put an **empty bracket pair** following the template's nam
-- in example
-  - `F` represents the type of a callable object
-  - function parameter `f` will be bound to a callable object
-  - `f` will be a default-initialized object of type `F`
-  - type of `T` is deduced as `Sales_data`
-  - `F` is deduced as the type of `compareIsbn`
-  - when `compare` is called with three arguments, 
-    - the type of the third argument must be a callable object that
-      - returns a type that is convertible to `bool` and
-      - takes arguments of a type compatible with the types of the first two arguments
+- Whenever we use a **class template**, we must **always** follow the template's name with angle brackets (unlike for function templates)
+  - because TAD works only for function templates
+    - though **since C++17** there is "Class template argument deduction (CTAD)"
+  - if we want to use the defaults, we must put an **empty bracket pair** following the template's name
+
+### Examples
+
+#### Function Template
+
+- **Goal:** use the type of a **callable object** as default template argument for `compare()`, so that users may supply their own comparison operation but are not required to do so
+- `F` represents the type of a **callable object**
+- function parameter `f` will be bound to a **callable object**
+- `f` will be a default-initialized object of type `F`
+- type of `T` is deduced as `Sales_data`
+- `F` is deduced as the type of `compareIsbn`
+- when `compare` is called with three arguments, 
+  - the type of the third argument must be a **callable object** that
+    - returns a type that is convertible to `bool` and
+    - takes arguments of a type compatible with the types of the first two arguments
 
 ```cpp
 // function templates with default args:
@@ -136,19 +150,103 @@ bool i = compare(0, 42); // uses less; i is -1
 // result depends on the isbns in item1 and item2
 Sales_data item1(cin), item2(cin);
 bool j = compare(item1, item2, compareIsbn);
+```
 
+#### Class Template
+
+```cpp
 // class templates with default args:
 
-template <class T = int> class Numbers { // by default T is int
-  public:
+template <class T = int>      // by default T is int
+class Numbers {
+public:
   Numbers(T v = 0): val(v) { }
   // various operations on numbers
-  private:
+private:
   T val;
 };
 Numbers<long double> lots_of_precision;
-Numbers<> average_precision; // empty <> says we want the default type
+Numbers<> average_precision;  // empty <> says we want the default type
 ```
+
+## Return Type
+
+### Explicit Template Argument
+
+Lippman:
+
+- useful, **if** we want to let the user control the type of the return
+
+```cpp
+// T1 cannot be deduced: it doesn't appear in the function parameter list
+template <typename T1, typename T2, typename T3>
+T1 sum(T2, T3);
+
+// T1 is explicitly specified; T2 and T3 are inferred from the argument types
+auto val3 = sum<long long>(i, lng); // long long sum(int, long)
+```
+
+### Trailing Return Type
+
+Lippman:
+
+- useful, **if** we want to determine the return type automatically (eg. from the function's parameters)
+- it **can use the function's parameters**
+  - because a trailing return appears after the parameter list
+
+Example:
+
+```cpp
+// we want to write a function that
+// - takes a pair of iterators denoting a sequence and 
+// - returns a reference to an element in the sequence
+template <typename It>
+??? &fcn(It beg, It end)
+{
+  // process the range
+  return *beg; // return a reference to an element from the range
+}
+
+vector<int> vi = {1,2,3,4,5};
+Blob<string> ca = { "hi", "bye" };
+// goal: the user should be able to call fcn without having to 
+// specify any explicit template argument (like eg. fcn<double>()):
+auto &i = fcn(vi.begin(), vi.end()); // fcn should return int&
+auto &s = fcn(ca.begin(), ca.end()); // fcn should return string&
+```
+
+**Problem:**
+
+```cpp
+// in principle, this is what we want, BUT
+// this approach does not work
+// because `beg` doesn't exist until the parameter list has been seen
+template <typename It>
+decltype(*beg) fcn(It beg, It end)
+{
+  // process the range
+  return *beg; // return a reference to an element from the range
+}
+```
+
+**Solution:**
+
+```cpp
+// a trailing return lets us declare the return type after the parameter list is seen
+template <typename It>
+auto fcn(It beg, It end) -> decltype(*beg)
+{
+  // process the range
+  return *beg; // return a reference to an element from the range
+}
+// string -> the return type will be string&
+// int -> the return will be int&
+```
+
+- Here, we returned **by reference**.
+- But what if we want to return **by value**?
+  - in this case, we must use the type trait `remove_reference`
+  - see `fcn2()` in examples in section "`remove_reference` Class Template"
 
 ## Type Traits
 
@@ -167,20 +265,24 @@ Numbers<> average_precision; // empty <> says we want the default type
 
 ```cpp
 remove_reference<int&>        // the `type` member will be int
-remove_reference<string&>     // `type` will be string
+remove_reference<string&>     // the `type` member will be string
 ```
 
-**Example:** For containers:
+**Example:**
 
-More generally, given that `beg` is an **iterator**:
+(continuation of the example in section "Trailing Return Type")
+
+Given that `beg` is an **iterator** (for some sequential container):
 - `remove_reference<decltype(*beg)>::type` will be the type of the element to which `beg` refers, where
-  - `decltype(*beg)` returns the reference type of the element type (eg. `int&`)
-  - `remove_reference::type` strips off the reference (eg. `int`)
+  1. `decltype(*beg)` returns the reference type of the element type (eg. `int&`)
+    - "The dereference operator returns an **lvalue**, so the type deduced by `decltype` is a reference to the type of the element that `beg` denotes." (Lip, p684)
+  2. `remove_reference<>::type` strips off the reference and returns the type without the `&` (eg. `int`)
 
 ```cpp
+// Lip:
 // return a copy of an element's value:
 
-// must use typename to use a type member of a template parameter; see § 16.1.3 (p. 670)
+// must use typename to use a type member of a template parameter;
 template <typename It>
 auto fcn2(It beg, It end) ->
   typename remove_reference<decltype(*beg)>::type
@@ -206,12 +308,11 @@ namespace std {
 
 ## Function Templates
 
-**Function Template**:
-
 see [stackoverflow](https://www.cplusplus.com/doc/oldtutorial/templates/)
 
 ```cpp
 // function template
+
 #include <iostream>
 using namespace std;
 
@@ -232,10 +333,6 @@ int main () {
   return 0;
 }
 ```
-
-**Generic Type**: Function templates are special functions that can operate with **generic types**. This allows us to create a function template whose functionality can be adapted to more than one type or class without repeating the entire code for each type.
-
-**Template Parameter**: In C++ this can be achieved using **template parameters**. A template parameter is a special kind of parameter that can be used to pass a type as argument: just like regular function parameters can be used to pass values to a function, template parameters allow to pass also types to a function. These function templates can use these parameters as if they were any other regular type.
 
 ### Order of Execution
 
@@ -261,16 +358,82 @@ ie.
 
 ### Non-type Template Parameters
 
-- represents a value rather than a type
-- specified by using a specific type name instead of the `class` or `typename` keyword
+Lip 16.1.1, 14.8.3:
+
+- represent a value rather than a type
+- are specified by using a specific type name instead of the `class` or `typename` keyword
+  - VJ12.2.2: but it can in some cases also start with the keyword `typename` (see examples below)
 - may be 
   - an **integral type**
-    - An argument bound to a nontype integral parameter **must** be a **constant** expression.
-  - a **pointer** or (lvalue) **reference** to an object or to a function type (see Lippman 14.8.3)
-    - Arguments bound to a pointer or reference nontype parameter **must** have **static** lifetime
-    - A pointer parameter can also be instantiated by `nullptr` or a zero-valued constant expression
+    - arguments bound to a nontype integral parameter must be a **constant expression**
+      - eg. `3`, `32`, but **not** `3.14`
+    - eg. `constexpr int`, `constexpr unsigned`, but **not** `constexpr double`
+  - a **pointer type** (to an object or to a function)
+    - arguments bound to it must have `static` lifetime
+      - ie. we may **not** use an ordinary (non`static`) local object or a dynamic object as a template argument
+    - a pointer parameter can also be instantiated by `nullptr` or a zero-valued **constant expression**
+  - an **lvalue reference** (to an object or to a function)
+    - arguments bound to it must have `static` lifetime
+      - ie. we may **not** use an ordinary (non`static`) local object or a dynamic object as a template argument
 - is a constant value inside the template definition
   - thus, can be used when constant expressions are required, eg. to specify the size of an array
+
+VJ12.2.2:
+
+- "stand for constant values that can be determined at compile or link time" 
+- "are declared much like variables, but they cannot have nontype specifiers like `static`, `mutable`, and so forth."
+- "can have `const` and `volatile` qualifiers, but if such a qualifier appears at the outermost level of the parameter type, it is simply ignored"
+
+#### Examples
+
+VJ12.2.2:
+
+Examples for nontype parameter of pointer type:
+
+```cpp
+template<typename T,                        // a type parameter
+         typename T::Allocator* Allocator>  // a nontype parameter
+class List;
+
+template<class X*>      // a nontype parameter of pointer type
+class Y;
+```
+
+Examples for function and array types (they are implicitly adjusted to the pointer type to which they decay):
+
+```cpp
+template<int buf[5]> class Lexer;     // buf is really an int*
+template<int* buf> class Lexer;       // OK: this is a redeclaration
+
+template<int fun()> struct FuncWrap;  // fun really has pointer to
+                                      // function type
+template<int (*)()> struct FuncWrap;  // OK: this is a redeclaration
+```
+
+Examples for other specifiers:
+- nontype parameters cannot have nontype specifiers like `static`, `mutable`, and so forth
+- top-level cv qualifiers are ignored:
+
+```cpp
+template<int const length> class Buffer;  // const is useless here
+template<int length> class Buffer;        // same as previous declaration
+```
+
+Examples for lvalue reference type nontype parameters:
+- nonreference nontype parameters are always prvalues
+  - ie. their address cannot be taken, and they cannot be assigned to
+- lvalue reference type nontype parameter can be used to denote an lvalue
+  - ie. they CAN be assigned to
+
+```cpp
+template<int& Counter>
+struct LocalIncrement {
+  LocalIncrement() { Counter = Counter + 1; } // OK: reference to an integer
+  ~LocalIncrement() { Counter = Counter - 1; }
+};
+```
+
+#### Passing Variable Size Arrays
 
 ```cpp
 // trick to pass variable size arrays:
@@ -288,16 +451,56 @@ compare("hi", "mom")
 int compare(const char (&p1)[3], const char (&p2)[4])
 ```
 
-VJ15.10.3: 
-- "using **deduced** nontype parameters in function templates"
+#### Deducible Nontype Parameters (auto Nontype Parameters)
+
+- note: there are
+  1. `auto` nontype parameters
+    - discussed in this section
+  2. `decltype(auto)` nontype parameters
+    - VJ "think that such nontype template parameters are likely to cause surprise and do not anticipate that they will be widely used"
+      - so, **best practice:** do not use `decltype(auto)` nontype parameters
+
+VJ p296:
 
 ```cpp
-// deduce the type of the parameter N of function template f<>() from the type of the nontype parameter of S
+// prior to C++17
+// having to specify the type of the nontype template 
+// argument - that is, specifying int in addition to 42 - can be tedious
+template<typename T, T V> struct S;
+S<int, 42>* ps;
+
+// since C++17
+// type of V for S<42> is deduced to be int because 42 has type int
+template<auto V> struct S;
+S<42>* ps;
+
+// general constraints on the type of nontype template parameters remain in effect
+S<3.14>* pd; // ERROR: floating-point nontype argument
+```
+
+VJ15.10.3: 
+
+- "the type of the parameter `N` of function template `f<>()` is deduced from the type of the nontype parameter of `S`."
+- "That's possible because a name of the form `X<...>` where `X` is a class template is a deduced context"
+
+```cpp
 template<auto N> struct S {};
-template<auto N> int f(S<N> p);
+template<auto N> int f(S<N> p);   // S<N> is a deduced context
 S<42> x;
 int r = f(x);
 ```
+
+However, there are also many patterns that cannot be deduced that way:
+
+```cpp
+// deduced_nontype_params.cpp
+template<auto V> int f(decltype(V) p);    // V is a nontype template parameter
+int r1 = f<42>(42);  // OK
+int r2 = f(42);      // ERROR: decltype(V) is a nondeduced context
+```
+
+- There is no unique value of `V` that matches the argument `42` (e.g., `decltype(7)` produces the same type as `decltype(42)`).
+  - Therefore, the nontype template parameter must be specified **explicitly** to be able to call this function
 
 ### Instantiation (Implicit Specialization)
 
@@ -308,58 +511,20 @@ From [cppreference](https://en.cppreference.com/w/cpp/language/function_template
   - the template arguments must be determined so that the compiler can generate an actual function (or class, from a class template).
 
 There are two forms of instantiation:
-- **explicit** instantiation
-- **implicit** instantiation
+1. **explicit** instantiation
+2. **implicit** instantiation
 
-#### Explicit Instantiation
-
-- for "controlling" instantiations
-- WITH `extern` it is an (explicit) instantiation **declaration**
-- WITHOUT `extern` it is an (explicit) instantiation **definition**
-- When the compiler sees an `extern` template declaration, it will **not** generate code for that instantiation in that file
-  - `extern` is a promise that there will be a non`extern` use of that instantiation elsewhere in the program
-  - "An explicit instantiation declaration (an extern template) prevents implicit instantiations", [cppreference](https://en.cppreference.com/w/cpp/language/function_template#Function_template_instantiation)
-
-```cpp
-// instantiation declaration and definition
-extern template class Blob<string>;             // declaration
-template int compare(const int&, const int&);   // definition
-```
-
-For a given instantiation 
-- there may be several `extern` declarations 
-- there must be **exactly one** definition
-
-```cpp
-// Syntax:
-
-// Explicit Instantiation Definition
-template return-type name < argument-list > ( parameter-list ) ; 	        // (1) 	
-template return-type name ( parameter-list ) ; 	                            // (2) 	
-// Explicit Instantiation Declaration
-extern template return-type name < argument-list > ( parameter-list ) ; 	// (3) 	(since C++11)
-extern template return-type name ( parameter-list ) ; 	                    // (4) 	(since C++11)
-```
-
-```cpp
-// examples from cppreference:
-
-template<typename T>
-void f(T s)
-{
-    std::cout << s << '\n';
-}
- 
-template void f<double>(double); // instantiates f<double>(double)
-template void f<>(char);         // instantiates f<char>(char), template argument deduced
-template void f(int);            // instantiates f<int>(int), template argument deduced
-```
+phth: remember:
+- an explicit instantiation is easily **visible in the code** (it always contains `template`)
+- an implicit instantiation is **not visible in the code** because it is generated by the compiler (it contains `template`, too, like an explicit instantiation, but you will not see it in the code)
+  - this is similar to a synthesized constructor which is also "there", but you do not see it in the code
+  - when a class or function template is used in the code and has not been explicitly instantiated yet, then it is implicitly instantiated 
 
 #### Implicit Instantiation
 
 cppreference:
 - **implicit instantiation** occurs when
-  - code refers to a function in context that requires the **function definition** to exist **AND** this particular **function has not been explicitly instantiated**
+  - **code refers to a function** in context that requires the function definition to exist **AND** this particular **function has not been explicitly instantiated**
 - The list of **template arguments** does not have to be supplied if it can be **deduced from context**.
 
 ```cpp
@@ -373,27 +538,239 @@ void f(T s)
  
 int main()
 {
-    f<double>(1); // instantiates and calls f<double>(double)
-    f<>('a');     // instantiates and calls f<char>(char)
-    f(7);         // instantiates and calls f<int>(int)
-    void (*pf)(std::string) = f; // instantiates f<string>(string)
+    f<double>(1); // implicitly instantiates and calls f<double>(double)
+    f<>('a');     // implicitly instantiates and calls f<char>(char)
+    f(7);         // implicitly instantiates and calls f<int>(int)
+    void (*pf)(std::string) = f; // implicitly instantiates f<string>(string)
     pf("∇");                     // calls f<string>(string)
 }
+```
+
+#### Explicit Instantiation
+
+Lip:
+
+- **motivation**
+  - when two or more separately compiled source files use the same template with the same template arguments, there is an **instantiation** of that template **in each of those files**. 
+  - in large systems, the overhead of instantiating the same template in multiple files can become significant. 
+  - since C++11, we can avoid this overhead through an **explicit instantiation**
+- declaration vs definition
+  - WITH `extern` it is an explicit instantiation **declaration**
+  - WITHOUT `extern` it is an explicit instantiation **definition**
+    - **note**: for a class template, this instantiates **all** the members of that template including `inline` member functions
+      - consequently, we can use explicit instantiation only for types that can be used with all the members of that template
+    - see "Class Templates" &rarr; "Member Functions" &rarr; "Instantiation"
+- When the compiler sees an `extern` template declaration, it will **not** generate code for that instantiation in that file
+  - `extern` is a promise that there will be a non`extern` use of that instantiation elsewhere in the program
+  - cppreference: "An explicit instantiation declaration (an `extern` template) prevents implicit instantiations"
+- For a given instantiation 
+  - there may be several `extern` declarations 
+  - there must be **exactly one** definition
+
+**Syntax:**
+
+cppreference:
+
+```cpp
+// Explicit Instantiation Definition
+template return-type name < argument-list > ( parameter-list ) ; 	        // (1) 	
+template return-type name ( parameter-list ) ; 	                                // (2) 	
+// Explicit Instantiation Declaration
+extern template return-type name < argument-list > ( parameter-list ) ; 	// (3) 	(since C++11)
+extern template return-type name ( parameter-list ) ; 	                        // (4) 	(since C++11)
+```
+
+- (1) and (3): without template argument deduction if every non-default template parameter is explicitly specified
+- (2) and (4): with template argument deduction for all parameters
+
+Lip:
+
+```cpp
+// below, "declaration" refers to a class or function declaration
+// in which ALL the template parameters are replaced by the template arguments
+extern template declaration;  // instantiation declaration
+template declaration;         // instantiation definition
+```
+
+**Examples**:
+
+Lip:
+
+```cpp
+// instantiation declaration and definition
+extern template class Blob<string>;             // declaration
+template int compare(const int&, const int&);   // definition
+```
+
+cppreference:
+
+```cpp
+template<typename T>
+void f(T s)
+{
+    std::cout << s << '\n';
+}
+ 
+// phth note: the word "template" helps to distinguish explicit and implicit instantiation
+template void f<double>(double); // explicitly instantiates f<double>(double)
+template void f<>(char);         // explicitly instantiates f<char>(char), template argument deduced
+template void f(int);            // explicitly instantiates f<int>(int), template argument deduced
+```
+
+Lip:
+
+```cpp
+// Application.cc
+// these template types must be instantiated elsewhere in the program
+extern template class Blob<string>;
+extern template int compare(const int&, const int&);
+Blob<string> sa1, sa2; // instantiation will appear elsewhere
+// Blob<int> and its initializer_list constructor instantiated in this file
+Blob<int> a1 = {0,1,2,3,4,5,6,7,8,9}; // will use the initializer_list constructor
+Blob<int> a2(a1); // copy constructor instantiated in this file
+int i = compare(a1[0], a2[0]); // instantiation will appear elsewhere
+
+// Application.o will contain instantiations for Blob<int>, along with
+// the initializer_list and copy constructors for that class. The compare<int>
+// function and Blob<string> class will not be instantiated in that file.
+```
+
+```cpp
+// templateBuild.cc
+// instantiation file must provide a (nonextern) definition for every
+// type and function that other files declare as extern
+template int compare(const int&, const int&);
+template class Blob<string>; // instantiates all members of the class template
+
+// templateBuild.o will contain the definitions for
+// compare instantiated with int and for the Blob<string> class. When we build
+// the application, we must link templateBuild.o with the Application.o files.
 ```
 
 ### Specialization
 
 - aka **"Explicit Specialization"**
 - a separate definition of the template in which one or more template parameters are specified to have particular types
+  - phth: unlike an explicit instantiation (which looks similar, but has no empty `<>` behind `template`), this does not instantiate anything, it is only a function template that has not been used in the code yet
 - useful, when 
   - the general definition might not compile or might do the wrong thing
   - we want to take advantage of some specific knowledge to write more efficient code than would be instantiated from the template
 - When we define a specialization, the function parameter type(s) **must match** the corresponding types in a previously declared template
 - cppreference: "When template arguments are provided, or, for function (and class (since C++17)) templates only, **deduced**, they are substituted for the template parameters to obtain a **specialization** of the template, that is, a specific type or a specific function lvalue."
-- **best practice:**
-  - Templates and their specializations should be declared in the same header file. 
-  - Declarations for all the templates with a given name should appear **first**, followed by any specializations of those templates.
-    - be careful: errors in declaration order between a template and its specializations are easy to make but hard to find
+
+#### Declaration Order
+
+- Templates and their specializations should be declared in the same header file. 
+- **declaration order**:
+  1. declarations for all the templates with a given name should appear **first**
+  2. any specializations of those templates
+- **Warning**:
+  - if an **ordinary class or function declaration** is missing, the compiler won't be able to process our code
+  - whereas if a **specialization declaration** is missing, the compiler will usually generate code using the original template
+  - therefore, errors in declaration order between a template and its specializations are easy to make but hard to find
+
+#### T.144: Don't specialize function templates
+
+Overloading > Specialization
+
+From [Core Guidelines](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rt-specialize-function):
+
+- Reason
+  - You can't partially specialize a function template per language rules. 
+  - You can fully specialize a function template but **you almost certainly want to overload instead**
+    - because function template specializations don't participate in overloading, they don't act as you probably wanted. (see **"Explanation 1"**)
+  - Rarely, you should actually specialize by delegating to a class template that you can specialize properly. (see **"Explanation 2"**)
+
+**Explanation 1**: "function template specializations don't participate in overloading"
+
+From [modernescpp](https://www.modernescpp.com/index.php/full-specialization-of-function-templates/):
+
+- "Overload resolution **IGNORES** function template **specializations**"
+- "Overload resolution operates on **primary templates**"
+- "Overload resolution only selects a primary template (...). **Only after it's been decided which primary template** is going to be selected, and that choice is locked in, will the compiler look around to see if there happens to be a suitable specialization of that template available, and if so that specialization will get used.", [gotw](http://www.gotw.ca/publications/mill17.htm)
+
+```cpp
+// dimovAbrahams.cpp
+
+#include <iostream>
+#include <string>
+
+// getTypeName
+
+template<typename T>            // (1) primary template
+std::string getTypeName(T){
+    return "unknown";
+}
+
+template<typename T>            // (2) primary template that overloads (1)
+std::string getTypeName(T*){
+    return "pointer";
+}
+
+template<>                      // (3) explicit specialization of (2)  // phth: Genau lesen: "of (2)" (nicht "of (1)" !)
+std::string getTypeName(int*){
+    return "int pointer";
+}
+
+// getTypeName2
+
+template<typename T>            // (4) primary template
+std::string getTypeName2(T){
+    return "unknown";
+}
+
+template<>                      // (5) explicit specialization of (4)  // phth: Genau lesen: "of (4)"
+std::string getTypeName2(int*){
+    return "int pointer";
+}
+
+template<typename T>            // (6) primary template that overloads (4)
+std::string getTypeName2(T*){
+    return "pointer";
+}
+
+int main(){
+    
+    std::cout << '\n';
+    
+    int* p;
+    
+    std::cout << "getTypeName(p): " << getTypeName(p) <<  '\n';  
+    std::cout << "getTypeName2(p): " << getTypeName2(p) <<  '\n';
+    
+    std::cout <<  '\n';
+    
+}
+```
+
+**Output**:
+
+```bash
+getTypeName(p): int pointer
+getTypeName2(p): pointer
+```
+
+**Explanation 2**: "specialize by delegating to a class template":
+
+From [gotw](http://www.gotw.ca/publications/mill17.htm):
+
+**Moral #2**: If you're writing a function primary template, prefer to write it as a single function template that should never be specialized or overloaded, and then implement the function template entirely as a simple handoff to a class template containing a static function with the same signature. Everyone can specialize that -- both fully and partially, and without affecting the results of overload resolution.
+
+```cpp
+// Example 4: Illustrating Moral #2 
+// 
+template<class T> 
+struct FImpl;
+
+template<class T> 
+void f( T t ) { FImpl<T>::f( t ); } // users, don't touch this!
+
+template<class T> 
+struct FImpl 
+{ 
+  static void f( T t ); // users, go ahead and specialize this 
+};
+```
 
 #### Full Specialization
 
@@ -403,11 +780,18 @@ int main()
     - The const version of a pointer type (eg. `double*`) is a **constant pointer** (`double* const`) (as distinct from a pointer to const), see code example below
 
 ```cpp
+// PRIMARY TEMPLATE:
 // Assume the general definition of this "compare" template is not appropriate 
 // for a particular type, namely, character pointers
 template <typename T> int compare(const T&, const T&);
 
-// specialization:
+// OVERLOAD:
+// an overloaded version of "compare" (which is not a specialization!) that
+// will be called only when we pass a string literal or an array
+template<size_t N, size_t M>
+int compare(const char (&)[N], const char (&)[M]);
+
+// SPECIALIZATION:
 // we want: special version of "compare" to handle 
 // pointers to character arrays, and therefore, we know "T" must be "const char*"
 // Which Function Parameter to use?:
@@ -418,6 +802,7 @@ int compare(const char* const &p1, const char* const &p2)
   return strcmp(p1, p2);
 }
 
+// SPECIALIZATION:
 // ... whereas a specialization to handle doubles would look like this:
 // Which Function Parameter to use?:
 // - "T" is "double" => so "const T&" is "const double&"
@@ -426,12 +811,20 @@ int compare(const double &p1, const double &p2)
 {
   return strcmp(p1, p2);
 }
+
+// call "compare"
+const char *p1 = "hi", *p2 = "mom";
+compare(p1, p2);        // calls the specialization for "const char*"
+                        // (if this specialization was missing, it would call the 
+                        // primary template which cannot handle "const char*")
+compare("hi", "mom");   // calls the overloaded template with two nontype parameters
 ```
 
 #### Partial Specialization
 
-- "Function **partial specialization** is **not allowed** yet as per the standard. (...) In the case of a function templates, only **full specialization** is allowed by the C++ standard.", [stackoverflow](https://stackoverflow.com/a/8061522)
-- cppreference: Specializations may also be provided explicitly: 
+cppreference:
+
+- Specializations may also be provided explicitly:
   - **full specializations** are allowed for class(, variable (since C++14)) and function templates,
   - **partial specializations** are only allowed for class templates (and variable templates (since C++14)).
 
@@ -455,9 +848,38 @@ template <typename T>
 ret_type Blob<T>::member_name(parm_list)
 ```
 
-**Inside** the scope of the class template itself, we may use the name of the template **without arguments**.
-- see Notes "Classes" &rarr; "Scope"
-- example:
+- **Inside** the scope of the class template itself, we may use the name of the template **without template arguments**.
+  - see Notes "Classes" &rarr; "Scope" (**important!**)
+  - eg. in the scope of the `BlobPtr` class template the compiler will treat `BlobPtr&` as `BlobPtr<T>&`
+
+```cpp
+template <typename T> class BlobPtr {
+public:
+  BlobPtr(): curr(0) { }
+  BlobPtr(Blob<T> &a, size_t sz = 0):
+          wptr(a.data), curr(sz) { }
+  T& operator*() const
+  { auto p = check(curr, "dereference past end");
+    return (*p)[curr];            // (*p) is the vector to which this object points
+  }
+  // increment and decrement
+  BlobPtr& operator++();          // prefix operators
+  BlobPtr& operator--();
+private:
+  // check returns a shared_ptr to the vector if the check succeeds
+  std::shared_ptr<std::vector<T>>
+      check(std::size_t, const std::string&) const;
+  // store a weak_ptr, which means the underlying vector might be destroyed
+  std::weak_ptr<std::vector<T>> wptr;
+  std::size_t curr;               // current position within the array
+};
+```
+
+#### Example
+
+- the **return type** of `operator++` is not in the scope of the class, but the **function body** and **parameter list** are!
+  - see Notes "Classes" &rarr; "Scope" (**important!**)
+  - therefore, inside the body of `operator++` the compiler will treat `BlobPtr` as `BlobPtr<T>`
 
 ```cpp
 // postfix: increment/decrement the object but return the unchanged value
@@ -473,7 +895,9 @@ BlobPtr<T> BlobPtr<T>::operator++(int)
 
 #### Instantiation
 
-By default, a member function of a class template is instantiated **only if** the program uses that member function.
+- By default, a member function of a class template is implicitly instantiated **only if** the program uses that member function.
+- But, **an explicit instantiation definition** for a class template instantiates **ALL** the members of that template including `inline` member functions.
+  - Consequently, we can use explicit instantiation only for types that can be used with **ALL** the members of that template.
 
 **Example 1**:
 
@@ -493,7 +917,16 @@ for (size_t i = 0; i != squares.size(); ++i)
 **Example 2**:
 
 Lets us instantiate a class with a type that may not meet the requirements for some of the template's operations.
-- eg. for instantiation of [vectors](#constraints-on-types-that-a-container-can-hold)
+- eg. for instantiation of vectors (see "Container" &rarr; "Constraints on Types that a Container can hold")
+- in this case, an explicit instantiation definition is not possible
+
+```cpp
+// assume noDefault is a type without a default constructor
+vector<noDefault> v1(10, init); // ok: element initializer supplied
+vector<noDefault> v2(10);       // error: must supply an element initializer
+template class vector<noDefault>;   // instantiates all members of the class template
+                                    // error: type "noDefault" cannot be used with ALL the members of the "vector" template
+```
 
 ### Friends
 
@@ -502,7 +935,7 @@ For a **nontemplate** class:
 ```cpp
 // forward declaration necessary to befriend a specific instantiation of a template
 // (because, recall, a friend declaration is not a declaration)
-template <typename T> class Pal;
+template <typename T> class Pal;  // this "T" is not related to the "T" in nontemplate class "C"
 class C {
   friend class Pal<C>;                      // specific friendship
   template <typename T> friend class Pal2;  // general friendship
@@ -510,9 +943,10 @@ class C {
 ```
 
 For a class template:
+- to allow **all** instantiations as friends, the `friend` declaration must use template parameter(s) that differ from those used by the class itself
 
 ```cpp
-template <typename T> class Pal;
+template <typename T> class Pal;  // this "T" is not related to the "T" in template class "C2"
 template <typename T> class C2 { 
   friend class Pal<T>;                      // specific friendship
   template <typename X> friend class Pal2;  // general friendship
@@ -577,13 +1011,13 @@ typename MyType<T>::iterator pos;   // man spart sich den "member of" operator
 
 ### static members
 
-- mostly like for any other (nontemplate) class
+- mostly like for any other (nontemplate) class (see "objects.md" &rarr; "static members")
   - a `static` member function is instantiated only if it is used in a program
   - access a `static` member of a class template 
     - through an object of the class type or 
-    - by using the scope operator to access the member directly
+    - by using the scope operator `::` to access the member directly
 - there is a distinct object **for each instantiation** of a class template
-  - eg. all objects of type `Foo<X>` share the same `ctr` object and `count` function, but there is a distinct `ctr` and `count` for objects of type `Foo<Y>`
+  - eg. all objects of type `Foo<X>` share **the same** `ctr` object and `count` function, but there is a **distinct** `ctr` and `count` for objects of type `Foo<Y>`
 
 ```cpp
 template <typename T> 
@@ -608,25 +1042,24 @@ size_t Foo<T>::ctr = 0; // define and initialize ctr
 
 #### Partial Specialization
 
-- Differently from function templates, a class template specialization does not have to supply an argument for **every** template parameter
+- unlike function templates, a class template specialization does not have to supply an argument for **every** template parameter
 - a partial specialization is itself a template
-- partial specialization has **the same name** as the template it specializes
+- a partial specialization has **the same name** as the template it specializes
 - the **template parameter list** includes an entry for each template parameter whose type is **not** completely **fixed**
 - **after the class name**, we specify **arguments** for the template **parameters we are specializing**
   - these arguments are listed **inside angle brackets** following the template name
   - the arguments correspond positionally to the parameters in the original template
-  - phth: whereas for (full specializations of) function templates we fix the function **call parameters** which don't need angle brackets
+  - *phth*: whereas for (full specializations of) function templates we fix the function **call parameter types** (which don't need angle brackets)
 
 ```cpp
-// original, most general template (called the "primary template")
-template <class T> struct remove_reference {
-typedef T type;
-};
+// original, most general template (also called the "primary template")
+template <class T> struct remove_reference
+{ typedef T type; };      // "type" is a "member type"
 // "partial specializations" that will be used for lvalue and rvalue references
 template <class T> struct remove_reference<T&>  // lvalue references
-  { typedef T type; };
+{ typedef T type; };
 template <class T> struct remove_reference<T&&> // rvalue references
-  { typedef T type; };
+{ typedef T type; };
 
 int i;
 remove_reference<decltype(42)>::type a;             // decltype(42) is int, uses the original template
@@ -654,9 +1087,10 @@ template<class X, class T, int I>
 class A<X, T*, I> {};   // #4: partial specialization where T2 is a pointer
 ```
 
-**Specialization of specific Members only:**
+#### Specialization of Specific Members but Not the Class
 
 - we can specialize just specific member function(s)
+- again, the arguments for the template parameters we are specializing are listed **inside angle brackets** following the class template name
 
 ```cpp
 // Important:
@@ -685,7 +1119,8 @@ fs.Bar();           // instantiates Foo<string>::Bar()
 
 ## Variadic Templates
 
-- a template function or class that can take a varying number of parameters. 
+- a function or class template that can take a varying number of parameters. 
+  - phth: variadic functions are often recursive, but they don't *have to* be recursive
 - The varying parameters are known as a **parameter pack**.
 - There are two kinds of parameter packs:
   - A **template parameter pack** represents zero or more template parameters, 
@@ -775,6 +1210,7 @@ print(cout, 42) calls the nonvariadic version of print | |
 ```cpp
 // - the pattern is "const Args&"
 // - the pattern is applied to each element in the template parameter pack "Args"
+// - pattern expands to: comma-separated list of zero or more parameter types, each of which will have the form const type&
 print(cout, i, s, 42); // two parameters in the pack
 
 // This call is instantiated as 
@@ -782,17 +1218,20 @@ ostream& print(ostream&, const int&, const string&, const int&);
 ```
 
 ```cpp
-// - the pattern is the name of the function parameter pack (i.e., rest)
+// - the pattern is the name of the function parameter pack (i.e., "rest")
+// - pattern expands to: comma-separated list of the elements in the pack
 print(os, rest...)
 
 // this call is equivalent to
 print(os, s, 42);
 ```
 
-More complicated patterns are also possible when we expand a function parameter pack:
+More complicated patterns are also possible:
 
 ```cpp
-// call debug_rep on each argument in the call to print
+// - the pattern is "debug_rep(rest)"
+// - call debug_rep on each argument in the call to print
+// - pattern expands to: comma-separated list of calls to debug_rep
 template <typename... Args>
 ostream &errorMsg(ostream &os, const Args&... rest)
 {
@@ -809,7 +1248,7 @@ print(cerr, debug_rep(fcnName), debug_rep(code.num()),
             debug_rep(item));
 ```
 
-Note: It is important where you put the ellipsis "`...`":
+**Warning**: It is important where you put the ellipsis `...`:
 
 ```cpp
 // passes the pack to debug_rep; print(os, debug_rep(a1, a2, ..., an))
@@ -838,6 +1277,81 @@ fun(10, 'c');
 
 // ... will execute as if we had written
 work(std::forward<int>(10), std::forward<char>(c))
+```
+
+## Fold Expressions
+
+- since C++17
+
+cppreference:
+
+```cpp
+( pack op ... )                // (1) unary right fold
+( ... op pack )                // (2) unary left fold
+( pack op ... op init )        // (3) binary right fold
+( init op ... op pack )        // (4) binary left fold
+```
+
+VJ4.2:
+
+Fold Expression         | Evaluation
+:--- | :---
+`( ... op pack )`         | `((( pack1 op pack2 ) op pack3 ) ... op packN )`
+`( pack op ... )`         | `( pack1 op ( ... ( packN-1 op packN )))`
+`( init op ... op pack )` | `((( init op pack1 ) op pack2 ) ... op packN )`
+`( pack op ... op init )` | `( pack1 op ( ... ( packN op init )))`
+
+related: [fluentcpp](https://www.fluentcpp.com/2021/03/12/cpp-fold-expressions/)
+
+### Repeating Operations, Comma Operator
+
+From [fluentcpp](https://www.fluentcpp.com/2021/03/19/what-c-fold-expressions-can-bring-to-your-code/):
+
+- fold over the **comma operator**
+- the default version of the comma operator
+  1. executes the left operand
+  2. then the right operand
+  3. then returns the right operand
+
+**Example:**
+
+```cpp
+// Adding several elements to a vector
+
+auto v = std::vector<int>{1, 2, 3};
+
+// bad: repeats code
+v.push_back(4);
+v.push_back(5);
+v.push_back(6);
+v.push_back(7);
+v.push_back(8);
+v.push_back(9);
+v.push_back(10);
+
+// unary right fold
+// instead, we can call multiple "push_back"s in a single expression
+template<typename T, typename... Ts>
+void push_back(std::vector<T>& v, Ts&&... values)
+{
+    (v.push_back(std::forward<Ts>(values)), ...);
+}
+
+// then, call push_back
+push_back(v, 4, 5, 6, 7, 8, 9, 10);
+```
+
+- The `,` operator in C++ is **associative** (see "cpp.md" &rarr; "Comma Operator").
+  - it does **not** matter whether we use a **left fold** or a **right fold**, the result will be **the same**:
+  
+```cpp
+// unary left fold
+// will have the same result as the unary right fold above
+template<typename T, typename... Ts>
+void push_back(std::vector<T>& v, Ts&&... values)
+{
+    (..., v.push_back(std::forward<Ts>(values)));
+}
 ```
 
 ## Constraints
