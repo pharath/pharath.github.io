@@ -233,6 +233,10 @@ sudo snap install pdftk | use `pdftk full-pdf.pdf cat 12-15 output outfile_p12-1
 | :--- | :--- |
 `sudo apt install keepass2` | password manager
 
+| command | description |
+| :--- | :--- |
+`sudo apt install gpick` | color picker (get hex code of a color by pointing with the mouse at some point on the screen, [stackoverflow](https://stackoverflow.com/a/10243630/12282296))
+
 # Dotfiles
 
 **Versioning**: see [atlassian.com](https://www.atlassian.com/git/tutorials/dotfiles)
