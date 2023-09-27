@@ -111,7 +111,7 @@ After `refVal` is initialized, whenever you mention its name, it behaves like th
 
 There is no type "**reference to reference** to `int`", `int&(&)`.
 
-### reference to const 
+### reference to const
 
 - aka "`const` reference", "lvalue reference to a `const` value"
 - `X const& x` is equivalent to `const X& x`, and `X const* x` is equivalent to `const X* x`. (see [isocpp.org](https://isocpp.org/wiki/faq/const-correctness#const-ref-nonsense))
@@ -174,7 +174,7 @@ Lip15.2.3:
 
 - "are primarily intended for use inside classes" (Lip2.3.1)
 - introduced by the new standard to support move operations
-- a reference that must be bound to an rvalue
+- must be bound to an rvalue
 - obtained by using `&&`
 - may be bound only to an object that is about to be destroyed
   - so that we are free to "move" resources from an rvalue reference to another object

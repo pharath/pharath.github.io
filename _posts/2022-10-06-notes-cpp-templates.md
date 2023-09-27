@@ -188,6 +188,8 @@ auto val3 = sum<long long>(i, lng); // long long sum(int, long)
 
 ### Trailing Return Type
 
+- since C++11
+
 Lippman:
 
 - useful, **if** we want to determine the return type automatically (eg. from the function's parameters)
@@ -247,6 +249,10 @@ auto fcn(It beg, It end) -> decltype(*beg)
 - But what if we want to return **by value**?
   - in this case, we must use the type trait `remove_reference`
   - see `fcn2()` in examples in section "`remove_reference` Class Template"
+
+#### `auto` Without Trailing Return Type
+
+- the use of `auto` for the return type **without a corresponding trailing return type** (which would be introduced with a `->` at the end) indicates that the actual return type must be deduced from the **return statements** in the function body (VJ1.3.2)
 
 ## Type Traits
 
@@ -450,6 +456,8 @@ compare("hi", "mom")
 // (Recall: the compiler inserts a null terminator at the end of a string literal)
 int compare(const char (&p1)[3], const char (&p2)[4])
 ```
+
+- but **for constructors** using an `initializer_list` is more convenient, see "functions.md" &rarr; "`initializer_list`"
 
 #### Deducible Nontype Parameters (auto Nontype Parameters)
 
@@ -1119,8 +1127,8 @@ fs.Bar();           // instantiates Foo<string>::Bar()
 
 ## Variadic Templates
 
-- a function or class template that can take a varying number of parameters. 
-  - phth: variadic functions are often recursive, but they don't *have to* be recursive
+- a function or class template that can take a varying number of parameters. (&rarr; "functions.md" &rarr; "Functions with Varying Parameters")
+- *phth*: variadic functions are often recursive, but they don't *have to* be recursive
 - The varying parameters are known as a **parameter pack**.
 - There are two kinds of parameter packs:
   - A **template parameter pack** represents zero or more template parameters, 
@@ -1359,8 +1367,7 @@ void push_back(std::vector<T>& v, Ts&&... values)
 ### Requirement
 
 - an ELEMENT OF of the set `requirement-seq` in a [requires expression](#requires-expression)
-
-see `requirement-seq` in section "requires expression"
+  - see `requirement-seq` in section "[requires expression](#requires-expression)"
 
 #### Compound Requirement
 
@@ -1439,7 +1446,7 @@ requires ( parameter-list(optional) ) { requirement-seq }
 
 - a requirement expression can appear inside a requirement clause, and vice versa
 - **remember**: a requires **clause**
-  - ~has no braces~
+  - ~~has no braces~~
   - appears typically 
     - after a `template<typename>` or 
     - as the last element of a function declarator

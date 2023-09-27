@@ -303,37 +303,103 @@ T x = T(T(f())); // x is initialized by the result of f() directly; no move
 
 - Sometimes we do not know in advance **how many arguments** we need to pass to a function
 - **two primary ways** to write a function that takes a varying number of arguments
-  - if all the arguments have the same type
+  1. if all the arguments have the same type
     - pass a library type named `initializer_list`
-  - if the argument types vary
-    - write a special kind of function, known as a [variadic template](#variadic-templates)
-- ellipsis
+  2. if the argument types vary
+    - write a special kind of function, known as a **variadic template**
+- **ellipsis**
   - special parameter type
   - can be used to pass a varying number of arguments
   - should be used only in programs that need to interface to C functions
 
 ### `initializer_list`
 
+- **primary use**:
+  - to write a function that takes a **varying number of arguments** (all of the same type)
+    - although you could use a function template with call parameter `int const (&arr)[N]` (= `const int (&arr)[N]`) instead, see [C-style Array vs `initializer_list`](#c-style-array-vs-initializer_list) and "templates.md" &rarr; "Passing Variable Size Arrays"
+      - but this is **less convenient** because it introduces **(1)** the nontype template parameter `N` and **(2)** the type parameter for the array elements (here: `int`), whereas `intializer_list<int>` needs only **(2)** the type parameter for the elements
+  - "**Initializer-list constructors**" (BJ5.2.3)
+    - like [constructor (10) for `vector`](https://en.cppreference.com/w/cpp/container/vector/vector)
+
+Lippman:
+
+- defined in the `<initializer_list>` header
 - a library type 
-- a template type
-- represents an array of values of the specified type
-- defined in the `initializer_list` header
-- elements are always `const` values
-  - there is no way to change the value of an element
-- operations:
+- a class template
+
+#### Backing Array
+
+- an `initializer_list` object "represents an **array** of values of the specified type", (Lip)
+  - Why "array"?
+    - "An object of type `std::initializer_list<T>` is a lightweight **proxy object** ("Zwischenobjekt") that provides **access to** an **array** of objects of type `const T`.", [cppreference](https://en.cppreference.com/w/cpp/utility/initializer_list)
+      - **"backing array"**: "An object of type `std::initializer_list<E>` is constructed from an initializer list as if the compiler generated (...) a prvalue of type "array of `N` `const E`", where `N` is the number of elements in the initializer list; this is called the initializer list's **backing array**.", [cppreference](https://en.cppreference.com/w/cpp/language/list_initialization#List-initializing_std::initializer_list)
+        - "Copying a `std::initializer_list` does not copy the **backing array** of the corresponding initializer list.", [cppreference](https://en.cppreference.com/w/cpp/language/list_initialization#List-initializing_std::initializer_list)
+
+**Example 1:** "Each element **of the backing array** is **copy-initialized** with the corresponding element of the initializer list, and the `std::initializer_list<E>` object is constructed to **refer to** that array.", [cppreference](https://en.cppreference.com/w/cpp/language/list_initialization#List-initializing_std::initializer_list)
 
 ```cpp
+// "backing array"
+
+// phth: what WE see
+void f(std::initializer_list<double> il);
+void g(float x)
+{
+   f({1, x, 3});
+}
+
+// phth: what THE COMPILER sees
+void g(float x)
+{
+    const double __a[3] = {double{1}, double{x}, double{3}}; // backing array
+    f(std::initializer_list<double>(__a, __a + 3));
+}
+```
+
+#### Immutability
+
+Lip:
+
+- elements are always `const` values
+  - there is **no way to change** the value of an **element**
+
+#### Initialization
+
+```cpp
+// Lip
 initializer_list<T> lst; // Default initialization; an empty list of elements of type T.
 initializer_list<T> lst{a,b,c...};
                 // lst has as many elements as there are initializers; elements are copies of
                 // the corresponding initializers. Elements in the list are const.
-lst2(lst)   // Copying or assigning an initializer_list does not copy the elements
-lst2 = lst  // in the list. After the copy, the original and the copy share the elements.
+```
+
+#### Copy, Assignment
+
+- "Copying a `std::initializer_list` does not copy the **backing array** of the corresponding initializer list.", see ["Backing Array"](#backing-array)
+  - phth: like a `shared_ptr` (where `shared_ptr`'s "handled resource" corresponds to `initializer_list`'s "backing array")
+
+```cpp
+// Lip
+// Copying or assigning an initializer_list does not copy the elements
+// in the list. After the copy, the original and the copy share the elements.
+lst2(lst)
+lst2 = lst
+```
+
+#### Iterators, Capacity
+
+```cpp
+// Lip
+// Capacity
 lst.size()  // Number of elements in the list.
+// Iterators
 lst.begin() // Returns a pointer to the first and one past the last element in lst.
 lst.end()
 ```
 
+#### As Function Parameter
+
+- phth: `initializer_list` is often used to write a function that takes a **varying number of arguments**
+  - phth: this is useful (and often used), e.g. when passing a **constructor parameter** for a sequential container, see [stackoverflow](https://stackoverflow.com/a/56169251/12282296) and "**Initializer-list constructors**" (BJ5.2.3)
 - When we pass a sequence of values to an `initializer_list` parameter, we must enclose the sequence in curly braces
 
 ```cpp
@@ -351,6 +417,8 @@ else
   error_msg({"functionX", "okay"});
 ```
 
+#### range for
+
 - we can use a **range for** to process the elements
 
 ```cpp
@@ -362,6 +430,30 @@ void error_msg(ErrCode e, initializer_list<string> il)
   cout << endl;
 }
 ```
+
+#### C-style Array vs `initializer_list`
+
+From [stackoverflow](https://stackoverflow.com/a/56169251/12282296):
+
+Plain and simple: `initializer_list` isn't a container. It's an immutable view onto externally allocated elements. It's utterly unsuitable for any scenario a container would be useful in - consider the needless indirection (no resizability), the immutability, the idiomacy of its name. On top of that, it has no proper interface.
+
+A situation where both seem adequate is a **constructor parameter** for a sequence ("**Initializer-list constructors**" (BJ5.2.3)). If the length is fixed (or template-parametrized), then `int const (&arr)[N]` is possible, although `initializer_list` is far simpler and more flexible. After all, **that's what it was designed and intended for**..
+
+Comments:
+
+- (...) why do you say that `intializer_list` is "far simpler and more flexible"? - **max66** `May 16, 2019 at 13:19`
+- **@max66** It's simpler and more flexible as it doesn't require you to think of, or constrain **length** the same way an array parameter would. - **Columbo** `May 16, 2019 at 15:38`
+  - phth: see example in ["As Function Parameter"](#as-function-parameter), this is why we are in section **"Functions with Varying Parameters"** here
+
+### Variadic Templates
+
+see "templates.md"
+
+### Ellipsis
+
+- special parameter type
+- can be used to pass a varying number of arguments
+- should be used only in programs that need to interface to C functions
 
 ## Return
 

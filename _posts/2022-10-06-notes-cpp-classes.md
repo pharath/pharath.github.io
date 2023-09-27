@@ -40,7 +40,7 @@ tags:
   - **cannot** have data members of its own type
   - **can** have data members that are pointers or references to its own type
 
-## Compile Order
+## Order of Compilation
 
 compile order: **two steps** 
 
@@ -181,7 +181,8 @@ Basically, it allows you to traverse up to the global namespace since your name 
 cppreference: (aka **"member initializer list"**)
 
 - "The body of a function definition of any constructor, before the opening brace of the compound statement (see [statements](#statements)), may include the **member initializer list**, whose syntax is the colon character `:`, followed by the comma-separated list of one or more member-initializers, each of which has the following syntax ..."
-- "Before the compound statement that forms the function body of the constructor begins executing, initialization of all direct bases, virtual bases, and non-static data members is finished. The **member initializer list** is the place where **non-default initialization** of these objects can be specified."
+- "Before the compound statement that forms the function body of the constructor begins executing, initialization of all direct bases, virtual bases, and non-static data members is finished."
+- "The **member initializer list** is the place where **non-default initialization** of these objects can be specified."
   - thus, all members omitted in the member initializer list are **default initialized**
 
 #### Initialization vs Assignment
@@ -372,7 +373,7 @@ Defined as deleted (see p.508, 538), if
 - "a (...) member function with the name `operator=` that takes **exactly one parameter** of type `T`, `T&`, `const T&`"
 
 ```cpp
-class-name & class-name ::operator= ( const class-name & )   // (2)
+class-name& class-name::operator=(const class-name&)   // (2)
 ```
 
 - used for **assignment**, whereas the Copy Constructor is used for **initialization**
@@ -804,7 +805,11 @@ hasX hx, hx2 = std::move(hx);   // uses the synthesized move constructor
 
 ### Move-Assignment Operator
 
-- "a non-template non-static member function with the name `operator=` that takes exactly one parameter (...) of type `T&&,` `const T&&`, `volatile T&&`, or `const volatile T&&`."
+- a non-template non-static member function with the name `operator=` that takes exactly one parameter (...) of type
+  - `T&&`,
+  - `const T&&`,
+  - `volatile T&&`, or
+  - `const volatile T&&`.
 
 ```cpp
 class-name& class-name::operator=(class-name&&) 	// (1)

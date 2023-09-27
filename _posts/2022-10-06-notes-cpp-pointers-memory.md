@@ -179,6 +179,8 @@ From [stackoverflow](https://stackoverflow.com/a/8783589):
 # Arrays
 
 - a **compound type**
+- an **array type** looks like eg. `int[7]`, `double[7][8]`, etc.
+  - (see shift - k definition in nvim in `array_init.cpp`)
 - the **dimension** must be a **constant expression**
 - cannot use `auto` to deduce the type
 - elements in an array are **default initialized**
@@ -516,7 +518,15 @@ const string *pcs = new const string;   // allocate a default-initialized const 
 // - pci and pcs are "pointers to const"
 ```
 
-## Memory Exhaustion and Exceptions
+### Constructors Throwing Exceptions
+
+cppreference:
+
+- "If initialization terminates by throwing an exception (e.g. from the constructor), if `new`-expression allocated any storage, it calls the appropriate **deallocation function**: `operator delete` for non-array type, operator `delete[]` for array type."
+- "The call to the deallocation function is made **the value obtained earlier from the allocation function** passed as the first argument (...) and `placement-params`, if any, passed as the additional placement arguments"
+  - *phth*: ie. if we used `A *ptr = new A` for allocation, then `delete ptr` is called (ie. `ptr` is "the value obtained earlier from the allocation function")
+
+### Memory Exhaustion and Exceptions
 
 Memory Exhaustion:
 - by default, if `new` is unable to allocate the requested storage, it throws an **exception** of type `bad_alloc` (defined in the `new` header)
@@ -535,6 +545,17 @@ int *p2 = new (nothrow) int;    // if allocation fails, new returns a null point
 - In order to prevent memory exhaustion, we must return dynamically allocated memory to the system once we are finished using it. We return memory through a `delete` expression.
 
 ## delete
+
+cppreference:
+
+```cpp
+delete expression     // (1)
+```
+
+1. **destructor:** "If `expression` is not a null pointer (...), the `delete` expression invokes the **destructor** (if any) for the object that's being destroyed, or for every element of the array being destroyed (proceeding from the last element to the first element of the array)."
+2. **delete:** "After that, whether or not an exception was thrown by any destructor, the delete expression invokes the **deallocation function**: either `operator delete` (for the first version of the expression) or `operator delete[]` (for the second version of the expression)"
+
+Lippman:
 
 - `delete`
   - takes a pointer to a dynamic object
@@ -560,8 +581,6 @@ delete pi2;     // ok: it is always ok to delete a null pointer
 const int *pci = new const int(1024);
 delete pci;     // ok: deletes a const object
 ```
-
-- cppreference: "If `expression` is not a null pointer (...), the `delete` expression invokes the **destructor** (if any) for the object that's being destroyed, or for every element of the array being destroyed (proceeding from the last element to the first element of the array)."
 
 ## Common Problems
 

@@ -44,6 +44,10 @@ From [stackoverflow](https://www.tutorialspoint.com/cplusplus/cpp_overloading.ht
 
 **overloaded declaration**, **overload resolution**: An overloaded declaration is a declaration that is declared with the same name as a previously declared declaration in the same scope, except that both declarations have different arguments and obviously different definition (implementation). When you call an overloaded **function** or **operator**, the compiler determines the most appropriate definition to use, by comparing the argument types you have used to call the function or operator with the parameter types specified in the definitions. The process of selecting the most appropriate overloaded function or operator is called **overload resolution**.
 
+## The main function
+
+- the main function may **not** be overloaded
+
 # Overriding
 
 - "**Overriding** a function means changing the implementation of a base class function in a derived class." (Day 12, J Liberty)
