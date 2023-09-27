@@ -122,6 +122,7 @@ Plugin 'christoomey/vim-system-copy'
 - change the color of folders in the output of the `ls` command: [link](https://askubuntu.com/a/466203)
   - meaning of the `LS_COLORS` variable: "The first number is the style (1=bold), followed by a semicolon, and then the actual number of the color."
 - terminal `xterm` highlight groups [source](https://unix.stackexchange.com/a/172674): 
+
 ```bash
 # get the terminal's background color rgb
 printf '\033]11;?\007'
