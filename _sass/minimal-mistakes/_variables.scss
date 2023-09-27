@@ -62,8 +62,8 @@ $light-gray: mix(#fff, $gray, 50%) !default;
 $lighter-gray: mix(#fff, $gray, 90%) !default;
 
 $background-color: #fff !default;
-$code-color: #c7254e !default; // phth // = $base05
-$code-background-color: #f9f2f4 !default; // phth // = $base00
+$code-color: #c7254e !default;                    // dark-red // for "like code block" style: $base05
+$code-background-color: #f9f2f4 !default;         // light-red // for "like code block" style: $base00
 $code-background-color-dark: $light-gray !default;
 $text-color: $dark-gray !default;
 $muted-text-color: mix(#fff, $text-color, 20%) !default;
@@ -140,6 +140,50 @@ $base0c: #89ddff !default;
 $base0d: #82aaff !default;
 $base0e: #c792ea !default;
 $base0f: #ff5370 !default;
+
+// "base16" explanation of "base00"-"base0f": https://github.com/chriskempson/base16/blob/main/styling.md
+// "base16" framework: https://github.com/chriskempson/base16
+// list of schemes: https://github.com/chriskempson/base16-schemes-source
+
+// scheme: "OneDark"
+// author: "Lalit Magant (http://github.com/tilal6991)"
+// (https://github.com/LalitMaganti/base16-onedark-scheme/blob/master/onedark.yaml)
+// $base00: #282c34 !default;
+// $base01: #353b45 !default;
+// $base02: #3e4451 !default;
+// $base03: #545862 !default;
+// $base04: #565c64 !default;
+// $base05: #abb2bf !default;
+// $base06: #b6bdca !default;
+// $base07: #c8ccd4 !default;
+// $base08: #e06c75 !default;
+// $base09: #d19a66 !default;
+// $base0a: #e5c07b !default;
+// $base0b: #98c379 !default;
+// $base0c: #56b6c2 !default;
+// $base0d: #61afef !default;
+// $base0e: #c678dd !default;
+// $base0f: #be5046 !default;
+
+// scheme: "Github"
+// author: "Defman21"
+// (https://github.com/Defman21/base16-github-scheme/blob/master/github.yaml)
+// $base00: #ffffff !default;
+// $base01: #f5f5f5 !default;
+// $base02: #c8c8fa !default;
+// $base03: #969896 !default;
+// $base04: #e8e8e8 !default;
+// $base05: #333333 !default;
+// $base06: #ffffff !default;
+// $base07: #ffffff !default;
+// $base08: #ed6a43 !default;
+// $base09: #0086b3 !default;
+// $base0a: #795da3 !default;
+// $base0b: #183691 !default;
+// $base0c: #183691 !default;
+// $base0d: #795da3 !default;
+// $base0e: #a71d5d !default;
+// $base0f: #333333 !default;
 
 /*
    Breakpoints (explanation: https://getbootstrap.com/docs/5.0/layout/breakpoints/)
