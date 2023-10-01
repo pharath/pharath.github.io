@@ -1075,7 +1075,13 @@ TODO: The `xmodmap ~/.Xmodmap` in your `.bashrc` is executed every time a new te
 | :--- | :--- |
 `retext markdown_file.md` | edit markdown_file.md
 `retext --preview markdown_file.md` | preview `markdown_file.md`
-|**Tipp:**| Shortcuts: s. Menu &rarr; File und Edit
+**Tipp:**| Shortcuts: s. Menu &rarr; File und Edit
 ctrl + e | preview on/off
 ctrl + l | live preview on/off (die live updates brauchen manchmal bisschen)
 
+## grip
+
+- see [manpages.ubuntu.com](https://manpages.ubuntu.com/manpages/focal/man1/grip.1.html)
+- "Preview GitHub Markdown files like Readme locally"
+- view in firefox
+- `grip file.md 6420` (to open a second file on a different port, here `6420`)
