@@ -11,6 +11,41 @@ tags:
   - notes
 ---
 
+# xml
+
+## DOM Parser vs SAX Parser
+
+From [stackoverflow](https://stackoverflow.com/a/6828897/12282296):
+
+In just a few words...
+
+SAX (**S**imple **A**PI for **X**ML): Is a stream-based processor. You only have a tiny part in memory at any time and you "sniff" the XML stream by implementing callback code for events like `tagStarted()` etc. It uses almost no memory, but you can't do "DOM" stuff, like use xpath or traverse trees.
+
+DOM (**D**ocument **O**bject **M**odel): You load the whole thing into memory - it's a massive memory hog. You can blow memory with even medium sized documents. But you can use xpath and traverse the tree etc.
+
+# PostgreSQL
+
+- CLI
+- see [ubuntu.com](https://ubuntu.com/server/docs/databases-postgresql)
+
+```bash
+# start the server
+sudo apt install postgresql-12
+sudo pg_ctlcluster 12 main start
+sudo pg_ctlcluster 12 main stop
+sudo pg_ctlcluster 12 main status
+```
+
+```bash
+# in another terminal
+# connect to a database
+sudo -u postgres psql template1
+# here you run (lowercase/uppercase does not matter)
+CREATE TABLE College(cName text, state text, enrollment int);
+insert into College values ('Stanford', 'CA', 15000);
+SELECT * FROM Student;
+```
+
 # List of DBMS
 
 [Ranking according to the popularity](https://db-engines.com/en/ranking)
