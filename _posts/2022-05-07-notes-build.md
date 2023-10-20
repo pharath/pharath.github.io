@@ -369,6 +369,7 @@ Hello, I am a shared library
 **Position independent code**: PIC is code that works no matter where in memory it is placed. Because several different programs can all use one instance of your shared library, the library cannot store things at fixed addresses, since the location of that library in memory will vary from program to program.
 
 If we want to **install** our library so everybody on the system can use it:
+
 ```bash
 $ cp /home/username/foo/libfoo.so /usr/lib
 $ chmod 0755 /usr/lib/libfoo.so

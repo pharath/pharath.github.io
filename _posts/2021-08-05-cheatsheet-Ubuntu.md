@@ -42,7 +42,7 @@ End-Date: 2022-12-03  06:16:03
 
 ## For Bluetooth Settings Icon in Ubuntu Activities
 
-- Create .desktop file (".desktop" ending required!) with this content
+- Create `.desktop` file (`.desktop` ending required!) with this content
 
 ```bash
 [Desktop Entry]
@@ -51,17 +51,18 @@ Exec=gnome-control-center bluetooth
 Terminal=false
 Type=Application
 ```
+
 - Make sure that your script is executable, like this:
 
 ```bash
 sudo chmod +x /path/to/script.sh  
 ```
 
-(if it does not execute, copy it to ~/Desktop/. There right-click on it and select "Allow Launching".)
+(if it does not execute, copy it to `~/Desktop/`. There right-click on it and select "Allow Launching".)
 
 ![allow launching pic](https://i.ibb.co/2ZQfnGY/allow-launching.png)
 
-- Move .desktop file to `/usr/share/applications/`. Press `Super` to open Activities and in the application grid view select "All" (instead of "Frequent") and search the created .desktop file there. Right-click on it and select "Add to Favorites". Now the .desktop file should be in the dock and can be accessed via shortcut `Super + <position_in_dock>`.
+- Move .desktop file to `/usr/share/applications/`. Press `Super` to open Activities and in the application grid view select "All" (instead of "Frequent") and search the created `.desktop` file there. Right-click on it and select "Add to Favorites". Now the `.desktop` file should be in the dock and can be accessed via shortcut `Super + <position_in_dock>`.
 
 - It also won't work with if your script uses the sudo command, or anything else that requires user input.
 
@@ -391,6 +392,24 @@ In Ubuntu Settings create a new Shortcut (press `'+'` button at the bottom to cr
 # PDF Reader
 
 ## Okular
+
+### Shortcuts
+
+| command | description |
+| :--- | :--- |
+F6 | toggle annotation tools bar
+F7 | toggle page preview pane
+ctrl + m | toggle menu bar
+ctrl + shift + , | configure okular
+ctrl + e | configure shortcuts
+
+### Annotation Tools
+
+**Configure annotation tools via GUI**:
+
+- right click on the annotation widget/bar (**F6** to toggle the annotation widget/bar)
+
+**Configure annotation tools via `tools.xml`**:
 
 ```bash
 /usr/share/okular/tools.xml
