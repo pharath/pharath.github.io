@@ -262,21 +262,27 @@ In `~/.bash_aliases`:
 
 # System Folder
 
+| command | description |
+| :--- | :--- |
 `~/.local/share/Trash/files` | `rm FILE` command moves `FILE` to this location
 
 # General commands
 
 | command | description |
 | :--- | :--- |
-ctrl + r + Suchbegriff	|	reverse search (mehrmals ctrl + r drücken, um zwischen den Suchbegriff enthaltenden commands auszuwählen, danach `->` um zu übernehmen bzw `Enter` um auszuführen)
+ctrl + r + Suchbegriff | reverse search (mehrmals ctrl + r drücken, um zwischen den Suchbegriff enthaltenden commands auszuwählen, danach `->` um zu übernehmen bzw `Enter` um auszuführen)
 
 ## Root
 
 | command | description |
 | :--- | :--- |
-sudo -i	| run single command with root privileges (does not require root password !)
-sudo -s | run single command with root privileges (does not require root password !) + do not change user and working directory
-su | switches to super user (root user) (requires root password !) (in Ubuntu: root account disabled by default for improved security)
+`sudo` | an acronym for **SuperUser & Do** or **Switch User & DO**
+`sudo -i` | run single command with root privileges (does not require root password !)
+`sudo -s` | run single command with root privileges (does not require root password !) + do not change user and working directory
+`su` | switches to super user (root user) (requires root password !) (in Ubuntu: root account disabled by default for improved security)
+`su -` | `-` (`-l`, `--login`) flag: the shell switches from its original directory to a login shell that simulates an actual login.
+`sudo su postgres` | Switches to the specified user's account (here: `postgres`) **and** it will inherit the original user's environment variables to target user
+`sudo su - postgres` | Switches to the specified user's account (here: `postgres`), **but does not** inherit the original user's environment variables, instead it resets all environment variables and creates them again
 
 ## Nohup
 
@@ -627,9 +633,14 @@ cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen 
 
 ### grep
 
-`grep -rn -e 'nvidia' /var/log/apt/history.log*` | r: recursively look at all files in the folder, n: show line numbers, e: regex pattern, here: `nvidia` (w/o this some regex patterns will not work)
-`grep -rnw -e 'nvidia' /var/log/apt/history.log*` | w: match whole words only (i.e. if the pattern `nvidia` is a substring of a word, it is not matched)
+| command | description |
+| :--- | :--- |
+`grep -rn -e 'nvidia' /var/log/apt/history.log*` | `r`: recursively look at all files in the folder, `n`: show line numbers, `e`: regex pattern, here: `nvidia` (w/o this some regex patterns will not work)
+`grep -rnw -e 'nvidia' /var/log/apt/history.log*` | `w`: match whole words only (i.e. if the pattern `nvidia` is a substring of a word, it is not matched)
 `grep -r -E 'orange|mango' .` | logical OR operator
+`l | grep 150 | xargs rm -v` | pipe output of `grep` to `rm`
+`l | grep xyzpattern | xargs cp -iv -t 150/` | pipe output of `grep` to `cp`
+`l | grep xyzpattern | xargs mv -iv -t 1024p/` | pipe output of `grep` to `mv`
 
 ### sed
 

@@ -52,12 +52,22 @@ tags:
 | :--- | :--- |
 `git branch -a` | show/list all branches (local and remote)
 `git branch -r` | show/list all branches (only remote)
-`git branch -d *local_branch*` | delete local branch *local_branch*
-`git push origin --delete *remote/branch*` | delete remote branch *remote/branch*
+`git branch -d *local_branch*` | delete local branch `local_branch`
+`git push origin --delete *remote/branch*` | delete remote branch `remote/branch`
 `git branch -m new_name` | rename branch (`--move`)
 `git branch -M new_name` | force rename branch (`--move --force`), ie rename even if the branch name exists
 `git branch -vv` | show which **local branches** track which **remote branches**, useful e.g. when you are creating and setting up new branches
-`git branch --set-upstream my_branch origin/my_branch` | make the **local** `my_branch` track the **remote** `origin/my_branch` (similar to `git push --set-upstream origin <new_branch>`)
+
+Track another branch, [stackoverflow](https://stackoverflow.com/a/2286030/12282296):
+
+| command | description |
+| :--- | :--- |
+`git branch -u upstream/foo` | As of Git 1.8.0, make the local branch `foo` track remote branch `foo` from remote `upstream` 
+`git branch -u upstream/foo foo` | if local branch `foo` is not the current branch
+`git branch --set-upstream-to=upstream/foo` | if you like to type longer commands, these are equivalent to the above two
+`git branch --set-upstream-to=upstream/foo foo` |
+`git branch --set-upstream foo upstream/foo` | As of Git 1.7.0 (before 1.8.0)
+`git branch --set-upstream my_branch origin/my_branch` | (similar to `git push --set-upstream origin <new_branch>`)
 
 ## git checkout, git switch
 

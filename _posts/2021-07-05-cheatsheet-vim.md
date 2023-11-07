@@ -144,12 +144,24 @@ Use [regexr.com](https://regexr.com/) to ...
 
 | command | description |
 | :--- | :--- |
-`^`	| vim: jump to the first non-blank character of the line; regexp: beginning of line ( praktisch für netrw: zB für jump to nächstem Ordner der mit "i" anfängt: /^i )
-`\n` oder `\r` | linebreak (man kann damit auch linebreaks suchen und mit einem whitespace (ie einfach 1x Leertaste) ersetzen)
-`:%s/pattern/replace/g`	| find pattern (regexp) and replace with replace. The basic construct of the command is `s#search#replace#`. `%`: tells the regex to work on **all lines** in the vim buffer. `g`: match multiple times in a single line. **Achtung**: Sonderzeichen (eg. Klammern, Punkt, ...) muss ein `\` vorangestellt werden!
+`:%s/pattern/xyz/g` | find `pattern` (regexp) and replace with `xyz`. The basic construct of the command is `s#search#replace#`. `%`: tells the regex to work on **all lines** in the vim buffer. `g`: match multiple times in a single line. **Achtung**: Sonderzeichen (eg. Klammern, Punkt, ...) muss ein `\` vorangestellt werden!
+`:%s/pattern/xyz/gc` | `c`: interactive replace
 `:s///` | find and replace **just on the current line**. 
+`^` | regexp: beginning of line (praktisch für netrw: zB für jump to nächstem Ordner der mit "i" anfängt: `/^i`)
+`\n` oder `\r` | linebreak (man kann damit auch linebreaks suchen und mit einem whitespace (ie einfach 1x Leertaste) ersetzen)
+
+### Match Lines Containing xyz
+
+| command | description |
+| :--- | :--- |
+`:g/pattern/d` | remove all lines containing `pattern`
+`:%s/^.*John.*$//g` | match the entire line that **contains** `John` 
+
+### Whitespaces
+
+| command | description |
+| :--- | :--- |
 `:%s/  /    /g`	| replace two spaces with four spaces
-`:g/pattern/d` | remove all lines containing "pattern"
 `^\R`  | blank line (exact empty line)
 `^\h\*\R` | for empty lines with blanks, only
 

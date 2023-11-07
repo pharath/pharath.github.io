@@ -11,17 +11,61 @@ tags:
   - notes
 ---
 
-# xml
+# List of DBMS
 
-## DOM Parser vs SAX Parser
+[Ranking according to the popularity](https://db-engines.com/en/ranking)
 
-From [stackoverflow](https://stackoverflow.com/a/6828897/12282296):
+# Types of Databases
 
-In just a few words...
+- NoSQL Databases
+  - Key-value database
+    - Key–value cache 
+    - Key–value store
+    - Key–value store (eventually consistent) 
+    - Key–value store (ordered)
+  - Tuple store
+  - Triplestore
+  - Object database 
+  - Document store 
+  - Wide Column Store
+  - Native multi-model database
+  - Graph database
+  - Multivalue database
 
-SAX (**S**imple **A**PI for **X**ML): Is a stream-based processor. You only have a tiny part in memory at any time and you "sniff" the XML stream by implementing callback code for events like `tagStarted()` etc. It uses almost no memory, but you can't do "DOM" stuff, like use xpath or traverse trees.
+# 7 Database Paradigms
 
-DOM (**D**ocument **O**bject **M**odel): You load the whole thing into memory - it's a massive memory hog. You can blow memory with even medium sized documents. But you can use xpath and traverse the tree etc.
+**source**: [Fireship](https://fireship.io/lessons/top-seven-database-paradigms/)
+
+| DB Type | Popular |
+| :--- | :--- |
+Key-Value | Redis, Memcached, Etcd
+Wide Column | Cassandra, Apache HBase
+Document Oriented | MongoDB, Firestore, CouchDB
+Relational | MySQL, Postgres, SQL Server, CockroachDB
+Graph | Neo4j, DGraph, Janus Graph
+Search Engine | ElasticSearch, Algolia, MeiliSearch
+Multi-Model | FaunaDB, CosmosDB
+
+# Structured Data
+
+- data incorporating **relations** among entities and variables, [Wikipedia](https://en.wikipedia.org/wiki/SQL)
+
+# SQL
+
+Wikipedia:
+
+- Originally based upon **relational algebra** and tuple **relational calculus**
+- SQL consists of many **types of statements**, which may be informally classed as **sublanguages**, commonly:
+  - a data query language (DQL),
+  - a data definition language (DDL),
+  - a data control language (DCL),
+  - and a data manipulation language (DML).
+- The **scope** of SQL includes
+  - data query,
+  - data manipulation (insert, update, and delete),
+  - data definition (schema creation and modification), and
+  - data access control.
+- Although SQL is essentially a **declarative language** (4th generation programming language), it also includes **procedural elements**.
 
 # PostgreSQL
 
@@ -38,38 +82,90 @@ sudo pg_ctlcluster 12 main status
 
 ```bash
 # in another terminal
-# connect to a database
+
+# connect to a database (opens a SQL Shell)
 sudo -u postgres psql template1
-# here you run (lowercase/uppercase does not matter)
+```
+
+```bash
+# in the SQL Shell:
+
+# list all databases
+\l
+
+# switch the current database
+\c database-name
+# or
+\connect database-name
+
+# to show all tables in the current database:
+\dt
+# If you want to display also the size and description of the tables, use the following command:
+\dt+ 
+```
+
+```bash
+# in pgAdmin or SQL Shell:
+
+# run SQL commands (lowercase/uppercase does not matter)
+
+CREATE DATABASE database-name;
+DROP DATABASE database-name;
+SHOW DATABASES;
+
 CREATE TABLE College(cName text, state text, enrollment int);
-insert into College values ('Stanford', 'CA', 15000);
+DROP TABLE College;
+INSERT INTO College VALUES ('Stanford', 'CA', 15000);
+
 SELECT * FROM Student;
 ```
 
-# List of DBMS
+## pgAdmin
 
-[Ranking according to the popularity](https://db-engines.com/en/ranking)
+### pgAdmin: Install and Setup
 
-# Types of Databases
+From: [ubuntu.com](https://ubuntu.com/server/docs/databases-postgresql)
 
-NoSQL
-- Key-value database
-  - Key–value cache 
-  - Key–value store
-  - Key–value store (eventually consistent) 
-  - Key–value store (ordered)
-- Tuple store
-- Triplestore
-- Object database 
-- Document store 
-- Wide Column Store
-- Native multi-model database
-- Graph database
-- Multivalue database
+To connect `pgAdmin` to a database `template1`:
 
-# NoSQL
+```bash
+# connect to a database (opens a SQL Shell)
+sudo -u postgres psql template1
+
+# in the SQL Shell:
+# configure the password for the user postgres
+ALTER USER postgres with encrypted password 'your_password';
+```
+
+After configuring the password, edit the file `/etc/postgresql/*/main/pg_hba.conf` to use `scram-sha-256` authentication with the `postgres` user, allowed for the `template1` database, from any system in the local network (which in the example is `192.168.122.1/24`):
+
+```bash
+# insert this at the bottom of file /etc/postgresql/*/main/pg_hba.conf
+hostssl template1       postgres        192.168.122.1/24        scram-sha-256
+```
+
+Then open `pgAdmin`, click on "Quick Links" &rarr; "Add New Server" and enter the following configuration options:
+- Host name/Address: `localhost`
+- Port: `5432`
+- Maintenance database: `template1`
+- Username: `postgres`
+- Password: `your_password` (the one which was set above)
+
+In `pgAdmin` right-click on the server name &rarr; "Create" &rarr; "Database ..." to create a database.
+
+Related:
+- [tecmint](https://www.tecmint.com/install-postgresql-and-pgadmin-in-ubuntu/)
+- [psql: create a database](https://www.tutorialsteacher.com/postgresql/create-database)
+
+### pgAdmin: Query Tool
+
+- [Query Tool](https://www.pgadmin.org/docs/pgadmin4/latest/query_tool.html)
+- [Shortcuts](https://www.pgadmin.org/docs/pgadmin4/development/keyboard_shortcuts.html#query-tool)
+
+# NoSQL Databases
 
 Wikipedia:
+
 - A NoSQL (originally referring to "**non-SQL**" or "**non-relational**") database provides a mechanism for storage and retrieval of data that is modeled in means other than the tabular relations used in relational databases. 
 - Such databases have existed since the late 1960s, but the name "NoSQL" was only coined in the early 21st century, triggered by the needs of Web 2.0 companies. 
 - NoSQL databases are **increasingly used** in big data and real-time web applications. 
@@ -82,13 +178,20 @@ Wikipedia:
   - simpler "horizontal" scaling to clusters of machines (which is **a problem for relational databases**), 
   - finer control over availability and 
   - limiting the object-relational impedance mismatch. 
-- The **data structures** used by NoSQL databases (e.g. key–value pair, wide column, graph, or document) are **different** from those used by default in relational databases, making **some operations faster in NoSQL**.
-- The particular suitability of a given NoSQL database **depends on the problem** it must solve. 
-  - Sometimes the data structures used by NoSQL databases are also viewed as "more flexible" than relational database tables.
+- The **data structures** used by NoSQL databases are **different** from those used by default in relational databases, making **some operations faster in NoSQL**. Examples of NoSQL Data Structures:
+  - key–value pair
+  - wide column
+  - graph
+  - document
+- The particular **suitability** of a given NoSQL database **depends on the problem** it must solve.
+- Sometimes the **data structures** used by NoSQL databases are also viewed as **"more flexible" than relational database tables**.
+
+# Graph Data
 
 ## Graph Databases
 
 [Wikipedia](https://en.wikipedia.org/wiki/NoSQL#Graph):
+
 - **Graph databases** are designed for data whose relations are well represented as a **graph** consisting of elements connected by a finite number of relations. 
 - Examples of data include 
   - social relations, 
@@ -115,3 +218,28 @@ Graph query-programming languages [Wikipedia](https://en.wikipedia.org/wiki/Grap
 - GraphQL
 - Gremlin
 - SPARQL
+
+# Semi-Structured Data
+
+- xml
+- json
+
+# xml
+
+## DOM Parser vs SAX Parser
+
+From [stackoverflow](https://stackoverflow.com/a/6828897/12282296):
+
+In just a few words...
+
+SAX (**S**imple **A**PI for **X**ML): Is a stream-based processor. You only have a tiny part in memory at any time and you "sniff" the XML stream by implementing callback code for events like `tagStarted()` etc. It uses almost no memory, but you can't do "DOM" stuff, like use xpath or traverse trees.
+
+DOM (**D**ocument **O**bject **M**odel): You load the whole thing into memory - it's a massive memory hog. You can blow memory with even medium sized documents. But you can use xpath and traverse the tree etc.
+
+## XPath
+
+## XQuery
+
+## XSLT
+
+# json
