@@ -15,6 +15,51 @@ tags:
   - cheatsheet
 ---
 
+# Help
+
+## navigation
+
+| command | description |
+| :--- | :--- |
+`gO` | show **table of contents**
+`:h tag` | vim tags
+`ctrl + ]` (press when the cursor is on a tag) | jump to selected tag
+`ctrl + t` | jump back after pressing `ctrl + ]`
+`/pattern` | zB `/^i` springt zur nächsten Zeile, die mit i anfängt
+`/|.\{-}|` | (a special search pattern) jumps to next tag on the same help page
+
+## vim commands
+
+| command | description |
+| :--- | :--- |
+`:h` | help
+`:h :u`	| Manual zu `:u` Befehl (im Manual kann man zB via Befehl `:v` zu dem `:v` springen)
+`:h Q_<tab>` |
+`:h quickref` | und dann eg `_sc` um auf `Q_sc` tag zu springen
+
+![Screenshot_table](https://i.ibb.co/jw1X1nH/Screen-Shot-2021-06-10-at-3-51-04-AM-2.png)
+
+## keymaps
+
+| command | description |
+| :--- | :--- |
+`:h key-notation` | vim key notation
+`:h index` | list of all vim **default** keymaps
+`:map`, `:nmap`, `:vmap`, `:imap` | list all **custom** keymaps
+`:map <someKey>`, `:nmap <someKey>` | list all keymaps with `<someKey>`
+`:filter pattern imap` |
+`:h map-which-keys` | to see which keys are **not** mapped
+`:h i_CTRL-R` | lookup meaning of CTRL-R in insert mode (deshalb das `i_` prefix; `v_` prefix für visual mode usw. s. Tabelle unten drunter)
+
+## Plugins
+
+| command | description |
+| :--- | :--- |
+`:h coc-nvim.txt` | 
+`:h telescope.<tab>` |
+`:h lsp<tab>` |
+`:h comment.config` |
+
 # Plugins
 
 - `VundleVim/Vundle.vim`
@@ -71,51 +116,6 @@ Plugin 'christoomey/vim-system-copy'
 6. `ln -s libclang.so.1 libclang.so`
     - make a symlink (=symbolic link) called `libclang.so` to `libclang.so.1` in this directory
 
-# help
-
-## navigation
-
-| command | description |
-| :--- | :--- |
-`gO` | show **table of contents**
-`:h tag` | vim tags
-`ctrl + ]` (während cursor auf einem tag)	| springe zu selected tag
-`ctrl + t` | jump back after pressing `ctrl + ]`
-`/pattern` | zB `/^i` springt zur nächsten Zeile, die mit i anfängt
-`/|.\{-}|` | jump to next tag on the same help page
-
-## vim commands
-
-| command | description |
-| :--- | :--- |
-`:h` | help
-`:h :u`	| Manual zu `:u` Befehl (im Manual kann man zB via Befehl `:v` zu dem `:v` springen)
-`:h Q_<tab>` |
-`:h quickref`	| und dann eg `_sc` um auf `Q_sc` tag zu springen
-
-![Screenshot_table](https://i.ibb.co/jw1X1nH/Screen-Shot-2021-06-10-at-3-51-04-AM-2.png)
-
-## keymaps
-
-| command | description |
-| :--- | :--- |
-`:h key-notation` | vim key notation
-`:h index` | list of all vim **default** keymaps
-`:map`, `:nmap`, `:vmap`, `:imap` | list all **custom** keymaps
-`:map <someKey>`, `:nmap <someKey>` | list all keymaps with `<someKey>`
-`:filter pattern imap` |
-`:h map-which-keys` | to see which keys are **not** mapped
-`:h i_CTRL-R` | lookup meaning of CTRL-R in insert mode (deshalb das `i_` prefix; `v_` prefix für visual mode usw. s. Tabelle unten drunter)
-
-## Plugins
-
-| command | description |
-| :--- | :--- |
-`:h coc-nvim.txt` | 
-`:h telescope.<tab>` |
-`:h lsp<tab>` |
-`:h comment.config` |
-
 # Highlight Groups
 
 - setting hi group in lua: [link](https://www.reddit.com/r/neovim/comments/sihuq7/psa_now_you_can_set_global_highlight_groups_ie/)
@@ -165,14 +165,14 @@ Use [regexr.com](https://regexr.com/) to ...
 `^\R`  | blank line (exact empty line)
 `^\h\*\R` | for empty lines with blanks, only
 
-# Von Shell aus
+# Starting vim from Terminal
 
 | command | description |
 | :--- | :--- |
-vim .  | öffne netrw in current dir
-vim -r *file.swp* | restore *file.swp*
-vim -u vimrc-file file | use another `.vimrc` (to specify other `.vim` location `set runtimepath` in `.vimrc`, further details below in section "General facts/Change default `.vim` `.vimrc` location")
-vim --clean file | start clean without loading `.vimrc`
+`vim .` | öffne netrw in current dir
+`vim -r *file.swp*` | restore *file.swp*
+`vim -u vimrc-file file` | use another `.vimrc` (to specify other `.vim` location `set runtimepath` in `.vimrc`, further details below in section "General facts/Change default `.vim` `.vimrc` location")
+`vim --clean file` | start clean without loading `.vimrc`
 
 # netrw
 
