@@ -258,6 +258,9 @@ Git actions:
   - " (show all registers)
   - "ry (yank text to register "r)
   - "rp (paste text from register "r)
+  - record arbitrary normal mode commands:
+    - `qa5jq` (`q`: start recording into register "a", `5j`: record motion "5j", `q`: stop recording)
+      - `"a` (to use the recorded command `5j` in normal mode)
 - delete
   - D (like `d$`)
   - ciw (statt diwa, diwi)
