@@ -267,6 +267,15 @@ xdg-settings set default-web-browser firefox.desktop
 
 ### Using xdg-mime
 
+**Get**:
+
+```bash
+# To view the current default for opening directories:
+xdg-mime query default inode/directory
+```
+
+**Set**:
+
 ```bash
 xdg-mime default some_app some_filetype
 ```
@@ -275,6 +284,9 @@ E.g.
 
 ```bash
 xdg-mime default org.kde.okular.desktop application/pdf
+
+# To set Dolphin as default file manager:
+xdg-mime default org.kde.dolphin.desktop inode/directory
 ```
 
 creates an entry in the local MIME database `~/.config/mimeapps.list`.
@@ -308,6 +320,21 @@ mimeopen -d myfile.pdf
 ```
 
 will give you a list of applications that can open the file, and (the `-d` flag) will also update the default application for you. *Note*: After running this command the default works for `mimeopen myfile.pdf` only. `xdg-open myfile.pdf` and `nautilus` defaults need to be specified via `xdg-mime default some_app some_filetype` (see above)!
+
+# File Manager
+
+## Dolphin
+
+```bash
+sudo apt install dolphin
+```
+
+```bash
+sudo nvim /usr/share/applications/org.kde.dolphin.desktop
+
+# in org.kde.dolphin.desktop set:
+Exec=dolphin %u --new-window
+```
 
 # Pager
 
