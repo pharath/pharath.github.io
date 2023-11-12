@@ -19,18 +19,18 @@ tags:
 
 | command | description |
 | :--- | :--- |
-htop | activity monitor (sieht besser aus als "top")
-hardinfo | hardware info
-ncdu | like `du -sh`, but more convenient (because avoids typing)
+`htop` | activity monitor (sieht besser aus als `top`)
+`hardinfo` | hardware info
+`ncdu` | like `du -sh`, but more convenient (because avoids typing)
 
 | command | description |
 | :--- | :--- |
-ffmpeg | mp4 to mp3 converter
-ffmpeg -i foo.mp4 bar.mp3 | convert foo.mp4 to bar.mp3
-ffmpeg -i source.mp4 -ss 00:00:00 -t 00:00:00 -vcodec copy -acodec copy outsplice.mp4 | crop source.mp4 from start time `-ss` to time `-t`
-ffmpeg -i input.mov -qscale 0 output.mp4 | convert input.mov to output.mp4
-ffmpeg -i input.mp4 -ss 00:05:20 -t 00:10:00 -c:v copy -c:a copy output1.mp4 | take the input video input.mp4, and cut out 10 minutes from it starting from 00:05:20 (5 minutes and 20 second mark), i.e. the output video will be from 00:05:20 to 00:15:20. If you specify a duration that will result in a stop time that is beyond the length of the input video, the output video will end where the input video ends. [source](https://shotstack.io/learn/use-ffmpeg-to-trim-video/)
-ffmpeg -i input.mp4 -ss 00:05:10 -to 00:15:30 -c:v copy -c:a copy output2.mp4 | uses `-to` to specify an exact time to cut to from the starting position. The cut video will be from 00:05:10 to 00:15:30, resulting in a 10 minutes and 20 seconds video. If you specify a time `-to` that is longer than the input video, e.g. `-to 00:35:00` when the input video is 20 minutes long, the cut video will end where the input video ends. If you specify a `-to` that is smaller than `-ss`, then the command won't run. You'll get the following error: `Error: -to value smaller than -ss; aborting.` [source](https://shotstack.io/learn/use-ffmpeg-to-trim-video/)
+`ffmpeg` | mp4 to mp3 converter
+`ffmpeg -i foo.mp4 bar.mp3` | convert foo.mp4 to bar.mp3
+`ffmpeg -i source.mp4 -ss 00:00:00 -t 00:00:00 -vcodec copy -acodec copy outsplice.mp4` | crop source.mp4 from start time `-ss` to time `-t`
+`ffmpeg -i input.mov -qscale 0 output.mp4` | convert input.mov to output.mp4
+`ffmpeg -i input.mp4 -ss 00:05:20 -t 00:10:00 -c:v copy -c:a copy output1.mp4` | take the input video input.mp4, and cut out 10 minutes from it starting from 00:05:20 (5 minutes and 20 second mark), i.e. the output video will be from 00:05:20 to 00:15:20. If you specify a duration that will result in a stop time that is beyond the length of the input video, the output video will end where the input video ends. [source](https://shotstack.io/learn/use-ffmpeg-to-trim-video/)
+`ffmpeg -i input.mp4 -ss 00:05:10 -to 00:15:30 -c:v copy -c:a copy output2.mp4` | uses `-to` to specify an exact time to cut to from the starting position. The cut video will be from 00:05:10 to 00:15:30, resulting in a 10 minutes and 20 seconds video. If you specify a time `-to` that is longer than the input video, e.g. `-to 00:35:00` when the input video is 20 minutes long, the cut video will end where the input video ends. If you specify a `-to` that is smaller than `-ss`, then the command won't run. You'll get the following error: `Error: -to value smaller than -ss; aborting.` [source](https://shotstack.io/learn/use-ffmpeg-to-trim-video/)
 
 | command | description |
 | :--- | :--- |
@@ -367,11 +367,11 @@ Differences between two directory trees
 
 | command | description |
 | :--- | :--- |
-sudo apt update			|
-sudo apt [-y] upgrade		|	-y oder —yes für automatic yes to prompts	
-apt --help |
-sudo apt autoremove |   remove not needed packages (NOTE: This command will remove all unused packages (orphaned dependencies). Explicitly installed packages will remain.)
-`sudo apt-mark auto $PACKAGES` | mark `$PACKAGES` as "automatically installed", if accidentally marked as "manually installed"
+`sudo apt update` |
+`sudo apt [-y] upgrade` | `-y` oder `—yes` für automatic yes to prompts	
+`apt --help` |
+`sudo apt autoremove` | remove not needed packages (NOTE: This command will remove all unused packages (orphaned dependencies). Explicitly installed packages will remain.)
+`sudo apt-mark auto $PACKAGES` | mark packages in variable `PACKAGES` as `automatically installed`, if accidentally marked as `manually installed`
 
 ## apt
 
