@@ -377,10 +377,15 @@ Git actions:
 
 # Aerial
 
-- g?
-- q
-- zM (collapse all)
-- c-b (fast markdown section select)
+- ToC window mode:
+  - space bb
+  - space bt (Telescope Search)
+    - faster than "bb" for jumping to sections
+- sidebar mode:
+  - g?
+  - q
+  - zM (collapse all)
+  - c-b (fast markdown section select)
 
 # Vista (Aerial ist besser!)
 
