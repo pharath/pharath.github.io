@@ -89,6 +89,32 @@ So it logs the same sorts of information as the Web Console - network requests, 
 - Fast Tab Switcher
 - Auto Tab Discard by tlintspr
 
+# Bookmarks
+
+## Improve Display Style of Exported Bookmarks
+
+To indent Firefox `bookmarks.html` add this CSS style:
+- note: the `<meta>` tags must come **after** the `<style>` tags
+  - otherwise the `Content-Security-Policy` (CSP) in the HTML head will prevent **all** CSS code in the HTML document from loading
+    - however, you can still allow some CSS code, see examples in [CSP: style-src](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/style-src)
+
+```html
+<head>
+  <style type="text/css">
+    dl dl {
+      margin-left:0.5in;
+      }
+  </style>
+  <meta>
+    ...
+  </meta>
+</head>
+<body>
+  ...
+</body>
+```
+
+
 # Troubleshooting
 
 ## Only Some Pages Load Others Do Not
