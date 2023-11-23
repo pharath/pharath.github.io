@@ -61,6 +61,14 @@ tags:
 - alt - i (next `# `)
 - alt - o
 - `:LspStop 1 (tailwindcss)` (because the treesitter markdown parser is sufficient)
+- alt - f (insert arrow symbol)
+
+## LaTex
+
+- math mode
+  - alt - b
+  - alt - u
+  - alt - t ($\[ \text{Let}\ x=\text{number of cats}. \]$)
 
 # Lazy
 
@@ -228,6 +236,12 @@ Git actions:
 - , (repeat)
 - ga (show ascii code of letter under cursor)
 
+## custom
+
+- <Space>fc (keymaps.lua)
+- <Space>fi (init.lua)
+- <Space>fp (plugins/init.lua)
+
 ## motion (in a line)
 
 - B (beginning of previous WORD, faster than b)
@@ -254,23 +268,24 @@ Git actions:
 
 ## edit
 
+- `c-r %` (in insert mode: insert current file name)
 - registers
-  - " (show all registers)
-  - "ry (yank text to register "r)
-  - "rp (paste text from register "r)
+  - `"` (show all registers)
+  - `"ry` (yank text to register `"r`)
+  - `"rp` (paste text from register `"r`)
   - record arbitrary normal mode commands:
-    - `qa5jq` (`q`: start recording into register "a", `5j`: record motion "5j", `q`: stop recording)
+    - `qa5jq` (`q`: start recording into register "a", `5j`: record motion "`5j`", `q`: stop recording)
       - `"a` (to use the recorded command `5j` in normal mode)
 - delete
-  - D (like `d$`)
-  - ciw (statt diwa, diwi)
-  - de (statt dw)
+  - `D` (like `d$`)
+  - `ciw` (statt `diwa`, `diwi`)
+  - `de` (statt `dw`)
   - `0d$` (clear line without deleting it)
 - find and replace
   - `:%s///gc` (find and replace in buffer; g for all occurrences; c for confirm)
   - `:s///gc` (find and replace in one line; g for all occurrences; c for confirm)
 - replace one word:
-  - cw statt dwi`<space>`
+  - `cw` statt `dwi<space>`
 - replace more than one word:
   - vt letter, vf letter (if you need to paste) statt ve
   - ct letter (change till letter)
