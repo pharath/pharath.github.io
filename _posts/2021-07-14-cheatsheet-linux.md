@@ -17,11 +17,15 @@ tags:
 
 # Apps
 
+## linux
+
 | command | description |
 | :--- | :--- |
 `htop` | activity monitor (sieht besser aus als `top`)
 `hardinfo` | hardware info
 `ncdu` | like `du -sh`, but more convenient (because avoids typing)
+
+## ffmpeg
 
 | command | description |
 | :--- | :--- |
@@ -32,15 +36,25 @@ tags:
 `ffmpeg -i input.mp4 -ss 00:05:20 -t 00:10:00 -c:v copy -c:a copy output1.mp4` | take the input video input.mp4, and cut out 10 minutes from it starting from 00:05:20 (5 minutes and 20 second mark), i.e. the output video will be from 00:05:20 to 00:15:20. If you specify a duration that will result in a stop time that is beyond the length of the input video, the output video will end where the input video ends. [source](https://shotstack.io/learn/use-ffmpeg-to-trim-video/)
 `ffmpeg -i input.mp4 -ss 00:05:10 -to 00:15:30 -c:v copy -c:a copy output2.mp4` | uses `-to` to specify an exact time to cut to from the starting position. The cut video will be from 00:05:10 to 00:15:30, resulting in a 10 minutes and 20 seconds video. If you specify a time `-to` that is longer than the input video, e.g. `-to 00:35:00` when the input video is 20 minutes long, the cut video will end where the input video ends. If you specify a `-to` that is smaller than `-ss`, then the command won't run. You'll get the following error: `Error: -to value smaller than -ss; aborting.` [source](https://shotstack.io/learn/use-ffmpeg-to-trim-video/)
 
+## convert (imagemagick)
+
 | command | description |
 | :--- | :--- |
 `sudo apt install imagemagick` | image editing, converting, compressing, etc.
 `convert path/to/image.png -resize 640x path/to/output_image.png` | compress an `image.png` by resizing / scaling down ([source](https://askubuntu.com/a/781588))
 `convert path/to/image.png -quality 50% path/to/output_image.png` | compress an `image.png` by reducing its quality ([source](https://askubuntu.com/a/781588))
+`convert *.PNG mydoc.pdf` | create a pdf from all `.PNG` files in the current folder; **important:** must run `sudo mv /etc/ImageMagick-6/policy.xml /etc/ImageMagick-6/policy.xmlout` first to fix `convert-im6.q16: attempt to perform an operation not allowed by the security policy PDF' @ error/constitute.c/IsCoderAuthorized/413.` error, [askubuntu](https://askubuntu.com/a/1081907)
+
+## pdftoppm (poppler)
+
+| command | description |
+| :--- | :--- |
 `sudo apt install poppler-utils` | install `pdftoppm`
 `pdftoppm -png myfile.pdf > myfile.png` | convert **single page** PDF with poppler
 `pdftoppm -png myfile.pdf myfile` | converts **multipage** PDF with poppler
 `pdftoppm -jpeg myfile.pdf > myfile.jpg` | convert pdf to jpeg
+
+## other
 
 | command | description |
 | :--- | :--- |
@@ -48,7 +62,7 @@ pyTranscriber | generates subtitles for `.mp3` files via Google Speech Recogniti
 
 | command | description |
 | :--- | :--- |
-goldendict |		dict for fast lookup (ctrl + c + c)
+goldendict | dict for fast lookup (ctrl + c + c)
 
 | command | description |
 | :--- | :--- |
@@ -60,34 +74,34 @@ docker |
 
 | command | description |
 | :--- | :--- |
-eog	|			picture viewer (shortcuts: https://help.gnome.org/users/eog/stable/index.html.en)
+eog | picture viewer ([shortcuts](https://help.gnome.org/users/eog/stable/index.html.en))
 
 | command | description |
 | :--- | :--- |
-pinta	|		picture editor (shortcuts: https://www.pinta-project.com/user-guide/shortcuts/)
+pinta | picture editor ([shortcuts](https://www.pinta-project.com/user-guide/shortcuts/))
 
 | command | description |
 | :--- | :--- |
-gedit |			texteditor
-zum Lesen:	| unter F10/Preferences/Font & Colors/ Font ändern zu "TeX Gyre Termes Math Regular"
-ctrl + h	|		find and replace (halte im “Find & Replace”-Fenster `alt` gedrückt für schnelle Auswahl der Optionen)
-F10	|			menu (u.a. Shortcuts)
-F1	|			help, Shortcut overview
+gedit | texteditor
+zum Lesen: | unter F10/Preferences/Font & Colors/ Font ändern zu "TeX Gyre Termes Math Regular"
+ctrl + h | find and replace (halte im "Find & Replace"-Fenster `alt` gedrückt für schnelle Auswahl der Optionen)
+F10 | menu (u.a. Shortcuts)
+F1 | help, Shortcut overview
 
 | command | description |
 | :--- | :--- |
-kazam |			screen recorder
+kazam | screen recorder
 
 | command | description |
 | :--- | :--- |
 joplin | Notes
 alt + entsprechende Taste im menu | im Menu stehen alle Shortcuts !
-ctrl + l |			change view (editor/markdown viewer/both)
-F10	|			show all notebooks sidebar
-F11	|			show all Notes sidebar
-ctrl + shift + l |		focus note selection
-ctrl + shift + b |	focus body
-ctrl + shift + n |	focus title
+ctrl + l | change view (editor/markdown viewer/both)
+F10 | show all notebooks sidebar
+F11 | show all Notes sidebar
+ctrl + shift + l | focus note selection
+ctrl + shift + b | focus body
+ctrl + shift + n | focus title
 
 | command | description |
 | :--- | :--- |
@@ -295,8 +309,8 @@ ctrl + r + Suchbegriff | reverse search (mehrmals ctrl + r drücken, um zwischen
 
 Main advantages: 
 - when you need to have a folder in multiple locations on your machine
-    - **Saves storage** by avoiding duplicate folders on the machine
-    - **Better versioning** by avoiding duplicate folders on the machine
+  - **Saves storage** by avoiding duplicate folders on the machine
+  - **Better versioning** by avoiding duplicate folders on the machine
 
 | command | description |
 | :--- | :--- |
@@ -359,11 +373,11 @@ Differences between two directory trees
 - `apt` = most commonly used command options from `apt-get` and `apt-cache` see [here](https://itsfoss.com/apt-vs-apt-get-difference/)
 - So with `apt`, you get all the necessary tools in one place. You won’t be lost under tons of command options. The main aim of `apt` is to provide an efficient way of handling packages in a way “pleasant for end users”.
 - `apt`:
-    - shows progress bar while installing or removing a program
-    - prompts number of packages that can be upgraded when you update the repository database (i.e. `apt update`)
-    - same can be achieved with apt-get (but you need additional options)
+  - shows progress bar while installing or removing a program
+  - prompts number of packages that can be upgraded when you update the repository database (i.e. `apt update`)
+  - same can be achieved with apt-get (but you need additional options)
 - When you use `apt` to install a package, under the hood it uses `dpkg`. When you install a package using `apt`, it first creates a list of all the dependencies and downloads it from the repository.
-    - Once the download is finished it calls `dpkg` to install all those files, satisfying all the dependencies.
+  - Once the download is finished it calls `dpkg` to install all those files, satisfying all the dependencies.
 
 | command | description |
 | :--- | :--- |
@@ -378,9 +392,9 @@ Differences between two directory trees
 ### Include directories for C++
 
 - `/usr/local/include/`
-    - e.g. `/usr/local/include/opencv4/opencv2/`
+  - e.g. `/usr/local/include/opencv4/opencv2/`
 - `/opt/`
-    - e.g. `/opt/ros/`
+  - e.g. `/opt/ros/`
 
 ### PPAs
 
@@ -644,22 +658,27 @@ cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen 
 
 ### sed
 
-- for line-based input
+- for **line-based input**
+  - thus, hard to replace `\n` with `sed`, `tr` is better here ([stackoverflow](https://stackoverflow.com/a/1252010))
 - "Sed uses basic regular expressions (BRE). In a BRE, in order to have them treated literally, the characters `$.*[\^` need to be quoted by preceding them by a backslash, except inside character sets (`[…]`). Letters, digits and `(){}+?|` must not be quoted (you can get away with quoting some of these in some implementations)." ([more](https://unix.stackexchange.com/a/33005))
 
 | command | description |
 | :--- | :--- |
 `sed 's/unix/linux/' geekfile.txt` | replaces the word 'unix' with 'linux' in the file 'geekfile.txt'. `sed` is mostly used to replace text in a file. Examples: see [here](https://www.geeksforgeeks.org/sed-command-in-linux-unix-with-examples/).
 `sed -E` | use extended (ERE) regular expression syntax
+`sed -e 's/ /\\ /g'` | useful when paths contain spaces and you need to escape these spaces with backslash, eg. when using `realpath`, `pwd`, `scp`, etc
 
 ### tr
 
-- hard to replace `\n` with `sed`, `tr` is better here ([stackoverflow](https://stackoverflow.com/a/1252010))
+- to replace **single characters** by **single characters**, [stackoverflow](https://stackoverflow.com/a/18366326/12282296)
+- [tr SET notation](https://phoenixnap.com/kb/linux-tr)
+- hard to replace `\n` with `sed`, `tr` is better for this task ([stackoverflow](https://stackoverflow.com/a/1252010))
+  - pipe with `tr a b | sed -e 's/find/replace/g'` to replace strings
 
 | command | description |
 | :--- | :--- |
-`tr '\n' ' '` | replace all `\n` with spaces
-`tr -d '\n'` | delete all `\n`
+`tr '\n' ' '` | replace all `\n` with spaces, [tr SET notation](https://phoenixnap.com/kb/linux-tr)
+`tr -d '\n'` | delete all `\n`, [tr SET notation](https://phoenixnap.com/kb/linux-tr)
 
 ### redirection, sort, head, tail
 
@@ -791,7 +810,7 @@ cat /proc/partitions |
 
 **Udev** is the **Linux subsystem** that supplies your computer with **device events**. In plain English, that means it's the code that **detects** when you have things **plugged into** your computer, like a network card, external hard drives (including USB thumb drives), mouses, keyboards, joysticks and gamepads, DVD-ROM drives, and so on.
 - **udev scripting**: see [tutorial](https://opensource.com/article/18/11/udev)
-    - how to create a udev script triggered by some **udev event**, such as plugging in a specific thumb drive
+  - how to create a udev script triggered by some **udev event**, such as plugging in a specific thumb drive
 
 | command | description |
 | :--- | :--- |
@@ -837,9 +856,9 @@ lsblk | list [block devices](#block-device-vs-character-device)
 
 Must knows:
 - SSD
-    - [fragmentation](https://superuser.com/questions/97071/do-ssds-get-fragmented-and-if-they-do-is-that-an-issue)
-    - [wear leveling](https://en.wikipedia.org/wiki/Wear_leveling)
-    - [wear leveling](https://www.dell.com/support/kbdoc/de-de/000137999/hard-drive-why-do-solid-state-devices-ssd-wear-out?lang=en): As the term suggests, **wear leveling** provides a method for distributing program and erase cycles uniformly throughout all of the memory blocks within the SSD. This prevents continuous program and erase cycles to the same memory block, resulting in greater extended life to the overall NAND flash memory.
+  - [fragmentation](https://superuser.com/questions/97071/do-ssds-get-fragmented-and-if-they-do-is-that-an-issue)
+  - [wear leveling](https://en.wikipedia.org/wiki/Wear_leveling)
+  - [wear leveling](https://www.dell.com/support/kbdoc/de-de/000137999/hard-drive-why-do-solid-state-devices-ssd-wear-out?lang=en): As the term suggests, **wear leveling** provides a method for distributing program and erase cycles uniformly throughout all of the memory blocks within the SSD. This prevents continuous program and erase cycles to the same memory block, resulting in greater extended life to the overall NAND flash memory.
 
 | command | description |
 | :--- | :--- |
@@ -848,16 +867,16 @@ Must knows:
 
 ## Eject
 
-1. press on eject button for all partitions in nautilus
-2. open gnome-disks
-3. press on stop button below all partitions, if any partition is still mounted (else no stop button should be available)
-4. press power off button in the top bar (only after all partitions have been unmounted in step 3!)
+1. press on **eject** button for all partitions in nautilus
+2. open **gnome-disks**
+3. press on **stop** button below all partitions, if any partition is still mounted (else no stop button should be available)
+4. press **power off** button in the top bar (only after all partitions have been unmounted in step 3!)
 5. disk LED will be turned off now
 6. close gnome-disks via alt + F4
 
 | command | description |
 | :--- | :--- |
-sudo eject /media/SDD |
+`sudo eject /media/SDD` |
 
 Troubleshooting:
 
@@ -865,15 +884,28 @@ Troubleshooting:
 
 | command | description |
 | :--- | :--- |
-sudo fuser -mv /media/SDD | displays all processes accessing `/media/SDD`, where the `m` tells it to look on the given location, the `v` switches the output to a human readable list instead of just a bunch of PIDs. [askubuntu](https://askubuntu.com/a/578631)
+`sudo fuser -mv /media/SDD` | displays all processes accessing `/media/SDD`, where the `m` tells it to look on the given location, the `v` switches the output to a human readable list instead of just a bunch of PIDs. [askubuntu](https://askubuntu.com/a/578631)
+
+2. `Disconnecting from filesystem` notification does not disappear automatically when ejecting an external hard drive (by pressing the eject button in Nautilus)
+
+- **Possible Solutions that worked once:**
+  - close all Nautilus/Dolphin windows that access the external hard drive
+  - press **ctrl + c** on some file that is stored on the **internal** hard drive (if ctrl + c was pressed on some file that is stored on the **external** hard drive, this will block the external hard drive when you try to eject it)
+
+3. in gnome-disks: External hard drive shows a **"loading"** symbol and the power off button for this external hard drive is **grayed out**
+
+- **Possible Solutions that worked once:**
+  - just wait
+  - close gnome-disks and open it again
+  - after a while the power off button for this external hard drive is not **grayed out** any more and the physical LED on the hard drive stops blinking
 
 ## Disk Usage
 
 - [FAQ](https://unix.stackexchange.com/a/120312)
-    - How much disk space does a file use?
-    - Why is the total from `du` different from the sum of the file sizes?
-    - What are these numbers from `df` exactly?
-    - What's using the space on my disk?
+  - How much disk space does a file use?
+  - Why is the total from `du` different from the sum of the file sizes?
+  - What are these numbers from `df` exactly?
+  - What's using the space on my disk?
 - [Why is there a discrepancy in disk usage reported by df and du?](https://unix.stackexchange.com/questions/9612/why-is-there-a-discrepancy-in-disk-usage-reported-by-df-and-du)
 - [Why du and df display different values](http://linuxshellaccount.blogspot.com/2008/12/why-du-and-df-display-different-values.html)
 
@@ -976,10 +1008,10 @@ The software utility cron also known as cron job is a time-based job scheduler i
 **Achtung**: 
 - erst in den Server einloggen und **dann** erst in den Computer einloggen, der die Internetverbindung des Servers benutzt !
 - **Error**: "X11 connection rejected because of wrong authentication." 
-   - ~/.Xauthority löschen und nochmal per ssh einloggen kann helfen bei xauth Problemen (siehe [issue](https://unix.stackexchange.com/a/494742)) ! 
-   - (prüfe evtl noch) nach [source](https://www.cyberciti.biz/faq/x11-connection-rejected-because-of-wrong-authentication/):   
-      - Make sure X11 SSHD Forwarding Enabled
-      - Make sure X11 client forwarding enabled
+  - `~/.Xauthority` löschen und nochmal per ssh einloggen kann helfen bei xauth Problemen (siehe [issue](https://unix.stackexchange.com/a/494742)) ! 
+  - (prüfe evtl noch) nach [source](https://www.cyberciti.biz/faq/x11-connection-rejected-because-of-wrong-authentication/):   
+    - Make sure X11 SSHD Forwarding Enabled
+    - Make sure X11 client forwarding enabled
 
 ### Graphics/Display
 
