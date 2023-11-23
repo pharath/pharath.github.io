@@ -162,6 +162,64 @@ Related:
 - [Query Tool](https://www.pgadmin.org/docs/pgadmin4/latest/query_tool.html)
 - [Shortcuts](https://www.pgadmin.org/docs/pgadmin4/development/keyboard_shortcuts.html#query-tool)
 
+# Query Processor
+
+- **query processor:** the group of components of a DBMS that turns user queries and data-modification commands into a sequence of database operations and executes those operations
+- **query execution**: the algorithms that manipulate the data of the database
+
+# Scanning Tables
+
+- **"scan" a table**: bring into main memory each tuple of some relation
+- 2 basic approaches to locating the tuples of R:
+  - **table-scan**: get the blocks containing the tuples of R one by one
+  - **index-scan**
+
+# Indexes
+
+- definition:
+  - any **data structure** that takes the value of one or more fields and finds the records with that value "quickly."
+  - In particular, an index lets us find a record **without having to look at more than a small fraction** of all possible records.
+  - The field(s) on whose values the index is based is called the **search key**, or just **"key"** if the index is understood.
+
+## Dense Index
+
+- **dense index**
+  - a **sequence of blocks** holding only
+    - the **keys** of the records and
+    - **pointers** to the records themselves
+  - The index blocks of the dense index maintain these keys in the same **sorted order** as in the file itself
+  - keys and pointers presumably take much **less space** than complete records
+    - many fewer blocks for the index than for the file itself
+      - thus, faster to search through the index than through the data file
+  - especially advantageous when the dense index file, but not the data file, can **fit in main memory**
+- method
+  - Given **key value K**
+  - search the index blocks for **K**
+  - follow the associated pointer to the **record with key K**
+
+## Sparse Index
+
+- **sparse index**
+  - has **only one key-pointer pair per block** of the data file
+  - thus uses **less space** than a dense index, at the expense of somewhat **more time to find a record given its key**
+  - can only use a sparse index if the data file is sorted by the search key
+- method
+  - find the **record with search-key value K**
+  - search the sparse index for the **largest key less than or equal to K**
+    - Since the index file is sorted by key, a **binary search** can locate this entry
+  - follow the associated **pointer** to a data block
+  - **search this block** for the **record with key K**
+    - the block must have enough format information that the records and their contents can be identified
+
+## Multiple Levels of Index
+
+- "putting an index on the index"
+- first-level index can be sparse or dense
+- second and higher levels **MUST** be sparse
+  - **reason**: a dense index on an index would have exactly as many key-pointer pairs as the first-level index, and therefore would take exactly as much space as the first-level index
+- idea has its **limits**
+  - prefer the B-tree structure over building many levels of index
+
 # NoSQL Databases
 
 Wikipedia:
