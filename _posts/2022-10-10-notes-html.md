@@ -73,7 +73,7 @@ To indent firefox `.bookmarks` add this CSS style:
 - used to separate content (or define a change)
 - `<hr style="height:2px;border-width:0;color:gray;background-color:gray">`
 
-## Paragraphs - `<p>` Tag
+## Paragraphs - p
 
 Attributes: 
 - id: `<p id="demo"></p>`, [explained]( https://www.dofactory.com/html/p/id )
@@ -108,3 +108,12 @@ An inline frame (iframe) is a HTML element that loads another HTML page within t
 
 "`<iframe>` tag specifies an inline frame. An inline frame is used to embed another document within the current HTML document." [w3schools](https://www.w3schools.com/tags/tag_iframe.ASP)
 
+## Button - button
+
+### AccessKey
+
+Keymap to activate access keys depends on the **Web Browser** and on the **OS**. In **Firefox** (on Windows and Linux) use <kbd>alt</kbd> + <kbd>shift</kbd> + <kbd>key</kbd>, [developer.mozilla.org](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey)
+
+```html
+<button accesskey="s">Stress reliever</button>
+```
