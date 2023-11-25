@@ -16,10 +16,23 @@ tags:
   - cheatsheet
 ---
 
+# website
+
+- alt + shift + s (Search) - (note: this is a html AccessKey)
+
 # ubuntu
 
+- alt + aboveTab (switch to last window)
 - ctrl + aboveTab (switch to last workspace)
   - like "`^`" in firefox or "alt + tab" in Ubuntu
+- window mgmt:
+  - `wmctrl -l` (list)
+  - `wmctrl -a window-name` (go to workspace and focus by window name)
+    - map this to alt + shift + 1,2,3,etc. (after renaming the windows properly, renaming command: see below)
+  - `wmctrl -i -a 0x066f5d24` (go to workspace and focus by window ID)
+  - `wmctrl -i -a 0x066f5d24 -T "documentation"` (rename)
+  - `wmctrl -i -a 0x0667167d -T "main-tmux"` (rename)
+  - [more complex commands](https://superuser.com/a/950287)
   
 # terminal
 
@@ -27,19 +40,49 @@ tags:
 
 # firefox
 
-## vimium
+## DevTools
+
+[official doc](https://firefox-source-docs.mozilla.org/devtools-user/index.html)
+
+- ctrl + shift + i (or F12)
+
+### Page Inspector
+
+- ctrl + shift + c
+
+### Web Console
+
+From [doc](https://firefox-source-docs.mozilla.org/devtools-user/web_console/):
+
+The Web Console:
+
+1. Logs information associated with a web page: network requests, JavaScript, CSS, security errors and warnings as well as error, warning and informational messages explicitly logged by JavaScript code running in the page context
+2. Enables you to interact with a web page by executing JavaScript expressions in the context of the page
+
+Shortcuts:
+
+- ctrl + shift + k (console) (click "..." to get side-by-side view)
+
+### JavaScript Debugger
+
+[Shortcuts](https://firefox-source-docs.mozilla.org/devtools-user/keyboard_shortcuts/index.html#keyboard-shortcuts-debugger)
+
+### React DevTools (Addon)
+
+- only visible on webpages built with React
+- beside standard firefox DevTools tabs
+  - React Components panel
+  - React Profiler panel
+
+## vimium 
 
 - T (switch tab)
 - click on "vimium button in firefox" &rarr; "Options" (to see custom maps)
 - yt (duplicate tab)
-- gi: jump into the first search box (must be in the view, does not work if you have to scroll the box into the view!)
-- gs: view source
-- HL: tabs
-- JK: history
-- ctrl + shift + k (console) (click "..." to get side-by-side view)
-- beside standard firefox DevTools tabs
-  - React Components panel
-  - React Profiler panel
+- gi (jump into the first search box (must be in the view, does not work if you have to scroll the box into the view!))
+- gs (view source)
+- HL (tabs)
+- JK (history)
 
 ## Textmarker
 
