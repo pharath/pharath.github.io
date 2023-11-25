@@ -577,6 +577,10 @@ Run these commands as `root` user. Run them in TTY mode (press e.g. ctrl + alt +
 
 # bash
 
+## Terminal Title
+
+Change the title of the current terminal: `echo -ne "\033]0;SOME TITLE HERE\007"`, [askubuntu](https://askubuntu.com/a/22417)
+
 ## terminal shortcuts
 
 ![jumping with command line cursor](/assets/images/moving_cli.png)
@@ -738,6 +742,32 @@ cp -iv | **Tipp:** IMMER -iv BENUTZEN! (-i für bestätigen, -v für ausgeführt
 `history` | get a list of the last 1000 commands 
 `history | grep command_to_search` | search some pattern within the history generated list
 `script` | start saving all input and output in the current terminal session in the file `typescript` (end recording via ctrl + d - this does not close the terminal here; use `script /path/to/mylogfile.txt` to save it in `/path/to/mylogfile.txt`; `typescript` will be overwritten if you start `script` twice without providing a name!). [source](https://askubuntu.com/a/557309)
+
+# wmctrl
+
+```bash
+sudo apt install wmctrl
+```
+
+From [superuser](https://superuser.com/questions/142945/bash-command-to-focus-a-specific-window).
+
+## List Window
+
+- `wmctrl -l` (list windows)
+
+## Focus Window
+
+- `wmctrl -a window-name` (go to workspace and focus **by window name**)
+  - map this to alt + shift + 1,2,3,etc. (after renaming the windows properly, renaming command: see below)
+- `wmctrl -i -a 0x066f5d24` (go to workspace and focus **by window ID**)
+
+## Rename Window
+
+- `wmctrl -i -a 0x066f5d24 -T "new-name"` (rename window)
+
+## With xdotool
+
+- [more complex commands](https://superuser.com/a/950287)
 
 # Unzipping
 
