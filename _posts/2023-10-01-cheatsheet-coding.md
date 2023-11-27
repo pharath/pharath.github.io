@@ -308,6 +308,8 @@ Git actions:
 - move
   - `)`, `(`
   - `*` fwd, `#` bwd
+- markdown sections
+  - `c-n`, `c-p` (next / previous section)
 
 ## edit
 
@@ -424,6 +426,7 @@ Git actions:
   - space bb
   - space bt (Telescope Search)
     - faster than "bb" for jumping to sections
+  - also try: c-n, c-p (next / previous section)
 - sidebar mode:
   - g?
   - q
