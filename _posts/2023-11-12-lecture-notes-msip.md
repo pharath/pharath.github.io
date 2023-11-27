@@ -15,6 +15,11 @@ tags:
 
 ---
 
+# Preliminaries
+
+- **infimum**: The **infimum** of a subset $S$ of a partially ordered set, $P$, assuming it exists, does not necessarily belong to $S$. If it does, it is a **minimum** or least element of $S$.
+- **supremum**: Similarly, if the **supremum** of $S$ belongs to, $S$, it is a **maximum** or greatest element of $S$.
+
 # Digital Images
 
 - **spatial dimension**: $d$
