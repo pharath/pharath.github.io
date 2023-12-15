@@ -355,19 +355,32 @@ Exec=dolphin %u --new-window
 # Sound
 
 List all microphones:
+
 ```bash
 sudo arecord -l
 ```
 
 Record an audio file `/tmp/test-mic.wav` with 10s duration, where `hw:2,0` means using **card** `2` and **device** `0` (as shown by `arecord -l`):
+
 ```bash
 arecord -f cd -c 1 -d 10 --device="hw:2,0" /tmp/test-mic.wav
 ```
 
 Play an audio file `/tmp/test-mic.wav`:
+
 ```bash
 aplay `/tmp/test-mic.wav`
 ```
+
+## Troubleshooting
+
+**Problem 1:** No sound in **Totem** Videos:
+
+- let the video that has no sound play in Totem
+- open Ubuntu Sound Settings
+- under section **"Volume Levels"** below eg. "System Sounds", "Firefox", etc. a new item for the currently playing video will be shown
+- check if the Volume for this video is **enabled** and is **sufficiently high**
+- in addition, check the Volume in the Totem Video App
 
 # Webcam
 
