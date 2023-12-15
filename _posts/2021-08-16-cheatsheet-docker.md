@@ -253,7 +253,24 @@ ctrl-p ctrl-q | detach from container
 `docker volume prune` | remove all the unused volumes
 `docker run -v data-volume:/var/opt/project bash:latest bash -c "ls /var/opt/project"` | start a container with a volume using the -v option. The -v option contains three components, separated by colons: 1. Source directory or volume name, 2. Mount point within the container, 3. (Optional) *ro* if the mount is to be read-only
 
-## Store Images on an external hard disk
+## Store Images on an External Hard Disk
+
+### Method 1 - docker save, docker load
+
+- `docker save` [doc](https://docs.docker.com/engine/reference/commandline/save/)
+- `docker load` [doc](https://docs.docker.com/engine/reference/commandline/load/)
+
+```bash
+# the .tar.gz file name must not contain slashes!
+
+docker save galaxis_simulation_bridge:latest | gzip > galaxis_simulation_bridge-latest.tar.gz
+docker load < galaxis_simulation_bridge-latest.tar.gz
+
+docker save blackteamatters/openpilot-base | gzip > blackteamatters-openpilot-base.tar.gz
+docker load < blackteamatters-openpilot-base.tar.gz
+```
+
+### Method 2 - Change data-root of docker.service
 
 **TODO**: `docker pull` fails with error: `failed to register layer: ApplyLayer exit status 1 stdout:  stderr: open /var/lib/dpkg/info/gcc-8-base:amd64.list: invalid argument` after running the following commands
 
