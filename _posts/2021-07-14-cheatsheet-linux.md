@@ -450,14 +450,14 @@ sudo apt install ./name.deb | install a .deb file
 
 | command | description |
 | :--- | :--- |
-`sudo dpkg -l | less`	| list all installed dpkg packages [meaning of tags ii, rc, ...](https://askubuntu.com/questions/18804/what-do-the-various-dpkg-flags-like-ii-rc-mean)
+`sudo dpkg -l | less` | list all installed dpkg packages [meaning of tags ii, rc, ...](https://askubuntu.com/questions/18804/what-do-the-various-dpkg-flags-like-ii-rc-mean)
 
 | command | description |
 | :--- | :--- |
-|**Tipp:**|AM BESTEN DIE FOLGENDEN 3 ALLE AUSFÜHREN, DA JEDER EINEN ANDEREN OUTPUT HAT !
-`sudo dpkg -l package`	|		confirm whether package is already installed (wenn nicht installed, dann wird “no packages found matching package” angezeigt) (ACHTUNG: exakten Namen schreiben, zB “lua” findet “lua5.1” nicht !) 
-`sudo dpkg -l | grep package`	|	confirm whether package is already installed (wenn nicht installed, dann wird nichts angezeigt) (ACHTUNG regexp: zB “lua” findet “lua5.1” ! )
-`sudo dpkg-query -s package`	| prüfe ob package installiert ist (ACHTUNG regexp: exakten Namen schreiben, zB “lua” findet “lua5.1” nicht !) und print weitere Informationen zum package
+| **Tipp:** | AM BESTEN DIE FOLGENDEN 3 ALLE AUSFÜHREN, DA JEDER EINEN ANDEREN OUTPUT HAT !
+`sudo dpkg -l package` | confirm whether package is already installed (wenn nicht installed, dann wird "no packages found matching package" angezeigt) (ACHTUNG: exakten Namen schreiben, zB "lua" findet "lua5.1" nicht !) 
+`sudo dpkg -l | grep package` | confirm whether package is already installed (wenn nicht installed, dann wird nichts angezeigt) (ACHTUNG regexp: zB "lua" findet "lua5.1" !)
+`sudo dpkg-query -s package` | prüfe ob package installiert ist (ACHTUNG regexp: exakten Namen schreiben, zB "lua" findet "lua5.1" nicht !) und print weitere Informationen zum package
 
 see also [how-to-show-history-of-installed-packages](https://www.linuxuprising.com/2019/01/how-to-show-history-of-installed.html)
 
@@ -477,7 +477,7 @@ see also [how-to-show-history-of-installed-packages](https://www.linuxuprising.c
 
 | command | description |
 | :--- | :--- |
-`dpkg -l | grep ^..r`   |   list all broken packages (**r** state (on the third field) means: reinst-required (package broken, reinstallation required))
+`dpkg -l | grep ^..r` | list all broken packages (**r** state (on the third field) means: reinst-required (package broken, reinstallation required))
 
 | command | description |
 | :--- | :--- |
@@ -577,11 +577,11 @@ Run these commands as `root` user. Run them in TTY mode (press e.g. ctrl + alt +
 
 # bash
 
-## Terminal Title
+## Change Terminal Title
 
 Change the title of the current terminal: `echo -ne "\033]0;SOME TITLE HERE\007"`, [askubuntu](https://askubuntu.com/a/22417)
 
-## terminal shortcuts
+## Gnome Terminal Shortcuts
 
 ![jumping with command line cursor](/assets/images/moving_cli.png)
 
@@ -597,9 +597,9 @@ ctrl + q | unfreeze/unblock terminal
 fn + links | scrolle nach ganz oben
 cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen will)
 
-## terminal commands and bash scripting
+## Bash Scripting
 
-### Shell
+### Change Shell
 
 | command | description |
 | :--- | :--- |
@@ -618,14 +618,6 @@ cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen 
 `env NAME=VALUE` | Set each NAME to VALUE in the environment
 `echo $PATH` | Variable, die alle Pfade enthält, in denen Shell-Programme/Shell-Befehle (ls, echo, df, nautilus, etc.) gesucht werden
 `echo $Variable` | display content of the variable "`Variable`"
-
-### Finding Program Paths
-
-| command | description |
-| :--- | :--- |
-`which <program>` | show the path of a program
-`which python3` |		
-`whereis python3` |
 
 ### Running Multiple Commands
 
@@ -648,6 +640,14 @@ cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen 
 `locate -i <file>` | case insensitive
 `locate -b '\file.xyz'` | exact match (Note: the slash and the quotation marks are necessary)
 `sudo updatedb` | update the `locate` command's database
+
+### Finding Program Paths
+
+| command | description |
+| :--- | :--- |
+`which <program>` | show the path of a program
+`which python3` |		
+`whereis python3` |
 
 ### grep
 
@@ -709,14 +709,7 @@ nautilus .	|	öffne current directory in File Browser
 | :--- | :--- |
 `# ein comment` | Kommentar in command line
 
-### Folder Operations
-
-| command | description |
-| :--- | :--- |
-pwd | zeige current working directory
-cd path/to/somedir |
-mkdir -p /folder/subfolder/subsubfolder	| erstellt folder und subfolder automatisch, falls sie noch nicht existieren
-cp -a | attempts to make a copy that's as close to the original as possible: same directory tree, same file types, same contents, same metadata (times, permissions, extended attributes, etc.). Always use `cp -a` instead of `cp -r`. (see [cp -a vs cp -r](https://unix.stackexchange.com/a/44981))
+### dirs, pushd, popd
 
 | command | description |
 | :--- | :--- |
@@ -727,13 +720,23 @@ cp -a | attempts to make a copy that's as close to the original as possible: sam
 `popd +N` | Removes the Nth directory (counting from the left of the list printed by dirs), starting with zero, from the stack, [doc](https://www.gnu.org/software/bash/manual/html_node/Directory-Stack-Builtins.html#Directory-Stack-Builtins)
 `popd -N` | like `popd +N`, but counting from the right
 
-### File Operations
+### cd, mkdir, pwd
 
 | command | description |
 | :--- | :--- |
-mv -iv | **Tipp:** IMMER -iv BENUTZEN! (-i für bestätigen, -v für ausgeführte Aktion zeigen)
-rm -iv | **Tipp:** IMMER -iv BENUTZEN! (-i für bestätigen, -v für ausgeführte Aktion zeigen)
-cp -iv | **Tipp:** IMMER -iv BENUTZEN! (-i für bestätigen, -v für ausgeführte Aktion zeigen)
+`pwd` | zeige current working directory
+`cd path/to/somedir` |
+`cd` | go to home directory
+`mkdir -p /folder/subfolder/subsubfolder` | erstellt folder und subfolder automatisch, falls sie noch nicht existieren
+
+### mv, rm, cp
+
+| command | description |
+| :--- | :--- |
+`mv -iv` | **Tipp:** IMMER -iv BENUTZEN! (-i für bestätigen, -v für ausgeführte Aktion zeigen)
+`rm -iv` | **Tipp:** IMMER -iv BENUTZEN! (-i für bestätigen, -v für ausgeführte Aktion zeigen)
+`cp -iv` | **Tipp:** IMMER -iv BENUTZEN! (-i für bestätigen, -v für ausgeführte Aktion zeigen)
+`cp -a` | attempts to make a copy that's as close to the original as possible: same directory tree, same file types, same contents, same metadata (times, permissions, extended attributes, etc.). Always use `cp -a` instead of `cp -r`. (see [cp -a vs cp -r](https://unix.stackexchange.com/a/44981))
 
 ### history, script
 
@@ -751,17 +754,17 @@ sudo apt install wmctrl
 
 From [superuser](https://superuser.com/questions/142945/bash-command-to-focus-a-specific-window).
 
-## List Window
+## List Windows
 
 - `wmctrl -l` (list windows)
 
-## Focus Window
+## Focus Windows
 
 - `wmctrl -a window-name` (go to workspace and focus **by window name**)
   - map this to alt + shift + 1,2,3,etc. (after renaming the windows properly, renaming command: see below)
 - `wmctrl -i -a 0x066f5d24` (go to workspace and focus **by window ID**)
 
-## Rename Window
+## Rename Windows
 
 - `wmctrl -i -a 0x066f5d24 -T "new-name"` (rename window)
 
@@ -773,12 +776,12 @@ From [superuser](https://superuser.com/questions/142945/bash-command-to-focus-a-
 
 | command | description |
 | :--- | :--- |
-unzip file -d destination	|	unzip to destination
-tar -C ./data/ -zxvf ~/Downloads/mnist.tgz | für .tgz (wobei -C target_location -zxvf source.tgz), .tar.gz
-oder andersrum: |
-tar -zxvf ~/Downloads/mnist.tgz -C ./data/ |
-tar -C ./data/ -jxvf ~/Downloads/datei.tar.bz2 | für .tar.bz2 (dh. -j flag statt -z flag)
-tar -C ~/ -xvf tor-browser-linux64-10.5.2_en-US.tar.xz | für .tar.xz
+`unzip file -d destination` | unzip to destination
+`tar -C ./data/ -zxvf ~/Downloads/mnist.tgz` | für **.tgz** (wobei `-C target_location -zxvf source.tgz`), **.tar.gz**
+*oder andersrum:* |
+`tar -zxvf ~/Downloads/mnist.tgz -C ./data/` |
+`tar -C ./data/ -jxvf ~/Downloads/datei.tar.bz2` | für **.tar.bz2** (dh. `-j` flag statt `-z` flag)
+`tar -C ~/ -xvf tor-browser-linux64-10.5.2_en-US.tar.xz` | für **.tar.xz**
 
 # System information
 
@@ -1117,11 +1120,13 @@ Rsync patterns: [stackexchange](https://unix.stackexchange.com/a/2503)
 **Deprecated**, use `setxkbmap` instead.
 
 Use 
+
 ```bash
 $ xev
 ``` 
 
 to find the keycode of a key. Then, in order to remap this key, run e.g.
+
 ```bash
 Syntax: xmodmap -e "keycode [keyNumber] = [normal] [shift] [NoIdea] [NoIdea] [altGr] [shift+altGr]"
 $ xmodmap -e "keycode 48 = bracketright braceright NoSymbol NoSymbol adiaeresis Adiaeresis"
@@ -1132,6 +1137,7 @@ $ xmodmap -e "keycode 45 = 0x06b 0x04b"
 **Note**: You can look up `[keyNumber]` under [keysymdef.h](https://cs.gmu.edu/~sean/stuff/n800/keyboard/keysymdef.h).
 
 Alternatively, create:
+
 ```bash
 # .Xmodmap in $HOME/ directory
 
@@ -1140,6 +1146,7 @@ keycode 48 = bracketright braceright NoSymbol NoSymbol adiaeresis Adiaeresis
 ```
 
 then in your `.bashrc` add
+
 ```bash
 xmodmap ~/.Xmodmap
 ```
