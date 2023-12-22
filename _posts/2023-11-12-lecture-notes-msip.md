@@ -20,7 +20,7 @@ tags:
 - **infimum**: The **infimum** of a subset $S$ of a partially ordered set, $P$, assuming it exists, does not necessarily belong to $S$. If it does, it is a **minimum** or least element of $S$.
 - **supremum**: Similarly, if the **supremum** of $S$ belongs to, $S$, it is a **maximum** or greatest element of $S$.
 
-# Digital Images
+# 1.1 Digital Images
 
 - **spatial dimension**: $d$
 - **d-dim cuboid**: $\Omega$, eg. $d=2$ and $\Omega=(a_1,b_1)\times(a_2,b_2)=(0,8)\times(0,6)$
@@ -88,7 +88,7 @@ tags:
       - with this CCD sensor one gets the discrete image $(r_{x^\underline{j}}^h\left[f\right])_{\underline{j}\in I}$ (a $d$-array)
 - **coordinate systems**: in digital images rotated by $90^\circ$ clockwise (ie. 1st axis is vertical, 2nd axis is horizontal)
 
-# Point Operators / Intensity Transforms
+# 1.6 Point Operators / Intensity Transforms
 
 - **intensity tranformation**: $T: \mathbb{R} \to \mathbb{R}$
 - **intensity transformed image**: $T\circ f$, where $f: \Omega \to \mathbb{R}$ is an image.
@@ -143,10 +143,36 @@ tags:
   - allows to catch very big values and bring them close to much smaller values
   - eg. useful in electron microscopy: some details in $\lvert FFT\left[f - \overline{f}\right] \rvert$ become only visible if **first** $T^{\log}$ and **then** $T^{\text{norm}}$ is applied instead of the other way around ($T^{\log}$ does not help much after $T^{\text{norm}}$ has been applied) (**gamma correction** could **not** do this unless you would use an extremely large gamma value that is exactly valid for the specific image, ie. gamma depends on the dataset, whereas the log transform does not have these problems)
 
-## Discrete Histogram
+## Intensity Transforms using Global Statistics
 
+- these global statistics of the intensity distributions in the image are computed once
+- based on that we can construct some intensity transform
+- the statistics are represented by a **histogram**
 
-# Local Operators
+### 1.7 Discrete Histogram of $F$, Discrete CDF of $F$
+
+- $F$ is a discrete image
+
+### 1.8 Characteristic Function, Level Set of $f$, Volume of a Bounded Set $A$
+
+- $f$ is a pixelated image
+
+### 1.9 Continuous Histogram, CDF of $f$, Discrete CDF of $f$
+
+- $f$ is a pixelated image
+- The continuous histogram $H_f$ is the distributional derivative of the CDF $G_f$.
+
+### 1.10 Binning
+
+- approximate the histogram of a continuous function discretely
+
+### 1.11 Histogram Equalization
+
+### 1.12 Histogram Matching
+
+### 1.13 Segmentation by Thresholding / Isodata Algorithm
+
+# 2.0 Local Operators
 
 # TODO (zurückgestellt)
 
