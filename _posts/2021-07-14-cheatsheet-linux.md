@@ -54,6 +54,21 @@ tags:
 `pdftoppm -png myfile.pdf myfile` | converts **multipage** PDF with poppler
 `pdftoppm -jpeg myfile.pdf > myfile.jpg` | convert pdf to jpeg
 
+## pdftk
+
+- crop pdf, extract pdf pages, cut pdf
+- merge pdfs
+- add pdf toc
+
+| command | description |
+| :--- | :--- |
+`sudo apt install pdftk` |
+`sudo snap install pdftk` | 
+`pdftk full-pdf.pdf cat 12-15 output outfile_p12-15.pdf` | to save pages 12-15 from `full-pdf.pdf` in `outfile_p12-15.pdf`
+`pdftk mt01.pdf mt02.pdf mt03.pdf mt04.pdf mt05.pdf mt06.pdf mt07.pdf mt08.pdf mt09.pdf mt10.pdf mt11.pdf mt12.pdf mt13.pdf mt14.pdf mt15.pdf mt16.pdf mt17.pdf mt18.pdf mt19.pdf mt20.pdf mt21.pdf mt22.pdf cat output mergedfile.pdf` | merge all files into one file `mergedfile.pdf`
+`pdftk input.pdf dump_data > metadata.txt` | dumps the current metadata to a file (edit this file in order to modify/add a new toc, see [youtube](https://www.youtube.com/watch?v=5dv_02v0zzc))
+`pdftk input.pdf update_info_utf8 metadata.txt output input_with_toc.pdf` | add a toc to `input.pdf`, where `metadata.txt` contains the toc, see [youtube](https://www.youtube.com/watch?v=5dv_02v0zzc)
+
 ## other
 
 | command | description |
@@ -227,10 +242,6 @@ backgroundremover | `pip install backgroundremover` and then download `u2net.pth
 | command | description |
 | :--- | :--- |
 v4l2-ctl | for setting webcam powerline frequency (see below)
-
-| command | description |
-| :--- | :--- |
-sudo snap install pdftk | use `pdftk full-pdf.pdf cat 12-15 output outfile_p12-15.pdf` to save pages 12-15 from `full-pdf.pdf` in `outfile_p12-15.pdf`
 
 | command | description |
 | :--- | :--- |
