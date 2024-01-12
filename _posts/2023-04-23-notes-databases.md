@@ -118,6 +118,9 @@ DROP TABLE College;
 INSERT INTO College VALUES ('Stanford', 'CA', 15000);
 
 SELECT * FROM Student;
+# but maybe:
+SELECT * FROM "Student";
+# press <tab><tab> to find out
 ```
 
 ## pgAdmin
