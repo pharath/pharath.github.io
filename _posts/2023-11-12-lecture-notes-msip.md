@@ -19,6 +19,11 @@ tags:
 
 - **infimum**: The **infimum** of a subset $S$ of a partially ordered set, $P$, assuming it exists, does not necessarily belong to $S$. If it does, it is a **minimum** or least element of $S$.
 - **supremum**: Similarly, if the **supremum** of $S$ belongs to, $S$, it is a **maximum** or greatest element of $S$.
+  - Theorem: The supremum of a set of **real numbers** always exists, in the worst case it is $\pm\infty$.
+    - "The completeness of the real numbers implies (and is equivalent to) that any bounded nonempty subset $S$ of the real numbers has an infimum and a supremum. If $S$ is not bounded below, one often formally writes $\inf{S}=-\infty$ If $S$ is empty, one writes $\inf{S}=+\infty$", [Wikipedia](https://en.wikipedia.org/wiki/Infimum_and_supremum#Infima_and_suprema_of_real_numbers)
+- **topology**: "die Menge $\mathcal {O}$ der offenen Mengen wird als die Topologie des topologischen Raumes $(X,\mathcal{O})$ bezeichnet", [Wikipedia](https://de.wikipedia.org/wiki/Topologie_(Mathematik)#Topologischer_Raum)
+  - "Üblicherweise werden topologische Räume in den Lehrbüchern über die **offenen Mengen** definiert"
+  - "Wird eine beliebige **Grundmenge** mit einer **Topologie** (einer topologischen Struktur) versehen, dann ist sie ein **topologischer Raum**, und ihre Elemente werden als **Punkte** aufgefasst. Die Topologie des Raumes bestimmt sich dann dadurch, dass bestimmte Teilmengen als **offen** ausgezeichnet werden."
 
 # 1.1 Digital Images
 
