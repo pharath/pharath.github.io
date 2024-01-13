@@ -1,5 +1,5 @@
 ---
-title: "Physics"
+title: "Physics and Astronomy"
 read_time: false
 excerpt: "Interesting ..."
 toc: true
@@ -10,6 +10,7 @@ categories:
   - Notes
 tags:
   - physics
+  - astronomy
   - notes
 
 ---
@@ -40,4 +41,4 @@ references:
 - [Wikipedia](https://en.wikipedia.org/wiki/Tesla_(unit)#Examples)
 - [physicsworld](https://physicsworld.com/a/world-record-pulsed-magnetic-f/#:~:text=Last%20week%20saw%20researchers%20at%20the%20Los%20Alamos,following%20day%20with%20an%20impressive%2097.4%20T%20field.)
 
-# Astrophysics
+# Astronomy
