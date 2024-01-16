@@ -17,11 +17,19 @@ tags:
 
 # Preliminaries
 
+## supremum and infimum
+
 - **infimum**: The **infimum** of a subset $S$ of a partially ordered set, $P$, assuming it exists, does not necessarily belong to $S$. If it does, it is a **minimum** or least element of $S$.
 - **supremum**: Similarly, if the **supremum** of $S$ belongs to, $S$, it is a **maximum** or greatest element of $S$.
   - Theorem: The supremum of a set of **real numbers** always exists, in the worst case it is $\pm\infty$.
     - "The completeness of the real numbers implies (and is equivalent to) that any bounded nonempty subset $S$ of the real numbers has an infimum and a supremum. If $S$ is not bounded below, one often formally writes $\inf{S}=-\infty$ If $S$ is empty, one writes $\inf{S}=+\infty$", [Wikipedia](https://en.wikipedia.org/wiki/Infimum_and_supremum#Infima_and_suprema_of_real_numbers)
-- **topology**: "die Menge $\mathcal {O}$ der offenen Mengen wird als die Topologie des topologischen Raumes $(X,\mathcal{O})$ bezeichnet", [Wikipedia](https://de.wikipedia.org/wiki/Topologie_(Mathematik)#Topologischer_Raum)
+- **essential supremum** ("supremum almost everywhere"): While the exact definition is not immediately straightforward, intuitively the essential supremum of a function is the smallest value that is greater than or equal to the function values everywhere **while ignoring** what the function does at a **set of points of measure zero**.
+  - For example, if one takes the function $f(x)$ that is equal to zero everywhere except at $x=0$ where $f(0)=1$, then the supremum of the function equals one. However, its **essential supremum** is zero because we are allowed to ignore what the function does at the single point where $f$ is peculiar.
+- **essential infimum**: The essential infimum is defined in a similar way.
+
+## topology
+
+- **topology**: "die Menge $\mathcal{O}$ der offenen Mengen wird als die Topologie des topologischen Raumes $(X,\mathcal{O})$ bezeichnet", [Wikipedia](https://de.wikipedia.org/wiki/Topologie_(Mathematik)#Topologischer_Raum)
   - "Üblicherweise werden topologische Räume in den Lehrbüchern über die **offenen Mengen** definiert"
   - "Wird eine beliebige **Grundmenge** mit einer **Topologie** (einer topologischen Struktur) versehen, dann ist sie ein **topologischer Raum**, und ihre Elemente werden als **Punkte** aufgefasst. Die Topologie des Raumes bestimmt sich dann dadurch, dass bestimmte Teilmengen als **offen** ausgezeichnet werden."
 
@@ -177,7 +185,26 @@ tags:
 
 ### 1.13 Segmentation by Thresholding / Isodata Algorithm
 
+- **Monotone Convergence Theorem**: 
+  1. If a sequence of real numbers is increasing and bounded above, then its supremum is the limit.
+  2. If a sequence of real numbers is decreasing and bounded below, then its infimum is the limit.
+  3. If $(a_{n})$ with $(n\in \mathbb{N})$ is a monotone sequence of real numbers (i.e., if $a_n \leq a_{n+1}$ for every $n \geq 1$ or $a_n \geq a_{n+1}$ for every $n \geq 1$), then this sequence has a finite limit if and only if the sequence is bounded.
+
 # 2.0 Local Operators
+
+## 2.3 Properties of the cross-correlation
+
+### 2.3 (i) Boundedness of the norm of the cross-correlation
+
+### 2.3 (ii) Derivatives
+
+To understand $\psi \in C_c^k(\mathbb{R}^d)$:
+
+**compact**: "In general, a set $K$ is called **compact**, if every sequence in $K$ has a converging subsequence with limit in $K$. For $K \subset \mathbb{R}^d$, compactness of $K$ is equivalent to $K$ being closed and bounded. This equivalence is known as **Heine–Borel theorem**.", lecture appendix
+- **Heine–Borel theorem**:
+  - For a subset $S$ of Euclidean space $\mathbb{R}^n$, the following two statements are equivalent:
+    - $S$ is **closed** and **bounded**
+    - $S$ is **compact**, that is, every open cover of $S$ has a finite subcover.
 
 # TODO (zurückgestellt)
 
