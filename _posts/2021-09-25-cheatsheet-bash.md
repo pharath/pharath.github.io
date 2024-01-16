@@ -130,6 +130,10 @@ $ echo $MYVAR
 
 # If
 
+## double square brackets vs single square brackets
+
+If you're writing a `#!/bin/bash` script then I recommend using `[[` instead. The double square-brackets `[[...]]` form has more features, a more natural syntax, and fewer gotchas that will trip you up., [stackoverflow](https://stackoverflow.com/a/20449556)
+
 ## Command as condition
 
 You can specify commands as a condition of `if`. If the command returns `0` in its exitcode that means that the condition is `true`; otherwise `false`. [source](https://stackoverflow.com/a/11287896/12282296)
@@ -157,7 +161,7 @@ if [[ $# -gt 0 ]]; then
 
 `$#` steht für: number of arguments (wie `argc` in C)
 
-# Vergleichsoperatoren
+# Comparison Operators, Vergleichsoperatoren, Logical Operators
 
 ```bash
 if [[ $# -gt 0 ]]; then
@@ -165,8 +169,12 @@ else
 fi
 ```
 
-`-gt` für "greater than" (ie der `>` operator) in der condition
-`-eq` für "equal to" (ie der `=` operator)
+- `-gt` für "greater than" (ie der `>` operator) in der condition
+- `-eq` für "equal to" (ie der `=` operator)
+
+- `=` and `==` are for string comparisons
+- `-eq` is for numeric comparisons
+- `-eq` is in the same family as `-lt`, `-le`, `-gt`, `-ge`, and `-ne`
 
 # Standard Stream Redirection: stdin, stdout and stderr
 
