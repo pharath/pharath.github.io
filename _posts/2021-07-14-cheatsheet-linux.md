@@ -1182,7 +1182,10 @@ ctrl + l | live preview on/off (die live updates brauchen manchmal bisschen)
 
 ## grip
 
+[github](https://github.com/joeyespo/grip)
+
+- `pip install grip`
 - see [manpages.ubuntu.com](https://manpages.ubuntu.com/manpages/focal/man1/grip.1.html)
 - "Preview GitHub Markdown files like Readme locally"
-- view in firefox
+- view in Firefox
 - `grip file.md 6420` (to open a second file on a different port, here `6420`)
