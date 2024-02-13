@@ -1,5 +1,5 @@
 ---
-title: "Mathematical methods of signal and image processing"
+title: "Mathematical Methods of Signal and Image Processing"
 read_time: false
 excerpt: "For learning \"Mathematical methods of signal and image processing\"; content mostly from \"RWTH lecture Mathematical methods of signal and image processing\" by Benjamin Berkels."
 toc: true
@@ -22,16 +22,126 @@ tags:
 - **infimum**: The **infimum** of a subset $S$ of a partially ordered set, $P$, assuming it exists, does not necessarily belong to $S$. If it does, it is a **minimum** or least element of $S$.
 - **supremum**: Similarly, if the **supremum** of $S$ belongs to, $S$, it is a **maximum** or greatest element of $S$.
   - Theorem: The supremum of a set of **real numbers** always exists, in the worst case it is $\pm\infty$.
-    - "The completeness of the real numbers implies (and is equivalent to) that any bounded nonempty subset $S$ of the real numbers has an infimum and a supremum. If $S$ is not bounded below, one often formally writes $\inf{S}=-\infty$ If $S$ is empty, one writes $\inf{S}=+\infty$", [Wikipedia](https://en.wikipedia.org/wiki/Infimum_and_supremum#Infima_and_suprema_of_real_numbers)
+    - "The **completeness** of the real numbers implies (and is equivalent to) that any bounded nonempty subset $S$ of the real numbers has an infimum and a supremum. If $S$ is not bounded below, one often formally writes $\inf{S}=-\infty$ If $S$ is empty, one writes $\inf{S}=+\infty$", [Wikipedia](https://en.wikipedia.org/wiki/Infimum_and_supremum#Infima_and_suprema_of_real_numbers)
 - **essential supremum** ("supremum almost everywhere"): While the exact definition is not immediately straightforward, intuitively the essential supremum of a function is the smallest value that is greater than or equal to the function values everywhere **while ignoring** what the function does at a **set of points of measure zero**.
   - For example, if one takes the function $f(x)$ that is equal to zero everywhere except at $x=0$ where $f(0)=1$, then the supremum of the function equals one. However, its **essential supremum** is zero because we are allowed to ignore what the function does at the single point where $f$ is peculiar.
 - **essential infimum**: The essential infimum is defined in a similar way.
+
+## supremum norm, $\infty$-norm, uniform norm
+
+- to measure the "distance between two functions", cf. [uniform convergence theorem](https://www.youtube.com/watch?v=O2HKxNcom7g&list=PLkZG1WV2RkYJTALH2dvQiQvUGXyHawkhG&index=19)
+- [Wikipedia](https://en.wikipedia.org/wiki/Uniform_norm):
+  - the **uniform norm** is also called the **supremum norm**, the **Chebyshev norm**, the **infinity norm**, or, when the supremum is in fact the maximum, the **max norm**
+  - the **uniform norm** (or **sup norm**) assigns to real- or complex-valued bounded functions $f$ defined on a set $S$ the non-negative number, $$\begin{equation*} \|f\|_{\infty }=\|f\|_{\infty ,S}=\sup\{\,\vert f(s)\vert :s\in S\,\} \end{equation*}$$ 
+
+## pointwise convergence
+
+- $\forall \tilde{x}\in I \,\forall \epsilon > 0 \,\exists N \,\forall n \geq N : \| f_n(\tilde{x}) - f(\tilde{x}) \| \lt \epsilon$
+- does **not** imply uniform convergence
+- does **not** conserve function properties:
+  - continuity
+
+## uniform convergence
+
+- $\forall \epsilon > 0 \,\exists N \,\forall n \geq N \,\forall \tilde{x}\in I : \| f_n(\tilde{x}) - f(\tilde{x}) \| \lt \epsilon$
+- converging function $f_n$ must be inside the **epsilon tube** around $f$
+- supremum norm $\lVert f_n - f\rVert_{\infty} \to 0$ for $n \to \infty$
+- implies pointwise convergence
+  - therefore, stronger than pointwise convergence
+- conserves function properties:
+  - continuity ($f_n$ continuous $\implies$ the limit function $f$ is also continuous)
+  - boundedness ($f_n$ bounded $\implies$ the limit function $f$ is also bounded)
+
+## open, closed
+
+[Wikipedia](https://en.wikipedia.org/wiki/Closed_set):
+
+"a **closed set** is a set whose complement is an open set."
+
+"In a **topological space**, a closed set can be defined as a set which contains all its limit points."
+
+"In a **vollständig/complete metric space**, a closed set is a set which is closed under the limit operation."
+
+- Eine Teilmenge $U \subset X$ ist genau dann (&rarr; Bredies)
+  - **offen**/**open**, falls sie nur aus **inneren Punkten** besteht, also es für jedes $x \in U$ ein $\epsilon > 0$ derart gibt, dass $B_\epsilon ( x ) \subset U$
+  - **abgeschlossen**/**closed**, wenn sie nur aus **Berührpunkten** besteht, das heißt für jedes $x \in X$ für welches die Mengen $B_\epsilon ( x )$ für jedes $\epsilon > 0$ die Menge $U$ schneiden, auch $x \in U$ gilt
+
+## closure
+
+- **Abschluss** von $U$, notiert mit $\overline{U}$, die Menge aller Berührpunkte (&rarr; Bredies)
+
+## dense
+
+- **idea**: "a subset $A$ of a topological space $X$ is said to be dense in $X$ if every point of $X$ either belongs to $A$ or else is arbitrarily "close" to a member of $A$, [Wikipedia](https://en.wikipedia.org/wiki/Dense_set)
+  - for instance, the **rational numbers** are a dense subset of the **real numbers** because every real number either is a rational number or has a rational number arbitrarily close to it"
+- eine Teilmenge $U\subset X$ ist **dicht** in $X$, falls $\overline{U} = X$ (&rarr; Bredies)
+- **approximation by polynomial functions** (Weierstrass): "any given **complex-valued continuous function** defined on a closed interval $[a,b]$ can be uniformly approximated as closely as desired by a **polynomial function**", [Wikipedia](https://en.wikipedia.org/wiki/Dense_set)
+
+## separable
+
+- $X$ wird als **separabel** bezeichnet, wenn es eine abzählbare dichte Teilmenge gibt (&rarr; Bredies)
+
+## compact
+
+- **The idea** is that a compact space has no "punctures" or "missing endpoints", i.e., it includes all limiting values of points., [Wikipedia](https://en.wikipedia.org/wiki/Compact_space)
+  - For example, the **open interval** $(0,1)$ would not be compact because it excludes the limiting values of $0$ and $1$, whereas the **closed interval** $[0,1]$ would be compact.
+  - Similarly, the **space of rational numbers** $\mathbb {Q}$ is not compact, because it has infinitely many "punctures" corresponding to the irrational numbers, and the **space of real numbers** $\mathbb {R}$ is not compact either, because it excludes the two limiting values $+\infty$ and $-\infty$. However, the **extended real number line** would be compact, since it contains both infinities.
+- **Formally**: In general, a set $K$ is called **compact**, if every sequence in $K$ has a converging subsequence with limit in $K$., lecture appendix
+  - For $K \subset \mathbb{R}^d$, compactness of $K$ is equivalent to $K$ being closed and bounded. This equivalence is known as **Heine–Borel theorem**.
+
+**Heine–Borel theorem**: For a subset $S$ of Euclidean space $\mathbb{R}^n$, the following two statements are equivalent:
+- $S$ is **closed** and **bounded**
+- $S$ is **compact**, that is, every open cover of $S$ has a finite subcover.
 
 ## topology
 
 - **topology**: "die Menge $\mathcal{O}$ der offenen Mengen wird als die Topologie des topologischen Raumes $(X,\mathcal{O})$ bezeichnet", [Wikipedia](https://de.wikipedia.org/wiki/Topologie_(Mathematik)#Topologischer_Raum)
   - "Üblicherweise werden topologische Räume in den Lehrbüchern über die **offenen Mengen** definiert"
   - "Wird eine beliebige **Grundmenge** mit einer **Topologie** (einer topologischen Struktur) versehen, dann ist sie ein **topologischer Raum**, und ihre Elemente werden als **Punkte** aufgefasst. Die Topologie des Raumes bestimmt sich dann dadurch, dass bestimmte Teilmengen als **offen** ausgezeichnet werden."
+
+## Function Spaces
+
+### $C(U,Y)$
+
+- Bredies 2.4:
+  - **"pointwise continuous"** vs. **"continuous"** vs. **"uniformly continuous"**:
+    - Ist $F$ in jedem Punkt $x \in U$ stetig, so nennt man $F$ einfach nur **stetig**, hängt darüber hinaus das $\delta$ nicht von $x$ ab, so ist $F$ **gleichmäßig stetig**
+- Bredies 2.6:
+  - $C(U,Y)$ is **not** $C(\overline{U},Y)$
+    - in $C(U,Y)$ the function $F$ must be only **continuous**
+    - in $C(\overline{U},Y)$ the function $F$ must be **bounded** and **uniformly continuous**
+  - $C(U,Y)$ is **not** a normed space, but $C(\overline{U},Y)$ **together with** $\Vert F\Vert_{\infty}$ is
+- Comparison: [$L^2$ vs. $C(U,Y)$](#l2-vs-cuy)
+
+### $L^2$
+
+- it is often convenient to think of $L^2(\mathbb{R}^n)$ as the **completion** of the **continuous functions** with respect to the $L^2$-norm, [mathworld.wolfram](https://mathworld.wolfram.com/L2-Space.html)
+- examples for $L^2$ functions:
+  - **Bounded functions**, defined on $\[ 0 , 1 \]$, are square-integrable. These functions are also in $L^p$, for any value of $p$., [wikipedia](https://en.wikipedia.org/wiki/Square-integrable_function#Examples)
+- Comparison: [$L^2$ vs. $C(U,Y)$](#l2-vs-cuy)
+
+### $L^2$ vs. $C(U,Y)$
+
+- not all continuous functions are in $L^2$,
+  - **counterexample**: the constant function $f=1$
+- not all $L^2$ functions are continuous,
+  - **counterexample**: the characteristic function of the finite set $A$, $\chi_{A}$
+
+## Series
+
+### Absolute Convergence
+
+Wikipedia:
+
+- "**absolutely convergent** series behave "nicely". For instance, **rearrangements** do not change the value of the sum. This is not true for **conditionally convergent** series"
+- example: **alternating sum** $S=1-1+1-1+1-\dots$
+  - "What is the value of $S$?"
+  - "The answer is that because $S$ is **not absolutely convergent**, grouping or rearranging its terms changes the value of the sum"
+  - "In fact, the series $1 - 1 + 1 - 1 + \dots$ **does not converge**, so $S$ does not have a value to find in the first place"
+  - "A series that is absolutely convergent does not have this problem: grouping or rearranging its terms does **not** change the value of the sum"
+- "If $G$ is complete with respect to the metric $d$, then **every absolutely convergent series is convergent**"
+- **conditionally convergent**: "If a series is convergent but not absolutely convergent, it is called conditionally convergent. An **example** of a conditionally convergent series is the **alternating harmonic series**."
+  - the **alternating harmonic series** converges to $\ln{2}$ or $\frac{3}{2}\ln{2}$ depending on the arrangement
 
 # 1.1 Digital Images
 
@@ -103,7 +213,7 @@ tags:
 
 # 1.6 Point Operators / Intensity Transforms
 
-- **intensity tranformation**: $T: \mathbb{R} \to \mathbb{R}$
+- **intensity transformation**: $T: \mathbb{R} \to \mathbb{R}$
 - **intensity transformed image**: $T\circ f$, where $f: \Omega \to \mathbb{R}$ is an image.
 
 ## clipping
@@ -166,7 +276,7 @@ tags:
 
 - $F$ is a discrete image
 
-### 1.8 Characteristic Function, Level Set of $f$, Volume of a Bounded Set $A$
+### 1.8 Characteristic Function $\chi_{A}$, Level Set of $f$, Volume of a Bounded Set $A$
 
 - $f$ is a pixelated image
 
@@ -200,11 +310,7 @@ tags:
 
 To understand $\psi \in C_c^k(\mathbb{R}^d)$:
 
-**compact**: "In general, a set $K$ is called **compact**, if every sequence in $K$ has a converging subsequence with limit in $K$. For $K \subset \mathbb{R}^d$, compactness of $K$ is equivalent to $K$ being closed and bounded. This equivalence is known as **Heine–Borel theorem**.", lecture appendix
-- **Heine–Borel theorem**:
-  - For a subset $S$ of Euclidean space $\mathbb{R}^n$, the following two statements are equivalent:
-    - $S$ is **closed** and **bounded**
-    - $S$ is **compact**, that is, every open cover of $S$ has a finite subcover.
+see [section "compact"](#compact)
 
 # TODO (zurückgestellt)
 
