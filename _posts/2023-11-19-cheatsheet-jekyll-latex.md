@@ -136,7 +136,7 @@ Liquid Exception: Liquid syntax error (line 194): Variable 'double-{-without-whi
 \quad
 ```
 
-- cases
+- formula with cases
 
 ```
 # works only inside $$$$
@@ -154,4 +154,18 @@ $$
 
 ```
 \circ   # degree, angle
+```
+
+- non-standalone symbols (a symbol changing another symbol)
+
+```
+\overline{A}    # instead of "\bar"
+```
+
+- absolute value, norm
+
+```
+\vert A\vert
+# versus:
+\Vert A\Vert
 ```
