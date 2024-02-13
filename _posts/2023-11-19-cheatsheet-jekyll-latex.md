@@ -63,12 +63,12 @@ Jekyll is written in Ruby.
 
 | command | description |
 | :---: | :---: |
-sudo apt-get install ruby-full |
-sudo apt install rubygems-integration | nicht nötig, wenn ruby-full installiert wurde
-sudo gem install bundler |
-sudo gem install jekyll | Seite funktioniert nicht richtig, wenn dieses Gem **nicht** installiert wurde (z.B. bei Seitenvergrößerung über ctrl - + werden die einzelnen Teile der Seite nicht automatisch ausgerichtet)! 
-sudo bundle install | im github-pages repo **root** folder
-bundle exec jekyll serve | warten bis "Server running... press ctrl-c to stop." message und dann ctrl gedrückt halten und auf server address clicken (oder in Browser "http://localhost:4000" aufrufen)
+`sudo apt-get install ruby-full` |
+`sudo apt install rubygems-integration` | nicht nötig, wenn ruby-full installiert wurde
+`sudo gem install bundler` |
+`sudo gem install jekyll` | Seite funktioniert nicht richtig, wenn dieses Gem **nicht** installiert wurde (z.B. bei Seitenvergrößerung über ctrl - + werden die einzelnen Teile der Seite nicht automatisch ausgerichtet)! 
+`sudo bundle install` | im github-pages repo **root** folder
+`bundle exec jekyll serve` | warten bis "Server running... press ctrl-c to stop." message und dann ctrl gedrückt halten und auf server address clicken (oder in Browser "http://localhost:4000" aufrufen)
 
 ## Create a new site
 
