@@ -391,6 +391,21 @@ aplay `/tmp/test-mic.wav`
 - caused by 50Hz vs 60Hz powerline frequency differences (see [source](https://blog.christophersmart.com/2017/02/07/fixing-webcam-flicker-in-linux-with-udev/))
     - **solution**: try `v4l2-ctl --set-ctrl power_line_frequency=0` or `v4l2-ctl --set-ctrl power_line_frequency=1`
 
+# buku
+
+Bookmark Manager
+
+```bash
+pip3 install buku
+pip3 install flask # fixes error
+# gui
+pip3 install "buku[server]"
+# start bukuserver, open in firefox
+bukuserver run --host 127.0.0.1 --port 5001
+# import firefox bookmarks
+buku --import ~/Downloads/bookmarks27jan24.html
+```
+
 # rofi
 
 ## Install
