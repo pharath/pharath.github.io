@@ -151,7 +151,7 @@ Wikipedia:
 - **image**: a mapping $f: \Omega \to V$, where $\Omega\subset \mathbb{R}^d$
   - **continuous gray scale image**: $f: (0,1)^2 \to \[0,1\]$
 - **image size**: the vector $\underline{m}=(m_1,\dotsc,m_d)$ (aka "number of pixels"), e.g. $\underline{m}=(4,3)$
-- **grid node**: $x^{\underline{j}}\in \Omega$ (aka "the center of each pixel", eg. $x^{(4,3)}$)
+- **grid node/cell center**: $x^{\underline{j}}\in \Omega$ (aka "the center of each pixel", eg. $x^{(4,3)}$)
 - **grid**: the $d$-array $\underline{X}=(x^{\underline{j}})_{\underline{j}\in I}$
   - $m$ and the cuboid $\Omega$ imply a grid
 - **grid size**: the vector $\underline{h}$, where $h_1$ is the grid size along the x-axis, $h_2$ along the y-axis, etc.
@@ -163,7 +163,9 @@ Wikipedia:
   3. no cell is empty
 - **cell-centered**: eg. used for finite differences (FDM)
 - **mesh-centered**: eg. used for finite elements (FEM)
-- **digital/discrete/pixel image**: a $d$-array $F=(f_\underline{j})_{\underline{j}\in I}$
+- **digital/discrete/pixel image**:
+  - a $d$-array $F=(f_\underline{j})_{\underline{j}\in I}$
+    - ie. a discrete image is **a matrix** and NOT a step function
   - **values** (eg. **gray value**): $f_\underline{j} \in V$
   - **examples**:
     - $d=2$, $\Omega = (0,8) \times (0,6)$ and $\underline{m}=(4,3)$
@@ -191,10 +193,10 @@ Wikipedia:
   - **values**: for grayscale image with $n$ bit precision $2^n$ possible values, eg. for 8 bit $V=\\{0,\dotsc,255\\}$
 - **pixel** (for $d=2$) or **voxel** (for $d=3$): the tuple $(c_\underline{j},f_\underline{j})$
 - **pixelated function**: a function $f: \Omega \to V$ that is constant on each cell, ie. $f\rvert_{c_\underline{j}}$ is constant for all $\underline{j}\in I$
-- **cell boundaries (of a pixelated function)**: $L=\Omega\setminus \bigcup_{\underline{j}\in I} c_\underline{j}$
-  - **values**: we choose $f(x)=f(c_\underline{j})$ for each cell boundary point $x\in L$, where $\underline{j}$ is the **unique** cell above or to the right of each cell boundary point $x\in L$
-    - Note: this is just one possible choice
-      - the cell boundaries are a **Lebesgue null set** $\Rightarrow$ values can be chosen freely in the sense of the Lebesgue measure
+  - **cell boundaries (of a pixelated function)**: $L=\Omega\setminus \bigcup_{\underline{j}\in I} c_\underline{j}$
+    - **values**: we choose $f(x)=f(c_\underline{j})$ for each cell boundary point $x\in L$, where $\underline{j}$ is the **unique** cell above or to the right of each cell boundary point $x\in L$ (at "crossings" $\underline{j}$ is the cell above **and** to the right of $x\in L$, and the value on the outer border of $\Omega$ is not defined because it is not part of $\Omega$)
+      - Note: this is just one possible choice
+        - the cell boundaries are a **Lebesgue null set** $\Rightarrow$ values can be chosen freely in the sense of the Lebesgue measure
 - **scanning** (**measurement of** $f$): $$(f,\psi)_{L^2}=\int_{\Omega} f(y)\psi(y)dy$$ (scalar product in $L^2$)
   - here:
     - $f\in L^2(\Omega)$ (Berkels: "an image where you can integrate the squared intensity, so it has to be finite")
@@ -207,8 +209,8 @@ Wikipedia:
                                        \end{equation*}\ \text{and}\ (f,r_h(x-\cdot))_{L^2}=\int_\Omega f(y)r_h(x-y)dy=:r^h_x\left[f\right].$$
       - $h$: sensor width
       - $x^{\underline{j}}$: sensor position
-      - intensities $f$ that fall in the sensor are averaged
-      - with this CCD sensor one gets the discrete image $(r_{x^\underline{j}}^h\left[f\right])_{\underline{j}\in I}$ (a $d$-array)
+      - <span style="color:red">intensities $f$ that fall in the sensor are averaged</span> 
+      - with this CCD sensor one gets the discrete image $(r_{x^\underline{j}}^h\left[f\right])_{\underline{j}\in I}$ (which is a **matrix** and not a step function, see def. of **discrete image**, and $x^{\underline{j}}\in \Omega$ are **grid nodes**, see def. above)
 - **coordinate systems**: in digital images rotated by $90^\circ$ clockwise (ie. 1st axis is vertical, 2nd axis is horizontal)
 
 # 1.6 Point Operators / Intensity Transforms
@@ -264,13 +266,13 @@ Wikipedia:
     - log is strictly increasing (for $b > 1$), or strictly decreasing (for $0 < b < 1$)
     - log is bijective for $b > 1$ and $0 < b < 1$
   - allows to catch very big values and bring them close to much smaller values
-  - eg. useful in electron microscopy: some details in $\lvert FFT\left[f - \overline{f}\right] \rvert$ become only visible if **first** $T^{\log}$ and **then** $T^{\text{norm}}$ is applied instead of the other way around ($T^{\log}$ does not help much after $T^{\text{norm}}$ has been applied) (**gamma correction** could **not** do this unless you would use an extremely large gamma value that is exactly valid for the specific image, ie. gamma depends on the dataset, whereas the log transform does not have these problems)
+  - eg. useful **in electron microscopy**: some details in $\lvert FFT\left[f - \overline{f}\right] \rvert$ become only visible if **first** $T^{\log}$ and **then** $T^{\text{norm}}$ is applied instead of the other way around ($T^{\log}$ does not help much **after** $T^{\text{norm}}$ has been applied) (**gamma correction** could **not** do this unless you would use an extremely large gamma value that is exactly valid for the specific image, ie. gamma depends on the dataset, whereas the log transform does not have these problems)
 
-## Intensity Transforms using Global Statistics
+## Intensity Transforms using Global Statistics / Histograms
 
 - these global statistics of the intensity distributions in the image are computed once
 - based on that we can construct some intensity transform
-- the statistics are represented by a **histogram**
+- <span style="color:red">the global statistics are represented by a **histogram**</span>
 
 ### 1.7 Discrete Histogram of $F$, Discrete CDF of $F$
 
@@ -295,10 +297,49 @@ Wikipedia:
 
 ### 1.13 Segmentation by Thresholding / Isodata Algorithm
 
-- **Monotone Convergence Theorem**: 
-  1. If a sequence of real numbers is increasing and bounded above, then its supremum is the limit.
-  2. If a sequence of real numbers is decreasing and bounded below, then its infimum is the limit.
-  3. If $(a_{n})$ with $(n\in \mathbb{N})$ is a monotone sequence of real numbers (i.e., if $a_n \leq a_{n+1}$ for every $n \geq 1$ or $a_n \geq a_{n+1}$ for every $n \geq 1$), then this sequence has a finite limit if and only if the sequence is bounded.
+<span style="color:red">Note: Like 1.11 and 1.12 this method is also **histogram based**!</span>
+
+- <span style="color:red">**idea**:</span> **fixed point equation**: Find a threshold $\theta$ s.t. $\theta = \varphi(\theta)$
+  - where $\varphi(\theta) := \frac{1}{2}(\int_{\\{f\leq\theta\\}}f(x)dx + \int_{\\{f\gt\theta\\}}f(x)dx)$
+- <span style="color:red">**method**:</span> **fixed point iteration**: $\theta^{n+1} = \varphi(\theta^n)$ with IV $\theta^1\in(0,1)$, typically $\theta^1 = \frac{1}{2}(\inf{f} + \sup{f})$ (mean of the value range)
+  - **Implementation**: Isodata Algorithm
+
+**What is a fixed point?**
+
+- **fixed point**: Formally, $c$ is a fixed point of a function $f$ if $c$ belongs to both the domain and the codomain of $f$, and $f(c) = c$.
+For example, if $f$ is defined on the real numbers by $f(x) = x^2 − 3x + 4$, then $2$ is a fixed point of $f$, because $f(2) = 2$. 
+  - "a fixed point is an element that is mapped to itself by the function."
+
+**Under which conditions does the fixed point iteration converge?**
+
+- Proof of convergence of the sequence $\theta^n$:
+  - **Monotone Convergence Theorem**: 
+    1. If a sequence of **real numbers** is <span style="color:red">increasing and bounded above</span>, then its supremum is the limit.
+    2. If a sequence of **real numbers** is <span style="color:red">decreasing and bounded below</span>, then its infimum is the limit.
+    3. If $(a_{n})$ with $(n\in \mathbb{N})$ is a monotone sequence of **real numbers** (i.e., if $a_n \leq a_{n+1}$ for every $n \geq 1$ or $a_n \geq a_{n+1}$ for every $n \geq 1$), then this sequence has a finite limit **if and only if** the sequence is bounded.
+  - $\varphi$ is <span style="color:red">increasing</span> (but not necessarily strictly increasing)
+    - because it is a sum of two increasing functions (the two average gray value integrals)
+    - **phth remember**: $\theta^n$ can be decreasing, but $\varphi$ is <span style="color:red">always</span> increasing!
+  - $\varphi(\[0,1\])\subset\[0,1\] \Rightarrow \varphi$ is <span style="color:red">bounded</span>
+    - because the two average gray value integrals are in $\[0,1\]$, so $\varphi$ must be in $\[0,1\]$, too
+- **problem**: just because $\theta^n$ converges that does not mean its **limit is a fixed point**
+- **problem**: moreover, we do not know if a fixed point even **exists**
+- Proof of existence of a fixed point:
+  - **fixed point theorems** assuming a **continuous** function $f$:
+    - **Brouwer's fixed point theorem**: "states that for any **continuous** function $f$ mapping a nonempty compact convex set to itself, there is a point $x_0$ such that $f(x_0) = x_0$."
+      - "The simplest forms of Brouwer's theorem are for continuous functions $f$ from a **closed interval** $I$ in the real numbers to itself or from a **closed disk** $D$ to itself."
+      - "A more general form than the latter is for continuous functions from a **nonempty convex compact subset $K$ of Euclidean space** to itself."
+  - **fixed point theorems** <span style="color:red">without</span> assuming a **continuous** function $f$:
+    - "Every monotonic <span style="color:red">non-decreasing</span> $\varphi: \[0,1\] \to \[0,1\]$ has a fixed point.", a special case of the **Knaster-Tarski fixed point theorem** in order theory, note: in **order theory** "monotonic" means "non-decreasing", exercise
+    - "If $\varphi$ is **<span style="color:red">not</span> continuous**, then the **limit of** $\theta^n$ is **not** necessarily **a fixed point**."
+- thus, we **must** assume $\varphi$ is **continuous** in order to guarantee that the Isodata Algorithm will converge to a fixed point
+
+**How to implement the Isodata Algorithm?**
+
+- use the histogram $H_f$ to compute the average gray values $\int_{\\{f\leq\theta\\}}f(x)dx$ and $\int_{\\{f\gt\theta\\}}f(x)dx$
+  - these integrals are approximated as discrete sums
+  - the continuous histogram $H_f$ is approximated as the histogram of the discrete image $H_F$
+  - **intuitively**: like discrete and continuous **center of mass** formula
 
 # 2.0 Local Operators
 
