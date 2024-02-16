@@ -333,7 +333,7 @@ Klicke auf den letzten der layers in der Liste links. Dann erscheint rechts der 
 
 ![image start CMD default config](https://i.ibb.co/QcRnxP8/Screenshot-from-2021-08-16-04-53-12.png)
 
-# Beispiele
+# docker commands (examples)
 
 Run osrf/ros image with GUI support:
 1. `xhost +local:root`
@@ -348,21 +348,31 @@ Start new bash shell in running container with color support:
 1. `xhost +local:root`
 2. `docker exec -it <tab-tab>container env TERM=xterm-256color bash`
 
-# Webcam
+# Webcam in Container
 
 - first enable x11 forwarding: `xhost +`
 - `docker run --ipc=host --device=/dev/video0`
 - Check the webcam: `sudo mplayer tv://device=/dev/video0`
-    - or: `sudo mplayer tv:// -tv driver=v4l2:device=/dev/video0`
+  - or: `sudo mplayer tv:// -tv driver=v4l2:device=/dev/video0`
 
-# Adding Users
+# Adding Users in Container
 
 - see [https://stackoverflow.com/a/49848507](https://stackoverflow.com/a/49848507)
 
-# Check OS in container
+# Check OS in Container
 
 - `lsb_release -sirc`
 - `cat /etc/os-release`
+
+# Kubernetes
+
+- While Docker is a **container runtime**, Kubernetes is a platform for **running and managing containers from many container runtimes**.
+- Kubernetes supports numerous container runtimes including
+  - Docker,
+  - containerd,
+  - CRI-O,
+  - and any implementation of the Kubernetes CRI (Container Runtime Interface).
+- A **good metaphor** is Kubernetes as an "operating system" and Docker containers are "apps" that you install on the "operating system".
 
 # Troubleshooting
 
