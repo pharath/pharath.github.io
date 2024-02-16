@@ -31,12 +31,18 @@ tags:
 
 ## gem
 
+- [What is a gem?](https://guides.rubygems.org/what-is-a-gem/)
+- like "packages" in Python
+- can be installed with `bundle`
+
 | command | description |
 | :---: | :---: |
 `gem list` | list gems
 `gem query --local` | list all locally installed gems
 
 ## bundle
+
+- like `apt` and `pip`, but for Ruby
 
 | command | description |
 | :---: | :---: |
@@ -45,6 +51,8 @@ tags:
 
 # Jekyll
 
+- **Jekyll** is a gem.
+
 Jekyll is written in Ruby.
 - [Ruby 101](https://jekyllrb.com/docs/ruby-101/) explains:
   - **Gems**
@@ -52,7 +60,7 @@ Jekyll is written in Ruby.
     - [Ruby gems search](https://rubygems.org/)
     - [Ruby gems list](https://rubygems.org/gems)
   - **Jekyll**
-    - **Jekyll** is a gem. 
+    - **Jekyll** is a gem.
     - Many **Jekyll plugins** are also gems, including jekyll-feed, jekyll-seo-tag and jekyll-archives.
   - **Gemfile**
     - a list of gems used by your site. Every Jekyll site has a Gemfile in the main folder.
@@ -169,3 +177,8 @@ $$
 # versus:
 \Vert A\Vert
 ```
+
+# Github Pages
+
+- **github-pages** is a gem.
+- make sure you have the same github-pages gem version installed locally as github.com (check with `bundle list | grep github-pages`)
