@@ -32,7 +32,8 @@ tags:
 - to measure the "distance between two functions", cf. [uniform convergence theorem](https://www.youtube.com/watch?v=O2HKxNcom7g&list=PLkZG1WV2RkYJTALH2dvQiQvUGXyHawkhG&index=19)
 - [Wikipedia](https://en.wikipedia.org/wiki/Uniform_norm):
   - the **uniform norm** is also called the **supremum norm**, the **Chebyshev norm**, the **infinity norm**, or, when the supremum is in fact the maximum, the **max norm**
-  - the **uniform norm** (or **sup norm**) assigns to real- or complex-valued bounded functions $f$ defined on a set $S$ the non-negative number, $$\begin{equation*} \|f\|_{\infty }=\|f\|_{\infty ,S}=\sup\{\,\vert f(s)\vert :s\in S\,\} \end{equation*}$$ 
+  - the **uniform norm** (or **sup norm**) assigns to real- or complex-valued bounded functions $f$ defined on a set $S$ the non-negative number, $$\begin{equation*} \|f\|_{\infty }=\|f\|_{\infty ,S}=\sup_{s\in S}\{\,\vert f(s)\vert \,\} \end{equation*}$$ 
+- in measure theory: $$\|f\|_{L^\infty(\Omega) }=\inf_{\mu(N)=0}\sup_{s\in\Omega\backslash N}\{\,\vert f(s)\vert \,\}$$
 
 ## pointwise convergence
 
@@ -44,7 +45,7 @@ tags:
 ## uniform convergence
 
 - $\forall \epsilon > 0 \,\exists N \,\forall n \geq N \,\forall \tilde{x}\in I : \| f_n(\tilde{x}) - f(\tilde{x}) \| \lt \epsilon$
-- converging function $f_n$ must be inside the **epsilon tube** around $f$
+- converging function $f_n$ must be inside the <span style="color:red">**epsilon tube**</span> around $f$
 - supremum norm $\lVert f_n - f\rVert_{\infty} \to 0$ for $n \to \infty$
 - implies pointwise convergence
   - therefore, stronger than pointwise convergence
@@ -82,6 +83,8 @@ tags:
 - $X$ wird als **separabel** bezeichnet, wenn es eine abzählbare dichte Teilmenge gibt (&rarr; Bredies)
 
 ## compact
+
+<span style="color:red">**Merke**: "compact" = "closed and bounded"</span>
 
 - **The idea** is that a compact space has no "punctures" or "missing endpoints", i.e., it includes all limiting values of points., [Wikipedia](https://en.wikipedia.org/wiki/Compact_space)
   - For example, the **open interval** $(0,1)$ would not be compact because it excludes the limiting values of $0$ and $1$, whereas the **closed interval** $[0,1]$ would be compact.
@@ -299,9 +302,10 @@ Wikipedia:
 
 <span style="color:red">Note: Like 1.11 and 1.12 this method is also **histogram based**!</span>
 
-- <span style="color:red">**idea**:</span> **fixed point equation**: Find a threshold $\theta$ s.t. $\theta = \varphi(\theta)$
-  - where $\varphi(\theta) := \frac{1}{2}(\int_{\\{f\leq\theta\\}}f(x)dx + \int_{\\{f\gt\theta\\}}f(x)dx)$
-- <span style="color:red">**method**:</span> **fixed point iteration**: $\theta^{n+1} = \varphi(\theta^n)$ with IV $\theta^1\in(0,1)$, typically $\theta^1 = \frac{1}{2}(\inf{f} + \sup{f})$ (mean of the value range)
+- <span style="color:red">**Idea**:</span> **fixed point equation**: Find a threshold $\theta$ s.t. $\theta = \varphi(\theta)$
+  - where $\varphi(\theta) := \frac{1}{2}(\int_{\\{f\leq\theta\\}}^\text{avg}f(x)dx + \int_{\\{f\gt\theta\\}}^\text{avg}f(x)dx)$
+  - where $\int_A^\text{avg}f(x)dx := \frac{1}{\text{Vol}(A)}\int_A f(x)dx$
+- <span style="color:red">**Method**:</span> **fixed point iteration**: $\theta^{n+1} = \varphi(\theta^n)$ with IV $\theta^1\in(0,1)$, typically $\theta^1 = \frac{1}{2}(\inf{f} + \sup{f})$ (mean of the value range)
   - **Implementation**: Isodata Algorithm
 
 **What is a fixed point?**
@@ -336,22 +340,206 @@ For example, if $f$ is defined on the real numbers by $f(x) = x^2 − 3x + 4$, t
 
 **How to implement the Isodata Algorithm?**
 
-- use the histogram $H_f$ to compute the average gray values $\int_{\\{f\leq\theta\\}}f(x)dx$ and $\int_{\\{f\gt\theta\\}}f(x)dx$
+- use the histogram $H_f$ to compute the average gray values $\int_{\\{f\leq\theta\\}}^\text{avg}f(x)dx$ and $\int_{\\{f\gt\theta\\}}^\text{avg}f(x)dx$
   - these integrals are approximated as discrete sums
   - the continuous histogram $H_f$ is approximated as the histogram of the discrete image $H_F$
   - **intuitively**: like discrete and continuous **center of mass** formula
 
 # 2.0 Local Operators
 
+## 2.1 Moving Average
+
+**Task**: Denoising
+
+- image: $f: \mathbb{R}^d \to \mathbb{R}$
+- image without noise: $f_0: \mathbb{R}^d \to \[0,1\]$
+- noise: $n: \mathbb{R}^d \to \mathbb{R}$
+- $M_rf(x) = \int^\text{avg}_{B_r(x)}f(y)dy$
+  - where $\int_A^\text{avg}f(x)dx := \frac{1}{\text{Vol}(A)}\int_A f(x)dx$
+  - you can use either a ball in 2-norm or in $\infty$-norm
+- $M_rf(x) = \int_{\mathbb{R}^d} f(x+y)\left(\frac{1}{\| B_r(0) \|}\chi_{B_r(0)}(y)\right)dy$ ($M_r$ as a **linear filter**, $\chi_{B_r(0)}$ as **filter function**)
+
+## 2.2 Cross-Correlation, Linear Filter
+
+- $\left(\psi\star f\right)(x) = \int_{\Omega}\psi(y)f(x+y)dy$
+- linear filter with kernel $\psi$: $M_\psi: f\mapsto(x \mapsto \left(\psi\star f\right)(x))$
+
+## Convolution vs. Cross-Correlation
+
+- For **real-valued functions**, of a continuous or discrete variable, convolution $( f \ast g )$ differs from cross-correlation $( f \star g )$ only in that either $f(x)$ or $g(x)$ is <span style="color:red">reflected about the y-axis</span> in convolution; thus <span style="color:red">the convolution is a cross-correlation of $g(−x)$ and $f(x)$</span>, or $f(−x)$ and $g(x)$.
+- For **complex-valued functions**, the cross-correlation operator is the <span style="color:red">adjoint of</span> the convolution operator, ie. <span style="color:red">the convolution is a cross-correlation of $\overline{g(−x)}$ and $f(x)$</span>, or $\overline{f(−x)}$ and $g(x)$
+  - **Beweis**:
+    - "$ f(x) \ast g(x) = \overline{f(−x)} \star g(x)$" **(Eq. 1)** steht explizit [hier](https://en.wikipedia.org/wiki/Cross-correlation#Properties).
+    - Für die Kommutation der convolution $( g \ast f )$ gilt nach **(Eq. 1)** $ g(x) \ast f(x) = \overline{g(−x)} \star f(x)$.
+    - Da die LHS von **(Eq. 1)** und **(Eq. 2)** gleich sind **by commutativity**, müssen auch deren RHS gleich sein, dh. "$\overline{f(−x)} \star g(x) = \overline{g(−x)} \star f(x)$".
+
+![conv_vs_corr](https://i.ibb.co/Q6sTW2Q/Comparison-convolution-correlation-svg.png)
+
+- "The symmetry of $f$ is the reason $f\star g$ and $g\ast f$ (s. unten Mitte und unten links im Bild) are identical in this example."
+  - dh. wäre $f$ nicht symmetrisch, wären $f\star g$ und $g\ast f$ <span style="color:red">unterschiedlich!</span>
+  - **convolution**: $f\ast g$ und $g\ast f$ sind <span style="color:red">immer</span> gleich (wegen <span style="color:red">commutativity</span>)
+  - **correlation**: $(f\star g)(x)$ und $(\overline{g}\star \overline{f})(-x)$ sind <span style="color:red">immer</span> gleich
+    - im Reellen ist Kommutation also nur eine Spiegelung an der y-Achse
+
 ## 2.3 Properties of the cross-correlation
 
 ### 2.3 (i) Boundedness of the norm of the cross-correlation
 
-### 2.3 (ii) Derivatives
+- $f\in L^p$ and $g\in L^q$, then
+  - (i) **existence/finiteness of the integral**: $(f\star g)\in L^r$, where $\frac{1}{r}+1 = \frac{1}{p}+\frac{1}{q}$
+  - (ii) **Young's convolution inequality** for cross-correlation: $\\|f\star g\\|\_{L^r} = \\|f\\|\_{L^p}\\|g\\|\_{L^q}$
+  - (iii) $(f\star g)(x) = (g\star f)(-x)$ (reflection about the y-axis)
+    - <span style="color:red">but</span> for convolution: $(f\ast g)(x) = (g\ast f)(x)$
+  - (iv) $\\|f\star g\\|\_{L^r} = \\|g\star f\\|\_{L^r}$
+
+### 2.3 (ii) Inheritance of Differentiability, Derivatives of the Correlation
 
 To understand $\psi \in C_c^k(\mathbb{R}^d)$:
 
 see [section "compact"](#compact)
+
+- $\psi\in C_c^k$ and $f\in L^p$, then
+  - (i) $(f\star \psi)\in C^k$
+    - in words:
+      - "the resulting correlation <span style="color:red">**inherits differentiability**</span> of its arguments (it is sufficient if **one** of the arguments is differentiable for the result to be differentiable)"
+      - "the result of the correlation is always **as smooth as the kernel**"
+  - (ii) $\frac{\partial^\alpha}{\partial x^\alpha}(f\star \psi) = f\star \frac{\partial^\alpha}{\partial x^\alpha}\psi$
+    - $\alpha$ is a vector of natural numbers including $0$ ($\partial x^0$ means "not derived in x-direction", $\partial y^1$ means "derived once in y-direction", etc.), eg. $\alpha=(2,1,0)$ means $\frac{\partial^3}{\partial x^2\partial y^1\partial z^0}$
+    - in words: "you just need to compute the derivative of the kernel"
+    - useful if: you need a differentiable approximation of your image, eg. for edge detection
+  - (iii) $\frac{\partial^\alpha}{\partial x^\alpha}(\psi\star f) = (-1)^{\|\alpha\|}\frac{\partial^\alpha}{\partial x^\alpha}\psi\star f$
+    - $\|\alpha\|$ is the **sum of components**, eg. with the example above $\|\alpha\|=2+1+0=3$
+    - in words: again, "you just need to compute the derivative of the kernel"
+    - note: $\psi$ is differentiable, but $f$ is not necessarily differentiable
+    - we get (iii) because $\frac{\partial^\alpha}{\partial x^\alpha}(\psi\star f)(x) = \frac{\partial^\alpha}{\partial x^\alpha}(f\star \psi)(-x)$ and, by applying the chain rule to compute $\frac{\partial^\alpha}{\partial x^\alpha}(f\star \psi)(-x)$, we see that the <span style="color:red">outer derivative</span> of $(f\star \psi)(-x)$ is given by (ii), whereas the <span style="color:red">inner derivative</span>, $\frac{\partial}{\partial x}(-x)$, is $(-1)$ for <span style="color:red">each</span> derivative. Since we derive $\|\alpha\|$ times in total, we get $(-1)^{\|\alpha\|}$.
+
+### 2.3 (iii) Approximating any Function with a Differentiable Function
+
+- **conditions**:
+  - $\psi\in L^1$, $\psi\geq 0$ and $\int_{\mathbb{R}^d}\psi(x)dx=1$
+  - **$\psi_\epsilon$ a scaled version of $\psi$**: for $\epsilon > 0$, $\psi_\epsilon: \mathbb{R}^d \to \mathbb{R}, x \mapsto \frac{1}{\epsilon^d}\psi(\frac{x}{\epsilon})$
+    - factor $\frac{1}{\epsilon^d}$ chosen s.t. integral over $\mathbb{R}^d$ stays $1$
+    - gets narrower along $x$-axis and higher along $y$-axis as $\epsilon\to 0$
+  - $f\in L^\infty$
+- (i) if $f$ is **continuous** in point $x$ then,
+  - $\lim_{\epsilon\to 0}{(\psi_\epsilon\star f)(x)} = f(x)$, ie. $(\psi_\epsilon\star f)$ converges to $f$ in point $x\in \mathbb{R}^d$ (<span style="color:red">pointwise convergence</span>)
+- (ii) if $f$ is **uniformly continuous** then,
+  - $(\psi_\epsilon\star f)$ converges to $f$ uniformly on each compact subset of $\mathbb{R}^d$ (<span style="color:red">uniform convergence</span>)
+- tool that helps us approximating images $f$
+  - mainly useful for proofs
+  - the nice thing is $f$ can be <span style="color:red">any</span> function, we only need boundedness for $f$
+    - then, the limit on the lhs of (i) gives us a way to approximate this $f$ with the differentiable function $(\psi_\epsilon\star f)$
+  - it is often easier to prove s.th. for a differentiable function and then show that it also holds in the limit
+    - so, this is a tool to show properties of the limit $f(x)$ on the rhs of (i)
+
+# 3.0 Frequency Domain
+
+## 3.1 Fourier Transform
+
+- "FT of $f$ in $\omega$": $\mathcal{F}f(\omega):=\hat{f}(\omega) = \frac{1}{(2\pi)^{\frac{d}{2}}} \int_{\mathbb{R}^d}f(x)e^{-ix\cdot\omega}dx$
+  - weighted sum of complex exponentials
+- "the continuous FT": $\mathcal{F}: f \to \mathcal{F}f$
+- **problem**:
+  - $\mathcal{F}$ gives us a very different representation of the image in which we can eg. change some frequencies to pronounce s.th., but we <span style="color:red">need to go back</span> after that.
+  - unless we can <span style="color:red">invert $\mathcal{F}$</span> it is useless for any kind of image processing &rarr; Is $\mathcal{F}$ invertible? If not, how can we change $\mathcal{F}$ to make it invertible?
+
+## 3.2 Properties of the mapping $\mathcal{F}$
+
+- $\mathcal{F}: L^1(\mathbb{R}^d,\mathbb{C}) \to C(\mathbb{R}^d,\mathbb{C})$
+  - **problem**: $\mathcal{F}$ is a mapping between two completely different spaces
+- $\mathcal{F}$ is linear and continuous.
+  - **problem**: $\mathcal{F}$ is not necessarily integrable
+- (A) $\mathcal{F}f\in C$:
+  - $\lim_{n\to\infty}{\mathcal{F}f(\omega_n)}=\lim_{n\to\infty}{\mathcal{F}f(\omega)}$
+    - dominated convergence theorem
+      - (i) $\|g_n(x)\| \leq \|f(x)\|$, where (ii) $g_n(x):=f(x)e^{-ix\cdot \omega_n}\to\, (\text{integrand of}\, \mathcal{F}f)$ pointwisely and (iii) $\|f\|\in L^1$ integrable
+        - **Achtung**: ohne die Betragsstriche um $f(x)$ würde $\|g_n(x)\| \leq \|f(x)\|$ nicht gelten
+        - $z=re^{i\varphi}=r(\cos{(\varphi)}+i\sin{(\varphi)})$ (polar form of complex number)
+- (B) $\mathcal{F}$ linear:
+  - because integral $\mathcal{F}f$ linear
+- (C) continuity of operator $\mathcal{F}$:
+  - sufficient to show $\\|\mathcal{F}f\\|\_{C} \leq c\cdot\\|f\\|_{L^1}$
+    - because continuity and boundedness are equivalent for linear operators (ex. 5.2)
+      - and $\mathcal{F}$ is a linear operator acc. to (B)
+
+## 3.3 FT of the characteristic function
+
+- for $B>0$: $\mathcal{F}\chi_{\[B,B\]}(\omega) = \sqrt{\frac{2}{\pi}}B\,\text{sinc}\left(\frac{B\omega}{\pi}\right)$
+  - where $\text{sinc}(x)=\left(\frac{\sin{(\pi x)}}{\pi x}\right)$, for $x=0$: $\text{sinc}(x)=1$
+- thus, the FT of a function with compact support does not necessarily have a compact support
+- **problem**: $\text{sinc}(x)$ is not integrable, ie. $\text{sinc}(x)\not\in L^1(\mathbb{R})$
+- **problem**: $\mathcal{F}$ does not map $L^1$ to itself
+  - this is bad news for the invertibility of $\mathcal{F}$
+
+## 3.4 Properties of $\mathcal{F}$
+
+- $f\in L^1$ and $\underline{A}\in \text{GL}(d)$ (set of invertible matrices, ie. $\det A \neq 0$), then
+  - $\mathcal{F}(T_y f) = M_y(\mathcal{F}f)$
+  - $\mathcal{F}(M_y f) = T_{-y}(\mathcal{F}f)$
+  - $\mathcal{F}(D_{\underline{A}} f) = \frac{1}{\|\det \underline{A}\|}D_{\underline{A}^{-T}}(\mathcal{F}f)$
+  - $\mathcal{F}(\overline{f}) = \overline{D_{-\mathbb{I}}(\mathcal{F}f)}$
+- where $M_y: f \mapsto m_yf \, (M_y\,\text{ist einfach das Produkt}\, f(x)e^{ix\cdot y}), \, m_y: x \mapsto e^{ix\cdot y}$ and $D_y: f \mapsto (x \mapsto f(\underline{A}x))$
+
+## 3.5 Hermitian, Skew-Hermitian
+
+- **Hermitian** (if real: **even**): $\overline{f(\omega)} = f(-\omega)$
+- **Skew-Hermitian** (if real: **odd**): $\overline{f(\omega)} = -f(-\omega)$ 
+- we need this def. for 3.6
+
+## 3.6 When is $\mathcal{F}$ even or odd?
+
+- for $f\in L^1$ (eg. images)
+  - $f$ real-valued $\Leftrightarrow$ $\mathcal{F}f$ hermitian
+  - $f$ imaginary-valued $\Leftrightarrow$ $\mathcal{F}f$ skew-hermitian
+- **Proof**: Based on (3.4) $\mathcal{F}(\overline{f}) = \overline{D_{-\mathbb{I}}(\mathcal{F}f)}$
+- we need this for
+
+## 3.7 Convolution Theorem for $\mathbb{C}$-valued Functions
+
+- for $f,g\in L^1$ $$\mathcal{F}(f\ast g) = (2\pi)^{\frac{d}{2}}\mathcal{F}(f) \mathcal{F}(g)$$
+- "the FT changes the <span style="color:red">**convolution**</span> to a **pointwise** multiplication"
+- **simple proof**:
+  - its just a little bit of computation with the integral, so no deep theory going on,
+  - we just need **Fubini** to change the order of integrals and the **substitution rule** for multiple variables, both things we have used a couple of times.
+
+## 3.8 "Integration by Parts" for $\mathcal{F}$
+
+- this is like "Integration by Parts" for derivatives
+- for $f,g\in L^1$ (eg. images) $$\int_{\mathbb{R}^d}(\mathcal{F}f)(x)g(x)dx = \int_{\mathbb{R}^d}f(x)(\mathcal{F}g)(x)dx$$
+- This is very useful if you eg. know what the FT of $g$ is but you do not know what the FT of $f$ is. We will make use of that.
+- **proof**: ex. (<span style="color:red">TODO</span>)
+
+## 3.9 Generalize the Cross-Correlation to $\mathbb{C}$-valued Functions
+
+- the convolution of $\mathbb{C}$-valued functions is exactly the same as the convolution for $\mathbb{R}$-valued functions, see [Wikipedia](https://en.wikipedia.org/wiki/Convolution#Domain_of_definition)
+- <span style="color:red">but</span> for the cross-correlation the generalization is different!
+- (i) for measurable $\psi,f$
+  - $(\psi\star f)(x) = \int_{\Omega}\overline{\psi (y)}f(x+y)dy$
+- (ii) Generalize 2.3:
+  - $\overline{(\psi\star f)(x)} = (f\star \psi)(-x)$
+
+## 3.10 "Correlation Theorem" for $\mathbb{C}$-valued Functions
+
+- for $f,g\in L^1(\mathbb{R}^d, \mathbb{C})$ $$\mathcal{F}(f\ast g) = (2\pi)^{\frac{d}{2}}\overline{\mathcal{F}(f)} \mathcal{F}(g)$$
+- "the FT changes the <span style="color:red">**correlation**</span> to a **pointwise** multiplication"
+- "the 1st argument is conjugated"
+
+## 3.11 Schwartz Space
+
+- aka "space of rapidly decreasing functions on $\mathbb{R}^d$"
+- $$S(\mathbb{R}^d,\mathbb{C}):=\\{f\in C^\infty : C_{\alpha,\beta}(f)<\infty\\}$$
+- **Schwartz functions**: infinitely differentiable functions that rapidly decay
+  - **rapidly decay**: for $x\to \infty$, $f\to 0$ **faster than any polynomial** goes to $\infty$
+  - the same holds for **all** derivatives
+
+## 3.25 $\mathcal{F}$ is bijective in $\mathcal{S}$
+
+- if we restrict the domain of $\mathcal{F}$ from $L^1$ to $\mathcal{S}$ then we get a bijective FT
+
+## 3.27 Extension of $\mathcal{F}$ from $\mathcal{S}$ to $L^2$
+
+- There is a unique, bijective, linear isometry $$\mathcal{F}_2: L^2 \to L^2 \quad \text{with} \quad \mathcal{F}_2\vert_\mathcal{S} = \mathcal{F}.$$
+- we wanted s.th. that is bijective when we transform it, $\mathcal{F}_2$ is what we were looking for
 
 # TODO (zurückgestellt)
 
