@@ -412,8 +412,8 @@ Git actions:
 # GV
 
 - öffnet sich in neuem Tab, d.h. "H", "L" um mit aktuellem file zu vergleichen
-- gg (only current file)
-- ga (all commits)
+- space gc (only commits of current file)
+- space ga (all commits)
 - q (quit)
 
 # telescope
