@@ -40,15 +40,22 @@ tags:
 
 # firefox
 
+## Page Info
+
+- ctrl + i alt + g (page info)
+- ctrl + i alt + m (page media)
+- ctrl + i alt + p (page permissions)
+- ctrl + i alt + s (page security, cookies, etc)
+
 ## DevTools
 
 [official doc](https://firefox-source-docs.mozilla.org/devtools-user/index.html)
 
-- ctrl + shift + i (or F12)
+- ctrl + shift + i (or F12) (shows the tool that was last opened)
 
 ### Page Inspector
 
-- ctrl + shift + c
+- ctrl + shift + c (pick element mode)
 
 ### Web Console
 
@@ -481,6 +488,7 @@ Git actions:
 
 ## surround
 
+- ysl" (surround letter under cursor)
 - vSo (surround letter under cursor)
 - ys3iw" (surround **ohne select**)
 - ys3iW" (see word vs WORD)
