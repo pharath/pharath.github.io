@@ -113,23 +113,42 @@ Liquid Exception: Liquid syntax error (line 194): Variable 'double-{-without-whi
 
 # Latex in Jekyll
 
+- conflicts with markdown symbols
+
+```
+# escape with "\" when a symbol causes trouble
+
+# underscore "_"  
+\_
+```
+
 - brackets
 
 ```
-# parentheses (brit. round brackets):
+# parentheses (brit.: round brackets):
 \(\)
 
-# braces (brit. curly brackets):
+# braces (brit.: curly brackets):
 ## either
 \\{\\}
 ## or
 \{\}
 
-# brackets (brit. square brackets):
+# brackets (brit.: square brackets):
 \[\]
+```
 
-# sizes:
-\bigr)
+- bracket sizes
+
+```
+# 1. size can be controlled automatically:
+# \left and \right can dynamically adjust the size:
+\left( \right)
+
+# 2. size can be controlled explicitly:
+\bigl( \Bigl( \biggl( \Biggl(
+
+# for braces:
 ## either
 \bigl\{
 ## or
