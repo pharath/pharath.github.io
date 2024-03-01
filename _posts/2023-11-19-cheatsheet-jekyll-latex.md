@@ -74,7 +74,7 @@ Jekyll is written in Ruby.
 `sudo apt-get install ruby-full` |
 `sudo apt install rubygems-integration` | nicht nötig, wenn ruby-full installiert wurde
 `sudo gem install bundler` |
-`sudo gem install jekyll` | Seite funktioniert nicht richtig, wenn dieses Gem **nicht** installiert wurde (z.B. bei Seitenvergrößerung über ctrl - + werden die einzelnen Teile der Seite nicht automatisch ausgerichtet)! 
+`sudo gem install jekyll` | Seite funktioniert nicht richtig, wenn dieses Gem **nicht** installiert wurde (z.B. bei Seitenvergrößerung über <kbd>ctrl</kbd> + <kbd>+</kbd> werden die einzelnen Teile der Seite nicht automatisch ausgerichtet)! 
 `sudo bundle install` | im github-pages repo **root** folder
 `bundle exec jekyll serve` | warten bis "Server running... press ctrl-c to stop." message und dann ctrl gedrückt halten und auf server address clicken (oder in Browser "http://localhost:4000" aufrufen)
 
@@ -100,6 +100,14 @@ E.g. [this link]({% post_url 2022-09-22-notes-OS %}) is a link to the post "Oper
 
 ## Troubleshooting
 
+### Incremental Build
+
+- **problem**: suddenly, the incremental build which used to take ca. 2 seconds, now takes ca. 8 seconds
+- **solution**:
+  - stop the currently running `bundle exec jekyll serve -I`,
+  - delete the `.jekyll-metadata` file
+  - rebuild with `bundle exec jekyll serve -I`
+
 ### Markdown Syntax
 
 #### Code Blocks
@@ -113,7 +121,7 @@ Liquid Exception: Liquid syntax error (line 194): Variable 'double-{-without-whi
 
 # Latex in Jekyll
 
-- conflicts with markdown symbols
+## conflicts with markdown symbols
 
 ```
 # escape with "\" when a symbol causes trouble
@@ -122,7 +130,7 @@ Liquid Exception: Liquid syntax error (line 194): Variable 'double-{-without-whi
 \_
 ```
 
-- brackets
+## brackets
 
 ```
 # parentheses (brit.: round brackets):
@@ -138,7 +146,7 @@ Liquid Exception: Liquid syntax error (line 194): Variable 'double-{-without-whi
 \[\]
 ```
 
-- bracket sizes
+## bracket sizes
 
 ```
 # 1. size can be controlled automatically:
@@ -155,7 +163,7 @@ Liquid Exception: Liquid syntax error (line 194): Variable 'double-{-without-whi
 \bigl\\{
 ```
 
-- spaces
+## spaces
 
 ```
 \<space>
@@ -163,7 +171,7 @@ Liquid Exception: Liquid syntax error (line 194): Variable 'double-{-without-whi
 \quad
 ```
 
-- formula with cases
+## formula with cases
 
 ```
 # works only inside $$$$
@@ -177,19 +185,30 @@ X(\omega) = \begin{cases}
 $$
 ```
 
-- symbols
+## displaystyle vs textstyle
+
+```
+\displaystyle
+\textstyle
+```
+
+- for example:
+  - `\textstyle` Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim mi sed rutrum mattis. Nulla ligula ante, mattis sit amet aliquam a, tristique eu nisl. $\sum_{n=1}^{\infty}$ (<span style="color:red">default mode</span>) Duis malesuada libero in lacus viverra, at malesuada ipsum feugiat. Quisque lacinia consectetur dictum. Suspendisse laoreet condimentum lacus, in dictum diam luctus at. Quisque mattis luctus nisl, molestie tempor quam semper a. Etiam tristique cursus libero. Mauris dictum ac nisl ac efficitur.
+  - `\displaystyle` Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim mi sed rutrum mattis. Nulla ligula ante, mattis sit amet aliquam a, tristique eu nisl. $\displaystyle \sum_{n=1}^{\infty}$ (<span style="color:red">warning: this affects line spacing!</span>) Duis malesuada libero in lacus viverra, at malesuada ipsum feugiat. Quisque lacinia consectetur dictum. Suspendisse laoreet condimentum lacus, in dictum diam luctus at. Quisque mattis luctus nisl, molestie tempor quam semper a. Etiam tristique cursus libero. Mauris dictum ac nisl ac efficitur.
+
+## symbols
 
 ```
 \circ   # degree, angle
 ```
 
-- non-standalone symbols (a symbol changing another symbol)
+## non-standalone symbols (a symbol changing another symbol)
 
 ```
 \overline{A}    # instead of "\bar"
 ```
 
-- absolute value, norm
+## absolute value, norm
 
 ```
 \vert A\vert
