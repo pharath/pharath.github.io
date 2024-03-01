@@ -370,28 +370,25 @@ y i w		|		yank current word
 y 3 i w		|		yank next 3 `iw` objects ("space" also counts as an object!)
 y 3 a w		|		yank next 3 `aw` objects ("space" does **not** count as an object!)
 y y	|			yank current line
-y %		|		yank to the matching character (useful to copy text betw matching brackets {}, [], () )
+y %		|		yank to the matching character (useful to copy text betw matching brackets `{}`, `[]`, `()` )
 `> >`		|		indent (in Insert mode: ctrl + t)
 `< <`		|		unindent (in Insert mode: ctrl + d)
 `10 < <`	|		unindent 10 lines
-`< %`		|		unindent betw matching brackets {}, [], ()
+`< %`		|		unindent betw matching brackets `{}`, `[]`, `()`
 u oder :u	|		undo last change
 ctrl + r	|		redo
-ctrl - k *digraph_id* | to type special characters that are not on the keyboard
-:dig | list all digraphs (see :h digraph)
+`ctrl - k *digraph_id*` | to type special characters that are not on the keyboard
+:dig | list all digraphs (see `:h digraph`)
 
 ### Copy, Paste
 
-#### Using Vim Registers
+#### Copy/Paste Using Registers
 
-Use `"+y` to copy the selection to the system clipboard.
+- `+`: Use `"+y` to copy the selection to the system clipboard.
 
-#### Using a Plugin
+#### Copy/Paste Using a Plugin
 
-```bash
-" copying to the system clipboard with text-objects and motions
-Plugin 'christoomey/vim-system-copy'
-```
+- `'christoomey/vim-system-copy'`: for copying to the system clipboard with text-objects and motions
 
 | command | description |
 | :--- | :--- |
@@ -411,6 +408,22 @@ cvi' | paste inside single quotes from system clipboard
 2. Shift + i (enter Insert mode (while in Block mode))
 3. " (Kommentarsymbol am Anfang der ersten Zeile eingeben (while in Block mode))
 4. Esc (drücken und 1 sec warten (bis das Kommentarsymbol vor allen Zeilen im Block auftaucht))
+
+## Vim Registers
+
+- **in insert mode**: `c-r<registername>` to paste `<registername>`, eg. `c-r a` to paste register `a`
+- **in normal mode**: `"` then register name, eg. `"a` for register `a`
+  - press `"<registername>y` to yank into register `<registername>`, eg. `"ay` to yank into register `a`
+  - press `"<registername>p` to paste register `<registername>`, eg. `"ap` to paste register `a`
+
+## Vim Macros
+
+- `q<registername>`: start recording into register `<registername>`
+- `q`: stop recording
+- `@<registername>`: replay the recording stored in register `<registername>`
+- `C-c`: cancel a recording while it is replaying
+- [stackoverflow](https://superuser.com/questions/666377/how-to-cancel-recording-a-macro-in-vim):
+  - `:let @b=@a` to copy the macro from register `a` to register `b` and thus preserve it
 
 # In INSERT mode
 
