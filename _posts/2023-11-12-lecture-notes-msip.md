@@ -1,5 +1,5 @@
 ---
-title: "Mathematical Methods of Signal and Image Processing"
+title: "Mathematical Methods of Signal and Image Processing - Chapter 1"
 read_time: false
 excerpt: "For learning \"Mathematical methods of signal and image processing\"; content mostly from \"RWTH lecture Mathematical methods of signal and image processing\" by Benjamin Berkels."
 toc: true
@@ -102,6 +102,27 @@ tags:
   - "Üblicherweise werden topologische Räume in den Lehrbüchern über die **offenen Mengen** definiert"
   - "Wird eine beliebige **Grundmenge** mit einer **Topologie** (einer topologischen Struktur) versehen, dann ist sie ein **topologischer Raum**, und ihre Elemente werden als **Punkte** aufgefasst. Die Topologie des Raumes bestimmt sich dann dadurch, dass bestimmte Teilmengen als **offen** ausgezeichnet werden."
 
+## complete
+
+- <span style="color:red">**completeness** is closely related to **Cauchy sequences**</span>
+- A metric space $(X,d)$ is **complete** if any of the following equivalent conditions are satisfied:
+  - Every Cauchy sequence of points in $X$ has a limit that is also in $X$.
+  - Every Cauchy sequence in $X$ converges in $X$ (that is, to some point of $X$).
+- **examples**:
+  - The space $\mathbb{Q}$ of <span style="color:red">**rational numbers**</span>, with the standard metric given by the absolute value of the difference, is <span style="color:red">**not complete**</span>.
+  - The <span style="color:red">**open interval** $(0,1)$</span>, again with the absolute difference metric, is <span style="color:red">**not complete**</span> either.
+    - The sequence defined by $x_{n}={\frac{1}{n}}$ is Cauchy, but does not have a limit in the given space. However the <span style="color:red">**closed interval** $\[0,1\]$</span> is complete; for example the given sequence does have a limit in this interval, namely zero.
+  - The space $\mathbb{R}$ of **real numbers** and the space $\mathbb{C}$ of **complex numbers** (with the metric given by the absolute difference) are complete, and so is **Euclidean space** $\mathbb{R}^n$, with the usual distance metric.
+  - In contrast, **infinite-dimensional normed vector spaces** may or may not be complete; those that are complete are **Banach spaces**.
+
+## Vector Spaces
+
+- from less to more requirements:
+  - **normed space**: the pair $(X,\lVert \cdot \rVert)$
+  - **pre-Hilbert space**: a vector space with a scalar product, ie. the pair $(X,(\cdot,\cdot)_X)$
+    - note: a scalar product induces a norm, thus, for each pre-Hilbert space there is an **associated normed space**
+  - **Hilbert space**: a complete pre-Hilbert space
+
 ## Function Spaces
 
 ### $C(U,Y)$
@@ -130,6 +151,17 @@ tags:
 - not all $L^2$ functions are continuous,
   - **counterexample**: the characteristic function of the finite set $A$, $\chi_{A}$
 
+### $C^\infty$, Smooth Functions
+
+- **Achtung**: $f$ ist nur dann **smooth**, wenn es **infinitely differentiable** ist, nur **differentiable** reicht nicht!
+- The function $f$ is said to be <span style="color:red">**infinitely differentiable**, **smooth**</span>, or of class $C^{\infty }$, if it has derivatives of <span style="color:red">**all**</span> orders
+
+### $C^0$, $C^1$, etc
+
+- The class $C^{0}$ consists of all **continuous functions**.
+- The class $C^{1}$ consists of all **differentiable functions** whose **derivative is continuous**; such functions are called **continuously differentiable**.
+  - Thus, a $C^{1}$ function is exactly a function whose derivative exists and is of class $C^{0}$
+
 ## Series
 
 ### Absolute Convergence
@@ -146,13 +178,37 @@ Wikipedia:
 - **conditionally convergent**: "If a series is convergent but not absolutely convergent, it is called conditionally convergent. An **example** of a conditionally convergent series is the **alternating harmonic series**."
   - the **alternating harmonic series** converges to $\ln{2}$ or $\frac{3}{2}\ln{2}$ depending on the arrangement
 
-# 1.1 Digital Images
+## Measure Theory
+
+### Measurable Space
+
+- $(\Omega,\mathcal{A})$ is a measurable space only if $\mathcal{A}$ is a $\sigma$-algebra
+  - if $\mathcal{A}$ is not a $\sigma$-algebra then $(\Omega,\mathcal{A})$ is not a measurable space!
+  - the $\sigma$-algebra properties ensure that the space is measurable
+
+### Borel and Radon Measures
+
+- $\mu$ is called a **Borel measure**, when the $\sigma$-algebra (=the domain of $\mu$) on which $\mu$ is defined is a **Borel $\sigma$-algebra**
+- $\mu$ is called a **positive Radon measure**, when it is a Borel measure <span style="color:red">and</span> finite on all compact sets in the $\sigma$-algebra (=the domain of $\mu$) on which $\mu$ is defined
+- <span style="color:red">**counting measure**</span>: Borel, but not Radon
+- <span style="color:red">**Dirac measure**</span>: Radon (note: Radon implies Borel!)
+- <span style="color:red">**($d$-dimensional) Lebesgue measure**</span>: Radon
+
+### Measurable Function
+
+- $(\Omega,\mathcal{A})$, $(\Sigma,\mathcal{B})$
+- a function is called $\mathcal{A}$-$\mathcal{B}$ measurable or <span style="color:red">measurable</span>, if $f^{-1}(B)\in\mathcal{A}$ for all $B\in\mathcal{B}$
+
+# C.1.1 Digital Images
 
 - **spatial dimension**: $d$
-- **d-dim cuboid**: $\Omega$, eg. $d=2$ and $\Omega=(a_1,b_1)\times(a_2,b_2)=(0,8)\times(0,6)$
+- **d-dim cuboid**: $\Omega=(a_1,b_1)\times\ldots\times(a_d,b_d)\subset \mathbb{R}^d$
+  - eg. $d=2$ and $\Omega=(a_1,b_1)\times(a_2,b_2)=(0,8)\times(0,6)$
 - **value range**: $V$
+  - **grayscale image**: $V=\mathbb{R}$ or $V=\left[0,1\right]$
+  - **color image**: $V=\mathbb{R}^3$ or $V=\left[0,1\right]^3$ (depends on color model, eg. RGB, HSV)
 - **image**: a mapping $f: \Omega \to V$, where $\Omega\subset \mathbb{R}^d$
-  - **continuous gray scale image**: $f: (0,1)^2 \to \[0,1\]$
+  - **continuous gray scale image**: $f: (0,1)^2 \to \[0,1\]$ (with $0$ black, $1$ white)
 - **image size**: the vector $\underline{m}=(m_1,\dotsc,m_d)$ (aka "number of pixels"), e.g. $\underline{m}=(4,3)$
 - **grid node/cell center**: $x^{\underline{j}}\in \Omega$ (aka "the center of each pixel", eg. $x^{(4,3)}$)
 - **grid**: the $d$-array $\underline{X}=(x^{\underline{j}})_{\underline{j}\in I}$
@@ -216,12 +272,12 @@ Wikipedia:
       - with this CCD sensor one gets the discrete image $(r_{x^\underline{j}}^h\left[f\right])_{\underline{j}\in I}$ (which is a **matrix** and not a step function, see def. of **discrete image**, and $x^{\underline{j}}\in \Omega$ are **grid nodes**, see def. above)
 - **coordinate systems**: in digital images rotated by $90^\circ$ clockwise (ie. 1st axis is vertical, 2nd axis is horizontal)
 
-# 1.6 Point Operators / Intensity Transforms
+# C.1.2 Point Operators aka Intensity Transforms
 
 - **intensity transformation**: $T: \mathbb{R} \to \mathbb{R}$
 - **intensity transformed image**: $T\circ f$, where $f: \Omega \to \mathbb{R}$ is an image.
 
-## clipping
+## 1.6 (i) clipping
 
 - **clipping**: $$\begin{equation*} T_{\left[a,b\right]}^{\text{clip}}: \mathbb{R} \to \left[a,b\right],\ s \mapsto \begin{cases}
                                             a &s\leq a\\
@@ -231,12 +287,12 @@ Wikipedia:
                   \end{equation*}$$
 - eg. in electron microscopy: sometimes just normalization is not enough (eg. outliers, very bright pixels) and you **must** apply **clipping** **first** to make certain structures visible and normalization **after** that
 
-## normalization
+## 1.6 (ii) normalization
 
 - **normalization**: $$\begin{equation*} T_{\left[a,b\right]}^{\text{norm}}: \mathbb{R} \to \left[0,1\right],\ s \mapsto T_{\left[0,1\right]}^{\text{clip}}\left(\frac{s-a}{b-a}\right) \end{equation*}$$
   - sometimes normalization is not enough (eg. presence of outliers): in that case first clipping then normalization is required
 
-## thresholding
+## 1.6 (iii) thresholding
 
 - **thresholding**: $$\begin{equation*} T_{\theta}^{\text{threshold}}: \mathbb{R} \to \bigl\{0,1\bigr\},\ s \mapsto \begin{cases}
                                     0 &s\leq \theta\\
@@ -245,7 +301,7 @@ Wikipedia:
                   \end{equation*}$$
   - Heaviside function: $H := T_0^{\text{threshold}}$
 
-## gamma correction
+## 1.6 (iv) gamma correction
 
 - **gamma correction**: $$\begin{equation*} T_{\gamma}: \left[0,1\right] \to \left[0,1\right],\ s \mapsto s^\gamma \end{equation*},\ \text{where}\ \gamma > 0$$
   - for $\gamma < 1$ strictly concave 
@@ -258,7 +314,7 @@ Wikipedia:
       - note: a linear function is **both** convex and concave
   - for $\gamma < 1$: compress bright areas, expand dark areas, ie. more details in dark areas visible, but less details in the bright areas
 
-## log transformation
+## 1.6 (v) log transformation
 
 - **log transformation**: $$\begin{equation*} T_{\log}: \left[0,\infty\right) \to \left[0,\infty\right),\ s \mapsto \log_2(1+s) \end{equation*},\ \text{where}\ \gamma > 0$$
   - **power spectrum**: absolute value of the Fourier transform
@@ -271,276 +327,189 @@ Wikipedia:
   - allows to catch very big values and bring them close to much smaller values
   - eg. useful **in electron microscopy**: some details in $\lvert FFT\left[f - \overline{f}\right] \rvert$ become only visible if **first** $T^{\log}$ and **then** $T^{\text{norm}}$ is applied instead of the other way around ($T^{\log}$ does not help much **after** $T^{\text{norm}}$ has been applied) (**gamma correction** could **not** do this unless you would use an extremely large gamma value that is exactly valid for the specific image, ie. gamma depends on the dataset, whereas the log transform does not have these problems)
 
-## Intensity Transforms using Global Statistics / Histograms
+## Point Operators using Global Statistics / Histograms
 
 - these global statistics of the intensity distributions in the image are computed once
 - based on that we can construct some intensity transform
 - <span style="color:red">the global statistics are represented by a **histogram**</span>
 
-### 1.7 Discrete Histogram of $F$, Discrete CDF of $F$
+### 1.7 Histogram of $F$, CDF of $F$
 
 - $F$ is a discrete image
+- $H_F(s) := \sum_{\underline{j}\in\mathcal{I}}\delta_{s,f_{\underline{j}}}$
+- $G_F(s) := \sum_{r=0}^{s}H_F(r)$
 
 ### 1.8 Characteristic Function $\chi_{A}$, Level Set of $f$, Volume of a Bounded Set $A$
 
 - $f$ is a pixelated image
+- (i) $\chi_A$
+- (ii) $\\{f=s\\} := \\{x\in\Omega:f(x)=s\\}$ (s-level set; <span style="color:red">in 2d</span>: level line, isoline; <span style="color:red">in 3d</span>: level surface, isosurface),
+  - and similarly, $\\{f\leq s\\}$, $\\{f\geq s\\}$ (s-sublevel set, s-superlevel set)
+  - $\Rightarrow f^{-1}(s)=\\{f=s\\}, f^{-1}(\left(-\infty, s\right])=\\{f\leq s\\}$
+- (iii) $\lvert A\rvert := \text{Vol}(A) := \int_A dx = \int_{\mathbb{R}^d}\chi_A(x)dx$
 
-### 1.9 Continuous Histogram, CDF of $f$, Discrete CDF of $f$
+### 1.9 (i)-(iii) Histogram of $f$
 
-- $f$ is a pixelated image
-- The continuous histogram $H_f$ is the distributional derivative of the CDF $G_f$.
+- $f: \Omega \to \mathbb{R}$ is a pixelated image
+- $H_f: \mathbb{R}\to \left[0,\infty\right), s\mapsto\text{Vol}(\\{f=s\\})$ <span style="color:red">does not work!</span> (counterexample: $f(x)=x$ on $\left[0,1\right]$)
+- **idea**: extend from $\mathbb{R}$ to $\mathcal{B}(\mathbb{R})$ (<span style="color:red">subsets of $\mathbb{R}$</span>)
+- (i) $H_f: \mathcal{B}(\mathbb{R})\to \left[0,\infty\right), A\mapsto\text{Vol}(\\{f\in A\\})$
+- (ii) $H_f$ is a <span style="color:red">**measure**</span>
+  - Generalization of functions (maps sets to values)
+  - $H_f$ is the push-forward measure of the Lebesgue measure $\lambda$ under the mapping $f$
+    - $\boxed{H_f(A)} := \text{Vol}(\\{f\in A\\}) = \text{Vol}(f^{-1}(A)) = \boxed{\lambda(f^{-1}(A))}$, where $\lambda(X)$ is the <span style="color:red">**Maß**</span> of set $X$
+      - in diesem Sinne gibt $H_f$ das <span style="color:red">"Maß des Urbildes von $A$"</span> an (<span style="color:red">"Volume of the preimage of $A$"</span>)
+      - brightsideofmathematics <span style="color:red">"image measure"</span>:
+        - the key ingredients here are the **measurable function** $f$ and the **measure** $\mu$
+        - the **measurable function** $f$ <span style="color:red">"pushes the measure $\mu$ forward"</span> to the right (here: from $\Omega$ to codomain $\mathbb{R}$), thus the name **"push-forward measure"**
+        - in the end we get a new measure on the codomain
+      - Berkels: "Take a volume in the unit square $\Omega$ and put it in image $f$ and get a volume in $\mathbb{R}$ as result. This $\mathbb{R}$-volume is the histogram."
+    - in <span style="color:green">(A.8)</span> $\mu$ is used instead of $\lambda$ (but it is just a different notation, $\mu\equiv\lambda$):
+      - $H_f: \mathcal{B}(\mathbb{R})\to \left[0,\infty\right), A\mapsto\mu(f^{-1}(A))$ (in the lecture: $A\mapsto\lambda(f^{-1}(A))$)
+      - $H_f$ is denoted by $f(\mu)$ (in the lecture: $f(\lambda)$)
+
+<p align="center">
+  <img src="https://i.ibb.co/jW56mfz/Screenshot-from-2024-02-29-06-31-33.png" alt="Screenshot-from-2024-02-29-06-31-33" border="0"><br><br><br>
+  <b>Recall:</b> <span style="color:red"><b>(d-dimensional) Lebesgue measure</b></span>:<br>
+  <img src="https://i.ibb.co/80QJ2Vm/Screenshot-from-2024-02-29-06-51-54.png" alt="Screenshot-from-2024-02-29-06-51-54" border="0">
+</p>
+
+- (iii) because of (ii) and <span style="color:green">(A.9)</span>:
+  - if $f$ is measurable and $g$ is $f(\lambda)$-integrable, then $\int_{\Omega}gdf(\lambda) = \boxed{\int_{\Omega}g(s)dH_f(s) = \int_{\mathbb{R}}(g\circ f)(x)dx}$
+    - in words: we can integrate wrt measure $H_f$ without actually needing $H_f$, we just need to compose $g\circ f$
+
+<p align="center">
+  <img src="https://i.ibb.co/DDBNxRm/Screenshot-from-2024-02-29-07-13-07.png" alt="Screenshot-from-2024-02-29-07-13-07" border="0">
+</p>
+
+### 1.9 (iv)-(vi) CDF of $f$
+
+- (iv) <span style="color:red">**CDF of $f$**</span>: $G_f(s) := \text{Vol}(\\{f\leq s\\})$
+  - $G_f$ is **not** a measure!
+  - no Lebesgue null sets (bec when we increase $s$ we increase the $s$-sublevel set continuously)
+  - **properties of $G_f$**: (exercise)
+    - $G_f: \mathbb{R}\to\left[0,\text{Vol}(\Omega)\right]$
+    - $G_f$ is monotonically increasing
+    - $G_f(s) = \text{Vol}(\Omega)\,\forall s > \text{ess sup}\,f$ 
+- (v) the <span style="color:red">**change of $G_f$**</span> at $s$ is a <span style="color:red">**measure of $H_f$**</span> at $s$
+  - **more precisely**: The continuous histogram $H_f$ is the distributional derivative of the CDF $G_f$. (exercise)
+    - Recall: <span style="color:red">**distributions**</span> map **$C_c^\infty$ functions** to **real numbers**
+      - every function $g\in L^1(\Omega)$ induces a distribution $f\mapsto\int_\Omega fgdx$
+      - every positive Radon measure $\mu$ on $\mathcal{B}(\Omega)$ induces a distribution $f\mapsto\int_\Omega fd\mu$
+        - **special case**: the distribution induced by the Dirac measure (a positive Radon measure!) is called **Dirac delta function** $\delta_x(f)=\int_{\Omega}fd\delta_x=f(x)$ (exercise: prove $\int_{\Omega}fd\delta_x=f(x)$ using the Lebesgue integral)
+    - why <span style="color:red">**distributional derivative**</span>?: $G_f$ is a step function and thus, $G_f$ is <span style="color:red">**not differentiable**</span> in the <span style="color:red">classical sense</span>, but $G_f' = H_f$ holds in the <span style="color:red">distributional sense</span>, ie. $\langle D^{\lvert\alpha\rvert}G_f,\psi\rangle := \boxed{-\int_{\mathbb{R}}G_f\psi'ds = \int_{\mathbb{R}}\psi dH_f} =: \langle H_f,\psi\rangle$ (exercise)
+      - $\int_{\mathbb{R}}\psi dH_f = \langle H_f,\psi\rangle$ gilt, weil das nach Definition für "distribution induced by a positive Radon measure" genau die Art ist wie ein **positive Radon measure** (hier: $H_f$) auf eine Testfunktion $\psi$ wirkt
+- (vi) $G_f(s) = \prod_{i=1}^{d}h_i G_F(s)$ (continuous vs discrete CDF)
 
 ### 1.10 Binning
 
-- approximate the histogram of a continuous function discretely
+- **idea**: approximate the histogram of a continuous function discretely
+- $B_k$: intervals (for $k=1,\ldots,m$)
+- $r_k$: interval boundaries (for $k=0,\ldots,m$)
+  - $r_0 = \inf f$ and $r_m = \sup f + 1$ (like <span style="color:red">minimum</span> and <span style="color:red">maximum</span>)
+- <span style="color:red">$B_m$ has a different length</span> than the other $B_k$ bec $r_m = \sup_\Omega f + 1$, but all other $B_k$ have length $\frac{1}{m-1}(\sup f - \inf f)$
+- $H_k = \text{Vol}(\\{f\in B_k\\}) = \\#(\\{\underline{j}\in \mathcal{I}:f_{\underline{j}}\in B_k\\})$ (<span style="color:red">Volume of the preimage of $B_k$</span> or for discrete images <span style="color:red">number of pixels with a value in $B_k$</span>)
+
+<p align="center">
+  <img src="https://i.ibb.co/c8Z5j0M/Screenshot-from-2024-03-01-06-20-09.png" alt="Screenshot-from-2024-03-01-06-20-09" border="0">
+</p>
 
 ### 1.11 Histogram Equalization
 
+- **Task**: <span style="color:red">improve contrast</span> (eg. due to bad conditions while shooting a photo or wrongly adjusted optical settings, the resulting image may exhibit a low contrast)
+- (i) **desired property**: $G_{T\circ f}(s)=s\text{Vol}(\Omega)$ (the transformed image $T\circ f$ should have a linear CDF with slope $\text{Vol}(\Omega)$)
+  - this property is <span style="color:red">equivalent to</span> "$H_{T\circ f}$ is a uniformly distributed histogram"
+- (ii) **conditions**:
+  - $G_f$ is <span style="color:red">strictly</span> increasing
+- then the **continuous histogram equalization** is $$\boxed{T: \left[0,1\right]\to \left[0,1\right],\,s\mapsto\frac{G_f(s)}{\text{Vol}(\Omega)}}$$
+- (iii) and the **discrete histogram equalization** is $$\boxed{T: \{0,\ldots,n\}\to \{0,\ldots,n\},\,s \mapsto \text{rd}(\frac{n}{\text{Vol}(\Omega)}G_f(s)) = \text{rd}(\frac{n}{\#\mathcal{I}}G_F(s))}$$
+  - $G_F(s)\in \\{0, \ldots, \\#\mathcal{I}\\}$, $G_f(s)\in\left[0,\text{Vol}(\Omega)\right]$ <span style="color:green">(1.9 (iv))</span>
+  - $n$ is the highest value in the value range $V := \\{0,\ldots,n\\}$
+    - <span style="color:red">why do we need $n$?</span>:
+      - bec for continuous images the value range was $V = \left[0,1\right]$, but for pixelated images and discrete images we have $V := \\{0,\ldots,n\\}$
+      - when $f$ is a pixelated image (or discrete image) with range $V := \\{0,\ldots,n\\}$ then $T\circ f$ is also a pixelated image (or discrete image) with range $V := \\{0,\ldots,n\\}$
+      - so we must multiply the fraction $\frac{G_f(s)}{\text{Vol}(\Omega)}\in \left[0,1\right]$ by $n$ and then **round** the result to the nearest integer in $V := \\{0,\ldots,n\\}$, so that we get a pixelated image (or discrete image) <span style="color:red">**with the same value range $V$**</span> as output
+  - for either a <span style="color:red">pixelated</span> image $f$ or a <span style="color:red">discrete</span> image $F$
+  - $\text{rd}$ means "ab $0.5$ wird aufgerundet"
+- <span style="color:red">**(ii) fulfills property (i)**</span>
+- <span style="color:red">**normalization**</span> vs <span style="color:red">**equalization**</span>:
+  - **normalization** <span style="color:green">(1.6)</span> will put lowest value to $0$ (black) and highest to $1$ (white), i.e. histogram will have full width after normalization, but this just spreads things vertically, it does **not** redistribute values 
+  - **equalization** flattens the distribution s.t. all the gray values are more or less taken equally
+    - nonlinear change in intensities;
+    - in the **continuous setting**: for **linear CDFs** you should get a **flat histogram** (uniformly distributed histogram)
+    - in the **discrete case**: this does not work bec you have to send one gray value to another gray value, so you cannot split these peaks
+      - eg. "if you have $100$ pixels with value $10$, you can change the value to $8$, but you cannot put one half to $8$ and the other half to $9$" &rarr; you can only <span style="color:red">approximate linear CDF</span> &rarr; <span style="color:red">step function</span> that <span style="color:red">looks like linear function</span> 
+      - Bredies: Of course, in a discrete setting, an equalized histogram cannot be achieved, since equal gray values are mapped to equal gray values again
+    - "makes good use of your gray value range" so that you <span style="color:red">see more details</span> in the equalized image, but at the cost that the equalized image <span style="color:red">does not look so natural</span>
+
 ### 1.12 Histogram Matching
+
+- another application of the **same idea as histogram equalization**
+- **Taks**: <span style="color:red">compensate sensor-dependent differences</span> (of two images of the same scene, but taken with different sensors)
+  - But you <span style="color:red">cannot compensate e.g. contrast reversal</span> because if there is no strictly increasing relationship between these sensors, then there is no chance to compensate this 
+- $T(s) = \frac{G_f(s)}{\text{Vol}(\Omega)}$ and $S(s) = \frac{G_g(s)}{\text{Vol}(\Omega)}$ (same as in <span style="color:green">(1.11)</span>)
+- **idea**: transfer $H_f$ to $H_g$ by applying $S^{-1}\circ T$ on $f$
+  - ie. first equalize as in <span style="color:green">(1.11)</span>, then invert the equalization with $S^{-1}$
+- **conditions**:
+  - $G_f$ and $G_g$ invertible (strictly increasing and continuous)
+    - bec otherwise $S^{-1}$ is not defined
+    - Berkels: bec to be able to apply the histogram equalization <span style="color:green">(1.11)</span> we need to <span style="color:red">assume</span> that the CDFs are invertible
+- then, $$\boxed{G_{S^{-1}\circ T\circ f}(s) = G_g(s)}$$
+- then, $H_{S^{-1}\circ T\circ f} = H_g$
+  - in words: "the operation $S^{-1}\circ T\circ f$ makes a histogram $H_f$ look like <span style="color:red">any</span> other histogram $H_g$"
+- Berkels: if - for whatever reason - you want your histogram to have a certain shape (which can be <span style="color:red">ANY shape</span> - as long as its CDF is strictly increasing!) you can do it with this kind of approach
 
 ### 1.13 Segmentation by Thresholding / Isodata Algorithm
 
 <span style="color:red">Note: Like 1.11 and 1.12 this method is also **histogram based**!</span>
 
+- **Task**:
+  - <span style="color:red">for compression</span> (binary image needs less storage than grayscale)
+  - <span style="color:red">as preprocessing step eg. for OCR</span>
 - <span style="color:red">**Idea**:</span> **fixed point equation**: Find a threshold $\theta$ s.t. $\theta = \varphi(\theta)$
-  - where $\varphi(\theta) := \frac{1}{2}(\int_{\\{f\leq\theta\\}}^\text{avg}f(x)dx + \int_{\\{f\gt\theta\\}}^\text{avg}f(x)dx)$
-  - where $\int_A^\text{avg}f(x)dx := \frac{1}{\text{Vol}(A)}\int_A f(x)dx$
-- <span style="color:red">**Method**:</span> **fixed point iteration**: $\theta^{n+1} = \varphi(\theta^n)$ with IV $\theta^1\in(0,1)$, typically $\theta^1 = \frac{1}{2}(\inf{f} + \sup{f})$ (mean of the value range)
+  - where $\boxed{\varphi(\theta) := \frac{1}{2}\left(\int_{\\{f\leq\theta\\}}^\text{avg}f(x)dx + \int_{\\{f\gt\theta\\}}^\text{avg}f(x)dx\right)}$
+  - where $\int_A^\text{avg}f(x)dx := \frac{1}{\text{Vol}(A)}\int_A f(x)dx$ is "the average value of $f$ on the domain region $A$"
+    - **warning**: this <span style="color:red">cannot</span> be the "center of mass" of $f$ on $A$ bec it must be a value in the <span style="color:red">codomain</span> of $f$, whereas the COM would be a value in the <span style="color:red">domain</span>!
+- <span style="color:red">**Method**:</span> **fixed point iteration**: $\boxed{\theta^{n+1} = \varphi(\theta^n)}$ with IV $\theta^1\in(0,1)$, typically $\theta^1 = \frac{1}{2}(\inf{f} + \sup{f})$ (mean of the value range)
   - **Implementation**: Isodata Algorithm
 
 **What is a fixed point?**
 
 - **fixed point**: Formally, $c$ is a fixed point of a function $f$ if $c$ belongs to both the domain and the codomain of $f$, and $f(c) = c$.
-For example, if $f$ is defined on the real numbers by $f(x) = x^2 − 3x + 4$, then $2$ is a fixed point of $f$, because $f(2) = 2$. 
-  - "a fixed point is an element that is mapped to itself by the function."
+  - For example, if $f$ is defined on the real numbers by $f(x) = x^2 − 3x + 4$, then $2$ is a fixed point of $f$, because $f(2) = 2$. 
+  - <span style="color:red">"a fixed point is an element that is mapped to itself by the function."</span>
 
 **Under which conditions does the fixed point iteration converge?**
 
-- Proof of convergence of the sequence $\theta^n$:
+- (i) Proof of convergence of the sequence $\theta^n$:
   - **Monotone Convergence Theorem**: 
     1. If a sequence of **real numbers** is <span style="color:red">increasing and bounded above</span>, then its supremum is the limit.
     2. If a sequence of **real numbers** is <span style="color:red">decreasing and bounded below</span>, then its infimum is the limit.
-    3. If $(a_{n})$ with $(n\in \mathbb{N})$ is a monotone sequence of **real numbers** (i.e., if $a_n \leq a_{n+1}$ for every $n \geq 1$ or $a_n \geq a_{n+1}$ for every $n \geq 1$), then this sequence has a finite limit **if and only if** the sequence is bounded.
-  - $\varphi$ is <span style="color:red">increasing</span> (but not necessarily strictly increasing)
-    - because it is a sum of two increasing functions (the two average gray value integrals)
+  - $\varphi$ is <span style="color:red">increasing</span> (but not necessarily strictly increasing) $\Rightarrow\theta^n$ is increasing (for $\theta^1\leq\theta^2$) or decreasing (for $\theta^1\geq\theta^2$)
+    - **prooven in lec**: because $\varphi$ is a <span style="color:red">sum of two increasing functions</span> (the two **average gray value integrals** $\varphi_a$ and $\varphi_b$)
     - **phth remember**: $\theta^n$ can be decreasing, but $\varphi$ is <span style="color:red">always</span> increasing!
-  - $\varphi(\[0,1\])\subset\[0,1\] \Rightarrow \varphi$ is <span style="color:red">bounded</span>
+  - $\varphi(\[0,1\])\subset\[0,1\] \Rightarrow \varphi$ is <span style="color:red">bounded</span> $\Rightarrow \theta^n$ is <span style="color:red">bounded</span>
     - because the two average gray value integrals are in $\[0,1\]$, so $\varphi$ must be in $\[0,1\]$, too
-- **problem**: just because $\theta^n$ converges that does not mean its **limit is a fixed point**
+- **problem**: just because $\theta^n$ converges that does not mean its **limit** $\theta^\ast$ (which must exist acc. to (i)!) is also a **fixed point**, ie. $\varphi(\theta^\ast) = \theta^\ast$
 - **problem**: moreover, we do not know if a fixed point even **exists**
-- Proof of existence of a fixed point:
-  - **fixed point theorems** assuming a **continuous** function $f$:
-    - **Brouwer's fixed point theorem**: "states that for any **continuous** function $f$ mapping a nonempty compact convex set to itself, there is a point $x_0$ such that $f(x_0) = x_0$."
-      - "The simplest forms of Brouwer's theorem are for continuous functions $f$ from a **closed interval** $I$ in the real numbers to itself or from a **closed disk** $D$ to itself."
-      - "A more general form than the latter is for continuous functions from a **nonempty convex compact subset $K$ of Euclidean space** to itself."
-  - **fixed point theorems** <span style="color:red">without</span> assuming a **continuous** function $f$:
-    - "Every monotonic <span style="color:red">non-decreasing</span> $\varphi: \[0,1\] \to \[0,1\]$ has a fixed point.", a special case of the **Knaster-Tarski fixed point theorem** in order theory, note: in **order theory** "monotonic" means "non-decreasing", exercise
+- (ii) Proof of existence of a fixed point:
+  - (A) **Brouwer's fixed point theorem**: "states that for any **continuous** function $f$ mapping a nonempty compact convex set to itself, there is a point $x_0$ such that $f(x_0) = x_0$."
+    - for $f: \left[a,b\right]\to \left[a,b\right]$: "The simplest forms of Brouwer's theorem are for continuous functions $f$ from a **closed interval** $I$ in the real numbers to itself (or from a **closed disk** $D$ to itself)."
+    - for **Euclidean space**: "A more general form than the latter is for continuous functions from a **nonempty convex compact subset $K$ of Euclidean space** to itself."
+  - (B) "Every monotonic <span style="color:red">non-decreasing</span> $\varphi: \[0,1\] \to \[0,1\]$ has a fixed point.", exercise
+    - this is a special case of the **Knaster-Tarski fixed point theorem** in order theory, note: in **order theory** "monotonic" **always** means "non-decreasing"
     - "If $\varphi$ is **<span style="color:red">not</span> continuous**, then the **limit of** $\theta^n$ is **not** necessarily **a fixed point**."
-- thus, we **must** assume $\varphi$ is **continuous** in order to guarantee that the Isodata Algorithm will converge to a fixed point
+      - This means that when $\varphi$ is **not** continuous $\theta^n$ will converge to *"something"*, but this *"something"* is **not** necessarily a fixed point.
+- thus, we know that $\varphi$ will always converge to some <span style="color:red">**limit**</span>, but we **must** assume $\varphi$ is **continuous** in order to guarantee that this <span style="color:red">**limit**</span> to which the Isodata Algorithm will converge is also a <span style="color:red">fixed point</span>
+
+<p align="center">
+  <img src="https://i.ibb.co/ky36PRx/Screenshot-from-2024-03-01-10-44-57.png" alt="Screenshot-from-2024-03-01-10-44-57" border="0">
+</p>
 
 **How to implement the Isodata Algorithm?**
 
 - use the histogram $H_f$ to compute the average gray values $\int_{\\{f\leq\theta\\}}^\text{avg}f(x)dx$ and $\int_{\\{f\gt\theta\\}}^\text{avg}f(x)dx$
-  - these integrals are approximated as discrete sums
   - the continuous histogram $H_f$ is approximated as the histogram of the discrete image $H_F$
-  - **intuitively**: like discrete and continuous **center of mass** formula
+  - **intuitively**: like discrete **center of mass** formula with $H_F(s)$ instead of $M(s)$
+    - $\sum_{s=\text{floor}(\theta)+1}^{n}sH_F(s)/\sum_{s=\text{floor}(\theta)+1}^{n}H_F(s)$
 
-# 2.0 Local Operators
-
-## 2.1 Moving Average
-
-**Task**: Denoising
-
-- image: $f: \mathbb{R}^d \to \mathbb{R}$
-- image without noise: $f_0: \mathbb{R}^d \to \[0,1\]$
-- noise: $n: \mathbb{R}^d \to \mathbb{R}$
-- $M_rf(x) = \int^\text{avg}_{B_r(x)}f(y)dy$
-  - where $\int_A^\text{avg}f(x)dx := \frac{1}{\text{Vol}(A)}\int_A f(x)dx$
-  - you can use either a ball in 2-norm or in $\infty$-norm
-- $M_rf(x) = \int_{\mathbb{R}^d} f(x+y)\left(\frac{1}{\| B_r(0) \|}\chi_{B_r(0)}(y)\right)dy$ ($M_r$ as a **linear filter**, $\chi_{B_r(0)}$ as **filter function**)
-
-## 2.2 Cross-Correlation, Linear Filter
-
-- $\left(\psi\star f\right)(x) = \int_{\Omega}\psi(y)f(x+y)dy$
-- linear filter with kernel $\psi$: $M_\psi: f\mapsto(x \mapsto \left(\psi\star f\right)(x))$
-
-## Convolution vs. Cross-Correlation
-
-- For **real-valued functions**, of a continuous or discrete variable, convolution $( f \ast g )$ differs from cross-correlation $( f \star g )$ only in that either $f(x)$ or $g(x)$ is <span style="color:red">reflected about the y-axis</span> in convolution; thus <span style="color:red">the convolution is a cross-correlation of $g(−x)$ and $f(x)$</span>, or $f(−x)$ and $g(x)$.
-- For **complex-valued functions**, the cross-correlation operator is the <span style="color:red">adjoint of</span> the convolution operator, ie. <span style="color:red">the convolution is a cross-correlation of $\overline{g(−x)}$ and $f(x)$</span>, or $\overline{f(−x)}$ and $g(x)$
-  - **Beweis**:
-    - "$ f(x) \ast g(x) = \overline{f(−x)} \star g(x)$" **(Eq. 1)** steht explizit [hier](https://en.wikipedia.org/wiki/Cross-correlation#Properties).
-    - Für die Kommutation der convolution $( g \ast f )$ gilt nach **(Eq. 1)** $ g(x) \ast f(x) = \overline{g(−x)} \star f(x)$.
-    - Da die LHS von **(Eq. 1)** und **(Eq. 2)** gleich sind **by commutativity**, müssen auch deren RHS gleich sein, dh. "$\overline{f(−x)} \star g(x) = \overline{g(−x)} \star f(x)$".
-
-![conv_vs_corr](https://i.ibb.co/Q6sTW2Q/Comparison-convolution-correlation-svg.png)
-
-- "The symmetry of $f$ is the reason $f\star g$ and $g\ast f$ (s. unten Mitte und unten links im Bild) are identical in this example."
-  - dh. wäre $f$ nicht symmetrisch, wären $f\star g$ und $g\ast f$ <span style="color:red">unterschiedlich!</span>
-  - **convolution**: $f\ast g$ und $g\ast f$ sind <span style="color:red">immer</span> gleich (wegen <span style="color:red">commutativity</span>)
-  - **correlation**: $(f\star g)(x)$ und $(\overline{g}\star \overline{f})(-x)$ sind <span style="color:red">immer</span> gleich
-    - im Reellen ist Kommutation also nur eine Spiegelung an der y-Achse
-
-## 2.3 Properties of the cross-correlation
-
-### 2.3 (i) Boundedness of the norm of the cross-correlation
-
-- $f\in L^p$ and $g\in L^q$, then
-  - (i) **existence/finiteness of the integral**: $(f\star g)\in L^r$, where $\frac{1}{r}+1 = \frac{1}{p}+\frac{1}{q}$
-  - (ii) **Young's convolution inequality** for cross-correlation: $\\|f\star g\\|\_{L^r} = \\|f\\|\_{L^p}\\|g\\|\_{L^q}$
-  - (iii) $(f\star g)(x) = (g\star f)(-x)$ (reflection about the y-axis)
-    - <span style="color:red">but</span> for convolution: $(f\ast g)(x) = (g\ast f)(x)$
-  - (iv) $\\|f\star g\\|\_{L^r} = \\|g\star f\\|\_{L^r}$
-
-### 2.3 (ii) Inheritance of Differentiability, Derivatives of the Correlation
-
-To understand $\psi \in C_c^k(\mathbb{R}^d)$:
-
-see [section "compact"](#compact)
-
-- $\psi\in C_c^k$ and $f\in L^p$, then
-  - (i) $(f\star \psi)\in C^k$
-    - in words:
-      - "the resulting correlation <span style="color:red">**inherits differentiability**</span> of its arguments (it is sufficient if **one** of the arguments is differentiable for the result to be differentiable)"
-      - "the result of the correlation is always **as smooth as the kernel**"
-  - (ii) $\frac{\partial^\alpha}{\partial x^\alpha}(f\star \psi) = f\star \frac{\partial^\alpha}{\partial x^\alpha}\psi$
-    - $\alpha$ is a vector of natural numbers including $0$ ($\partial x^0$ means "not derived in x-direction", $\partial y^1$ means "derived once in y-direction", etc.), eg. $\alpha=(2,1,0)$ means $\frac{\partial^3}{\partial x^2\partial y^1\partial z^0}$
-    - in words: "you just need to compute the derivative of the kernel"
-    - useful if: you need a differentiable approximation of your image, eg. for edge detection
-  - (iii) $\frac{\partial^\alpha}{\partial x^\alpha}(\psi\star f) = (-1)^{\|\alpha\|}\frac{\partial^\alpha}{\partial x^\alpha}\psi\star f$
-    - $\|\alpha\|$ is the **sum of components**, eg. with the example above $\|\alpha\|=2+1+0=3$
-    - in words: again, "you just need to compute the derivative of the kernel"
-    - note: $\psi$ is differentiable, but $f$ is not necessarily differentiable
-    - we get (iii) because $\frac{\partial^\alpha}{\partial x^\alpha}(\psi\star f)(x) = \frac{\partial^\alpha}{\partial x^\alpha}(f\star \psi)(-x)$ and, by applying the chain rule to compute $\frac{\partial^\alpha}{\partial x^\alpha}(f\star \psi)(-x)$, we see that the <span style="color:red">outer derivative</span> of $(f\star \psi)(-x)$ is given by (ii), whereas the <span style="color:red">inner derivative</span>, $\frac{\partial}{\partial x}(-x)$, is $(-1)$ for <span style="color:red">each</span> derivative. Since we derive $\|\alpha\|$ times in total, we get $(-1)^{\|\alpha\|}$.
-
-### 2.3 (iii) Approximating any Function with a Differentiable Function
-
-- **conditions**:
-  - $\psi\in L^1$, $\psi\geq 0$ and $\int_{\mathbb{R}^d}\psi(x)dx=1$
-  - **$\psi_\epsilon$ a scaled version of $\psi$**: for $\epsilon > 0$, $\psi_\epsilon: \mathbb{R}^d \to \mathbb{R}, x \mapsto \frac{1}{\epsilon^d}\psi(\frac{x}{\epsilon})$
-    - factor $\frac{1}{\epsilon^d}$ chosen s.t. integral over $\mathbb{R}^d$ stays $1$
-    - gets narrower along $x$-axis and higher along $y$-axis as $\epsilon\to 0$
-  - $f\in L^\infty$
-- (i) if $f$ is **continuous** in point $x$ then,
-  - $\lim_{\epsilon\to 0}{(\psi_\epsilon\star f)(x)} = f(x)$, ie. $(\psi_\epsilon\star f)$ converges to $f$ in point $x\in \mathbb{R}^d$ (<span style="color:red">pointwise convergence</span>)
-- (ii) if $f$ is **uniformly continuous** then,
-  - $(\psi_\epsilon\star f)$ converges to $f$ uniformly on each compact subset of $\mathbb{R}^d$ (<span style="color:red">uniform convergence</span>)
-- tool that helps us approximating images $f$
-  - mainly useful for proofs
-  - the nice thing is $f$ can be <span style="color:red">any</span> function, we only need boundedness for $f$
-    - then, the limit on the lhs of (i) gives us a way to approximate this $f$ with the differentiable function $(\psi_\epsilon\star f)$
-  - it is often easier to prove s.th. for a differentiable function and then show that it also holds in the limit
-    - so, this is a tool to show properties of the limit $f(x)$ on the rhs of (i)
-
-# 3.0 Frequency Domain
-
-## 3.1 Fourier Transform
-
-- "FT of $f$ in $\omega$": $\mathcal{F}f(\omega):=\hat{f}(\omega) = \frac{1}{(2\pi)^{\frac{d}{2}}} \int_{\mathbb{R}^d}f(x)e^{-ix\cdot\omega}dx$
-  - weighted sum of complex exponentials
-- "the continuous FT": $\mathcal{F}: f \to \mathcal{F}f$
-- **problem**:
-  - $\mathcal{F}$ gives us a very different representation of the image in which we can eg. change some frequencies to pronounce s.th., but we <span style="color:red">need to go back</span> after that.
-  - unless we can <span style="color:red">invert $\mathcal{F}$</span> it is useless for any kind of image processing &rarr; Is $\mathcal{F}$ invertible? If not, how can we change $\mathcal{F}$ to make it invertible?
-
-## 3.2 Properties of the mapping $\mathcal{F}$
-
-- $\mathcal{F}: L^1(\mathbb{R}^d,\mathbb{C}) \to C(\mathbb{R}^d,\mathbb{C})$
-  - **problem**: $\mathcal{F}$ is a mapping between two completely different spaces
-- $\mathcal{F}$ is linear and continuous.
-  - **problem**: $\mathcal{F}$ is not necessarily integrable
-- (A) $\mathcal{F}f\in C$:
-  - $\lim_{n\to\infty}{\mathcal{F}f(\omega_n)}=\lim_{n\to\infty}{\mathcal{F}f(\omega)}$
-    - dominated convergence theorem
-      - (i) $\|g_n(x)\| \leq \|f(x)\|$, where (ii) $g_n(x):=f(x)e^{-ix\cdot \omega_n}\to\, (\text{integrand of}\, \mathcal{F}f)$ pointwisely and (iii) $\|f\|\in L^1$ integrable
-        - **Achtung**: ohne die Betragsstriche um $f(x)$ würde $\|g_n(x)\| \leq \|f(x)\|$ nicht gelten
-        - $z=re^{i\varphi}=r(\cos{(\varphi)}+i\sin{(\varphi)})$ (polar form of complex number)
-- (B) $\mathcal{F}$ linear:
-  - because integral $\mathcal{F}f$ linear
-- (C) continuity of operator $\mathcal{F}$:
-  - sufficient to show $\\|\mathcal{F}f\\|\_{C} \leq c\cdot\\|f\\|_{L^1}$
-    - because continuity and boundedness are equivalent for linear operators (ex. 5.2)
-      - and $\mathcal{F}$ is a linear operator acc. to (B)
-
-## 3.3 FT of the characteristic function
-
-- for $B>0$: $\mathcal{F}\chi_{\[B,B\]}(\omega) = \sqrt{\frac{2}{\pi}}B\,\text{sinc}\left(\frac{B\omega}{\pi}\right)$
-  - where $\text{sinc}(x)=\left(\frac{\sin{(\pi x)}}{\pi x}\right)$, for $x=0$: $\text{sinc}(x)=1$
-- thus, the FT of a function with compact support does not necessarily have a compact support
-- **problem**: $\text{sinc}(x)$ is not integrable, ie. $\text{sinc}(x)\not\in L^1(\mathbb{R})$
-- **problem**: $\mathcal{F}$ does not map $L^1$ to itself
-  - this is bad news for the invertibility of $\mathcal{F}$
-
-## 3.4 Properties of $\mathcal{F}$
-
-- $f\in L^1$ and $\underline{A}\in \text{GL}(d)$ (set of invertible matrices, ie. $\det A \neq 0$), then
-  - $\mathcal{F}(T_y f) = M_y(\mathcal{F}f)$
-  - $\mathcal{F}(M_y f) = T_{-y}(\mathcal{F}f)$
-  - $\mathcal{F}(D_{\underline{A}} f) = \frac{1}{\|\det \underline{A}\|}D_{\underline{A}^{-T}}(\mathcal{F}f)$
-  - $\mathcal{F}(\overline{f}) = \overline{D_{-\mathbb{I}}(\mathcal{F}f)}$
-- where $M_y: f \mapsto m_yf \, (M_y\,\text{ist einfach das Produkt}\, f(x)e^{ix\cdot y}), \, m_y: x \mapsto e^{ix\cdot y}$ and $D_y: f \mapsto (x \mapsto f(\underline{A}x))$
-
-## 3.5 Hermitian, Skew-Hermitian
-
-- **Hermitian** (if real: **even**): $\overline{f(\omega)} = f(-\omega)$
-- **Skew-Hermitian** (if real: **odd**): $\overline{f(\omega)} = -f(-\omega)$ 
-- we need this def. for 3.6
-
-## 3.6 When is $\mathcal{F}$ even or odd?
-
-- for $f\in L^1$ (eg. images)
-  - $f$ real-valued $\Leftrightarrow$ $\mathcal{F}f$ hermitian
-  - $f$ imaginary-valued $\Leftrightarrow$ $\mathcal{F}f$ skew-hermitian
-- **Proof**: Based on (3.4) $\mathcal{F}(\overline{f}) = \overline{D_{-\mathbb{I}}(\mathcal{F}f)}$
-- we need this for
-
-## 3.7 Convolution Theorem for $\mathbb{C}$-valued Functions
-
-- for $f,g\in L^1$ $$\mathcal{F}(f\ast g) = (2\pi)^{\frac{d}{2}}\mathcal{F}(f) \mathcal{F}(g)$$
-- "the FT changes the <span style="color:red">**convolution**</span> to a **pointwise** multiplication"
-- **simple proof**:
-  - its just a little bit of computation with the integral, so no deep theory going on,
-  - we just need **Fubini** to change the order of integrals and the **substitution rule** for multiple variables, both things we have used a couple of times.
-
-## 3.8 "Integration by Parts" for $\mathcal{F}$
-
-- this is like "Integration by Parts" for derivatives
-- for $f,g\in L^1$ (eg. images) $$\int_{\mathbb{R}^d}(\mathcal{F}f)(x)g(x)dx = \int_{\mathbb{R}^d}f(x)(\mathcal{F}g)(x)dx$$
-- This is very useful if you eg. know what the FT of $g$ is but you do not know what the FT of $f$ is. We will make use of that.
-- **proof**: ex. (<span style="color:red">TODO</span>)
-
-## 3.9 Generalize the Cross-Correlation to $\mathbb{C}$-valued Functions
-
-- the convolution of $\mathbb{C}$-valued functions is exactly the same as the convolution for $\mathbb{R}$-valued functions, see [Wikipedia](https://en.wikipedia.org/wiki/Convolution#Domain_of_definition)
-- <span style="color:red">but</span> for the cross-correlation the generalization is different!
-- (i) for measurable $\psi,f$
-  - $(\psi\star f)(x) = \int_{\Omega}\overline{\psi (y)}f(x+y)dy$
-- (ii) Generalize 2.3:
-  - $\overline{(\psi\star f)(x)} = (f\star \psi)(-x)$
-
-## 3.10 "Correlation Theorem" for $\mathbb{C}$-valued Functions
-
-- for $f,g\in L^1(\mathbb{R}^d, \mathbb{C})$ $$\mathcal{F}(f\ast g) = (2\pi)^{\frac{d}{2}}\overline{\mathcal{F}(f)} \mathcal{F}(g)$$
-- "the FT changes the <span style="color:red">**correlation**</span> to a **pointwise** multiplication"
-- "the 1st argument is conjugated"
-
-## 3.11 Schwartz Space
-
-- aka "space of rapidly decreasing functions on $\mathbb{R}^d$"
-- $$S(\mathbb{R}^d,\mathbb{C}):=\\{f\in C^\infty : C_{\alpha,\beta}(f)<\infty\\}$$
-- **Schwartz functions**: infinitely differentiable functions that rapidly decay
-  - **rapidly decay**: for $x\to \infty$, $f\to 0$ **faster than any polynomial** goes to $\infty$
-  - the same holds for **all** derivatives
-
-## 3.25 $\mathcal{F}$ is bijective in $\mathcal{S}$
-
-- if we restrict the domain of $\mathcal{F}$ from $L^1$ to $\mathcal{S}$ then we get a bijective FT
-
-## 3.27 Extension of $\mathcal{F}$ from $\mathcal{S}$ to $L^2$
-
-- There is a unique, bijective, linear isometry $$\mathcal{F}_2: L^2 \to L^2 \quad \text{with} \quad \mathcal{F}_2\vert_\mathcal{S} = \mathcal{F}.$$
-- we wanted s.th. that is bijective when we transform it, $\mathcal{F}_2$ is what we were looking for
-
-# TODO (zurückgestellt)
-
-- Remark 1.3
