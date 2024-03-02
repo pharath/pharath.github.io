@@ -294,12 +294,13 @@ Git actions:
 
 ## motion (in a line)
 
-- B (beginning of previous WORD, faster than b)
-- E (end of WORD, faster than e)
-- gE (end of previous WORD, "be" does not work if cursor currently in middle of a word)
-- ge (end of previous word, "be" does not work if cursor currently in middle of a word)
-- Ea (start writing at end of WORD)
-- ea (start writing at end of word)
+- `f<letter>,,,,` (jump to `<letter>`, press `,` repeatedly to jump to the next `<letter>`)
+- `B` (beginning of previous WORD, faster than b)
+- `E` (end of WORD, faster than e)
+- `gE` (end of previous WORD, "be" does not work if cursor currently in middle of a word)
+- `ge` (end of previous word, "be" does not work if cursor currently in middle of a word)
+- `Ea` (start writing at end of WORD)
+- `ea` (start writing at end of word)
 
 ## motion
 
