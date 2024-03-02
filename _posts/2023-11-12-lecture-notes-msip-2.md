@@ -39,6 +39,8 @@ tags:
 
 # Convolution vs. Cross-Correlation
 
+## Merke
+
 - <span style="color:red">**Merke**</span>:
   - Correlation ist "das Einfache", Convolution ist eine Correlation mit der gespiegelten Version einer der beiden Funktionen (welche der beiden wir spiegeln ist egal, aber <span style="color:red">die Gespiegelte muss die sein, die wir von links nach rechts schieben</span>).
     - Je nachdem welche wir spiegeln, kriegen wir entweder $f\ast g$ oder $g\ast f$ raus. Aber weil die Convolution kommutativ ist, sind beide Ergebnisse gleich.
@@ -48,8 +50,11 @@ tags:
     - im Komplexen wird aus der <span style="color:red">Spiegelung</span> eine <span style="color:red">Adjungierung</span>, dh. die Convolution schiebt $\overline{g(-x)}$ statt $g(-x)$ von links nach rechts
   - Convolution: kommutativ.
   - Correlation: Kommutation entspricht einer Spiegelung an der y-Achse (im Reellen).
-- For **real-valued functions**, of a continuous or discrete variable, convolution $( f \ast g )$ differs from cross-correlation $( f \star g )$ only in that either $f(x)$ or $g(x)$ is <span style="color:red">reflected about the y-axis</span> in convolution; thus <span style="color:red">the convolution is a cross-correlation of $g(−x)$ and $f(x)$</span>, or $f(−x)$ and $g(x)$.
-- For **complex-valued functions**, the cross-correlation operator is the <span style="color:red">adjoint of</span> the convolution operator, ie. <span style="color:red">the convolution is a cross-correlation of $\overline{g(−x)}$ and $f(x)$</span>, or $\overline{f(−x)}$ and $g(x)$
+
+## Relationship between Convolution and Correlation
+
+- (i) For **real-valued functions**, of a continuous or discrete variable, convolution $( f \ast g )$ differs from cross-correlation $( f \star g )$ only in that either $f(x)$ or $g(x)$ is <span style="color:red">reflected about the y-axis</span> in convolution; thus <span style="color:red">the convolution is a cross-correlation of $g(−x)$ and $f(x)$</span>, or $f(−x)$ and $g(x)$.
+- (ii) For **complex-valued functions**, the cross-correlation operator is the <span style="color:red">adjoint of</span> the convolution operator, ie. <span style="color:red">the convolution is a cross-correlation of $\overline{g(−x)}$ and $f(x)$</span>, or $\overline{f(−x)}$ and $g(x)$
   - **Beweis**:
     - "$ f(x) \ast g(x) = \overline{f(−x)} \star g(x)$" **(Eq. 1)** steht explizit [hier](https://en.wikipedia.org/wiki/Cross-correlation#Properties).
     - Für die Kommutation der convolution $( g \ast f )$ gilt nach **(Eq. 1)** $ g(x) \ast f(x) = \overline{g(−x)} \star f(x)$.
@@ -59,11 +64,16 @@ tags:
   <img src="https://i.ibb.co/Q6sTW2Q/Comparison-convolution-correlation-svg.png" alt="Comparison-convolution-correlation-svg" border="0">
 </p>
 
-- "The symmetry of $f$ is the reason $f\star g$ and $g\ast f$ (s. unten Mitte und unten links im Bild) are identical in this example."
+- in the figure: "The symmetry of $f$ is the reason $f\star g$ and $g\ast f$ (s. unten Mitte und unten links im Bild) are identical in this example."
   - dh. wäre $f$ nicht symmetrisch, wären $f\star g$ und $g\ast f$ <span style="color:red">unterschiedlich!</span>
-  - **convolution**: $f\ast g$ und $g\ast f$ sind <span style="color:red">immer</span> gleich (wegen <span style="color:red">commutativity</span>)
-  - **correlation**: $(f\star g)(x)$ und $(\overline{g}\star \overline{f})(-x)$ sind <span style="color:red">immer</span> gleich
-    - im Reellen ist Kommutation also nur eine Spiegelung an der y-Achse
+
+## Commutative or Not?
+
+- **convolution**: $f\ast g = g\ast f$ (wegen <span style="color:red">commutativity</span>)
+- **correlation**: $(f\star g)(x) = (\overline{g}\star \overline{f})(-x) = \overline{(g\star f)(-x)}$
+  - im Reellen ist Kommutation also nur eine Spiegelung an der y-Achse
+  - bec of the latter $(\overline{g}\star \overline{f})(-x) = \overline{(g\star f)(-x)}$, this is equivalent to <span style="color:green">(3.9 (ii))</span>
+    - $(\overline{g}\star \overline{f})(-x) = \overline{(g\star f)(-x)}$ holds bec conjugation is distributive over multiplication and addition (the integral is like a sum, so distributivity must hold for the integral, too), [conjugation properties](https://en.wikipedia.org/wiki/Complex_conjugate#Properties)
 
 # 2.3 Properties of the cross-correlation
 

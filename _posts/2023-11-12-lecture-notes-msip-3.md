@@ -138,6 +138,7 @@ tags:
 - <span style="color:red">but</span> for the cross-correlation the generalization is different!
 - (i) for measurable $\psi,f$
   - $(\psi\star f)(x) = \int_{\Omega}\overline{\psi (y)}f(x+y)dy$
+  - "the 1st argument is conjugated"
 - (ii) Generalize 2.3:
   - $\overline{(\psi\star f)(x)} = (f\star \psi)(-x)$
 
@@ -148,10 +149,10 @@ tags:
 - "the 1st argument is conjugated"
 - **problem**:
   - We need to continue to work on the inverse of the FT.
-  - We have seen that the FT maps L1 functions to continuous functions and that the transformed functions dont need to be integrable.
-  - We couldnt even apply the FT twice bec after the FT we may loose this integrability.
-  - This show that we need a different space.
-  - It will turn out that there is a space where the def. of the FT that we have is invertible
+  - We have seen that the FT maps $L^1$ functions to continuous functions and that the transformed functions do not need to be integrable.
+  - We could not even apply the FT twice bec after the FT we may loose this integrability.
+  - This shows that we need a different space.
+  - It will turn out that there is a space where the def. of the FT that we have is invertible.
 
 ## 3.11 Schwartz Space
 
@@ -272,9 +273,10 @@ tags:
 - (iii) $\mathcal{F}(p^\alpha f) = i^{\vert \alpha\vert}\frac{\partial^\alpha}{\partial \omega^\alpha}\mathcal{F}(f)$
 - in words: the FT converts **derivatives** into a **multiplication with polynomials** and vice versa (like the FT converted a translation into modulation and vice versa)
 - **proof**:
+  - (i) will be shown last
   - show (ii) using integration by parts 3.16 (which requires checking the conditions in 3.15, too)
   - show (iii), using B.12 "if the derivative is uniformly bounded by an integrable function, differentiation and integration may be interchanged"
-  - with (iii) we know that we are in $C^\infty$ bec we know what the derivatives are
+  - with (iii) we know that we are in $C^\infty$ bec we know what the derivatives are, thus (i) holds
 - **problem**: now we know $\mathcal{F}(f)\in C^\infty$, but we need to show that the mapping $\mathcal{F}$ maps to the Schwartz space
 
 ## 3.18 $\mathcal{F}f\in S$
@@ -411,7 +413,7 @@ tags:
   - (iii) $(\mathcal{F}^{-1}f)(x)=(\mathcal{F}^3f)(x)=(\mathcal{F}^2(\mathcal{F}f))(x)=(\mathcal{F}f)(-x)$ (the last "$=$" follows from <span style="color:green">(3.24)</span>)
   - (iv) $(\mathcal{F}f,\mathcal{F}g)\_{L^2} := \int_{\mathbb{R}^d} \mathcal{F}f(x)\overline{\mathcal{F}g(x)}dx$ then use <span style="color:green">(3.8), (3.4)</span> and <span style="color:green">(3.24)</span> to arrive at $\int_{\mathbb{R}^d} f(x)\overline{g(x)}dx$
 - **problem**:
-  - So, this will give us a way to extend funtions from a dense subset/dense subspace to a bigger space
+  - So, this will give us a way to extend functions from a dense subset/dense subspace to a bigger space
 
 ## 3.26 Extension to a Bigger Space
 
@@ -422,7 +424,7 @@ tags:
   - So, <span style="color:green">(3.25)</span> is way too strong to be used "as is" in practice, so we **need to extend** this to a bigger space.
   - So, <span style="color:red">the idea for extension</span> is:
     - recall, the statement we did in chapter 2, where we were looking at the correlation and convolution and what we showed there was that the continuous functions with compact support $C_c$ <span style="color:green">(B.8)</span> and $C_c^\infty$ <span style="color:green">(2.7)</span> are dense in $L^p$ for $1\leq p<\infty$ (ie. $\forall f \in L^p (\Omega)\, \forall \epsilon > 0\, \exists g \in C_c (\Omega) : \lVert f − g\rVert_{L^p(Ω)} < \epsilon$). In particular, they are dense in $L^2$.
-      - Thus, for any $L^2$ function we can get arbitrarily close with a $C_c^\infty$ function and $C_c^\infty$ functions are also Schwartz functions <span style="color:green">(3.12)</span>.
+      - Thus, for any $L^2$ function we can get arbitrarily close with a $C_c^\infty$ function and <span style="color:red">**$C_c^\infty$ functions are also Schwartz functions**</span> <span style="color:green">(3.12)</span>.
     - So, <span style="color:red">the idea is</span>, lets extend $\mathcal{F}$ from our Schwartz space to $L^2$ by using this denseness.
     - On the Schwartz space it should do exactly what we have shown in <span style="color:green">(3.25)</span>, but we want to extend it to the entire space $L^2$.
   - And such kind of extension is actually a general tool that one can use **without** having explicitly Schwartz space here and $L^2$ there - it is just working in normed vector spaces.
@@ -438,8 +440,8 @@ tags:
       - essentially, we make the assumption that <span style="color:red">the set $Y$</span> does **not** have this problem, it <span style="color:red">is complete</span> (and <span style="color:red">$L^2$ is also complete</span>, so if you want to think more specifically and not in abstract terms, then <span style="color:red">think of $Y$ as $L^2$</span>)
       - it is just here that I am trying to present this in an abstract way, where we only assume what is essentially necessary and not more
   - (ii) norms $\lVert\cdot\rVert_X$ and $\lVert\cdot\rVert_Y$
-  - (iii) $V\subset X$
-    - a dense subspace of $X$
+  - (iii) $V\subset X$ is a <span style="color:red">**dense**</span> subspace of $X$
+    - <span style="color:red">**Warning**</span>: $V$ must be <span style="color:red">dense</span> in $X$, ie. just <span style="color:red">being a subset of $X$ is not enough!</span> This is the main idea of this proposition.
     - this would be our Schwartz space $S$ = a dense subspace of $L^2$ (so, $V=S$ and $X=L^2$)
   - (iv) $F: V\to Y$ is a linear isometry (ie. (iv.i) $F$ is linear **and** (iv.ii) $\lVert F(x)\rVert_Y = \lVert x\rVert_X$ for all $x\in V$)
     - thinking about our specific setting: $F: S \to L^2$
