@@ -1,5 +1,5 @@
 ---
-title: "Mathematical Methods of Signal and Image Processing - Chapter 3"
+title: "Mathematical Methods of Signal and Image Processing - Chapter 3 - The Frequency Domain"
 read_time: false
 excerpt: "For learning \"Mathematical methods of signal and image processing\"; content mostly from \"RWTH lecture Mathematical methods of signal and image processing\" by Benjamin Berkels."
 toc: true
