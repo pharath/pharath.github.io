@@ -39,6 +39,15 @@ tags:
 
 # Convolution vs. Cross-Correlation
 
+- <span style="color:red">**Merke**</span>:
+  - Correlation ist "das Einfache", Convolution ist eine Correlation mit der gespiegelten Version einer der beiden Funktionen (welche der beiden wir spiegeln ist egal, aber <span style="color:red">die Gespiegelte muss die sein, die wir von links nach rechts schieben</span>).
+    - Je nachdem welche wir spiegeln, kriegen wir entweder $f\ast g$ oder $g\ast f$ raus. Aber weil die Convolution kommutativ ist, sind beide Ergebnisse gleich.
+  - betrachte $f\star g$ bzw. $f\ast g$:
+    - **Correlation**: Das **erste** Argument $f$ wird von links nach rechts geschoben.
+    - **Convolution**: Das **zweite** Argument $g$ wird gespiegelt und dann von links nach rechts geschoben.
+    - im Komplexen wird aus der <span style="color:red">Spiegelung</span> eine <span style="color:red">Adjungierung</span>, dh. die Convolution schiebt $\overline{g(-x)}$ statt $g(-x)$ von links nach rechts
+  - Convolution: kommutativ.
+  - Correlation: Kommutation entspricht einer Spiegelung an der y-Achse (im Reellen).
 - For **real-valued functions**, of a continuous or discrete variable, convolution $( f \ast g )$ differs from cross-correlation $( f \star g )$ only in that either $f(x)$ or $g(x)$ is <span style="color:red">reflected about the y-axis</span> in convolution; thus <span style="color:red">the convolution is a cross-correlation of $g(−x)$ and $f(x)$</span>, or $f(−x)$ and $g(x)$.
 - For **complex-valued functions**, the cross-correlation operator is the <span style="color:red">adjoint of</span> the convolution operator, ie. <span style="color:red">the convolution is a cross-correlation of $\overline{g(−x)}$ and $f(x)$</span>, or $\overline{f(−x)}$ and $g(x)$
   - **Beweis**:
@@ -46,7 +55,9 @@ tags:
     - Für die Kommutation der convolution $( g \ast f )$ gilt nach **(Eq. 1)** $ g(x) \ast f(x) = \overline{g(−x)} \star f(x)$.
     - Da die LHS von **(Eq. 1)** und **(Eq. 2)** gleich sind **by commutativity**, müssen auch deren RHS gleich sein, dh. "$\overline{f(−x)} \star g(x) = \overline{g(−x)} \star f(x)$".
 
-![conv_vs_corr](https://i.ibb.co/Q6sTW2Q/Comparison-convolution-correlation-svg.png)
+<p align="center">
+  <img src="https://i.ibb.co/Q6sTW2Q/Comparison-convolution-correlation-svg.png" alt="Comparison-convolution-correlation-svg" border="0">
+</p>
 
 - "The symmetry of $f$ is the reason $f\star g$ and $g\ast f$ (s. unten Mitte und unten links im Bild) are identical in this example."
   - dh. wäre $f$ nicht symmetrisch, wären $f\star g$ und $g\ast f$ <span style="color:red">unterschiedlich!</span>
@@ -58,11 +69,13 @@ tags:
 
 ## 2.3 (i) Boundedness of the norm of the cross-correlation
 
-- $f\in L^p$ and $g\in L^q$, then
-  - (i) **existence/finiteness of the integral**: $(f\star g)\in L^r$, where $\frac{1}{r}+1 = \frac{1}{p}+\frac{1}{q}$
-  - (ii) **Young's convolution inequality** for cross-correlation: $\\|f\star g\\|\_{L^r} = \\|f\\|\_{L^p}\\|g\\|\_{L^q}$
+- $f\in L^p(\Omega)$ and $g\in L^q(\mathbb{R}^d)$ and $\frac{1}{r}+1 = \frac{1}{p}+\frac{1}{q}$, then
+  - (i) **existence/finiteness of the integral**: $(f\star g)\in L^r(\mathbb{R}^d)$
+  - (ii) **Young's convolution inequality** for cross-correlation: $\\|f\star g\\|\_{L^r} \leq \\|f\\|\_{L^p}\\|g\\|\_{L^q}$
+    - <span style="color:red">we need this to</span> show <span style="color:green">(2.7 (i))</span>
   - (iii) $(f\star g)(x) = (g\star f)(-x)$ (reflection about the y-axis)
     - <span style="color:red">but</span> for convolution: $(f\ast g)(x) = (g\ast f)(x)$
+    - for complex-valued functions: $(f\star g)(x) = (\overline{g}\star \overline{f})(-x)$
   - (iv) $\\|f\star g\\|\_{L^r} = \\|g\star f\\|\_{L^r}$
 
 ## 2.3 (ii) Inheritance of Differentiability, Derivatives of the Correlation
@@ -76,15 +89,19 @@ see [section "compact"](#compact)
     - in words:
       - "the resulting correlation <span style="color:red">**inherits differentiability**</span> of its arguments (it is sufficient if **one** of the arguments is differentiable for the result to be differentiable)"
       - "the result of the correlation is always **as smooth as the kernel**"
+    - <span style="color:red">we need this to</span> show <span style="color:green">(2.7 (ii))</span> "denseness of $C_c^{\infty}$"
   - (ii) $\frac{\partial^\alpha}{\partial x^\alpha}(f\star \psi) = f\star \frac{\partial^\alpha}{\partial x^\alpha}\psi$
     - $\alpha$ is a vector of natural numbers including $0$ ($\partial x^0$ means "not derived in x-direction", $\partial y^1$ means "derived once in y-direction", etc.), eg. $\alpha=(2,1,0)$ means $\frac{\partial^3}{\partial x^2\partial y^1\partial z^0}$
     - in words: "you just need to compute the derivative of the kernel"
-    - useful if: you need a differentiable approximation of your image, eg. for edge detection
+    - <span style="color:red">useful if</span>: you need a differentiable (aka "smooth") approximation of your image, eg. for edge detection (see "In general, a signal $f$ is not smooth, but Proposition <span style="color:green">(2.3 (ii))</span> ensures that ..." idea in the Canny Edge section)
+    - <span style="color:red">we need this to</span> show <span style="color:green">(iii)</span> which, in turn, we will need in the Canny Edge Detector section <span style="color:green">(2.16)</span>
   - (iii) $\frac{\partial^\alpha}{\partial x^\alpha}(\psi\star f) = (-1)^{\|\alpha\|}\frac{\partial^\alpha}{\partial x^\alpha}\psi\star f$
     - $\|\alpha\|$ is the **sum of components**, eg. with the example above $\|\alpha\|=2+1+0=3$
     - in words: again, "you just need to compute the derivative of the kernel"
     - note: $\psi$ is differentiable, but $f$ is not necessarily differentiable
-    - we get (iii) because $\frac{\partial^\alpha}{\partial x^\alpha}(\psi\star f)(x) = \frac{\partial^\alpha}{\partial x^\alpha}(f\star \psi)(-x)$ and, by applying the chain rule to compute $\frac{\partial^\alpha}{\partial x^\alpha}(f\star \psi)(-x)$, we see that the <span style="color:red">outer derivative</span> of $(f\star \psi)(-x)$ is given by (ii), whereas the <span style="color:red">inner derivative</span>, $\frac{\partial}{\partial x}(-x)$, is $(-1)$ for <span style="color:red">each</span> derivative. Since we derive $\|\alpha\|$ times in total, we get $(-1)^{\|\alpha\|}$.
+    - we get <span style="color:green">(iii)</span> because by <span style="color:green">(2.3 (i) part (iii))</span> $\frac{\partial^\alpha}{\partial x^\alpha}(\psi\star f)(x) = \frac{\partial^\alpha}{\partial x^\alpha}(f\star \psi)(-x)$ and, by applying the chain rule to compute $\frac{\partial^\alpha}{\partial x^\alpha}(f\star \psi)(-x)$, we see that the <span style="color:red">outer derivative</span> of $(f\star \psi)(-x)$ is given by <span style="color:green">(ii)</span>, whereas the <span style="color:red">inner derivative</span>, $\frac{\partial^\alpha}{\partial x^\alpha}(-x)$, is $(-1)^{\|\alpha\|}$.
+    - <span style="color:red">we need this</span>
+      - in the Canny Edge Detector section <span style="color:green">(2.16)</span> to show $(\psi\star f)' = -\psi'\star f$ (note: <span style="color:green">(ii)</span> would not be enough to show this!)
 
 ## 2.3 (iii) Approximating any Function with a Differentiable Function
 
@@ -94,18 +111,20 @@ see [section "compact"](#compact)
     - factor $\frac{1}{\epsilon^d}$ chosen s.t. integral over $\mathbb{R}^d$ stays $1$
     - gets narrower along $x$-axis and higher along $y$-axis as $\epsilon\to 0$
       - $\epsilon$ is the <span style="color:red">**width**</span> of $\psi_\epsilon$, ie. **low values of $\epsilon$** mean $\psi_\epsilon$ is **very concentrated**
-  - $f\in L^\infty$
+  - $f\in L^\infty$ (**warning**: this just means <span style="color:red">$f$ must be bounded</span> (aka $\infty$-norm is finite), it does **not** mean that $f$ must be integrable!)
 - (i) if $f$ is **continuous** in point $x$ then,
   - $\lim_{\epsilon\to 0}{(\psi_\epsilon\star f)(x)} = f(x)$, ie. $(\psi_\epsilon\star f)$ converges to $f$ in point $x\in \mathbb{R}^d$ (<span style="color:red">pointwise convergence</span>)
     - the narrower and more concentrated $\psi_\epsilon$ is the better $(\psi_\epsilon\star f)$ approximates $f$
+    - <span style="color:red">we need this</span> in the Canny Edge section <span style="color:green">(2.16)</span> to show that for very weak smoothing $\sigma\to 0$ the filtered image converges to the original image
 - (ii) if $f$ is **uniformly continuous** then,
   - $(\psi_\epsilon\star f)$ converges to $f$ uniformly on each compact subset of $\mathbb{R}^d$ (<span style="color:red">uniform convergence</span>)
+  - <span style="color:red">we need this to</span> show <span style="color:green">(2.7 (i))</span>
 - tool that helps us approximating images $f$
   - mainly useful for proofs
-  - the nice thing is $f$ can be <span style="color:red">any</span> function, we only need boundedness for $f$
-    - then, the limit on the lhs of (i) gives us a way to approximate this $f$ with the differentiable function $(\psi_\epsilon\star f)$
-  - it is often easier to prove s.th. for a differentiable function and then show that it also holds in the limit
-    - so, this is a tool to show properties of the limit $f(x)$ on the rhs of (i)
+  - the nice thing is $f$ can be <span style="color:red">any</span> function, <span style="color:red">**we only need boundedness**</span> for $f$ (see condition: $f\in L^\infty$)
+    - then, the limit on the lhs of <span style="color:green">(i)</span> gives us a way to approximate this $f$ with the **differentiable function** $(\psi_\epsilon\star f)$
+  - it is often easier to prove s.th. for a **differentiable function** and then show that it also holds in the limit
+    - so, this is a tool to show properties of the limit $f(x)$ on the rhs of <span style="color:green">(i)</span>
 
 # 2.4 The Difference Quotient Converges to the Derivative
 
@@ -128,12 +147,13 @@ see [section "compact"](#compact)
         - **solution**: <span style="color:red">convexity</span> legt fest, dass $x+te_i\in D$
       - dh. wäre $D$ **nicht** convex würde unter Umständen eine Stelle in $\left[0,h\right]$ nicht in $D$ liegen, sodass wir $f(x+te_i)$ an dieser Stelle nicht bestimmen könnten und deshalb $g$ an dieser Stelle dann nicht well-defined wäre.
   - (iv) **mean value theorem**: $\partial_if(x+\xi e_i)=g'(\xi)=\frac{g(h)-g(0)}{h}=\frac{f(x+he_i)-f(x)}{h}$
+- we need this for <span style="color:green">(2.3 (ii))</span> proof
 
 # 2.5 Correlation is Continuous, Edges are Always Blurred
 
 <p style="border-width:3px; border-style:solid; border-color:#FF0000; padding: 1em;">
 - <b>conditions</b>:<br>
-&emsp;  - $\frac{1}{p}+\frac{1}{q}=1$ ($q,p$ are dual exponents)
+&emsp;  - $\frac{1}{p}+\frac{1}{q}=1$ ($q,p$ are dual exponents)<br>
 &emsp;  - $f\in L^p$, $g\in L^q$ (neither of them needs to be continuous !)<br>
 - then $$(f\star g)\in C(\mathbb{R}^d)$$
 </p>
@@ -256,7 +276,7 @@ see [section "compact"](#compact)
 
 ## 2.11 (ii) Gaussian Filter
 
-- **idea**: $\psi\star f$ is as smooth as the $\psi$ <span style="color:green">(2.3 (ii))</span> $\Rightarrow$ "full smoothing" by choosing sth that is in $C^\infty$ $\Rightarrow g_\sigma\in C^\infty$
+- **idea**: by <span style="color:green">(2.3 (ii))</span> $\psi\star f$ is as smooth as the $\psi$ $\Rightarrow$ "full smoothing" by choosing sth that is in $C^\infty$ $\Rightarrow g_\sigma\in C^\infty$
 - (i) **continuous case**: $g_\sigma(x) = \frac{1}{(\sqrt{2\pi}\sigma)^d}e^{-(\frac{\lVert x\rVert}{2\sigma})^2}$
   - normalization factor (should integrate to $1$, depends on dim)
 - (ii) **discrete case**: $(\widetilde{G}\_\sigma)\_{k,l} = \frac{1}{(\sqrt{2\pi}\sigma)^d}e^{-(\frac{k^2+l^2}{2\sigma})^2}$ (einfach das $\lVert x\rVert$ in (i) mit $k^2+l^2$ ersetzen)
@@ -442,9 +462,13 @@ see [section "compact"](#compact)
 
 - **problem**:
   - Problem with Prewitt and Sobel detector: there is no "knob" to configure <span style="color:red">how many edges you want</span> or to see <span style="color:red">how strong the edges have to be</span>. 
-  - The Canny will give us a way to select how sensitive we want to be to the edges and also with <span style="color:red">some sane properties</span>, eg.
-    - <span style="color:red">when you want fewer edges there will never be new edges</span> and
-    - <span style="color:red">existing edges will either vanish or stay at their position</span> (ie. they will also not move to new positions).
+- **idea**:
+  - **step 1**: smooth the signal (otherwise local maxima cannot be determined)
+    - In general, a signal $f$ is <span style="color:red">not smooth</span>, but <span style="color:green">(2.3 (ii))</span> ensures that $\psi \star f \in C^2$ and $(\psi\star f)' = -\psi' \star f$ for a suitable kernel $\psi$. Assuming some regularity of $f$ (eg. <span style="color:green">(2.3 (iii))</span>), with $\psi_\sigma(x) = \frac{1}{\sigma} \psi( \frac{x}{\sigma} )$ we have $\lim_{\sigma\to 0} (\psi_\sigma \star f )(x) = f(x)$.
+  - **step 2**: find a suitable kernel $\psi$
+    - The Canny Edge Detector will give us a way to select how sensitive we want to be to the edges and also with <span style="color:red">some sane properties</span>, eg.
+      - <span style="color:red">when you want fewer edges there will never be new edges</span> and
+      - <span style="color:red">existing edges will either vanish or stay at their position</span> (ie. they will also not move to new positions).
 
 <p align="center">
   <img src="https://i.ibb.co/mFCwCwt/Screenshot-from-2024-02-25-02-37-14.png" alt="Screenshot-from-2024-02-25-02-37-14" border="0">
@@ -479,12 +503,13 @@ see [section "compact"](#compact)
   - we just want that if we increase sigma then the edges decrease, but it does not matter how fast. In other words the scale of sigma does not matter
     - take $(\sigma^2)/2$ instead of $\sigma$
   - **for $d>1$:** <span style="color:red">**for all $d\in\mathbb{N}$**</span> the solution of the heat equation is $g_\sigma$ (exercise)
-- (iv) the convolution can be expressed as a correlation $(g_{\sqrt{2\sigma}}\ast f)=(g_{\sqrt{2\sigma}}\star f)$
+- (iv) the convolution can be expressed <span style="color:red">**as a correlation**</span> $(g_{\sqrt{2\sigma}}\ast f)=(g_{\sqrt{2\sigma}}\star f)$
 - (v) the <span style="color:red">**Canny Edge Detector**</span> computes
-  - **size**: $\rho(x)=\sqrt{(\partial_{x_1}(g_{\sqrt{2\sigma}}\ast f))^2+(\partial_{x_2}(g_{\sqrt{2\sigma}}\ast f))^2}$
-  - **direction of the edge** (direction of "steepest ascent"): $\theta(x)=\text{arctan2}((\partial_{x_1}(g_{\sqrt{2\sigma}}\ast f)), (\partial_{x_2}(g_{\sqrt{2\sigma}}\ast f)))$
+  - **size**: $\rho(x)=\sqrt{(\partial_{x_1}(g_{\sqrt{2\sigma}}\star f))^2+(\partial_{x_2}(g_{\sqrt{2\sigma}}\star f))^2}$
+  - **direction of the edge** (direction of "steepest ascent"): $\theta(x)=\text{arctan2}((\partial_{x_1}(g_{\sqrt{2\sigma}}\star f)), (\partial_{x_2}(g_{\sqrt{2\sigma}}\star f)))$
     - the <span style="color:red">angle that the gradient has with the x-axis</span>
   - similar to the Sobel detector before, but here we use a Gaussian kernel instead of a Prewitt or Sobel kernel
+  - **trick**: $\partial_{x_i}(g_{\sqrt{2\sigma}}\star f) = \partial_{x_i}g_{\sqrt{2\sigma}}\star f$, we can precompute the corresponding Gaussian derivative filters and filter the image with those
   - as edges we consider all points where $\rho$ is strictly maximal locally in direction <span style="color:red">$(\sin(\theta),\cos(\theta))$ TODO</span>
 - **implementation**: to implement this we will have to 
   - <span style="color:red">**discretize**</span>: ie instead of looking at all $\theta$s we <span style="color:red">only look at multiples of 45 degrees **by rounding $\theta$ to those multiples**</span> and then <span style="color:red">compare neighboring pixel values in direction $\theta$ and $\theta+180$</span>

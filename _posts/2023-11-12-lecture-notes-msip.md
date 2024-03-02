@@ -137,12 +137,26 @@ tags:
   - $C(U,Y)$ is **not** a normed space, but $C(\overline{U},Y)$ **together with** $\Vert F\Vert_{\infty}$ is
 - Comparison: [$L^2$ vs. $C(U,Y)$](#l2-vs-cuy)
 
+### Integrability
+
+- <span style="color:red">**remember**</span>: we don't say "$f$ is integrable," but rather "$f$ is integrable over $D$"
+  - eg. eg. for $f(x)=1/x$ the anti-derivative is $\ln{(\lvert x\rvert)}$, so $f(x)=1/x$ is "integrable over $D$" if the domain $D$ is an interval that doesn't contain $0$
+
 ### $L^2$
 
-- it is often convenient to think of $L^2(\mathbb{R}^n)$ as the **completion** of the **continuous functions** with respect to the $L^2$-norm, [mathworld.wolfram](https://mathworld.wolfram.com/L2-Space.html)
-- examples for $L^2$ functions:
+- (i) it is often convenient to think of $L^2(\mathbb{R}^n)$ as the **completion** of the **continuous functions** with respect to the $L^2$-norm, [mathworld.wolfram](https://mathworld.wolfram.com/L2-Space.html)
+- (ii) examples for $L^2$ functions:
   - **Bounded functions**, defined on $\[ 0 , 1 \]$, are square-integrable. These functions are also in $L^p$, for any value of $p$., [wikipedia](https://en.wikipedia.org/wiki/Square-integrable_function#Examples)
-- Comparison: [$L^2$ vs. $C(U,Y)$](#l2-vs-cuy)
+- (iii) Comparison: [$L^2$ vs. $C(U,Y)$](#l2-vs-cuy)
+- (iv) ${\displaystyle L^{2}}$ is the only **Hilbert space** among ${\displaystyle L^{p}}$ spaces
+- <span style="color:red">Neither of the containments (v), (vi) holds in general!</span>
+  - (v) $L^2\subset L^1$ **for bounded domains**, <span style="color:red">but not for unbounded domains!</span>, [stackexchange](https://math.stackexchange.com/a/18399)
+    - (a) because what keeps a function from being integrable on a bounded set is being too large, and squares make large numbers larger
+      - ie. if $f$ is defined on a bounded domain and in $L^2$, then we know the integral under $f^2$ is finite. But since $\lvert f\rvert<\lvert f\rvert^2$ ($f^2$ is an integrable mojorant of $f$) we also know that the integral under $f$ is finite. Thus, $f\in L^1$.
+  - (vi) $L^1\subset L^2$ **for bounded functions**, <span style="color:red">but not for unbounded functions!</span>
+    - (a) because what keeps a bounded function from being integrable is not going to zero fast enough, and squares make numbers go to zero faster
+      - ie. if $f$ is bounded and in $L^1$, then we know it must go to zero fast enough to be in $L^1$. $f^2$ must go to zero even faster and there is nothing else that prevents $f^2$ from being integrable. Thus, $f$ must be in $L^2$.
+      - if an unbounded function does **not** go to zero, then it is not integrable (intuitively clear!)
 
 ### $L^2$ vs. $C(U,Y)$
 

@@ -30,15 +30,15 @@ tags:
 
 - (i) $\mathcal{F}: L^1(\mathbb{R}^d,\mathbb{C}) \to C(\mathbb{R}^d,\mathbb{C})$
   - **problem**: $\mathcal{F}$ is a mapping between two completely different spaces
+  - **problem**: $\mathcal{F}f$ is not necessarily integrable, ie. it can have infinite Maß
   - <span style="color:red">**needed for**</span>:
     - proof of <span style="color:green">(3.50)</span> Shannon-Whittaker
 - (ii) $\mathcal{F}$ is linear and continuous.
-  - **problem**: $\mathcal{F}$ is not necessarily integrable
 - **proof**:
   - (A) $\mathcal{F}f\in C$:
-    - $\lim_{n\to\infty}{\mathcal{F}f(\omega_n)}=\lim_{n\to\infty}{\mathcal{F}f(\omega)}$
-      - dominated convergence theorem
-        - (i) $\|g_n(x)\| \leq \|f(x)\|$, where (ii) $g_n(x):=f(x)e^{-ix\cdot \omega_n}\to\, (\text{integrand of}\, \mathcal{F}f)$ pointwisely and (iii) $\|f\|\in L^1$ integrable
+    - $\lim_{n\to\infty}{\mathcal{F}f(\omega_n)}=\mathcal{F}f(\omega)$
+      - dominated convergence theorem <span style="color:green">(B.11)</span> (see figure below)
+        - <span style="color:green">(B.11 (i))</span> $\|g_n(x)\| \leq \|f(x)\|$, where <span style="color:green">(B.11 (ii))</span> $g_n(x):=f(x)e^{-ix\cdot \omega_n}\to_{n\to\infty}\, (\text{integrand of}\, \mathcal{F}f)$ pointwisely and <span style="color:green">(B.11 (iii))</span> $\|f\|\in L^1$ integrable
           - **Achtung**: ohne die Betragsstriche um $f(x)$ würde $\|g_n(x)\| \leq \|f(x)\|$ nicht gelten
           - $z=re^{i\varphi}=r(\cos{(\varphi)}+i\sin{(\varphi)})$ (polar form of complex number)
   - (B) $\mathcal{F}$ linear:
@@ -48,36 +48,69 @@ tags:
       - because continuity and boundedness are equivalent for linear operators (ex. 5.2)
         - and $\mathcal{F}$ is a linear operator acc. to (B)
 
+<p align="center">
+  <img src="https://i.ibb.co/HtqC8sS/Screenshot-from-2024-03-02-04-04-56.png" alt="Screenshot-from-2024-03-02-04-04-56" border="0">
+</p>
+
+- **problem**:
+  - so $\mathcal{F}f$ gives me a very different representation of my image and then, for instance, I can then do sth wtih that representation, I can change some frequencies to pronounce sth, but once I'm done making this manipulation with the frequencies, I need to go back.
+  - So, unless I can invert this transform it is useless for any kind of image processing.
+  - And the very first thing before we can even think about going back is, we need to know where we are, ie.
+    - what is this kind of function?
+    - do we have a chance of going back from $\mathcal{F}f$ to $f$ or is there sth that we need to change?
+
 ## 3.3 FT of the characteristic function
 
-- for $B>0$: $\mathcal{F}\chi_{\[-B,B\]}(\omega) = \sqrt{\frac{2}{\pi}}B\,\text{sinc}\left(\frac{B\omega}{\pi}\right)$
+- (i) for $B>0$: $\mathcal{F}\chi_{\[-B,B\]}(\omega) = \sqrt{\frac{2}{\pi}}B\,\text{sinc}\left(\frac{B\omega}{\pi}\right)$
   - where $\text{sinc}(x)=\left(\frac{\sin{(\pi x)}}{\pi x}\right)$, for $x=0$: $\text{sinc}(x)=1$
-- thus, the FT of a function with compact support does not necessarily have a compact support
+- (ii) thus, the FT of a function with compact support does not necessarily have a compact support
 - **problem**: $\text{sinc}(x)$ is not integrable, ie. $\text{sinc}(x)\not\in L^1(\mathbb{R})$
 - **problem**: $\mathcal{F}$ does not map $L^1$ to itself
-  - this is bad news for the invertibility of $\mathcal{F}$
+  - this is bad news for the invertibility of $\mathcal{F}$, but to use the FT in image processing we need the inverse FT &rarr; need a new space (<span style="color:red">Schwartz space</span>)
+    - you can think of this space as infinitely differentiable functions that rapidly decay, so if you go to $\infty$ the values go to zero and the values go to zero faster than any polynomial goes to infty and the same is true for all derivatives
+    - klarer: "it turns out that $F$ is <span style="color:red">bijective</span> in this Schwartz space"
+      - ie. if we restrict the $L^1$ in <span style="color:green">(3.2)</span> to a smaller space (the Schwartz space) then we get a bijective transform
+      - and then we will show that with this transform on the Schwartz space we get a FT on $L^2$, so for square integrable functions, and we will see that this is also bijective (so that we get sth that is bijective when we tranform from $L^2$ to $L^2$ and we have the inverse transform and we know how to compute it)
+
+<p align="center">
+  <img src="https://i.ibb.co/V9Q5t4h/Screenshot-from-2024-03-02-04-50-41.png" alt="Screenshot-from-2024-03-02-04-50-41" border="0">
+</p>
+
+- slide demo:
+  - left: $f=\chi$: white circle on black background
+  - right: $T^{norm}( \lvert Ff\rvert )=\text{sinc}$: white center blob + multiple white rings around center (with intensity dropping to the outside)
 
 ## 3.4 Properties of $\mathcal{F}$
 
 - $f\in L^1$ and $\underline{A}\in \text{GL}(d)$ (set of invertible matrices, ie. $\det A \neq 0$), then
   - $\mathcal{F}(T_y f) = M_y(\mathcal{F}f)$
+    - in words: "a shift in the spatial domain is a frequency change in the frequency domain"
   - $\mathcal{F}(M_y f) = T_{-y}(\mathcal{F}f)$
   - $\mathcal{F}(D_{\underline{A}} f) = \frac{1}{\|\det \underline{A}\|}D_{\underline{A}^{-T}}(\mathcal{F}f)$
+    - in words: when we apply the FT on $f$ first: **it is still the same transform**, but we just have to do a different coordinate transformation with some extra scaling
   - $\mathcal{F}(\overline{f}) = \overline{D_{-\mathbb{I}}(\mathcal{F}f)}$
-- where $M_y: f \mapsto m_yf \, (M_y\,\text{ist einfach das Produkt}\, f(x)e^{ix\cdot y}), \, m_y: x \mapsto e^{ix\cdot y}$ and $D_y: f \mapsto (x \mapsto f(\underline{A}x))$
+    - $D_{-\mathbb{I}}$ is a "function argument sign changer" operator: it just says that we have to multiply the argument with $-1$ (bec if I take $-\mathbb{I}$ this just means "change the sign" and then conjugate)
+- where $M_y: f \mapsto m_yf$ ($M_y$ ist einfach das Produkt $f(x)e^{ix\cdot y}$), $m_y: x \mapsto e^{ix\cdot y}$ and $D_{\underline{A}}: f \mapsto (x \mapsto f(\underline{A}x))$
 
 ## 3.5 Hermitian, Skew-Hermitian
 
 - **Hermitian** (if real: **even**): $\overline{f(\omega)} = f(-\omega)$
 - **Skew-Hermitian** (if real: **odd**): $\overline{f(\omega)} = -f(-\omega)$ 
-- we need this def. for 3.6
+- we need this def. for <span style="color:green">(3.6)</span>
+- <span style="color:red">**warning**</span>: there are
+  - **complex-valued functions** $f: \mathbb{R} \to \mathbb{C}$
+  - **complex functions** $f: \mathbb{C} \to \mathbb{C}$
+  - the terminology hermitian and skew-hermitian is used for complex functions, for complex-valued functions **even symmetric** and **odd symmetric** are used
 
 ## 3.6 When is $\mathcal{F}$ even or odd?
 
-- for $f\in L^1$ (eg. images)
-  - $f$ real-valued $\Leftrightarrow$ $\mathcal{F}f$ hermitian
-  - $f$ imaginary-valued $\Leftrightarrow$ $\mathcal{F}f$ skew-hermitian
-- **Proof**: Based on (3.4) $\mathcal{F}(\overline{f}) = \overline{D_{-\mathbb{I}}(\mathcal{F}f)}$
+- for $f\in L^1$ (eg. images), <span style="color:purple">read $L^2$</span>
+  - (i) $f$ real-valued $\Leftrightarrow$ $\mathcal{F}f$ hermitian
+  - (ii) $f$ imaginary-valued $\Leftrightarrow$ $\mathcal{F}f$ skew-hermitian
+- **Proof**:
+  - Based on
+    - <span style="color:green">(3.4)</span> $\mathcal{F}(\overline{f}) = \overline{D_{-\mathbb{I}}(\mathcal{F}f)}$
+    - $\mathcal{F}$ is linear <span style="color:green">(3.2)</span> and injective <span style="color:green">(3.23)</span>
 - we need this for
 
 ## 3.7 Convolution Theorem for $\mathbb{C}$-valued Functions
@@ -87,6 +120,10 @@ tags:
 - **simple proof**:
   - its just a little bit of computation with the integral, so no deep theory going on,
   - we just need **Fubini** to change the order of integrals and the **substitution rule** for multiple variables, both things we have used a couple of times.
+
+<p align="center">
+  <img src="https://i.ibb.co/6r1MhhC/Screenshot-from-2024-03-02-07-36-36.png" alt="Screenshot-from-2024-03-02-07-36-36" border="0">
+</p>
 
 ## 3.8 "Integration by Parts" for $\mathcal{F}$
 
