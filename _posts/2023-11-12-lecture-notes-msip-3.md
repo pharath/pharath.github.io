@@ -254,14 +254,19 @@ tags:
 
 ## 3.16 Integration by Parts in $\mathbb{R}^d$
 
+- **Warning**: <span style="color:green">(3.8)</span> was <span style="color:red">for the operator $\mathcal{F}$</span>, but this is <span style="color:red">for the operator $\partial_i$</span>
 - **conditions**:
-  - choose $g,h\in C^1$ s.t. $f := gh$ fulfills the conditions of <span style="color:red">3.15</span> (ie differentiability and integrability of the derivative and this growth constraint)
-    - dh. $g$ und $h$ müssen **nicht unbedingt** die conditions in 3.15 erfüllen! Nur $f$ muss sie erfüllen.
+  - choose $g,h\in C^1$ s.t. $f := gh$ fulfills the conditions of <span style="color:green">(3.15)</span> (ie differentiability and integrability of the derivative and this growth constraint)
+    - dh. $g$ und $h$ müssen **nicht unbedingt** die conditions in <span style="color:green">(3.15)</span> erfüllen! Nur $f$ muss sie erfüllen.
   - $\partial_i gh, g\partial_i h\in L^1$
 - (i) integration by parts in $\mathbb{R}^d$: $$\int_{\mathbb{R}^d} \partial_i g(x)h(x)dx = -\int_{\mathbb{R}^d} g(x)\partial_i h(x)dx$$
   - in words: we are allowed to move the derivative from one function to the other, we just get the flip in the sign. And if you can do this once you can also do this more often. If you would have more derivatives here we could iteratively put them over to the $h$ and for each derivative you get one "$-1$".
 - (ii) or by iterating this for $\alpha\in \mathbb{N}^d$: $$\int_{\mathbb{R}^d} \frac{\partial_\alpha}{\partial x_\alpha} g(x)h(x)dx = (-1)^{\vert\alpha\vert}\int_{\mathbb{R}^d} g(x)\frac{\partial_\alpha}{\partial x_\alpha} h(x)dx$$
 - Note: (i) only holds iff $0 = \int_{\mathbb{R}^d}\partial_i (gh)(x)dx$ which, in turn, only holds if $gh$ fulfills the conditions of <span style="color:red">3.15</span>
+
+<p align="center">
+  <img src="https://i.ibb.co/NnjY5kN/Screenshot-from-2024-03-03-11-49-49.png" alt="Screenshot-from-2024-03-03-11-49-49" border="0">
+</p>
 
 ## 3.17 Differentiability of the $\mathcal{F}$-transformed Schwartz Function
 
@@ -699,14 +704,19 @@ tags:
     - "The derivative of a tempered distribution is again a tempered distribution"
     - "The tempered distributions can also be characterized as *slowly growing*, meaning that each derivative of \[the tempered distribution\] $T$ grows at most as fast as some polynomial."
     - "Tempered distributions generalize the bounded (or slow-growing) locally integrable functions"
-- we can define $\delta_x$ by its evaluation at $f\in S$ $$\mathcal{F}\delta_x(f) := \delta_x(\mathcal{F}f)$$
-  - then, $\delta_x(\mathcal{F}f) = (\mathcal{F}f)(x) = \frac{1}{(2\pi)^{\frac{d}{2}}}\int_{\mathbb{R}^d} f(y)e^{-iyx}dy$, where we used the definition of $\delta_x$ in the 1st step and the definition of $\mathcal{F}$ in the 2nd step
-  - this means, since the distribution $\mathcal{F}\delta_x$ is described as the integral $\frac{1}{(2\pi)^{\frac{d}{2}}}\int_{\mathbb{R}^d} f(y)e^{-iyx}dy$, this distribution $\mathcal{F}\delta_x$ corresponds to the integral density $e^{-iyx}$. Such kinds of distributions are called <span style="color:red">"**regular distributions**" (= "it can be expressed as an integral with a density")</span>.
+- we can define $\delta_x$ by its evaluation at $f\in S(\mathbb{R}^d,\mathbb{C})$ $$\boxed{\mathcal{F}\delta_x(f) := \delta_x(\mathcal{F}f)}$$
+  - then, $\delta_x(\mathcal{F}f) = \int_{\mathbb{R}^d} (\mathcal{F}f)d\delta_x = (\mathcal{F}f)(x) = \frac{1}{(2\pi)^{\frac{d}{2}}}\int_{\mathbb{R}^d} f(y)e^{-iyx}dy$, where we used the definition of $\delta_x$ <span style="color:green">(1.9 (v))</span> in the 1st and 2nd step and the definition of $\mathcal{F}$ in the last step
+  - this means, since the distribution $\mathcal{F}\delta_x$ is described as the integral $\frac{1}{(2\pi)^{\frac{d}{2}}}\int_{\mathbb{R}^d} f(y)e^{-iyx}dy$, this distribution $\mathcal{F}\delta_x$ corresponds to the integral density $\frac{1}{(2\pi)^\frac{d}{2}}e^{-iyx}$. Such kinds of distributions are called <span style="color:red">"**regular distributions**" (= "it can be expressed as an integral with a density")</span>.
 - **generalization of $\mathcal{F}_2$ to tempered distributions**:
-  - in the same way we can define $$\mathcal{F}g(f) := g(\mathcal{F}f)$$ for any <span style="color:red">**tempered distribution $g$**</span>
+  - in the same way we can define $$\boxed{\mathcal{F}g(f) := g(\mathcal{F}f)}$$ for any <span style="color:red">**tempered distribution $g$**</span>
   - we can view any <span style="color:red">function</span> $g\in L^2$ <span style="color:red">as a tempered distribution</span> by defining $g(f) := \int_{\mathbb{R}^d} gfdx$
-    - thus, for $g\in L^2$ this view coincides with our usual definition of $\mathcal{F}_2$ ($\mathcal{F}$ on $L^2$)
-    - thus, this view is just a generalization of $\mathcal{F}_2$
+
+<p align="center">
+  <img src="https://i.ibb.co/hsDxCS2/Screenshot-from-2024-03-03-11-39-53.png" alt="Screenshot-from-2024-03-03-11-39-53" border="0">
+</p>
+
+- thus, for $g\in L^2$ this view coincides with our usual definition of $\mathcal{F}_2$ ($\mathcal{F}$ on $L^2$)
+  - thus, this view is just a generalization of $\mathcal{F}_2$
 - **problem**:
   - now there are still two things missing:
     1. this FT is <span style="color:red">not discrete</span>
