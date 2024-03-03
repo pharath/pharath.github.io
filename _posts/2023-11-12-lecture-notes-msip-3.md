@@ -694,7 +694,7 @@ tags:
 - **problem**:
   - now for the other direction: now we have sth that is transformed to a measure. But we can also extend the FT to measures.
 
-## 3.35 Extension of $\mathcal{F}$ to Tempered Distributions
+## 3.35 $\mathcal{F}$ of the $\delta_x$ distribution, $\mathcal{F}$ of Tempered Distributions
 
 - the FT can be extended to more general spaces than $L^2$, eg. to the <span style="color:red">space of tempered distributions</span>
   - Wikip. quotes:
@@ -704,8 +704,8 @@ tags:
     - "The derivative of a tempered distribution is again a tempered distribution"
     - "The tempered distributions can also be characterized as *slowly growing*, meaning that each derivative of \[the tempered distribution\] $T$ grows at most as fast as some polynomial."
     - "Tempered distributions generalize the bounded (or slow-growing) locally integrable functions"
-- we can define $\delta_x$ by its evaluation at $f\in S(\mathbb{R}^d,\mathbb{C})$ $$\boxed{\mathcal{F}\delta_x(f) := \delta_x(\mathcal{F}f)}$$
-  - then, $\delta_x(\mathcal{F}f) = \int_{\mathbb{R}^d} (\mathcal{F}f)d\delta_x = (\mathcal{F}f)(x) = \frac{1}{(2\pi)^{\frac{d}{2}}}\int_{\mathbb{R}^d} f(y)e^{-iyx}dy$, where we used the definition of $\delta_x$ <span style="color:green">(1.9 (v))</span> in the 1st and 2nd step and the definition of $\mathcal{F}$ in the last step
+- we can define $\mathcal{F}\delta_x$ by its evaluation at $f\in S(\mathbb{R}^d,\mathbb{C})$ $$\boxed{\mathcal{F}\delta_x(f) := \delta_x(\mathcal{F}f)}$$
+  - then, $\delta_x(\mathcal{F}f) = \int_{\mathbb{R}^d} (\mathcal{F}f)d\delta_x = (\mathcal{F}f)(x) = \frac{1}{(2\pi)^{\frac{d}{2}}}\int_{\mathbb{R}^d} f(y)e^{-iyx}dy$, where we used the definition of the **distribution induced by the measure $\delta_x$** <span style="color:green">(1.9 (v))</span> in the 1st and 2nd step and the definition of $\mathcal{F}$ in the last step
   - this means, since the distribution $\mathcal{F}\delta_x$ is described as the integral $\frac{1}{(2\pi)^{\frac{d}{2}}}\int_{\mathbb{R}^d} f(y)e^{-iyx}dy$, this distribution $\mathcal{F}\delta_x$ corresponds to the integral density $\frac{1}{(2\pi)^\frac{d}{2}}e^{-iyx}$. Such kinds of distributions are called <span style="color:red">"**regular distributions**" (= "it can be expressed as an integral with a density")</span>.
 - **generalization of $\mathcal{F}_2$ to tempered distributions**:
   - in the same way we can define $$\boxed{\mathcal{F}g(f) := g(\mathcal{F}f)}$$ for any <span style="color:red">**tempered distribution $g$**</span>
