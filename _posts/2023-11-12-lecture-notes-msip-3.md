@@ -498,7 +498,7 @@ tags:
   <img src="https://i.ibb.co/rvwZY1F/F2-approx-ball-to-infty.png" alt="F2-approx-ball-to-infty" border="0">
 </p>
 
-## 3.29 Properties of $\mathcal{F}_2$
+## 3.29 Computation of $\mathcal{F}_2^{-1}$, Properties of $\mathcal{F}_2$
 
 - (i) <span style="color:green">3.28</span> holds for $\mathcal{F}_2^{-1}$ when we replace $e^{-ix\cdot\omega}$ with $e^{+ix\cdot\omega}$ in <span style="color:green">(3.28)</span>
 - (ii) <span style="color:green">3.4, 3.6, "Conv Theorem" 3.7, "Corr Theorem" 3.10</span> still hold for $\mathcal{F}_2$
@@ -520,7 +520,7 @@ tags:
   - Think of these **exponential functions** as $\cos(xw)+i\cdot\sin(xw)$. These have frequencies $\omega$.
   - <span style="color:red">$(\mathcal{F}f)(\omega)$ specifies the **weight** of $e^{ix\cdot\omega}$</span> (the **amplitudes** of cosine and sine)
     - so, in this sense <span style="color:red">$(\mathcal{F}f)(\omega)$ tells us how strongly is the **frequency** $\omega$ encoded by the corresponding cosine and sine functions</span> present in our signal $f$. Bec we are really reconstructing the entire signal $f$ just by these complex exponential functions $e^{ix\cdot\omega}$.
-    - in the dual sense the $f(x)$ in $\mathcal{F}f(\omega) = \frac{1}{(2\pi)^{\frac{d}{2}}} \int_{\mathbb{R}^d}f(x)e^{-ix\cdot\omega}dx$ <span style="color:green">(3.1)</span> tells us how strongly is the **position** $x$ encoded by the corresponding cosine and sine functions present in our transformed signal $\mathcal{F}f$.
+    - in the dual sense the <span style="color:red">$f(x)$</span> in $\boxed{\mathcal{F}f(\omega) = \frac{1}{(2\pi)^{\frac{d}{2}}} \int_{\mathbb{R}^d}f(x)e^{-ix\cdot\omega}dx}$ <span style="color:green">(3.1)</span> <span style="color:red">tells us how strongly is the **position** $x$ encoded by the corresponding cosine and sine functions</span> present in our transformed signal $\mathcal{F}f$.
 - And this also leads to some notation or some <span style="color:red">**terminology**</span>:
   - $\mathcal{F}f$ is the **frequency domain representation**
   - $f$ is the **space domain representation**
@@ -555,9 +555,9 @@ tags:
 - because of this interpretation $\mathcal{F}\psi$ is called <span style="color:red">**transfer function**</span>
   - bec $\mathcal{F}\psi$ "transfers" (=changes) the frequencies of $f$ in a multiplicative fashion.
 - and now that we have this interpretation we can think about filters that do specific things with certain frequencies (ie. manipulating certain frequencies). Eg. we can look at a filter where the transfer function $\mathcal{F}\psi$ is <span style="color:red">$0$ for high frequencies</span>:
-  - a convolution kernel $\psi$ with $\mathcal{F}\psi(\omega)\approx 0$ for high $\omega$ is called <span style="color:red">low-pass filter</span>
+  - a convolution kernel $\psi$ with $\mathcal{F}\psi(\omega)\approx 0$ for high $\omega$ is called <span style="color:red">**low-pass filter**</span>
     - name because "**low frequencies pass**" and high frequencies are removed
-      - because from ($\ref{eq:fdomainreplinfilter}$) we see that, if $(\mathcal{F}\psi)(\omega) = 0$ for high $\omega$, then on the rhs of ($\ref{eq:fdomainreplinfilter}$) these $0$s (the "$(\mathcal{F}\psi)(\omega)$"s where $(\mathcal{F}\psi)(\omega) = 0$) are multiplied with the corresponding frequencies (the "$(\mathcal{F}f)(\omega)$"s where $(\mathcal{F}\psi)(\omega) = 0$) and essentially they (the product "$\mathcal{F}(\psi) * \mathcal{F}(f)$" at point $\omega$) are then $0$, so they (the function values "$(\mathcal{F}(\psi \ast f))(\omega)$" at these high frequencies $\omega$) are suppressed and only those (function values at frequencies $\omega$) where this absolute value of $\omega$ is small will be there after applying the filter.
+      - because from ($\ref{eq:fdomainreplinfilter}$) we see that, if $(\mathcal{F}\psi)(\omega) = 0$ for high $\omega$, then on the rhs of ($\ref{eq:fdomainreplinfilter}$) these $0$s (the <span style="color:red">"$(\mathcal{F}\psi)(\omega)$"s</span> where $(\mathcal{F}\psi)(\omega) = 0$) are multiplied with the corresponding frequencies (the <span style="color:red">"$(\mathcal{F}f)(\omega)$"s</span> where $(\mathcal{F}\psi)(\omega) = 0$) and essentially they (the product <span style="color:red">"$\mathcal{F}(\psi) * \mathcal{F}(f)$"</span> at point $\omega$) are then $0$, so they (the function values "$(\mathcal{F}(\psi \ast f))(\omega)$" at these high frequencies $\omega$) are suppressed and only those (function values at frequencies $\omega$) where this absolute value of $\omega$ is small will be there after applying the filter.
 - slide demo: **low-pass filter**:
     - lower right:
       - this is <span style="color:red">the transfer function $\mathcal{F}\psi$</span>
@@ -627,11 +627,15 @@ tags:
 ## 3.33 Deconvolution/Deblurring with the Convolution Theorem
 
 <p style="border-width:3px; border-style:solid; border-color:#FF0000; padding: 1em;">
-- Consider $f=\psi\ast f_0$, where $f$ is the blurred image and $f_0$ is the unblurred image. <span style="color:red">How to undo</span> this convolution with $\psi$?<br>
-- if $\mathcal{F}\psi(\omega)\neq 0$ for all $\omega$, then $$\label{eq:deconvconvtheorem}\mathcal{F}^{-1}\left(\boxed{\frac{\mathcal{F}f}{(2\pi)^{\frac{d}{2}}\mathcal{F}\psi}}\right)=\mathcal{F}^{-1}\left(\frac{(2\pi)^{\frac{d}{2}}\mathcal{F}\psi\mathcal{F}f_0}{(2\pi)^{\frac{d}{2}}\mathcal{F}\psi}\right)=f_0$$<br>
-- thus, if $f$ and $\psi$ are known <b>exactly</b> and $\mathcal{F}\psi(\omega)\neq 0$, then $f_0$ can be reconstructed <b>exactly</b>
+&#9679; Consider $f=\psi\ast f_0$, where $f$ is the blurred image and $f_0$ is the unblurred image. <span style="color:red">How to undo</span> this convolution with $\psi$?<br>
+&#9679; if $\mathcal{F}\psi(\omega)\neq 0$ for all $\omega$, then $$\label{eq:deconvconvtheorem}\mathcal{F}^{-1}\left(\boxed{\frac{\mathcal{F}f}{(2\pi)^{\frac{d}{2}}\mathcal{F}\psi}}\right)=\mathcal{F}^{-1}\left(\frac{(2\pi)^{\frac{d}{2}}\mathcal{F}\psi\mathcal{F}f_0}{(2\pi)^{\frac{d}{2}}\mathcal{F}\psi}\right)=f_0$$<br>
+&#9679; thus, if $f$ and $\psi$ are known <b>exactly</b> and $\mathcal{F}\psi(\omega)\neq 0$, then $f_0$ can be reconstructed <b>exactly</b>
 </p>
 
+- **3 sources of errors** (discussed below):
+  - quantization
+  - regularization
+  - $\psi$ not known
 - **problem**:
   - in practice, $f$ is **not** known **exactly**, since $f$ is **quantized** &rarr; may lead to <span style="color:red">reconstruction artifacts</span>
     - even 8-bit quantization has a noticable effect!
@@ -713,7 +717,7 @@ tags:
 # 3.2 Orthogonal Expansions
 
 - **problem**:
-  - So, the 1st step before we actually do the discretization is to replace this $\mathbb{R}^d$ in $f \in S(\mathbb{R}^d$,\mathbb{C})$ with a square or a rectangle.
+  - So, the 1st step before we actually do the discretization is to replace this $\mathbb{R}^d$ in $f \in S(\mathbb{R}^d,\mathbb{C})$ with a square or a rectangle.
   - And this leads to Fourier series.
   - It will be consistent with the FT, but there it turns out that to represent functions in 1D / to represent functions on an interval you do not need **all** frequencies in $\mathbb{R}$, but you just need countably many.
   - This gives you a different or a series representation that is easier to handle.
