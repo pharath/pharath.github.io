@@ -394,7 +394,7 @@ tags:
 - **problem**:
   - with this tool we can show the <span style="color:red">bijectivity of the FT on the Schwartz space</span>
 
-## 3.25 $\mathcal{F}$ is bijective in $S$
+## 3.25 $\mathcal{F}$ is bijective in $S$, Inverse FT $\mathcal{F}^{-1}$, $\mathcal{F}$ Preserves Scalar Product
 
 - if we restrict the domain of $\mathcal{F}$ from $L^1$ to $S$ then we get a bijective FT
 - (i) $\mathcal{F}$ is a bijection from $S$ to itself
@@ -748,7 +748,7 @@ tags:
 - (i) a sequence $(e_n)\_n$ is called **ONS**, if $(e_i,e_j)=\delta_{ij}$ for all $i,j$
   - <span style="color:red">think of eg. $\mathbb{R}^n$</span> with the canonical basis vectors and the Euclidean scalar product
   - but we will be going in the direction where <span style="color:red">these $e_n$ have to do with the complex exponentials $e^{-iyx}$</span> (but we will not consider them on all of $\mathbb{R}^d$ like we did above), I will have an example with the sine soon
-- (ii) **k-th Fourier coefficient**: $x_i := (x,e_k)_X$
+- (ii) **k-th Fourier coefficient**: $x_k := (x,e_k)_X$
   - again, <span style="color:red">think of the $\mathbb{R}^n$ example</span>:
     - in $\mathbb{R}^n$ this $x$ would be a vector and if we take the canonical basis as ONS then these scalar products $(x,e_k)_X$ would just give us the <span style="color:red">**entries**</span> of the vector
     - but you can do the very same thing <span style="color:red">if this $x$ is a function</span> and it gives you sth equivalent to these coefficients that you know from $\mathbb{R}^n$
@@ -757,7 +757,7 @@ tags:
       - just <span style="color:red">on a fixed interval</span> $(0,\pi)$
       - and we look at the <span style="color:red">functions that are just $\sin(nx)$</span>
 
-## 3.37 $f_n(x)=sin(nx)$ on $L^2((0,\pi))^{\mathbb{N}}$ are an ONS
+## 3.37 $(sin(nx))_n$ on $L^2((0,\pi))^{\mathbb{N}}$ are an ONS
 
 - **conditions**:
   - $(f_n)_n\in L^2((0,\pi))^{\mathbb{N}}$
@@ -847,7 +847,7 @@ tags:
 - <span style="color:green">(3.40) and (3.42)</span> together imply:
 
 <p style="border-width:3px; border-style:solid; border-color:#FF0000; padding: 1em;">
-- if $(e_n)_n$ is a CONS, then <span style="color:red">$\sum_{k=1}^{K}x_ke_k$ converges to $x$</span> for $K\to\infty$
+- if $(e_n)_n\in X^{\mathbb{N}}$ is a CONS, then <span style="color:red">$\sum_{k=1}^{K}x_ke_k$ converges to $x$</span> for $K\to\infty$
 </p>
 
 - you should really <span style="color:red">think of this as a limit</span> of these sums and **not** as actually summing up infinitely many elements.
@@ -891,15 +891,22 @@ tags:
 
 # 3.3 Fourier Series
 
-## 3.46
+## 3.46 Scalar Product
 
-## 3.47
+- $(f,g)\_{\left[-B,B\right]} := \frac{1}{2B}\int\_{-B}^{B}f(x)\overline{g(x)}dx$
 
-- $e_k(x)=e^{ikx}$ are an ONB of $L^2(\left[-\pi,\pi\right],\mathbb{C})$ wrt scalar product $(\cdot,\cdot)_{\left[-\pi,\pi\right)}$
+## 3.47 $(e^{ikx})\_{k\in\mathbb{Z}}$ is an ONB
 
-## 3.48
+- $(e_k)\_{k\in\mathbb{Z}},\,e_k(x)=e^{ikx}$ are an ONB of $L^2(\left[-\pi,\pi\right],\mathbb{C})$ wrt scalar product $(\cdot,\cdot)\_{\left[-\pi,\pi\right]}$
 
-- (ii) $e^B_{k}(x)=e^{ik\frac{\pi}{B}x}$
+## 3.48 Fourier Series
+
+- (i) <span style="color:red">**Fourier Series**</span>: $f=\sum_{k\in\mathbb{Z}}(f,e_k)\_{\left[-\pi,\pi\right]}e_k$, with <span style="color:red">**Fourier coefficients**</span> $(f,e_k)\_{\left[-\pi,\pi\right]}=\frac{1}{2\pi}\int_{-\pi}^{\pi}f(x)e^{-ikx}dx$
+- (ii) $e_k$ can be generalized to $e^B_{k}(x)=e^{ik\frac{\pi}{B}x}$
+
+## 3.49 Compute Fourier Series for $f(x)=x(\pi-\lvert x\rvert)$
+
+- use symmetry: $f$ is odd
 
 ## 3.50 Sampling Theorem, Shannon-Whittaker
 
@@ -908,7 +915,7 @@ tags:
   - $\hat{f}(\omega)=\mathcal{F}f(\omega)=0$ outside $\left[-B,B\right]$
     - So, we look at a function where the FT lives on a circle and everything outside is $0$ which means that there are no high frequencies and $B$ is the bound. This is eg. the case after you have applied a <span style="color:red">**low-pass filter**</span>, then you know that your signal must have bounded frequency.
 - (i) $f$ is continuous
-- (ii) $f$ is uniquely determined by the values $f(\frac{k\pi}{B})$
+- (ii) $f$ is uniquely determined by the values $f(\frac{k\pi}{B})\_{k\in\mathbb{Z}}$
 - (iii) formula with $f=\text{sinc}$
 - **proof**:
   - <span style="color:red">for (i)</span>:

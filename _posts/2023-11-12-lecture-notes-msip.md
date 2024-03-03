@@ -118,6 +118,7 @@ tags:
 ## Vector Spaces
 
 - from less to more requirements:
+  - **vector space**: a non-empty set $X$ that satisfies the **eight vector space axioms**
   - **normed space**: the pair $(X,\lVert \cdot \rVert)$
   - **pre-Hilbert space**: a vector space with a scalar product, ie. the pair $(X,(\cdot,\cdot)_X)$
     - note: a scalar product induces a norm, thus, for each pre-Hilbert space there is an **associated normed space**
