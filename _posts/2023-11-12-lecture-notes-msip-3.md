@@ -944,6 +944,10 @@ tags:
         - to get this specific representation
         - to see that these countably many values are enough to fully characterize our $f$
 
+## 3.52 Undersampling, Oversampling, Aliasing
+
+- aliasing can be prevented by low-pass filtering
+
 # 3.4 DFT
 
 ## 3.62 Multiplication of Large Numbers
