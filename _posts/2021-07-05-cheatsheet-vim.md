@@ -261,30 +261,30 @@ ctrl + w N | scroll in a terminal tab
 
 | command | description |
 | :--- | :--- |
-shift + z q	| wie `:q!`
-ctrl + w q	| wie `:q` (ohne `!`), schließe aktiven split window
-shift + z z	| wie `:x` ( dasselbe wie `:wq`, aber `:wq` überschreibt auch wenn keine modification [nur wichtig, falls modification times matter] )
+shift + z q | wie `:q!`
+ctrl + w q | wie `:q` (ohne `!`), schließe aktiven split window
+shift + z z | wie `:x` ( dasselbe wie `:wq`, aber `:wq` überschreibt auch wenn keine modification [nur wichtig, falls modification times matter] )
 ctrl + z | suspend, i.e. pause and switch to terminal (sends SIGTSTP to a process, like `kill -TSTP [processid]`, see notes on Bash under section "job control")
-in terminal: fg | resume, i.e. go back to vim (a shell **builtin command**)
+in terminal: `fg` | resume, i.e. go back to vim (a shell **builtin command**)
 ctrl + g | show current file name
 1 + ctrl + g | show current file name + path
-:e | reload/refresh file
-:e! | discard local changes and reload/refresh file
-:e /path/to/other/file	| öffne anderen file in vim
+`:e` | reload/refresh file
+`:e!` | discard local changes and reload/refresh file
+`:e /path/to/other/file` | öffne anderen file in vim
 
 ## File Saving
 
 | command | description |
 | :--- | :--- |
 `:w` |
-`:sav(eas) new_file_name` | save as `new_file_name` and set `new_file_name` as current file (`:sav` and `:saveas` are the same)
+`:sav(eas) new_file_name` | rename file (will not delete your old file), ie. save as `new_file_name` and set `new_file_name` as current file (`:sav` and `:saveas` are the same)
 
 ## Navigation
 
 | command | description |
 | :--- | :--- |
-ctrl + e	| 		scroll window one line down
-ctrl + y	|		scroll window one line up 
+ctrl + e | scroll window one line down
+ctrl + y | scroll window one line up 
 ctrl + + | zoom in (anschließend ctrl + w, =)
 ctrl - - | zoom out (anschließend ctrl + w, =)
 
@@ -292,19 +292,19 @@ ctrl - - | zoom out (anschließend ctrl + w, =)
 
 | command | description |
 | :--- | :--- |
-vi -o /path/to/file1 /path/to/file2	|	öffne 2 files in split screen
-ctrl + w, s	|	öffne neuen split window horizontal
-ctrl + w, v	|	öffne neuen split window vertical (oder besser: `:Lexplore`)
-ctrl + w J |    change two vertically split windows to horizonally split
-ctrl + w H |    change two horizonally split windows to vertically split
-ctrl + w, &lt;h j k l&gt;|	change active viewport
-ctrl + r		|	rotate viewport (zum Anordnen der viewports)
+`vi -o /path/to/file1 /path/to/file2` |	öffne 2 files in split screen
+ctrl + w, s | öffne neuen split window horizontal
+ctrl + w, v | öffne neuen split window vertical (oder besser: `:Lexplore`)
+ctrl + w J | change two vertically split windows to horizonally split
+ctrl + w H | change two horizonally split windows to vertically split
+ctrl + w, &lt;h j k l&gt; | change active viewport
+ctrl + r | rotate viewport (zum Anordnen der viewports)
 ctrl + R |
-ctrl + w, q	|	wie `:q` (ohne `!`), schließe aktiven split window
-ctrl + w, =	|	resize viewports to be of equal size
-ctrl + w, &lt;	|	decrease active viewport size (für 8 Einheiten Verkleinerung: ctrl + w, 8, &lt;)
-ctrl + w, o     |       close all the other splits except the active one (same as `:only`)
-`:qa`, `:qa!`   |       close all splits ("quit all")
+ctrl + w, q | wie `:q` (ohne `!`), schließe aktiven split window
+ctrl + w, = | resize viewports to be of equal size
+ctrl + w, &lt; | decrease active viewport size (für 8 Einheiten Verkleinerung: ctrl + w, 8, &lt;)
+ctrl + w, o | close all the other splits except the active one (same as `:only`)
+`:qa`, `:qa!` | close all splits ("quit all")
 
 ### Jump
 
@@ -596,7 +596,7 @@ In the Ubuntu terminal profile settings set `Hack Nerd Font Regular` as the term
     - ═  merging
     - ➜  renamed
 - does NOT show folders and files that are in `.gitignore`
-  - press "I" to show them
+  - press `I` to show them
 
 `toggleterm`
 - use `3<c-\>` to create and toggle terminal "3"
