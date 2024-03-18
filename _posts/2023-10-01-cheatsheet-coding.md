@@ -122,14 +122,14 @@ Shortcuts:
 
 # Lazy
 
-- https://dev.to/vonheikemen/lazynvim-how-to-revert-a-plugin-back-to-a-previous-version-1pdp
-  - restore specific plugin to previous state
-  - revert all plugins to previous state
-- :Lazy (must update regularly)
-- C (check if a tag exists, after changing "tag =" or "version =" in init.lua)
-- :checkhealth (debug broken plugins, shows a log)
-  - tip: use `:set ft=markdown` for syntax highlighting
-  - :checkhealth somePluginName
+- [dev.to](https://dev.to/vonheikemen/lazynvim-how-to-revert-a-plugin-back-to-a-previous-version-1pdp)
+  - restore specific plugin to previous state/version
+  - revert all plugins to previous state/version
+- `:Lazy` (must update regularly)
+- C (check if a tag exists, after changing `tag =` or `version =` in `init.lua`)
+- `:checkhealth` (debug broken plugins, shows a log)
+  - hint: use `:set ft=markdown` for syntax highlighting
+  - `:checkhealth somePluginName`
   
 # LSP, Mason
 
@@ -386,6 +386,8 @@ Git actions:
   - c - space (show cmp-complete)
   - enter (confirm cmp-complete)
   - c - e (abort complete) (both cmp-complete and vim-complete)
+- buffers
+  - `:b partialName<tab>`
 - sessions
   - space fod (load default session)
   - space fsd (save default session)
