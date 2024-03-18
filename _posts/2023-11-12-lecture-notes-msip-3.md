@@ -64,13 +64,13 @@ tags:
 - (i) for $B>0$: $\mathcal{F}\chi_{\[-B,B\]}(\omega) = \sqrt{\frac{2}{\pi}}B\,\text{sinc}\left(\frac{B\omega}{\pi}\right)$
   - where $\text{sinc}(x)=\left(\frac{\sin{(\pi x)}}{\pi x}\right)$, for $x=0$: $\text{sinc}(x)=1$
 - (ii) thus, the FT of a function with compact support does not necessarily have a compact support
-- **problem**: $\text{sinc}(x)$ is not integrable, ie. $\text{sinc}(x)\not\in L^1(\mathbb{R})$
-- **problem**: $\mathcal{F}$ does not map $L^1$ to itself
-  - this is bad news for the invertibility of $\mathcal{F}$, but to use the FT in image processing we need the inverse FT &rarr; need a new space (<span style="color:red">Schwartz space</span>)
+- (iii) **problem**: $\text{sinc}(x)$ is not integrable, ie. $\text{sinc}(x)\not\in L^1(\mathbb{R})$
+- <span style="color:green">(iii)</span> $\Rightarrow$ **problem**: $\mathcal{F}$ does not map $L^1$ to itself $\Rightarrow$ <span style="color:red">$\mathcal{F}: L^1\to C$ is not bijective</span> and thus <span style="color:red">not invertible</span>
+  - this is bad news for the <span style="color:red">invertibility of $\mathcal{F}$</span>, but <span style="color:purple">**to use the FT in image processing**</span> we <span style="color:purple">**need the inverse FT**</span> &rarr; need a new space (<span style="color:red">Schwartz space</span>)
     - you can think of this space as infinitely differentiable functions that rapidly decay, so if you go to $\infty$ the values go to zero and the values go to zero faster than any polynomial goes to infty and the same is true for all derivatives
-    - klarer: "it turns out that $F$ is <span style="color:red">bijective</span> in this Schwartz space"
+    - klarer: "it turns out that <span style="color:red">$\mathcal{F}$ is bijective</span> in this Schwartz space"
       - ie. if we restrict the $L^1$ in <span style="color:green">(3.2)</span> to a smaller space (the Schwartz space) then we get a bijective transform
-      - and then we will show that with this transform on the Schwartz space we get a FT on $L^2$, so for square integrable functions, and we will see that this is also bijective (so that we get sth that is bijective when we tranform from $L^2$ to $L^2$ and we have the inverse transform and we know how to compute it)
+      - and then we will show that with this transform on the Schwartz space we get a <span style="color:red">FT on $L^2$</span>, so for square integrable functions, and we will see that this is <span style="color:red">also bijective</span> (so that we get sth that is bijective when we tranform from $L^2$ to $L^2$ and <span style="color:purple">**we have the inverse transform**</span> and we know how to compute it)
 
 <p align="center">
   <img src="https://i.ibb.co/V9Q5t4h/Screenshot-from-2024-03-02-04-50-41.png" alt="Screenshot-from-2024-03-02-04-50-41" border="0">
@@ -83,12 +83,12 @@ tags:
 ## 3.4 Properties of $\mathcal{F}$
 
 - $f\in L^1$ and $\underline{A}\in \text{GL}(d)$ (set of invertible matrices, ie. $\det A \neq 0$), then
-  - $\mathcal{F}(T_y f) = M_y(\mathcal{F}f)$
+  - (i) $\mathcal{F}(T_y f) = M_y(\mathcal{F}f)$
     - in words: "a shift in the spatial domain is a frequency change in the frequency domain"
-  - $\mathcal{F}(M_y f) = T_{-y}(\mathcal{F}f)$
-  - $\mathcal{F}(D_{\underline{A}} f) = \frac{1}{\|\det \underline{A}\|}D_{\underline{A}^{-T}}(\mathcal{F}f)$
+  - (ii) $\mathcal{F}(M_y f) = T_{-y}(\mathcal{F}f)$
+  - (iii) $\mathcal{F}(D_{\underline{A}} f) = \frac{1}{\|\det \underline{A}\|}D_{\underline{A}^{-T}}(\mathcal{F}f)$
     - in words: when we apply the FT on $f$ first: **it is still the same transform**, but we just have to do a different coordinate transformation with some extra scaling
-  - $\mathcal{F}(\overline{f}) = \overline{D_{-\mathbb{I}}(\mathcal{F}f)}$
+  - (iv) $\mathcal{F}(\overline{f}) = \overline{D_{-\mathbb{I}}(\mathcal{F}f)}$
     - $D_{-\mathbb{I}}$ is a "function argument sign changer" operator: it just says that we have to multiply the argument with $-1$ (bec if I take $-\mathbb{I}$ this just means "change the sign" and then conjugate)
 - where $M_y: f \mapsto m_yf$ ($M_y$ ist einfach das Produkt $f(x)e^{ix\cdot y}$), $m_y: x \mapsto e^{ix\cdot y}$ and $D_{\underline{A}}: f \mapsto (x \mapsto f(\underline{A}x))$
 
@@ -127,7 +127,8 @@ tags:
 
 ## 3.8 "Integration by Parts" for $\mathcal{F}$
 
-- this is like "Integration by Parts" for derivatives
+- like "Integration by Parts" for derivatives, but for operator $\mathcal{F}$ instead of operator $\partial_i$
+- **Warning**: <span style="color:green">(3.8)</span> is <span style="color:red">for the operator $\mathcal{F}$</span>, but <span style="color:green">(3.16)</span> is <span style="color:red">for the operator $\partial_i$</span>
 - for $f,g\in L^1$ (eg. images) $$\int_{\mathbb{R}^d}(\mathcal{F}f)(x)g(x)dx = \int_{\mathbb{R}^d}f(x)(\mathcal{F}g)(x)dx$$
 - This is very useful if you eg. know what the FT of $g$ is but you do not know what the FT of $f$ is. We will make use of that.
 - **proof**: ex. (<span style="color:red">TODO</span>)
@@ -139,7 +140,7 @@ tags:
 - (i) for measurable $\psi,f$
   - $(\psi\star f)(x) = \int_{\Omega}\overline{\psi (y)}f(x+y)dy$
   - "the 1st argument is conjugated"
-- (ii) Generalize 2.3:
+- (ii) Generalize <span style="color:green">(2.3)</span>:
   - $\overline{(\psi\star f)(x)} = (f\star \psi)(-x)$
 
 ## 3.10 "Correlation Theorem" for $\mathbb{C}$-valued Functions
@@ -163,7 +164,7 @@ tags:
   - (ii) **rapidly decay**: for $x\to \infty$, $f\to 0$ **faster than any polynomial** goes to $\infty$
   - (iii) **all** derivatives decay rapidly as well
 
-**idea**:
+<span style="color:red">**idea**</span>:
 
 - first, think about the case $\alpha=2$ and $\beta=0$:
 
@@ -179,23 +180,22 @@ tags:
 </p>
 
 - Is the $\text{sinc}$ function a Schwartz function?
-  - No, it is not because the $\text{sinc}$ function cannot be integrated (see 3.14). We had that the $\text{sinc}$ function is **not** in $L^1$, whereas it will turn out that all Schwartz functions **can** be integrated (discussed later in 3.14) - which is necessary to apply the FT to them
-  - but it is **not** obvious because you see the $\text{sinc}$ function going to zero nicely, **but** not fast enough (to be a Schwartz function) !
-
-- **problem**: next, lets try to understand 3.11
+  - No, it is not because the $\text{sinc}$ function cannot be integrated (see <span style="color:green">(3.14)</span>). We had that the $\text{sinc}$ function is **not** in $L^1$, whereas it will turn out that all Schwartz functions **can** be integrated (discussed later in <span style="color:green">(3.14)</span>) - which is necessary to apply the FT to them
+  - but it is **not** obvious because you see the $\text{sinc}$ function going to zero nicely, **but** not fast enough (to be a Schwartz function)!
+- **problem**: next, lets try to understand <span style="color:green">(3.11)</span>
 
 ## 3.12 $C_c^\infty$ Functions are always Schwartz functions
 
-- (i) $C_c^\infty \subset S \subset C^\infty$
+- (i) <span style="color:red">$\boxed{C_c^\infty \subset S \subset C^\infty}$</span>
 - why $C_c^\infty \subset S$ ?
-  - because for the functions with compact support we know that they are $0$ at a certain point. Outside a certain ball that is large enough they are completely $0$ &rarr; and "$0$" is, of course, "rapidly decreasing to $0$" ("0" just cancels everything outside the ball) and thus, for all $f\in C_c^\infty$ 3.11(ii) is fulfilled
+  - because for the functions with compact support we know that they are $0$ at a certain point. Outside a certain ball that is large enough they are completely $0$ &rarr; and "$0$" is, of course, "rapidly decreasing to $0$" ("0" just cancels everything outside the ball) and thus, for all $f\in C_c^\infty$ <span style="color:green">(3.11 (ii))</span> is fulfilled
   - The <span style="color:red">**difference between $C_c^\infty$ and $S$**</span> is that in $S$ you do not have to be $0$ at the boundary (or $\to\infty$, respectively), but you have to get very quickly very close to $0$ (eg. $g_\sigma$ has this property).
     - **counterexample**: the Gaussian kernel <span style="color:red">$g_\sigma$ is a Schwartz function</span> **without** compact support, ie. $g_\sigma\not\in C_c^\infty$
       - **proof**:
         - all derivatives of $g_\sigma$ are a product of $g_\sigma$ and a polynomial
         - $g_\sigma$ goes to $0$ faster than polynomials go to $\infty$
         - products of polynomials are still polynomials
-- the "$\subset$" in (i) is strict, ie. there are Schwartz functions which are not in $C_c^\infty$, eg. $g_\sigma$
+- the "$\subset$" in (i) is strict, ie. there are Schwartz functions which are not in $C_c^\infty$, <span style="color:red">eg. $g_\sigma$</span>
 - **problem**:
   - how does this help us with the FT?
   - now we have a new object, a Schwartz function, but we know nothing about Schwartz functions
@@ -204,9 +204,9 @@ tags:
 ## 3.13 Properties of Schwartz Functions
 
 - $f\in S$, then
-  - (i) $\frac{\partial^\gamma}{\partial x^\gamma}f \in S$ for all multi-indices $\gamma \in \mathbb{N}^d$ ("derivatives of Schwartz functions are Schwartz functions")
-  - (ii) $pf\in S$ for all polynomials $p$ ("multiplication of a Schwartz function with a polynomial gives a Schwartz function")
-  - (iii) $fg\in S$ for all $g\in S$ ("a product of Schwartz functions is a Schwartz function")
+  - (i) $\frac{\partial^\gamma}{\partial x^\gamma}f \in S$ for all multi-indices $\gamma \in \mathbb{N}^d$ (<span style="color:red">"derivatives of Schwartz functions are Schwartz functions"</span>)
+  - (ii) $pf\in S$ for all polynomials $p$ (<span style="color:red">"multiplication of a Schwartz function with a polynomial gives a Schwartz function"</span>)
+  - (iii) $fg\in S$ for all $g\in S$ (<span style="color:red">"a product of Schwartz functions is a Schwartz function"</span>)
 - **idea**:
   - the properties are not surprising: because we know that for all polynomials and derivatives $\bigg\vert x^\alpha\frac{\partial^\beta}{\partial x^\beta} f(x)\bigg\vert$ is bounded.
     - So, if we multiply $\bigg\vert x^\alpha\frac{\partial^\beta}{\partial x^\beta} f(x)\bigg\vert$ by another polynomial - as in (ii) - we get, again, a different polynomial, but it should be covered by the fact that we considered **ALL** possible polynomials in 3.11 (and we also considered **ALL** derivatives)
@@ -227,8 +227,8 @@ tags:
 
 ## 3.14 Schwartz functions can be integrated wrt any Power
 
-- (i) $1\leq p\leq\infty$, then $S\subset L^p$
-  - in words: Schwartz functions can be integrated wrt any power (or in other words, this "rapidly decreasing to $0$" is enough to have finite area under the functions)
+- (i) $1\leq p\leq\infty$, then <span style="color:red">**$S\subset L^p$**</span>
+  - in words: <span style="color:red">Schwartz functions can be integrated wrt any power</span> (or in other words, this "rapidly decreasing to $0$" is enough to have finite area under the functions)
   - in particular, this means that we can apply $\mathcal{F}$ to the Schwartz space because we know we can apply it to $L^1$ functions.
 - (ii) **a bound for the $L^p$-norm**: $p<\infty$ and $q\in \mathbb{N}$ with $2qp > d$, then there is a $C>0$ s.t. for all $f\in S$ $$\|f\|_{L^p}\leq C\bigg\|(1 + \|\cdot\|_2^{2q}) f\bigg\|_{L^\infty} < \infty$$
   - (ii) is just a technical tool if we need to say sth about the $L^p$ norm of a Schwartz function then we have a bound here (which is just the supremum of the Schwartz function $f$ multiplied by a certain polynomial, where the role of "$q$" is just that the "$q$" has to be big enough so that this polynomial is large enough to get this bound).
@@ -260,9 +260,10 @@ tags:
     - dh. $g$ und $h$ müssen **nicht unbedingt** die conditions in <span style="color:green">(3.15)</span> erfüllen! Nur $f$ muss sie erfüllen.
   - $\partial_i gh, g\partial_i h\in L^1$
 - (i) integration by parts in $\mathbb{R}^d$: $$\int_{\mathbb{R}^d} \partial_i g(x)h(x)dx = -\int_{\mathbb{R}^d} g(x)\partial_i h(x)dx$$
-  - in words: we are allowed to move the derivative from one function to the other, we just get the flip in the sign. And if you can do this once you can also do this more often. If you would have more derivatives here we could iteratively put them over to the $h$ and for each derivative you get one "$-1$".
-- (ii) or by iterating this for $\alpha\in \mathbb{N}^d$: $$\int_{\mathbb{R}^d} \frac{\partial_\alpha}{\partial x_\alpha} g(x)h(x)dx = (-1)^{\vert\alpha\vert}\int_{\mathbb{R}^d} g(x)\frac{\partial_\alpha}{\partial x_\alpha} h(x)dx$$
-- Note: (i) only holds iff $0 = \int_{\mathbb{R}^d}\partial_i (gh)(x)dx$ which, in turn, only holds if $gh$ fulfills the conditions of <span style="color:red">3.15</span>
+  - in words: we are allowed to <span style="color:red">move the derivative from one function to the other, we just get the flip in the sign</span>.
+  - And if you can do this once you can also do this more often. If you would have more derivatives here we could iteratively put them over to the $h$ and for each derivative you get one "$-1$".
+- (ii) or by iterating this for $\alpha\in \mathbb{N}^d$: $$\int_{\mathbb{R}^d} \frac{\partial^\alpha}{\partial x^\alpha} g(x)h(x)dx = (-1)^{\vert\alpha\vert}\int_{\mathbb{R}^d} g(x)\frac{\partial^\alpha}{\partial x^\alpha} h(x)dx$$
+- **Warning**: (i) only holds <span style="color:red">**iff**</span> $0 = \int_{\mathbb{R}^d}\partial_i (gh)(x)dx$ which, in turn, only holds if $gh$ fulfills the conditions of <span style="color:green">(3.15)</span>
 
 <p align="center">
   <img src="https://i.ibb.co/NnjY5kN/Screenshot-from-2024-03-03-11-49-49.png" alt="Screenshot-from-2024-03-03-11-49-49" border="0">
@@ -273,39 +274,42 @@ tags:
 - **conditions**:
   - $f\in S$
   - $p^\alpha (x) = x^\alpha$
-- (i) $\mathcal{F}(f)\in C^\infty$
+- (i) <span style="color:red">$\mathcal{F}(f)\in C^\infty$</span>
 - (ii) $\mathcal{F}(\frac{\partial^\alpha}{\partial x^\alpha}f) = i^{\vert \alpha\vert}p^\alpha\mathcal{F}(f)$
 - (iii) $\mathcal{F}(p^\alpha f) = i^{\vert \alpha\vert}\frac{\partial^\alpha}{\partial \omega^\alpha}\mathcal{F}(f)$
-- in words: the FT converts **derivatives** into a **multiplication with polynomials** and vice versa (like the FT converted a translation into modulation and vice versa)
+- in words: <span style="color:red">the FT converts **derivatives** into a **multiplication with polynomials** and vice versa</span> (like the FT converted a translation into modulation and vice versa)
 - **proof**:
   - (i) will be shown last
-  - show (ii) using integration by parts 3.16 (which requires checking the conditions in 3.15, too)
-  - show (iii), using B.12 "if the derivative is uniformly bounded by an integrable function, differentiation and integration may be interchanged"
+  - show (ii) using integration by parts <span style="color:green">(3.16)</span> (which requires checking the conditions in <span style="color:green">(3.15)</span>, too)
+  - show (iii), using <span style="color:green">(B.12)</span> "if the derivative is uniformly bounded by an integrable function, differentiation and integration may be interchanged"
   - with (iii) we know that we are in $C^\infty$ bec we know what the derivatives are, thus (i) holds
 - **problem**: now we know $\mathcal{F}(f)\in C^\infty$, but we need to show that the mapping $\mathcal{F}$ maps to the Schwartz space
 
-## 3.18 $\mathcal{F}f\in S$
+## 3.18 $\mathcal{F}f\in S$, $\mathcal{F}$ is continuous
 
 - (i) $\mathcal{F}f\in S$
-- (ii) if $(f_n)\_n\in S$ and $\lim_{n\to \infty}{C_{\alpha,\beta}(f_n)} = 0\, \forall \alpha,\beta\in \mathbb{N}_0^d$, then $$\lim_{n\to \infty}{C_{\alpha,\beta}(\mathcal{F}f_n)} = 0 \,\forall \alpha,\beta\in \mathbb{N}_0^d$$
-  - in words: The 2nd part has to do with **continuity**: if we have a **sequence of Schwartz functions** and their coefficients converge to $0$ for all multiindices $\alpha$ and $\beta$, then the coefficients of the $\mathcal{F}$-transformed functions also converge to $0$.
-    - This essentially means that we have **continuity** of $\mathcal{F}$ (not $\mathcal{F}f$, this we have already shown in 3.17(i)) on the Schwartz space (ie. $\mathcal{F}: S \to S$ is continuous), but this will be discussed in 3.19
+- (ii) if $(f_n)\_n\in S^\mathbb{N}$, then $$\lim_{n\to \infty}{C_{\alpha,\beta}(f_n)} = 0\, \forall \alpha,\beta\in \mathbb{N}_0^d\quad\Rightarrow\quad\lim_{n\to \infty}{C_{\alpha,\beta}(\mathcal{F}f_n)} = 0 \,\forall \alpha,\beta\in \mathbb{N}_0^d$$
+  - in words: (ii) has to do with <span style="color:red">**continuity**</span>: if we have a <span style="color:red">**sequence of Schwartz functions**</span> and their coefficients converge to $0$ for all multiindices $\alpha$ and $\beta$, then the coefficients of the <span style="color:red">**sequence of $\mathcal{F}$-transformed functions**</span> also converge to $0$.
+    - This essentially means that we have <span style="color:red">**continuity**</span> of $\mathcal{F}$ (not $\mathcal{F}f$, this we have already shown in <span style="color:green">(3.17 (i))</span>) on the Schwartz space (ie. $\mathcal{F}: S \to S$ is continuous), but this will be discussed in <span style="color:green">(3.19)</span>
 - **proof**:
   - (i)
     - show $\mathcal{F}f\in C^\infty$
     - show $C_{\alpha,\beta}(\mathcal{F}f) < \infty$
-    - using 3.17
+    - using <span style="color:green">(3.17)</span>
   - (ii) 
     - we fix some $\alpha$, $\beta$ and we need to show that for this fixed $\alpha$, $\beta$ the limit of the coefficients of the Ftransformed functions $\lim_{n\to \infty}{C_{\alpha,\beta}(\mathcal{F}f_n)}$ is also $0$
-    - using 3.14 (ii) the "technical" part about the upper bound
-- **problem**: now lets come to the promised interpretation of 3.18 (ii), what does it mean and what does it have to do with continuity?
+    - using <span style="color:green">(3.14 (ii))</span> the "technical" part about the upper bound
+- **problem**: now lets come to the promised interpretation of <span style="color:green">(3.18 (ii))</span>, what does it mean and what does it have to do with continuity?
 
-## 3.19 Alternative Definition of Convergence and Continuity
+## 3.19 Sequential Convergence in $S$, Continuity of $\mathcal{F}$ in the Schwartz Space
 
-- so far we always used **norms** to think about convergence, eg. if $x_n$ converges to $x$ that meant that the norm of $x_n-x$ converges to $0$, but you can also define this in different ways
-- (i) **convergence** of a sequence: $f_n\in S$ converges to $f\in S$, if $\lim_{n\to\infty}{C_{\alpha,\beta}(f_n-f)} = 0\,\forall\alpha,\beta$
-- (ii) **continuity** in $0$: Let $f_n\in S$ converges to $0\in S$, ie. $\lim_{n\to\infty}{C_{\alpha,\beta}(f_n-0)} = 0\,\forall\alpha,\beta$, then $\lim_{n\to\infty}{C_{\alpha,\beta}(f_n)} = 0$ and thus, by <span style="color:green">**3.18 (ii)**</span>, $\lim_{n\to\infty}{C_{\alpha,\beta}(\mathcal{F}f_n)} = 0\,\forall\alpha,\beta$ and therefore, $$\lim_{n\to\infty}{C_{\alpha,\beta}(\mathcal{F}f_n-\mathcal{F}0)} = 0\,\forall\alpha,\beta$$
-  - this means $\mathcal{F}f_n$ converges to $\mathcal{F}0$ (in the sense of our defined convergence (i)) which shows the <span style="color:red">**"continuity"**</span> of $\mathcal{F}$
+- so far we always used <span style="color:red">**norms**</span> to think about convergence, eg. if $x_n$ converges to $x$ that meant that the norm of $x_n-x$ converges to $0$, but you can also define this in different ways
+  - $\mathcal{F}: S \to S$ is <span style="color:red">**continuous**</span> with respect to a suitable <span style="color:red">topology on the Schwartz space</span>. This topology is not defined by a <span style="color:red">**norm**</span> on this space. Instead, one **defines when sequences converge** in this space: (*from lecture notes*)
+- (i) <span style="color:red">**convergence** of a sequence $(f_n)\_n$</span>:
+  - A sequence $(f_n)\_n \in S^\mathbb{N}$ converges to $f \in S$, if $C_{\alpha,\beta}(f_n − f) \to 0$ for $n \to \infty$ for all $\alpha, \beta \in N^d_0$. (*from lecture notes*)
+  - $(f_n)\_n\in S^\mathbb{N}$ converges to $f\in S$, if $\lim_{n\to\infty}{C_{\alpha,\beta}(f_n-f)} = 0\,\forall\alpha,\beta$
+- (ii) <span style="color:red">**continuity** of $\mathcal{F}$ in $0$</span>: Let $f_n\in S$ converge to $0\in S$, ie., by <span style="color:green">**3.19 (i)**</span>, $\lim_{n\to\infty}{C_{\alpha,\beta}(f_n-0)} = 0\,\forall\alpha,\beta$, then $\lim_{n\to\infty}{C_{\alpha,\beta}(f_n)} = 0$ and thus, by <span style="color:green">**3.18 (ii)**</span>, $\lim_{n\to\infty}{C_{\alpha,\beta}(\mathcal{F}f_n)} = 0\,\forall\alpha,\beta$ and therefore, $$\lim_{n\to\infty}{C_{\alpha,\beta}(\mathcal{F}f_n-\mathcal{F}0)} = 0\,\forall\alpha,\beta$$
+  - this means $\mathcal{F}f_n$ converges to $\mathcal{F}0$ (in the sense of our defined convergence <span style="color:green">**3.19 (i)**</span>) which shows the <span style="color:red">**"continuity"**</span> of $\mathcal{F}$
 - recall: def. of pointwise continuous in $x\in X$: $\lim{f(x_n)}=f(\lim{x_n})$, ie. "you can switch function evaluation and limit"
 - **problem**:
   - This is more a side remark that if you want to look at $\mathcal{F}$ just in the Schwartz space and continuity there then this would be the way to go. But we are more importantly interested in the **bijectivity**.
@@ -516,8 +520,8 @@ tags:
 ## 3.30 Frequency Domain Representation
 
 <p style="border-width:3px; border-style:solid; border-color:#FF0000; padding: 1em;">
-  for $f\in L^2$ we have $f = \mathcal{F}^{-1}\mathcal{F}f \Leftrightarrow \boxed{f(x) = \frac{1}{(2\pi)^{\frac{d}{2}}} \int_{\mathbb{R}^d}(\mathcal{F}f)(\omega)e^{ix\cdot\omega}d\omega}$<br>
-  &rarr; (im letzten Schritt wurde einfach nur das $\mathcal{F}^{-1}$ auf der rhs von $f = \mathcal{F}^{-1}\mathcal{F}f$ ausgeschrieben)
+&#10625;&#160; for $f\in L^2$ we have $$f = \mathcal{F}^{-1}\mathcal{F}f \Leftrightarrow \boxed{f(x) = \frac{1}{(2\pi)^{\frac{d}{2}}} \int_{\mathbb{R}^d}(\mathcal{F}f)(\omega)e^{ix\cdot\omega}d\omega}$$<br>
+&emsp;&#10625;&#160; (im letzten Schritt wurde einfach nur das $\mathcal{F}^{-1}$ auf der rhs von $f = \mathcal{F}^{-1}\mathcal{F}f$ ausgeschrieben)
 </p>
 
 - this gives us now a different way of <span style="color:red">interpreting what $f$ is</span>:
@@ -544,7 +548,7 @@ tags:
   - in <span style="color:green">3.29</span> haben wir gesagt, dass das Conv Theorem für $\mathcal{F}_2$ gilt, d.h. für $f,g\in L^2$ (statt für $f,g\in L^1$ wie im ursprünglichen Conv Theorem <span style="color:green">3.7</span>), sodass wir hier das Conv Theorem auf $L^2$ functions anwenden können
 
 <p style="border-width:3px; border-style:solid; border-color:#FF0000; padding: 1em;">
-- image $f\in L^2$, convolution kernel $\psi\in L^2$, then $$\label{eq:fdomainreplinfilter}\mathcal{F}(\psi\ast f) = (2\pi)^{\frac{d}{2}}\mathcal{F}(\psi)\mathcal{F}(f)$$
+&#10625;&#160; image $f\in L^2$, convolution kernel $\psi\in L^2$, then $$\label{eq:fdomainreplinfilter}\mathcal{F}(\psi\ast f) = (2\pi)^{\frac{d}{2}}\mathcal{F}(\psi)\mathcal{F}(f)$$
 </p>
 
 - **problem**: <span style="color:red">the conv of two $L^2$ functions is bounded, but not necessarily in $L^2$</span>, but if you think about a kernel with compact support, it is all fine.
@@ -601,7 +605,7 @@ tags:
   - and a similar thing we did for the low-passed image, where we saw that the <span style="color:red">**resolution has an influence**</span> on what we perceive as high and low frequencies
 
 <p style="border-width:3px; border-style:solid; border-color:#FF0000; padding: 1em;">
-- image $f\in L^2$, correlation kernel $\psi\in L^2$, then $$\mathcal{F}(\psi\star f) = (2\pi)^{\frac{d}{2}}\overline{\mathcal{F}(\psi)}\mathcal{F}(f)$$
+&#10625;&#160; image $f\in L^2$, correlation kernel $\psi\in L^2$, then $$\mathcal{F}(\psi\star f) = (2\pi)^{\frac{d}{2}}\overline{\mathcal{F}(\psi)}\mathcal{F}(f)$$
 </p>
 
 - ie. the same holds for the correlation: the FT of a correlation is also converted to a pointwise multiplication, the only difference being that the transfer function of the filter $\mathcal{F}\psi$ is conjugated.
@@ -632,9 +636,9 @@ tags:
 ## 3.33 Deconvolution/Deblurring with the Convolution Theorem
 
 <p style="border-width:3px; border-style:solid; border-color:#FF0000; padding: 1em;">
-&#9679; Consider $f=\psi\ast f_0$, where $f$ is the blurred image and $f_0$ is the unblurred image. <span style="color:red">How to undo</span> this convolution with $\psi$?<br>
-&#9679; if $\mathcal{F}\psi(\omega)\neq 0$ for all $\omega$, then $$\label{eq:deconvconvtheorem}\mathcal{F}^{-1}\left(\boxed{\frac{\mathcal{F}f}{(2\pi)^{\frac{d}{2}}\mathcal{F}\psi}}\right)=\mathcal{F}^{-1}\left(\frac{(2\pi)^{\frac{d}{2}}\mathcal{F}\psi\mathcal{F}f_0}{(2\pi)^{\frac{d}{2}}\mathcal{F}\psi}\right)=f_0$$<br>
-&#9679; thus, if $f$ and $\psi$ are known <b>exactly</b> and $\mathcal{F}\psi(\omega)\neq 0$, then $f_0$ can be reconstructed <b>exactly</b>
+&#10625;&#160; Consider $f=\psi\ast f_0$, where $f$ is the blurred image and $f_0$ is the unblurred image. <span style="color:red">How to undo</span> this convolution with $\psi$?<br>
+&#10625;&#160; if $\mathcal{F}\psi(\omega)\neq 0$ for all $\omega$, then $$\label{eq:deconvconvtheorem}\mathcal{F}^{-1}\left(\boxed{\frac{\mathcal{F}f}{(2\pi)^{\frac{d}{2}}\mathcal{F}\psi}}\right)=\mathcal{F}^{-1}\left(\frac{(2\pi)^{\frac{d}{2}}\mathcal{F}\psi\mathcal{F}f_0}{(2\pi)^{\frac{d}{2}}\mathcal{F}\psi}\right)=f_0$$<br>
+&#10625;&#160; thus, if $f$ and $\psi$ are known <b>exactly</b> and $\mathcal{F}\psi(\omega)\neq 0$, then $f_0$ can be reconstructed <b>exactly</b>
 </p>
 
 - **3 sources of errors** (discussed below):
@@ -847,7 +851,7 @@ tags:
 - <span style="color:green">(3.40) and (3.42)</span> together imply:
 
 <p style="border-width:3px; border-style:solid; border-color:#FF0000; padding: 1em;">
-- if $(e_n)_n\in X^{\mathbb{N}}$ is a CONS, then <span style="color:red">$\sum_{k=1}^{K}x_ke_k$ converges to $x$</span> for $K\to\infty$
+&#10625;&#160; if $(e_n)_n\in X^{\mathbb{N}}$ is a CONS, then <span style="color:red">$\sum_{k=1}^{K}x_ke_k$ converges to $x$</span> for $K\to\infty$
 </p>
 
 - you should really <span style="color:red">think of this as a limit</span> of these sums and **not** as actually summing up infinitely many elements.
@@ -857,9 +861,9 @@ tags:
 ## 3.44 Necessary and Sufficient Condition for an ONS to be a CONS
 
 <p style="border-width:3px; border-style:solid; border-color:#FF0000; padding: 1em;">
-- <b>condition</b>:<br>
-&emsp;  - same as in <span style="color:green">(3.42)</span><br>
-- the ONS is called <span style="color:red"><b>complete</b></span> or <span style="color:red"><b>CONS</b></span> of $X$ or <span style="color:red"><b>ONB</b></span>, if $$\forall_{x}\forall_{\epsilon}\exists_{K\in\mathbb{N}}\exists_{i_1,\ldots,i_K\in N}\exists_{c_{i_1},\ldots,c_{i_K}\in\mathbb{K}}\bigg\lVert x - \sum_{k=1}^{K}c_{i_k}e_{i_k}\bigg\rVert<\epsilon$$
+&#10625;&#160; <b>condition</b>:<br>
+&emsp;&#10625;&#160; same as in <span style="color:green">(3.42)</span><br>
+&#10625;&#160; the ONS is called <span style="color:red"><b>complete</b></span> or <span style="color:red"><b>CONS</b></span> of $X$ or <span style="color:red"><b>ONB</b></span>, if $$\forall_{x}\forall_{\epsilon}\exists_{K\in\mathbb{N}}\exists_{i_1,\ldots,i_K\in N}\exists_{c_{i_1},\ldots,c_{i_K}\in\mathbb{K}}\bigg\lVert x - \sum_{k=1}^{K}c_{i_k}e_{i_k}\bigg\rVert<\epsilon$$
 </p>
 
 - <span style="color:red">$K$</span> is the <span style="color:red">number of basis elements $e_k$ we need to approximate $x$</span> and this number does not have to be equal to the <span style="color:red">total number of basis elements in the CONS $\lvert N\rvert$</span> (note: $N$ is a <span style="color:red">set</span>, $\lvert N\rvert$ denotes the number of elements in the set $N$)
@@ -877,12 +881,12 @@ tags:
 ## 3.45 Parseval's Identity
 
 <p style="border-width:3px; border-style:solid; border-color:#FF0000; padding: 1em;">
-- <b>conditions</b>:<br>
-&emsp;  - let $X$ be a pre-Hilbert space<br>
-&emsp;  - <span style="color:red">$N=\mathbb{N}$ infinite</span><br>
-&emsp;&emsp;  - here I only explicitly consider the case that the ONS has infinitely many elements bec it is obvious that this holds for finitely many elements<br>
-&emsp;  - $(e_n)_n\in X^\mathbb{N}$ <span style="color:red">a CONS</span><br>
-- then $$(x,y)_X = \sum_{k=1}^{\infty}(x,e_k)_X\overline{(y,e_k)_X}\quad\forall x,y$$
+&#10625;&#160; <b>conditions</b>:<br>
+&emsp;&#10625;&#160; let $X$ be a pre-Hilbert space<br>
+&emsp;&#10625;&#160; <span style="color:red">$N=\mathbb{N}$ infinite</span><br>
+&emsp;&emsp;&#10625;&#160; here I only explicitly consider the case that the ONS has infinitely many elements bec it is obvious that this holds for finitely many elements<br>
+&emsp;&#10625;&#160; $(e_n)_n\in X^\mathbb{N}$ <span style="color:red">a CONS</span><br>
+&#10625;&#160; then $$(x,y)_X = \sum_{k=1}^{\infty}(x,e_k)_X\overline{(y,e_k)_X}\quad\forall x,y$$
 </p>
 - ie. $(x,y)_X$ is a "series of the product of the Fcoeffs"
 - you can think of this as a <span style="color:red">generalization</span> that <span style="color:red">we can represent the norm in the CONS as the sum of the squared Fcoeffs</span>, see <span style="color:green">(3.42)</span>.

@@ -53,6 +53,33 @@ tags:
   - continuity ($f_n$ continuous $\implies$ the limit function $f$ is also continuous)
   - boundedness ($f_n$ bounded $\implies$ the limit function $f$ is also bounded)
 
+## pointwisely continuous, continuous, uniformly continuous
+
+- Bredies 2.4:
+  - **"pointwise continuous"** vs. **"continuous"** vs. **"uniformly continuous"**:
+    - Ist $F$ in jedem Punkt $x \in U$ stetig, so nennt man $F$ einfach nur <span style="color:red">**stetig**</span>, hängt darüber hinaus das $\delta$ nicht von $x$ ab, so ist $F$ <span style="color:red">**gleichmäßig stetig**</span>
+
+## Lipschitz continuous
+
+- Bredies 2.5:
+  - **Lipschitz continuous**:
+    - there exists a constant $C > 0$ such that for all $x, y \in U$, one has $$ \lVert F (x) − F (y)\rVert_Y \leq C\lVert x − y\rVert_X.$$
+    - The infimum over all these constants $C$ is called the **Lipschitz constant**.
+- Wikipedia
+  - Lipschitz continuous $\subset$ absolutely continuous $\subset$ uniformly continuous
+    - thus, <span style="color:red">Lipschitz continuous $\Rightarrow$ uniformly continuous</span>, but not vice versa!
+- [brightsideofmathematics](https://www.youtube.com/watch?v=mnlUnBFDccI):
+  - Continuously differentiable $\subset$ Lipschitz continuous $\subset$ continuous
+  - "Mittelglied zwischen differenzierbar und stetig"
+  - <span style="color:red">**Merkregel**</span>. Eine Lipschitz-stetige Funktion ist eine stetige Funktion, deren Steigungen beschränkt bleiben. Dabei ist es unerheblich, ob wir diese Steigung als Ableitung an einem Punkt messen, oder als Sekantensteigung an zwei Punkten., [article](https://jp-g.de/Skripte/Lipschitz.pdf)
+- **intuitively**:
+  - For real-valued functions of several real variables, this holds if and only if the absolute value of the slopes of all secant lines are bounded by $K$. The set of lines of slope $K$ passing through a point on the graph of the function forms a <span style="color:red">**circular cone**</span>, and a function is Lipschitz if and only if the graph of the <span style="color:red">function everywhere lies completely outside of this cone</span> (see figure)., [Wikipedia](https://en.wikipedia.org/wiki/Lipschitz_continuity)
+  - "For a Lipschitz continuous function, there is a double cone (shown in white) whose <span style="color:red">**vertex**</span> can be translated along the graph so that the graph always remains entirely outside the cone.", [Wikipedia](https://en.wikipedia.org/wiki/Continuous_function#Uniform,_H%C3%B6lder_and_Lipschitz_continuity)
+
+<p align="center">
+  <img src="https://i.ibb.co/ZXVRSDX/Lipschitz-Visualisierung.gif" alt="Lipschitz-Visualisierung" border="0">
+</p>
+
 ## open, closed
 
 [Wikipedia](https://en.wikipedia.org/wiki/Closed_set):
@@ -98,52 +125,47 @@ tags:
 
 ## topology
 
-- **topology**: "die Menge $\mathcal{O}$ der offenen Mengen wird als die Topologie des topologischen Raumes $(X,\mathcal{O})$ bezeichnet", [Wikipedia](https://de.wikipedia.org/wiki/Topologie_(Mathematik)#Topologischer_Raum)
-  - "Üblicherweise werden topologische Räume in den Lehrbüchern über die **offenen Mengen** definiert"
-  - "Wird eine beliebige **Grundmenge** mit einer **Topologie** (einer topologischen Struktur) versehen, dann ist sie ein **topologischer Raum**, und ihre Elemente werden als **Punkte** aufgefasst. Die Topologie des Raumes bestimmt sich dann dadurch, dass bestimmte Teilmengen als **offen** ausgezeichnet werden."
+- **topology**: "die <span style="color:red">Menge $\mathcal{O}$ der offenen Mengen</span> wird als die <span style="color:red">**Topologie**</span> des <span style="color:purple">**topologischen Raumes** $(X,\mathcal{O})$</span> bezeichnet", [Wikipedia](https://de.wikipedia.org/wiki/Topologie_(Mathematik)#Topologischer_Raum)
+  - "Üblicherweise werden <span style="color:purple">**topologische Räume**</span> in den Lehrbüchern über die **offenen Mengen** definiert"
+  - "Wird eine beliebige **Grundmenge** mit einer <span style="color:red">**Topologie**</span> (einer topologischen Struktur) versehen, dann ist sie ein <span style="color:purple">**topologischer Raum**</span>, und ihre Elemente werden als **Punkte** aufgefasst. Die <span style="color:red">**Topologie**</span> des Raumes bestimmt sich dann dadurch, dass bestimmte Teilmengen als **offen** ausgezeichnet werden."
+- Wikipedia: Formally, let $X$ be a set and let $\tau$ be a family of subsets of $X$. Then $\tau$ is called a <span style="color:red">**topology on $X$**</span> if:
+  - Both the empty set and $X$ are elements of $\tau$.
+  - Any union of elements of $\tau$ is an element of $\tau$.
+  - Any intersection of finitely many elements of $\tau$ is an element of $\tau$.
+- **norm topology**: The <span style="color:red">**norm topology**</span> on a normed space $X=(X,\lVert \cdot\rVert\_X)$ is the topology $\tau$ **consisting of all sets which can be written as** a (possibly empty) union of sets of the form $B_r(x)=\\{y \in X:\lVert y-x\rVert\_X<r\\}$ for some $x \in X$ and for some number $r\in\mathbb{R}$. Sets of the form $B_r(x)$ are called the <span style="color:red">**open balls**</span> in $X$., [wolfram](https://mathworld.wolfram.com/NormTopology.html)
+  - Bredies: "Die <span style="color:red">**Norm**</span> auf einen Vektorraum <span style="color:red">**impliziert**</span> sofort eine Topologie auf $X$, die <span style="color:red">**Norm-Topologie**</span> (oder starke Topologie): Zunächst definiere für $x \in X$ und $r > 0$ den <span style="color:red">**offenen r-Ball**</span> um $x$ als (...)"
+- for <span style="color:green">(3.19)</span>: **continuity between topological spaces**: Continuity is one of the core concepts of calculus and mathematical analysis, where arguments and values of functions are <span style="color:red">**real and complex numbers**</span>. The concept has been generalized to functions <span style="color:red">**between metric spaces \[ie. with norm\]**</span> and <span style="color:red">**between topological spaces \[ie. without norm\]**</span>. The latter are the most general continuous functions, and their definition is the basis of <span style="color:red">**topology**</span>., [Wikipedia](https://en.wikipedia.org/wiki/Continuous_function#)
 
 ## complete
 
 - <span style="color:red">**completeness** is closely related to **Cauchy sequences**</span>
-- A metric space $(X,d)$ is **complete** if any of the following equivalent conditions are satisfied:
-  - Every Cauchy sequence of points in $X$ has a limit that is also in $X$.
-  - Every Cauchy sequence in $X$ converges in $X$ (that is, to some point of $X$).
+- A metric space $(X,d)$ is <span style="color:red">**complete**</span> if any of the following **equivalent conditions** are satisfied:
+  - (i) Every Cauchy sequence of points in $X$ has a limit that is also in $X$.
+  - (ii) Every Cauchy sequence in $X$ converges in $X$ (that is, to some point of $X$).
 - **examples**:
   - The space $\mathbb{Q}$ of <span style="color:red">**rational numbers**</span>, with the standard metric given by the absolute value of the difference, is <span style="color:red">**not complete**</span>.
-  - The <span style="color:red">**open interval** $(0,1)$</span>, again with the absolute difference metric, is <span style="color:red">**not complete**</span> either.
-    - The sequence defined by $x_{n}={\frac{1}{n}}$ is Cauchy, but does not have a limit in the given space. However the <span style="color:red">**closed interval** $\[0,1\]$</span> is complete; for example the given sequence does have a limit in this interval, namely zero.
-  - The space $\mathbb{R}$ of **real numbers** and the space $\mathbb{C}$ of **complex numbers** (with the metric given by the absolute difference) are complete, and so is **Euclidean space** $\mathbb{R}^n$, with the usual distance metric.
-  - In contrast, **infinite-dimensional normed vector spaces** may or may not be complete; those that are complete are **Banach spaces**.
+  - The <span style="color:red">**open interval** $(0,1)$</span>, again with the absolute difference metric, is <span style="color:red">**not complete**</span> either. The sequence defined by $x_{n}={\frac{1}{n}}$ (for $n=2,3,\ldots$ or $x_{n}={\frac{1}{n+1}}$ for $n=1,2,\ldots$) is Cauchy, but does not have a limit in the given space.
+    - However the <span style="color:green">**closed interval** $\[0,1\]$</span> is complete; for example the given sequence does have a limit in this interval, namely zero.
+  - The space $\mathbb{R}$ of <span style="color:green">**real numbers**</span> and the space $\mathbb{C}$ of <span style="color:green">**complex numbers**</span> (with the metric given by the absolute difference) are complete, and so is <span style="color:green">**Euclidean space**</span> $\mathbb{R}^n$, with the usual distance metric.
+  - In contrast, **infinite-dimensional normed vector spaces** may or may not be complete; those that are complete are <span style="color:green">**Banach spaces**</span>.
 
 ## Vector Spaces
 
-- from less to more requirements:
-  - **vector space**: a non-empty set $X$ that satisfies the **eight vector space axioms**
-  - **normed space**: the pair $(X,\lVert \cdot \rVert)$
-  - **pre-Hilbert space**: a vector space with a scalar product, ie. the pair $(X,(\cdot,\cdot)_X)$
-    - note: a scalar product induces a norm, thus, for each pre-Hilbert space there is an **associated normed space**
-  - **Hilbert space**: a complete pre-Hilbert space
+- **vector space**: a non-empty set $X$ that satisfies the **eight vector space axioms**
+- **normed space**: the pair $(X,\lVert \cdot \rVert)$
+- **Banach space**: a complete normed space
+- **pre-Hilbert space**: a vector space with a scalar product, ie. the pair $(X,(\cdot,\cdot)_X)$
+  - note: a scalar product induces a norm, thus, for each pre-Hilbert space there is an **associated normed space**
+- **Hilbert space**: a complete pre-Hilbert space
 
 ## Function Spaces
-
-### $C(U,Y)$
-
-- Bredies 2.4:
-  - **"pointwise continuous"** vs. **"continuous"** vs. **"uniformly continuous"**:
-    - Ist $F$ in jedem Punkt $x \in U$ stetig, so nennt man $F$ einfach nur **stetig**, hängt darüber hinaus das $\delta$ nicht von $x$ ab, so ist $F$ **gleichmäßig stetig**
-- Bredies 2.6:
-  - $C(U,Y)$ is **not** $C(\overline{U},Y)$
-    - in $C(U,Y)$ the function $F$ must be only **continuous**
-    - in $C(\overline{U},Y)$ the function $F$ must be **bounded** and **uniformly continuous**
-  - $C(U,Y)$ is **not** a normed space, but $C(\overline{U},Y)$ **together with** $\Vert F\Vert_{\infty}$ is
-- Comparison: [$L^2$ vs. $C(U,Y)$](#l2-vs-cuy)
 
 ### Integrability
 
 - <span style="color:red">**remember**</span>: we don't say "$f$ is integrable," but rather "$f$ is integrable over $D$"
-  - eg. eg. for $f(x)=1/x$ the anti-derivative is $\ln{(\lvert x\rvert)}$, so $f(x)=1/x$ is "integrable over $D$" if the domain $D$ is an interval that doesn't contain $0$
+  - eg. for $f(x)=1/x$ the anti-derivative is $\ln{(\lvert x\rvert)}$, so $f(x)=1/x$ is "integrable over $D$" if the domain $D$ is an interval that doesn't contain $0$
 
-### $L^2$
+### $L^2$, Square Integrable Functions
 
 - (i) it is often convenient to think of $L^2(\mathbb{R}^n)$ as the **completion** of the **continuous functions** with respect to the $L^2$-norm, [mathworld.wolfram](https://mathworld.wolfram.com/L2-Space.html)
 - (ii) examples for $L^2$ functions:
@@ -159,23 +181,38 @@ tags:
       - ie. if $f$ is bounded and in $L^1$, then we know it must go to zero fast enough to be in $L^1$. $f^2$ must go to zero even faster and there is nothing else that prevents $f^2$ from being integrable. Thus, $f$ must be in $L^2$.
       - if an unbounded function does **not** go to zero, then it is not integrable (intuitively clear!)
 
+### $C(U,Y)$, Continuous Functions
+
+- Bredies 2.6:
+  - $C ( U, Y ) = \\{ F : U \to Y \mid F \ \text{continuous}\\}$
+  - $C ( \overline{U}, Y ) = \\{ F : U \to Y \mid F \ \text{bounded and uniformly continuous}\\}$
+  - $C(U,Y)$ is **not** $C(\overline{U},Y)$
+    - in $C(U,Y)$ the function $F$ must be only **continuous**
+    - in $C(\overline{U},Y)$ the function $F$ must be **bounded** and **uniformly continuous**
+  - $C(U,Y)$ is **not** a normed space, but $C(\overline{U},Y)$ **together with** the [supremum norm](#supremum-norm-infty-norm-uniform-norm) $\Vert F\Vert_{\infty}$ is
+- Comparison: [$L^2$ vs. $C(U,Y)$](#l2-vs-cuy)
+
+### $C^\infty$, Smooth Functions
+
+- **Achtung**: $f$ ist nur dann **smooth**, wenn es **infinitely differentiable** ist, nur **differentiable** reicht nicht!
+- The function $f$ is said to be <span style="color:red">**infinitely differentiable**, **smooth**</span>, or of <span style="color:red">**(differentiability) class $C^{\infty }$**</span>, if it has derivatives of <span style="color:red">**all**</span> orders
+
+### $C^0$, $C^1$, etc, Differentiability Classes
+
+- The class $C^{0}$ consists of all **continuous functions**.
+- The class $C^{1}$ consists of all **differentiable functions** whose **derivative is continuous**; such functions are called **continuously differentiable**.
+  - Thus, a $C^{1}$ function is exactly a function whose derivative exists and is of class $C^{0}$
+- ${\displaystyle C^{k}}$ is contained in ${\displaystyle C^{k-1}}$ for every ${\displaystyle k>0,}$ and there are examples to show that this containment is strict (${\displaystyle C^{k}\subsetneq C^{k-1}}$), [Wikipedia](https://en.wikipedia.org/wiki/Smoothness#Differentiability_classes)
+  - ie. <span style="color:red">$C_0\supset C_1\supset C_2\supset\ldots$</span>
+  - why $C_0\supset C_1$?:
+    - recall: "any **differentiable function** must be **continuous at every point** in its domain.", [Wikipedia](https://en.wikipedia.org/wiki/Differentiable_function#Differentiability_and_continuity)
+
 ### $L^2$ vs. $C(U,Y)$
 
 - not all continuous functions are in $L^2$,
   - **counterexample**: the constant function $f=1$
 - not all $L^2$ functions are continuous,
   - **counterexample**: the characteristic function of the finite set $A$, $\chi_{A}$
-
-### $C^\infty$, Smooth Functions
-
-- **Achtung**: $f$ ist nur dann **smooth**, wenn es **infinitely differentiable** ist, nur **differentiable** reicht nicht!
-- The function $f$ is said to be <span style="color:red">**infinitely differentiable**, **smooth**</span>, or of class $C^{\infty }$, if it has derivatives of <span style="color:red">**all**</span> orders
-
-### $C^0$, $C^1$, etc
-
-- The class $C^{0}$ consists of all **continuous functions**.
-- The class $C^{1}$ consists of all **differentiable functions** whose **derivative is continuous**; such functions are called **continuously differentiable**.
-  - Thus, a $C^{1}$ function is exactly a function whose derivative exists and is of class $C^{0}$
 
 ## Series
 
@@ -321,13 +358,13 @@ Wikipedia:
 - **gamma correction**: $$\begin{equation*} T_{\gamma}: \left[0,1\right] \to \left[0,1\right],\ s \mapsto s^\gamma \end{equation*},\ \text{where}\ \gamma > 0$$
   - for $\gamma < 1$ strictly concave 
   - for $\gamma > 1$ strictly convex
-  - **convex**:
+  - **idea**: for $\gamma < 1$: compress bright areas, expand dark areas, ie. more details in dark areas visible, but less details in the bright areas
+  - <span style="color:red">**convex**</span>:
     - if the line segment between any two distinct points on the graph of the function lies **above the graph** between the two points
-    - if the epigraph is a convex set
-      - **epigraph of a function**: the set of points on or above the graph of the function
-    - convex function graph is shaped like a **cup**
-      - note: a linear function is **both** convex and concave
-  - for $\gamma < 1$: compress bright areas, expand dark areas, ie. more details in dark areas visible, but less details in the bright areas
+    - **convex function**: if the epigraph is a convex set
+      - <span style="color:red">**epigraph**</span> of a function: the set of points on or above the graph of the function
+      - graph of a convex function is shaped like a **cup**
+    - a **linear function** is **both** convex and concave
 
 ## 1.6 (v) log transformation
 
