@@ -400,30 +400,36 @@ cV | paste line
 cpi' | copy inside single quotes to system clipboard
 cvi' | paste inside single quotes from system clipboard
 
-### Mehrere Zeilen auskommentieren
+### Comment, Uncomment Multiple Rows
 
 [how-to-comment-and-uncomment-multiple-line-vi-terminal-editor](https://discuss.devopscube.com/t/how-to-comment-and-uncomment-multiple-line-vi-terminal-editor/64)
 
-1. ctrl + v	(Block markieren)
-2. Shift + i (enter Insert mode (while in Block mode))
-3. " (Kommentarsymbol am Anfang der ersten Zeile eingeben (while in Block mode))
-4. Esc (drücken und 1 sec warten (bis das Kommentarsymbol vor allen Zeilen im Block auftaucht))
+1. <kbd>ctrl</kbd> + <kbd>v</kbd> (Block markieren)
+2. <kbd>shift</kbd> + <kbd>i</kbd> (enter Insert mode (while in Block mode))
+3. <kbd>"</kbd> (Kommentarsymbol am Anfang der ersten Zeile eingeben (while in Block mode))
+4. <kbd>Esc</kbd> (drücken und 1 sec warten (bis das Kommentarsymbol vor allen Zeilen im Block auftaucht))
 
 ## Vim Registers
 
-- **in insert mode**: `c-r<registername>` to paste `<registername>`, eg. `c-r a` to paste register `a`
-- **in normal mode**: `"` then register name, eg. `"a` for register `a`
-  - press `"<registername>y` to yank into register `<registername>`, eg. `"ay` to yank into register `a`
-  - press `"<registername>p` to paste register `<registername>`, eg. `"ap` to paste register `a`
+- **in insert mode**: <kbd>ctrl</kbd>-<kbd>r</kbd><kbd>registername</kbd> to paste <kbd>registername</kbd>, eg. <kbd>ctrl</kbd>-<kbd>r</kbd> <kbd>a</kbd> to paste register <kbd>a</kbd>
+- **in normal mode**: <kbd>"</kbd> then register name, eg. <kbd>"</kbd> <kbd>a</kbd> for register <kbd>a</kbd>
+  - press <kbd>"</kbd><kbd>registername</kbd><kbd>y</kbd> to yank into register <kbd>registername</kbd>, eg. <kbd>"</kbd><kbd>a</kbd><kbd>y</kbd> to yank into register <kbd>a</kbd>
+  - press <kbd>"</kbd><kbd>registername</kbd><kbd>p</kbd> to paste register <kbd>registername</kbd>, eg. <kbd>"</kbd><kbd>a</kbd><kbd>p</kbd> to paste register <kbd>a</kbd>
+- <span style="color:red">**tricks**</span>:
+  - you can use <kbd>Esc</kbd> + <kbd>normal mode command</kbd> while recording into a register
+    - useful for **markdown**:
+      - use <kbd>Esc</kbd> + <kbd>h</kbd> <kbd>h</kbd> <kbd>h</kbd> <kbd>h</kbd> <kbd>i</kbd> to automatically jump to a certain position after inserting a string
 
 ## Vim Macros
 
-- `q<registername>`: start recording into register `<registername>`
-- `q`: stop recording
-- `@<registername>`: replay the recording stored in register `<registername>`
-- `C-c`: cancel a recording while it is replaying
+- <kbd>q</kbd><kbd>registername</kbd>: start recording into register <kbd>registername</kbd>
+  - <span style="color:red">**trick**</span>: use <kbd>ctrl</kbd> <kbd>o</kbd> <kbd>q</kbd> <kbd>registername</kbd> to **start** recording **in insert mode**
+- <kbd>q</kbd>: stop recording
+  - <span style="color:red">**trick**</span>: use <kbd>ctrl</kbd> <kbd>o</kbd> <kbd>q</kbd> to **finish** recording **in insert mode**
+- <kbd>@</kbd><kbd>registername</kbd>: replay the recording stored in register <kbd>registername</kbd>
+- <kbd>ctrl</kbd> <kbd>c</kbd>: cancel a recording while it is replaying
 - [stackoverflow](https://superuser.com/questions/666377/how-to-cancel-recording-a-macro-in-vim):
-  - `:let @b=@a` to copy the macro from register `a` to register `b` and thus preserve it
+  - `:let @b=@a` to copy the macro from register <kbd>a</kbd> to register <kbd>b</kbd> and thus preserve it
 
 # In INSERT mode
 
