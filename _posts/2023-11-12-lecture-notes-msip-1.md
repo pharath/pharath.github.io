@@ -29,7 +29,12 @@ tags:
 
 ## supremum norm, $\infty$-norm, uniform norm
 
-- to measure the "distance between two functions", cf. [uniform convergence theorem](https://www.youtube.com/watch?v=O2HKxNcom7g&list=PLkZG1WV2RkYJTALH2dvQiQvUGXyHawkhG&index=19)
+- **idea**: to measure the "distance between two functions", cf. [brightsideofmathematics: uniform convergence theorem](https://www.youtube.com/watch?v=O2HKxNcom7g&list=PLkZG1WV2RkYJTALH2dvQiQvUGXyHawkhG&index=19)
+  - let's take **two functions** and their graphs: Now the question is how can we measure a suitable **distance between both functions**? Or in other words, when would you say that the functions are close to each other?
+  - Of course, what you already know is that for each point $\tilde{x}$, we can measure the **distance** of the values. So what you have to calculate is the **absolute value** as before. So, if we call the point $x$, we have $\lvert f(x)-g(x)\rvert$. And of course, as before, we could do that for all the points $x$ form the domain $I$. There, you see, we find small distances but also larger ones. And, we would find the largest one if we take the **maximum** of these numbers $\lvert f(x)-g(x)\rvert$. However, because we do not know if the maximum really exists, we should take the **supremum**. Hence, this number $\lvert f(x)-g(x)\rvert$ tells us in fact how close the two graphs are. So, we have **a distance measure for two functions** and usually we just call it the <span style="color:red">**supremum norm**</span>.
+  - The common **short notation** for this would be $\lVert f-g\rVert_\infty$. So this is the supremum norm of $f$ minus $g$.
+  - Now, as promised with this, we can rewrite the <span style="color:red">**uniform convergence**</span> definition. It simply means that the supremum norm gives us a sequence that goes to zero. So $f_n$ minus the limit function $f$ measured in the supremum norm goes to zero when $n$ goes to infinity.
+    - So we started with a **sequence of functions**. But what we got here is an ordinary **sequence of numbers**. Therefore, this is also the ordinary convergence for a sequence of real numbers.
 - [Wikipedia](https://en.wikipedia.org/wiki/Uniform_norm):
   - the **uniform norm** is also called the **supremum norm**, the **Chebyshev norm**, the **infinity norm**, or, when the supremum is in fact the maximum, the **max norm**
   - the **uniform norm** (or **sup norm**) assigns to real- or complex-valued bounded functions $f$ defined on a set $S$ the non-negative number, $$\begin{equation*} \|f\|_{\infty }=\|f\|_{\infty ,S}=\sup_{s\in S}\{\,\vert f(s)\vert \,\} \end{equation*}$$ 
@@ -80,16 +85,21 @@ tags:
   <img src="https://i.ibb.co/ZXVRSDX/Lipschitz-Visualisierung.gif" alt="Lipschitz-Visualisierung" border="0">
 </p>
 
+## Continuous Linear Operators = Bounded Linear Operators
+
+Let $X$ and $Y$ be normed vector spaces, $T : X \to Y$ linear and $x_0 \in X$. The following statements are equivalent:
+1. $T$ is <span style="color:red">**continuous**</span>.
+2. $T$ is continuous in $x_0$.
+3. $\displaystyle\sup_{\lVert x\rVert_X \leq 1} \lVert Tx\rVert_Y < \infty$ 
+4. $T$ is <span style="color:red">**bounded**</span> (ie. there exists a constant $C$ with $\lVert Tx\rVert_Y \leq C \lVert x\rVert_X$ for all $x \in X$).
+
 ## open, closed
 
 [Wikipedia](https://en.wikipedia.org/wiki/Closed_set):
 
-"a **closed set** is a set whose complement is an open set."
-
-"In a **topological space**, a closed set can be defined as a set which contains all its limit points."
-
-"In a **vollständig/complete metric space**, a closed set is a set which is closed under the limit operation."
-
+- "a **closed set** is a set whose complement is an open set."
+  - "In a **topological space**, a closed set can be defined as a set which <span style="color:red">**contains all its limit points**</span>."
+  - "In a **complete metric space**, a closed set is a set which is <span style="color:red">**closed under the limit operation**</span>."
 - Eine Teilmenge $U \subset X$ ist genau dann (&rarr; Bredies)
   - **offen**/**open**, falls sie nur aus **inneren Punkten** besteht, also es für jedes $x \in U$ ein $\epsilon > 0$ derart gibt, dass $B_\epsilon ( x ) \subset U$
   - **abgeschlossen**/**closed**, wenn sie nur aus **Berührpunkten** besteht, das heißt für jedes $x \in X$ für welches die Mengen $B_\epsilon ( x )$ für jedes $\epsilon > 0$ die Menge $U$ schneiden, auch $x \in U$ gilt
@@ -100,9 +110,10 @@ tags:
 
 ## dense
 
+- <span style="color:red">**Merke**: $\mathbb{Q}$ is dense in $\mathbb{R}$</span>
 - **idea**: "a subset $A$ of a topological space $X$ is said to be dense in $X$ if every point of $X$ either belongs to $A$ or else is arbitrarily "close" to a member of $A$, [Wikipedia](https://en.wikipedia.org/wiki/Dense_set)
   - for instance, the **rational numbers** are a dense subset of the **real numbers** because every real number either is a rational number or has a rational number arbitrarily close to it"
-- eine Teilmenge $U\subset X$ ist **dicht** in $X$, falls $\overline{U} = X$ (&rarr; Bredies)
+- (i) eine Teilmenge $U\subset X$ ist **dicht** in $X$, falls $\overline{U} = X$ (&rarr; Bredies)
 - **approximation by polynomial functions** (Weierstrass): "any given **complex-valued continuous function** defined on a closed interval $[a,b]$ can be uniformly approximated as closely as desired by a **polynomial function**", [Wikipedia](https://en.wikipedia.org/wiki/Dense_set)
 
 ## separable
@@ -111,11 +122,10 @@ tags:
 
 ## compact
 
-<span style="color:red">**Merke**: "compact" = "closed and bounded"</span>
-
+- <span style="color:red">**Merke**: "compact" = "closed and bounded"</span>
 - **The idea** is that a compact space has no "punctures" or "missing endpoints", i.e., it includes all limiting values of points., [Wikipedia](https://en.wikipedia.org/wiki/Compact_space)
-  - For example, the **open interval** $(0,1)$ would not be compact because it excludes the limiting values of $0$ and $1$, whereas the **closed interval** $[0,1]$ would be compact.
-  - Similarly, the **space of rational numbers** $\mathbb {Q}$ is not compact, because it has infinitely many "punctures" corresponding to the irrational numbers, and the **space of real numbers** $\mathbb {R}$ is not compact either, because it excludes the two limiting values $+\infty$ and $-\infty$. However, the **extended real number line** would be compact, since it contains both infinities.
+  - For example, the <span style="color:red">**open interval** $(0,1)$</span> would not be compact because it excludes the limiting values of $0$ and $1$, whereas the <span style="color:green">**closed interval**</span> $[0,1]$ would be compact.
+  - Similarly, the <span style="color:red">**space of rational numbers**</span> $\mathbb {Q}$ is not compact, because it has infinitely many "punctures" corresponding to the irrational numbers, and the <span style="color:red">**space of real numbers**</span> $\mathbb {R}$ is not compact either, because it excludes the two limiting values $+\infty$ and $-\infty$. However, the <span style="color:green">**extended real number line**</span> would be compact, since it contains both infinities.
 - **Formally**: In general, a set $K$ is called **compact**, if every sequence in $K$ has a converging subsequence with limit in $K$., lecture appendix
   - For $K \subset \mathbb{R}^d$, compactness of $K$ is equivalent to $K$ being closed and bounded. This equivalence is known as **Heine–Borel theorem**.
 
@@ -136,6 +146,10 @@ tags:
   - Bredies: "Die <span style="color:red">**Norm**</span> auf einen Vektorraum <span style="color:red">**impliziert**</span> sofort eine Topologie auf $X$, die <span style="color:red">**Norm-Topologie**</span> (oder starke Topologie): Zunächst definiere für $x \in X$ und $r > 0$ den <span style="color:red">**offenen r-Ball**</span> um $x$ als (...)"
 - for <span style="color:green">(3.19)</span>: **continuity between topological spaces**: Continuity is one of the core concepts of calculus and mathematical analysis, where arguments and values of functions are <span style="color:red">**real and complex numbers**</span>. The concept has been generalized to functions <span style="color:red">**between metric spaces \[ie. with norm\]**</span> and <span style="color:red">**between topological spaces \[ie. without norm\]**</span>. The latter are the most general continuous functions, and their definition is the basis of <span style="color:red">**topology**</span>., [Wikipedia](https://en.wikipedia.org/wiki/Continuous_function#)
 
+### Further Reading
+
+- [Topological vector space](https://en.wikipedia.org/wiki/Topological_vector_space)
+
 ## complete
 
 - <span style="color:red">**completeness** is closely related to **Cauchy sequences**</span>
@@ -154,7 +168,7 @@ tags:
 - **vector space**: a non-empty set $X$ that satisfies the **eight vector space axioms**
 - **normed space**: the pair $(X,\lVert \cdot \rVert)$
 - **Banach space**: a complete normed space
-- **pre-Hilbert space**: a vector space with a scalar product, ie. the pair $(X,(\cdot,\cdot)_X)$
+- **pre-Hilbert space**, **inner product space**: a vector space with a scalar product, ie. the pair $(X,(\cdot,\cdot)_X)$
   - note: a scalar product induces a norm, thus, for each pre-Hilbert space there is an **associated normed space**
 - **Hilbert space**: a complete pre-Hilbert space
 
@@ -213,6 +227,12 @@ tags:
   - **counterexample**: the constant function $f=1$
 - not all $L^2$ functions are continuous,
   - **counterexample**: the characteristic function of the finite set $A$, $\chi_{A}$
+
+### $L^p$
+
+- <span style="color:red">**$L^p$ is complete**</span> wrt the $L^p$-norm $\lVert \cdot\rVert_{L^p(\Omega)}$ (<span style="color:red">**Riesz-Fischer Theorem**</span>)
+  - ie. "every Cauchy sequence of functions in ${\displaystyle L^{p}}$ converges to a function in ${\displaystyle L^{p},}$ under the metric induced by the $p$-norm", [Wikipedia](https://en.wikipedia.org/wiki/Riesz%E2%80%93Fischer_theorem#Completeness_of_Lp,_0_%3C_p_%E2%89%A4_%E2%88%9E)
+- The **triangle inequality** for the $L^p$-norm is also called **Minkowski inequality**
 
 ## Series
 

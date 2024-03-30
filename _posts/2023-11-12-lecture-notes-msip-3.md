@@ -15,25 +15,28 @@ tags:
 
 ---
 
-# 3.0 Frequency Domain
+# 3 Frequency Domain
+
+# 3.1 Fourier Transform
 
 ## 3.1 Fourier Transform
 
-- "FT of $f$ in $\omega$": $\mathcal{F}f(\omega):=\hat{f}(\omega) = \frac{1}{(2\pi)^{\frac{d}{2}}} \int_{\mathbb{R}^d}f(x)e^{-ix\cdot\omega}dx$
+- (i) "<span style="color:red">**FT of $f$ in $\omega$**</span>": $\mathcal{F}f(\omega):=\hat{f}(\omega) = \frac{1}{(2\pi)^{\frac{d}{2}}} \int_{\mathbb{R}^d}f(x)e^{-ix\cdot\omega}dx$
   - weighted sum of complex exponentials
-- "the continuous FT": $\mathcal{F}: f \to \mathcal{F}f$
+- (ii) "the <span style="color:red">**continuous FT**</span>": $\mathcal{F}: f \to \mathcal{F}f$
+  - where $\mathcal{F}f$ is defined by <span style="color:green">(i)</span>
 - **problem**:
-  - $\mathcal{F}$ gives us a very different representation of the image in which we can eg. change some frequencies to pronounce s.th., but we <span style="color:red">need to go back</span> after that.
+  - $\mathcal{F}$ gives us a very **different representation of the image** in which we can eg. change some frequencies to pronounce s.th., but we <span style="color:red">need to go back</span> after that.
   - unless we can <span style="color:red">invert $\mathcal{F}$</span> it is useless for any kind of image processing &rarr; Is $\mathcal{F}$ invertible? If not, how can we change $\mathcal{F}$ to make it invertible?
 
 ## 3.2 Properties of the mapping $\mathcal{F}$
 
 - (i) $\mathcal{F}: L^1(\mathbb{R}^d,\mathbb{C}) \to C(\mathbb{R}^d,\mathbb{C})$
-  - **problem**: $\mathcal{F}$ is a mapping between two completely different spaces
-  - **problem**: $\mathcal{F}f$ is not necessarily integrable, ie. it can have infinite Maß
+  - **problem**: $\mathcal{F}$ is a mapping between <span style="color:red">two completely different spaces</span>
+  - **problem**: $\mathcal{F}f$ is <span style="color:red">not</span> necessarily <span style="color:red">integrable</span>, ie. it can have infinite Maß
   - <span style="color:red">**needed for**</span>:
     - proof of <span style="color:green">(3.50)</span> Shannon-Whittaker
-- (ii) $\mathcal{F}$ is linear and continuous.
+- (ii) $\mathcal{F}$ is <span style="color:red">**linear**</span> and <span style="color:red">**continuous**</span>.
 - **proof**:
   - (A) $\mathcal{F}f\in C$:
     - $\lim_{n\to\infty}{\mathcal{F}f(\omega_n)}=\mathcal{F}f(\omega)$
@@ -53,9 +56,9 @@ tags:
 </p>
 
 - **problem**:
-  - so $\mathcal{F}f$ gives me a very different representation of my image and then, for instance, I can then do sth wtih that representation, I can change some frequencies to pronounce sth, but once I'm done making this manipulation with the frequencies, I need to go back.
-  - So, unless I can invert this transform it is useless for any kind of image processing.
-  - And the very first thing before we can even think about going back is, we need to know where we are, ie.
+  - so $\mathcal{F}f$ gives me a very **different representation of my image** and then, for instance, I can then do sth wtih that representation, I can change some frequencies to pronounce sth, but once I'm done making this manipulation with the frequencies, I <span style="color:red">need to go back</span>.
+  - So, unless I can <span style="color:red">invert</span> this transform it is useless for any kind of image processing.
+  - And the very first thing before we can even think about going back is, we <span style="color:red">need to know where we are</span>, ie.
     - what is this kind of function?
     - do we have a chance of going back from $\mathcal{F}f$ to $f$ or is there sth that we need to change?
 
@@ -70,7 +73,7 @@ tags:
     - you can think of this space as infinitely differentiable functions that rapidly decay, so if you go to $\infty$ the values go to zero and the values go to zero faster than any polynomial goes to infty and the same is true for all derivatives
     - klarer: "it turns out that <span style="color:red">$\mathcal{F}$ is bijective</span> in this Schwartz space"
       - ie. if we restrict the $L^1$ in <span style="color:green">(3.2)</span> to a smaller space (the Schwartz space) then we get a bijective transform
-      - and then we will show that with this transform on the Schwartz space we get a <span style="color:red">FT on $L^2$</span>, so for square integrable functions, and we will see that this is <span style="color:red">also bijective</span> (so that we get sth that is bijective when we tranform from $L^2$ to $L^2$ and <span style="color:purple">**we have the inverse transform**</span> and we know how to compute it)
+      - and then we will show that with this transform on the Schwartz space we get a <span style="color:red">FT on $L^2$</span>, so for square integrable functions, and we will see that this is <span style="color:red">also bijective</span> (so that we get sth that is bijective when we transform from $L^2$ to $L^2$ and <span style="color:purple">**we have the inverse transform**</span> and we know how to compute it)
 
 <p align="center">
   <img src="https://i.ibb.co/V9Q5t4h/Screenshot-from-2024-03-02-04-50-41.png" alt="Screenshot-from-2024-03-02-04-50-41" border="0">
@@ -301,7 +304,7 @@ tags:
     - using <span style="color:green">(3.14 (ii))</span> the "technical" part about the upper bound
 - **problem**: now lets come to the promised interpretation of <span style="color:green">(3.18 (ii))</span>, what does it mean and what does it have to do with continuity?
 
-## 3.19 Sequential Convergence in $S$, Continuity of $\mathcal{F}$ in the Schwartz Space
+## 3.19 Sequential Convergence in the Schwartz Space, Continuity of $\mathcal{F}$ in the Schwartz Space
 
 - so far we always used <span style="color:red">**norms**</span> to think about convergence, eg. if $x_n$ converges to $x$ that meant that the norm of $x_n-x$ converges to $0$, but you can also define this in different ways
   - $\mathcal{F}: S \to S$ is <span style="color:red">**continuous**</span> with respect to a suitable <span style="color:red">topology on the Schwartz space</span>. This topology is not defined by a <span style="color:red">**norm**</span> on this space. Instead, one **defines when sequences converge** in this space: (*from lecture notes*)
@@ -468,7 +471,7 @@ tags:
         - <span style="color:green">(3.25 (iv))</span> is stronger than the isometry statement in <span style="color:green">(3.26)</span> since <span style="color:green">(3.25 (iv))</span> preserves the scalar product, whereas in <span style="color:green">(3.26)</span> we do not even need to have a scalar product, we just need norms.
 - **theorem**: then, there is a unique linear isometry $\hat{F}: X\to Y$ with $\hat{F}\vert_V = F$
 
-## 3.27 Extension of $\mathcal{F}$ from $\mathcal{S}$ to $L^2$
+## 3.27 Extension of $\mathcal{F}$ from $\mathcal{S}$ to $L^2$, Plancherel Formula
 
 - (i) There is a unique, <span style="color:red">**bijective**</span>, linear isometry $$\mathcal{F}_2: L^2 \to L^2 \quad \text{s.t.} \quad \mathcal{F}_2\vert_\mathcal{S} = \mathcal{F}.$$
   - ie. on the Schwartz space this isometry "$F_2$" is exactly the FT as we defined it
