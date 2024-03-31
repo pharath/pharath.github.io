@@ -88,7 +88,7 @@ The vanilla way link to somewhere in-page is via an [anchor point](https://www.w
 
 This can be created using the `<a>…</a>` tag. Note that the link specified in "anchor point" (above) has `#h-12.2` at the end. This corresponds to `<a id="h-12.2">12.2</a>` embedded in the HTML forming the page, and when clicked will reposition the page view to this anchor.
 
-Note that prior to HTML5, the name attribute was used in the anchor tag, but is no longer supported and the id attribute should be used in its place ([reference](https://www.w3schools.com/tags/tag_a.asp)). This also means that you can use any element for an anchor tag, you are not limited to the `<a>` element.
+Note that prior to HTML5, the `name` attribute was used in the anchor tag, but is no longer supported and the `id` attribute should be used in its place ([reference](https://www.w3schools.com/tags/tag_a.asp)). This also means that you can use any element for an anchor tag, you are not limited to the `<a>` element.
 
 ### Beispiel
 
