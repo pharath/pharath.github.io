@@ -192,13 +192,17 @@ tags:
 
 # 4.2 The Discrete Wavelet Transform
 
-- **note**: unlike what the name suggests this discrete WT is <span style="color:red">**not fully discrete**</span> like the DFT. (However, there are *some* relations to the FS, so it is more like the FS.)
+- **note**: unlike what the name suggests this discrete WT is <span style="color:red">**not fully discrete**</span> like the DFT. (However, there are *some* relations to the FS, so it is <span style="color:red">**more like the FS**</span>.)
 - **problem**: One thing that is very apparent is that this **WT so far is redundant** because we take a 1D function and convert it to a 2D function. Therefore, this 2D function has to have some redundant information because **we cannot need a 2D function to describe a 1D function**.
 - **more precisely**: The (continuous) wavelet transform of a function $f \in L^2 (\mathbb{R})$ is apparently a <span style="color:red">**redundant representation of $f$**</span> ($f$ is univariate (1D function), $L_\psi f$ is bivariate (2D function)).
   - The question arises <span style="color:red">**whether it is sufficient to know $L_\psi f$ on a subset of $\left(0,\infty\right] \times \mathbb{R}$**</span> (ie. perhaps we do not need to compute it for <span style="color:red">**all**</span> the <span style="color:red">**scalings**</span> and all the <span style="color:red">**shifts**</span>, but just for <span style="color:red">**some**</span> of them).
     - It will turn out that this is indeed the case for certain <span style="color:red">**discrete subsets**</span>, but showing this requires several preparations.
     - But it is very important to venture into this because <span style="color:red">**in order to practically use the WT**</span> we need to figure out for which scalings and for which translations we actually **need** these computations.
 - **problem**: The first tool on this way is the MRA:
+- **problem**:
+  - the WT is redundant
+  - we are now on our way to the DWT that is supposed to only look at necessary spatial and scaling parameters, so not at all of them, but hopefully just a subset
+  - to make this possible I introduced the concept of a so-called MRA:
 
 ## 4.8 MRA, MSA, Generator
 
@@ -235,7 +239,8 @@ it fulfills the following conditions:
 ## 4.9 Example MRA: "Space of Functions that are Constant on Dyadic Intervals"
 
 - for $j\in\mathbb{Z}$ let $$V_j:=\{f\in L^2 : f\vert_\left[k2^j,(k+1)2^j\right)\ \text{is constant for all}\ k\in\mathbb{Z}\}$$
-  - ie. $V_j$ is the space of square integrable functions that are constant on the <span style="color:red">**dyadic intervals $\left[k2^j , (k + 1)2^j\right)$**</span> ("dyadic" because the interval limits are powers of $2$, related: dyadic logarithm)
+  - ie. $V_j$ is the space of **square integrable** functions that are constant on the <span style="color:red">**dyadic intervals $\left[k2^j , (k + 1)2^j\right)$**</span> ("dyadic" because the interval limits are powers of $2$, related: dyadic logarithm)
+    - phth: **square integrable** means *for p.w. constant functions* that they must either have compact support or be the zero function, ie. the p.w.c. functions are nonzero only a **finite** number of dyadic intervals
 
 <p align="center">
   <a href="https://ibb.co/9N5Kbpr"><img src="https://i.ibb.co/t4rjqHJ/Screenshot-from-2024-03-25-23-19-09.png" alt="Screenshot-from-2024-03-25-23-19-09" border="0"></a>
@@ -259,7 +264,7 @@ it fulfills the following conditions:
   - <span style="color:green">(i) - (iii)</span> are **intuitively** clear:
     - <span style="color:green">(i)</span> we need to be able to shift by multiples of $2^j$: if say $j=0$, then we need to shift the function by $2^0=1$, or by $2^1=2$, etc. and this just shifts the constant values from one interval to another interval, but they will stay piecewise constant on these intervals, you just shift the values to different intervals
     - <span style="color:green">(ii)</span> if you scale by $\frac{1}{2}$ you are supposed to go from $V_j$ to $V_{j+1}$. Lets look at the green function here: if we scale that by $\frac{1}{2}$ that means we double everthing, ie. this value will be mapped to that (...), so you just switched from being constant on intervals of length one to being constant on intervals of length two
-    - <span style="color:green">(iii)</span> if you are piecewise constant on intevals of length $2^{j+1}$ of course this is also piecewise constant on intervals of length $2^j$ (because the latter is just a weaker property)
+    - <span style="color:green">(iii)</span> if you are piecewise constant on intervals of length $2^{j+1}$ of course this is also piecewise constant on intervals of length $2^j$ (because the latter is just a weaker property)
 
 ### Proof (iv)
 
@@ -305,30 +310,36 @@ it fulfills the following conditions:
       - <span style="color:green">(A)</span> is $\lVert f\rVert^2_{L^2}$
       - <span style="color:green">(B)</span> is $\sum_{k\in Z}(f, T_k\chi_{\left[0,1\right)})^2$, where $(f, T_k\chi_{\left[0,1\right)})$ is the k-th Fcoeff
 
-## 4.10 Orthogonal Projection $P_{V_j}$
+## 4.10 Orthogonal Projection $P_{V_j}$, Approximating $f$ with the Nested Spaces $V_j$
 
 - **conditions**:
   - Let $(V_j)\_{j\in\mathbb{Z}}$ be a MRA.
   - Let $P\_{V_j}$ denote the <span style="color:red">**orthogonal projection from $L^2$ to $V_j$**</span>.
     - Note that the orthogonal projection exists since $L^2$ is a Hilbert space and $V_j$ a nonempty, closed subspace of $L^2$. ([**Hilbert projection theorem**](https://en.wikipedia.org/wiki/Hilbert_projection_theorem#Statement))
   - Let $f \in L^2$.
-- Then, we have $\lim_{j\to\infty} P\_{V_j} f = f$ and $\lim_{j\to -\infty} P\_{V_j} f = 0$.
-  - This means that we can use the nested spaces $V_j$ to approximate $f$, <span style="color:red">the smaller $j$, the better the approximation</span>.
+- Then, we have $\lim_{j\to -\infty} P\_{V_j} f = f$ and $\lim_{j\to \infty} P\_{V_j} f = 0$.
+  - $\lim_{j\to \infty} P\_{V_j} f = 0$ encodes that the $V_j$ get smaller and smaller
+  - $\lim_{j\to -\infty} P\_{V_j} f = f$ means that we can use the nested spaces $V_j$ to approximate $f$, <span style="color:red">the smaller $j$, the better the approximation</span>.
     - So, if we have a very small $j$ ($j\to -\infty$, highly negative), then we get very close to $f$ and if it is very large ($j\to\infty$), then it is very coarse. So, we can decide how well we want to approximate $f$ by choosing this $V_j$.
     - we can approximate $f$ with the spaces $V_j$ arbitrarily well if $j$ is "negative enough"
 - **proof**:
   - the reason we are looking at this is to get familiar with the consequences of all of the properties in <span style="color:green">(4.8)</span>. So far, it is not clear why we need these properties. Here this gets clear.
   - $j\to\infty$: <span style="color:green">(4.14)</span>
   - $j\to -\infty$: show that $\lVert f − P\_{V_j} f\rVert_{L^2} = \inf_{u\in V_j} \lVert f − u\rVert_{L^2}$ for all $j \in \mathbb{Z}$ goes to $0$ for $j\to -\infty$
+    - this is because, by definition, the orthogonal projection $P_{V_j}$ is just the "closest point in the space $V_j$ to a given point $f$"
     - use **completeness** <span style="color:green">(4.8 (v))</span> and **inclusion** <span style="color:green">(4.8 (ii))</span> properties
 
-## 4.11 Scaling Equation
+<p align="center">
+  <a href="https://imgbb.com/"><img src="https://i.ibb.co/7yh3NpZ/Screenshot-from-2024-03-30-21-31-14.png" alt="Screenshot-from-2024-03-30-21-31-14" border="0"></a>
+</p>
+
+## 4.11 $\phi_{j,k}$, Scaling Equation, Scaling Function $\phi$
 
 - **conditions**:
   - Let $(V_j)\_{j\in\mathbb{Z}}$ be a MRA with generator $\phi$.
     - again, this is just some object that fulfills all of the properties in <span style="color:green">(4.8)</span>
     - and we have one example <span style="color:green">(4.9)</span> that fulfills all of the properties in <span style="color:green">(4.8)</span>, so we know that there are such MRAs, thus it makes sense to look at them
-  - Let $\phi_{j,k} (x) := 2^{-\frac{j}{2}}\phi(2^{-j}x - k)$ for all $j, k \in \mathbb{Z}$ and $x \in \mathbb{R}$.
+  - Let <span style="color:red">$\phi_{j,k} (x) := 2^{-\frac{j}{2}}\phi(2^{-j}x - k)$</span> for all $j, k \in \mathbb{Z}$ and $x \in \mathbb{R}$.
     - **problem**: why do we look at $\phi_{j,k}(x)$? &rarr; Because $\phi_{j,k}(x)$ is an ONB of $V_j$ &rarr; <span style="color:green">(i)</span>
 
 ### 4.11 (i) $\\{\phi_{j,k} : k \in \mathbb{Z}\\}$ is an ONB/CONS of $V_j$
@@ -343,7 +354,7 @@ it fulfills the following conditions:
     - but then we have this scaling property <span style="color:green">(4.8 (iii))</span>, ie. that $f$ is in $V_j$ **iff** the scaled version $D_{\frac{1}{2}}f$ is in $V_{j+1}$ and this we can use to convert the ONS from $V_0$ to the other $V$s
     - the scaling $2^{-\frac{j}{2}}$ is exactly done in such a way that the **normality property** does not vanish because if you just scale by $D_{\frac{1}{2}}f$ you would scale the $L^2$-norm (ie. the scaling would change the $L^2$-norm), but the $2^{-\frac{j}{2}}$ corrects for this (**exercise**: when you just compute it you will see how this fits together)
     - so, from one ONB of $V_0$ we can go to ONBs for all of our $V_j$s
-    - **note**: if we have such an MRA then the <span style="color:red">absolute value of $j$ has no meaning by itself</span> because if we have $(V_j)\_{j\in\mathbb{Z}}$ then we can just shift $j$ by any number and it still goes from $-\infty$ to $\infty$ just that $j=0$ then means perhaps $j=10$, so there is no inherent value. The only thing that puts a specific value to the $j$ is that for $V_0$ we have the generator $\phi$. And, since we have the generator at $0$, it is natural that we just go one level finer and end up with $V_{-1}$. In principle, we could just invert the ordering of the $j$s, it would not change anything, except for that going up with $j$ (better/**finer** approximation) and going down with $j$ (worse/**coarser** approximation) would mean the opposite, ie. whether you call "going finer" "increasing $j$" or "decreasing $j$" does not matter. So, the construction <span style="color:green">(4.8)</span> links different scales, but it is completely arbitrary whether you want to associate fine scales with a large $j$ or with a negative $j$. It is just one decision. You can just replace $j$ with $-j$ everywhere, if you want, and everything stays consistent.
+  - **sidenote**: if we have such an MRA then the <span style="color:red">absolute value of $j$ has no meaning by itself</span> because if we have $(V_j)\_{j\in\mathbb{Z}}$ then we can just shift $j$ by any number and it still goes from $-\infty$ to $\infty$ just that $j=0$ then means perhaps $j=10$, so there is no inherent value. The only thing that puts a specific value to the $j$ is that for $V_0$ we have the generator $\phi$. And, since we have the generator at $0$, it is natural that we just go one level finer and end up with $V_{-1}$. In principle, we could just invert the ordering of the $j$s, it would not change anything, except for that going up with $j$ (better/**finer** approximation) and going down with $j$ (worse/**coarser** approximation) would mean the opposite, ie. whether you call "going finer" "increasing $j$" or "decreasing $j$" does not matter. So, the construction <span style="color:green">(4.8)</span> links different scales, but it is completely arbitrary whether you want to associate fine scales with a large $j$ or with a negative $j$. It is just one decision. You can just replace $j$ with $-j$ everywhere, if you want, and everything stays consistent.
   - **problem**: in this way we can connect amongst other things $V_0$ and $V_{-1}$ &rarr; <span style="color:green">(ii)</span>
 
 ### 4.11 (ii) The Generator $\phi$ is not only in $V_0$, but also in $V_{-1}$
@@ -401,7 +412,9 @@ it fulfills the following conditions:
 
 ## 4.13 Prerequisites: Orthogonal Complement, Direct Sum
 
-- <span style="color:red">**outer/direct sum**</span>: [direct sum](https://en.wikipedia.org/wiki/Direct_sum)
+- <span style="color:red">**outer/direct sum**</span>:
+  - [direct sum](https://en.wikipedia.org/wiki/Direct_sum)
+  - **macht am meisten Sinn**: [Innere direkte Summe](https://de.wikipedia.org/wiki/Direkte_Summe#Innere_direkte_Summe)
 - <span style="color:red">**orthogonal complement**</span>:
   - "the set $W^{\perp}$ of all vectors in $V$ that are orthogonal to every vector in $W$"
     - phth: thus, <span style="color:red">$W^{\perp}$ always includes the vector $0$</span> (important for the proof of <span style="color:green">(4.14)</span>)
@@ -420,11 +433,11 @@ it fulfills the following conditions:
 - and $W_j$ is called <span style="color:red">**detail space**</span> or <span style="color:red">**wavelet space**</span> to the scale $j$.
   - Because you can think of it, when going from $V_j$ to the larger $V_{j-1}$, then we are adding some stuff and the stuff that we add are just "details" \[from the "detail space"\].
   - If the approximation gets better \[as $j$ gets smaller\], apparently, we have to add things \[functions\] that were missing, ie. that were not representable on these coarser spaces \[$V_j$ with larger $j$\], and that motivates the name "detail space".
-- **problem**: so, all of the $W_j$s are enough to represent the signals/all $L^2$ functions. Now, we can iterate this:
+- **problem**: so, all of the $W_j$s are enough to represent all $L^2$ functions. Now, we can iterate this:
  
-## 4.14 Splitting $V_j$ into Details, Splitting a $L^2$-Function in all its Details in all Scales $j$
+## 4.14 Splitting $V_j$ into Details, Splitting a $L^2$-Function into all its Details in all Scales $j$
 
-### 4.14 (i) $V_j$ Decomposition into Details
+### 4.14 (i) Decomposition of $V_j$ into Details
 
 - The definition of $W_j$ implies by iteration that $$\label{eq:Vj-decomposition}V_j \stackrel{(4.13)}{=} V_{j+1} \oplus W_{j+1} \stackrel{(4.13)}{=} V_{j+2} \oplus W_{j+2} \oplus W_{j+1} = \ldots \stackrel{(4.13)}{=} V_{j+M} \oplus \color{blue}{\bigoplus_{m=j+1}^{j+M} W_m}$$ for all $M \geq 1.$
   - Berkels: "<span style="color:red">**outer sum**</span>" ($\color{blue}{\bigoplus_{m=j+1}^{j+M} W_m}$) also means that the intersection of all of these $W_j$s is $\\{0\\}$.
@@ -447,46 +460,69 @@ it fulfills the following conditions:
 - (i) Thus, we have shown $$V_j = \bigoplus_{m\geq j+1} W_m.$$
   - thus, "<span style="color:red">the $V_j$ can be split into all details contained for these larger $V_j$ spaces</span>"
 
-### 4.14 (ii) $L^2$ Decomposition into Details
+### 4.14 (ii) Decomposition of $L^2$ into Details
 
 - (ii) Combined with the completeness, we have $$\color{red}{L^2(\mathbb{R})} \stackrel{(\text{completeness prop. of}\ V_j)}{=} \overline{\bigcup_{j\in\mathbb{Z}} V_j} \stackrel{(\text{i})}{=} \overline{\bigcup_{j\in\mathbb{Z}}\bigoplus_{m\geq j+1} W_m} \color{red}{= \overline{\bigoplus_{m\in\mathbb{Z}} W_m}}$$.
   - thus, "<span style="color:red">we can split any $L^2$ function in sums of elements of this $W_m$</span>"
     - in other words: this is like "splitting the function in all its details in all the scales"
-- These equations justify the name "**multiscale analysis**": the spaces $V_j$ allow a systematic approximation of functions on different scales.
 
-### 4.14 (iii) Proof of 4.10 (continued)
+### 4.14 (iii) Representing $f$ via $V_j$ and $W_j$
 
-- (iii) Since $V_j \oplus W_j$ is an <span style="color:red">**orthogonal decomposition of $V_{j−1}$**</span>, we have $$P_{V_{j-1}} \stackrel{(\text{orth. decomposition})}{=} P_{V_j} + P_{W_j} \Rightarrow P_{W_j} = P_{V_{j-1}} - P_{V_j}.$$ Due to $$\label{eq:L2-decomposition}L^2(\mathbb{R}) \stackrel{(\text{ii})}{=} \overline{\color{blue}{\bigoplus_{m\in\mathbb{Z}} W_m}} = \overline{\bigoplus_{m\geq j+1} W_m \oplus \bigoplus_{m\leq j} W_m} \stackrel{(\text{i})}{=} \overline{\color{red}{V_j} \oplus \color{purple}{\bigoplus_{m\leq j} W_m}},$$ $f \in L^2(\mathbb{R})$ can be expressed by $$\label{eq:f-projection-to-V-and-W}f \stackrel{(\ref{eq:L2-decomposition})}{=} \color{blue}{\sum_{m\in\mathbb{Z}} P_{W_m} f} \stackrel{(\ref{eq:L2-decomposition})}{=} \color{red}{P_{V_j} f} + \color{purple}{\sum_{m\leq j} P_{W_m} f}.$$ This implies that <span style="color:red">$P_{V_j} f \to 0$ for $j \to \infty$ holds</span> (because <span style="color:magenta">**explanation 2**</span>), which we claimed earlier (proof of <span style="color:green">(4.10)</span>).
-  - <span style="color:magenta">**explanation 2**</span>: "sandwich": the last equality in ($\ref{eq:f-projection-to-V-and-W}$) must hold for all $j$, thus, since ($\color{blue}{blue}$) and ($\color{purple}{purple}$) are equal for $j\to\infty$, this equality can only hold for $j\to\infty$ if $P_{V_j}f$ vanishes
-  - **explanation 3**:
+- (iii) Since $V_j \oplus W_j$ is an <span style="color:red">**orthogonal decomposition of $V_{j−1}$**</span>, we have $$P_{V_{j-1}} \stackrel{(\text{orth. decomposition})}{=} P_{V_j} + P_{W_j} \Rightarrow P_{W_j} = P_{V_{j-1}} - P_{V_j}.$$ Due to $$\label{eq:L2-decomposition}L^2(\mathbb{R}) \stackrel{(\text{ii})}{=} \overline{\color{blue}{\bigoplus_{m\in\mathbb{Z}} W_m}} = \overline{\bigoplus_{m\geq j+1} W_m \oplus \bigoplus_{m\leq j} W_m} \stackrel{(\text{i})}{=} \overline{\color{red}{V_j} \oplus \color{purple}{\bigoplus_{m\leq j} W_m}},$$ $f \in L^2(\mathbb{R})$ can be expressed by $$\label{eq:f-projection-to-V-and-W}\boxed{f \stackrel{(\ref{eq:L2-decomposition})}{=} \color{blue}{\sum_{m\in\mathbb{Z}} P_{W_m} f} \stackrel{(\ref{eq:L2-decomposition})}{=} \color{red}{P_{V_j} f} + \color{purple}{\sum_{m\leq j} P_{W_m} f}.}$$
+  - Bredies: Wir können nun jedes $f \in L^2$ auf verschiedene Weisen mit Hilfe der Räume $V_j$ und $W_j$ darstellen
+  - **explanation 2**:
     - ($\color{blue}{blue}$ part of ($\ref{eq:f-projection-to-V-and-W}$)) is the <span style="color:purple">orthogonal projection</span> of $f$ to the **orthogonal decomposition of $L^2$** in the form of $\overline{\color{blue}{\bigoplus_{m\in\mathbb{Z}} W_m}}$
     - ($\color{red}{red}+\color{purple}{purple}$ part of ($\ref{eq:f-projection-to-V-and-W}$)) is the <span style="color:purple">orthogonal projection</span> of $f$ to the **orthogonal decomposition of $L^2$** in the form of $\overline{\color{red}{V_j} \oplus \color{purple}{\bigoplus_{m\leq j} W_m}}$
     - related: "Decomposition of a vector space into direct sums is **not unique**.", [Wikipedia](https://en.wikipedia.org/wiki/Projection_(linear_algebra)#Spectrum)
+  - Bredies (en): These equations justify the name "<span style="color:red">**multiscale analysis**</span>": the spaces $V_j$ allow a systematic approximation of functions on different scales.
+    - Bredies (de): Diese Gleichungen rechtfertigen die Bezeichnung "<span style="color:red">**Multiskalenanalyse**</span>": Die Räume $V_j$ erlauben die systematische Approximation von Funktionen auf verschiedenen Skalen.
+  - Bredies: **Abbildung 4.12**: Im Sinne des vorherigen Beispiels \[dh. Beispiel "Stückweise konstante Multiskalenanalyse"\] kann man etwas unpräzise aber suggestiv sagen: $P_{V_j} u$ ist die Darstellung von $u$ "auf der Skala $V_j$" und enthält Details von $u$ "bis zur Größe $2^j$", siehe **Abbildung 4.12**.
+    - phth: die Höhe von $P_{V_j}u$ auf den einzelnen dyadischen Intervallen ist nach <span style="color:green">(4.15 (i))</span> "the mean of $f$ on the dyadic interval $\left[k2^j , (k + 1)2^j \right)$" (im Fall der stückweise konstanten Multiskalenanalyse) bzw. $\sum_{k\in\mathbb{Z}}(\phi_{j,k},u)\_{L^2}\phi_{j,k}$ (im allgemeinen Fall)
+    - phth: Details von $u$ "bis zur Größe $2^j$"
+
+<p align="center">
+  <b>Abbildung 4.12</b>:<a id="Abbildung_4_12"></a><br>
+  <a href="https://ibb.co/k9B7d8N"><img src="https://i.ibb.co/WP5hTym/Screenshot-from-2024-03-30-22-02-49.png" alt="Screenshot-from-2024-03-30-22-02-49" border="0"></a>
+</p>
+
+### 4.14 (iv) Proof of 4.10 (continued)
+
+- (iv) <span style="color:green">(iii)</span> implies that <span style="color:red">$P_{V_j} f \to 0$ for $j \to \infty$ holds</span> (because <span style="color:magenta">**explanation 3**</span>), which we claimed earlier (proof of <span style="color:green">(4.10)</span>).
+  - <span style="color:magenta">**explanation 3**</span>: "sandwich": the last equality in ($\ref{eq:f-projection-to-V-and-W}$) must hold for all $j$, thus, since ($\color{blue}{blue}$) and ($\color{purple}{purple}$) are equal for $j\to\infty$, this equality can only hold for $j\to\infty$ if $P_{V_j}f$ vanishes
 - **problem**: Let's look at our only MRA example again and see what we can get about these projections there:
 
 ## 4.15 Example: Piecewise Constant MRA
 
-### 4.15 (i) Projection of $f$ to the Approximation Space $V_j$
+### 4.15 (i) Compute Projection of $f$ to $V_j$
 
 - Let $(V_j )j\in\mathbb{Z}$ the piecewise constant MRA from <span style="color:green">(4.9)</span> and let $f \in L^2 (\mathbb{R})$.
-- Since the elements of $V_j$ are constant on the intervals $\left[k2^j , (k + 1)2^j \right)$ and $\lVert f − P_{V_j} f\rVert_{L^2} = \inf_{u\in V_j} \lVert f − u\rVert_{L^2}$, we get for $x \in \left[k2^j , (k + 1)2^j \right)$ that (**intuitively**: boils down to approximating a function on an inteval with a single value) $$(P_{V_j} f )(x) = \color{blue}{2^{−j}}\color{red}{\int^{(k+1)2^j}_{k2^j} f(y)dy} = 2^{−j}\int_{\mathbb{R}} \chi_{\left[k2^j ,(k+1)2^j \right)}(y)f(y)dy$$ $$\label{eq:PVj1}(\ldots) = 2^{−\frac{j}{2}}\int_{\mathbb{R}}2^{−\frac{j}{2}}\chi_{\left[0,1\right)}(2^{−j}y − k)f(y)dy = 2^{−\frac{j}{2}}\int_{\mathbb{R}}\phi_{j,k}(y)f(y)dy = (f, \phi_{j,k} )_{L^2} \phi_{j,k}(x)$$.
-  - ($\color{red}{red}$) is the mean of $f$ on the dyadic interval $\left[k2^j , (k + 1)2^j \right)$
+- Since <span style="color:magenta">(A)</span> the elements of $V_j$ are constant on the intervals $\left[k2^j , (k + 1)2^j \right)$ and <span style="color:magenta">(B)</span> $\lVert f − P_{V_j} f\rVert_{L^2} = \inf_{u\in V_j} \lVert f − u\rVert_{L^2}$, we get for $x \in \left[k2^j , (k + 1)2^j \right)$ that (**intuitively**: boils down to approximating a function on an interval with a single value) $$(P_{V_j} f )(x) \stackrel{(\text{p.w.c. MRA})}{=} \color{blue}{2^{−j}}\color{red}{\int^{(k+1)2^j}_{k2^j} f(y)dy} = 2^{−j}\int_{\mathbb{R}} \chi_{\left[k2^j ,(k+1)2^j \right)}(y)f(y)dy$$ $$\label{eq:PVj1}(\ldots) = 2^{−\frac{j}{2}}\int_{\mathbb{R}}2^{−\frac{j}{2}}\chi_{\left[0,1\right)}(2^{−j}y − k)f(y)dy = \color{purple}{2^{−\frac{j}{2}}}\int_{\mathbb{R}}\phi_{j,k}(y)f(y)dy = (f, \phi_{j,k} )_{L^2} \color{purple}{\phi_{j,k}(x)}$$.
+  - ($\color{purple}{purple}$) is the value of $\phi_{j,k}(x)$ on the intervals $\left[k2^j , (k + 1)2^j \right)$ (which is the same value, $2^{-\frac{j}{2}}$, on all intervals for a fixed $j$, ie. the value is independent of $k$)
+  - ($\color{blue}{blue}$ + $\color{red}{red}$) is the mean of $f$ on the dyadic interval $\left[k2^j , (k + 1)2^j \right)$
+    - recall: $f_{\text{avg}}=\color{blue}{\frac{1}{b-a}}\color{red}{\int_a^b f(x)dx}$
+    - phth: the <span style="color:red">area under $\phi_{j,k}$ is always $2^{\frac{j}{2}}$</span> ~~because $\\{\phi_{j,k} : k \in \mathbb{Z}\\}$ is an ONB/CONS of $V_j$, ie. for a given $j\in\mathbb{Z}$ we have $(\phi_{j,k},\phi_{j,l})\_{L^2}=\delta_{k,l}$ which means the $L^2$-norm of $\phi_{j,k}$ must be $1$ for all $j,k\in \mathbb{Z}$~~ (<span style="color:purple">wrong because: ONBs consider the $L^2$-norm and the $L^2$-norm is the area under the squared function, not the area under the function itself!</span>)
+    - Warum ist $(P_{V_j} f )(x) \color{red}{\stackrel{(\text{?})}{=}} 2^{−j}\int^{(k+1)2^j}_{k2^j} f(y)dy$?
+      - because, by definition of $P_{V_j}$, we have $\lVert f − P_{V_j} f\rVert_{L^2} = \inf_{u\in V_j} \lVert f − u\rVert_{L^2}$ (see <span style="color:magenta">(B)</span>), so $P_{V_j} f$ has to be "the closest (in the $L^2$-norm) function $u\in V_j$ to $f$" on $\left[k2^j , (k + 1)2^j \right)$, ie. $P_{V_j} f$ is the function that minimizes the $L^2$-norm difference between $u$ and $f$ on $\left[k2^j , (k + 1)2^j \right)$ (**intuitively**, the size of the area under $u^2$ must be as similar as possible to the size of the area under $f^2$). Since, the $f_{\text{avg}}$ minimizes $\lVert f − u\rVert_{L^2}$ over $u\in V_j$ (the mean minimizes the mean squared error), we get $(P_{V_j} f )(x) = f_{\text{avg}} = 2^{−j}\int^{(k+1)2^j}_{k2^j} f(y)dy$.
+        - <span style="color:red">**important**</span>: This holds <span style="color:red">**only for the p.w.c. MRA**</span> (see <span style="color:magenta">(A)</span>). For a different MRA, $\inf_{u\in V_j} \lVert f − u\rVert_{L^2}$ is not necessarily minimized by the mean $f_{\text{avg}}$, but by some other $u\in V_j$.
   - ($\color{blue}{blue}$) is a normalization factor
+    - Warum gerade $2^{-j}$?
+      - because $f_{\text{avg}}=\color{blue}{\frac{1}{b-a}}\color{red}{\int_a^b f(x)dx}$, and in our case we have $\color{blue}{\frac{1}{b-a}}=2^{-j}$
 
 <p align="center">
   <a href="https://ibb.co/mhZcSN5"><img src="https://i.ibb.co/3S6CkRm/Screenshot-from-2024-03-29-18-42-23.png" alt="Screenshot-from-2024-03-29-18-42-23" border="0"></a>
 </p>
 
-- thus, we can compute this projection $P_{V_j}f$ in terms of the generator, ie. in terms of the CONS of $V_j$ given by $\phi_{j,k}$:
-- (i) Noting that for any $x \in \mathbb{R}$, we have $\phi_{j,k} (x) = 0$ for all $k \in \mathbb{Z}$ but one, we get $$\label{eq:PVj2}P_{V_j} f = \sum_{k\in \mathbb{Z}} (f, \phi_{j,k} )_{L^2} \phi_{j,k}$$.
+- thus, <span style="color:red">we can compute this projection $P_{V_j}f$ in terms of the generator, ie. in terms of the CONS of $V_j$ given by $\phi_{j,k}$:</span>
+- (i) Noting that for any $x \in \mathbb{R}$, we have $\phi_{j,k} (x) = 0$ for all $k \in \mathbb{Z}$ but one, we get $$\label{eq:PVj2}\boxed{P_{V_j} f = \sum_{k\in \mathbb{Z}} (f, \phi_{j,k} )_{L^2} \phi_{j,k}}$$.
   - $P_{V_j} f$ is the "Projection of $f$ to our approximation space $V_j$"
-  - **note**: ($\ref{eq:PVj1}$) is for $x$ and ($\ref{eq:PVj2}$) is for <span style="color:red">**all**</span> $x$. So, why is ($\ref{eq:PVj2}$) valid? When going from ($\ref{eq:PVj1}$) to ($\ref{eq:PVj2}$), we have used that for any $x \in \mathbb{R}$, we have <span style="color:red">$\phi_{j,k} (x) = 0$ for all $k \in \mathbb{Z}$ but one</span> 
+  - **note**: ($\ref{eq:PVj1}$) is for $x$ and ($\ref{eq:PVj2}$) is for <span style="color:red">**all**</span> $x$. So, why is ($\ref{eq:PVj2}$) valid?
+    - When going from ($\ref{eq:PVj1}$) to ($\ref{eq:PVj2}$), we have used that for any $x \in \mathbb{R}$, we have <span style="color:red">$\phi_{j,k} (x) = 0$ for all $k \in \mathbb{Z}$ but one</span> 
   - for simplicity, consider a fixed $j'$ first
   - Because \[ for a fixed $j'$ \] these dyadic intervals do not overlap and this $x'$ is only in just one of these dyadic intervals \[ say $x' \in \left[k'2^j,(k'+1)2^j\right)$ \]. Thus, \[for any $x'$,\] the series (the sum over $k\in \mathbb{Z}$) is just a sum with <span style="color:red">one summand \[which is non-zero.</span> This summand is the one with the factor $\phi_{j,k'}(x')$ (because $x' \in \left[k'2^j,(k'+1)2^j\right)$ as assumed above, thus, $\phi_{j,k'}(x') = 2^{-\frac{j}{2}}\chi_{ \left[k'2^j,(k'+1)2^j\right) }(x') = 2^{-\frac{j}{2}} \neq 0$ will always hold).\]
   - from next lec:
     - Berkels: ($\ref{eq:PVj2}$) is a finite sum with only one non-zero coeff. \[phth: must be wrong: probably Berkels means the summands of the series because the coeffs $(f, \phi_{j,k} )\_{L^2}$ themselves cannot be $0$ because the scalar product is an integral over $\mathbb{R}$, thus, the scalar product with $\phi_{j,k}$ "samples" $f$ on $\left[k2^j,(k+1)2^j\right)$ for each $k$ which would be $0$ only if both $f$ and $\phi_{j,k}$ are $0$ on this interval\]
     - ~~This non-zero coeff is $(f, \phi_{j,k'})\_{L^2}$ (ie. the scalar product of $f$ with the scaled $\chi_{ \left[k'2^j,(k'+1)2^j\right) })$.~~
-    - ~~The scalar product of $f$ with all other $\chi_{ \left[m2^j,(m+1)2^j\right) }$ with $m \neq k'$ is always zero bec $x'$ is not in $\left[m2^j,(m+1)2^j\right)$, so $\phi_{j,m}(x') = 0$.~~
+    - ~~The scalar product of $f$ with all other $\chi_{ \left[m2^j,(m+1)2^j\right) }$ with $m \neq k'$ is always zero because $x'$ is not in $\left[m2^j,(m+1)2^j\right)$, so $\phi_{j,m}(x') = 0$.~~
   - of course, this also follows **from the ONB property of these $\phi_{j,k}$**, but here we actually computed this how it naturally arises from how we chose the generator
 - **problem**: now, lets compute the $h_k$ for our specific p.w. constant MRA:
 
@@ -506,13 +542,13 @@ it fulfills the following conditions:
 ### 4.15 (iv) Compute $\phi_{j,k}$
 
 - Composing this with $x \mapsto 2^{-j} x - k$, this shows $$\phi(2^{-j} \cdot -k) = \phi(2^{-(j-1)} \cdot -2k) + \phi(2^{-(j-1)} \cdot -(2k + 1)).$$ Multiplying both sides with $2^{-\frac{j}{2}}$ shows $$\label{eq:phi-jk}\phi_{j,k} = \frac{1}{\sqrt{2}} (\phi_{j-1,2k} + \phi_{j-1,2k+1} ).$$
-  - ie. each of these $\phi_{j,k}$ we can represent as linear combination of two of the $\phi_{j-1,\ldots}$, so from one finer level
+  - ie. <span style="color:red">each of these $\phi_{j,k}$ we can represent as linear combination of two of the $\phi_{j-1,\ldots}$, so from one finer level</span> (which we can see in <a href="#Abbildung_4_12">Abbildung 4.12</a>)
 - **problem**: we have already checked $P_{V_j}$ above (the projection to approximation spaces), now, we check $P_{W_j}$ (the projection to detail spaces)
 
-### 4.15 (v) Compute Projection to $W_j$
+### 4.15 (v) Compute Projection of $f$ to $W_j$ (Part 1)
 
 - This allows us to compute <span style="color:red">**the projection to $W_{j+1}$**</span>. We get $$P_{W_{j+1}} f \stackrel{(\text{EA})}{=} P_{V_j} f − P_{V_{j+1}} f \stackrel{(\text{EB})}{=} \sum_{k\in\mathbb{Z}} (f, \phi_{j,k} )_{L^2} \phi_{j,k} − \sum_{k\in\mathbb{Z}} (f, \phi_{j+1,k} )_{L^2} \phi_{j+1,k}$$
-  - **EA**: for this, lets recall our def. of these $W_j$s: so, $V_{j-1} = V_j \oplus W_j$ <span style="color:green">(4.13)</span> implies that the projection to $V_{j-1}$ is a projection to $V_j$ plus a projection to $W_j$ and if I just solve for the projection to $W_j$ then I have to subtract $V_j$ on both sides, so we get this result $P_{V_j}f - P_{V_{j+1}}f$ here
+  - **EA**: for this, lets recall our def. of these $W_j$s: so, $V_{j-1} = V_j \oplus W_j$ <span style="color:green">(4.13)</span> implies that $P_{V_{j-1}}=P_{V_j}+P_{W_j}$ and if I just solve for the projection to $W_j$ then I have to subtract $V_j$ on both sides, so we get this result $P_{V_j}f - P_{V_{j+1}}f$ here
   - **EB**: we computed both $P_{V_j}$ and $P_{V_{j+1}}$ last time (see beginning of <span style="color:green">(4.15)</span>: $P_{V_j}f = \ldots$)
 - Splitting the first sum in **even** and **odd** indices and using ($\ref{eq:phi-jk}$) for the second sum, leads to
 
@@ -520,52 +556,68 @@ it fulfills the following conditions:
   <a href="https://ibb.co/z5bR1wh"><img src="https://i.ibb.co/qn9szwM/Screenshot-from-2024-03-29-19-47-41.png" alt="Screenshot-from-2024-03-29-19-47-41" border="0"></a>
 </p>
 
-### 4.15 (vi) Wavelet Corresponding to the Generator
+### 4.15 (vi) Compute Projection of $f$ to $W_j$ (Part 2), Wavelet Corresponding to the Generator
 
 - what we introduce now is actually the <span style="color:red">**wavelet that is corresponding to the generator**</span>.
   - recall:
     - if you think about <span style="color:green">(4.1)</span> where we had the continuous WT, we started with this wavelet $\psi$ that we used to multiply our function $f$ with for the WT and integrate
     - but here we started with a generator that is called $\phi$ (not $\psi$) and is not called "wavelet" but "generator"
     - and now comes the connection back to the wavelet that we had before. This is what this $\psi$ will be.
-- Introducing $$\psi(x) := \phi(2x) - \phi(2x - 1)\ \text{and}\ \psi_{j,k} (x) := 2^{-\frac{j}{2}} (2^{-j}x - k)$$ we get $\psi_{j+1,k} = \frac{1}{\sqrt{2}} (\phi_{j,2k} - \phi_{j,2k+1} )$ and the representation of $P_{W_{j+1}} f$ simplifies to $$\label{eq:PWf}P_{W_{j+1}} f = \sum_{k\in\mathbb{Z}} (f, \psi_{j+1,k} )_{L^2} \psi_{j+1,k}$$ .
-  - define scaled and translated versions of this $\psi$, exactly like we did with $\phi$
-  - same scaling as for $\phi_{j,k}$
+- Introducing $$\label{eq:psijk}\boxed{\psi(x) := \phi(2x) - \phi(2x - 1)}\ \text{and}\ \boxed{\psi_{j,k} (x) := 2^{-\frac{j}{2}} \psi(2^{-j}x - k)}$$ we get $\psi_{j+1,k} = \frac{1}{\sqrt{2}} (\phi_{j,2k} - \phi_{j,2k+1} )$ and the representation of $P_{W_{j+1}} f$ simplifies to $$\label{eq:PWf}\boxed{P_{W_{j+1}} f = \sum_{k\in\mathbb{Z}} (f, \psi_{j+1,k} )_{L^2} \psi_{j+1,k}}$$.
+  - ($\ref{eq:psijk}$) defines scaled and translated versions of this $\psi$, exactly like we did with $\phi$
+  - ($\ref{eq:psijk}$) $\psi_{j,k}$ has the same scaling as $\phi_{j,k}$
 - This $\psi$ we already know, you just have to recognize it:
 - The function $\psi$ is the <span style="color:red">**Haar wavelet**</span> we have seen before in <span style="color:green">(4.7 (iii))</span>.
-  - Because $\phi(2x)$ is the characteristic function on the interval $\left[0,\frac{1}{2}\right)$ and, accordingly, $\phi(2x-1)$ is the characteristic function on the interval $\left[\frac{1}{2},1\right)$. This means the function $\psi$ is $1$ on the interval $\left[0,\frac{1}{2}\right)$ and $-1$ on the interval $\left[\frac{1}{2},1\right)$ which is exactly what was the Haar wavelet!
+  - Because $\phi(2x)$ is $\chi_{\left[0,\frac{1}{2}\right)}$ and, accordingly, $\phi(2x-1)$ is $\chi_{\left[\frac{1}{2},1\right)}$. This means the function $\psi$ is $1$ on the interval $\left[0,\frac{1}{2}\right)$ and $-1$ on the interval $\left[\frac{1}{2},1\right)$ which is exactly what was the Haar wavelet!
 
 ### 4.15 (vii) $\\{\psi_{j,k} : k \in \mathbb{Z} \\}$ is an ONB of $W_j$
 
 - Moreover, we have $$\label{eq:orthonormal}(\psi_{j,k} , \psi_{j,m})_{L^2} = \frac{1}{2}((\phi_{j−1,2k} − \phi_{j−1,2k+1}) , (\phi_{j−1,2m} − \phi_{j−1,2m+1}))_{ L^2 } = \frac{1}{2} (\delta_{k,m} + 0 + 0 + \delta_{k,m} ) = \delta_{k,m}$$ .
-  - this means that the $\psi_{j,k}$ that we get are also an ONS
+  - this means that the $\psi_{j,k}$ that we get are also an ON<span style="color:red">**S**</span>
 - Combined with the representation of $P_{W_{j+1}}$ we derived above ($\ref{eq:PWf}$) and that $P_{W_{j+1}}g=g$ (for $g\in W_{j+1}$ for all $j$) is the identity on $W_{j+1}$ , this means that <span style="color:red">$\\{\psi_{j,k} : k \in \mathbb{Z} \\}$ is an orthonormal basis of $W_j$</span> .
-  - $P_{W_{j+1}}g=g$ gilt für alle $f\in W_{j+1}$ und heißt, dass ($\ref{eq:PWf}$) für alle $f\in W_{j+1}$ zeigt, dass $f$ durch die Operation $P_{W_j}$ nicht verändert wird. ($\ref{eq:PWf}$) kann also auf alle $f\in W_{j+1}$ angewendet werden und kann also alle $f\in W_{j+1}$ als Linearkombination darstellen. $\Rightarrow$ completeness of ONS $\\{\psi_{j,k}\\}$.
-  - (i) "orthonormality of ONS" follows from ($\ref{eq:orthonormal}$)
-  - (ii) "each element $f$ of $W_{j+1}$ can be represented by $P_{W_{j+1}}$ as a projection in this space" follows from the $P_{W_{j+1}}g=g$ argument
-  - (iii) "With $P_{W_{j+1}}$ we can represent any element $f \in W_{j+1}$ as linear combination of the $\psi_{j+1,k}$s" follows from ($\ref{eq:PWf}$) and (ii) ("completeness of ONS")
+  - <span style="color:purple">(i)</span> "orthonormality of ONS" follows from ($\ref{eq:orthonormal}$)
+  - <span style="color:purple">(ii)</span> "each element $f$ of $W_{j+1}$ can be represented by $P_{W_{j+1}}$ as a projection in this space" follows from the $P_{W_{j+1}}g=g$ argument
+  - <span style="color:purple">(iii)</span> "With $P_{W_{j+1}}$ we can represent any element $f \in W_{j+1}$ as linear combination of the $\psi_{j+1,k}$s" follows from ($\ref{eq:PWf}$) and <span style="color:purple">(ii)</span> ("completeness of ONS")
   - phth:
-    - (ii), (iii) müssen für alle $j$ gelten: 
-      - zB. mit index shift $j-1$ wird aus (iii):
+    - <span style="color:purple">(ii)</span>, <span style="color:purple">(iii)</span> müssen für alle $j$ gelten: 
+      - zB. mit index shift $j-1$ wird aus <span style="color:purple">(iii)</span>:
       - "With $P_{W_{j}}$ we can represent any element $f \in W_{j}$ as linear combination of the $\psi_{j,k}$s"
     - bestätigt er auch später: "the $P_{W_{j+1}}g=g$ argument holds for all $j$, it is not only for $j+1$, but I can insert $j-1$ for $j$. It is somewhat confusing because of all of these $j$ and $j+1$ and we are jumping back and forth between these, but $j$ is arbitrary."
+  - phth: wofür brauchen wir $P_{W_{j+1}}g=g$?
+    - $P_{W_{j+1}}g=g$ gilt für alle $f\in W_{j+1}$ und zeigt, dass $f$ durch die Operation $P_{W_j}$ nicht verändert wird. Deshalb muss ($\ref{eq:PWf}$) (zumindest) alle $f\in W_{j+1}$ als Linearkombination darstellen können. $\Rightarrow$ completeness of ONS $\\{\psi_{j,k}\\}$.
 - The existence of a wavelet that generates an orthonormal basis for $W_j$ not only holds in the special case here, but more generally.
   - so, this general construction that we can start with the generator $\phi$, then use the scaling equation and all these combinations to construct the $\psi$ and then get CONSes for all our $W_j$s, is not linked just to the Haar wavelet, but this is a very general connection.
+- phth: the <span style="color:red">area under $\psi_{j,k}$ is always $2^{\frac{j}{2}}$</span> ~~because $\\{\psi_{j,k} : k \in \mathbb{Z}\\}$ is an ONB/CONS of $W_j$, ie. for a given $j\in\mathbb{Z}$ we have $(\psi_{j,k},\psi_{j,l})\_{L^2}=\delta_{k,l}$ which means the $L^2$-norm of $\psi_{j,k}$ must be $1$ for all $j,k\in \mathbb{Z}$~~ (<span style="color:purple">wrong because: ONBs consider the $L^2$-norm and the $L^2$-norm is the area under the squared function, not the area under the function itself!</span>)
+
+<p align="center">
+  <a href="https://ibb.co/JHGgCsk"><img src="https://i.ibb.co/ZxF7NMT/Screenshot-from-2024-03-30-23-15-31.png" alt="Screenshot-from-2024-03-30-23-15-31" border="0"></a><br>
+  source: Bredies
+</p>
+
+- Bredies: Das obige Beispiel zeigt, dass sich zur stückweise konstanten Multiskalenanalyse tatsächlich ein Wavelet (das Haar-Wavelet) findet, welches eine Orthonormalbasis der Wavelet-Räume $W_j$ liefert. Eine ähnliche Konstruktion funktioniert auch allgemein, wie folgender Satz zeigt:
 
 ## 4.16 $\psi$ is a Wavelet, $\\{\psi_{j,k}\\}$ is an ONB/CONS of $W_j$ and $L^2$
 
 - **conditions**:
-  - let $(V_j )_{j\in\mathbb{Z}}$ be a MRA with generator $\phi$
-  - let $h_k$ be the coefficients of the scaling equation.
-  - let $\psi \in V_{−1}$ be defined by $\psi := \sum_{k\in\mathbb{Z}} (−1)^k h_{1−k} \phi_{−1,k}$ . 
-    - this $\psi$ may look surprising, but if we insert the p.w.c. MRA we only have $h_0$ and $h_1$ not equal to $0$ and actually, both times it is just $\sqrt{2}/2$ (see <span style="color:green">(4.15 (ii))</span>) and then we see that we get exactly the combination of characteristic function of the interval $\left[0,1/2\right]$ which just comes from the $k=0$ minus the characteristic function of $\left[1/2,1\right]$ which comes from $k=1$, where we also get this minus here from the $(-1)^k$. So, for the one case that we computed this $\psi$ here is exactly the $\psi$ that we had above, but here it is now told in general.
+  - (c1) let $(V_j )_{j\in\mathbb{Z}}$ be a MRA with generator $\phi$
+  - (c2) let $h_k$ be the coefficients of the scaling equation.
+  - (c3) let $\psi \in V_{−1}$ be defined by <span style="color:red">$\psi := \sum_{k\in\mathbb{Z}} (−1)^k h_{1−k} \phi_{−1,k}$</span>. 
+    - this $\psi$ may look surprising, but if we insert <span style="color:green">**the p.w.c. MRA**</span> we only have $h_0$ and $h_1$ not equal to $0$ and, actually, both are just $\sqrt{2}/2$ (see <span style="color:green">(4.15 (ii))</span>) and then we see that we get exactly the combination of $\chi_{\left[0,1/2\right]}$ (which just comes from the $k=0$) minus $\chi_{\left[1/2,1\right]}$ (which comes from $k=1$), where we also get this minus here from the $(-1)^k$. So, for the one case that we computed, this $\psi$ here is exactly the $\psi$ that we had above, but here it is now told in general. &rarr; <span style="color:green">(4.17 (i))</span>
 - Then,
   - (i) <span style="color:red">$\\{\psi_{j,k} : k \in Z\\}$ is an orthonormal basis of $W_j$.</span>
     - which we showed for our specific generator $\phi$, but it holds for all generators
   - (ii) <span style="color:red">$\\{\psi_{j,k} : j, k \in Z\\}$ is an orthonormal basis of $L^2 (\mathbb{R})$.</span>
-    - We already saw last time that $L^2$ is the closure of the sum of all the $W_j$s. Thus, if we have <span style="color:green">(i)</span> then <span style="color:green">(ii)</span> follows from what we already know.
-  - (iii) <span style="color:red">$\psi$ is a wavelet with $c_\psi = \ln {2}$.</span>
+    - We already saw last time that $L^2$ is the closure of the \[direct\] sum of all the $W_j$s <span style="color:green">(4.14 (ii))</span>. Thus, if we have <span style="color:green">(i)</span>, then <span style="color:green">(ii)</span> follows from what we already know.
+    - phth: nach <span style="color:green">(i)</span> können wir jedes $f\in W_j$ mit $\\{\psi_{j,k} : k \in Z\\}$ darstellen. Da nach <span style="color:green">(4.14 (ii))</span> alle $W_j$ zusammen $L^2$ bilden, muss $\\{\psi_{j,k} : k \in Z\\}$ <span style="color:red">**über alle $j$**</span> alle $f\in L^2$ darstellen können.
+  - (iii) <span style="color:red">$\psi$ is a wavelet with $c_\psi = \ln{2}$.</span>
     - again, with the same scaling as above
-    - which is now the promised connection in its generality. So, for a function to be a wavelet we needed this corresponding constant $c_\psi$ to be bigger than $0$ and smaller than $\infty$ (this was for the continuous WT). In this case we can even exactly tell what this constant is for the $\psi$ and it is always the same if this $\psi$ is constructed from an MRA and its generator. So, in essence, this means that <span style="color:red">**"for any MRA we get a corresponding wavelet"**</span>.
+    - which is now the promised connection in its generality. So, for a function to be a wavelet we needed this corresponding constant $c_\psi$ to be bigger than $0$ and smaller than $\infty$ (this was for the continuous WT). In this case, we can even exactly tell what this constant is for the $\psi$ and <span style="color:red">this constant is always the same if this $\psi$ is constructed from an MRA and its generator</span>. So, in essence, this means that <span style="color:red">**"for any MRA we get a corresponding wavelet"**</span>.
+- "how to <span style="color:red">**construct a wavelet given any MRA**</span>", works as follows:
+  - <span style="color:green">(c1)</span> if we have a MRA $(V_j)_j$ it comes always with a generator $\phi$ (that is part of the def. of a MRA)
+  - <span style="color:green">(c3)</span> then we can <span style="color:red">construct a function $\psi$ from scale shifted versions of the generator, ie. from $\phi_{-1,k}$</span>, by reusing the coeffs from the scaling equation $h_{1-k}$
+  - <span style="color:green">(i)</span> if we do so, then this <span style="color:red">$\psi$ gives us CONSes of all detail spaces $W_j$</span> for all the $j$ (ie. if we fix the scale $j$ and use all the shifts $k$)
+  - <span style="color:green">(ii)</span> if we also use <span style="color:red">**all**</span> the scales $j$ and <span style="color:red">**all**</span> the shifts $k$, then we even get a <span style="color:red">CONS of $L^2$</span>. So, this is like, instead of expressing things in terms of the $V_j$, we are expressing in terms of the $W_j$s (the **detail spaces**)
+  - <span style="color:green">(iii)</span> furthermore, <span style="color:red">**the $\psi$ created like this is always a wavelet**</span> and we can specify the admissibility constant $c_\psi$ which is $\ln{2}$ in this case, that means <span style="color:red">**"given an MRA we get a wavelet"**</span> (this connects the 1st part of this chapter where I just assumed I was given a wavelet, and now we see how we can construct one from an MRA)
 - **proof**:
   - we will use similar techniques that we used in the specific case above where we did the computation for a very specific MRA (the p.w.c. MRA).
   - Lets see if there are any unforeseen things happening on the way
@@ -607,10 +659,20 @@ it fulfills the following conditions:
 - (iii) In the sense of <span style="color:green">(ii)</span>, <span style="color:red">the coefficients $(f, \psi_{j,k} )\_{L^2}$ are **the discrete wavelet transform of $f$**</span>.
 - (iv) The key to a <span style="color:red">**fast wavelet transform**</span> is to use that those <span style="color:red">coefficients can be computed recursively</span>, which is a consequence of the scaling equation and the definition of $\psi$:
 
-## 4.18 FWT Recursion Formulas: Computing the Coefficients $(f, \psi_{j,k} )\_{L^2}$ Recursively
+## 4.18 FWT Recursion Formulas: Computing the Coefficients $(f, \psi_{j,k} )\_{L^2}$ from $(f, \psi_{j-1,k} )\_{L^2}$
 
 - basically, the same as <span style="color:green">(4.19)</span>, but <span style="color:green">(4.19)</span> is the short notation of <span style="color:green">(4.18)</span>
 - Herleitung der <span style="color:red">**FWT Recursion Formulas**</span> <span style="color:green">(4.19)</span>:
+- the 1st part is a generalization of the scaling equation: says that the scaling equation can be used for all $j$
+  - recall: $\phi = \sum_{k\in\mathbb{Z}} h_k \phi_{-1,k}$
+    - $\phi$ is constructed from the $\phi_{\color{red}{-1},k}$, so $\phi_\color{red}{j}$ can be constructed from the $\phi_{\color{red}{j}-1,k}$
+    - we have added $j$ in front of the $-1$ index in $\phi = \sum_{k\in\mathbb{Z}} h_k \phi_{\color{red}{-1},k}$
+    - and it is shifted by $k$ (see $\phi_{j,\color{red}{k}}$)
+  - recall: $\psi := \sum_{k\in\mathbb{Z}} (−1)^k h_{1−k} \phi_{−1,k}$
+    - $\psi$ is constructed from the $\phi_{\color{red}{-1},k}$, so $\psi_\color{red}{j}$ can be constructed from the $\phi_{\color{red}{j}-1,k}$
+- the 2nd part follows by inserting the expressions for $\phi_{j,k}$ and $\psi_{j,k}$ from the 1st part into the scalar products $(f,\phi_{j,k})$ and $(f,\phi_{j,k})$
+- this now <span style="color:red">**gives us a way to go from $j$ to $j+1$**</span>
+  - given the $c$s for one $j$ we can get the $c$s and $d$s for $j$ increased by $1$
 
 <p align="center">
   <a href="https://ibb.co/PY0m18N"><img src="https://i.ibb.co/VN5jM8t/Screenshot-from-2024-03-30-16-28-44.png" alt="Screenshot-from-2024-03-30-16-28-44" border="0"></a>
@@ -618,6 +680,8 @@ it fulfills the following conditions:
 
 ## 4.19 FWT: Compute $c^{j+1}$ and $d^{j+1}$ from $c^j$
 
+- Berkels: the $c^j$ correspond to the projection $P_{V_j} f$ and the $c^{j+1}\_k$ correspond to the projection $P_{V_{j+1}} f$ and the $d^{j+1}\_k$ correspond to the projection $P_{W_{j+1}} f$
+  - Berkels: ie. if we know the function on $V_j$ we can split it in $V_{j+1}$ and $W_{j+1}$ (this is like splitting the coarse information from the detail)
 - <span style="color:red">**FWT Recursion Formulas**</span>:
 
 <p align="center">
@@ -626,8 +690,9 @@ it fulfills the following conditions:
 
 - The FWT uses these <span style="color:green">**FWT Recursion Formulas**</span> to
   - <span style="color:red">**compute**</span> from $P_{V_j} f$ (given in form of the coefficient vector $c^j$ ) the coarser projection $P_{V_{j+1}} f$ (as the coefficient vector $c^{j+1}$ ) and the wavelet component $P_{W_{j+1}} f$ (as the coefficient vector $d_{j+1}$).
-- Note that the sums are finite in case the scaling equation coefficient sequence only has finitely many nonzero entries.
-- If only few are nonzero (e. g. for the Haar wavelet only $h_0$ and $h_1$ are nonzero), only few computations have to be done when going from $j$ to $j + 1$.
+- Note that the <span style="color:red">**sums are finite**</span> in case the <span style="color:purple">scaling equation coefficient sequence</span> only has finitely many nonzero entries.
+- If only few \[of the scaling equation coefficients\] are nonzero (<span style="color:green">**eg. for the Haar wavelet**</span> only $h_0$ and $h_1$ are nonzero, <span style="color:green">**for Daubechies' wavelets**</span> four $h_k$s are nonzero), <span style="color:red">**only few computations have to be done**</span> when going from $j$ to $j + 1$.
+- **problem**: we still want to convert back to our original input after we have done whatever manipulation we wanted to do on the wavelet coeffs, so we need to be able to invert this. Fortunately, this is also possible in a similar way:
 
 ## 4.20 Invert the FWT: Compute $c^j$ from $c^{j+1}$ and $d^{j+1}$
 
@@ -636,12 +701,31 @@ it fulfills the following conditions:
 
 ## 4.21 Compact Notation of the FWT and IFWT (Algorithm)
 
+- apply <span style="color:green">(4.19)</span> $M$ times, ie. go from $j$ to $j+1$ $M$ times
+- only the $V_j$s are splitted further and further by the FWT algorithm, while $W_{j+1}$, $W_{j+2}$ are not splitted further (see figure below)
+- the IFWT goes in the figure below in the opposite direction, ie. from bottom to top
+
+<p align="center">
+  <a href="https://imgbb.com/"><img src="https://i.ibb.co/Xp6zf1F/Screenshot-from-2024-03-31-21-07-00.png" alt="Screenshot-from-2024-03-31-21-07-00" border="0"></a>
+</p>
+
 ## 4.22 $H$ and $G$ can be expressed as Convolutions
 
-## 4.23 Coefficients $c_j = ((f, \phi_{j,k} )\_{L_2} )k∈Z$ for one $j \in \mathbb{Z}$, ie. the representation of our signal $f$ on an initial scale $j$
+## 4.23 Coefficients $c_j = ((f, \phi_{j,k} )\_{L_2} )\_{k\in\mathbb{Z}}$ for one $j \in \mathbb{Z}$, ie. the representation of our signal $f$ on an initial scale $j$
 
+- **problem**:
+  - To compute the FWT, we still need the coefficients $c^j = ((f, \phi_{j,k} )\_{L^2} )\_{k\in\mathbb{Z}}$ for one $j \in\mathbb{Z}$, ie. the representation of our signal $f$ on an initial scale $j$.
+  - Usually, $f$ is not available analytically, so we cannot just compute $c^j$.
+  - Thus, we need a way to <span style="color:red">estimate $c^j$ from available data</span>.
+- **condition**:
+  - let $C := \int_{\mathbb{R}}\phi(x) dx$
+- then, $$(f, \phi_{j,k} )_{L^2} = 2^\frac{j}{2} Cf (2^j k)+\mathcal{O}(2^j)$$ thus, for $-j$ large enough \[so that $\mathcal{O}(2^j)$ is negligible\], <span style="color:red">$2^\frac{j}{2} Cf (2^j k)$ is a good approximation of $(f, \phi_{j,k} )_{L^2}$</span> .
 - it is sufficient, if we can <span style="color:red">**sample**</span> our signal <span style="color:red">**$f$ at equidistant points**</span> as long as the distance between neighboring sample points is sufficiently small.
-- the FWT for decomposition depth $M$ can be computed with $\mathcal{O}(nN )$, which is even faster than the FFT, if $n$ is small. Similarly, one can show that the IFWT is also $\mathcal{O}(nN )$.
+- Let <span style="color:red">$N = 2^M$</span>.
+- computing a **single coefficient** $(Hc)_k = (c \ast D\_{−1} h)\_{2k}$ is $\mathcal{O}(n)$
+- Both **$Hc$ and $Gc$** are (due to the downsampling) vectors of length $N/2$ and thus **can be computed with $\mathcal{O}(nN )$**
+- the <span style="color:red">**FWT for decomposition depth $M$**</span> can be computed with <span style="color:red">**$\mathcal{O}(nN )$**</span>, which is even faster than the FFT, if $n$ is small.
+- Similarly, one can show that the <span style="color:red">**IFWT is also $\mathcal{O}(nN )$**</span>.
 
 ## 4.24 2D Discrete Wavelet Transform
 
