@@ -307,30 +307,32 @@ Git actions:
 
 ## motion (in a line)
 
-- `f<letter>,,,,` (jump to `<letter>`, press `,` repeatedly to jump to the next `<letter>`)
-- `B` (beginning of previous WORD, faster than b)
-- `E` (end of WORD, faster than e)
-- `gE` (end of previous WORD, "be" does not work if cursor currently in middle of a word)
-- `ge` (end of previous word, "be" does not work if cursor currently in middle of a word)
-- `Ea` (start writing at end of WORD)
-- `ea` (start writing at end of word)
+- <kbd>f</kbd><kbd>letter</kbd><kbd>,,,,</kbd> (jump to <kbd>letter</kbd>, press <kbd>,</kbd> repeatedly to jump to the next <kbd>letter</kbd>)
+- <kbd>B</kbd> (beginning of previous WORD, faster than <kbd>b</kbd>)
+- <kbd>E</kbd> (end of WORD, faster than <kbd>e</kbd>)
+- <kbd>gE</kbd> (end of previous WORD, <kbd>be</kbd> does not work if cursor currently in middle of a word)
+- <kbd>ge</kbd> (end of previous word, <kbd>be</kbd> does not work if cursor currently in middle of a word)
+- <kbd>Ea</kbd> (start writing at end of WORD)
+- <kbd>ea</kbd> (start writing at end of word)
 
 ## motion
 
-- `g_` (end of line, last non-blank character)
-- `:changes`
-  - `g;` and `g,` (jump to previous/next change location)
-- `%` (jump out of parenthesized block to 1st parenthesis)
-- `%%` (jump out of parenthesized block to 1st parenthesis)
+- search
+  - <kbd>shift</kbd><kbd>N</kbd> (instead of <kbd>?</kbd> to search backwards)
+- <kbd>g</kbd><kbd>_</kbd> (end of line, last non-blank character)
+- `:changes` related motions (jumping between change locations)
+  - <kbd>g;</kbd> and <kbd>g,</kbd> (jump to previous/next change location)
+- <kbd>%</kbd> (jump out of parenthesized block to 1st parenthesis)
+- <kbd>%%</kbd> (jump out of parenthesized block to 1st parenthesis)
 - <kbd>backtick</kbd> (list possible jumps and marks)
   - <kbd>backtick</kbd> <kbd>.</kbd> (jump to last change in current buffer)
   - <kbd>m</kbd> + <kbd>markLetter</kbd> (set jump mark)
   - <kbd>backtick</kbd> + <kbd>markLetter</kbd> (jump to mark)
 - move
-  - `)`, `(`
-  - `*` fwd, `#` bwd
+  - <kbd>)</kbd>, <kbd>(</kbd>
+  - <kbd>*</kbd> fwd, <kbd>#</kbd> bwd
 - markdown sections
-  - <kbd>ctrl</kbd>-n, <kbd>ctrl</kbd>-p (next / previous section)
+  - <kbd>ctrl</kbd><kbd>n</kbd>, <kbd>ctrl</kbd><kbd>p</kbd> (next / previous section)
 
 ## edit
 
