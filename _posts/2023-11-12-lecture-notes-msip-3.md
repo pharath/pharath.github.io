@@ -105,7 +105,7 @@ tags:
   - **complex functions** $f: \mathbb{C} \to \mathbb{C}$
   - the terminology hermitian and skew-hermitian is used for complex functions, for complex-valued functions **even symmetric** and **odd symmetric** are used
 
-## 3.6 When is $\mathcal{F}$ even or odd?
+## 3.6 When is $\mathcal{F}f$ even or odd?
 
 - for $f\in L^1$ (eg. images), <span style="color:purple">read $L^2$</span>
   - (i) $f$ real-valued $\Leftrightarrow$ $\mathcal{F}f$ hermitian
@@ -114,7 +114,8 @@ tags:
   - Based on
     - <span style="color:green">(3.4)</span> $\mathcal{F}(\overline{f}) = \overline{D_{-\mathbb{I}}(\mathcal{F}f)}$
     - $\mathcal{F}$ is linear <span style="color:green">(3.2)</span> and injective <span style="color:green">(3.23)</span>
-- we need this for
+      - ie. <span style="color:red">**this proof uses a result from later**</span>: **for the backward direction** we need that <span style="color:red">the FT is injective</span> <span style="color:green">(3.23)</span>
+- we need this for ... TODO
 
 ## 3.7 Convolution Theorem for $\mathbb{C}$-valued Functions
 
@@ -160,11 +161,12 @@ tags:
 
 ## 3.11 Schwartz Space
 
-- aka **space of rapidly decreasing <span style="color:red">smooth</span> functions on $\mathbb{R}^d$** ([smooth functions](#cinfty-smooth-functions)): $$S(\mathbb{R}^d,\mathbb{C}):=\{f\in C^\infty : C_{\alpha,\beta}(f) := \sup_{x\in \mathbb{R}^d}{\bigg\vert x^\alpha\frac{\partial^\beta}{\partial x^\beta} f(x)\bigg\vert} < \infty\}$$
+- aka **space of rapidly decreasing <span style="color:red">smooth</span> functions on $\mathbb{R}^d$** ([smooth functions](#cinfty-smooth-functions)): $$S(\mathbb{R}^d,\mathbb{C}):=\{f\in C^\infty(\mathbb{R}^d,\mathbb{C}) : C_{\alpha,\beta}(f) := \sup_{x\in \mathbb{R}^d}{\bigg\vert x^\alpha\frac{\partial^\beta}{\partial x^\beta} f(x)\bigg\vert} < \infty\}$$
 - this definition is just formalizing what it means to be "rapidly decreasing"
 - **Schwartz functions**: infinitely differentiable functions that rapidly decay
   - (i) infinitely differentiable
   - (ii) **rapidly decay**: for $x\to \infty$, $f\to 0$ **faster than any polynomial** goes to $\infty$
+    - phth: actually, [(multi-dimensional) monomial](https://en.wikipedia.org/wiki/Monomial#Multi-index_notation)
   - (iii) **all** derivatives decay rapidly as well
 
 <span style="color:red">**idea**</span>:
@@ -198,7 +200,7 @@ tags:
         - all derivatives of $g_\sigma$ are a product of $g_\sigma$ and a polynomial
         - $g_\sigma$ goes to $0$ faster than polynomials go to $\infty$
         - products of polynomials are still polynomials
-- the "$\subset$" in (i) is strict, ie. there are Schwartz functions which are not in $C_c^\infty$, <span style="color:red">eg. $g_\sigma$</span>
+- the "$\subset$" in <span style="color:green">(i)</span> is strict, ie. there are Schwartz functions which are not in $C_c^\infty$, <span style="color:red">eg. $g_\sigma$</span>
 - **problem**:
   - how does this help us with the FT?
   - now we have a new object, a Schwartz function, but we know nothing about Schwartz functions
@@ -212,35 +214,35 @@ tags:
   - (iii) $fg\in S$ for all $g\in S$ (<span style="color:red">"a product of Schwartz functions is a Schwartz function"</span>)
 - **idea**:
   - the properties are not surprising: because we know that for all polynomials and derivatives $\bigg\vert x^\alpha\frac{\partial^\beta}{\partial x^\beta} f(x)\bigg\vert$ is bounded.
-    - So, if we multiply $\bigg\vert x^\alpha\frac{\partial^\beta}{\partial x^\beta} f(x)\bigg\vert$ by another polynomial - as in (ii) - we get, again, a different polynomial, but it should be covered by the fact that we considered **ALL** possible polynomials in 3.11 (and we also considered **ALL** derivatives)
-    - also, if you multiply $f$ with functions that go to $0$ - as in (iii) - then they go to $0$ even faster
+    - So, if we multiply $\bigg\vert x^\alpha\frac{\partial^\beta}{\partial x^\beta} f(x)\bigg\vert$ by another polynomial - as in <span style="color:green">(ii)</span> - we get, again, a different polynomial, but it should be covered by the fact that we considered **ALL** possible polynomials in <span style="color:green">(3.11)</span> (and we also considered **ALL** derivatives)
+    - also, if you multiply $f$ with functions that go to $0$ - as in <span style="color:green">(iii)</span> - then they go to $0$ even faster
 - **proof**:
-  - verify the conditions in definition 3.11:
-    1. show that each object (i)-(iii) is in $C^\infty$
-      - (i) $\frac{\partial^\gamma}{\partial x^\gamma}f \in C^\infty$ because $f \in S$ and $S\subset C^\infty$
-      - (ii) polynomials are in $C^\infty$
-      - (iii) $g$ is in $C^\infty$ because $g\in S$
-    2. show that $C_{\alpha,\beta}$ is finite for each object (i)-(iii) ($C_{\alpha,\beta}< \infty$ for all $\alpha$ and $\beta$)
+  - verify the conditions in definition <span style="color:green">(3.11)</span>:
+    1. show that each object <span style="color:green">(i)</span>-<span style="color:green">(iii)</span> is in $C^\infty$
+      - <span style="color:green">(i)</span> $\frac{\partial^\gamma}{\partial x^\gamma}f \in C^\infty$ because $f \in S$ and $S\subset C^\infty$
+      - <span style="color:green">(ii)</span> polynomials are in $C^\infty$
+      - <span style="color:green">(iii)</span> $g$ is in $C^\infty$ because $g\in S$
+    2. show that $C_{\alpha,\beta}$ is finite for each object <span style="color:green">(i)</span>-<span style="color:green">(iii)</span> ($C_{\alpha,\beta}< \infty$ for all $\alpha$ and $\beta$)
 - **problem**:
   - **before**: we started with defining $\mathcal{F}$ on $L^1$ and noted that it maps from $L^1$ to the continuous functions, but the FTs are not necessarily in $L^1$ (we had this example of the characteristic function of an interval which was mapped to the cardinal sine function which is NOT integrable)
   - **now**: we want to show that if we restrict $\mathcal{F}$ to the Schwartz space ($\mathcal{F}: S \to S$) then we get a bijective function.
   - but to realize that the $\mathcal{F}$, as we defined it before, is actually defined on the Schwartz space we still need to know that the <span style="color:red">**Schwartz functions can be integrated**</span>.
-    - So far we just said that they are a subset of $C^\infty$, but $C^\infty$ functions cannot be necessarily integrated (think about the constant function $1$ which is obviously as smooth as it gets, but the area under the function $1$ is $\infty$).
+    - So far we just said that they are a subset of $C^\infty$, but <span style="color:red">$C^\infty$ functions cannot be necessarily integrated</span> (think about <span style="color:green">**the constant function $1$**</span> which is obviously as smooth as it gets, but the area under the function $1$ is $\infty$).
   - the first thing that we will do now is to show that <span style="color:red">**$S$ is a subset of $L^1$**</span> and actually we show a bit more:
 
 ## 3.14 Schwartz functions can be integrated wrt any Power
 
 - (i) $1\leq p\leq\infty$, then <span style="color:red">**$S\subset L^p$**</span>
   - in words: <span style="color:red">Schwartz functions can be integrated wrt any power</span> (or in other words, this "rapidly decreasing to $0$" is enough to have finite area under the functions)
-  - in particular, this means that we can apply $\mathcal{F}$ to the Schwartz space because we know we can apply it to $L^1$ functions.
+  - (i.1) in particular, this means that <span style="color:red">we can apply $\mathcal{F}$ to the Schwartz space</span> because we know we can apply it to $L^1$ functions.
 - (ii) **a bound for the $L^p$-norm**: $p<\infty$ and $q\in \mathbb{N}$ with $2qp > d$, then there is a $C>0$ s.t. for all $f\in S$ $$\|f\|_{L^p}\leq C\bigg\|(1 + \|\cdot\|_2^{2q}) f\bigg\|_{L^\infty} < \infty$$
-  - (ii) is just a technical tool if we need to say sth about the $L^p$ norm of a Schwartz function then we have a bound here (which is just the supremum of the Schwartz function $f$ multiplied by a certain polynomial, where the role of "$q$" is just that the "$q$" has to be big enough so that this polynomial is large enough to get this bound).
-  - Berkels: this very specific structure of the bound in (ii) we will only need once (&rarr; in the proof of 3.18, see lec 15 (XI)), but the integrability (i) is what you should remember
+  - <span style="color:green">(ii)</span> is just a technical tool if we need to say sth about the $L^p$ norm of a Schwartz function then we have a bound here (which is just the supremum of the Schwartz function $f$ multiplied by a certain polynomial, where the role of "$q$" is just that the "$q$" has to be big enough so that this polynomial is large enough to get this bound).
+  - Berkels: this very specific structure of the bound in <span style="color:green">(ii)</span> we will only need once (&rarr; in the proof of <span style="color:green">(3.18)</span>, see lec 15 (XI)), but the <span style="color:red">**integrability**</span> <span style="color:green">(i)</span> <span style="color:red">**is what you should remember**</span>
 - **problem**:
   - (A) Another tool that we will use has to do with derivatives: one of the things that we have to show in order to realize that the FT maps from the Schwartz functions to the Schwartz functions is to <span style="color:red">**show that the FT is differentiable**</span> <span style="color:green">(&rarr; **3.17**)</span>.
     - If I take the FT of the Schwartz function, for this to be a Schwartz function that it in particular needs to be infinitely often differentiable.
     - We need to figure out can we derive the FT of the Schwartz function and if so what are the derivatives.
-  - (B) One tool that we need for (A) is <span style="color:red">**integration by parts**</span>, ie. if we do $\int fg'$ that this is the same as $-\int g'f + \text{boundary terms}$ <span style="color:green">(&rarr; **3.16**)</span>.
+  - (B) One tool that we need for <span style="color:green">(A)</span> is <span style="color:red">**integration by parts**</span>, ie. if we do $\int fg'$ that this is the same as $-\int g'f + \text{boundary terms}$ <span style="color:green">(&rarr; **3.16**)</span>.
     - but this is more <span style="color:red">tricky</span> if you integrate <span style="color:red">over all of $\mathbb{R}^d$</span> because **usually** you would integrate over an integral or a **bounded domain** and then you have these terms on the boundary, but if there is <span style="color:red">no boundary</span> because you integrate over all of $\mathbb{R}^d$ you have to be extra cautious
     - and this is what the following lemma <span style="color:green">(&rarr; **3.15**)</span> prepares
 
@@ -248,7 +250,7 @@ tags:
 
 - **conditions**:
   - $f\in C^1$ s.t. $\partial_i f\in L^1$ for an $i\in \\{1,\ldots,d\\}$
-    - we will need a minimum amount of assumptions on $f$, but you can think about this $f$ as a Schwartz function (that will be sufficient)
+    - we will need a minimum amount of assumptions on $f$, but you can think about this $f$ as <span style="color:green">**a Schwartz function**</span> (that will be sufficient)
   - $\sup_{x\in \mathbb{R}^d}{\bigg\lvert f(x) \lVert x\rVert_{2}^{2d}\bigg\rvert}<\infty$,
     - ie $f$ must go to $0$ faster than $x^2$ (this is just a restriction for the behavior of $x\to\infty$)
 - then $$\int_{\mathbb{R}^d}\partial_i f(x)dx = 0$$
@@ -259,14 +261,14 @@ tags:
 
 - **Warning**: <span style="color:green">(3.8)</span> was <span style="color:red">for the operator $\mathcal{F}$</span>, but this is <span style="color:red">for the operator $\partial_i$</span>
 - **conditions**:
-  - choose $g,h\in C^1$ s.t. $f := gh$ fulfills the conditions of <span style="color:green">(3.15)</span> (ie differentiability and integrability of the derivative and this growth constraint)
+  - choose $g,h\in C^1$ s.t. $f := gh$ fulfills the conditions of <span style="color:green">(3.15)</span> (ie <span style="color:purple">differentiability of $f$</span> and <span style="color:purple">integrability of the derivative of $f$</span> and this <span style="color:purple">growth constraint</span>)
     - dh. $g$ und $h$ müssen **nicht unbedingt** die conditions in <span style="color:green">(3.15)</span> erfüllen! Nur $f$ muss sie erfüllen.
   - $\partial_i gh, g\partial_i h\in L^1$
 - (i) integration by parts in $\mathbb{R}^d$: $$\int_{\mathbb{R}^d} \partial_i g(x)h(x)dx = -\int_{\mathbb{R}^d} g(x)\partial_i h(x)dx$$
   - in words: we are allowed to <span style="color:red">move the derivative from one function to the other, we just get the flip in the sign</span>.
   - And if you can do this once you can also do this more often. If you would have more derivatives here we could iteratively put them over to the $h$ and for each derivative you get one "$-1$".
 - (ii) or by iterating this for $\alpha\in \mathbb{N}^d$: $$\int_{\mathbb{R}^d} \frac{\partial^\alpha}{\partial x^\alpha} g(x)h(x)dx = (-1)^{\vert\alpha\vert}\int_{\mathbb{R}^d} g(x)\frac{\partial^\alpha}{\partial x^\alpha} h(x)dx$$
-- **Warning**: (i) only holds <span style="color:red">**iff**</span> $0 = \int_{\mathbb{R}^d}\partial_i (gh)(x)dx$ which, in turn, only holds if $gh$ fulfills the conditions of <span style="color:green">(3.15)</span>
+- **Warning**: <span style="color:green">(i)</span> only holds <span style="color:red">**iff**</span> $0 = \int_{\mathbb{R}^d}\partial_i (gh)(x)dx$ which, in turn, only holds if $gh$ fulfills the conditions of <span style="color:green">(3.15)</span>
 
 <p align="center">
   <img src="https://i.ibb.co/NnjY5kN/Screenshot-from-2024-03-03-11-49-49.png" alt="Screenshot-from-2024-03-03-11-49-49" border="0">
@@ -282,40 +284,48 @@ tags:
 - (iii) $\mathcal{F}(p^\alpha f) = i^{\vert \alpha\vert}\frac{\partial^\alpha}{\partial \omega^\alpha}\mathcal{F}(f)$
 - in words: <span style="color:red">the FT converts **derivatives** into a **multiplication with polynomials** and vice versa</span> (like the FT converted a translation into modulation and vice versa)
 - **proof**:
-  - (i) will be shown last
-  - show (ii) using integration by parts <span style="color:green">(3.16)</span> (which requires checking the conditions in <span style="color:green">(3.15)</span>, too)
-  - show (iii), using <span style="color:green">(B.12)</span> "if the derivative is uniformly bounded by an integrable function, differentiation and integration may be interchanged"
-  - with (iii) we know that we are in $C^\infty$ bec we know what the derivatives are, thus (i) holds
+  - <span style="color:green">(i)</span> will be shown last
+  - show <span style="color:green">(ii)</span> using integration by parts <span style="color:green">(3.16)</span> (which requires checking the conditions in <span style="color:green">(3.15)</span>, too)
+  - show <span style="color:green">(iii)</span>, using <span style="color:green">(B.12)</span> "if the derivative is uniformly bounded by an integrable function, differentiation and integration may be interchanged"
+  - with <span style="color:green">(iii)</span> we know that we are in $C^\infty$ bec we know what the derivatives are, thus <span style="color:green">(i)</span> holds
 - **problem**: now we know $\mathcal{F}(f)\in C^\infty$, but we need to show that the mapping $\mathcal{F}$ maps to the Schwartz space
 
 ## 3.18 $\mathcal{F}f\in S$, $\mathcal{F}$ is continuous
 
-- (i) $\mathcal{F}f\in S$
+- **note**: the interpretation of this is in <span style="color:green">(3.19)</span>
+- **conditions**:
+  - $f\in S$
+- (i) <span style="color:red">$\mathcal{F}f\in S$</span>
 - (ii) if $(f_n)\_n\in S^\mathbb{N}$, then $$\lim_{n\to \infty}{C_{\alpha,\beta}(f_n)} = 0\, \forall \alpha,\beta\in \mathbb{N}_0^d\quad\Rightarrow\quad\lim_{n\to \infty}{C_{\alpha,\beta}(\mathcal{F}f_n)} = 0 \,\forall \alpha,\beta\in \mathbb{N}_0^d$$
-  - in words: (ii) has to do with <span style="color:red">**continuity**</span>: if we have a <span style="color:red">**sequence of Schwartz functions**</span> and their coefficients converge to $0$ for all multiindices $\alpha$ and $\beta$, then the coefficients of the <span style="color:red">**sequence of $\mathcal{F}$-transformed functions**</span> also converge to $0$.
-    - This essentially means that we have <span style="color:red">**continuity**</span> of $\mathcal{F}$ (not $\mathcal{F}f$, this we have already shown in <span style="color:green">(3.17 (i))</span>) on the Schwartz space (ie. $\mathcal{F}: S \to S$ is continuous), but this will be discussed in <span style="color:green">(3.19)</span>
+  - in words: <span style="color:green">(ii)</span> has to do with <span style="color:red">**continuity of $\mathcal{F}$ in $f=0$**</span>: if we have a <span style="color:red">**sequence of Schwartz functions**</span> and their <span style="color:purple">coefficients $C_{\alpha,\beta}$ converge to $0$</span> for all multiindices $\alpha$ and $\beta$, then the <span style="color:purple">coefficients $C_{\alpha,\beta}$</span> of the <span style="color:red">**sequence of $\mathcal{F}$-transformed functions**</span> also <span style="color:purple">converge to $0$</span>.
+    - This essentially means that we have <span style="color:red">**continuity**</span> of $\mathcal{F}$ in $f=0$ (not continuity of $\mathcal{F}f$, this we have already shown in <span style="color:green">(3.17 (i))</span>) on the Schwartz space (ie. $\mathcal{F}: S \to S$ is continuous), but this will be discussed in <span style="color:green">(3.19)</span>
+  - **recall**: def. of $f$ pointwise continuous in $x\in X$: <span style="color:red">$\lim{x_n}=x\Rightarrow\lim{f(x_n)}=f(\lim{x_n})=f(x)$</span>, ie. "you can switch function evaluation and limit", and in particular, for $f$ continuous in $x=0$ $$\lim_{n\to\infty}x_n=0 \Rightarrow \lim_{n\to\infty}f(x_n)=f(0)$$
 - **proof**:
-  - (i)
-    - show $\mathcal{F}f\in C^\infty$
-    - show $C_{\alpha,\beta}(\mathcal{F}f) < \infty$
-    - using <span style="color:green">(3.17)</span>
-  - (ii) 
+  - <span style="color:green">(i)</span>
+    - $f\in S\stackrel{\color{green}{\text{(3.17 (i))}}}{\Rightarrow} \mathcal{F}f\in C^\infty$
+    - show $C_{\alpha,\beta}(\mathcal{F}f) < \infty$ using <span style="color:green">(3.17 (ii-iii))</span>
+  - <span style="color:green">(ii)</span> 
     - we fix some $\alpha$, $\beta$ and we need to show that for this fixed $\alpha$, $\beta$ the limit of the coefficients of the Ftransformed functions $\lim_{n\to \infty}{C_{\alpha,\beta}(\mathcal{F}f_n)}$ is also $0$
     - using <span style="color:green">(3.14 (ii))</span> the "technical" part about the upper bound
 - **problem**: now lets come to the promised interpretation of <span style="color:green">(3.18 (ii))</span>, what does it mean and what does it have to do with continuity?
 
 ## 3.19 Sequential Convergence in the Schwartz Space, Continuity of $\mathcal{F}$ in the Schwartz Space
 
-- so far we always used <span style="color:red">**norms**</span> to think about convergence, eg. if $x_n$ converges to $x$ that meant that the norm of $x_n-x$ converges to $0$, but you can also define this in different ways
-  - $\mathcal{F}: S \to S$ is <span style="color:red">**continuous**</span> with respect to a suitable <span style="color:red">topology on the Schwartz space</span>. This topology is not defined by a <span style="color:red">**norm**</span> on this space. Instead, one **defines when sequences converge** in this space: (*from lecture notes*)
-- (i) <span style="color:red">**convergence** of a sequence $(f_n)\_n$</span>:
-  - A sequence $(f_n)\_n \in S^\mathbb{N}$ converges to $f \in S$, if $C_{\alpha,\beta}(f_n − f) \to 0$ for $n \to \infty$ for all $\alpha, \beta \in N^d_0$. (*from lecture notes*)
-  - $(f_n)\_n\in S^\mathbb{N}$ converges to $f\in S$, if $\lim_{n\to\infty}{C_{\alpha,\beta}(f_n-f)} = 0\,\forall\alpha,\beta$
-- (ii) <span style="color:red">**continuity** of $\mathcal{F}$ in $0$</span>: Let $f_n\in S$ converge to $0\in S$, ie., by <span style="color:green">**3.19 (i)**</span>, $\lim_{n\to\infty}{C_{\alpha,\beta}(f_n-0)} = 0\,\forall\alpha,\beta$, then $\lim_{n\to\infty}{C_{\alpha,\beta}(f_n)} = 0$ and thus, by <span style="color:green">**3.18 (ii)**</span>, $\lim_{n\to\infty}{C_{\alpha,\beta}(\mathcal{F}f_n)} = 0\,\forall\alpha,\beta$ and therefore, $$\lim_{n\to\infty}{C_{\alpha,\beta}(\mathcal{F}f_n-\mathcal{F}0)} = 0\,\forall\alpha,\beta$$
-  - this means $\mathcal{F}f_n$ converges to $\mathcal{F}0$ (in the sense of our defined convergence <span style="color:green">**3.19 (i)**</span>) which shows the <span style="color:red">**"continuity"**</span> of $\mathcal{F}$
-- recall: def. of pointwise continuous in $x\in X$: $\lim{f(x_n)}=f(\lim{x_n})$, ie. "you can switch function evaluation and limit"
+- **note**: this is the interpretation of <span style="color:green">(3.18 (ii))</span>
+- $\mathcal{F}: S \to S$ is <span style="color:red">**continuous**</span> with respect to a suitable <span style="color:red">topology on the Schwartz space</span>. This topology is not defined by a <span style="color:red">**norm**</span> on this space. Instead, one **defines when sequences converge** in this space: (*from lecture notes*)
+  - [Schwartz seminorm](https://de.wikipedia.org/wiki/Schwartz-Raum#Definition): Der Schwartz-Raum ist ein metrisierbarer lokalkonvexer Raum, welcher durch die Familie von [**Halbnormen**](https://en.wikipedia.org/wiki/Seminorm#) $$\lVert f\rVert_N=\sup_{x\in \mathbb{R}^d}\max_{\lvert \alpha\rvert,\lvert \beta\rvert<N}{\bigg\vert x^\alpha\frac{\partial^\beta}{\partial x^\beta} f(x)\bigg\vert}$$ induziert wird.
+  - phth: a seminorm induces a <span style="color:red">**topology**</span> (called [seminorm-induced topology](https://en.wikipedia.org/wiki/Seminorm#Topologies_of_seminormed_spaces)) which can be used to define [<span style="color:red">**continuity**</span> for functions between seminormed spaces](https://en.wikipedia.org/wiki/Seminorm#Continuity_of_linear_maps)
+- (i) <span style="color:red">**convergence** of a sequence $(f_n)\_n$ to $f$</span>:
+  - A sequence $(f_n)\_n \in S^\mathbb{N}$ <span style="color:red">**converges to $f \in S$**</span>, if $C_{\alpha,\beta}(f_n − f) \to 0$ for $n \to \infty$ for all $\alpha, \beta \in N^d_0$. (*from lecture notes*)
+  - phth: $(f_n)\_n\in S^\mathbb{N}$ <span style="color:red">**converges to $f\in S$**</span>, if $$\lim_{n\to\infty}{C_{\alpha,\beta}(f_n-f)} = 0\,\forall\alpha,\beta$$
+  - so far we always used <span style="color:red">**norms**</span> to think about convergence, eg. if $x_n$ converges to $x$ that meant that the norm of $x_n-x$ converges to $0$, but you can also define this in different ways (*from lecture notes*) $$\lim_{n\to\infty}\lVert x_n-x\rVert=0$$
+- (ii) <span style="color:red">**continuity** of $\mathcal{F}$ in $0$</span>: Let $f_n\in S$ converge to $0\in S$, ie., by <span style="color:green">**3.19 (i)**</span>, $$\lim_{n\to\infty}{C_{\alpha,\beta}(f_n-0)} = 0\,\forall\alpha,\beta,$$ then $\lim_{n\to\infty}{C_{\alpha,\beta}(f_n)} = 0$ and thus, by <span style="color:green">**3.18 (ii)**</span>, $\lim_{n\to\infty}{C_{\alpha,\beta}(\mathcal{F}f_n)} = 0\,\forall\alpha,\beta$ and therefore, $$\lim_{n\to\infty}{C_{\alpha,\beta}(\mathcal{F}f_n-\mathcal{F}0)} = 0\,\forall\alpha,\beta$$
+  - phth: <span style="color:red">$\mathcal{F}0=0$</span> steht so in lec 15 (handwritten), p. 3
+    - macht aber auch mit <span style="color:green">(3.34)</span> Sinn &rarr; $\mathcal{F}c$ is the scaled Dirac measure, ie. $\mathcal{F}c(\omega)=(2\pi)^{\frac{d}{2}}c\delta_0$
+  - this means $\mathcal{F}f_n$ converges to $\mathcal{F}0$ (in the sense of our defined convergence <span style="color:green">**3.19 (i)**</span>) which shows the <span style="color:red">**"continuity"**</span> of $\mathcal{F}$ in $0$
+  - **recall**: def. of $f$ pointwise continuous in $x\in X$: <span style="color:red">$\lim{x_n}=x\Rightarrow\lim{f(x_n)}=f(\lim{x_n})=f(x)$</span>, ie. "you can switch function evaluation and limit", and in particular, for $f$ continuous in $x=0$ $$\lim_{n\to\infty}x_n=0 \Rightarrow \lim_{n\to\infty}f(x_n)=f(0)$$
 - **problem**:
-  - This is more a side remark that if you want to look at $\mathcal{F}$ just in the Schwartz space and continuity there then this would be the way to go. But we are more importantly interested in the **bijectivity**.
+  - This is more a side remark that if you want to <span style="color:purple">look at $\mathcal{F}$ just in the Schwartz space and **continuity there**</span> then this would be the way to go. But we are more importantly interested in the **bijectivity**.
   - We have shown the 1st part of our goal, ie. the form of the mapping $\mathcal{F}: S \to S$, but not its bijectivity.
   - Now it is time to look at the **inverse**.
   - And there is one final building block that we need before I can write down what the inverse is and show that it is the inverse.
@@ -338,26 +348,27 @@ tags:
 
 - <span style="color:red">only applicable to continuous $L^1$-integrable functions that have an $L^1$-integrable FT (eg. Schwartz functions)</span>
 - **conditions**:
-  - (i) $f\in L^1$ with $\mathcal{F}f\in L^1$
+  - (i) $f\in L^1$
+  - (ii) $\mathcal{F}f\in L^1$
     - must assume this to rule out $\chi_{\[-B,+B\]}\in L^1$ <span style="color:green">(3.3)</span>
     - because we know that $\mathcal{F}f\in L^1$ is not true for all $L^1$ functions, eg. we have seen $\chi_{\[-B,+B\]}\in L^1$ where we know that the cardinal sine is **not** in $L^1$.
     - $\mathcal{F}f\in L^1$ is definitely not true for all $L^1$ functions, but at least for some.
     - In particular, it is **true for all Schwartz functions**.
-  - (ii) $f$ is continuous in $x$
+  - (iii) $f$ is continuous in $x$
     - which would be **true for all Schwartz functions**
 - then $$f(x) = \frac{1}{(2\pi)^{\frac{d}{2}}} \int_{\mathbb{R}^d}(\mathcal{F}f)(\omega)e^{ix\cdot\omega}d\omega$$
 - Thus, we are looking at functions that are not only **continuous**, but also **integrable**. Because we must rule out eg. $\chi_{\[-1,+1\]}$ <span style="color:green">(3.3)</span> because its FT is the cardinal sine and we must not ignore this.
   - **outlook**: actually we will be able to repair this for $\chi_{\[-1,+1\]}$ <span style="color:green">(3.3)</span> because there **you can convert back**, <span style="color:red">but not with this formula</span>. It is somewhat different.
 - **proof**:
-  - by the DCT with the <span style="color:red">integrable</span> majorant $\lvert\mathcal{F}f\rvert$ (because from (i) we know $\mathcal{F}f\in L^1$) we know $\frac{1}{(2\pi)^{\frac{d}{2}}} \int_{\mathbb{R}^d}(\mathcal{F}f)(\omega)e^{ix\cdot\omega}d\omega = \lim_{\epsilon\to 0}\frac{1}{(2\pi)^{\frac{d}{2}}} \int_{\mathbb{R}^d}(\mathcal{F}f)(\omega)e^{-\frac{1}{2}\epsilon \lvert\omega\rvert^2+ix\cdot\omega}d\omega$
-    - <span style="color:red">ie. without condition (i) this proof is not valid!</span>
+  - by the DCT with the <span style="color:red">integrable</span> majorant $\lvert\mathcal{F}f\rvert$ (because from <span style="color:green">(i)</span> we know $\mathcal{F}f\in L^1$) we know $\frac{1}{(2\pi)^{\frac{d}{2}}} \int_{\mathbb{R}^d}(\mathcal{F}f)(\omega)e^{ix\cdot\omega}d\omega = \lim_{\epsilon\to 0}\frac{1}{(2\pi)^{\frac{d}{2}}} \int_{\mathbb{R}^d}(\mathcal{F}f)(\omega)e^{-\frac{1}{2}\epsilon \lvert\omega\rvert^2+ix\cdot\omega}d\omega$
+    - <span style="color:red">ie. without condition <span style="color:green">(i)</span> this proof is not valid!</span>
     - conditions of DCT:
       1. integrand $f_n$ converges pointwisely to $f$
       2. integrable majorant $g$
   - Now, you may say that I make this easy looking formula much more complicated bec I put these extra terms in there. Why did I do this?
-  - If you look closely the term $e^{-\frac{1}{2}\epsilon \lvert\omega\rvert^2}$ is **a Gaussian**.
-  - And we have just learned that if we apply a FT to a Gaussian then the FT vanishes bec the Gaussian is a Eigenvalue <span style="color:green">(3.20)</span>.
-  - And we know that we can move a FT from one factor to the other factor <span style="color:green">(3.8)</span>.
+    - If you look closely the term $e^{-\frac{1}{2}\epsilon \lvert\omega\rvert^2}$ is **a Gaussian**.
+    - And we have just learned that if we apply a FT to a Gaussian then the FT vanishes bec the Gaussian is a Eigenvalue <span style="color:green">(3.20)</span>.
+    - And we know that we can move a FT from one factor to the other factor <span style="color:green">(3.8)</span>.
   - So, <span style="color:red">the idea</span> now is we take the FT from our $f$ where we **cannot** compute it and move it to our Gaussian where we **can** compute it.
   - In the end we have $\frac{1}{(2\pi)^{\frac{d}{2}}} \int_{\mathbb{R}^d}(\mathcal{F}f)(\omega)e^{-\frac{1}{2}\epsilon \lvert\omega\rvert^2+ix\cdot\omega}d\omega = \int_{\mathbb{R}^d} f(\omega)\psi_\epsilon(x-\omega)d\omega = (f\ast\psi_\epsilon)(x)$
     - where $\psi(\omega) := \frac{1}{(2\pi)^{\frac{d}{2}}}e^{-\frac{1}{2}\lvert\omega\rvert^2}$ is the Gaussian and $\psi_\epsilon$ is its scaled version as in <span style="color:green">(2.3 (iii))</span>
@@ -366,15 +377,15 @@ tags:
       - we rewrite $\frac{1}{(2\pi)^{\frac{d}{2}}} \int_{\mathbb{R}^d}f(\omega)\mathcal{F}(e^{-\frac{1}{2}\epsilon \lvert\omega\rvert^2+ix\cdot\omega})d\omega = \int_{\mathbb{R}^d}f(\omega)\mathcal{F} (M_x D_{-\epsilon\mathbb{I}} \psi)d\omega$
       - we show that $\mathcal{F} (M_x D_{-\epsilon\mathbb{I}} \psi) = \psi_\epsilon(x-\omega)$ using <span style="color:green">(3.4)</span>
   - Then, using <span style="color:green">(B.10 (iii))</span>, we go the same limit $\lim_{\epsilon\to 0}$ back and the Gaussian will vanish again, ie. $\lim_{\epsilon\to 0}(f\ast\psi_\epsilon)(x) = f(x)$.
-    - to fulfill the **2nd condition** of the pointwise convergence in B.10 (iii) the continuity of $f$ at position $x$ - that we assumed in (ii) - is necessary
-    - <span style="color:red">ie. without condition (ii) this proof is not valid!</span>
-    - $f$ does not fulfill the **3rd condition** of B.10 (iii), $f\in L^\infty$ (boundedness of $f$)
+    - to fulfill the **2nd condition** of the pointwise convergence in <span style="color:green">(B.10 (iii))</span> the continuity of $f$ at position $x$ - that we assumed in <span style="color:green">(ii)</span> - is necessary
+    - <span style="color:red">ie. without condition <span style="color:green">(ii)</span> this proof is not valid!</span>
+    - $f$ does not fulfill the **3rd condition** of <span style="color:green">(B.10 (iii))</span>, $f\in L^\infty$ (boundedness of $f$)
       - but in <span style="color:purple">**ex. 7.2**</span> we showed that $f\in L^1$ works, if $\psi\in S$
   - So, by sneaking in a small Gaussian and letting that absorb our FT and going back, we can get the inverse of $\mathcal{F}f$, ie. $f(x)$.
 
 ## 3.22 Fourier Inversion Theorem a.e. without Continuity of $f$
 
-- without the continuity of $f$ the Inversion Theorem <span style="color:green">(3.21)</span> still holds **for almost all $x$**
+- <span style="color:red">without the continuity of $f$ <span style="color:green">(3.21 (iii))</span> the Inversion Theorem <span style="color:green">(3.21)</span> still holds **for almost all $x$**</span>
   - as opposed to "for every $x$"
 - **why useful**:
   - but this is just some more technical remark.
@@ -392,28 +403,32 @@ tags:
   - with Inversion Theorem a.e. without continuity of $f$ <span style="color:green">(3.22)</span>
 - Thus, a byproduct of the inversion theorem is the injectivity.
 - **problem**:
-  - Based on this inversion theorem we can now show that <span style="color:red">the FT is a bijection on the Schwartz space</span> which then justifies essentially our introduction of the space
-  - But, before we show that the FT is a bijection on the Schwartz space, we first show this simple formula here that essentially summarizes what this inverse formula says in a very compact way for the Schwartz space: It indicates that the <span style="color:red">FT is almost inverse to itself</span>. So, if we apply the FT twice then we get the function, but it is evaluated at the position $x$ multiplied by "$-1$". So, there is just this mirroring which has to do with the missing minus in the exponent of "$e^{ixw}$" in the inversion formula
+  - Based on this inversion theorem <span style="color:green">(3.21)</span> we can now show that <span style="color:red">the FT is a bijection on the Schwartz space</span> which then justifies essentially our introduction of the space
 
 ## 3.24 $\mathcal{F}$ is almost inverse to itself
 
-- if $f\in S$, then $(\mathcal{F}\mathcal{F}f)(x) = f(-x)$ for all $x$
+- **problem**:
+  - But, before we show that the FT is a bijection on the Schwartz space, we first show this simple formula <span style="color:green">(3.24)</span> that essentially <span style="color:red">summarizes what this inverse formula <span style="color:green">(3.21)</span> says in a very compact way</span> for the Schwartz space:
+    - It indicates that the <span style="color:red">FT is almost inverse to itself</span>. So, if we apply the FT twice then we get the function, but it is evaluated at the position $x$ multiplied by "$-1$". So, there is just this mirroring which has to do with the missing minus in the exponent of "$e^{ixw}$" in the inversion formula <span style="color:green">(3.21)</span>
+- **condition**:
+  - $f\in S$
+- then $(\mathcal{F}\mathcal{F}f)(x) = f(-x)$ for all $x$
 - **problem**:
   - with this tool we can show the <span style="color:red">bijectivity of the FT on the Schwartz space</span>
 
 ## 3.25 $\mathcal{F}$ is bijective in $S$, Inverse FT $\mathcal{F}^{-1}$, $\mathcal{F}$ Preserves Scalar Product
 
 - if we restrict the domain of $\mathcal{F}$ from $L^1$ to $S$ then we get a bijective FT
-- (i) $\mathcal{F}$ is a bijection from $S$ to itself
+- (i) <span style="color:red">**$\mathcal{F}$ is a bijection**</span> from $S$ to itself
 - (ii) the inverse is $\mathcal{F}^{-1} = \mathcal{F}^3$
 - (iii) $(\mathcal{F}^{-1}f)(x) = \frac{1}{(2\pi)^{\frac{d}{2}}} \int_{\mathbb{R}^d}f(\omega)e^{ix\cdot\omega}d\omega$ for $f\in S$
   - the inversion formula <span style="color:green">(3.21)</span> describes what you need to apply to $\mathcal{F}f$ to go back to $f$
-  - but this here is about how you apply the the inverse $\mathcal{F}^{-1}$ on any function
+  - but this here is about <span style="color:red">how you apply the the inverse $\mathcal{F}^{-1}$ on any function</span>
 - (iv) $(f,g)\_{L^2} = (\mathcal{F}f,\mathcal{F}g)\_{L^2}$ for $f,g\in S$
   - where $(f,g)\_{L^2} := \int_{\mathbb{R}^d} f(x)\overline{g(x)}dx$
-  - in words: "the FT does not change the $L^2$ scalar product"
+  - in words: <span style="color:red">"the FT does not change the $L^2$ scalar product"</span>
     - the $L^2$ scalar product represents the "cosine of the angle" between two objects
-    - thus, "the FT preserves lengths and angles"
+    - thus, <span style="color:red">"the FT preserves lengths and angles"</span>
   - thus, we also have $\lVert f\rVert_{L^2} := \sqrt{(f,f)\_{L^2}} = \sqrt{(\mathcal{F}f,\mathcal{F}f)\_{L^2}} =: \lVert \mathcal{F}f\rVert_{L^2}$
     - this is the "usual way" how you can create norms out of scalar products
 - **proof**:
@@ -427,7 +442,7 @@ tags:
 - **problem**:
   - So, this will give us a way to extend functions from a dense subset/dense subspace to a bigger space
 
-## 3.26 Extension to a Bigger Space
+## 3.26 Extension of Functions from a Dense Subspace to a Bigger Normed Vector Space
 
 - **problem**:
   - So, on the Schwartz space we have everything nicely under control (meaning <span style="color:green">(3.25 (i) - (iv))</span>),
@@ -439,9 +454,9 @@ tags:
       - Thus, for any $L^2$ function we can get arbitrarily close with a $C_c^\infty$ function and <span style="color:red">**$C_c^\infty$ functions are also Schwartz functions**</span> <span style="color:green">(3.12)</span>.
     - So, <span style="color:red">the idea is</span>, lets extend $\mathcal{F}$ from our Schwartz space to $L^2$ by using this denseness.
     - On the Schwartz space it should do exactly what we have shown in <span style="color:green">(3.25)</span>, but we want to extend it to the entire space $L^2$.
-  - And such kind of extension is actually a general tool that one can use **without** having explicitly Schwartz space here and $L^2$ there - it is just working in normed vector spaces.
+  - And such kind of extension is actually a <span style="color:red">**general tool**</span> that one can use **without** having explicitly <span style="color:green">Schwartz space here and $L^2$ there</span> - it is just working <span style="color:red">**in normed vector spaces**</span>.
   - And this is what the next lemma is preparing.
-  - So, this will give us a way to extend functions from a **dense** subspace $S$ (note: $S\subset L^2$ was shown in <span style="color:green">(3.14)</span>) to a bigger space $L^2$ (like the dense subspace $\mathbb{Q}$ can be extended to $\mathbb{R}$)
+  - So, this will give us a way to <span style="color:red">extend functions from a **dense** subspace $S$</span> (note: $S\subset L^2$ was shown in <span style="color:green">(3.14)</span>) <span style="color:red">to a bigger space $L^2$</span> (like the dense subspace $\mathbb{Q}$ can be extended to $\mathbb{R}$)
 - **conditions**:
   - (i) $X$ a normed vector space, $Y$ a Banach space
     - **Banach Space**: a complete, normed vector space
@@ -496,7 +511,7 @@ tags:
   - in words: "the FT has the shape that we would expect, <span style="color:red">but it just holds for a.e. $\omega$</span>"
     - clarification: "shape that we would expect": the $L^1$ FT we had in the beginning
   - **problem**: this is only for functions that are both in $L^1$ and $L^2$ &rarr; eg. we cannot use this to transform the <span style="color:red">cardinal sine</span> bec it is **not** in $L^1$
-    - but the characteristic function is both in $L^1$ and $L^2$ (bec the Lebesgue integral is defined via simple functions which in turn are defined via the characteristic functions), so there we can apply this
+    - but the characteristic function is both in $L^1$ and $L^2$ (because the Lebesgue integral is defined via simple functions which in turn are defined via the characteristic functions), so there we can apply this
   - <span style="color:red">**needed for**</span>:
     - proof of <span style="color:green">(3.50)</span> Shannon-Whittaker
 - (ii) for $f\in L^2$
@@ -514,11 +529,11 @@ tags:
 
 - (i) <span style="color:green">3.28</span> holds for $\mathcal{F}_2^{-1}$ when we replace $e^{-ix\cdot\omega}$ with $e^{+ix\cdot\omega}$ in <span style="color:green">(3.28)</span>
 - (ii) <span style="color:green">3.4, 3.6, "Conv Theorem" 3.7, "Corr Theorem" 3.10</span> still hold for $\mathcal{F}_2$
-- the general integrals <span style="color:red">on all of $\mathbb{R}^d$</span> in the def. of the FT that we did originally they do not have to exist, but the structure is preserved as we have seen in <span style="color:green">3.28 (ii)</span>, we just <span style="color:red">have to think about these integrals as limits of integrals on balls</span>, not as the more general integral on all of $\mathbb{R}^d$.
+- the general integrals <span style="color:red">on all of $\mathbb{R}^d$</span> in the def. of the FT <span style="color:green">(3.1)</span> that we did originally they do not have to exist, but the structure is preserved as we have seen in <span style="color:green">3.28 (ii)</span>, we just <span style="color:red">have to think about these integrals as limits of integrals on balls</span>, not as the more general integral on all of $\mathbb{R}^d$.
 - In the remainder I want to drop the difference between $\mathcal{F}$ and $\mathcal{F}_2$ in the notation and just write $\mathcal{F}$
-  - But keep in mind that you actually have to use this limit representation. It is just to keep the notation simple.
+  - But <span style="color:red">keep in mind that you actually have to use this limit representation <span style="color:green">3.28 (ii)</span> for $\mathcal{F}$</span> (because we will work with arbitrary $L^2$ functions). It is just to keep the notation simple.
 - **problem**:
-  - what can we actually practically get from the FT: It gives us a so called "**frequency domain representation**" of arbitrary $L^2$ functions
+  - what can we actually practically get from the FT: It gives us a so called "**frequency domain representation**" of <span style="color:red">arbitrary $L^2$ functions</span>
 
 ## 3.30 Frequency Domain Representation
 
@@ -528,8 +543,9 @@ tags:
 </p>
 
 - this gives us now a different way of <span style="color:red">interpreting what $f$ is</span>:
-  - $f$ is now expressed as a **superposition** of **complex exponential functions**.
-  - Think of these **exponential functions** as $\cos(xw)+i\cdot\sin(xw)$. These have frequencies $\omega$.
+  - **interpolation 1**: $f$ is now expressed as a <span style="color:purple">**superposition**</span> of <span style="color:purple">**complex exponential functions**</span>.
+  - Think of these **exponential functions** as <span style="color:purple">**$\boxed{\cos(xw)+i\cdot\sin(xw)}$**</span>. These have frequencies $\omega$.
+  - **interpolation 2**: $f$ is now expressed as a <span style="color:purple">**superposition**</span> of <span style="color:purple">**cosine and sine functions**</span>.
   - <span style="color:red">$(\mathcal{F}f)(\omega)$ specifies the **weight** of $e^{ix\cdot\omega}$</span> (the **amplitudes** of cosine and sine)
     - so, in this sense <span style="color:red">$(\mathcal{F}f)(\omega)$ tells us how strongly is the **frequency** $\omega$ encoded by the corresponding cosine and sine functions</span> present in our signal $f$. Bec we are really reconstructing the entire signal $f$ just by these complex exponential functions $e^{ix\cdot\omega}$.
     - in the dual sense the <span style="color:red">$f(x)$</span> in $\boxed{\mathcal{F}f(\omega) = \frac{1}{(2\pi)^{\frac{d}{2}}} \int_{\mathbb{R}^d}f(x)e^{-ix\cdot\omega}dx}$ <span style="color:green">(3.1)</span> <span style="color:red">tells us how strongly is the **position** $x$ encoded by the corresponding cosine and sine functions</span> present in our transformed signal $\mathcal{F}f$.
@@ -709,7 +725,7 @@ tags:
     - "the space of tempered distributions. It is the continuous <span style="color:red">**dual space of the Schwartz space**</span>"
     - "<span style="color:red">all tempered distributions have a Fourier transform</span>, which is not true for an arbitrary distribution"
     - "The derivative of a tempered distribution is again a tempered distribution"
-    - "The tempered distributions can also be characterized as *slowly growing*, meaning that each derivative of \[the tempered distribution\] $T$ grows at most as fast as some polynomial."
+    - "The tempered distributions can also be characterized as *slowly growing*, meaning that each derivative of \[the tempered distribution\] $T$ grows at most as fast as some polynomial. This characterization is dual to the *rapidly falling* behaviour of the derivatives of a function in the Schwartz space, where each derivative of ${\displaystyle \phi }$ decays faster than every inverse power of ${\displaystyle \lvert x\rvert}$."
     - "Tempered distributions generalize the bounded (or slow-growing) locally integrable functions"
 - we can define $\mathcal{F}\delta_x$ by its evaluation at $f\in S(\mathbb{R}^d,\mathbb{C})$ $$\boxed{\mathcal{F}\delta_x(f) := \delta_x(\mathcal{F}f)}$$
   - then, $\delta_x(\mathcal{F}f) = \int_{\mathbb{R}^d} (\mathcal{F}f)d\delta_x = (\mathcal{F}f)(x) = \frac{1}{(2\pi)^{\frac{d}{2}}}\int_{\mathbb{R}^d} f(y)e^{-iyx}dy$, where we used the definition of the **distribution induced by the measure $\delta_x$** <span style="color:green">(1.9 (v))</span> in the 1st and 2nd step and the definition of $\mathcal{F}$ in the last step
@@ -724,19 +740,19 @@ tags:
 
 - thus, for $g\in L^2$ this view coincides with our usual definition of $\mathcal{F}_2$ ($\mathcal{F}$ on $L^2$)
   - thus, this view is just a generalization of $\mathcal{F}_2$
+
+# 3.2 Orthogonal Expansions
+
 - **problem**:
   - now there are still two things missing:
     1. this FT is <span style="color:red">not discrete</span>
     2. the FT has the (from an application perspective) <span style="color:red">unrealistic assumption</span> that we have <span style="color:red">functions on all of $\mathbb{R}^d$</span>, but real images do not live on all of $\mathbb{R}^d$, they live only on the image domain $\Omega$, ie. on some rectangle or on the unit square.
       - **Objection to point 2.**: But we said you can extend the image with $0$s on all of $\mathbb{R}^d$.
-        - Berkels: Of course, you can extend it with $0$s, but then you have a FT that works on a much larger class of functions. So we developed this FT for $L^2$ functions from $\mathbb{R}^d$ to the complex numbers and, of course, those functions that have just support on the image domain would be $L^2$ functions so that you can apply the FT, but what you get back then is sth that has frequencies in all of $\mathbb{R}^d$. So, you start on a rectangle, but your FT lives on all of $\mathbb{R}^d$. So, you would greatly increase the size of your function. This is nothing that you want to do, if you do not have to!
-
-# 3.2 Orthogonal Expansions
-
+        - Berkels: Of course, you can extend it with $0$s, but then you have a FT that works on a much larger class of functions. So we developed this FT for $L^2$ functions from $\mathbb{R}^d$ to the complex numbers and, of course, those functions that have just support on the image domain would be $L^2$ functions so that you can apply the FT, but what you get back then is sth that has <span style="color:purple">frequencies in all of $\mathbb{R}^d$</span>. So, you start \[with <span style="color:red">**the image $f$**</span>\] <span style="color:purple">on a rectangle</span>, but <span style="color:red">**your FT**</span> lives <span style="color:purple">on all of $\mathbb{R}^d$</span>. So, $\mathcal{F}$ would greatly increase the size \[of the domain\] of your function. This is nothing that you want to do, if you do not have to!
 - **problem**:
-  - So, the 1st step before we actually do the discretization is to replace this $\mathbb{R}^d$ in $f \in S(\mathbb{R}^d,\mathbb{C})$ with a square or a rectangle.
-  - And this leads to Fourier series.
-  - It will be consistent with the FT, but there it turns out that to represent functions in 1D / to represent functions on an interval you do not need **all** frequencies in $\mathbb{R}$, but you just need countably many.
+  - So, the 1st step before we actually do the discretization is to <span style="color:red">**replace this $\mathbb{R}^d$**</span> in $f \in S(\mathbb{R}^d,\mathbb{C})$ <span style="color:red">**with a square or a rectangle**</span>.
+  - And <span style="color:red">**this leads to Fourier series**</span>.
+  - It will be consistent with the FT, but there it turns out that to represent functions in 1D / to represent functions on an interval you do not need **all** frequencies in $\mathbb{R}$, but you just need **countably** many.
   - This gives you a different or a series representation that is easier to handle.
   - QnA: Does conv theorem hold for the FS ?
     - Berkels: "That is a good question ..."
@@ -744,7 +760,7 @@ tags:
   - I try to briefly sketch, where this will be heading:
     - instead of integral $\frac{1}{(2\pi)^{\frac{d}{2}}}\int_{\mathbb{R}^d} f(y)e^{-iyx}dy$ we will have an **infinite sum**, so it is a **series**
     - the **summands** will be certain **functions** $e^{-iyx}$ that are multiplied with certain **weights** $f(y)$
-      - in this sense, these **complex exponentials** $e^{-iyx}$ have to be sth like a **basis**, but a **basis with infinitely many elements**.
+      - in this sense, these **complex exponentials** $e^{-iyx}$ have to be sth like a **basis**, but a <span style="color:red">**basis with infinitely (but countably) many elements**</span>.
     - to be able to understand this properly, we need to be able to handle these kind of basises, with countably many elements, and understand what it means to have this <span style="color:red">**infinite sum of functions**</span> and <span style="color:red">in which sense it converges</span> to sth or <span style="color:red">how it encodes some function</span>
     - and this is exactly what the next very brief section will do
   - but, again, we do this <span style="color:red">in an abstract setting</span>, so we can concentrate on the structures that we actually need
@@ -753,11 +769,12 @@ tags:
 
 - let $X$ be a pre-Hilbert space
 - (i) a sequence $(e_n)\_n$ is called **ONS**, if $(e_i,e_j)=\delta_{ij}$ for all $i,j$
-  - <span style="color:red">think of eg. $\mathbb{R}^n$</span> with the canonical basis vectors and the Euclidean scalar product
-  - but we will be going in the direction where <span style="color:red">these $e_n$ have to do with the complex exponentials $e^{-iyx}$</span> (but we will not consider them on all of $\mathbb{R}^d$ like we did above), I will have an example with the sine soon
+  - <span style="color:red">think of eg. $\mathbb{R}^n$</span>
+    - with <span style="color:green">**the canonical basis vectors**</span> and the Euclidean scalar product
+    - but we will be going in the direction where <span style="color:red">these $e_n$ have to do with the complex exponentials $e^{-iyx}$</span> (but we will not consider them on all of $\mathbb{R}^d$ like we did above), I will have an example with the sine soon
 - (ii) **k-th Fourier coefficient**: $x_k := (x,e_k)_X$
   - again, <span style="color:red">think of the $\mathbb{R}^n$ example</span>:
-    - in $\mathbb{R}^n$ this $x$ would be a vector and if we take the canonical basis as ONS then these scalar products $(x,e_k)_X$ would just give us the <span style="color:red">**entries**</span> of the vector
+    - in $\mathbb{R}^n$ this $x$ would be a vector and if we take <span style="color:green">**the canonical basis**</span> as ONS then these scalar products $(x,e_k)_X$ would just give us the <span style="color:red">**entries**</span> of the vector
     - but you can do the very same thing <span style="color:red">if this $x$ is a function</span> and it gives you sth equivalent to these coefficients that you know from $\mathbb{R}^n$
 - **problem**:
   - **Example of an ONS**: to see that there are also rather simple ONSs in the infinite dimensional case, so actually $X$ is a function space, so we look at $L^2$, but this time not on all of $\mathbb{R}$, but
@@ -792,7 +809,7 @@ tags:
 - (i) $\lVert x - \sum_{k=1}^{K} x_k e_k\rVert^2 = \lVert x\rVert^2 - \sum_{k=1}^{K} \lvert x_k\rvert^2$
   - ie. $\sum_{k=1}^{K}x_ke_k$ approximates $x$
   - this has some <span style="color:red">important consequences</span>: the $\sum_{k=1}^{K} \lvert x_k\rvert^2$ must be smaller than $\lVert x\rVert^2$ bec the lhs norm is always positive (but we will come to that later <span style="color:green">(3.40)</span>)
-- (ii) $\lVert x - \sum_{k=1}^{K} c_k e_k\rVert^2 = \lVert x\rVert^2 - \sum_{k=1}^{K} \lvert x_k\rvert^2 + \sum_{k=1}^{K}\lVert c_k + x_k\rVert^2$
+- (ii) $\lVert x - \sum_{k=1}^{K} c_k e_k\rVert^2 = \lVert x\rVert^2 - \sum_{k=1}^{K} \lvert x_k\rvert^2 + \sum_{k=1}^{K}\lvert c_k - x_k\rvert^2$
   - $c_k\in\mathbb{K}$ are any other coefficients than the Fourier coefficients
   - we can immediately see that the rhs is smallest if we choose $c_k = x_k$, ie the "error" (the difference of the linear combination and the element $x$) is minimal when we use exactly the Fcoeffs $x_k$.
     - in this sense, <span style="color:red">the Fcoeffs give us the "best approximation" of any element $x\in X$</span>
@@ -814,7 +831,7 @@ tags:
   - **proof**:
     - not surprising, bec of <span style="color:green">(3.38(i))</span>
 - The more interesting part that we do **not** know yet is:
-- (i.2) equality in (i.1) holds iff $\lVert x - \sum_{k=1}^{K} x_k e_k\rVert^2 = 0$
+- (i.2) equality in <span style="color:green">(i.1)</span> holds iff $\lVert x - \sum_{k=1}^{K} x_k e_k\rVert^2 = 0$
   - <span style="color:green">(i.2)</span> means that equality in <span style="color:green">(i.1)</span> holds <span style="color:red">iff $x$ is exactly represented by this linear combination</span>.
   - **proof**:
     - this also follows from <span style="color:green">(3.38 (i))</span> bec we have an equality, so the only way that the rhs can be $0$ is when the lhs is $0$.
@@ -822,9 +839,9 @@ tags:
 - (ii.1) $\sum_{k=1}^{\infty}\lvert x_k\rvert^2 \leq \lVert x\rVert^2$
   - Thus, this inequality in <span style="color:green">(i.1)</span> is <span style="color:red">still true</span>. So, even if you have infinitely many elements here, the <span style="color:red">sum of the squared Fcoeffs can never exceed the norm there (on the rhs)</span> bec this shows that <span style="color:red">this series here (on the lhs) converges (bec it has a finite value)</span>.
 - here we have to be a little more careful with the formulation:
-- (ii.2) equality in (ii.1) holds iff $\lim_{K\to\infty}\lVert x - \sum_{k=1}^{K} x_k e_k\rVert^2 = 0$
+- (ii.2) equality in <span style="color:green">(ii.1)</span> holds iff $\lim_{K\to\infty}\lVert x - \sum_{k=1}^{K} x_k e_k\rVert^2 = 0$
   - in words: the linear combination converges to $x$
-  - since there are infinitely many entries in the ONS we cannot just look at the infinite sum, but we can look at the convergence of functions.
+  - since there are infinitely many entries in the ONS we <span style="color:red">cannot just look at the infinite sum</span>, but we can look at the <span style="color:red">convergence of functions \[in the norm\]</span>.
   - This is what is important for a <span style="color:red">basis</span>. Bec this way you can at least <span style="color:red">approximate any $x$ as a finite linear combination of the ONS</span>. This will be the necessary extension for when we call an ONS <span style="color:red">complete</span> (later).
 
 ## 3.41 Interpretation of 3.40
@@ -857,7 +874,7 @@ tags:
 &#10625;&#160; if $(e_n)_n\in X^{\mathbb{N}}$ is a CONS, then <span style="color:red">$\sum_{k=1}^{K}x_ke_k$ converges to $x$</span> for $K\to\infty$
 </p>
 
-- you should really <span style="color:red">think of this as a limit</span> of these sums and **not** as actually summing up infinitely many elements.
+- you should really <span style="color:red">think of this as a limit of these sums</span> and **not** as actually summing up infinitely many elements.
 - **problem**:
   - The following corollary illustrates this from a different angle:
 
@@ -898,9 +915,23 @@ tags:
 
 # 3.3 Fourier Series
 
+- Since <span style="color:red">**digital images**</span> are typically given on <span style="color:red">**bounded hyperrectangles $\left[a_1, b_1\right] \times \ldots \times \left[a_d, b_d\right]$**</span>, we are not only interested in the Fourier transform on the whole $\mathbb{R}^d$, but also in analogous <span style="color:red">**transforms on such hyperrectangles**</span>.
+  - see comment in <span style="color:green">(3.35)</span>: "$\mathcal{F}$ would live on all of $\mathbb{R}^d$, we don't want that"
+- First, we just consider the case $d = 1$ and $\left[a_1 , b_1 \right] = \left[−B, B\right]$ with $B > 0$.
+  - **problem**: this is a special case: interval is **symmetric**
+    - but this does not restrict us bec with scaling and translation we can easily **generalize** this **to arbitrary intervals**
+- Using scaling and translation, this case can be <span style="color:red">generalized to all bounded intervals</span>
+- and then, using the tensor product, <span style="color:red">to hyperrectangles in any dimension</span>.
+- Since $\left[−B, B\right]$ is bounded, <span style="color:red">we can directly consider $L^2$-functions</span>.
+  - what does he mean with "directly"?
+    - for the FT we had to start with $L^1$ functions (because the classical way to define the FT does <span style="color:red">not</span> work for $L^2$ functions) and we needed a lot of time to fix that, but this is <span style="color:red">not a problem on a bounded domain</span>.
+      - phth: not a problem <span style="color:red">because $L^2\subset L^1$ on bounded domains</span> (see Prerequisites)
+
 ## 3.46 Scalar Product
 
 - $(f,g)\_{\left[-B,B\right]} := \frac{1}{2B}\int\_{-B}^{B}f(x)\overline{g(x)}dx$
+- pretty much like the scalar prod on $L^2$, the only difference is the scaling factor (I'm normalizing with the length of the interval $-B$ to $B$)
+- the division by $2B$ makes the functions $e_k$ <span style="color:red">orthoNORMAL</span>, otherwise they would be <span style="color:red">orthoGONAL</span> (and we would need some scaling factor in front of the $e^{ikx}$ to make sure they integrate to $1$)
 
 ## 3.47 $(e^{ikx})\_{k\in\mathbb{Z}}$ is an ONB
 
@@ -909,11 +940,13 @@ tags:
 ## 3.48 Fourier Series
 
 - (i) <span style="color:red">**Fourier Series**</span>: $f=\sum_{k\in\mathbb{Z}}(f,e_k)\_{\left[-\pi,\pi\right]}e_k$, with <span style="color:red">**Fourier coefficients**</span> $(f,e_k)\_{\left[-\pi,\pi\right]}=\frac{1}{2\pi}\int_{-\pi}^{\pi}f(x)e^{-ikx}dx$
+  - RHS to be understood as a linear combination of $L^2$ functions ($e_k$ are $L^2$ functions, see <span style="color:green">(3.47)</span>)
 - (ii) $e_k$ can be generalized to $e^B_{k}(x)=e^{ik\frac{\pi}{B}x}$
 
 ## 3.49 Compute Fourier Series for $f(x)=x(\pi-\lvert x\rvert)$
 
 - use symmetry: $f$ is odd
+- <span style="color:red">the Fcoeffs $(f,e_k)_{\left[-\pi,\pi\right]}$ are $0$ for the even $k$</span>
 
 ## 3.50 Sampling Theorem, Shannon-Whittaker
 
@@ -933,7 +966,7 @@ tags:
         - because the only thing that can go wrong in $L^2$ is that you may have a singularity, but the square $\cdot^2$ makes it just go quicker to $\infty$, thus, <span style="color:red">if it (the integration wrt the absolute value) works with a square then it has to work with a $1$, too</span>
     - $\Rightarrow \hat{f}\in L^2(\mathbb{R},\mathbb{C})\cap L^1(\mathbb{R},\mathbb{C})$
       - $\Rightarrow$ <span style="color:green">(3.29 (i)), (3.28 (i))</span> **conditions** fulfilled, <span style="color:red">so we can write $f=\mathcal{F}^{-1}\hat{f}$</span>
-        - $\Rightarrow$ <span style="color:green">(3.2 (i))</span> **conditions** fulfilled, so $f=\mathcal{F}^{-1}\hat{f}$ is continuous
+        - $\Rightarrow$ <span style="color:green">(3.2 (i))</span> **conditions** fulfilled, so $\mathcal{F}\hat{f}$ is continuous and thus, $f=\mathcal{F}^{-1}\hat{f}=D_{-\mathbb{I}}\mathcal{F}\hat{f}$ is continuous
   - <span style="color:red">for (ii)</span>:
     - **because of (i)** we can write $$\boxed{f\left(\frac{k\pi}{B}\right)=\sqrt{\frac{2}{\pi}}B(\hat{f},e^{B}_{-k})_{\left[-B,B\right]}}\,\text{where}\, e^B_{k}(x)\,\text{defined in (3.48).}$$
       - in words: all Fcoeffs $(\hat{f},e^{B}_{-k})$ are solely determined by $f(\frac{k\pi}{B})$

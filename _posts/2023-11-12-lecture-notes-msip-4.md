@@ -93,7 +93,7 @@ tags:
   - $c_\psi<\infty$ gives us the **continuity** of the WT &rarr; <span style="color:green">(4.5 (ii))</span>
   - $c_\psi>0$ gives us the **invertibility** of the WT &rarr; <span style="color:green">(4.6)</span>
 
-## 4.5 $L_{\psi}$ Almost Isometry, $L_{\psi}$ is Continuous, $\hat{\psi}(0) = 0\Leftrightarrow$ Mean Value of $\psi$ (not $\hat{\psi}$!) is $0$
+## 4.5 $L_{\psi}$ Almost Isometry, $L_{\psi}$ is Continuous, ($\hat{\psi}(0) = 0\Leftrightarrow$ Mean Value of $\psi$ (not $\hat{\psi}$!) is $0$)
 
 - (i) the scalar product in <span style="color:green">(4.2 (iv))</span> induces the <span style="color:red">**norm**</span> $$\lVert L_{\psi}f\rVert_{L^2(\left[0,\infty\right)\times\mathbb{R},\frac{dadb}{a^2})}=\sqrt{(L_{\psi}f,L_{\psi}f)_{L^2(\left[0,\infty\right)\times\mathbb{R},\frac{dadb}{a^2})}}\stackrel{(4.3)}{=}\sqrt{c_{\psi}(f,f)_{L^2}}=\sqrt{c_{\psi}}\lVert f\rVert_{L^2}\quad\forall f\in L^2$$
 - (ii) from <span style="color:green">(i)</span> we see that <span style="color:green">(4.3)</span> shows that <span style="color:red">**the WT is continuous**</span> <span style="color:red">if $c_{\psi}<\infty$</span>
@@ -110,6 +110,7 @@ tags:
 ## 4.6 Wavelet Inversion Theorem
 
 - **conditions**:
+  - $f\in L^2$
   - $\psi\in L^2$
   - $\psi$ is <span style="color:red">a wavelet</span>
     - ie. $\psi$ fulfills the <span style="color:red">admissibility condition</span>
@@ -365,7 +366,7 @@ it fulfills the following conditions:
 
 - (iii) Since $\\{\phi_{-1,k} : k \in \mathbb{Z}\\}$ is a CONS of $V_{-1}$, <span style="color:red">**we can express the generator $\phi$ in this CONS**</span> $$\label{eq:scaling-equation}\phi = \sum_{k\in\mathbb{Z}} h_k \phi_{-1,k} = \sum_{k\in\mathbb{Z}} h_k \sqrt{2}\phi(2 \cdot - k),$$ where the dot "$\cdot$" is just a placeholder (not a variable!) and <span style="color:red">$h_k = (\phi, \phi_{-1,k} )_{L^2}$</span> for $k \in \mathbb{Z}$ are <span style="color:red">**the Fcoeffs**</span>, cf. <span style="color:green">(3.43)</span> (note that this does <span style="color:red">**not**</span> mean that the series is converging pointwise a.e.).
   - This equation is called <span style="color:red">**scaling equation**</span> and the reason why $\phi$ is also called <span style="color:red">**scaling function**</span> (cf. <span style="color:green">(4.8)</span>).
-  - **note**: This also means that we can express $\phi$ with scaled versions of itself. This puts some interesting constraints on this $\phi$.
+  - **note**: This also means that we can <span style="color:red">express $\phi$ with scaled versions of itself</span>. This puts some interesting constraints on this $\phi$.
   - phth: this does <span style="color:red">**not**</span> imply the <span style="color:purple">pointwise convergence</span> $\phi\color{red}{(x)} = \sum_{k\in\mathbb{Z}} h_k\sqrt{2}\phi(2\color{red}{x} - k)$ for all $x$, but only <span style="color:purple">convergence of the $L^2$-norm of the series</span> <span style="color:green">(rhs)</span> to the $L^2$-norm of $\phi$ <span style="color:green">(lhs)</span> (see <span style="color:green">(3.48)</span>)
   - <span style="color:red">**watch**</span>: lecture 27, beginning of <span style="color:green">(4.12)</span>: long discussion about <span style="color:green">(3.43)</span> and <span style="color:green">(3.48)</span>, <span style="color:purple">convergence of the series in the $L^2$-norm</span> vs. <span style="color:purple">pointwise convergence</span>
     - **counterexample**: in the figure below: consider the following sequence of functions:
@@ -731,10 +732,26 @@ it fulfills the following conditions:
 
 - There are numerous ways to construct a two-dimensional wavelet transform.
 - The easiest way is to extend the one-dimensional wavelet transform by using the tensor product.
+- slide demo:
+  - Berkels: these 3 ($H_j^2$, $S_j^2$, $D_j^2$) contain a $V_j$, why are they called <span style="color:red">2D detail spaces</span>? - These 3 ($H_j^2$, $S_j^2$, $D_j^2$) are <span style="color:red">**just details (like edges)**</span>, <span style="color:purple">**although they contain a $V_j$**</span>, because these 3 together form $W_j$ by our definition of $W_j$: <span style="color:red">$\mathcal{W}\_j^2$ must be the orthogonal complement of $V_j^2$, ie. $V_{j-1}^2=V_j^2\oplus \mathcal{W}\_j^2$</span>, so, when comparing this with the equation in **Figure 4.24** we can see that <span style="color:red">$\mathcal{W}_j^2=H_j^2\oplus S_j^2\oplus D_j^2$</span>
+    - Berkels: If you check the picture on the slides you can also see that there is <span style="color:red">**no local means**</span> left <span style="color:red">**in these $H_j^2$, $S_j^2$, $D_j^2$**</span>.
+
+<p align="center">
+  <b>Figure 4.24:</b><br>
+  <a href="https://imgbb.com/"><img src="https://i.ibb.co/LZ96WTL/Screenshot-from-2024-04-03-13-11-24.png" alt="Screenshot-from-2024-04-03-13-11-24" border="0"></a>
+</p>
+
+  - Berkels: on the **lower left** it picks more <span style="color:red">vertical</span> structures, on the **top right** it picks more <span style="color:red">horizontal</span> structures and on the **diagonal** it picks more <span style="color:red">diagonal</span> structures
+  - Berkels: <span style="color:red">**at the 2nd level**</span> we just get horizontal, vertical and diagonal components <span style="color:red">**at a coarser scale**</span>. They contain coarser information because they are already <span style="color:purple">**averaged**</span>.
+    - <span style="color:purple">**why "averaged"?**</span>: 2nd level ist die Zerlegung von $V_{j+1}$ in $V_{j+2}$ und $W_{j+2}$ und $P_{V_{j+1}}f=f_{\text{avg}}$ im Sinne von <span style="color:green">(4.15 (i))</span>, dh. <span style="color:purple">**das Bild oben links (a, aa, aaa, etc.)**</span> ist ein <span style="color:purple">**"average"**</span> (für p.w.c. MRA). In diesem Sinn ist $W_{j+2}$ (2nd level) coarser als $W_{j+1}$ (1st level), weil $W_{j+2}$ ein Teil des bereits "geaverageten" $V_{j+1}$ ist
+      - for other wavelets (other MRA) than the Haar wavelet the "average" (top left image) and the details (3 other images) look different
+    - Berkels: but the 2nd level is still <span style="color:red">**more**</span> horizontal, vertical and diagonal details. So, the 2nd level gives you <span style="color:red">additional information</span> that is not in the 1st level. But it is still as directional as the 1st level.
+    - Berkels: the <span style="color:red">**scale**</span> on everything is very much related to your <span style="color:red">**image resolution**</span>, not to what you actually see in there
 
 ## 4.25 JPEG, JPEG2000
 
 - <span style="color:red">**Wavelets**</span> have <span style="color:red">**countless of applications**</span>, both in theoretical and in practical work. Here, we just confine to briefly mention **one** practical application.
 - Like the DCT, the <span style="color:red">**FWT (Fast Wavelet Transform)**</span> can be used <span style="color:red">**for image compression**</span> by only storing the most important wavelet coefficients.
 - In <span style="color:red">**JPEG2000**</span>, the block-wise DCT is replaced by a wavelet transform, which results in significantly improved compression rates, ie. **better image quality** using the **same amount of data** or **same image quality** using **less data**.
+  - unlike the DCT, the WT has <span style="color:red">**no "blocking" artifacts**</span>
 - While the <span style="color:red">**classical JPEG**</span> format is still <span style="color:red">**much more popular**</span> in digital photography than JPEG2000, digital cinema uses JPEG2000 as basis for video compression.

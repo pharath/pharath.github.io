@@ -115,6 +115,7 @@ see [section "compact"](#compact)
 
 ## 2.3 (iii) Approximating any Function with a Differentiable Function
 
+- <span style="color:red">**note**</span>: <span style="color:green">(B.10 (iii))</span> has <span style="color:red">the same</span> conditions!
 - **conditions**:
   - $\psi\in L^1$, $\psi\geq 0$ and $\int_{\mathbb{R}^d}\psi(x)dx=1$
   - **$\psi_\epsilon$ a scaled version of $\psi$**: for $\epsilon > 0$, $\psi_\epsilon: \mathbb{R}^d \to \mathbb{R}, x \mapsto \frac{1}{\epsilon^d}\psi(\frac{x}{\epsilon})$
@@ -394,7 +395,7 @@ see [section "compact"](#compact)
   - <span style="color:red">central</span> diff quot $D_{x_1}^{c} = 0$, but the signal is not constant
     - ie. it is not desirable to have a derivative of $0$ for a signal that is absolutely NOT constant / a signal that is maximally oscillating.
     - why <span style="color:red">central</span> diff quot?: bec this is what we would usually do for the 1st order derivative bec the central diff is a better approximation than the forward or backward difference !
-  - **solution**: make use of property <span style="color:green">(2.3)</span>
+  - **solution**: make use of property <span style="color:green">(2.3)</span>, ie. convolve with the derivative of a certain kernel
 - **problem**:
   - despite these problems with the finite differences you can use them for edge detection:
 
@@ -496,13 +497,13 @@ see [section "compact"](#compact)
     - **black graph**: image
     - <span style="color:red">zero crossings</span> of **red graph** are where the edges are
   - look <span style="color:red">at left edge</span>:
-    - the only thing we are allowed to do is to decrease the slope where we are locally at the edge, this means:
+    - the only thing we are allowed to do is to <span style="color:red">**decrease the slope**</span> where we are locally at the edge (<span style="color:red">**"decrease"**</span> because "we just want that if we increase sigma then the <span style="color:red">**edges decrease**</span>", as mentioned below and <span style="color:purple">**"edge decreases" = "slope decreases"**</span>), this means:
       - left of left edge: we are only allowed to increase values of $f$
       - right of left edge: we are only allowed to decrease values of $f$
   - the <span style="color:red">1st and 3rd condition</span> encode exactly this idea
-    - $\partial^2x_u > 0$ detects whether we are left of the left edge
+    - $\partial^2_xu > 0$ detects whether we are left of the left edge
       - where $\partial_{\sigma}u > 0$ only allows to increase $f$
-    - $\partial^2x_u < 0$ detects whether we are right of the left edge
+    - $\partial^2_xu < 0$ detects whether we are right of the left edge
       - where $\partial_{\sigma}u < 0$ only allows to decrease $f$
   - the situation <span style="color:red">at the right edge</span> is the opposite, but the 3 conditions apply there, too
 
@@ -571,7 +572,7 @@ see [section "compact"](#compact)
 
 # 2.18 Denoising of Objects
 
-- <span style="color:red">**"objects"**</span> are different from images in that they have <span style="color:red">only $0$ or $1$ as values</span>, whereas images have a continuous value range.
+- the <span style="color:red">**"objects"**</span> is the subset of the domain (the "big circle" in the drawing) <span style="color:red">**together with**</span> the noise dots
 - $f(x)=1$ if $\forall y: \chi_A(x+y)=1$ (universal quantifier) &rarr; "denoiser" of $\chi_A$
 - $g(x)=1$ if $\exists y: f(x+y)=1$ (existential quantifier) &rarr; "grower" of $f$
 - where
@@ -656,7 +657,7 @@ see [section "compact"](#compact)
 </p>
 
 - opening, closing:
-  - fulfill all <span style="color:red">except distributivity</span> and additionally:
+  - fulfill all <span style="color:red">except distributivity</span> (makes sense bec of <span style="color:green">(2.27)</span>) and additionally:
   - **non-increasingness**
     - durch opening ("removing noise") kann $f$ nur kleiner werden oder gleich bleiben
   - **non-decreasingness**

@@ -234,9 +234,18 @@ Let $X$ and $Y$ be normed vector spaces, $T : X \to Y$ linear and $x_0 \in X$. T
   - ie. "every Cauchy sequence of functions in ${\displaystyle L^{p}}$ converges to a function in ${\displaystyle L^{p},}$ under the metric induced by the $p$-norm", [Wikipedia](https://en.wikipedia.org/wiki/Riesz%E2%80%93Fischer_theorem#Completeness_of_Lp,_0_%3C_p_%E2%89%A4_%E2%88%9E)
 - The **triangle inequality** for the $L^p$-norm is also called **Minkowski inequality**
 
+## Sequences
+
+### Absolute Convergence of a Sequence
+
+- [stackexchange](https://math.stackexchange.com/a/896692)
+  - Does **absolute convergence of a sequence** imply convergence?
+    - No. e.g. $(−1)^n$ does not converge but $\lvert (−1)^n\rvert=\lvert −1\rvert^n=1$ does converge (to $1$).
+    - As NotNotLogical has pointed out, the exception to this is when a sequence converges absolutely to $0$ , in which case the sequence converges to $0$.
+
 ## Series
 
-### Absolute Convergence
+### Absolute Convergence of a Series
 
 Wikipedia:
 
@@ -270,6 +279,16 @@ Wikipedia:
 
 - $(\Omega,\mathcal{A})$, $(\Sigma,\mathcal{B})$
 - a function is called $\mathcal{A}$-$\mathcal{B}$ measurable or <span style="color:red">measurable</span>, if $f^{-1}(B)\in\mathcal{A}$ for all $B\in\mathcal{B}$
+
+## Schwarz's theorem
+
+- refers to the possibility of **interchanging the order of taking partial derivatives** of a function of ${\displaystyle n}$ variables without changing the result under certain conditions
+
+## Distributions
+
+- <span style="color:red">**Distributions**</span>, also known as <span style="color:red">**Schwartz distributions**</span> or <span style="color:red">**generalized functions**</span>, are objects that generalize the classical notion of functions in mathematical analysis.
+- Distributions make it possible to differentiate functions whose derivatives do not exist in the classical sense.
+  - In particular, any **locally integrable function** has a <span style="color:red">**distributional derivative**</span>. 
 
 # C.1.1 Digital Images
 
@@ -354,7 +373,7 @@ Wikipedia:
 - **clipping**: $$\begin{equation*} T_{\left[a,b\right]}^{\text{clip}}: \mathbb{R} \to \left[a,b\right],\ s \mapsto \begin{cases}
                                             a &s\leq a\\
                                             b &s\geq b\\
-                                            c &\text{else}
+                                            s &\text{else}
                                             \end{cases}
                   \end{equation*}$$
 - eg. in electron microscopy: sometimes just normalization is not enough (eg. outliers, very bright pixels) and you **must** apply **clipping** **first** to make certain structures visible and normalization **after** that
@@ -388,7 +407,7 @@ Wikipedia:
 
 ## 1.6 (v) log transformation
 
-- **log transformation**: $$\begin{equation*} T_{\log}: \left[0,\infty\right) \to \left[0,\infty\right),\ s \mapsto \log_2(1+s) \end{equation*},\ \text{where}\ \gamma > 0$$
+- **log transformation**: $$\begin{equation*} T_{\log}: \left[0,\infty\right) \to \left[0,\infty\right),\ s \mapsto \log_2(1+s) \end{equation*}$$
   - **power spectrum**: absolute value of the Fourier transform
   - log transformation often used to visualize the power spectrum
   - choose base $2$, so that $\left[0,1\right]$ is mapped to $\left[0,1\right]$ **bijectively** (but you could choose other bases as well)
