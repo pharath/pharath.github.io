@@ -204,6 +204,10 @@ Aufruf über Einstellungen -> Suchen. Dort gibt es oben in der Titelleiste den B
 
 In this GUI excluding the "Home" folder stopped `tracker-miner-fs` which was stuck (see above in the output of "tracker daemon") and had about `95%` CPU in `htop`.
 
+# Disk
+
+`baobab` aka **Disk Usage Analyzer**
+
 # Appearance
 
 ## Restart GUI

@@ -349,16 +349,21 @@ gio open file | same as xdg-open, but depends on what desktop the user has insta
 `pgrep process_name` | list all PIDs containing `process_name` (which is a regular expression)
 
 Check PID of a window: 
+
 ```bash
 xprop _NET_WM_PID | sed 's/_NET_WM_PID(CARDINAL) = //' | ps `cat`
 ```
+
+This will make your cursor a cross with which you can click on an open window. It will report the PID and command in the terminal you ran it in.
+
+In general, `xprop` and `xwininfo` will provide you with a lot of information about an open window.
 
 ## Get Paths
 
 | command | description |
 | :--- | :--- |
-realpath foo.bar | get path to file "foo.bar" (like `pwd` + foo.bar)
-readlink -f foo.bar | get path to file "foo.bar" (like `pwd` + foo.bar)
+`realpath foo.bar` | get path to file "foo.bar" (like `pwd` + foo.bar)
+`readlink -f foo.bar` | get path to file "foo.bar" (like `pwd` + foo.bar)
 
 ## Redirection, Pipe Tricks
 
@@ -955,7 +960,7 @@ Troubleshooting:
 
 | command | description |
 | :--- | :--- |
-ncdu | like `du -sh`, but more convenient (because avoids typing)
+`ncdu` | like `du -sh`, but more convenient (because avoids typing)
 `du -sh *` | 
 `du -sch *` | `-c` to show grand total
 `du -sh * | sort -h` | "ascending": largest file in the last output line
@@ -1083,11 +1088,13 @@ The software utility cron also known as cron job is a time-based job scheduler i
 
 | command | description |
 | :--- | :--- |
-scp *source* *target* | immer Anführungszeichen um den *source* Pfad setzen!
-`scp -rv Macbook:"~/Desktop/Uni/FS1/Essential\ Astrophysics\ WS1819" ~/Desktop/` | spaces DOPPELT escapen (hier: 1. mit `"` **UND** 2. mit `\`) 
+`scp "source" "target"` | immer Anführungszeichen `"` um den `source` Pfad setzen!
+`scp -rv Macbook:"~/Desktop/Uni/FS1/Essential\ Astrophysics\ WS1819" ~/Desktop/` | spaces DOPPELT escapen (hier: mit `"` **UND** mit `\` **gleichzeitig**)
 `scp -r [!.]* source target` | exclude hidden files
 
 ## rsync
+
+### rsync basics
 
 Rsync patterns: [stackexchange](https://unix.stackexchange.com/a/2503)
 
@@ -1101,7 +1108,7 @@ Rsync patterns: [stackexchange](https://unix.stackexchange.com/a/2503)
 
 | command | description |
 | :--- | :--- |
-`rsync -a --exclude="SomeDirForPythonInstall"` | exclude directory "SomeDirForPythonInstall"
+`rsync -a --exclude="SomeDirForPythonInstall"` | exclude directory `SomeDirForPythonInstall`
 `rsync -a --exclude=".*"` | excludes hidden files and directories
 `rsync -a --exclude=".*/"` | exclude hidden directories only
 `rsync -av --progress sourcefolder /destinationfolder --exclude thefoldertoexclude` | exclude `thefoldertoexclude`
@@ -1124,6 +1131,8 @@ Rsync patterns: [stackexchange](https://unix.stackexchange.com/a/2503)
 | command | description |
 | :--- | :--- |
 `tree -H ./ > result.html` | save directory tree to file 
+`tree -aH --du -h ./ > result.html` | report human readable sizes of files and folders
+`tree -aJ --du -h ./ > result.json` | output json format
 `firefox ./result.html` | view html tree created by `tree` command
 
 # xmodmap, xev
@@ -1177,8 +1186,8 @@ TODO: The `xmodmap ~/.Xmodmap` in your `.bashrc` is executed every time a new te
 `retext markdown_file.md` | edit markdown_file.md
 `retext --preview markdown_file.md` | preview `markdown_file.md`
 **Tipp:**| Shortcuts: s. Menu &rarr; File und Edit
-ctrl + e | preview on/off
-ctrl + l | live preview on/off (die live updates brauchen manchmal bisschen)
+<kbd>ctrl</kbd> <kbd>e</kbd> | preview on/off
+<kbd>ctrl</kbd> <kbd>l</kbd> | live preview on/off (die live updates brauchen manchmal bisschen)
 
 ## grip
 
