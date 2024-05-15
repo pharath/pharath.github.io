@@ -12,6 +12,13 @@ tags:
   - cheatsheet
 ---
 
+# References
+
+- [tldp.org](https://tldp.org/LDP/Bash-Beginners-Guide/html/Bash-Beginners-Guide.html)
+- [gnu.org](https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html)
+  - the same on [devdocs.io: bash](https://devdocs.io/bash/) ("DevDocs combines multiple API documentations in a fast, organized, and searchable interface.", [devdocs.io](https://devdocs.io/))
+- [mywiki.wooledge.org](https://mywiki.wooledge.org/BashSheet#Syntax)
+
 # Profiling
 
 ## Check the Execution Time 
@@ -130,9 +137,10 @@ $ echo $MYVAR
 
 # If
 
-## double square brackets vs single square brackets
+## Double Square-Brackets vs Single Square-Brackets
 
-If you're writing a `#!/bin/bash` script then I recommend using `[[` instead. The double square-brackets `[[...]]` form has more features, a more natural syntax, and fewer gotchas that will trip you up., [stackoverflow](https://stackoverflow.com/a/20449556)
+- "If you're writing a `#!/bin/bash` script then I recommend using `[[` instead. The double square-brackets `[[...]]` form has more features, a more natural syntax, and fewer gotchas that will trip you up.", [stackoverflow](https://stackoverflow.com/a/20449556)
+- "`[[` is bash's improvement to the `[` command. It has several enhancements that make it a better choice if you write scripts that target bash.", [stackoverflow](https://stackoverflow.com/questions/3427872/whats-the-difference-between-and-in-bash)
 
 ## Command as condition
 
@@ -145,13 +153,9 @@ $ if /bin/false; then echo that is true; fi
 $
 ```
 
-## Not
+# Was bedeutet `$#`?
 
-```bash
-if ! grep -q sysa /etc/passwd ; then
-```
-
-# Was bedeutet $# in einem bash script? (s. [askubuntu post](https://askubuntu.com/questions/939620/what-does-mean-in-bash))
+from: [askubuntu post](https://askubuntu.com/questions/939620/what-does-mean-in-bash))
 
 Zum Beispiel:
 
@@ -161,20 +165,43 @@ if [[ $# -gt 0 ]]; then
 
 `$#` steht für: number of arguments (wie `argc` in C)
 
-# Comparison Operators, Vergleichsoperatoren, Logical Operators
+# Comparison Operators
 
 ```bash
 if [[ $# -gt 0 ]]; then
+  # ...
 else
+  # ...
 fi
 ```
 
-- `-gt` für "greater than" (ie der `>` operator) in der condition
-- `-eq` für "equal to" (ie der `=` operator)
+- `=` vs `==` vs `-eq`, [stackoverflow](https://stackoverflow.com/a/20449556)
+  - `=` and `==` are for string comparisons
+  - `-eq` is for numeric comparisons
+    - `-eq` is in the same family as `-lt`, `-le`, `-gt`, `-ge`, and `-ne`
+  - `==` is specific to **bash** (not present in **sh (Bourne shell)**, ...).
+  - Using **POSIX** `=` is preferred for compatibility.
+  - In **bash** the two are equivalent, and in sh `=` is the only one that will work.
 
-- `=` and `==` are for string comparisons
-- `-eq` is for numeric comparisons
-- `-eq` is in the same family as `-lt`, `-le`, `-gt`, `-ge`, and `-ne`
+# Logical Operators
+
+## And
+
+`[command] && [command]`
+
+An **AND conditional** causes the second command to be executed only if the first command ends and exits successfully. 
+
+## Or
+
+`[command] || [command]`
+
+An **OR conditional** causes the second command to be executed only if the first command ends and exits with a failure exit code (any non-zero exit code). 
+
+## Not
+
+```bash
+if ! grep -q sysa /etc/passwd ; then
+```
 
 # Standard Stream Redirection: stdin, stdout and stderr
 
