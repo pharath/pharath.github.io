@@ -40,6 +40,8 @@ tags:
 
 # firefox
 
+- <kbd>ctrl</kbd> <kbd>u</kbd> (view page source code)
+
 ## Page Info
 
 - <kbd>ctrl</kbd> + i <kbd>alt</kbd> + g (page info)
@@ -120,7 +122,9 @@ Shortcuts:
   - <kbd>alt</kbd> - u
   - <kbd>alt</kbd> - t ($\[ \text{Let}\ x=\text{number of cats}. \]$)
 
-# Lazy
+# nvim Plugins
+
+## Lazy
 
 - [dev.to](https://dev.to/vonheikemen/lazynvim-how-to-revert-a-plugin-back-to-a-previous-version-1pdp)
   - restore specific plugin to previous state/version
@@ -131,7 +135,7 @@ Shortcuts:
   - hint: use `:set ft=markdown` for syntax highlighting
   - `:checkhealth somePluginName`
   
-# LSP, Mason
+## LSP, Mason
 
 - <kbd>space</kbd> ca (apply code fix)
 - `:Mason` (manage all LSPs, DAPs, Linter, Formatter)
@@ -141,12 +145,12 @@ Shortcuts:
 - `:LspStop serverName`
   - eg. to stop tailwindcss server for markdown files (&rarr; [markdown](#markdown))
 
-# Diagnostics
+## Diagnostics
 
 - [definition in neovim doc](https://neovim.io/doc/user/diagnostic.html)
   - "Nvim provides a framework for displaying errors or warnings from external tools, otherwise known as **"diagnostics"**. These diagnostics can come from a variety of sources, such as **linters** or **LSP servers**. The diagnostic framework is an extension to existing error handling functionality such as the quickfix list."
 
-# Formatter
+## Formatter
 
 - <kbd>leader</kbd><kbd>j</kbd><kbd>key-for-language</kbd>
 - available **formatters**:
@@ -154,17 +158,17 @@ Shortcuts:
   - `coc-prettier`
   - `:Format`, alias for `vim.lsp.buf.format()` (defined in `init.lua`)
 
-# clang, clangd
+## clang, clangd
 
 - **clang** is the **compiler**
 - **clangd** is the **language server**
 
-## compile commands json
+### compile commands json
 
 - From `:LspInfo` &rarr; press tab:
   - If `compile_commands.json` lives in a build directory, you should symlink it to the root of your source tree. `ln -s /path/to/myproject/build/compile_commands.json /path/to/myproject/`
 
-## compile flags txt
+### compile flags txt
 
 - run `:LspRestart` to reload
 - for simple projects (eg. compile one file only):
@@ -172,7 +176,7 @@ Shortcuts:
     - in the folder where the source code is
     - eg. with the content `-std=c++20`
 
-## .clangd (project configuration file, yaml)
+### .clangd (project configuration file, yaml)
 
 - e.g. to suppress `In included file: main file cannot be included recursively when building a preamble` add 
 
@@ -183,7 +187,7 @@ Diagnostics:
 
 to `.clangd`
 
-# autocomplete, completion
+## autocomplete, completion
 
 - 3 popup/drop-down Arten:
   - vim builtin completion
@@ -193,7 +197,7 @@ to `.clangd`
 - <kbd>ctrl</kbd> - e (discard + do not do anything)
   - helpful eg. if two conflicting completion popups appear at the same time, <kbd>ctrl</kbd> - e will switch between these
 
-# nvim-cmp
+## nvim-cmp
 
 - requires a "snippet engine"
   - in use: "luasnip"
@@ -205,19 +209,21 @@ to `.clangd`
   - TODO:
     - maybe configure a loader: [LuaSnip#add-snippets](https://github.com/L3MON4D3/LuaSnip#add-snippets)
   
-# coc.nvim
+## coc.nvim
 
 - das **completion popup** mit den eckigen Klammer Symbolen in der rechten Spalte (zB `completionVorschlag1 [A]`, `completionVorschlag2 [B]`, usw) wird von `coc.nvim` erzeugt, wobei jedes eckige Klammer Symbol für jeweils eine "source" steht, die in `:CocList` &rarr; "sources" registriert wurde
   - am besten alle "sources" deregistrieren (über `:CocList` &rarr; "sources"), weil sonst der `nvim-cmp` popup und der `coc.nvim` popup manchmal gleichzeitig erscheinen
   - wobei das source namens `File` nützlich ist (zeigt die files in cwd, wenn man `./` typet
 - `:CocList` (select "sources" to configure which sources are used for autocompletion)
 
-# nvim-tree
+## nvim-tree
 
-- c then p (duplicate file, automatically shows "rename" where you have to choose a new name)
+- <kbd>-</kbd> (show more (show parent folder))
+- <kbd>ctrl</kbd> <kbd>\]</kbd> (show less (only show the folder on which the cursor is placed, ie. this works only if the cursor is placed on a folder))
+- <kbd>c</kbd> then <kbd>p</kbd> (duplicate file, automatically shows "rename" where you have to choose a new name)
 - for Firefox-Bookmarks-like behavior use
-  - init.lua: `on_attach` keymap: bind <kbd>ctrl</kbd>-e to `api.tree.toggle`
-  - keymaps.lua: normal keymap: bind <kbd>ctrl</kbd>-e to `:NvimTreeFocus`
+  - `init.lua`: `on_attach` keymap: bind <kbd>ctrl</kbd>-e to `api.tree.toggle`
+  - `keymaps.lua`: normal keymap: bind <kbd>ctrl</kbd>-e to `:NvimTreeFocus`
 - <kbd>alt</kbd> - h, <kbd>alt</kbd> - l (focus/unfocus nvim-tree, when nvim-tree open)
 - "/" at end (create dir)
 - J (jump to last item in folder)
@@ -228,8 +234,10 @@ to `.clangd`
 - statt netrw
 - `/` (search)
 - <kbd>ctrl</kbd>-d (collapse)
+- gy (get absolute path)
+- Y (get relative path)
 
-# toggleterm (for lazygit integration in nvim)
+## toggleterm (for lazygit integration in nvim)
 
 - scroll
   - <kbd>ctrl</kbd>-\ <kbd>ctrl</kbd>-n to exit terminal mode, then you can use vim motions to move around
@@ -240,12 +248,12 @@ to `.clangd`
   - the prefixed number is the number of the terminal instance
   - pressing a non-existent number will create a new terminal
 
-# gitsigns
+## gitsigns
 
 This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <kbd>space</kbd> sk) will not show any keymaps related to gitsigns in non-git-tracked folders.
 
-- <kbd>alt</kbd> - , (next hunk)
-- <kbd>alt</kbd> - . (prev hunk)
+- <kbd>alt</kbd> - <kbd>,</kbd> (next hunk)
+- <kbd>alt</kbd> - <kbd>.</kbd> (prev hunk)
 - <kbd>space</kbd> h b (blame line)
   - um schnell herauszufinden in welchem commit die line geaddet wurde
 - diff
@@ -253,51 +261,125 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
   - <kbd>space</kbd> h D (diff zu vorletztem commit)
   - besser: <kbd>space</kbd> g f (see fugitive)
 
-# lazygit
+## lazygit
 
 - each panel has its own help menu!
-- W (groß W, diff menu)
-- <kbd>ctrl</kbd> + r (switch repo)
-- "@" (focus command log)
-- "x" (help) (ins commit panel und auf x drücken, zeigt zB amend, reset, etc.)
-- R (change multiline commit message)
-- r (change commit message)
-- "A" (amend)
-  - erst <kbd>space</kbd> und dann "A"
+- <kbd>W</kbd> (**groß** W, diff menu)
+- <kbd>ctrl</kbd> + <kbd>r</kbd> (switch repo)
+- <kbd>@</kbd> (focus command log)
+- <kbd>x</kbd> (help) (ins commit panel und auf x drücken, zeigt zB amend, reset, etc.)
+- <kbd>R</kbd> (change multiline commit message)
+- <kbd>r</kbd> (change commit message)
+- <kbd>A</kbd> (amend)
+  - erst <kbd>space</kbd> und dann <kbd>A</kbd>
 - <kbd>space</kbd> gg (for normal repos)
 - <kbd>space</kbd> gd (for dotfiles repo)
-- H, L (scroll left, right) 
+- <kbd>H</kbd>, <kbd>L</kbd> (scroll left, right) 
   - praktisch um kleine panels zu lesen, e.g. "commit" panel
-- h, l
+- <kbd>h</kbd>, <kbd>l</kbd>
   - switch between the 5 panels (or 12345)
-- `[`, `]`
+- <kbd>\[</kbd>, <kbd>\]</kbd>
   - tabs sind getrennt durch "-"
   - zB "Commit" - "Reflog" sind 2 tabs
-- "+" (rotate through views, "-" dann nicht nötig)
-- esc (go back, Achtung: "q" is for exit lazygit!)
-- esc (go back to commit list after seeing a commit's files)
-- pageup/pagedown to scroll
+- <kbd>+</kbd> (rotate through views, <kbd>-</kbd> dann nicht nötig)
+- <kbd>esc</kbd> (go back, Achtung: <kbd>q</kbd> is for exit lazygit!)
+- <kbd>esc</kbd> (go back to commit list after seeing a commit's files)
+- <kbd>pageup</kbd>/<kbd>pagedown</kbd> to scroll
 - <kbd>ctrl</kbd> <kbd>-/+</kbd> (zoom out/in, very useful to view the full main panel)
 - um mehr vom file zu sehen: 
-  - im "Commits" panel den commit fokussieren (aber nicht enter drücken) und dann mehrmals "`}`" drücken
+  - im "Commits" panel den commit fokussieren (aber nicht <kbd>enter</kbd> drücken) und dann mehrmals <kbd>\}</kbd> drücken
     - dies sollte am Ende den ganzen file anzeigen
 
-Git actions:
+### lazygit: Git actions
+
 - add
-  - a (git add all)
+  - <kbd>a</kbd> (git add all)
   - <kbd>space</kbd> (git add file, press again to undo)
 - commit
-  - c
+  - <kbd>c</kbd>
 - push
-  - P (UPPERcase!)
+  - <kbd>P</kbd> (UPPERcase!)
 - pull
-  - p (lowercase!)
+  - <kbd>p</kbd> (lowercase!)
 
+## fugitive
+
+- for normal git commands use exclamation mark "`:!git ...`"
+- :G (former "Gstatus", press g? to see what you can do)
+- :G `<tab><tab>` to see available commands
+- :G log
+- :G shortlog
+- `:Gdiffsplit HEAD~1` (horizontal view)
+- `:Gvdiffsplit HEAD~1` (vertical view)
+  - <kbd>space</kbd> g f (diff zu weiter zurück liegenden commits)
+- :Gread `%` (git checkout) (use u to undo/go back)
+
+## GV
+
+- öffnet sich in neuem Tab, d.h. "H", "L" um mit aktuellem file zu vergleichen
+- <kbd>space</kbd> gc (only commits of current file)
+- <kbd>space</kbd> ga (all commits)
+- q (quit)
+
+## telescope
+
+- `:h` telescope.mappings
+- <kbd>ctrl</kbd>-/ (insert mode), <kbd>?</kbd> (normal mode) (show shortcuts)
+- <kbd>ctrl</kbd>-t (open file in new tab)
+- <kbd>ctrl</kbd> <kbd>-/+</kbd> (see more of the preview pane/results pane)
+- <kbd>ctrl</kbd>-u <kbd>ctrl</kbd>-d (scroll preview up/down)
+- <kbd>space</kbd> sk (search **keymaps** of active plugins, ie keymaps of inactive plugins are not shown)
+- <kbd>space</kbd> ? (recently opened)
+- <kbd>space</kbd> `/` (current buffer find)
+
+## Aerial
+
+- ToC window mode:
+  - <kbd>space</kbd> bb
+  - <kbd>space</kbd> bt (Telescope Search)
+    - faster than "bb" for jumping to sections
+  - also try: <kbd>ctrl</kbd>-n, <kbd>ctrl</kbd>-p (next / previous section)
+- sidebar mode:
+  - g?
+  - q
+  - zM (collapse all)
+  - <kbd>ctrl</kbd>-b (fast markdown section select)
+
+## Vista (Aerial ist besser!)
+
+- Vista: in "`:h Vista`": tag: `vista-key-mappings`
+- q (quit)
+- p (preview)
+
+## vim illuminate
+
+- <kbd>alt</kbd>-n
+- <kbd>alt</kbd>-p
+
+## treesitter
+
+(note: treesitter highlighting is distinct from the [LSP-based "semantic highlighting"](https://gist.github.com/swarn/fb37d9eefe1bc616c2a7e476c0bc0316))
+
+- `:set ft=markdown` (enable syntax highlighting for unwritten buffer, ie a "`No name`" buffer)
+- from [supported-languages](https://github.com/nvim-treesitter/nvim-treesitter#supported-languages)
+  - to support a specific feature for a specific language requires both 
+    - a parser for that language and 
+    - an appropriate language-specific query file for that feature
+  - `:TSInstall parserName` (install a specific parser)
+    - in use: `markdown`, `markdown_inline`
+  - `:TSInstallInfo` (list all installed parsers)
+  - `:TSUninstall parserName`
+- <kbd>ctrl</kbd> + <kbd>space</kbd> multiple times (select nodes, von innen nach außen)
+- press `]` (next) or `[` (previous) to see keybindings
+  - jumps to
+    - start of next function/class
+    - end of next function/class
+    
 # vim
 
-- ; (undo repeat)
-- , (repeat)
-- ga (show ascii code of letter under cursor)
+- <kbd>;</kbd> (undo repeat)
+- <kbd>,</kbd> (repeat)
+- <kbd>g</kbd> <kbd>a</kbd> (show ascii code of letter under cursor)
 
 ## custom
 
@@ -415,84 +497,6 @@ Git actions:
   - to go to `:AerialToggle` and back (Avoid this! Use `:AerialNavToggle` (<kbd>leader</kbd> bb) instead!)
   - to go to nvim-tree and back
 
-# fugitive
-
-- for normal git commands use exclamation mark "`:!git ...`"
-- G (former "Gstatus", press g? to see what you can do)
-- G `<tab><tab>` to see available commands
-- G log
-- G shortlog
-- `Gdiffsplit HEAD~1` (horizontal view)
-- `Gvdiffsplit HEAD~1` (vertical view)
-  - <kbd>space</kbd> g f (diff zu weiter zurück liegenden commits)
-- Gread `%` (git checkout) (use u to undo/go back)
-
-# GV
-
-- öffnet sich in neuem Tab, d.h. "H", "L" um mit aktuellem file zu vergleichen
-- <kbd>space</kbd> gc (only commits of current file)
-- <kbd>space</kbd> ga (all commits)
-- q (quit)
-
-# telescope
-
-- `:h` telescope.mappings
-- <kbd>ctrl</kbd>-/ (insert mode), <kbd>?</kbd> (normal mode) (show shortcuts)
-- <kbd>ctrl</kbd>-t (open file in new tab)
-- <kbd>ctrl</kbd> <kbd>-/+</kbd> (see more of the preview pane/results pane)
-- <kbd>ctrl</kbd>-u <kbd>ctrl</kbd>-d (scroll preview up/down)
-- <kbd>space</kbd> sk (search **keymaps** of active plugins, ie keymaps of inactive plugins are not shown)
-- <kbd>space</kbd> ? (recently opened)
-- <kbd>space</kbd> `/` (current buffer find)
-
-# Aerial
-
-- ToC window mode:
-  - <kbd>space</kbd> bb
-  - <kbd>space</kbd> bt (Telescope Search)
-    - faster than "bb" for jumping to sections
-  - also try: <kbd>ctrl</kbd>-n, <kbd>ctrl</kbd>-p (next / previous section)
-- sidebar mode:
-  - g?
-  - q
-  - zM (collapse all)
-  - <kbd>ctrl</kbd>-b (fast markdown section select)
-
-# Vista (Aerial ist besser!)
-
-- q (quit)
-- p (preview)
-
-# vim illuminate
-
-- <kbd>alt</kbd>-n
-- <kbd>alt</kbd>-p
-
-# Help
-
-- `:nmap <some-key>` to list all bindings with `<some-key>`
-- g? (help for Aerial, nvim-tree, etc)
-- Vista: in "`:h Vista`": tag: `vista-key-mappings`
-
-# treesitter
-
-(note: treesitter highlighting is distinct from the [LSP-based "semantic highlighting"](https://gist.github.com/swarn/fb37d9eefe1bc616c2a7e476c0bc0316))
-
-- `:set ft=markdown` (enable syntax highlighting for unwritten buffer, ie a "`No name`" buffer)
-- from [supported-languages](https://github.com/nvim-treesitter/nvim-treesitter#supported-languages)
-  - to support a specific feature for a specific language requires both 
-    - a parser for that language and 
-    - an appropriate language-specific query file for that feature
-  - `:TSInstall parserName` (install a specific parser)
-    - in use: `markdown`, `markdown_inline`
-  - `:TSInstallInfo` (list all installed parsers)
-  - `:TSUninstall parserName`
-- <kbd>ctrl</kbd> + <kbd>space</kbd> multiple times (select nodes, von innen nach außen)
-- press `]` (next) or `[` (previous) to see keybindings
-  - jumps to
-    - start of next function/class
-    - end of next function/class
-    
 # Edit Code
 
 - <kbd>space</kbd> ca (apply code fix)
@@ -513,21 +517,24 @@ Git actions:
 
 # Help Code, Doc
 
+Keybindings:
+- `:nmap <some-key>` to list all bindings with `<some-key>`
+
 Definition:
-- <kbd>shift</kbd> + k (for objects: press when cursor is on object; press 2x to jump into def window)
-- <kbd>ctrl</kbd> + k (for functions: press keys inside function brackets; press 2x to jump into def window)
+- <kbd>shift</kbd> + k (for <span style={{ color: "red" }}>**objects**</span>: press when cursor is on object; press 2x to jump into def window)
+- <kbd>ctrl</kbd> + k (for <span style={{ color: "red" }}>**functions**</span>: press keys inside function brackets; press 2x to jump into def window)
 - gd (go to def)
 - gr (go to references)
 
-Search ONE file:
+Search through content of ONE file:
 - (symbols: classes, properties, methods)
   - <kbd>space</kbd> ds (native lsp)
   - <kbd>space</kbd> bb (aerial)
     - <kbd>space</kbd> bm (collapse all in aerial)
   - <kbd>space</kbd> bt (aerial in telescope)
-- gr (e.g. cycle through all occurrences of a var in the file)
+- gr (e.g. cycle through all occurrences of a variable in the file)
 
-Search ALL files:
+Search through content of ALL files:
 - <kbd>space</kbd> sw (search word under cursor; gives the same results as <kbd>space</kbd> sg)
 - <kbd>space</kbd> sg (search by grep all files in cwd)
 
