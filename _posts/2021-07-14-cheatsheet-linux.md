@@ -44,6 +44,7 @@ tags:
 `convert path/to/image.png -resize 640x path/to/output_image.png` | compress an `image.png` by resizing / scaling down ([source](https://askubuntu.com/a/781588))
 `convert path/to/image.png -quality 50% path/to/output_image.png` | compress an `image.png` by reducing its quality ([source](https://askubuntu.com/a/781588))
 `convert *.PNG mydoc.pdf` | create a pdf from all `.PNG` files in the current folder; **important:** must run `sudo mv /etc/ImageMagick-6/policy.xml /etc/ImageMagick-6/policy.xmlout` first to fix `convert-im6.q16: attempt to perform an operation not allowed by the security policy PDF' @ error/constitute.c/IsCoderAuthorized/413.` error, [askubuntu](https://askubuntu.com/a/1081907)
+`convert EXAMPLE.png EXAMPLE.svg` | convert png to svg
 
 ## pdftoppm (poppler)
 
@@ -750,8 +751,10 @@ nautilus .	|	öffne current directory in File Browser
 | command | description |
 | :--- | :--- |
 `mv -iv` | **Tipp:** IMMER -iv BENUTZEN! (-i für bestätigen, -v für ausgeführte Aktion zeigen)
+`mv "$file" "${file%???????}"  # 7 question marks to match 7 characters` | rename file and remove the last 7 characters of the filename
 `rm -iv` | **Tipp:** IMMER -iv BENUTZEN! (-i für bestätigen, -v für ausgeführte Aktion zeigen)
 `cp -iv` | **Tipp:** IMMER -iv BENUTZEN! (-i für bestätigen, -v für ausgeführte Aktion zeigen)
+`find ../path/to/search/ -iname *searchpattern* -exec cp -iv "{}" ./destination/folder/ \;` | find and copy the found files
 `cp -a` | attempts to make a copy that's as close to the original as possible: same directory tree, same file types, same contents, same metadata (times, permissions, extended attributes, etc.). Always use `cp -a` instead of `cp -r`. (see [cp -a vs cp -r](https://unix.stackexchange.com/a/44981))
 
 ### history, script
