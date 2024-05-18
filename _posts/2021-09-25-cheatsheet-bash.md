@@ -203,9 +203,9 @@ An **OR conditional** causes the second command to be executed only if the first
 if ! grep -q sysa /etc/passwd ; then
 ```
 
-# Standard Stream Redirection: stdin, stdout and stderr
+# Standard Stream Redirection: `stdin`, `stdout` and `stderr`
 
-- see "[What is /dev/null](https://linuxhint.com/what_is_dev_null/)"
+- see "[What is `/dev/null`](https://linuxhint.com/what_is_dev_null/)"
 
 ## File Descriptor (part of POSIX API)
 
@@ -213,32 +213,34 @@ if ! grep -q sysa /etc/passwd ; then
 - Each Unix process should have three standard POSIX file descriptors, corresponding to the three standard streams: `stdin`, `stdout` and `stderr`.
 - Each file descriptor has a **non**-negative integer value: `stdin`: 0, `stdout`: 1, `stderr`: 2.
 
-## Redirect stderr to a text file
+## Redirect `stderr` to a text file
 
 - `asdfadsa 2> error.txt`
 
-## Redirect stdout to a text file
+## Redirect `stdout` to a text file
 
 - **Note:** If no file descriptor value is specified, bash will use `stdout` (i.e. file descriptor value `1`) by default.
 - `echo "Hello World" > log.txt`
 
-## Redirect to /dev/null
+## Redirect to `/dev/null`
 
 - Send the output to `/dev/null`: `command 1> /dev/null`.
 - Send the error to `/dev/null`: `command 2> /dev/null`.
 - Send both output and error to `/dev/null`: `command 2>&1 /dev/null`.
 
-## Redirect stderr AND stdout to /dev/null
+## Redirect `stderr` AND stdout to `/dev/null`
 
 - `grep -r hello /sys/ &> /dev/null`
 
-## Redirect ALL output to /dev/null
+## Redirect ALL output to `/dev/null`
 
-- In certain situations, the output may not be useful at all. Using redirection, we can dump all the output into the void:
-  - `> /dev/null 2>&1`
-    - `> /dev/null` dumps all the `stdout` to `/dev/null`
-    - `2>&1` redirects `stderr` (file descriptor value: `2`) to `stdout` (file descriptor value: `1`)
-- phth note: `> /dev/null 2>&1` idea came from `~/git/geohot/openpilot/update_requirements.sh`
+- `> /dev/null 2>&1`
+  - [unix.stackexchange](https://unix.stackexchange.com/a/119650)
+  - In certain situations, the output may not be useful at all. Using redirection, we can dump all the output into the void:
+    - `> /dev/null 2>&1`
+      - `> /dev/null` dumps all the `stdout` to `/dev/null`
+      - `2>&1` redirects `stderr` (file descriptor value: `2`) to `stdout` (file descriptor value: `1`)
+  - phth note: `> /dev/null 2>&1` idea came from `~/git/geohot/openpilot/update_requirements.sh`
 
 # Test
 
