@@ -40,6 +40,22 @@ tags:
 `git add --all -- ':!./Gemfile' ':!./_config.yml' ':!./_layouts/*.bak' ':!./_sass/*.bak'` | **exclude files** from `git add`
 `git stage` | synonoym for `git add` (since 2008), see [stackoverflow](https://stackoverflow.com/a/34175877)
 
+## git commit
+
+| command | description |
+| :--- | :--- |
+`git commit --amend` | reword/rephrase the last commit message, "This brings up the editor with the last commit message and lets you edit the message. (You can use `-m` if you want to wipe out the old message and use a new one.)", [stackoverflow](https://stackoverflow.com/a/8981216/12282296)
+`git push --force-with-lease <repository> <branch>` | to push the reworded commit message to the remote
+
+## git push
+
+| command | description |
+| :--- | :--- |
+`git push <repository> <branch>` |
+`git push --force <repository> <branch>` | **do not** use this, better use `--force-with-lease`, see below
+`git push <repository> +<branch>` | **do not** use this, better use `--force-with-lease`, see below
+`git push --force-with-lease <repository> <branch>` | **best practice**: `--force-with-lease` is a safer option \[than `git push <repository> +<branch>` and `git push --force <repository> <branch>`\] that will not overwrite any work on the remote branch if more commits were added to the remote branch (by another team-member or coworker or what have you). It ensures you do not overwrite someone elses work by force pushing., [stackoverflow](https://stackoverflow.com/a/52823955/12282296)
+
 ## git clone
 
 | command | description |
