@@ -61,6 +61,22 @@ It's not exactly profiling, but you can trace your script as it runs.
 - `set -x` enables xtrace, which will show every line that executes. 
 - `set -v` enables verbose mode, which will also show lines that may have an effect, but are not executed, such as variable assignment.
 
+# How to call one shell script from another shell script?
+
+[stackoverflow](https://stackoverflow.com/a/8352939/12282296)
+
+Three ways:
+
+- **Make the other script executable** with `chmod a+x /path/to/file`, add the `#!/bin/bash` line (called shebang) at the top, and the path where the file is to the `$PATH` environment variable. Then you can call it as a normal command;
+- **Or call it with the source command** (which is an alias for `.`), like this: `source /path/to/script`
+- **Or use the bash command** to execute it, like: `/bin/bash /path/to/script`
+
+The first and third approaches execute the script as another process, so variables and functions in the other script will not be accessible.
+
+**The second approach executes the script in the first script's process, and pulls in variables and functions from the other script (so they are usable from the calling script)**. It will of course run all the commands in the other script, not only set variables.
+
+In the second method, if you are using exit in second script, it will `exit` the first script as well. Which will not happen in first and third methods.
+
 # Shebang
 
 beste Erklärung: [askubuntu discussion](https://stackoverflow.com/questions/7670303/purpose-of-usr-bin-python3-shebang/7670338#7670338)
@@ -73,7 +89,9 @@ When a text file with a shebang is used as if it is an executable in a Unix-like
 
 The **shebang line** is usually **ignored by the interpreter**, because the "`#`" character is a **comment marker** in many scripting languages; some language interpreters that do not use the hash mark to begin comments still may ignore the shebang line in recognition of its purpose.
 
-# Command Substitution
+# Core
+
+## Command Substitution
 
 Syntax: `$(command substitution)`
 
@@ -82,17 +100,17 @@ Nested Variables:
 DIRNAME="$(dirname "$FILE")"
 ```
 
-# No-op Command
+## No-op Command
 
 Colon: `:`
 
 from [bash manual](https://www.gnu.org/software/bash/manual/html_node/Bourne-Shell-Builtins.html#Bourne-Shell-Builtins):
 - "Do nothing beyond expanding arguments and performing redirections. The return status is zero."
 
-# Double-ampersand vs semicolon
+## Double-Ampersand vs Semicolon
 
-- semicolon: run the command no matter what the exit status of the previous command is
-- double-ampersand: only run the command if the previous command is a success
+- **semicolon**: run the command no matter what the exit status of the previous command is
+- **double-ampersand**: only run the command if the previous command is a success
 
 ```bash
 $ false ; echo "OK"
@@ -108,9 +126,14 @@ $ true || echo "OK"
 $
 ```
 
-# Variables
+## Variables
 
-## `export` vs setting a variable
+### Best Practices
+
+- `echo "$somevar"` instead of `echo $somevar`
+  - "Quoting variables prevents word splitting and glob expansion, and prevents the script from breaking when input contains spaces, line feeds, glob characters and such.", [shellcheck.net](https://www.shellcheck.net/wiki/SC2086)
+
+### `export` vs setting a variable
 
 see [baeldung.com](https://www.baeldung.com/linux/bash-variables-export)
 
@@ -135,14 +158,14 @@ $ echo $MYVAR
 
 **Note:** We can access bash environment variables only one way; the parent shell exports its variables to the child shell's environment, but **the child shell can't export variables back to the parent shell**.
 
-# If
+## If
 
-## Double Square-Brackets vs Single Square-Brackets
+### Double Square-Brackets vs Single Square-Brackets
 
 - "If you're writing a `#!/bin/bash` script then I recommend using `[[` instead. The double square-brackets `[[...]]` form has more features, a more natural syntax, and fewer gotchas that will trip you up.", [stackoverflow](https://stackoverflow.com/a/20449556)
 - "`[[` is bash's improvement to the `[` command. It has several enhancements that make it a better choice if you write scripts that target bash.", [stackoverflow](https://stackoverflow.com/questions/3427872/whats-the-difference-between-and-in-bash)
 
-## Command as condition
+### Command as condition
 
 You can specify commands as a condition of `if`. If the command returns `0` in its exitcode that means that the condition is `true`; otherwise `false`. [source](https://stackoverflow.com/a/11287896/12282296)
 
@@ -153,7 +176,7 @@ $ if /bin/false; then echo that is true; fi
 $
 ```
 
-# Was bedeutet `$#`?
+## `$#`
 
 from: [askubuntu post](https://askubuntu.com/questions/939620/what-does-mean-in-bash))
 
@@ -161,11 +184,12 @@ Zum Beispiel:
 
 ```bash
 if [[ $# -gt 0 ]]; then
+# ...
 ```
 
-`$#` steht für: number of arguments (wie `argc` in C)
+`$#` means: number of arguments (like `argc` in C)
 
-# Comparison Operators
+## Comparison Operators
 
 ```bash
 if [[ $# -gt 0 ]]; then
@@ -183,25 +207,61 @@ fi
   - Using **POSIX** `=` is preferred for compatibility.
   - In **bash** the two are equivalent, and in sh `=` is the only one that will work.
 
-# Logical Operators
+## Logical Operators
 
-## And
+### And
 
 `[command] && [command]`
 
 An **AND conditional** causes the second command to be executed only if the first command ends and exits successfully. 
 
-## Or
+### Or
 
 `[command] || [command]`
 
 An **OR conditional** causes the second command to be executed only if the first command ends and exits with a failure exit code (any non-zero exit code). 
 
-## Not
+### Not
 
 ```bash
 if ! grep -q sysa /etc/passwd ; then
 ```
+
+## `test`
+
+There are two syntaxes for using the `test` command.
+
+```bash
+test EXPRESSION
+[ EXPRESSION ]
+```
+
+Note that in the case of `[`, there is a space at both ends of the `EXPRESSION`.
+- e.g. `test 1 -eq 2 && echo "true" || echo "false"` &rarr; `false`
+- alternatively: `$ [ 1 -eq 2 ] && echo "true" || echo "false"`
+
+### Check if File exists
+
+```bash
+FILE=/etc/resolv.conf
+if [ -f "$FILE" ]; then
+    echo "$FILE exists."
+fi
+```
+
+## `printf`
+
+Don't use variables in the printf format string. Use `printf "..%s.." "$foo"`.
+
+```bash
+printf "%sphth: Need to rename some windows to make some shortcuts work:%s\n" "${RED}" "${NC}"
+# instead of
+printf "${RED}phth: Need to rename some windows to make some shortcuts work:${NC}\n"
+```
+
+## Colors
+
+- [stackoverflow](https://stackoverflow.com/a/4332530/12282296)
 
 # Standard Stream Redirection: `stdin`, `stdout` and `stderr`
 
@@ -241,28 +301,6 @@ if ! grep -q sysa /etc/passwd ; then
       - `> /dev/null` dumps all the `stdout` to `/dev/null`
       - `2>&1` redirects `stderr` (file descriptor value: `2`) to `stdout` (file descriptor value: `1`)
   - phth note: `> /dev/null 2>&1` idea came from `~/git/geohot/openpilot/update_requirements.sh`
-
-# Test
-
-There are two syntaxes for using the test command.
-
-```bash
-test EXPRESSION
-[ EXPRESSION ]
-```
-
-Note that in the case of `[`, there is a space at both ends of the `EXPRESSION`.
-- e.g. `test 1 -eq 2 && echo "true" || echo "false"` &rarr; `false`
-- alternatively: `$ [ 1 -eq 2 ] && echo "true" || echo "false"`
-
-## Check if File exists
-
-```bash
-FILE=/etc/resolv.conf
-if [ -f "$FILE" ]; then
-    echo "$FILE exists."
-fi
-```
 
 # Job control
 
