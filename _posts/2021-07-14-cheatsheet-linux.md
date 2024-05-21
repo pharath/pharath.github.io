@@ -349,7 +349,7 @@ gio open file | same as xdg-open, but depends on what desktop the user has insta
 `pkill process_name` | stop all processes containing `process_name` (which is a regular expression), sends SIGTERM (i.e. kills gracefully), *Warning:* use `pgrep` first to check which processes will be killed
 `pgrep process_name` | list all PIDs containing `process_name` (which is a regular expression)
 
-Check PID of a window: 
+Check PID of a window (pick a window with the cursor): 
 
 ```bash
 xprop _NET_WM_PID | sed 's/_NET_WM_PID(CARDINAL) = //' | ps `cat`
@@ -676,6 +676,19 @@ cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen 
 `l | grep 150 | xargs rm -v` | pipe output of `grep` to `rm`
 `l | grep xyzpattern | xargs cp -iv -t 150/` | pipe output of `grep` to `cp`
 `l | grep xyzpattern | xargs mv -iv -t 1024p/` | pipe output of `grep` to `mv`
+`grep -n someSearchPattern` | `n`: show line numbers (useful to find things in `man` and long `--help` outputs, eg. use `man command` and jump to the line that `command --help \| grep -n someSearchPattern` shows)
+
+### awk
+
+#### Get Columns
+
+| command | description |
+| :--- | :--- |
+`<some_command> | awk '{print $2}'` | get the 2nd column of the command output
+`<some_command> | awk '{print $2, $4}'` | get the 2nd and 4th column of the command output
+`<some_command> | awk '{print $2, $4}'` | get the 2nd and 4th column of the command output
+`<some_command> | cut -f2- -d' '` | get all columns from the 2nd to the last column of the command output
+`<some_command> | awk -F '"' '{print $2}'` | Use `-F [field separator]` to split the lines on `"`s
 
 ### sed
 
