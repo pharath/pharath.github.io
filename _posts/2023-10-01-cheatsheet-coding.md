@@ -102,7 +102,9 @@ Shortcuts:
   - Notes: if a highlight has a Note attached to it, there is a small white box beside it in the "Marks and Notes" list
     - helps to quickly find all existing Notes (without clicking through all of them)
 
-# godbolt
+# cpp
+
+## godbolt
 
 - f1 (command palette)
 - <kbd>ctrl</kbd> - x (cut line)
@@ -332,6 +334,25 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
 - <kbd>space</kbd> ? (recently opened)
 - <kbd>space</kbd> `/` (current buffer find)
 
+## treesitter
+
+(note: treesitter highlighting is distinct from the [LSP-based "semantic highlighting"](https://gist.github.com/swarn/fb37d9eefe1bc616c2a7e476c0bc0316))
+
+- `:set ft=markdown` (enable syntax highlighting for unwritten buffer, ie a "`No name`" buffer)
+- from [supported-languages](https://github.com/nvim-treesitter/nvim-treesitter#supported-languages)
+  - to support a specific feature for a specific language requires both 
+    - a parser for that language and 
+    - an appropriate language-specific query file for that feature
+  - `:TSInstall parserName` (install a specific parser)
+    - in use: `markdown`, `markdown_inline`
+  - `:TSInstallInfo` (list all installed parsers)
+  - `:TSUninstall parserName`
+- <kbd>ctrl</kbd> + <kbd>space</kbd> multiple times (select nodes, von innen nach außen)
+- press `]` (next) or `[` (previous) to see keybindings
+  - jumps to
+    - start of next function/class
+    - end of next function/class
+    
 ## Aerial
 
 - ToC window mode:
@@ -356,25 +377,6 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
 - <kbd>alt</kbd>-n
 - <kbd>alt</kbd>-p
 
-## treesitter
-
-(note: treesitter highlighting is distinct from the [LSP-based "semantic highlighting"](https://gist.github.com/swarn/fb37d9eefe1bc616c2a7e476c0bc0316))
-
-- `:set ft=markdown` (enable syntax highlighting for unwritten buffer, ie a "`No name`" buffer)
-- from [supported-languages](https://github.com/nvim-treesitter/nvim-treesitter#supported-languages)
-  - to support a specific feature for a specific language requires both 
-    - a parser for that language and 
-    - an appropriate language-specific query file for that feature
-  - `:TSInstall parserName` (install a specific parser)
-    - in use: `markdown`, `markdown_inline`
-  - `:TSInstallInfo` (list all installed parsers)
-  - `:TSUninstall parserName`
-- <kbd>ctrl</kbd> + <kbd>space</kbd> multiple times (select nodes, von innen nach außen)
-- press `]` (next) or `[` (previous) to see keybindings
-  - jumps to
-    - start of next function/class
-    - end of next function/class
-    
 # vim
 
 - <kbd>;</kbd> (undo repeat)
