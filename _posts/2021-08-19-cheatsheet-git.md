@@ -55,6 +55,7 @@ tags:
 `git push --force <repository> <branch>` | **do not** use this, better use `--force-with-lease`, see below
 `git push <repository> +<branch>` | **do not** use this, better use `--force-with-lease`, see below
 `git push --force-with-lease <repository> <branch>` | **best practice**: `--force-with-lease` is a safer option \[than `git push <repository> +<branch>` and `git push --force <repository> <branch>`\] that will not overwrite any work on the remote branch if more commits were added to the remote branch (by another team-member or coworker or what have you). It ensures you do not overwrite someone elses work by force pushing., [stackoverflow](https://stackoverflow.com/a/52823955/12282296)
+`git push --set-upstream origin <new_branch>` | push to a locally newly created branch (see `git checkout -b <new_branch>`) that does not yet exist on remote (i.e. on github.com). `--set-upstream`: will make the local `<new_branch>` track the remote `remotes/origin/<new_branch>` (w/o this flag git does not know where to push the `new_branch`).
 
 ## git clone
 
