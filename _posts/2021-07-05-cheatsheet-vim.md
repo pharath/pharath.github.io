@@ -247,29 +247,30 @@ ctrl + w N | scroll in a terminal tab
 
 | command | description |
 | :--- | :--- |
-:ls | get the buffer number of all files edited in this session
-:files | see `:ls`
-:buffers | see `:ls`
-:tabnew +Nbuf | re-open closed tab (where N is the buffer number of the closed tab which you can get via `:ls`), e.g. `:tabnew +18buf` in order to reopen buffer 18
-:buffer very/very/long/path/to/a/veryVeryLongFileName.txt | switch to buffer `very/very/long/path/to/a/veryVeryLongFileName.txt`, where a **buffer** is a file in the `:ls` list
-:b LongFileName\<hit tab to find a match\> | short form of `:buffer very/very/long/path/to/a/veryVeryLongFileName.txt` (**note**: `:b` command can also take a **substring** of the name of the file, thus `LongFileName` instead of `veryVeryLongFileName`!)
-:b SubstringOfFilename\<hit tab to find a match\> |
-:b 5 | switch to buffer 5 (see file-number map in the `:ls` list)
+`:ls` | get the buffer number of all files edited in this session
+`:files` | see `:ls`
+`:buffers` | see `:ls`
+`:tabnew +Nbuf` | re-open closed tab (where N is the buffer number of the closed tab which you can get via `:ls`), e.g. `:tabnew +18buf` in order to reopen buffer 18
+`:buffer very/very/long/path/to/a/veryVeryLongFileName.txt` | switch to buffer `very/very/long/path/to/a/veryVeryLongFileName.txt`, where a **buffer** is a file in the `:ls` list
+`:b LongFileName<hit tab to find a match>` | short form of `:buffer very/very/long/path/to/a/veryVeryLongFileName.txt` (**note**: `:b` command can also take a **substring** of the name of the file, thus `LongFileName` instead of `veryVeryLongFileName`!)
+`:b SubstringOfFilename<hit tab to find a match>` |
+`:b 5` | switch to buffer 5 (see file-number map in the `:ls` list)
 `:bd [N]` | Unload buffer `[N]` (default: current buffer) and delete it from the buffer list. If the buffer was changed, this fails, unless when `[!]` is specified, in which case changes are lost. The file remains unaffected.
 
 ## File Open, Close, Suspend, Name, Refresh
 
 | command | description |
 | :--- | :--- |
-shift + z q | wie `:q!`
-ctrl + w q | wie `:q` (ohne `!`), schließe aktiven split window
-shift + z z | wie `:x` ( dasselbe wie `:wq`, aber `:wq` überschreibt auch wenn keine modification [nur wichtig, falls modification times matter] )
-ctrl + z | suspend, i.e. pause and switch to terminal (sends SIGTSTP to a process, like `kill -TSTP [processid]`, see notes on Bash under section "job control")
+<kbd>shift</kbd> <kbd>z</kbd> <kbd>q</kbd> | wie `:q!`
+<kbd>ctrl</kbd> <kbd>w</kbd> <kbd>q</kbd> | wie `:q` (ohne `!`), schließe aktiven split window
+<kbd>shift</kbd> <kbd>z</kbd> <kbd>z</kbd> | wie `:x` (dasselbe wie `:wq`, aber `:wq` überschreibt auch wenn keine modification \[nur wichtig, falls modification times matter\])
+<kbd>ctrl</kbd> <kbd>z</kbd> | suspend, i.e. pause and switch to terminal (sends SIGTSTP to a process, like `kill -TSTP [processid]`, see notes on Bash under section "job control")
 in terminal: `fg` | resume, i.e. go back to vim (a shell **builtin command**)
-ctrl + g | show current file name
-1 + ctrl + g | show current file name + path
+<kbd>ctrl</kbd> <kbd>g</kbd> | show current file name
+<kbd>1</kbd> <kbd>ctrl</kbd> <kbd>g</kbd> | show current file name + path
 `:e` | reload/refresh file
 `:e!` | discard local changes and reload/refresh file
+`:bufdo :e` or `:bufdo :e!` | reload/refresh **all** buffers
 `:e /path/to/other/file` | öffne anderen file in vim
 
 ## File Saving
@@ -557,6 +558,12 @@ For **clangd**:
 
 For **spectral** (json LSP), **tailwindcss**, **bashls**:
 - open a json, css and bash file, run `:LspInstall` and select `spectral`, `tailwindcss` and `bashls` respectively
+
+### Filetype
+
+see [reddit.com: "Usage of 'after/ftplugin' directory for filetype-specific configuration"](https://www.reddit.com/r/neovim/comments/x3zp6t/usage_of_afterftplugin_directory_for/)
+
+This is better than using `nvim_create_autocmd()`!
 
 ## Font
 

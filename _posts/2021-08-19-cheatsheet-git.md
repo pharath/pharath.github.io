@@ -233,6 +233,12 @@ git restore . | discard **all unstaged** files in current working directory
 git checkout -- path/to/file/to/revert | see `git restore path/to/file/to/revert`
 git restore path/to/file/to/revert | discard a specific unstaged file
 
+## Undo git reset --soft
+
+To undo `git reset HEAD~`:
+
+`git reset HEAD@{1}`
+
 ## Undo git reset --hard
 
 `git fsck --lost-found`

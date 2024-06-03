@@ -28,7 +28,7 @@ Search operator	| What it does	| Example
 `cache:`	| Find the most recent cache of a webpage.	| cache:apple.com
 `filetype:`	| Search for particular types of files (e.g., PDF).	| apple filetype:pdf
 `ext:` 	| Same as filetype:	| apple ext:pdf
-`site:`	| Search for results from a particular website.	| site:apple.com
+`site:`	| Search for results from a particular website.	| `site:apple.com`
 `related:`	| Search for sites related to a given domain.	| related:apple.com
 `intitle:`	| Search for pages with a particular word in the title tag.	| intitle:apple
 `allintitle:`	| Search for pages with multiple words in the title tag. 	| allintitle:apple iphone

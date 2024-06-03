@@ -191,31 +191,39 @@ to `.clangd`
 
 ## autocomplete, completion
 
+- see also [Help Code, Doc](#documentation)
 - 3 popup/drop-down Arten:
-  - vim builtin completion
-  - `coc.nvim`
-  - `nvim-cmp`
-- <kbd>ctrl</kbd> - y (confirm + replace)
-- <kbd>ctrl</kbd> - e (discard + do not do anything)
-  - helpful eg. if two conflicting completion popups appear at the same time, <kbd>ctrl</kbd> - e will switch between these
+  - vim builtin completion (sieht so aus wie `completionVorschlag1`)
+  - `coc.nvim` (sieht so aus wie `completionVorschlag1 [A]`)
+  - `nvim-cmp` (sieht so aus wie `completionVorschlag1 Variable`)
+- <kbd>ctrl</kbd> <kbd>y</kbd> (confirm + replace)
+- <kbd>ctrl</kbd> <kbd>e</kbd> (discard + do not do anything)
+  - helpful eg. if two conflicting completion popups appear at the same time, <kbd>ctrl</kbd> <kbd>e</kbd> will switch between these
 
-## nvim-cmp
+### nvim-cmp
 
-- requires a "snippet engine"
-  - in use: "luasnip"
-  - tab, <kbd>shift</kbd>-tab
+- das **completion popup** mit den Kategorien (`Variable`, `Function`, `Keyword`, usw) in der rechten Spalte (zB `completionVorschlag1 Variable`, `completionVorschlag2 Keyword`, `completionVorschlag2 Function`, usw) wird von `nvim-cmp` erzeugt
+- servers must be added to the LSP server list `local servers = {}` in `init.lua`, otherwise `nvim-cmp` will not autocomplete
+- requires a <span style="color:red">snippet engine</span>
+  - in use: `luasnip`
+  - <kbd>tab</kbd>, <kbd>shift</kbd> <kbd>tab</kbd>
     - select item in drop-down
       - if the item is a function a snippet is inserted
     - edit next/previous function parameter in the function snippet
   - luasnip config: [Example-mappings#luasnip](https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#luasnip)
   - TODO:
     - maybe configure a loader: [LuaSnip#add-snippets](https://github.com/L3MON4D3/LuaSnip#add-snippets)
+- `nvim-cmp` steuert scrolling im "documentation preview" popup
+  - press <kbd>ctrl</kbd>-<kbd>f</kbd> to scroll down
+  - alle key mappings in `.config/nvim/init.lua` bei `cmp.setup { ..., mapping = ... }`
+  - **problem**: you cannot jump into the documentation preview window in nvim-cmp (which is important to open links in the documentation preview window, eg. MDN links for JavaScript)
+    - **solution**: instead, you can first autocomplete an expression and then press <kbd>ctrl</kbd> <kbd>k</kbd> or <kbd>shift</kbd> <kbd>k</kbd> while the cursor is on the completed expression
   
-## coc.nvim
+### coc.nvim
 
 - das **completion popup** mit den eckigen Klammer Symbolen in der rechten Spalte (zB `completionVorschlag1 [A]`, `completionVorschlag2 [B]`, usw) wird von `coc.nvim` erzeugt, wobei jedes eckige Klammer Symbol für jeweils eine "source" steht, die in `:CocList` &rarr; "sources" registriert wurde
   - am besten alle "sources" deregistrieren (über `:CocList` &rarr; "sources"), weil sonst der `nvim-cmp` popup und der `coc.nvim` popup manchmal gleichzeitig erscheinen
-  - wobei das source namens `File` nützlich ist (zeigt die files in cwd, wenn man `./` typet
+  - wobei das source namens `File` nützlich ist (zeigt die files in cwd, wenn man `./` typet)
 - `:CocList` (select "sources" to configure which sources are used for autocompletion)
 
 ## nvim-tree
@@ -377,6 +385,46 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
 - <kbd>alt</kbd>-n
 - <kbd>alt</kbd>-p
 
+# Finding Keymaps
+
+- `:nmap <some-key>` to list all bindings with `<some-key>`
+- <kbd>space</kbd> sk (show keybindings in Telescope)
+
+# Understanding Code
+
+## Documentation
+
+- LSP Documentation:
+  - <kbd>shift</kbd> <kbd>k</kbd> (hover doc, for <span style={{ color: "red" }}>**objects**</span>: press when cursor is on object)
+    - press 2x to jump into def window
+    - press <kbd>q</kbd> to jump out
+  - <kbd>ctrl</kbd> <kbd>k</kbd> (function signature doc, for <span style={{ color: "red" }}>**functions**</span>: press when cursor inside function brackets)
+    - press 2x to jump into def window
+    - press <kbd>q</kbd> to jump out
+- `nvim-cmp` documentation preview window
+  - **problem**: you cannot jump into the documentation preview window in nvim-cmp (which is important to open links in the documentation preview window, eg. MDN links for JavaScript)
+    - **solution**: instead, you can first autocomplete an expression and then press <kbd>ctrl</kbd> <kbd>k</kbd> or <kbd>shift</kbd> <kbd>k</kbd> while the cursor is on the completed expression
+
+## Definitions
+
+- LSP Definitions:
+  - gd (go to def)
+  - gr (go to references)
+
+## Search for Words
+
+- Search through content of ONE file:
+  - (symbols: classes, properties, methods)
+    - <kbd>space</kbd> ds (native lsp)
+    - <kbd>space</kbd> bb (aerial)
+      - <kbd>space</kbd> bm (collapse all in aerial)
+    - <kbd>space</kbd> bt (aerial in telescope)
+  - gr (e.g. cycle through all occurrences of a variable in the file)
+
+- Search through content of ALL files:
+  - <kbd>space</kbd> sw (search word under cursor; gives the same results as <kbd>space</kbd> sg)
+  - <kbd>space</kbd> sg (search by grep all files in cwd)
+
 # vim
 
 - <kbd>;</kbd> (undo repeat)
@@ -516,30 +564,3 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
 - vSo (surround letter under cursor)
 - ys3iw" (surround **ohne select**)
 - ys3iW" (see word vs WORD)
-
-# Help Code, Doc
-
-Keybindings:
-- `:nmap <some-key>` to list all bindings with `<some-key>`
-
-Definition:
-- <kbd>shift</kbd> + k (for <span style={{ color: "red" }}>**objects**</span>: press when cursor is on object; press 2x to jump into def window)
-- <kbd>ctrl</kbd> + k (for <span style={{ color: "red" }}>**functions**</span>: press keys inside function brackets; press 2x to jump into def window)
-- gd (go to def)
-- gr (go to references)
-
-Search through content of ONE file:
-- (symbols: classes, properties, methods)
-  - <kbd>space</kbd> ds (native lsp)
-  - <kbd>space</kbd> bb (aerial)
-    - <kbd>space</kbd> bm (collapse all in aerial)
-  - <kbd>space</kbd> bt (aerial in telescope)
-- gr (e.g. cycle through all occurrences of a variable in the file)
-
-Search through content of ALL files:
-- <kbd>space</kbd> sw (search word under cursor; gives the same results as <kbd>space</kbd> sg)
-- <kbd>space</kbd> sg (search by grep all files in cwd)
-
-`nvim-cmp` steuert scrolling in definition preview popup
-- press <kbd>ctrl</kbd>-f to scroll down
-- alle key mappings in `.config/nvim/init.lua` bei `cmp.setup { ..., mapping = ... }`

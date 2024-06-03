@@ -778,6 +778,22 @@ nautilus .	|	öffne current directory in File Browser
 `history | grep command_to_search` | search some pattern within the history generated list
 `script` | start saving all input and output in the current terminal session in the file `typescript` (end recording via ctrl + d - this does not close the terminal here; use `script /path/to/mylogfile.txt` to save it in `/path/to/mylogfile.txt`; `typescript` will be overwritten if you start `script` twice without providing a name!). [source](https://askubuntu.com/a/557309)
 
+# xclip, xsel
+
+- `xclip` and `xsel` are [very similar!](https://askubuntu.com/a/705658/1802556)
+- `xclip` and `xsel` can store text into 3 different <span style="color:red">**selections**</span> (by default it is primary selection)
+- the two main selections are:
+  - <span style="color:red">**Primary selection**</span> is basically what you high-light and released with the middle mouse click (which corresponds to pressing both right and left touchpad key on a laptop).
+  - <span style="color:red">**The clipboard**</span> is the traditional <kbd>Ctrl</kbd> <kbd>V</kbd>.
+
+| command | description |
+| :--- | :--- |
+`command | xclip` | copy the output of `command` and place it in `XA_PRIMARY` (the "primary selection")
+`command | xclip -sel prim` | same as `command | xclip`
+`command | xclip -sel clip` | copy the output of `command` and place it in `XA_CLIPBOARD` ("the clipboard")
+`xclip -o` | print a selection to standard out
+`xclip -o | xclip -sel clip` | Copy `XA_PRIMARY` to `XA_CLIPBOARD`
+
 # wmctrl
 
 ```bash
