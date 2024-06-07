@@ -695,12 +695,13 @@ cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen 
 - for **line-based input**
   - thus, hard to replace `\n` with `sed`, `tr` is better here ([stackoverflow](https://stackoverflow.com/a/1252010))
 - "Sed uses basic regular expressions (BRE). In a BRE, in order to have them treated literally, the characters `$.*[\^` need to be quoted by preceding them by a backslash, except inside character sets (`[…]`). Letters, digits and `(){}+?|` must not be quoted (you can get away with quoting some of these in some implementations)." ([more](https://unix.stackexchange.com/a/33005))
+- [Command Summary for sed](https://docstore.mik.ua/orelly/unix/sedawk/appa_03.htm)
 
 | command | description |
 | :--- | :--- |
 `sed 's/unix/linux/' geekfile.txt` | replaces the word 'unix' with 'linux' in the file 'geekfile.txt'. `sed` is mostly used to replace text in a file. Examples: see [here](https://www.geeksforgeeks.org/sed-command-in-linux-unix-with-examples/).
 `sed -E` | use extended (ERE) regular expression syntax
-`sed -e 's/ /\\ /g'` | useful when paths contain spaces and you need to escape these spaces with backslash, eg. when using `realpath`, `pwd`, `scp`, etc
+`sed -e 's/ /\\ /g'` | Useful when paths contain spaces and you need to escape these spaces with backslash, eg. when using `realpath`, `pwd`, `scp`, etc. `s/`: Substitute *replacement* for *pattern* on each addressed line [doc: see "s" command](https://docstore.mik.ua/orelly/unix/sedawk/appa_03.htm).
 
 ### tr
 
@@ -720,7 +721,7 @@ cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen 
 | :--- | :--- |
 `exec > some_file` | redirect all shell output to `some_file`
 `ls -ltr | vim -` | zeige Output eines Befehls in vim (ACHTUNG: Leerzeichen hinter "vim" nicht vergessen!)
-`Befehl | head -3` |	zeige oberste 3 Zeilen des Outputs
+`Befehl | head -3` | zeige oberste 3 Zeilen des Outputs
 `Befehl | tail -3` |
 `du -sch ./folder | sort -rh | head -5` | zeige disk usage (=size) of folder (`-h` für human readable; `-s` für zeige auch Subdirectories; `-c` für zeige grand total am Ende) (`sort -rh` für sortiere nach size, wobei `-r` für reverse und `-h` für compare human readable sizes)
 `echo "blabla" >> filename` | write output to file *filename*
