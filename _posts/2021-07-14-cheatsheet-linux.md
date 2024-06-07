@@ -653,6 +653,8 @@ cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen 
 `find /opt/ -iname pattern -type d` | nur dirs suchen
 `find /opt/ ( -iname pattern1 -o -iname pattern2 )` | `-o` für oder
 `find /opt/ -size +1G` | nur files, die über 1GB groß sind
+`find . -iname searchPattern -print0 | xargs -0 someCommand` | apply `someCommand` on each of the found files
+`find . -iname searchPattern -print0 | xargs -0 du -sh` | show the size of each found file
 `locate <file>` | faster than find, but uses a database which must be updated via `sudo updatedb` to find recent changes
 `locate -i <file>` | case insensitive
 `locate -b '\file.xyz'` | exact match (Note: the slash and the quotation marks are necessary)
@@ -677,6 +679,16 @@ cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen 
 `l | grep xyzpattern | xargs cp -iv -t 150/` | pipe output of `grep` to `cp`
 `l | grep xyzpattern | xargs mv -iv -t 1024p/` | pipe output of `grep` to `mv`
 `grep -n someSearchPattern` | `n`: show line numbers (useful to find things in `man` and long `--help` outputs, eg. use `man command` and jump to the line that `command --help \| grep -n someSearchPattern` shows)
+
+### tee
+
+| command | description |
+| :--- | :--- |
+`command | tee file.txt` | read from standard input and write to both standard output **and** the file `file.txt` (overwrites `file.txt`!) [doc](http://manpages.ubuntu.com/manpages/bionic/man1/tee.1.html) (name derived from "T-junction", since `tee` is usually used in pipes)
+`command | tee -a file.txt` | append to `file.txt`
+`du -h | tee disk_usage1.txt disk_usage2.txt disk_usage3.txt` | write to multiple files at once
+`ls file* | tee third_file.txt | wc -l` | forward the output as input
+`echo "newline" | sudo tee -a /etc/file.conf` | using `tee` in conjunction with `sudo`
 
 ### awk
 
@@ -726,7 +738,6 @@ cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen 
 `du -sch ./folder | sort -rh | head -5` | zeige disk usage (=size) of folder (`-h` für human readable; `-s` für zeige auch Subdirectories; `-c` für zeige grand total am Ende) (`sort -rh` für sortiere nach size, wobei `-r` für reverse und `-h` für compare human readable sizes)
 `echo "blabla" >> filename` | write output to file *filename*
 `echo "blabla" | tee filename` | write output to file *filename*
-`tee` | read from standard input and write to both standard output **and** files [doc](http://manpages.ubuntu.com/manpages/bionic/man1/tee.1.html) (name derived from "T-junction", since `tee` is usually used in pipes)
 
 ### Open in File Browser
 

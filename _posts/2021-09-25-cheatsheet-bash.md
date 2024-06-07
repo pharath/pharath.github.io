@@ -158,12 +158,23 @@ $ echo $MYVAR
 
 **Note:** We can access bash environment variables only one way; the parent shell exports its variables to the child shell's environment, but **the child shell can't export variables back to the parent shell**.
 
+### Variable Expansion
+
+["Parameter expansion" (A.K.A "Variable expansion")](https://unix.stackexchange.com/questions/403867/what-is-parameter-expansion-a-k-a-variable-expansion-in-shell-scripting-in)
+
 ## If
 
 ### Double Square-Brackets vs Single Square-Brackets
 
 - "If you're writing a `#!/bin/bash` script then I recommend using `[[` instead. The double square-brackets `[[...]]` form has more features, a more natural syntax, and fewer gotchas that will trip you up.", [stackoverflow](https://stackoverflow.com/a/20449556)
 - "`[[` is bash's improvement to the `[` command. It has several enhancements that make it a better choice if you write scripts that target bash.", [stackoverflow](https://stackoverflow.com/questions/3427872/whats-the-difference-between-and-in-bash)
+
+### Double Parentheses
+
+[stackoverflow](https://stackoverflow.com/a/2188369)
+
+- "Double parentheses are used for **arithmetic operations**"
+- "and they enable you to omit the dollar signs on integer and array variables and include spaces around operators for readability."
 
 ### Command as condition
 
@@ -174,6 +185,24 @@ $ if /bin/true; then echo that is true; fi
 that is true
 $ if /bin/false; then echo that is true; fi
 $
+```
+
+### Pipe
+
+#### Pipe on a Condition
+
+[How to pipe on a condition in Bash](https://stackoverflow.com/a/56870935)
+
+#### Examples
+
+Using `find` in combination with `xargs`: the flags `-print0` and `-0` are necessary because filenames may contain spaces:
+
+```bash
+# duplicates.txt: filenames with file sizes
+for pattern in $(du -sh searchPatternWith\ \(Spaces\)/* | cut -f2- -d'/' | cut -f1 -d'_'); do count=$(find . -iname *$pattern* -print0 | xargs -0 ls | grep .mp4$ | wc -l); if [[ $count -ge 2 ]]; then find . -iname *$pattern* -print0 | xargs -0 du | grep -v searchPatternWith | tee -a duplicates.txt; fi; done
+
+# duplicates2.txt: only filenames
+for pattern in $(du -sh searchPatternWith\ \(Spaces\)/* | cut -f2- -d'/' | cut -f1 -d'_'); do count=$(find . -iname *$pattern* -print0 | xargs -0 ls | grep .mp4$ | wc -l); if [[ $count -ge 2 ]]; then find . -iname *$pattern* -print0 | xargs -0 du | grep -v searchPatternWith | grep -v jpg$ | tee -a duplicates2.txt; fi; done
 ```
 
 ## `$#`
