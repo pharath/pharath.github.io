@@ -1,5 +1,5 @@
 ---
-title: "C++ Notes - Exception Handling"
+title: "C++ Notes - Exception Handling and Assert"
 read_time: false
 excerpt: "For learning C++"
 header:
@@ -303,3 +303,16 @@ Options:
 
 related: "Constructors throwing Exceptions" &rarr; Notes on "Classes"
 
+# Assert
+
+## `static_assert`
+
+From [stackoverflow](https://stackoverflow.com/a/1647921):
+
+Static assert is used to make assertions **at compile time**. When the static assertion fails, the program simply doesn't compile. This is useful in different situations, like, for example, if you implement some functionality by code that critically depends on `unsigned int` object having **exactly 32 bits**. You can put a static assert like this
+
+```cpp
+static_assert(sizeof(unsigned int) * CHAR_BIT == 32);
+```
+
+in your code. On another platform, with differently sized `unsigned int` type the compilation will fail, thus drawing attention of the developer to the problematic portion of the code and advising them to re-implement or re-inspect it.

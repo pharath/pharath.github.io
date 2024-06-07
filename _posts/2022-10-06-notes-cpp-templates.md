@@ -254,6 +254,28 @@ auto fcn(It beg, It end) -> decltype(*beg)
 
 - the use of `auto` for the return type **without a corresponding trailing return type** (which would be introduced with a `->` at the end) indicates that the actual return type must be deduced from the **return statements** in the function body (VJ1.3.2)
 
+## Two-Phase Lookup
+
+Templates are "compiled" in two phases:
+1. Without instantiation **at definition time** (in 1. `T` is not substituted!), the template code itself is checked for correctness ignoring the template parameters. This includes:
+  - **Syntax errors** are discovered, such as missing semicolons.
+  - Using **unknown names** (type names, function names, ...) that don't depend on template parameters are discovered.
+  - **Static assertions that don't depend on template parameters** are checked.
+2. **At instantiation time**, the template code is checked (again) to ensure that all code is valid. That is, now especially, all parts that depend on template parameters are double-checked.
+
+```cpp
+template<typename T>
+void foo(T t)
+{
+  undeclared();       // first-phase compile-time error if undeclared() unknown
+  undeclared(t);      // second-phase compile-time error if undeclared(T) unknown
+  static_assert(sizeof(int) > 10,   // always fails if sizeof(int)<=10, first-phase compile-time error
+                "int too small");
+  static_assert(sizeof(T) > 10,     // fails if instantiated for T with size <=10, second-phase compile-time error
+                "T too small");
+}
+```
+
 ## Type Traits
 
 - aka type transformation
@@ -316,6 +338,12 @@ namespace std {
 
 see [stackoverflow](https://www.cplusplus.com/doc/oldtutorial/templates/)
 
+### Terminology
+
+- function templates have 2 sets of parameters:
+  - **template parameters**: declared in angle brackets before the function template name
+  - **Call parameters**: declared in parentheses after the function template name
+
 ```cpp
 // function template
 
@@ -339,6 +367,28 @@ int main () {
   return 0;
 }
 ```
+
+### Declaration
+
+- **template declaration**: 
+  - must include the template parameters (which need not be the same across the declaration(s) and the definition)
+  - **best practice:** 
+    - declarations for all the templates needed by a given file usually should appear together at the beginning of a file before any code that uses those names
+
+```cpp
+// all three uses of calc refer to the same function template
+template <typename T> T calc(const T&, const T&); // declaration
+template <typename U> U calc(const U&, const U&); // declaration
+// definition of the template
+template <typename Type>
+Type calc(const Type& a, const Type& b) { /* . . . */ } // definition
+```
+
+### Definition
+
+- **template definition**: 
+  - the declaration of a class template or function template is called a **definition** if it has a body (VJ10.2)
+  - declaration and the definition of a given template must have the same number and kind (i.e., type or nontype) of parameters
 
 ### Order of Execution
 
@@ -835,6 +885,136 @@ cppreference:
 - Specializations may also be provided explicitly:
   - **full specializations** are allowed for class(, variable (since C++14)) and function templates,
   - **partial specializations** are only allowed for class templates (and variable templates (since C++14)).
+
+### Multiple Template Parameters
+
+#### Choosing the Return Type
+
+**Problem**: in the following example the return type depends on the call argument order
+
+```cpp
+template<typename T1, typename T2>
+T1 max (T1 a, T2 b)
+{
+  return b < a ? a : b;
+}
+...
+auto m = ::max(4, 7.2);         // OK, but type of first argument defines return type
+```
+
+C++ provides different ways to deal with this problem:
+1. Introduce a third template parameter for the return type.
+2. Let the compiler find out the return type. (`auto`, trailing return type syntax)
+3. Declare the return type to be the "common type" of the two parameter types. (`std::common_type_t<T1,T2>`)
+
+**Method 1:**
+
+```cpp
+// RT does not appear in the types of the function call parameters
+// -> Therefore, RT cannot be deduced (TAD does not take return types into account)
+// -> have to specify the template argument list explicitly
+template<typename T1, typename T2, typename RT>
+RT max (T1 a, T2 b);
+...
+::max<int,double,double>(4, 7.2);   // OK, but tedious
+```
+
+The same a bit shorter:
+
+```cpp
+// specify only the first arguments explicitly and allow the deduction process to derive the rest
+// -> must specify all the argument types up to the last argument type that cannot be determined implicitly
+// -> need to change the order of the template parameters, so that RT is double, and T1, T2 are deduced
+template<typename RT, typename T1, typename T2>
+RT max (T1 a, T2 b);
+deduced as: int double
+...
+::max<double>(4, 7.2)               // OK: return type is double, T1 and T2 are deduced
+```
+
+**Method 2:**
+- (the simplest and best approach to deduce the return type)
+
+```cpp
+// Since C++14
+// - auto for the return type WITHOUT a corresponding trailing return type
+// - indicates that the actual return type must be deduced from the return statements in the function body
+// - condition: multiple return statements have to match
+template<typename T1, typename T2>
+auto max (T1 a, T2 b)
+{
+  return b < a ? a : b;
+}
+```
+
+Using **trailing return type** syntax:
+
+```cpp
+// Since C++11
+// - auto for the return type WITH a corresponding trailing return type
+template<typename T1, typename T2>
+auto max (T1 a, T2 b) -> decltype(b<a?a:b)
+{
+  return b < a ? a : b;
+}
+
+// Problem: It might happen that the return type is a reference type, 
+//          because under some conditions T might be a reference
+// Solution: use std::decay to return the type decayed from T
+
+#include <type_traits>
+
+template<typename T1, typename T2>
+auto max (T1 a, T2 b) -> typename std::decay<decltype(b<a?a:b)>::type
+{
+  return b < a ? a : b;
+}
+
+// Note: must use "typename" because "type" is a type
+```
+
+**Method 3:**
+
+```cpp
+// choosing "the more general type".
+
+#include <type_traits>
+
+// Since C++11
+template<typename T1, typename T2>
+typename std::common_type<T1,T2>::type max (T1 a, T2 b)
+{
+  return b < a ? a : b;
+}
+
+// Since C++14
+template<typename T1, typename T2>
+std::common_type_t<T1,T2> max (T1 a, T2 b)
+{
+  return b < a ? a : b;
+}
+
+// Note: std::common_type<> decays so that the return value can't become 
+// a reference (ie. drops & and top-level const)
+```
+
+### Default Template Arguments
+
+- may even refer to previous template parameters
+
+```cpp
+// note: the default template argument for RT refers to the previous template parameters T1 and T2
+#include <type_traits>
+
+template<typename T1, typename T2,
+         typename RT = std::decay_t<decltype(true ? T1() : T2())>>       // value initialization: calls default constructor
+RT max (T1 a, T2 b)
+{
+  return b < a ? a : b;
+}
+
+// Note: this can be simplified by using declval (see notes "auto" -> "declval")
+```
 
 ## Class Templates
 

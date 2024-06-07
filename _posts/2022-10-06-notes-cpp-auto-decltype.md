@@ -501,6 +501,7 @@ VJ:
 - does not have a definition
   - therefore, cannot be called
   - therefore, doesn't create an object
+  - therefore, can only be used in **unevaluated operands** (such as those of `decltype` and `sizeof` constructs)
 - can be used as a placeholder for an object reference of a specific type
   - to "use" objects of the corresponding type without creating them
 
