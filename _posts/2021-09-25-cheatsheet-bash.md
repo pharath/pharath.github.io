@@ -218,6 +218,84 @@ if [[ $# -gt 0 ]]; then
 
 `$#` means: number of arguments (like `argc` in C)
 
+## `$1`, `$2`, etc.
+
+- called the **Positional Parameters**
+
+[bash.cyberciti.biz](https://bash.cyberciti.biz/guide/$1)
+
+- `$1` is the first command-line argument passed to the shell script.
+- It is a way to access the value of the first parameter supplied when executing the script or function.
+- For example, `$0`, `$1`, `$3`, `$4` and so on.
+- If you run `./script.sh filename1 dir1`, then:
+  - `$0` is the name of the script itself (`script.sh`)
+  - `$1` is the first argument (`filename1`)
+  - `$2` is the second argument (`dir1`)
+  - `$9` is the ninth argument
+  - `${10}` is the tenth argument and must be enclosed in brackets after `$9`.
+  - `${11}` is the eleventh argument.
+
+## Passing Arguments to Scripts
+
+[redhat.com](https://www.redhat.com/sysadmin/arguments-options-bash-scripts)
+
+```bash
+#!/bin/bash
+############################################################
+# Help                                                     #
+############################################################
+Help()
+{
+   # Display Help
+   echo "Add description of the script functions here."
+   echo
+   echo "Syntax: scriptTemplate [-g|h|v|V]"
+   echo "options:"
+   echo "g     Print the GPL license notification."
+   echo "h     Print this Help."
+   echo "v     Verbose mode."
+   echo "V     Print software version and exit."
+   echo
+}
+
+############################################################
+############################################################
+# Main program                                             #
+############################################################
+############################################################
+
+# Set variables
+Name="world"
+
+############################################################
+# Process the input options. Add options as needed.        #
+############################################################
+# Get the options
+while getopts ":hn:" option; do
+   case $option in
+      h) # display Help
+         Help
+         exit;;
+      n) # Enter a name
+         Name=$OPTARG;;
+     \?) # Invalid option
+         echo "Error: Invalid option"
+         exit;;
+   esac
+done
+
+
+echo "hello $Name!"
+```
+
+### `$OPTARG`
+
+[quora.com](https://www.quora.com/What-is-Optarg-in-a-shell-script)
+
+`$OPTARG` stores the value of the argument of the option
+
+**Example**: when you run `./script.sh -p "someArg"` then the `$OPTARG` variable in the `p)` case in the `while getopts` construct contains `"someArg"`
+
 ## Comparison Operators
 
 ```bash
