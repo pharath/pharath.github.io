@@ -219,10 +219,32 @@ pipenv graph | shows installed dependencies
 
 # poetry
 
+## Install poetry
+
 | command | description |
 | :---: | :---: |
 curl -sSL https://install.python-poetry.org \| python3 - | install poetry
 pip3 install poetry==1.1.15 | install poetry
+
+## Basics
+
+Activate the virtual environment (like `source env/bin/activate`):
+
+```bash
+cd path/to/poetry/project/folder/   # the folder that contains the files "pyproject.toml" and "poetry.lock"
+poetry install   # install all packages in a poetry virtual environment
+poetry shell   # activate the virtual environment
+...            # now you can use all packages that are installed in the poetry virtual environment
+exit           # deactivate the virtual environment (shortcut: ctrl-d)
+```
+
+Alternatively, you can use all packages that are installed in the poetry virtual environment by using `poetry run`, [python-poetry.org](https://python-poetry.org/docs/basic-usage/#using-poetry-run), like so:
+
+```bash
+cd path/to/poetry/project/folder/   # the folder that contains the files "pyproject.toml" and "poetry.lock"
+poetry install
+poetry run python main.py -d /media/bra-ket/INTENSO/path/to/destination/folder/ https://domain.xyz/from/which/to/download/
+```
 
 | command | description |
 | :---: | :---: |
