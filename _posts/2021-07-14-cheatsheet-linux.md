@@ -655,6 +655,7 @@ cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen 
 `find /opt/ -size +1G` | nur files, die über 1GB groß sind
 `find . -iname searchPattern -print0 | xargs -0 someCommand` | apply `someCommand` on each of the found files
 `find . -iname searchPattern -print0 | xargs -0 du -sh` | show the size of each found file
+`find . -iname searchPattern -exec rm -v {} +` | remove the found files; from `man find`: `-exec`: "The specified command is run once for each matched file."
 `locate <file>` | faster than find, but uses a database which must be updated via `sudo updatedb` to find recent changes
 `locate -i <file>` | case insensitive
 `locate -b '\file.xyz'` | exact match (Note: the slash and the quotation marks are necessary)
@@ -805,6 +806,7 @@ nautilus .	|	öffne current directory in File Browser
 `command | xclip -sel clip` | copy the output of `command` and place it in `XA_CLIPBOARD` ("the clipboard")
 `xclip -o` | print a selection to standard out
 `xclip -o | xclip -sel clip` | Copy `XA_PRIMARY` to `XA_CLIPBOARD`
+`pwd | tr -d '\n' | sed 's/$/\//g' | xclip -selection c` | copy the output of `pwd` into the clipboard (without the linebreak at the end)
 
 # wmctrl
 
