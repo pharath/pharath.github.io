@@ -656,6 +656,7 @@ cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen 
 `find . -iname searchPattern -print0 | xargs -0 someCommand` | apply `someCommand` on each of the found files
 `find . -iname searchPattern -print0 | xargs -0 du -sh` | show the size of each found file
 `find . -iname searchPattern -exec rm -v {} +` | remove the found files; from `man find`: `-exec`: "The specified command is run once for each matched file."
+`find path_A -name '*AAA*' -exec mv -t path_B {} +` | move the found files
 `locate <file>` | faster than find, but uses a database which must be updated via `sudo updatedb` to find recent changes
 `locate -i <file>` | case insensitive
 `locate -b '\file.xyz'` | exact match (Note: the slash and the quotation marks are necessary)
@@ -1008,13 +1009,13 @@ Troubleshooting:
 | :--- | :--- |
 `ncdu` | like `du -sh`, but more convenient (because avoids typing)
 `du -sh *` | 
+`du -sh ./*/` | show directories only
 `du -sch *` | `-c` to show grand total
 `du -sh * | sort -h` | "ascending": largest file in the last output line
 `du -sh * | sort -rh` | "descending": largest file in the first output line (`-r` for "reverse order")
-`du -sh * .[^.]*` | 
-`du -sh * .[^.]* | sort -h` | 
+`du -sh * .[^.]*` | show hidden files, too (`.[^.]*` aka `.[!.]*` is a ["globbing pattern"](https://stackoverflow.com/questions/41034115/in-shell-scripting-what-does-mean))
 `du -h -d 1 *` | `-d 1` or `--max-depth=1` display the sizes of only the directories immediately within the specified path. If we were to specify 2 it would go a level further.
-`du -h -d 1 -t 1G /` | show the sizes of all first level directories larger than 1GB within the root `/` path
+`du -h -d 1 -t 1G /` | `-t`: threshold, show the sizes of all first level directories larger than 1GB within the root `/` path
 
 | command | description |
 | :--- | :--- |
