@@ -579,6 +579,12 @@ When `*` (All-or-none) is added to the combination, all paths are selected if th
 
 Also, these upper-case letters can be **downcased** to **exclude**. E.g. `--diff-filter=ad` excludes added and deleted paths.
 
+# Hunks
+
+[gnu.org](https://www.gnu.org/software/diffutils/manual/html_node/Hunks.html)
+
+"When comparing two files, `diff` finds sequences of lines common to both files, interspersed with groups of differing lines called **hunks**."
+
 # git grep
 
 [stackoverflow](https://stackoverflow.com/a/2929502)
