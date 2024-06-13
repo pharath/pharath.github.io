@@ -302,6 +302,8 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
 
 ### lazygit: Git actions
 
+- scroll
+  - <kbd>H</kbd> / <kbd>L</kbd> (left/right) (useful when committing hunks with the "stage individual hunks" function)
 - add
   - <kbd>a</kbd> (git add all)
   - <kbd>space</kbd> (git add file, press again to undo)
