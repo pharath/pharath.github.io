@@ -318,6 +318,17 @@ git stash drop stash@{1} | remove `stash@{1}`
 git stash show stash@{1} | view the diff of the stash
 git stash show stash@{0} -p | view a more detailed diff of the stash
 
+## Undo git stash apply
+
+[stackoverflow](https://stackoverflow.com/questions/1020132/how-to-reverse-apply-a-stash)
+
+```bash
+git stash show -p | git apply --reverse
+
+# to remove ALL non-committed changes
+git checkout -f
+```
+
 ## git pull despite having uncommitted changes
 
 - pull, but make sure that the local files are not overwritten by the remote
@@ -471,12 +482,15 @@ git difftool -y master..dev /path/to/file
 
 The `-y` flag automatically confirms the prompt to open the diff in the editor. Use `git config --global difftool.prompt false` to turn off these prompts.
 
-## Compare files on disk, `--no-index`
+## Compare files outside a git repo, `--no-index`
+
+`git diff oldFile newFile` works in all folders, not just in git repos.
 
 ```bash
 git diff origin/exercise/4_ros_node_cpp..origin/solution/4_ros_node_cpp
 
 # compare two arbitrary files on disk
+# ("--no-index" is only necessary inside a git repo)
 git diff --no-index file1.txt file2.txt
 ```
 
@@ -511,7 +525,37 @@ git diff 2326473e602be4b90b46f6b6afc7315ff1d09a17~ 2326473e602be4b90b46f6b6afc73
 git diff HEAD:full/path/to/foo HEAD~:full/path/to/bar
 ```
 
-## diff-filter
+## Compare with stash
+
+```bash
+git stash show -p stash@{2}
+```
+
+Why `-p`?: By default, the command shows the `diffstat`, but it will accept any format known to `git diff` (e.g., `git stash show -p stash@{1}` to view the second most recent stash in patch form).
+
+Note: `stash@{0}` is the default
+
+## Compare with an unmerged file
+
+**problem**: `git diff <unmerged-path>` shows nothing, whereas `git diff --staged <successfully-merged-and-added-file>` shows a diff
+
+[stackoverflow](https://stackoverflow.com/questions/22215651/why-doesnt-git-diff-show-anything-for-unmerged-paths)
+
+"During a merge, the conflicting files are in a special state."
+
+**Takeaway**: There is no easy way to do this. During a merge conflict, there are multiple blobs with the name of the conflicting file and you need to diff these blobs.
+
+## `--cached`, `--staged`
+
+To see already added changes: `git diff --cached`
+
+`--staged` is a synonym of `--cached`
+
+## `--name-status`
+
+Show only names and status of changed files. See the description of the `--diff-filter` option on what the status letters mean.
+
+## `--diff-filter`
 
 From `man git-diff`:
 
