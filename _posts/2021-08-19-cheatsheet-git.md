@@ -44,7 +44,8 @@ tags:
 
 | command | description |
 | :--- | :--- |
-`git commit --amend` | reword/rephrase the last commit message, "This brings up the editor with the last commit message and lets you edit the message. (You can use `-m` if you want to wipe out the old message and use a new one.)", [stackoverflow](https://stackoverflow.com/a/8981216/12282296)
+`git commit --amend -m "message"` | reword/rephrase the last commit message, "This brings up the editor with the last commit message and lets you edit the message. (You can use `-m` if you want to wipe out the old message and use a new one.)", [stackoverflow](https://stackoverflow.com/a/8981216/12282296)
+`git commit --allow-empty --amend --only -m "message"` | reword/rephrase the last commit message (the lazygit way)
 `git push --force-with-lease <repository> <branch>` | to push the reworded commit message to the remote
 
 ## git push
