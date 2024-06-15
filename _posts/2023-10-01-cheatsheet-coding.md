@@ -275,32 +275,43 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
 
 ### lazygit
 
+- start lazygit
+  - <kbd>space</kbd> gg (for normal repos)
+  - <kbd>space</kbd> gd (for dotfiles repo)
 - each panel has its own help menu!
-- <kbd>W</kbd> (**groß** W, diff menu)
-- <kbd>ctrl</kbd> + <kbd>r</kbd> (switch repo)
-- <kbd>@</kbd> (focus command log)
-- <kbd>x</kbd> (help) (ins commit panel und auf x drücken, zeigt zB amend, reset, etc.)
-- <kbd>R</kbd> (change multiline commit message)
-- <kbd>r</kbd> (change commit message)
-- <kbd>A</kbd> (amend)
-  - erst <kbd>space</kbd> und dann <kbd>A</kbd>
-- <kbd>space</kbd> gg (for normal repos)
-- <kbd>space</kbd> gd (for dotfiles repo)
-- <kbd>H</kbd>, <kbd>L</kbd> (scroll left, right) 
-  - praktisch um kleine panels zu lesen, e.g. "commit" panel
-- <kbd>h</kbd>, <kbd>l</kbd>
-  - switch between the 5 panels (or 12345)
-- <kbd>\[</kbd>, <kbd>\]</kbd>
-  - tabs sind getrennt durch "-"
-  - zB "Commit" - "Reflog" sind 2 tabs
-- <kbd>+</kbd> (rotate through views, <kbd>-</kbd> dann nicht nötig)
-- <kbd>esc</kbd> (go back, Achtung: <kbd>q</kbd> is for exit lazygit!)
-- <kbd>esc</kbd> (go back to commit list after seeing a commit's files)
-- <kbd>pageup</kbd>/<kbd>pagedown</kbd> to scroll
-- <kbd>ctrl</kbd> <kbd>-/+</kbd> (zoom out/in, very useful to view the full main panel)
-- um mehr vom file zu sehen: 
-  - im "Commits" panel den commit fokussieren (aber nicht <kbd>enter</kbd> drücken) und dann mehrmals <kbd>\}</kbd> drücken
-    - dies sollte am Ende den ganzen file anzeigen
+- commands that work in all panels
+  - <kbd>W</kbd> (**groß** W, diff menu)
+  - <kbd>ctrl</kbd> <kbd>r</kbd> (switch repo)
+    - does not work when a commit is selected during cherry-picking (see commands under "commits" panel)
+  - <kbd>@</kbd> (focus command log)
+  - <kbd>x</kbd> (help) (ins commit panel und auf x drücken, zeigt zB amend, reset, etc.)
+  - <kbd>H</kbd>, <kbd>L</kbd> (scroll left, right) 
+    - praktisch um kleine panels zu lesen, e.g. "commit" panel
+  - <kbd>h</kbd>, <kbd>l</kbd>
+    - switch between the 5 panels (or 12345)
+  - <kbd>\[</kbd>, <kbd>\]</kbd>
+    - tabs sind getrennt durch "-"
+    - zB "Commit" - "Reflog" sind 2 tabs
+  - <kbd>+</kbd> (rotate through views, zoom-out <kbd>-</kbd> not necessary then)
+  - <kbd>esc</kbd> (go back, Achtung: <kbd>q</kbd> is for exit lazygit!)
+  - <kbd>esc</kbd> (go back to commit list after seeing a commit's files)
+  - <kbd>pageup</kbd>/<kbd>pagedown</kbd> to scroll the main panel
+  - <kbd>ctrl</kbd> <kbd>-/+</kbd> (zoom out/in, very useful to view the full main panel)
+    - better: press <kbd>enter</kbd> on the file in the "files" panel, then press <kbd>+</kbd> to rotate to the view where the file spans the full width of the screen
+- in "files" panel
+  - <kbd>A</kbd> (amend)
+    - erst <kbd>space</kbd> und dann <kbd>A</kbd>
+- in "commits" panel
+  - um mehr vom file zu sehen:
+    - im "Commits" panel den commit fokussieren (aber nicht <kbd>enter</kbd> drücken) und dann mehrmals <kbd>\}</kbd> drücken, sodass am Ende der ganze file sichtbar ist
+    - better: press <kbd>enter</kbd> on the file in the "files" panel, then press <kbd>+</kbd> to rotate to the view where the file spans the full width of the screen
+  - reword commit messages
+    - <kbd>R</kbd> (change multiline commit message)
+    - <kbd>r</kbd> (change commit message)
+  - cherry-pick
+    - <kbd>c</kbd> (select cherry-pick)
+    - <kbd>v</kbd> (apply cherry-pick to the current branch)
+    - <kbd>ctrl</kbd> <kbd>r</kbd> (unselect cherry-pick)
 
 #### lazygit: Git actions
 
