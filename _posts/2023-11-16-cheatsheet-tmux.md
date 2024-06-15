@@ -43,6 +43,51 @@ Install these plugins using the TPM method (after installing TPM):
 - [tmux-continuum](https://github.com/tmux-plugins/tmux-continuum)
   - Put `set -g @continuum-restore 'on'` in `.tmux.conf` to enable ["Automatic Restore"](https://github.com/tmux-plugins/tmux-continuum#automatic-restore).
 
+## Colors
+
+Vim/Neovim will show wrong colors unless <span style="color:red">true color support</span> is configured properly.
+
+**Check**:
+
+The following script
+
+```bash
+awk 'BEGIN{
+    s="/\\/\\/\\/\\/\\"; s=s s s s s s s s;
+    for (colnum = 0; colnum<77; colnum++) {
+        r = 255-(colnum*255/76);
+        g = (colnum*510/76);
+        b = (colnum*255/76);
+        if (g>255) g = 510-g;
+        printf "\033[48;2;%d;%d;%dm", r,g,b;
+        printf "\033[38;2;%d;%d;%dm", 255-r,255-g,255-b;
+        printf "%s\033[0m", substr(s,colnum+1,1);
+    }
+    printf "\n";
+}'
+```
+
+shows a <span style="color:red">continuous</span> color band when run outside of Tmux (&rarr; true color is supported),
+
+![truecolor-working.png](https://i.ibb.co/QCjdgfG/truecolor-working.png)
+
+as opposed to when run inside Tmux (&rarr; true color is <span style="color:red">not</span> supported).
+
+![truecolor-not-working.png](https://i.ibb.co/KbJPY2F/truecolor-not-working.png)
+
+To properly set truecolor capability add the following snippet to `.tmux.conf`:
+
+```bash
+set -g default-terminal 'tmux-256color'
+set -as terminal-overrides ",xterm*:Tc"
+```
+
+Then, restart tmux completely by exiting <span style="color:red">**all**</span> sessions and then opening a new session. Here, it is very important to really exit ALL existing tmux sessions!
+
+source: [reddit.com](https://www.reddit.com/r/neovim/comments/11usepy/how_to_properly_set_tmux_truecolor_capability/)
+
+"Adding `,xterm*:Tc` is pointless unless you are using additional terminals outside of Kitty that also support True Color but don't have the Tc flag set inside their terminfo (most likely the case as it's not an official flag) <span style="color:red">or if you aren't defining default-terminal as xterm-kitty and instead using a generic xterm like `xterm-*` or `xterm-256color`</span>, Tmux's generic `tmux-256color`, or any other terminfo that was not defined by kitty."
+
 ## tmux Shortcuts
 
 | command | description |
