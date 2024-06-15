@@ -258,7 +258,9 @@ to `.clangd`
   - the prefixed number is the number of the terminal instance
   - pressing a non-existent number will create a new terminal
 
-## gitsigns
+## git
+
+### gitsigns
 
 This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <kbd>space</kbd> sk) will not show any keymaps related to gitsigns in non-git-tracked folders.
 
@@ -271,7 +273,7 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
   - <kbd>space</kbd> h D (diff zu vorletztem commit)
   - besser: <kbd>space</kbd> g f (see fugitive)
 
-## lazygit
+### lazygit
 
 - each panel has its own help menu!
 - <kbd>W</kbd> (**groß** W, diff menu)
@@ -300,7 +302,7 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
   - im "Commits" panel den commit fokussieren (aber nicht <kbd>enter</kbd> drücken) und dann mehrmals <kbd>\}</kbd> drücken
     - dies sollte am Ende den ganzen file anzeigen
 
-### lazygit: Git actions
+#### lazygit: Git actions
 
 - scroll
   - <kbd>H</kbd> / <kbd>L</kbd> (left/right) (useful when committing hunks with the "stage individual hunks" function)
@@ -314,7 +316,7 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
 - pull
   - <kbd>p</kbd> (lowercase!)
 
-## fugitive
+### fugitive
 
 - for normal git commands use exclamation mark "`:!git ...`"
 - :G (former "Gstatus", press g? to see what you can do)
@@ -326,7 +328,7 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
   - <kbd>space</kbd> g f (diff zu weiter zurück liegenden commits)
 - :Gread `%` (git checkout) (use u to undo/go back)
 
-## GV
+### GV
 
 - öffnet sich in neuem Tab, d.h. "H", "L" um mit aktuellem file zu vergleichen
 - <kbd>space</kbd> gc (only commits of current file)
