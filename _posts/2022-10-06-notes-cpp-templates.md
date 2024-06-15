@@ -368,28 +368,6 @@ int main () {
 }
 ```
 
-### Declaration
-
-- **template declaration**: 
-  - must include the template parameters (which need not be the same across the declaration(s) and the definition)
-  - **best practice:** 
-    - declarations for all the templates needed by a given file usually should appear together at the beginning of a file before any code that uses those names
-
-```cpp
-// all three uses of calc refer to the same function template
-template <typename T> T calc(const T&, const T&); // declaration
-template <typename U> U calc(const U&, const U&); // declaration
-// definition of the template
-template <typename Type>
-Type calc(const Type& a, const Type& b) { /* . . . */ } // definition
-```
-
-### Definition
-
-- **template definition**: 
-  - the declaration of a class template or function template is called a **definition** if it has a body (VJ10.2)
-  - declaration and the definition of a given template must have the same number and kind (i.e., type or nontype) of parameters
-
 ### Order of Execution
 
 From [cppreference](https://en.cppreference.com/w/cpp/language/template_argument_deduction):
