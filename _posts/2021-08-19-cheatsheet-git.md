@@ -29,6 +29,13 @@ tags:
 
 # Basics
 
+## git status
+
+| command | description |
+| :--- | :--- |
+`git status -uno` | Show no untracked files (useful, if you have many untracked files), [stackoverflow](https://stackoverflow.com/a/46335093)
+`git config --global status.showUntrackedFiles no` | makes `git status -uno` the default, ie. after running this command `git status` will show the same as `git status -uno` [stackoverflow](https://stackoverflow.com/a/2774461)
+
 ## git rm, git add
 
 | command | description |
@@ -506,6 +513,11 @@ git diff [--options] <commit> <commit> [--] [<path>...]
 git diff HEAD^^ HEAD main.c
 git diff HEAD^^..HEAD -- main.c
 git diff HEAD~2 HEAD -- main.c
+
+find . -iname *templates* # copy the (long) file path
+git log ./docs/cpp/core/2022-10-06-notes-cpp-templates.md
+commithash=SHA-1
+git difftool $commithash~2 $commithash -- ./docs/cpp/core/2022-10-06-notes-cpp-templates.md
 ```
 
 ## Compare commits
