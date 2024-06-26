@@ -31,6 +31,7 @@ tags:
 | :--- | :--- |
 `ffmpeg` | mp4 to mp3 converter
 `ffmpeg -i foo.mp4 bar.mp3` | convert foo.mp4 to bar.mp3
+`ffmpeg -i input.webm -c:v libx264 -preset slow -crf 22 -c:a aac -b:a 128k output.mp4` | convert input.webm to output.mp4
 `ffmpeg -i source.mp4 -ss 00:00:00 -t 00:00:00 -vcodec copy -acodec copy outsplice.mp4` | crop source.mp4 from start time `-ss` to time `-t`
 `ffmpeg -i input.mov -qscale 0 output.mp4` | convert input.mov to output.mp4
 `ffmpeg -i input.mp4 -ss 00:05:20 -t 00:10:00 -c:v copy -c:a copy output1.mp4` | take the input video input.mp4, and cut out 10 minutes from it starting from 00:05:20 (5 minutes and 20 second mark), i.e. the output video will be from 00:05:20 to 00:15:20. If you specify a duration that will result in a stop time that is beyond the length of the input video, the output video will end where the input video ends. [source](https://shotstack.io/learn/use-ffmpeg-to-trim-video/)
@@ -643,6 +644,13 @@ cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen 
 `do_something1 && do_something2_that_depended_on_something1` | only run "something2", if "something1" completes successfully
 `do_something1; do_something2` | run "something2" irrespective of "something1"
 
+### ls
+
+| command | description |
+| :--- | :--- |
+`ls -d */` | list directories only
+`ls -d /etc/*/` | list directories only in a specific directory
+
 ### find, locate
 
 | command | description |
@@ -670,17 +678,42 @@ cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen 
 `which python3` |		
 `whereis python3` |
 
+### regex
+
+- match URLs: `https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)`, [stackoverflow](https://stackoverflow.com/a/3809435)
+  - without http protocol: `[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)`
+
 ### grep
+
+- **Best Practices**:
+  - always exclude the `... | grep pattern` command itself
+    - if you cannot exclude it, then
+      - in `... | grep pattern | tail -n number` the `tail` command should come last
+- `man grep`:
+  - "Typically PATTERNS should be quoted when grep is used in a shell"
+- [single quotes vs. double quotes](https://stackoverflow.com/questions/25151067/grep-double-quotes-vs-single-quotes)
 
 | command | description |
 | :--- | :--- |
+`grep -c` | count matches, **best practice**: instead of `grep | wc -l`
+`grep -o pattern "$file"` | option `-o` to only print the matching part
+`l | grep -e pattern1 -e pattern2` | logical "OR": greps `pattern1` or `pattern2`
+`grep -r -E 'orange|mango' .` | logical "OR" operator
+`l | grep -e pattern1 | grep -e pattern2` | logical "AND": greps `pattern1` and `pattern2`
+`l | grep -v pattern` | logical "NOT": greps everything except `pattern`
 `grep -rn -e 'nvidia' /var/log/apt/history.log*` | `r`: recursively look at all files in the folder, `n`: show line numbers, `e`: regex pattern, here: `nvidia` (w/o this some regex patterns will not work)
 `grep -rnw -e 'nvidia' /var/log/apt/history.log*` | `w`: match whole words only (i.e. if the pattern `nvidia` is a substring of a word, it is not matched)
-`grep -r -E 'orange|mango' .` | logical OR operator
 `l | grep 150 | xargs rm -v` | pipe output of `grep` to `rm`
 `l | grep xyzpattern | xargs cp -iv -t 150/` | pipe output of `grep` to `cp`
 `l | grep xyzpattern | xargs mv -iv -t 1024p/` | pipe output of `grep` to `mv`
 `grep -n someSearchPattern` | `n`: show line numbers (useful to find things in `man` and long `--help` outputs, eg. use `man command` and jump to the line that `command --help \| grep -n someSearchPattern` shows)
+`grep -oE 'pattern.{0,4}' "$file"` | option `-o` to only print the matching part in combination with `-E` (extended regular expression) and pattern `.{0,4}` to match up to four characters after your search pattern, [stackexchange](https://unix.stackexchange.com/questions/518823/grep-only-show-x-chars-in-the-result)
+
+### nl
+
+| command | description |
+| :--- | :--- |
+`command | nl -w2 -s'> '` | add line numbers in front of each line of the output of `command`, [stackexchange](https://unix.stackexchange.com/a/222220)
 
 ### tee
 
@@ -698,6 +731,7 @@ cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen 
 
 | command | description |
 | :--- | :--- |
+`<some_command> | awk 'NR % 5 == 0'` | prints every fifth line
 `<some_command> | awk '{print $2}'` | get the 2nd column of the command output
 `<some_command> | awk '{print $2, $4}'` | get the 2nd and 4th column of the command output
 `<some_command> | awk '{print $2, $4}'` | get the 2nd and 4th column of the command output
@@ -729,15 +763,20 @@ cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen 
 `tr '\n' ' '` | replace all `\n` with spaces, [tr SET notation](https://phoenixnap.com/kb/linux-tr)
 `tr -d '\n'` | delete all `\n`, [tr SET notation](https://phoenixnap.com/kb/linux-tr)
 
-### redirection, sort, head, tail
+### head, tail
+
+| command | description |
+| :--- | :--- |
+`Befehl | head -3` | zeige oberste 3 Zeilen des Outputs
+`Befehl | tail -3` |
+`tail -n +10 input.txt | head -n 91` | prints rows 10-100, ie. `tail -n +10` prints out the entire file starting from line 10, and `head -n 91` prints the first 91 lines of that (up to and including line 100 of the original file)
+
+### redirection
 
 | command | description |
 | :--- | :--- |
 `exec > some_file` | redirect all shell output to `some_file`
 `ls -ltr | vim -` | zeige Output eines Befehls in vim (ACHTUNG: Leerzeichen hinter "vim" nicht vergessen!)
-`Befehl | head -3` | zeige oberste 3 Zeilen des Outputs
-`Befehl | tail -3` |
-`du -sch ./folder | sort -rh | head -5` | zeige disk usage (=size) of folder (`-h` für human readable; `-s` für zeige auch Subdirectories; `-c` für zeige grand total am Ende) (`sort -rh` für sortiere nach size, wobei `-r` für reverse und `-h` für compare human readable sizes)
 `echo "blabla" >> filename` | write output to file *filename*
 `echo "blabla" | tee filename` | write output to file *filename*
 
@@ -802,6 +841,7 @@ nautilus .	|	öffne current directory in File Browser
 
 | command | description |
 | :--- | :--- |
+`xsel -bc` | clear clipboard
 `command | xclip` | copy the output of `command` and place it in `XA_PRIMARY` (the "primary selection")
 `command | xclip -sel prim` | same as `command | xclip`
 `command | xclip -sel clip` | copy the output of `command` and place it in `XA_CLIPBOARD` ("the clipboard")
@@ -845,6 +885,7 @@ From [superuser](https://superuser.com/questions/142945/bash-command-to-focus-a-
 `tar -zxvf ~/Downloads/mnist.tgz -C ./data/` |
 `tar -C ./data/ -jxvf ~/Downloads/datei.tar.bz2` | für **.tar.bz2** (dh. `-j` flag statt `-z` flag)
 `tar -C ~/ -xvf tor-browser-linux64-10.5.2_en-US.tar.xz` | für **.tar.xz**
+`zip -FF 210211.zip --out 210211-2.zip -fz` | "fix" a broken zip file, then run `unzip 210211-2.zip`, [stackexchange](https://unix.stackexchange.com/a/634316)
 
 # System information
 
@@ -1013,6 +1054,7 @@ Troubleshooting:
 `du -sch *` | `-c` to show grand total
 `du -sh * | sort -h` | "ascending": largest file in the last output line
 `du -sh * | sort -rh` | "descending": largest file in the first output line (`-r` for "reverse order")
+`du -sch ./folder | sort -rh | head -5` | zeige disk usage (=size) of folder (`-h` für human readable; `-c` für zeige grand total am Ende) (`sort -rh` für sortiere nach size, wobei `-r` für reverse und `-h` für compare human readable sizes)
 `du -sh * .[^.]*` | show hidden files, too (`.[^.]*` aka `.[!.]*` is a ["globbing pattern"](https://stackoverflow.com/questions/41034115/in-shell-scripting-what-does-mean))
 `du -h -d 1 *` | `-d 1` or `--max-depth=1` display the sizes of only the directories immediately within the specified path. If we were to specify 2 it would go a level further.
 `du -h -d 1 -t 1G /` | `-t`: threshold, show the sizes of all first level directories larger than 1GB within the root `/` path
@@ -1052,6 +1094,7 @@ nvidia-smi --query-gpu=name --format=csv | get GPU name
 | :--- | :--- |
 `wget -nc` | `-nc` for "do not overwrite existing files"
 `wget -O output_file -q https://checkip.amazonaws.com -P DESTINATION` | `-O output_file`: benutze Minuszeichen "-" statt `output_file` wenn output direkt in Terminal erscheinen soll; `-q` für quiet; `-P` für Zielordner
+`torsocks wget "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-10.1.0-amd64-xfce-CD-1.iso"` | download anonymously (need to install `sudo apt-get install tor torsocks`), [reddit](https://www.reddit.com/r/privacytoolsIO/comments/ddnx6x/how_to_download_files_properly_and_anonymously/)
 `wget -A pdf,jpg -m -p -E -k -K -np http://site/path/` | get all pdfs and jpgs from site
 `wget --accept pdf,jpg --mirror --page-requisites --adjust-extension --convert-links --backup-converted --no-parent http://site/path/` | same as above using long option names
 `curl -s https://checkip.amazonaws.com` | `-s` für silent

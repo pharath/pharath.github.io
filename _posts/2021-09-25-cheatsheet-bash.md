@@ -77,6 +77,162 @@ The first and third approaches execute the script as another process, so variabl
 
 In the second method, if you are using exit in second script, it will `exit` the first script as well. Which will not happen in first and third methods.
 
+# Source instead of Execute
+
+[unix.stackexchange.com](https://unix.stackexchange.com/a/424495)
+
+Assuming that you are running bash, put the following code near the start of the script that you want to be sourced but not executed:
+
+```bash
+if [ "${BASH_SOURCE[0]}" -ef "$0" ]
+then
+  echo "Hey, you should source this script, not execute it!"
+  exit 1
+fi
+```
+
+# Exit on Error
+
+## set -e
+
+**Bad practice**: Only use `set -e` for debugging purposes.
+
+[stackoverflow](https://stackoverflow.com/a/19622569/12282296):
+
+It's recommended to use:
+
+```bash
+trap 'do_something' ERR
+```
+
+to run `do_something` function when errors occur. (see below in section "bash traps")
+
+[stackoverflow](https://stackoverflow.com/a/2871034):
+
+```bash
+#!/bin/bash
+set -e
+# Any subsequent(*) commands which fail will cause the shell script to exit immediately
+```
+
+You can also disable this behavior with `set +e`.
+
+**Warning:** When you use `set -e` in a script that you want to be sourced, you **must** put a `set +e` at the end of this script as well as at each point in the script at which the script might exit. Otherwise, `set -e` will continue to be set in the shell in which the script was sourced. This will cause the shell to exit whenever one of the following commands entered in this shell fails (and also when tab autocompletion cannot find a matching completion!).
+
+> **history**: `set -e` was an attempt to add "automatic error detection" to the shell. Its goal was to cause the shell to abort any time an error occurred, so you don't have to put || exit 1 after each important command. This does not work well in practice.
+> [bash FAQ](http://mywiki.wooledge.org/BashFAQ/105)
+
+- related:
+  - [bash strict mode](http://redsymbol.net/articles/unofficial-bash-strict-mode/)
+
+## bash traps
+
+**Warning**: Do not forget to remove traps after setting them.
+
+| command | description |
+| :--- | :--- |
+`trap 'do_something' ERR` | set a trap that runs `do_something` on signal `ERR`; "the SIG prefix is optional" (from `trap --help`), ie. you can write eg. `SIGINT` or `INT`
+`trap - [signal]` | remove a trap, [stackoverflow](https://stackoverflow.com/questions/31201572/how-to-untrap-after-a-trap-command)
+`trap -l` | print a list of signal names and their corresponding numbers
+`ERR` | similar to `set -e`, [stackoverflow](https://stackoverflow.com/a/26261518/12282296)
+`EXIT` | useful for cleanup operations, see below "examples" &rarr; "exit traps", [exit traps](http://redsymbol.net/articles/bash-exit-traps/)
+
+- related:
+  - [bash trap example](https://opensource.com/article/20/6/bash-trap)
+  - [SIGINT traps](https://www.baeldung.com/linux/bash-signal-handling)
+
+### Examples
+
+**Example 1**: report the line number where an error occurred:
+
+```bash
+FILENAME=$0
+# Colors
+RED=$(tput setaf 1)
+NC=$(tput sgr0) # No Color
+
+err_report() {
+   printf "%s%s: Error on line %s.%s\n" "${RED}" "${FILENAME}" "$1" "${NC}"
+}
+trap 'err_report $LINENO' ERR
+
+# do some work
+
+trap - ERR
+```
+
+**Example 2**: "exit traps" to perform cleanup operations:
+
+```bash
+#!/bin/bash
+function finish {
+  # Your cleanup code here
+}
+trap finish EXIT
+```
+
+**Example 3**: only exit at the end of a loop: [stackoverflow](https://stackoverflow.com/questions/26797953/bash-trap-exit-only-at-the-end-of-loop)
+
+- **important (related to Example 3)**: behaviour when pressing <kbd>ctrl</kbd> + <kbd>c</kbd>
+  - observed in `scripts/dl/cyberdrop-status.sh`
+  - A SIGINT (<kbd>ctrl</kbd> + <kbd>c</kbd>) is sent to the whole **process group** (see section "Process Group ID, Process Group Leader"), ie. to all processes that have the same **process group ID** (PGID).
+    - So, eg. when there is a `sleep` inside a while loop in your bash script, the `sleep` process will receive a SIGINT and the script process will also receive a SIGINT.
+    - If this bash script has a SIGINT `trap` that does **not** exit the script on SIGINT, then the script will continue running, whereas the `sleep` process will terminate immediately (while [returning the remaining time](https://man7.org/linux/man-pages/man3/sleep.3.html)).
+    - This means that the next statement in the script after the `sleep` command is executed. If `sleep` is the last command in the loop, then the next iteration of the loop will start.
+
+### Process Group ID, Process Group Leader
+
+[unix.stackexchange](https://unix.stackexchange.com/questions/737385/how-can-i-identify-the-leader-of-a-process-group-in-linux):
+
+I understand that when a process is started from a shell in linux or unix, a new process group is created with that process as the process leader, giving its PID equal to a new PGID which is used for any processes spawn from that process.
+
+As I understand it, in the case where the process leader is terminated, a new process becomes leader. This new leader would then have a PID inequal to the PGID of the process group.
+
+[How to get the PID and corresponding PGID of each process](https://unix.stackexchange.com/a/149756):
+
+Simplest way to determine the process group ID is to use `ps`:
+
+```bash
+ps ax -O tpgid
+```
+
+The second column will be the process group ID.
+
+**phth**: here you can run eg.
+
+```bash
+ps ax -O tpgid | grep some_PID
+ps ax -O tpgid | grep some_PGID
+ps ax -O tpgid | grep name_of_some_process
+```
+
+to get your desired information.
+
+[How to get the PGID of the current process in bash](https://stackoverflow.com/questions/71444028/print-pgid-in-a-bash-script):
+
+```bash
+ps -o pgid= $$
+```
+
+- related:
+  - [PID, PPID, SID, PGID, UID, EUID](https://stackoverflow.com/questions/41498383/what-do-the-identifiers-pid-ppid-sid-pgid-uid-euid-mean)
+  - [Process Group](https://en.wikipedia.org/wiki/Process_group)
+  - [pgrep -g PGID](https://unix.stackexchange.com/questions/737385/how-can-i-identify-the-leader-of-a-process-group-in-linux)
+  - [Process Group Leader](https://en.wikipedia.org/wiki/Process_group#Details)
+  - [what happens on SIGINT in bash](https://superuser.com/questions/1829830/behavior-of-sigint-with-bash)
+
+# Exit after some Time
+
+[stackoverflow](https://stackoverflow.com/a/71409539)
+
+```bash
+SECONDS=0
+while (( SECONDS < 60)); do
+  echo "keep running"
+  sleep 5
+done
+```
+
 # Shebang
 
 beste Erklärung: [askubuntu discussion](https://stackoverflow.com/questions/7670303/purpose-of-usr-bin-python3-shebang/7670338#7670338)
@@ -162,19 +318,46 @@ $ echo $MYVAR
 
 ["Parameter expansion" (A.K.A "Variable expansion")](https://unix.stackexchange.com/questions/403867/what-is-parameter-expansion-a-k-a-variable-expansion-in-shell-scripting-in)
 
+### Check if a Variable is Set
+
+[stackoverflow](https://stackoverflow.com/a/3601734)
+
+```bash
+if [[ -n "${var+x}" ]]; then
+  # do something
+fi
+```
+
 ## If
+
+```bash
+if [ conditions ]; then
+   # Things
+elif [ other_conditions ]; then
+   # Other things
+else
+   # In case none of the above occurs
+fi
+```
+
+Note: The spaces are needed around the brackets. Otherwise, it won't work. This is because `[` itself is a command. 
 
 ### Double Square-Brackets vs Single Square-Brackets
 
 - "If you're writing a `#!/bin/bash` script then I recommend using `[[` instead. The double square-brackets `[[...]]` form has more features, a more natural syntax, and fewer gotchas that will trip you up.", [stackoverflow](https://stackoverflow.com/a/20449556)
 - "`[[` is bash's improvement to the `[` command. It has several enhancements that make it a better choice if you write scripts that target bash.", [stackoverflow](https://stackoverflow.com/questions/3427872/whats-the-difference-between-and-in-bash)
 
-### Double Parentheses
+### Double Parentheses, Arithmetic Expansion
 
 [stackoverflow](https://stackoverflow.com/a/2188369)
 
 - "Double parentheses are used for **arithmetic operations**"
-- "and they enable you to omit the dollar signs on integer and array variables and include spaces around operators for readability."
+- "and they enable you to **omit the dollar signs** on integer and array **variables** and include spaces around operators for readability."
+
+[mywiki.wooledge.org](https://mywiki.wooledge.org/ArithmeticExpression)
+
+- POSIX sh (and all shells based on it, including Bash and ksh) uses the `$(( ))` syntax to do arithmetic, using the same syntax as C.
+- Bash calls this an "Arithmetic Expansion", and it obeys the same basic rules as all other `$...` substitutions.
 
 ### Command as condition
 
@@ -287,6 +470,18 @@ done
 
 echo "hello $Name!"
 ```
+
+### `optstring`
+
+[How to specify an optstring](https://stackoverflow.com/questions/13251732/how-to-specify-an-optstring-in-the-getopt-function)
+
+It is just a string, and each character of this string represents an option. If this option requires an argument, you have to follow the option character by `:`.
+
+For example, `"cdf:g"` accepts the options `c`, `d`, `f`, and `g`; `f` requires an additional argument.
+
+[What the first colon means](https://unix.stackexchange.com/questions/426483/what-is-the-purpose-of-the-very-first-character-of-the-option-string-of-getopts)
+
+If the very first character of optstring is a colon, getopts will not produce any diagnostic messages for missing option arguments or invalid options.
 
 ### `$OPTARG`
 
@@ -452,6 +647,19 @@ $ echo $?
 - Exit Codes With Special Meanings: see [link](https://tldp.org/LDP/abs/html/exitcodes.html)
 - Only use 64-113 as user-defined exit codes: see [link](https://tldp.org/LDP/abs/html/exitcodes.html)
 
+### Check Exit Code and Run Code
+
+```bash
+# check, if my custom shortcuts for focussing certain windows work
+RED=$(tput setaf 1)
+NC=$(tput sgr0) # No Color
+wmctrl -l | grep -q main-tmux
+if ! "$?" > /dev/null 2>&1; then
+    printf "%sphth: Need to rename some windows to make some shortcuts work:%s\n" "${RED}" "${NC}"
+    cat scripts/rename-windows.sh
+fi
+```
+
 ### Signal numbers
 
 `man bash`:
@@ -487,3 +695,13 @@ See also:
 
 - sends a `SIGCONT`
 
+# Formatting
+
+## Clear the Terminal
+
+```bash
+if [[ "$error_count" -eq 0 ]]; then
+    # clear the terminal
+    printf "\033c"
+fi
+```

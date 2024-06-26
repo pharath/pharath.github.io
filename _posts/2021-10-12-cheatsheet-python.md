@@ -122,12 +122,66 @@ pip show *package* | show location of *package* (and other package information)
 pip install -h | show install options/settings
 python3 -m pip install --upgrade pip | upgrade pip (old pip versions cause many errors, always upgrade pip first and keep pip updated!)
 
+## PyPI
+
+[Wikipedia](https://en.wikipedia.org/wiki/Python_Package_Index)
+
+The Python Package Index, abbreviated as PyPI (/ˌpaɪpiˈaɪ/) and also known as the Cheese Shop (a reference to the Monty Python's Flying Circus sketch "Cheese Shop"), is the official third-party software repository for Python. (...) PyPI is run by the Python Software Foundation, a charity. Some package managers, including `pip`, use PyPI as the **default source for packages and their dependencies**.
+
+As of 6 May 2024, more than 530,000 Python packages are available.
+
+PyPI primarily hosts Python packages in the form of source archives, called "**sdists**", or of "**wheels**" that may contain binary modules from a compiled language.
+
+## Wheels vs Source Distributions
+
+### sdist
+
+[realpython.com](https://realpython.com/python-wheels/)
+
+**example**: install the `uWSGI` package
+
+The `tar.gz` tarball that `pip` retrieves is a source distribution, or `sdist`, rather than a wheel. In some ways, a `sdist` is the opposite of a wheel.
+
+A **source distribution** contains source code. That includes not only Python code but also the source code of any extension modules (usually in **C** or **C++**) bundled with the package. With source distributions, extension modules are compiled on the user’s side rather than the developer’s.
+
+### Wheel
+
+[realpython.com](https://realpython.com/python-wheels/)
+
+**example**: install the `chardet` package
+
+(...) Installing `chardet` downloads a `.whl` file directly from PyPI. The wheel name `chardet-3.0.4-py2.py3-none-any.whl` follows a specific naming convention that you’ll see later. What’s more important from the user’s perspective is that there’s no build stage when `pip` finds a compatible wheel on PyPI.
+
+### Wheels Make Things Go Fast
+
+(...) Above, you saw a comparison of an installation that fetches a prebuilt wheel and one that downloads a `sdist`. Wheels make the end-to-end installation of Python packages faster for two reasons:
+
+- All else being equal, wheels are typically **smaller in size** than source distributions, meaning they can move faster across a network.
+- Installing from wheels directly avoids the intermediate step of **building** packages off of the source distribution.
+
 ## Install packages
 
 | command | description |
 | :---: | :---: |
 pip install -U,	--upgrade | Upgrade all specified packages to the newest available version. The handling of dependencies depends on the upgrade-strategy used. 
 pip install -q,	--quiet | Give less output. Option is additive, and can be used up to 3 times (corresponding to WARNING, ERROR, and CRITICAL logging levels).
+
+## Cache
+
+- [issue: cache is always disabled and cannot be enabled via pip.conf](https://github.com/pypa/pip/issues/11832)
+  - **fix**: remove **ALL** `no-cache-dir = false` lines in **ALL** `pip.conf` files in the hierarchy, ie. at the global level, the user level and the site level, see [levels](https://pip.pypa.io/en/stable/topics/configuration/#configuration-files)
+- [pip doc: Caching](https://pip.pypa.io/en/stable/topics/caching/)
+
+| command | description |
+| :---: | :---: |
+pip cache dir | to get the cache directory that pip is currently configured to use
+pip cache list | list all wheel files from pip’s cache
+pip cache list somepackage | list all `somepackage`-related wheel files from pip’s cache
+pip cache info | provides an overview of the contents of pip’s cache, such as the total size and location of various parts of it
+pip cache remove somepackage | removes all wheel files related to `somepackage` from pip’s cache. HTTP cache files are not removed at this time.
+pip cache purge | will clear all files from pip’s wheel and HTTP caches.
+pip install --download-cache /path/to/pip/cache matplotlib | cache downloaded packages to avoid downloading them again, [stackoverflow](https://stackoverflow.com/a/10336348/12282296)
+pip install --no-cache-dir | pip’s caching behaviour is disabled by passing the `--no-cache-dir` option.
 
 ## Uninstall packages
 
