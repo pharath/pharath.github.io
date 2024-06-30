@@ -374,7 +374,33 @@ In general, `xprop` and `xwininfo` will provide you with a lot of information ab
 `ls | wc -l` | count files in a directory
 `history | tail -n 30` | show last 30 commands
 
+# comm
+
+To compare **just the filenames** in `dir1` and `dir2`:
+
+[linuxquestions.org](https://www.linuxquestions.org/questions/linux-general-1/how-to-compare-only-the-file-names-between-two-directories-diff-4175477358/#post5029670)
+
+```bash
+comm <(ls dir1) <(ls dir2)
+```
+
+The output will be differentiated by 0, 1, or 2 leading tabs as:
+
+files only in dir1
+files only in dir2
+files in both dirs
+
+Options to `comm` allow selection of the columns you want.
+
 # diff
+
+[groups.google.com](https://groups.google.com/g/linux.redhat.list/c/jp-inxNQQJk/m/2nSsxlY3scMJ)
+
+Compare listings of two directories using process substitution in bash:
+
+```bash
+diff <(ls dir1) <(ls dir2)
+```
 
 Differences between two directory trees
 
@@ -463,6 +489,7 @@ sudo apt install ./name.deb | install a .deb file
 | :--- | :--- |
 `sudo apt-mark hold package_name` | hold packages (i.e. do not upgrade, remove or modify `package_name`)
 `sudo apt-mark unhold package_name` | unhold "held" packages 
+`apt-mark showhold` | show held packages
 
 ## dpkg
 
@@ -727,16 +754,27 @@ cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen 
 
 ### awk
 
-#### Get Columns
+#### Get Rows
 
 | command | description |
 | :--- | :--- |
 `<some_command> | awk 'NR % 5 == 0'` | prints every fifth line
+
+#### Get Columns
+
+| command | description |
+| :--- | :--- |
 `<some_command> | awk '{print $2}'` | get the 2nd column of the command output
 `<some_command> | awk '{print $2, $4}'` | get the 2nd and 4th column of the command output
 `<some_command> | awk '{print $2, $4}'` | get the 2nd and 4th column of the command output
-`<some_command> | cut -f2- -d' '` | get all columns from the 2nd to the last column of the command output
 `<some_command> | awk -F '"' '{print $2}'` | Use `-F [field separator]` to split the lines on `"`s
+
+### cut
+
+| command | description |
+| :--- | :--- |
+`<some_command> | cut -f2- -d' '` | get all columns (delimited by a space) from the 2nd to the last column of the command output
+`<some_command> | cut -f2- -d'	'` | tab delimiter: Press <kbd>Ctrl</kbd>+<kbd>V</kbd> and then <kbd>Tab</kbd> to use "verbatim" quoted insert.
 
 ### sed
 
@@ -791,6 +829,13 @@ nautilus .	|	öffne current directory in File Browser
 | command | description |
 | :--- | :--- |
 `# ein comment` | Kommentar in command line
+
+### time, date
+
+| command | description |
+| :--- | :--- |
+`date` | use `date --help` for formatting options
+`date '+%m-%d-%y'` | for `06-30-24` format
 
 ### dirs, pushd, popd
 

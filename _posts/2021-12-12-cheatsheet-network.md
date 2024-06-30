@@ -74,6 +74,18 @@ ssh-keygen -p -f ~/.ssh/id_ed25519 # bisheriges Passwort zum ssh key, der sich i
 ssh -T git@git.rwth-aachen.de # (sollte "Welcome to GitLab, @username!" ausgeben)
 ```
 
+## Network Traffic Monitoring
+
+source: [askubuntu.com](https://askubuntu.com/questions/257263/how-to-display-network-traffic-in-the-terminal)
+
+| command | description |
+| :--- | :--- |
+`bmon` | Shows multiple interfaces at once
+`slurm` | Has nice colored graphs
+`tcptrack` | Tells how much bandwidth is being used and also what protocol (service/port) and destination the transmission is taking place to. Very helpful when you want to know exactly what is using up your bandwidth
+`sudo iftop -i wlan0` |
+`nethogs` |
+
 # Router
 
 ## Troubleshooting

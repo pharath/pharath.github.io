@@ -155,6 +155,7 @@ Use [regexr.com](https://regexr.com/) to ...
 | command | description |
 | :--- | :--- |
 `:g/pattern/d` | remove all lines containing `pattern`
+`:g/^$/d` | remove blank lines
 `:%s/^.*John.*$//g` | match the entire line that **contains** `John` 
 
 ### Whitespaces

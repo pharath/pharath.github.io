@@ -16,12 +16,12 @@ toc_label: "Contents"
 # Installing multiple Python Versions
 
 - [source](https://askubuntu.com/a/682875):
-    - `sudo add-apt-repository ppa:deadsnakes/ppa`
-    - `sudo apt-get update`
-    - `sudo apt-get install python3.5`
-    - `sudo apt-get install python3.5-dev`
-        - It will not overwrite your existing `python3.4` which is still symlinked as `python3`.
-        - Instead, to run `python3.5`, run the command `python3.5` (or `python3.X` for any other version of python).
+  - `sudo add-apt-repository ppa:deadsnakes/ppa`
+  - `sudo apt-get update`
+  - `sudo apt-get install python3.5`
+  - `sudo apt-get install python3.5-dev`
+    - It will not overwrite your existing `python3.4` which is still symlinked as `python3`.
+    - Instead, to run `python3.5`, run the command `python3.5` (or `python3.X` for any other version of python).
 
 ## venv using multiple Python Versions
 
@@ -36,13 +36,13 @@ toc_label: "Contents"
 - [source](https://realpython.com/absolute-vs-relative-python-imports/)
 - `.py` files are **modules**
 - folders (containing modules) are **packages**
-    - importing a package essentially imports the package's `__init__.py` file as a module
+  - importing a package essentially imports the package's `__init__.py` file as a module
 
 # pyenv
 
 - For Python version management, e.g. 
-    - if you want to use multiple python versions on the same machine
-    - if a project requires an older python version
+  - if you want to use multiple python versions on the same machine
+  - if a project requires an older python version
 - `pipenv install` (see below) will automatically install a python version using `pyenv`, if the project requires it 
 
 ## Prerequisites
@@ -93,9 +93,9 @@ from [official doc](https://github.com/pyenv/pyenv#switch-between-python-version
 To select a Pyenv-installed Python as the version to use, run one
 of the following commands:
 
-* [`pyenv shell <version>`](COMMANDS.md#pyenv-shell) -- select just for current shell session
-* [`pyenv local <version>`](COMMANDS.md#pyenv-local) -- automatically select whenever you are in the current directory (or its subdirectories)
-* [`pyenv global <version>`](COMMANDS.md#pyenv-shell) -- select globally for your user account
+* `pyenv shell <version>` -- select just for current shell session
+* `pyenv local <version>` -- automatically select whenever you are in the current directory (or its subdirectories)
+* `pyenv global <version>` -- select globally for your user account
 
 E.g. to select the above-mentioned newly-installed Python 3.10.4 as your preferred version to use:
 
@@ -112,7 +112,7 @@ Using "`system`" as a version name would reset the selection to your system-prov
 
 - use `pipenv` (see subsection below) instead of `venv` and `pip`
 - pip caches downloaded packages, so that you can resume downloads and installations by running `pip install` again, if e.g. 
-    - the installation is aborted because there was no space left on the device
+  - the installation is aborted because there was no space left on the device
 
 ## Basics
 
@@ -175,6 +175,7 @@ pip install -q,	--quiet | Give less output. Option is additive, and can be used 
 | command | description |
 | :---: | :---: |
 pip cache dir | to get the cache directory that pip is currently configured to use
+`l ~/.cache/pip/` | a typical cache directory location
 pip cache list | list all wheel files from pip’s cache
 pip cache list somepackage | list all `somepackage`-related wheel files from pip’s cache
 pip cache info | provides an overview of the contents of pip’s cache, such as the total size and location of various parts of it
@@ -215,7 +216,7 @@ pip cache dir | show cache folder
 - `npx` works with JavaScript and `pipx` works with Python
 - Both tools attempt to make running executables written in a dynamic language (JS/Python) as easy as possible
 - `pipx` can also install tools globally; `npx` cannot
-    - `npx` looks into the local `/node_modules` folder for the package and if it can't find it, it will download and run it **without** having that package globally installed. [source](https://blog.scottlogic.com/2018/04/05/npx-the-npm-package-runner.html)
+  - `npx` looks into the local `/node_modules` folder for the package and if it can't find it, it will download and run it **without** having that package globally installed. [source](https://blog.scottlogic.com/2018/04/05/npx-the-npm-package-runner.html)
 
 # venv (python3)
 
@@ -245,7 +246,7 @@ virtualenv -p /home/username/opt/python-2.7.15/bin/python venv | create a virtua
 ## pip freeze
 
 - `pip freeze` has some issues
-    - a better tool for generating `requirements.txt`: [pip-compile](https://github.com/jazzband/pip-tools?ref=alexo.dev)
+  - a better tool for generating `requirements.txt`: [pip-compile](https://github.com/jazzband/pip-tools?ref=alexo.dev)
 
 | command | description |
 | :---: | :---: |
@@ -253,8 +254,8 @@ pip freeze > requirements.txt | write all packages in the current environment to
 
 Problems:
 - `pkg_resources==0.0.0`
-    - `pip freeze` also includes `pkg_resources==0.0.0` in the `requirements.txt` which can cause errors, when running `pip install -r requirements.txt`
-        - you can safely remove this line (see [stackoverflow](https://stackoverflow.com/questions/39577984/what-is-pkg-resources-0-0-0-in-output-of-pip-freeze-command))
+  - `pip freeze` also includes `pkg_resources==0.0.0` in the `requirements.txt` which can cause errors, when running `pip install -r requirements.txt`
+    - you can safely remove this line (see [stackoverflow](https://stackoverflow.com/questions/39577984/what-is-pkg-resources-0-0-0-in-output-of-pip-freeze-command))
 
 # pipenv
 
@@ -286,6 +287,7 @@ Activate the virtual environment (like `source env/bin/activate`):
 
 ```bash
 cd path/to/poetry/project/folder/   # the folder that contains the files "pyproject.toml" and "poetry.lock"
+poetry env use 3.11   # activate the right python version (only works if you have the python executable in your PATH)
 poetry install   # install all packages in a poetry virtual environment
 poetry shell   # activate the virtual environment
 ...            # now you can use all packages that are installed in the poetry virtual environment
@@ -296,6 +298,7 @@ Alternatively, you can use all packages that are installed in the poetry virtual
 
 ```bash
 cd path/to/poetry/project/folder/   # the folder that contains the files "pyproject.toml" and "poetry.lock"
+poetry env use 3.11   # activate the right python version (only works if you have the python executable in your PATH)
 poetry install
 poetry run python main.py -d /media/bra-ket/INTENSO/path/to/destination/folder/ https://domain.xyz/from/which/to/download/
 ```
@@ -304,12 +307,14 @@ poetry run python main.py -d /media/bra-ket/INTENSO/path/to/destination/folder/ 
 | :---: | :---: |
 poetry env info | show information about currently active environment
 poetry env list | show available environments
-poetry env use *some_env* | switch environment (**note**: use `pyenv shell some_python_version` to switch python versions)
+poetry env use someenv | switch environment (**note**: use `pyenv shell some_python_version` to switch python versions)
+poetry env remove test-O3eWbxRl-py3.7 | delete existing virtual environments
 
 | command | description |
 | :---: | :---: |
 poetry install | reads the `pyproject.toml` file from the current project, resolves the dependencies, and installs them.
 poetry install --no-dev | like `poetry install`, but do not install the development dependencies
+poetry show | like `pip list`
 
 # conda
 
@@ -387,7 +392,7 @@ pip show torch | show the location of package "torch" (there you can find the so
 
 [argparse](https://docs.python.org/3/library/argparse.html)
 - erlaubt zB mit `python prog.py 1 2 3 4 5  —sum`  einen command line Befehl selber zu definieren: 
-    - The `argparse` module makes it easy to write user-friendly command-line interfaces. The program defines what arguments it requires, and `argparse` will figure out how to parse those out of `sys.argv`. The `argparse` module also automatically generates **help and usage messages** and **issues errors** when users give the program invalid arguments. 
+  - The `argparse` module makes it easy to write user-friendly command-line interfaces. The program defines what arguments it requires, and `argparse` will figure out how to parse those out of `sys.argv`. The `argparse` module also automatically generates **help and usage messages** and **issues errors** when users give the program invalid arguments. 
 
 ## functools
 
@@ -396,7 +401,7 @@ pip show torch | show the location of package "torch" (there you can find the so
 `new_function = partial(some_function, *args)` 
 - [functools.partial documentation](https://docs.python.org/3/library/functools.html#functools.partial)
 - definiert eine neue Funktion `new_function`, die genau das gleiche macht wie `some_function`
-    - Praktisch, um bestimmte Argumente einer Funktion festzulegen, damit sie nicht wieder eingegeben werden müssen: zB `basetwo = partial(int, base=2)` um nicht jedes mal `base=2` eingeben zu müssen um binäre Zahlen in Dezimalzahlen umzuwandeln
+  - Praktisch, um bestimmte Argumente einer Funktion festzulegen, damit sie nicht wieder eingegeben werden müssen: zB `basetwo = partial(int, base=2)` um nicht jedes mal `base=2` eingeben zu müssen um binäre Zahlen in Dezimalzahlen umzuwandeln
 
 ## sys
 

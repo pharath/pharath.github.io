@@ -201,12 +201,23 @@ The second column will be the process group ID.
 **phth**: here you can run eg.
 
 ```bash
+# get the PID and its corresponding PGID
 ps ax -O tpgid | grep some_PID
 ps ax -O tpgid | grep some_PGID
 ps ax -O tpgid | grep name_of_some_process
 ```
 
 to get your desired information.
+
+The output will look eg. like this:
+
+```bash
+$ ps ax -O tpgid | grep some_PID
+3521072 3669289 S pts/18   00:00:00 bash
+3669289 3669289 S pts/18   00:00:00 /bin/bash ./dl/someprocess.sh
+3669347 3669289 S pts/18   00:00:00 sleep 10
+3669396 3669395 S pts/23   00:00:00 grep --color=auto 3669289
+```
 
 [How to get the PGID of the current process in bash](https://stackoverflow.com/questions/71444028/print-pgid-in-a-bash-script):
 
