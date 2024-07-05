@@ -297,8 +297,23 @@ $
 
 ### Best Practices
 
-- `echo "$somevar"` instead of `echo $somevar`
+- double quote variables: `echo "$somevar"` instead of `echo $somevar`
   - "Quoting variables prevents word splitting and glob expansion, and prevents the script from breaking when input contains spaces, line feeds, glob characters and such.", [shellcheck.net](https://www.shellcheck.net/wiki/SC2086)
+
+### Naming Rules
+
+- numbers in variable names:
+  - variable names must **not** start with a number
+  - variable names can contain numbers
+  - more precisely: [reddit.com](https://www.reddit.com/r/bash/comments/10e583a/comment/j4pby0s/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)
+
+### Naming Conventions
+
+[unix.stackexchange](https://unix.stackexchange.com/a/42849)
+
+Environment variables or shell variables introduced by the operating system, shell startup scripts, or the shell itself, etc., are usually all in `CAPITALS1`.
+
+To prevent your variables from conflicting with these variables, it is a good practice to use `lower_case` variable names.
 
 ### `export` vs setting a variable
 
@@ -340,6 +355,8 @@ fi
 ```
 
 ## If
+
+[tldp.org](https://tldp.org/LDP/Bash-Beginners-Guide/html/sect_07_01.html)
 
 ```bash
 if [ conditions ]; then

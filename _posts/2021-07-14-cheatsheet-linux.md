@@ -415,7 +415,7 @@ Differences between two directory trees
 ## Difference between apt and apt-get + apt-cache:
 
 - `apt` = most commonly used command options from `apt-get` and `apt-cache` see [here](https://itsfoss.com/apt-vs-apt-get-difference/)
-- So with `apt`, you get all the necessary tools in one place. You won’t be lost under tons of command options. The main aim of `apt` is to provide an efficient way of handling packages in a way “pleasant for end users”.
+- So with `apt`, you get all the necessary tools in one place. You won’t be lost under tons of command options. The main aim of `apt` is to provide an efficient way of handling packages in a way "pleasant for end users".
 - `apt`:
   - shows progress bar while installing or removing a program
   - prompts number of packages that can be upgraded when you update the repository database (i.e. `apt update`)
@@ -678,21 +678,31 @@ cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen 
 `ls -d */` | list directories only
 `ls -d /etc/*/` | list directories only in a specific directory
 
-### find, locate
+### find
+
+- **Best Practices:**
+  - put the search pattern in quotes, otherwise you might get the error `paths must precede expression`
 
 | command | description |
 | :--- | :--- |
-`find /opt/ -iname pattern` | find all files (hier: in dir `/opt/` ), for which base of file name (path with leading dirs removed) matches shell pattern `pattern` (Achtung: `pattern` muss genau übereinstimmen! Falls Endung unbekannt, mit Sternchen `*` am Ende suchen, dh. `pattern*` statt `pattern` suchen (wie bei `ls` Befehl).
-`find /opt/ -name pattern` | wie -iname, aber case-sensitive
-`find /opt/ -iname pattern -type f` | nur files suchen
-`find /opt/ -iname pattern -type d` | nur dirs suchen
-`find /opt/ ( -iname pattern1 -o -iname pattern2 )` | `-o` für oder
+`find /opt/ -iname "pattern"` | find all files (hier: in dir `/opt/` ), for which base of file name (path with leading dirs removed) matches shell pattern `pattern` (Achtung: `pattern` muss genau übereinstimmen! Falls Endung unbekannt, mit Sternchen `*` am Ende suchen, dh. `pattern*` statt `pattern` suchen (wie bei `ls` Befehl).
+`find /opt/ -name "pattern"` | wie -iname, aber case-sensitive
+`find /opt/ -iname "pattern" -type f` | nur files suchen
+`find /opt/ -iname "pattern" -type d` | nur dirs suchen
+`find /opt/ -iname "pattern1" -iname "pattern2"` | logical AND
+`find /opt/ ! -iname "pattern1"` | logical NOT
+`find /opt/ ( -iname "pattern1" -o -iname "pattern2" )` | `-o` for logical OR
 `find /opt/ -size +1G` | nur files, die über 1GB groß sind
-`find . -iname searchPattern -print0 | xargs -0 someCommand` | apply `someCommand` on each of the found files
-`find . -iname searchPattern -print0 | xargs -0 du -sh` | show the size of each found file
-`find . -iname searchPattern -exec rm -v {} +` | remove the found files; from `man find`: `-exec`: "The specified command is run once for each matched file."
-`find path_A -name '*AAA*' -exec mv -t path_B {} +` | move the found files
-`locate <file>` | faster than find, but uses a database which must be updated via `sudo updatedb` to find recent changes
+`find . -iname "searchPattern" -print0 | xargs -0 someCommand` | apply `someCommand` on each of the found files
+`find . -iname "searchPattern" -print0 | xargs -0 du -sh` | show the size of each found file
+`find . -iname "searchPattern" -exec rm -v "{}" \+` | remove the found files; from `man find`: `-exec`: "The specified command is run once for each matched file."; `+`: best explanation: [stackoverflow](https://stackoverflow.com/a/6085237)
+`find path_A -name '*AAA*' -exec mv -t path_B "{}" \+` | move the found files
+
+### locate
+
+| command | description |
+| :--- | :--- |
+`locate <file>` | faster than `find`, but uses a database which must be updated via `sudo updatedb` to find recent changes
 `locate -i <file>` | case insensitive
 `locate -b '\file.xyz'` | exact match (Note: the slash and the quotation marks are necessary)
 `sudo updatedb` | update the `locate` command's database
@@ -788,6 +798,7 @@ cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen 
 `sed 's/unix/linux/' geekfile.txt` | replaces the word 'unix' with 'linux' in the file 'geekfile.txt'. `sed` is mostly used to replace text in a file. Examples: see [here](https://www.geeksforgeeks.org/sed-command-in-linux-unix-with-examples/).
 `sed -E` | use extended (ERE) regular expression syntax
 `sed -e 's/ /\\ /g'` | Useful when paths contain spaces and you need to escape these spaces with backslash, eg. when using `realpath`, `pwd`, `scp`, etc. `s/`: Substitute *replacement* for *pattern* on each addressed line [doc: see "s" command](https://docstore.mik.ua/orelly/unix/sedawk/appa_03.htm).
+`sed '0,/Apple/{s/Apple/Banana/}' input_filename` | replace only the first occurrence in a file, "The first two parameters `0` and `/Apple/` are the range specifier. The `s/Apple/Banana/` is what is executed within that range. So in this case "within the range of the beginning (`0`) up to the first instance of `Apple`, replace `Apple` with `Banana`. Only the first `Apple` will be replaced.", [stackoverflow](https://stackoverflow.com/a/9453461)
 
 ### tr
 

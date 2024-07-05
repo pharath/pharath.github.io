@@ -448,9 +448,9 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
 
 ## custom
 
-- <Space>fc (keymaps.lua)
-- <Space>fi (init.lua)
-- <Space>fp (plugins/init.lua)
+- <Space>fc (`keymaps.lua`)
+- <Space>fi (`init.lua`)
+- <Space>fp (`plugins/init.lua`)
 
 ## motion (in a line)
 

@@ -168,8 +168,9 @@ sudo docker rmi "image with more than 1 tag" | If your image is tagged with more
 sudo docker container ls -a |
 docker container inspect container_id | zeige container info (u.a. **Bindings** [= Ordner, deren Inhalte host und container sharen])
 sudo docker container stop 1ff0175b5104 | stoppt den container nur (dh. container Status: "Exited"), aber `docker ps -a` zeigt den container noch!
-sudo docker container rm 1ff0175b5104 | entfernt den container, dh. "docker ps -a" zeigt den container nicht mehr
+sudo docker container rm 1ff0175b5104 | entfernt den container, dh. `docker ps -a` zeigt den container nicht mehr
 sudo docker container kill 1ff0175b5104 | killt den container (Unterschied zu `docker container stop`: see [here](https://stackoverflow.com/a/66736836): "So ideally we always stop a container with the `docker stop` command in order to get the running process inside of it a little bit of time to shut itself down, otherwise if it feels like the container has locked up and it's not responding to the docker stop command then we could issue `docker kill` instead.")
+sudo docker container prune | Removes all stopped containers
 
 ## run
 
