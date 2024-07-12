@@ -200,6 +200,13 @@ to `.clangd`
 - <kbd>ctrl</kbd> <kbd>e</kbd> (discard + do not do anything)
   - helpful eg. if two conflicting completion popups appear at the same time, <kbd>ctrl</kbd> <kbd>e</kbd> will switch between these
 
+### vim builtin completion
+
+- <kbd>ctrl</kbd> <kbd>n</kbd> (next suggestion)
+- <kbd>ctrl</kbd> <kbd>p</kbd> (previous suggestion)
+- <kbd>ctrl</kbd> <kbd>x</kbd> followed by <kbd>ctrl</kbd> <kbd>f</kbd> (Path completion)
+  - select with <kbd>ctrl</kbd> <kbd>n</kbd> then press <kbd>ctrl</kbd> <kbd>x</kbd> followed by <kbd>ctrl</kbd> <kbd>f</kbd> again to select the next subfolder etc.
+
 ### nvim-cmp
 
 - das **completion popup** mit den Kategorien (`Variable`, `Function`, `Keyword`, usw) in der rechten Spalte (zB `completionVorschlag1 Variable`, `completionVorschlag2 Keyword`, `completionVorschlag2 Function`, usw) wird von `nvim-cmp` erzeugt
@@ -214,7 +221,7 @@ to `.clangd`
   - TODO:
     - maybe configure a loader: [LuaSnip#add-snippets](https://github.com/L3MON4D3/LuaSnip#add-snippets)
 - `nvim-cmp` steuert scrolling im "documentation preview" popup
-  - press <kbd>ctrl</kbd>-<kbd>f</kbd> to scroll down
+  - press <kbd>ctrl</kbd> <kbd>f</kbd> to scroll down
   - alle key mappings in `.config/nvim/init.lua` bei `cmp.setup { ..., mapping = ... }`
   - **problem**: you cannot jump into the documentation preview window in nvim-cmp (which is important to open links in the documentation preview window, eg. MDN links for JavaScript)
     - **solution**: instead, you can first autocomplete an expression and then press <kbd>ctrl</kbd> <kbd>k</kbd> or <kbd>shift</kbd> <kbd>k</kbd> while the cursor is on the completed expression
@@ -225,36 +232,37 @@ to `.clangd`
   - am besten alle "sources" deregistrieren (über `:CocList` &rarr; "sources"), weil sonst der `nvim-cmp` popup und der `coc.nvim` popup manchmal gleichzeitig erscheinen
   - wobei das source namens `File` nützlich ist (zeigt die files in cwd, wenn man `./` typet)
 - `:CocList` (select "sources" to configure which sources are used for autocompletion)
+- `:CocConfig` (opens `coc-settings.json` where you can configure Coc, eg. you can turn off Coc's autocompletion by adding `"suggest.autoTrigger": "none"` to `coc-settings.json`)
 
 ## nvim-tree
 
 - <kbd>-</kbd> (show more (show parent folder))
-- <kbd>ctrl</kbd> <kbd>\]</kbd> (show less (only show the folder on which the cursor is placed, ie. this works only if the cursor is placed on a folder))
+- <kbd>ctrl</kbd> <kbd>]</kbd> (show less (only show the folder on which the cursor is placed, ie. this works only if the cursor is placed on a folder))
 - <kbd>c</kbd> then <kbd>p</kbd> (duplicate file, automatically shows "rename" where you have to choose a new name)
 - for Firefox-Bookmarks-like behavior use
-  - `init.lua`: `on_attach` keymap: bind <kbd>ctrl</kbd>-e to `api.tree.toggle`
-  - `keymaps.lua`: normal keymap: bind <kbd>ctrl</kbd>-e to `:NvimTreeFocus`
-- <kbd>alt</kbd> - h, <kbd>alt</kbd> - l (focus/unfocus nvim-tree, when nvim-tree open)
-- "/" at end (create dir)
-- J (jump to last item in folder)
-- K (jump to first item in folder)
-- i (show gitignored folders and files)
-- U (show hidden folders and files)
-- q (quit)
+  - `init.lua`: `on_attach` keymap: bind <kbd>ctrl</kbd><kbd>e</kbd> to `api.tree.toggle`
+  - `keymaps.lua`: normal keymap: bind <kbd>ctrl</kbd><kbd>e</kbd> to `:NvimTreeFocus`
+- <kbd>alt</kbd><kbd>h</kbd>, <kbd>alt</kbd><kbd>l</kbd> (focus/unfocus nvim-tree, when nvim-tree open)
+- <kbd>a</kbd> then put a "/" at the end of the written name (create dir)
+- <kbd>J</kbd> (jump to last item in folder)
+- <kbd>K</kbd> (jump to first item in folder)
+- <kbd>i</kbd> (show gitignored folders and files)
+- <kbd>U</kbd> (show hidden folders and files)
+- <kbd>q</kbd> (quit)
 - statt netrw
-- `/` (search)
-- <kbd>ctrl</kbd>-d (collapse)
-- gy (get absolute path)
-- Y (get relative path)
+- <kbd>/</kbd> (search)
+- <kbd>ctrl</kbd><kbd>d</kbd> (collapse)
+- <kbd>g</kbd><kbd>y</kbd> (get absolute path)
+- <kbd>Y</kbd> (get relative path)
 
 ## toggleterm (for lazygit integration in nvim)
 
 - scroll
-  - <kbd>ctrl</kbd>-\ <kbd>ctrl</kbd>-n to exit terminal mode, then you can use vim motions to move around
+  - <kbd>ctrl</kbd><kbd>\</kbd> <kbd>ctrl</kbd><kbd>n</kbd> to exit terminal mode, then you can use vim motions to move around
   - scroll with mouse first and then you can use pageUp/pageDown
 - written in lua
 - better than floaterm (written in vimscript)
-- 1<kbd>ctrl</kbd>-\, 2<kbd>ctrl</kbd>-\, 7<kbd>ctrl</kbd>-\, etc. to create and access terminals
+- <kbd>1</kbd><kbd>ctrl</kbd><kbd>\</kbd>, <kbd>2</kbd><kbd>ctrl</kbd><kbd>\</kbd>, <kbd>7</kbd><kbd>ctrl</kbd><kbd>\</kbd>, etc. to create and access terminals
   - the prefixed number is the number of the terminal instance
   - pressing a non-existent number will create a new terminal
 
@@ -264,14 +272,15 @@ to `.clangd`
 
 This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <kbd>space</kbd> sk) will not show any keymaps related to gitsigns in non-git-tracked folders.
 
-- <kbd>alt</kbd> - <kbd>,</kbd> (next hunk)
-- <kbd>alt</kbd> - <kbd>.</kbd> (prev hunk)
-- <kbd>space</kbd> h b (blame line)
+- <kbd>alt</kbd> <kbd>,</kbd> (next hunk)
+- <kbd>alt</kbd> <kbd>.</kbd> (prev hunk)
+- <kbd>space</kbd> <kbd>h</kbd> <kbd>b</kbd> (blame line)
   - um schnell herauszufinden in welchem commit die line geaddet wurde
+  - press the keymap twice to jump into the preview window (useful if you want to copy the commit hash in the preview window in order to see the whole commit)
 - diff
-  - <kbd>space</kbd> h d (diff zu letztem commit)
-  - <kbd>space</kbd> h D (diff zu vorletztem commit)
-  - besser: <kbd>space</kbd> g f (see fugitive)
+  - <kbd>space</kbd> <kbd>h</kbd> <kbd>d</kbd> (diff zu letztem commit)
+  - <kbd>space</kbd> <kbd>h</kbd> <kbd>D</kbd> (diff zu vorletztem commit)
+  - besser: <kbd>space</kbd> <kbd>g</kbd> <kbd>f</kbd> (see fugitive)
 
 ### lazygit
 
@@ -410,10 +419,10 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
 ## Documentation
 
 - LSP Documentation:
-  - <kbd>shift</kbd> <kbd>k</kbd> (hover doc, for <span style={{ color: "red" }}>**objects**</span>: press when cursor is on object)
+  - <kbd>shift</kbd> <kbd>k</kbd> (hover doc, for <span style="color:red">**objects**</span>: press when cursor is on object)
     - press 2x to jump into def window
     - press <kbd>q</kbd> to jump out
-  - <kbd>ctrl</kbd> <kbd>k</kbd> (function signature doc, for <span style={{ color: "red" }}>**functions**</span>: press when cursor inside function brackets)
+  - <kbd>ctrl</kbd> <kbd>k</kbd> (function signature doc, for <span style="color:red">**functions**</span>: press when cursor inside function brackets)
     - press 2x to jump into def window
     - press <kbd>q</kbd> to jump out
 - `nvim-cmp` documentation preview window

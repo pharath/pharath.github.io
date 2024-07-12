@@ -167,6 +167,12 @@ see [NoAnnoyance v2](https://extensions.gnome.org/extension/2182/noannoyance/)
 
 see [Switch Workspace](https://extensions.gnome.org/extension/1231/switch-workspace/)
 
+## Gnome-Terminal
+
+| command | description |
+| :--- | :--- |
+`gnome-terminal --title="TITLE"` |
+
 # Tracker
 
 see [wiki.ubuntuusers.de](https://wiki.ubuntuusers.de/Tracker/)

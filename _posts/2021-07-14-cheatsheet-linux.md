@@ -661,8 +661,8 @@ cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen 
 `printenv` | Print the values of the specified environment VARIABLE(s).
 `env` | show all environment variables
 `env NAME=VALUE` | Set each NAME to VALUE in the environment
-`echo $PATH` | Variable, die alle Pfade enthält, in denen Shell-Programme/Shell-Befehle (ls, echo, df, nautilus, etc.) gesucht werden
-`echo $Variable` | display content of the variable "`Variable`"
+`echo $PATH` | spezielle Variable, die alle Pfade enthält, in denen Shell-Programme/Shell-Befehle (ls, echo, df, nautilus, etc.) gesucht werden
+`echo $Variable` | display the content of the variable "`Variable`"
 
 ### Running Multiple Commands
 
@@ -689,10 +689,12 @@ cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen 
 `find /opt/ -name "pattern"` | wie -iname, aber case-sensitive
 `find /opt/ -iname "pattern" -type f` | nur files suchen
 `find /opt/ -iname "pattern" -type d` | nur dirs suchen
-`find /opt/ -iname "pattern1" -iname "pattern2"` | logical AND
-`find /opt/ ! -iname "pattern1"` | logical NOT
-`find /opt/ ( -iname "pattern1" -o -iname "pattern2" )` | `-o` for logical OR
+`find /opt/ -iname "pattern1" -iname "pattern2"` | logical "AND"
+`find /opt/ ! -iname "pattern1"` | logical "NOT"
+`find /opt/ ( -iname "pattern1" -o -iname "pattern2" )` | logical "OR"
+`find /opt/ ( -iname "pattern1" -or -iname "pattern2" )` | logical "OR", not POSIX compliant
 `find /opt/ -size +1G` | nur files, die über 1GB groß sind
+`find . -regextype sed -regex ".*/[a-f0-9\-]\{36\}\.jpg"` | regex, there's an implicit `^ ... $` surrounding your regex (it must match the WHOLE result line), `valid types are 'findutils-default', 'awk', ' egrep', 'ed', 'emacs', 'gnu-awk', 'grep', 'posix-awk', 'posix-basic', 'posix-egrep', 'posix -extended', 'posix-minimal-basic', 'sed'`
 `find . -iname "searchPattern" -print0 | xargs -0 someCommand` | apply `someCommand` on each of the found files
 `find . -iname "searchPattern" -print0 | xargs -0 du -sh` | show the size of each found file
 `find . -iname "searchPattern" -exec rm -v "{}" \+` | remove the found files; from `man find`: `-exec`: "The specified command is run once for each matched file."; `+`: best explanation: [stackoverflow](https://stackoverflow.com/a/6085237)
@@ -720,6 +722,28 @@ cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen 
 - match URLs: `https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)`, [stackoverflow](https://stackoverflow.com/a/3809435)
   - without http protocol: `[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)`
 
+**Special Characters**:
+
+| Char	| Description	| Meaning
+| :--- | :--- | :--- |
+`\`	| Backslash	| Used to escape a special character
+`^`	| Caret	| Beginning of a string
+`$`	| Dollar sign	| End of a string
+`.`	| Period or dot	| Matches any single character
+`|`	| Vertical bar or pipe symbol	| Matches previous OR next character/group
+`?`	| Question mark	| Match zero or one of the previous
+`*`	| Asterisk or star	| Match zero, one or more of the previous
+`+`	| Plus sign	| Match one or more of the previous
+`( )`	| Opening and closing parenthesis	| Group characters
+`[ ]`	| Opening and closing square bracket	| Matches a range of characters
+`{ }`	| Opening and closing curly brace	| Matches a specified number of occurrences of the previous
+
+**Quantifiers:**
+
+- `X`, exactly n times: `X{n}`
+- `X`, at least n times: `X{n,}`
+- `X`, at least n but not more than m times: `X{n,m}`
+
 ### grep
 
 - **Best Practices**:
@@ -729,6 +753,9 @@ cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen 
 - `man grep`:
   - "Typically PATTERNS should be quoted when grep is used in a shell"
 - [single quotes vs. double quotes](https://stackoverflow.com/questions/25151067/grep-double-quotes-vs-single-quotes)
+- by default, `grep` used BRE (use `-E` to use ERE)
+
+#### Basics
 
 | command | description |
 | :--- | :--- |
@@ -745,6 +772,37 @@ cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen 
 `l | grep xyzpattern | xargs mv -iv -t 1024p/` | pipe output of `grep` to `mv`
 `grep -n someSearchPattern` | `n`: show line numbers (useful to find things in `man` and long `--help` outputs, eg. use `man command` and jump to the line that `command --help \| grep -n someSearchPattern` shows)
 `grep -oE 'pattern.{0,4}' "$file"` | option `-o` to only print the matching part in combination with `-E` (extended regular expression) and pattern `.{0,4}` to match up to four characters after your search pattern, [stackexchange](https://unix.stackexchange.com/questions/518823/grep-only-show-x-chars-in-the-result)
+`grep -x '.\{3,10\}'` | `-x` (also `--line-regexp` with GNU `grep`) match pattern to whole line
+
+#### Spaces
+
+[How to include a space character with grep?](https://askubuntu.com/a/949334)
+
+Make sure you quote your expression.
+
+```bash
+grep ' \.pdf' example
+```
+
+Or if there might be multiple spaces (we can't use `*` as this will match the cases where there are no preceding spaces)
+
+```bash
+grep ' \+\.pdf' example
+```
+
+`+` means "one or more of the preceding character". In BRE you need to escape it with `\` to get this special function, but you can use ERE instead to avoid this
+
+```bash
+grep -E ' +\.pdf' example 
+```
+
+You can also use `\s` in `grep` to mean a space
+
+```bash
+grep '\s\+\.pdf' example
+```
+
+We should escape literal `.` because in regex `.` means any character, unless it's in a character class.
 
 ### nl
 
@@ -792,6 +850,7 @@ cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen 
   - thus, hard to replace `\n` with `sed`, `tr` is better here ([stackoverflow](https://stackoverflow.com/a/1252010))
 - "Sed uses basic regular expressions (BRE). In a BRE, in order to have them treated literally, the characters `$.*[\^` need to be quoted by preceding them by a backslash, except inside character sets (`[…]`). Letters, digits and `(){}+?|` must not be quoted (you can get away with quoting some of these in some implementations)." ([more](https://unix.stackexchange.com/a/33005))
 - [Command Summary for sed](https://docstore.mik.ua/orelly/unix/sedawk/appa_03.htm)
+- [Bash Variables in sed](https://askubuntu.com/a/76842)
 
 | command | description |
 | :--- | :--- |
@@ -1092,7 +1151,7 @@ Troubleshooting:
   - close gnome-disks and open it again
   - after a while the power off button for this external hard drive is not **grayed out** any more and the physical LED on the hard drive stops blinking
 
-## Disk Usage
+## du, Disk Usage
 
 - [FAQ](https://unix.stackexchange.com/a/120312)
   - How much disk space does a file use?
@@ -1101,6 +1160,14 @@ Troubleshooting:
   - What's using the space on my disk?
 - [Why is there a discrepancy in disk usage reported by df and du?](https://unix.stackexchange.com/questions/9612/why-is-there-a-discrepancy-in-disk-usage-reported-by-df-and-du)
 - [Why du and df display different values](http://linuxshellaccount.blogspot.com/2008/12/why-du-and-df-display-different-values.html)
+
+```bash
+$ du --help
+ [ ... ]
+ Display values are in units of the first available SIZE from --block-size,
+ and the DU_BLOCK_SIZE, BLOCK_SIZE and BLOCKSIZE environment variables.
+ Otherwise, units default to 1024 bytes (or 512 if POSIXLY_CORRECT is set).
+```
 
 | command | description |
 | :--- | :--- |

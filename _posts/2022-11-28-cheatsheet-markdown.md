@@ -25,6 +25,12 @@ tags:
 - see [list of languages 1](https://support.codebasehq.com/articles/tips-tricks/syntax-highlighting-in-markdown)
 - see [list of languages 2](https://docs.readme.com/rdmd/docs/code-blocks#language-support)
 
+## Code Blocks
+
+### Indentation
+
+- If you want to add a block of code to a list item, you have to add an extra 4 spaces for every level of that list. You also have to make sure that you leave a blank line before the code block., [stackexchange](https://meta.stackexchange.com/a/7837)
+
 ## Common issues in vim
 
 - the following characters must be escaped or in a code block:

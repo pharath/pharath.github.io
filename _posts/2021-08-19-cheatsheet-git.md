@@ -53,17 +53,17 @@ tags:
 | :--- | :--- |
 `git commit --amend -m "message"` | reword/rephrase the last commit message, "This brings up the editor with the last commit message and lets you edit the message. (You can use `-m` if you want to wipe out the old message and use a new one.)", [stackoverflow](https://stackoverflow.com/a/8981216/12282296)
 `git commit --allow-empty --amend --only -m "message"` | reword/rephrase the last commit message (the lazygit way)
-`git push --force-with-lease <repository> <branch>` | to push the reworded commit message to the remote
+`git push --force-with-lease remote <branch>` | to push the reworded commit message to the remote
 
 ## git push
 
 | command | description |
 | :--- | :--- |
-`git push <repository> <branch>` |
-`git push --force <repository> <branch>` | **do not** use this, better use `--force-with-lease`, see below
-`git push <repository> +<branch>` | **do not** use this, better use `--force-with-lease`, see below
-`git push --force-with-lease <repository> <branch>` | **best practice**: `--force-with-lease` is a safer option \[than `git push <repository> +<branch>` and `git push --force <repository> <branch>`\] that will not overwrite any work on the remote branch if more commits were added to the remote branch (by another team-member or coworker or what have you). It ensures you do not overwrite someone elses work by force pushing., [stackoverflow](https://stackoverflow.com/a/52823955/12282296)
-`git push --set-upstream origin <new_branch>` | push to a locally newly created branch (see `git checkout -b <new_branch>`) that does not yet exist on remote (i.e. on github.com). `--set-upstream`: will make the local `<new_branch>` track the remote `remotes/origin/<new_branch>` (w/o this flag git does not know where to push the `new_branch`).
+`git push remote my_branch:remote_branch` |
+`git push --force remote branch` | **do not** use this, better use `--force-with-lease`, see below
+`git push remote +branch` | **do not** use this, better use `--force-with-lease`, see below
+`git push --force-with-lease remote branch` | **best practice**: `--force-with-lease` is a safer option \[than `git push remote +branch` and `git push --force remote branch`\] that will not overwrite any work on the remote branch if more commits were added to the remote branch (by another team-member or coworker or what have you). It ensures you do not overwrite someone elses work by force pushing., [stackoverflow](https://stackoverflow.com/a/52823955/12282296)
+`git push --set-upstream origin new_branch` | push to a locally newly created branch (see `git checkout -b new_branch`) that does not yet exist on remote (i.e. on github.com). `--set-upstream`: will make the local `new_branch` track the remote `remotes/origin/new_branch` (w/o this flag git does not know where to push the `new_branch`).
 
 ## git clone
 
@@ -165,6 +165,40 @@ Track another branch, [stackoverflow](https://stackoverflow.com/a/2286030/122822
 `git shortlog` | show the commit messages grouped by author and title (for creating release announcements)
 `git show 35e32b6a00dec02ae7d7c45c6b7106779a124685` | find a commit given the commit hash
 `git log -p -1 35e32b6a00dec02ae7d7c45c6b7106779a124685` | find a commit given the commit hash
+`git log -L110,110:/lib/client.js` | will return every commit which touched the line 110, [stackoverflow: Show all of the various changes to a single line in a specified file over the entire git history](https://stackoverflow.com/a/27108677/12282296)
+
+## git blame
+
+"`git blame` <span style="color:red">does not</span> show the per-line modifications history in the chronological sense. It only shows <span style="color:red">who was the last person</span> to have changed a line in a document up to the last commit in `HEAD`.", [What does 'git blame' do?](https://stackoverflow.com/a/31204980/12282296)
+
+## git ls-tree
+
+[superuser](https://superuser.com/a/429694)
+
+If you want to **list all files for a specific branch**, e.g. `master`:
+
+```bash
+git ls-tree -r master --name-only
+```
+
+If you want to get a **list of all files that ever existed**:
+
+```bash
+git log --pretty=format: --name-only --diff-filter=A  | sort -u
+```
+
+## git init
+
+How to use `main` instead of `master` as the initial branch?
+
+```bash
+git init
+git checkout -b main
+```
+
+Note: After this the branch `main`/`master` does not actually exist--the branches don't get created until they have at least one commit.
+
+Since Git 2.28.0 you can set `git config --global init.defaultBranch foo` if you want all new repos to have `foo` as the default branch
 
 ## git pull vs fetch vs update
 

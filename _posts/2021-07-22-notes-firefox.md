@@ -89,6 +89,21 @@ So it logs the same sorts of information as the Web Console - network requests, 
 - Fast Tab Switcher
 - Auto Tab Discard by tlintspr
 
+## Video Downloadhelper CoApp
+
+Where is it installed?
+
+```bash
+CoApp successfuly installed under '~/.local/share/vdhcoapp'.
+```
+
+How to **uninstall** Video Downloadhelper CoApp:
+
+```bash
+To uninstall, run '~/.local/share/vdhcoapp/vdhcoapp uninstall' and remove '~/.local/share/vdhcoapp'.
+Re-run that script to update the coapp.
+```
+
 # Bookmarks
 
 ## Improve Display Style of Exported Bookmarks
