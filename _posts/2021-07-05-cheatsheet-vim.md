@@ -204,6 +204,8 @@ ctrl+w capital N | in terminal mode: enable scrolling (move around with cursor) 
 
 ## Vim Settings
 
+Note: You can check the current value of a variable via `:set variable?`.
+
 | command | description |
 | :--- | :--- |
 :syntax on |
@@ -249,8 +251,10 @@ ctrl + w N | scroll in a terminal tab
 | command | description |
 | :--- | :--- |
 `:ls` | get the buffer number of all files edited in this session
+`:ls t` | `t` flag: from `:help :ls`: "show time last used and sort buffers"
+`:filter .*foo.*cpp ls t` | only show the buffers that match the pattern `.*foo.*cpp` sorted by time last used
 `:files` | see `:ls`
-`:buffers` | see `:ls`
+`:buffers` | same as `:ls`
 `:tabnew +Nbuf` | re-open closed tab (where N is the buffer number of the closed tab which you can get via `:ls`), e.g. `:tabnew +18buf` in order to reopen buffer 18
 `:buffer very/very/long/path/to/a/veryVeryLongFileName.txt` | switch to buffer `very/very/long/path/to/a/veryVeryLongFileName.txt`, where a **buffer** is a file in the `:ls` list
 `:b LongFileName<hit tab to find a match>` | short form of `:buffer very/very/long/path/to/a/veryVeryLongFileName.txt` (**note**: `:b` command can also take a **substring** of the name of the file, thus `LongFileName` instead of `veryVeryLongFileName`!)
@@ -709,6 +713,62 @@ require('nvim-treesitter.configs').setup {
 ```
 
 ## Formatting
+
+### Tabs and Spaces
+
+**Tabs and Spaces: My Old `init.lua` Setup for C++ Files:**
+
+In summary, the whole setup looked like this:
+
+```lua
+vim.o.tabstop = 4   -- "4" is the default value in vscode ; Actually, you must not use vim.o.tabstop! (see vim doc)
+vim.o.shiftwidth = 4   -- for indent using the "<" and ">" keys
+vim.o.softtabstop = 4   -- for indent using the "<tab>" key
+vim.o.expandtab = true
+
+vim.api.nvim_create_autocmd({"BufRead"}, {
+  desc = "replace tabs with spaces",
+  group = vim.api.nvim_create_augroup('ph_c', { clear = false }),
+  pattern = {"*.c", "*.h", "*.cpp", "*.hpp"},
+  command = "%retab",
+})
+```
+
+<span style="color:red">**Explanation**</span>:
+
+```lua
+vim.o.tabstop = 4   -- "4" is the default value in vscode ; Actually, you must not use vim.o.tabstop! (see vim doc)
+vim.o.shiftwidth = 4   -- for indent using the "<" and ">" keys
+vim.o.softtabstop = 4   -- for indent using the "<tab>" key
+```
+
+- Problem: applies to all files types (e.g. markdown needs `tabstop=2`, cpp needs `tabstop=4`)
+- Solution: Set the following options via a keymap instead of using `vim.o` settings.
+
+```lua
+vim.o.expandtab = true
+```
+
+- `expandtab` and `retab`:
+  1. [changing tabs in spaces (and back)](https://neovim.io/doc/user/usr_30.html#_changing-tabs-in-spaces-(and-back))
+  2. [lua guide autocommand create](https://neovim.io/doc/user/lua-guide.html#lua-guide-autocommand-create)
+- effect of `expandtab`: 
+  - inserts spaces instead of tabs
+  - does NOT affect any existing tabs!
+  - example: 
+    - if `expandtab=false` AND `tabstop=8` AND `shiftwidth=4`, 
+      - then pressing <kbd>></kbd> two times will insert a tab (instead of 8 spaces)
+- `retab` changes all existing indents to use spaces instead of tabs. However, all tabs that come after a non-blank character are kept:
+  - Warning: This command modifies the file! Tabs are replaced with spaces!
+
+```lua
+vim.api.nvim_create_autocmd({"BufRead"}, {
+  desc = "replace tabs with spaces",
+  group = vim.api.nvim_create_augroup('ph_c', { clear = false }),
+  pattern = {"*.c", "*.h", "*.cpp", "*.hpp"},
+  command = "%retab",
+})
+```
 
 ### C/C++
 

@@ -743,6 +743,8 @@ cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen 
 - `X`, exactly n times: `X{n}`
 - `X`, at least n times: `X{n,}`
 - `X`, at least n but not more than m times: `X{n,m}`
+- related:
+  - [regexp-quantifiers](https://javascript.info/regexp-quantifiers)
 
 ### grep
 
@@ -843,6 +845,7 @@ We should escape literal `.` because in regex `.` means any character, unless it
 | :--- | :--- |
 `<some_command> | cut -f2- -d' '` | get all columns (delimited by a space) from the 2nd to the last column of the command output
 `<some_command> | cut -f2- -d'	'` | tab delimiter: Press <kbd>Ctrl</kbd>+<kbd>V</kbd> and then <kbd>Tab</kbd> to use "verbatim" quoted insert.
+`history | cut -c 8-` | show the history without line numbers, `-c 8-` deletes the first 7 characters
 
 ### sed
 
@@ -858,6 +861,8 @@ We should escape literal `.` because in regex `.` means any character, unless it
 `sed -E` | use extended (ERE) regular expression syntax
 `sed -e 's/ /\\ /g'` | Useful when paths contain spaces and you need to escape these spaces with backslash, eg. when using `realpath`, `pwd`, `scp`, etc. `s/`: Substitute *replacement* for *pattern* on each addressed line [doc: see "s" command](https://docstore.mik.ua/orelly/unix/sedawk/appa_03.htm).
 `sed '0,/Apple/{s/Apple/Banana/}' input_filename` | replace only the first occurrence in a file, "The first two parameters `0` and `/Apple/` are the range specifier. The `s/Apple/Banana/` is what is executed within that range. So in this case "within the range of the beginning (`0`) up to the first instance of `Apple`, replace `Apple` with `Banana`. Only the first `Apple` will be replaced.", [stackoverflow](https://stackoverflow.com/a/9453461)
+`sed 's/$/ pattern/' filename` | appending `pattern` to end of a line
+`sed '/Fred Flintstone/ s/$/ pattern/' filename` | append only to lines containing a specific string
 
 ### tr
 
