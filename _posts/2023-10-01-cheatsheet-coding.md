@@ -363,6 +363,9 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
 - <kbd>ctrl</kbd> <kbd>-/+</kbd> (see more of the preview pane/results pane)
 - <kbd>ctrl</kbd>-u <kbd>ctrl</kbd>-d (scroll preview up/down)
 - <kbd>space</kbd> sk (search **keymaps** of active plugins, ie keymaps of inactive plugins are not shown)
+- <kbd>space</kbd> sa (search **autocommands**, my own custom autocommands have a `ph_` prefix in their `augroup` so that I can find them more easily in telescope or via `:autocmd ph_<tab>`)
+  - [what is augroup?](https://www.reddit.com/r/neovim/comments/xhtr1p/nvim_autocmd_filetype_option/)
+  - **better**: use `:autocmd ph_<tab>` to find autocommands and their doc (specified in the `desc = "..."` field of `nvim_create_autocmd`)
 - <kbd>space</kbd> ? (recently opened)
 - <kbd>space</kbd> `/` (current buffer find)
 
@@ -408,6 +411,12 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
 
 - <kbd>alt</kbd>-n
 - <kbd>alt</kbd>-p
+
+## telescope_sessions_picker
+
+- <kbd>CR</kbd> - open Session file (same as `:so your_session_file`)
+- <kbd>DEL</kbd> - remove selected session file (not the project file, just session file!)
+- <kbd>C-n</kbd> - create new session from cwd.
 
 # Finding Keymaps
 
@@ -478,8 +487,13 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
 - <kbd>g</kbd><kbd>_</kbd> (end of line, last non-blank character)
 - `:changes` related motions (jumping between change locations)
   - <kbd>g;</kbd> and <kbd>g,</kbd> (jump to previous/next change location)
-- <kbd>%</kbd> (jump out of parenthesized block to 1st parenthesis)
-- <kbd>%%</kbd> (jump out of parenthesized block to 1st parenthesis)
+- blocks
+  - <kbd>[%</kbd> (jump to beginning of block) &rarr; <kbd>alt</kbd> <kbd>h</kbd>
+  - <kbd>]%</kbd> (jump to end of block) &rarr; <kbd>alt</kbd> <kbd>l</kbd>
+    - sometimes when there are multiple brackets and parentheses <kbd>[{</kbd> or <kbd>[(</kbd> can be faster than <kbd>[%</kbd>
+    - see [vi.stackexchange](https://vi.stackexchange.com/a/16854)
+  - <kbd>%</kbd> (jump out of parenthesized block to 1st parenthesis)
+  - <kbd>%%</kbd> (jump out of parenthesized block to 1st parenthesis)
 - <kbd>backtick</kbd> (list possible jumps and marks)
   - <kbd>backtick</kbd> <kbd>.</kbd> (jump to last change in current buffer)
   - <kbd>m</kbd> + <kbd>markLetter</kbd> (set jump mark)
@@ -549,6 +563,7 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
 
 ## control
 
+- `:mes[sages]` (Show all messages.)
 - <kbd>ctrl</kbd>-o (temporary normal mode for one command)
 - `:set ft?` (show filetype)
   - eg. for denylist in vim-illuminate config
