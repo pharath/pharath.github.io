@@ -146,7 +146,6 @@ Track another branch, [stackoverflow](https://stackoverflow.com/a/2286030/122822
 | command | description |
 | :--- | :--- |
 `git reflog` | view history of `git checkout` operations
-`git revert <commit-hash>` | commit `<commit-hash>` rückgängig machen
 
 ## git log, git shortlog
 
@@ -245,6 +244,8 @@ Use `git reflog` to find the `SHA1` of the last commit of the branch.
 
 ## Undo Commits
 
+### git reset
+
 | command | description |
 | :---: | :---: |
 git reflog | get SHA-1 list of previous states
@@ -253,6 +254,12 @@ git push origin +HEAD | reset the **remote's** last commit to the **local's** la
 git reset --soft HEAD~1 | `HEAD~` and `HEAD~1` are the same; `HEAD` and `HEAD~0` are the same
 git reset --soft *SHA-1* | reset to a previous state **locally** (`--soft`: safe way)
 git reset --hard *SHA-1* | reset to a previous state **locally** (**Warning**: `--hard`: All changes will be lost.)
+
+### git revert
+
+| command | description |
+| :--- | :--- |
+`git revert <commit-hash>` | undo commit `<commit-hash>`, "`git revert` simply creates a new commit that is the opposite of an existing commit. It leaves the files in the same state as if the commit that has been reverted never existed.", [stackoverflow](https://stackoverflow.com/a/19032678/12282296)
 
 ## Undo Changes to Specific Files
 
