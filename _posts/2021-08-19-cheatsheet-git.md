@@ -17,15 +17,13 @@ tags:
 
 # Terminology
 
-**remote** = remote-repository (e.g. in `git push *remote* *branch*`)
-
-**PAT** = Personal Access Token (see [youtube: PATs and their scopes](https://www.youtube.com/watch?v=SzrETQdGzBM&t=49s))
-
-**index** = Staging Directory (`.index/`) (see [explanation](https://www.javatpoint.com/git-index))
-    - There are three places in Git where file changes can reside, and these are 
-        - working directory, 
-        - staging area, 
-        - the repository.
+- **remote** = remote-repository (e.g. in `git push *remote* *branch*`)
+- **PAT** = Personal Access Token (see [youtube: PATs and their scopes](https://www.youtube.com/watch?v=SzrETQdGzBM&t=49s))
+- **index** = Staging Directory (`.index/`) (see [explanation](https://www.javatpoint.com/git-index))
+  - There are three places in Git where file changes can reside, and these are 
+    - working directory, 
+    - staging area, 
+    - the repository.
 
 # Basics
 
@@ -306,15 +304,15 @@ For **committed** changes, see
 
 - "sowas wie `git merge`"
 - [atlassian.com](https://www.atlassian.com/git/tutorials/rewriting-history/git-rebase)
-    - The primary reason for rebasing is to **maintain a linear project history**. 
-        - For **example**, consider a situation where the `main` branch has progressed since you started working on a `feature` branch. You want to get the latest updates to the `main` branch in your `feature` branch, but you want to keep your branch's history clean so it appears as if you've been working off the latest `main` branch. This gives the later benefit of a clean merge of your `feature` branch back into the `main` branch.
+  - The primary reason for rebasing is to **maintain a linear project history**. 
+    - For **example**, consider a situation where the `main` branch has progressed since you started working on a `feature` branch. You want to get the latest updates to the `main` branch in your `feature` branch, but you want to keep your branch's history clean so it appears as if you've been working off the latest `main` branch. This gives the later benefit of a clean merge of your `feature` branch back into the `main` branch.
 - history: **CVS** and **Subversion** users routinely rebase their local changes on top of upstream work when they update before commit. **Git** just adds explicit separation between the commit and rebase steps. [source](https://stackoverflow.com/a/2452610)
 
 ## git rebase vs git merge
 
 - [Explanation 1](https://poanchen.github.io/blog/2020/09/19/what-to-do-when-git-branch-has-diverged)
 - [Explanation 2](https://www.atlassian.com/git/tutorials/merging-vs-rebasing):
-    - The first thing to understand about `git rebase` is that it solves the same problem as `git merge`. Both of these commands are designed to integrate changes from one branch into another branch - they just do it in very different ways.
+  - The first thing to understand about `git rebase` is that it solves the same problem as `git merge`. Both of these commands are designed to integrate changes from one branch into another branch - they just do it in very different ways.
 
 **Problem:** 
 
@@ -808,7 +806,7 @@ git push origin HEAD:main
 
 1. `git submodule init`
 2. `git submodule update --progress`
-    - use `--progress` to display a cloning progress report
+  - use `--progress` to display a cloning progress report
 
 ## Add submodule
 
