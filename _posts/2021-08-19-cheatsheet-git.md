@@ -223,7 +223,7 @@ Git normally checks `gitignore` patterns from multiple sources, with the followi
 ## Undo git add
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 git reset | undo `git add`
 git restore --staged file | discard a `file` **in the index** (= "added" file) without overwriting the same file **in the working tree**. `man git restore`: "Specifying `--staged` will only restore the index" and **not** the working tree!
 
@@ -247,7 +247,7 @@ Use `git reflog` to find the `SHA1` of the last commit of the branch.
 ### git reset
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 git reflog | get SHA-1 list of previous states
 git reset --soft HEAD~ | undo last commit **locally** (`--soft`: safe way)
 git push origin +HEAD | reset the **remote's** last commit to the **local's** last commit (**Note**: `HEAD` always points to the last commit. The `+` indicates a force-push, like the `-f` flag, see [stackoverflow](https://stackoverflow.com/a/25937833).)
@@ -264,7 +264,7 @@ git reset --hard *SHA-1* | reset to a previous state **locally** (**Warning**: `
 ## Undo Changes to Specific Files
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 `git checkout -- some_file` | undo changes to `some_file` in the local repository and get the latest `some_file` version from git instead
 `git checkout HEAD path/to/file path/to/another_file` | [stackoverflow](https://stackoverflow.com/a/8735590/12282296)
 
@@ -273,7 +273,7 @@ git reset --hard *SHA-1* | reset to a previous state **locally** (**Warning**: `
 - E.g., if files were removed accidentally, but you did not `git add` them yet, you can get them back using the following commands.
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 git checkout -- . | see `git restore .`
 git restore --worktree file | `man git restore`: "If neither option (`--worktree` or `--staged`) is specified, **by default** the working tree is restored. Specifying `--staged` will only restore the index. Specifying both restores both."
 git restore . | discard **all unstaged** files in current working directory
@@ -334,7 +334,7 @@ and have 2 and 1 different commits each, respectively.
 **Solution:**
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 git merge main | advantage: non-destructive operation; disadvantage: non-linear git history
 git rebase main | advantage: linear project history; disadvantage: destructive operation (remember ["Golden Rule of git rebase"](#golden-rule-of-git-rebase))
 git rebase -i main | interactive rebasing
@@ -350,7 +350,7 @@ The **golden rule of git rebase** is to never use it on *public* branches.
 - [git stash basics](https://opensource.com/article/21/4/git-stash)
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 git stash | stash uncommitted changes (staged and unstaged files)
 git stash -u | stash untracked files
 git stash -a | stash untracked files and ignored files
@@ -642,7 +642,7 @@ Also, these upper-case letters can be **downcased** to **exclude**. E.g. `--diff
 [stackoverflow](https://stackoverflow.com/a/2929502)
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 `git grep <regexp>` | Search working tree for text matching regular expression `regexp`
 `git grep -e <regexp1> [--or] -e <regexp2>` | Search working tree for lines of text matching regular expression `regexp1` or `regexp2`
 `git grep -l -e <regexp1> --and -e <regexp2>` | Search working tree for lines of text matching regular expression `regexp1` and `regexp2`, reporting file paths only
@@ -705,7 +705,7 @@ You can now merge the branches on the command line or push your changes to your 
 # git config
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 `git config -l` | list the current git settings
 `git config --get remote.origin.url` | get only the URL of the remote `origin`
 `git config --global core.editor nvim` | set the default editor, see [git-scm](https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration#_basic_client_configuration)
@@ -715,7 +715,7 @@ You can now merge the branches on the command line or push your changes to your 
 ## Set credential helper
 
 | command | description |
-| :---: | :---: |
+| :--- | :--- |
 git config credential.helper store | store the next entered password in ~/.git-credentials (visible for anyone !) (for current repo only)
 git config --global credential.helper store | store the next entered password in ~/.git-credentials (visible for anyone !) (globally, ie. for all repos)
 
