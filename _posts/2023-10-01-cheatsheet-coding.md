@@ -236,6 +236,7 @@ to `.clangd`
 
 ## nvim-tree
 
+- <kbd>f</kbd> `somepattern` (filter the tree)
 - <kbd>-</kbd> (show more (show parent folder))
 - <kbd>ctrl</kbd> <kbd>]</kbd> (show less (only show the folder on which the cursor is placed, ie. this works only if the cursor is placed on a folder))
 - <kbd>c</kbd> then <kbd>p</kbd> (duplicate file, automatically shows "rename" where you have to choose a new name)
@@ -404,24 +405,25 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
 ## Vista (Aerial ist besser!)
 
 - Vista: in "`:h Vista`": tag: `vista-key-mappings`
-- q (quit)
-- p (preview)
+- <kbd>q</kbd> (quit)
+- <kbd>p</kbd> (preview)
 
 ## vim illuminate
 
 - <kbd>alt</kbd>-n
 - <kbd>alt</kbd>-p
 
-## telescope_sessions_picker
+## auto-session
 
-- <kbd>CR</kbd> - open Session file (same as `:so your_session_file`)
-- <kbd>DEL</kbd> - remove selected session file (not the project file, just session file!)
-- <kbd>C-n</kbd> - create new session from cwd.
+- while in the session-lens telescope picker:
+  - <kbd>c-s</kbd> **restores** the previously opened session. This can give you a nice flow if you're constantly switching between two projects.
+  - <kbd>c-d</kbd> will **delete** the currently highlighted session. This makes it easy to keep the session list clean.
+- <kbd>space</kbd> <kbd>cs</kbd> (**save** session)
 
 # Finding Keymaps
 
 - `:nmap <some-key>` to list all bindings with `<some-key>`
-- <kbd>space</kbd> sk (show keybindings in Telescope)
+- <kbd>space</kbd> <kbd>sk</kbd> (show keybindings in Telescope)
 
 # Understanding Code
 
@@ -599,6 +601,10 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
 
 ## surround
 
+- dst (delete surrounding tag)
+- ds) (delete surrounding parentheses)
+- ds" (delete surrounding ")
+- ds' (delete surrounding ')
 - ysl" (surround letter under cursor)
 - vSo (surround letter under cursor)
 - ys3iw" (surround **ohne select**)
