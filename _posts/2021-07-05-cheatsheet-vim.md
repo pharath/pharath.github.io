@@ -503,6 +503,10 @@ sudo apt install ./nvim-linux64.deb
 
 ## Configuration
 
+### Ubuntu
+
+- use the "German (no dead keys)" keyboard layout
+
 ### Nvim
 
 ```bash

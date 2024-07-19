@@ -17,8 +17,8 @@ tags:
 
 - To switch ttys use ctrl + alt + F\#, where \# is the tty number you want to switch to.
 - see [Switching between ttys](https://unix.stackexchange.com/a/167388)
-    - Ubuntu 17.10+ assigns the X server to tty1 and a "dumb terminal" / "console" to tty2-7
-        - older Ubuntus assign X server to tty7 instead of tty1!
+  - Ubuntu 17.10+ assigns the X server to tty1 and a "dumb terminal" / "console" to tty2-7
+    - older Ubuntus assign X server to tty7 instead of tty1!
 
 ## Unattended Upgrade
 
@@ -38,7 +38,12 @@ Upgrade: libnvidia-common-510:amd64 (510.85.02-0ubuntu1, 510.108.03-0ubuntu0.20.
 End-Date: 2022-12-03  06:16:03
 ```
 
-# Creating Shortcuts
+# Shortcuts
+
+## Disable Annoying Gnome Shortcuts
+
+- **emoji autocomplete popup**: <kbd>ctrl</kbd><kbd>shift</kbd><kbd>e</kbd> (annoying when using IntelliJ)
+  - run `ibus-setup`, there you can remove this shortcut under "Emoji" &rarr; "Keyboard Shortcuts", [unix.stackexchange](https://unix.stackexchange.com/a/623413)
 
 ## For Bluetooth Settings Icon in Ubuntu Activities
 
@@ -62,9 +67,8 @@ sudo chmod +x /path/to/script.sh
 
 ![allow launching pic](https://i.ibb.co/2ZQfnGY/allow-launching.png)
 
-- Move .desktop file to `/usr/share/applications/`. Press `Super` to open Activities and in the application grid view select "All" (instead of "Frequent") and search the created `.desktop` file there. Right-click on it and select "Add to Favorites". Now the `.desktop` file should be in the dock and can be accessed via shortcut `Super + <position_in_dock>`.
-
-- It also won't work with if your script uses the sudo command, or anything else that requires user input.
+- Move `.desktop` file to `/usr/share/applications/`. Press `Super` to open Activities and in the application grid view select "All" (instead of "Frequent") and search the created `.desktop` file there. Right-click on it and select "Add to Favorites". Now the `.desktop` file should be in the dock and can be accessed via shortcut `Super + <position_in_dock>`.
+- Warning: It won't work if your script uses the `sudo` command, or anything else that requires user input.
 
 If you want it to open a terminal window when you run it (if you needed to add input or watch the output) set Terminal to true.
 
@@ -76,7 +80,7 @@ Terminal=true
 
 Press `F4` to open the current directory in the terminal:
 - see [askubuntu](https://askubuntu.com/a/696901)
-    - **note**: do not forget `chmod +x Terminal`
+  - **note**: do not forget `chmod +x Terminal`
 
 # Network
 
@@ -104,9 +108,9 @@ CriticalPowerAction=HybridSleep
 ```
 
 - for laptops: [source](https://www.kernel.org/doc/Documentation/ABI/testing/sysfs-class-power)
-   - `cat /sys/class/power_supply/BAT0/capacity` outputs laptop battery level (in percent)
-   - `cat /sys/class/power_supply/BAT0/status` outputs laptop battery status (values: "Unknown", "Charging", "Discharging", "Not charging", "Full")
-   - `cat /sys/class/power_supply/BAT0/capacity_level` outputs laptop battery level description (values: "Unknown", "Critical", "Low", "Normal", "High", "Full"). From doc: "Coarse representation of battery capacity."
+  - `cat /sys/class/power_supply/BAT0/capacity` outputs laptop battery level (in percent)
+  - `cat /sys/class/power_supply/BAT0/status` outputs laptop battery status (values: "Unknown", "Charging", "Discharging", "Not charging", "Full")
+  - `cat /sys/class/power_supply/BAT0/capacity_level` outputs laptop battery level description (values: "Unknown", "Critical", "Low", "Normal", "High", "Full"). From doc: "Coarse representation of battery capacity."
 
 # Gnome Shell
 
@@ -399,7 +403,7 @@ aplay `/tmp/test-mic.wav`
 ### Flickering
 
 - caused by 50Hz vs 60Hz powerline frequency differences (see [source](https://blog.christophersmart.com/2017/02/07/fixing-webcam-flicker-in-linux-with-udev/))
-    - **solution**: try `v4l2-ctl --set-ctrl power_line_frequency=0` or `v4l2-ctl --set-ctrl power_line_frequency=1`
+  - **solution**: try `v4l2-ctl --set-ctrl power_line_frequency=0` or `v4l2-ctl --set-ctrl power_line_frequency=1`
 
 # buku
 
