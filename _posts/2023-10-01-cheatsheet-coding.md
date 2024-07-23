@@ -36,7 +36,7 @@ tags:
   
 # terminal
 
-- <kbd>ctrl</kbd> - l (clear)
+- <kbd>ctrl</kbd><kbd>l</kbd> (clear)
 
 # firefox
 
@@ -44,20 +44,20 @@ tags:
 
 ## Page Info
 
-- <kbd>ctrl</kbd> + i <kbd>alt</kbd> + g (page info)
-- <kbd>ctrl</kbd> + i <kbd>alt</kbd> + m (page media)
-- <kbd>ctrl</kbd> + i <kbd>alt</kbd> + p (page permissions)
-- <kbd>ctrl</kbd> + i <kbd>alt</kbd> + s (page security, cookies, etc)
+- <kbd>ctrl</kbd><kbd>i</kbd> <kbd>alt</kbd><kbd>g</kbd> (page info)
+- <kbd>ctrl</kbd><kbd>i</kbd> <kbd>alt</kbd><kbd>m</kbd> (page media)
+- <kbd>ctrl</kbd><kbd>i</kbd> <kbd>alt</kbd><kbd>p</kbd> (page permissions)
+- <kbd>ctrl</kbd><kbd>i</kbd> <kbd>alt</kbd><kbd>s</kbd> (page security, cookies, etc)
 
 ## DevTools
 
 [official doc](https://firefox-source-docs.mozilla.org/devtools-user/index.html)
 
-- <kbd>ctrl</kbd> + <kbd>shift</kbd> + i (or F12) (shows the tool that was last opened)
+- <kbd>ctrl</kbd> + <kbd>shift</kbd><kbd>i</kbd> (or F12) (shows the tool that was last opened)
 
 ### Page Inspector
 
-- <kbd>ctrl</kbd> + <kbd>shift</kbd> + c (pick element mode)
+- <kbd>ctrl</kbd> + <kbd>shift</kbd><kbd>c</kbd> (pick element mode)
 
 ### Web Console
 
@@ -70,7 +70,7 @@ The Web Console:
 
 Shortcuts:
 
-- <kbd>ctrl</kbd> + <kbd>shift</kbd> + k (console) (click "..." to get side-by-side view)
+- <kbd>ctrl</kbd> + <kbd>shift</kbd><kbd>k</kbd> (console) (click "..." to get side-by-side view)
 
 ### JavaScript Debugger
 
@@ -107,22 +107,22 @@ Shortcuts:
 ## godbolt
 
 - f1 (command palette)
-- <kbd>ctrl</kbd> - x (cut line)
-- <kbd>ctrl</kbd> - d (duplicate line)
+- <kbd>ctrl</kbd><kbd>x</kbd> (cut line)
+- <kbd>ctrl</kbd><kbd>d</kbd> (duplicate line)
 
 # markdown
 
-- <kbd>alt</kbd> - i (next `# `)
-- <kbd>alt</kbd> - o
+- <kbd>alt</kbd><kbd>i</kbd> (next `# `)
+- <kbd>alt</kbd><kbd>o</kbd>
 - `:LspStop 1 (tailwindcss)` (because the treesitter markdown parser is sufficient)
-- <kbd>alt</kbd> - f (insert arrow symbol)
+- <kbd>alt</kbd><kbd>f</kbd> (insert arrow symbol)
 
 ## LaTex
 
 - math mode
-  - <kbd>alt</kbd> - b
-  - <kbd>alt</kbd> - u
-  - <kbd>alt</kbd> - t ($\[ \text{Let}\ x=\text{number of cats}. \]$)
+  - <kbd>alt</kbd><kbd>b</kbd>
+  - <kbd>alt</kbd><kbd>u</kbd>
+  - <kbd>alt</kbd><kbd>t</kbd> ($\[ \text{Let}\ x=\text{number of cats}. \]$)
 
 # nvim Plugins
 
@@ -309,6 +309,7 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
   - <kbd>ctrl</kbd> <kbd>-/+</kbd> (zoom out/in, very useful to view the full main panel)
     - better: press <kbd>enter</kbd> on the file in the "files" panel, then press <kbd>+</kbd> to rotate to the view where the file spans the full width of the screen
 - in "files" panel
+  - <kbd>d</kbd> (git checkout, to discard changes made to a file)
   - <kbd>A</kbd> (amend)
     - erst <kbd>space</kbd> und dann <kbd>A</kbd>
 - in "commits" panel
@@ -358,17 +359,28 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
 
 ## telescope
 
-- `:h` telescope.mappings
-- <kbd>ctrl</kbd>-/ (insert mode), <kbd>?</kbd> (normal mode) (show shortcuts)
-- <kbd>ctrl</kbd>-t (open file in new tab)
-- <kbd>ctrl</kbd> <kbd>-/+</kbd> (see more of the preview pane/results pane)
-- <kbd>ctrl</kbd>-u <kbd>ctrl</kbd>-d (scroll preview up/down)
-- <kbd>space</kbd> sk (search **keymaps** of active plugins, ie keymaps of inactive plugins are not shown)
-- <kbd>space</kbd> sa (search **autocommands**, my own custom autocommands have a `ph_` prefix in their `augroup` so that I can find them more easily in telescope or via `:autocmd ph_<tab>`)
+- `:h` (telescope.mappings)
+- <kbd>ctrl</kbd><kbd>/</kbd> (in insert mode), <kbd>?</kbd> (in normal mode) (show shortcuts)
+- <kbd>space</kbd><kbd>space</kbd> (recent files)
+  - based on `:oldfiles` (`:h :o`)
+    - eg. you can filter the `:oldfiles` list using `:filter pattern o` (where `:o` is the short version of `:oldfiles`, see `:h :o`)
+  - to remove entries in `:oldfiles` edit the "ShaDa" file <span style="color:red">**using nvim**</span> `nvim .local/state/nvim/shada/main.shada` (see [vi.stackexchange](https://vi.stackexchange.com/a/17260))
+    - eg. you can install `michaeljsmith/vim-indent-object` and then use `:g/pattern/norm dai`
+    - note: `nvim` has a different `:oldfiles` system than `vim` (see [vi.stackexchange](https://vi.stackexchange.com/a/17260))
+    - useful if you accidentally put some files in the `:oldfiles` list that are on an external hard drive (the hard drive has to spin up each time you press this telescope shortcut while the frozen telescope window is blocking `nvim`)
+- ignoring files ([comment](https://github.com/nvim-telescope/telescope.nvim/issues/2471#issuecomment-1513758675)):
+  - put them in `.ignore`
+  - use the `file_ignore_patterns` telescope option (`:h telescope.defaults.file_ignore_patterns`)
+  - use `.gitignore`
+- <kbd>ctrl</kbd><kbd>t</kbd> (open file in new tab)
+- <kbd>ctrl</kbd><kbd>-/+</kbd> (see more of the preview pane/results pane)
+- <kbd>ctrl</kbd><kbd>u</kbd>, <kbd>ctrl</kbd><kbd>d</kbd> (scroll preview up/down)
+- <kbd>space</kbd><kbd>sk</kbd> (search **keymaps** of active plugins, ie keymaps of inactive plugins are not shown)
+- <kbd>space</kbd><kbd>sa</kbd> (search **autocommands**, my own custom autocommands have a `ph_` prefix in their `augroup` so that I can find them more easily in telescope or via `:autocmd ph_<tab>`)
   - [what is augroup?](https://www.reddit.com/r/neovim/comments/xhtr1p/nvim_autocmd_filetype_option/)
   - **better**: use `:autocmd ph_<tab>` to find autocommands and their doc (specified in the `desc = "..."` field of `nvim_create_autocmd`)
-- <kbd>space</kbd> ? (recently opened)
-- <kbd>space</kbd> `/` (current buffer find)
+- <kbd>space</kbd><kbd>?</kbd> (recently opened)
+- <kbd>space</kbd><kbd>/</kbd> (current buffer find)
 
 ## treesitter
 
@@ -395,12 +407,12 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
   - <kbd>space</kbd> bb
   - <kbd>space</kbd> bt (Telescope Search)
     - faster than "bb" for jumping to sections
-  - also try: <kbd>ctrl</kbd>-n, <kbd>ctrl</kbd>-p (next / previous section)
+  - also try: <kbd>ctrl</kbd><kbd>n</kbd>, <kbd>ctrl</kbd><kbd>p</kbd> (next / previous section)
 - sidebar mode:
   - g?
   - q
   - zM (collapse all)
-  - <kbd>ctrl</kbd>-b (fast markdown section select)
+  - <kbd>ctrl</kbd><kbd>b</kbd> (fast markdown section select)
 
 ## Vista (Aerial ist besser!)
 
@@ -410,8 +422,8 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
 
 ## vim illuminate
 
-- <kbd>alt</kbd>-n
-- <kbd>alt</kbd>-p
+- <kbd>alt</kbd><kbd>n</kbd>
+- <kbd>alt</kbd><kbd>p</kbd>
 
 ## auto-session
 
@@ -508,7 +520,7 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
 
 ## edit
 
-- <kbd>ctrl</kbd>-r % (in insert mode: insert current file name)
+- <kbd>ctrl</kbd><kbd>r</kbd> % (in insert mode: insert current file name)
 - registers
   - `"` (show all registers)
   - `"ry` (yank text to register `"r`)
@@ -545,7 +557,7 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
 - A (insert at end of line, besser als $a)
 - selection `c"aString"` (replace selection with "aString")
   - see [how-to-block-replace-code-in-visual-mode](https://vi.stackexchange.com/questions/2036/how-to-block-replace-code-in-visual-mode)
-- <kbd>shift</kbd> - j (append the line below)
+- <kbd>shift</kbd><kbd>j</kbd> (append the line below)
 - text objects
   - sometimes "word" works, whereas "WORD" doesn't and vice versa
   - W (WORD, delimited by whitespaces)
@@ -566,26 +578,26 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
 ## control
 
 - `:mes[sages]` (Show all messages.)
-- <kbd>ctrl</kbd>-o (temporary normal mode for one command)
+- <kbd>ctrl</kbd><kbd>o</kbd> (temporary normal mode for one command)
 - `:set ft?` (show filetype)
   - eg. for denylist in vim-illuminate config
 - autocomplete
-  - <kbd>ctrl</kbd> - y (confirm vim-complete)
-  - <kbd>ctrl</kbd> - <kbd>space</kbd> (show cmp-complete)
+  - <kbd>ctrl</kbd><kbd>y</kbd> (confirm vim-complete)
+  - <kbd>ctrl</kbd><kbd>space</kbd> (show cmp-complete)
   - enter (confirm cmp-complete)
-  - <kbd>ctrl</kbd> - e (abort complete) (both cmp-complete and vim-complete)
+  - <kbd>ctrl</kbd><kbd>e</kbd> (abort complete) (both cmp-complete and vim-complete)
 - buffers
   - `:b partialName<tab>`
 - sessions
-  - <kbd>space</kbd> fod (load default session)
-  - <kbd>space</kbd> fsd (save default session)
-  - <kbd>space</kbd> fon (load new session)
-  - <kbd>space</kbd> fsn (save new session)
+  - <kbd>space</kbd><kbd>fod</kbd> (load default session)
+  - <kbd>space</kbd><kbd>fsd</kbd> (save default session)
+  - <kbd>space</kbd><kbd>fon</kbd> (load new session)
+  - <kbd>space</kbd><kbd>fsn</kbd> (save new session)
 - tabs
-  - next tab: gt or <kbd>ctrl</kbd> - PageDown (by default in vim)
-  - previous tab: gT or <kbd>ctrl</kbd> - PageUp (by default in vim)
-- <kbd>alt</kbd>-h and <kbd>alt</kbd>-l (switch viewports)
-  - to go to `:AerialToggle` and back (Avoid this! Use `:AerialNavToggle` (<kbd>leader</kbd> bb) instead!)
+  - next tab: <kbd>gt</kbd> or <kbd>ctrl</kbd><kbd>P</kbd>ageDown (by default in vim)
+  - previous tab: <kbd>gT</kbd> or <kbd>ctrl</kbd><kbd>P</kbd>ageUp (by default in vim)
+- <kbd>alt</kbd><kbd>h</kbd> and <kbd>alt</kbd><kbd>l</kbd> (switch viewports)
+  - to go to `:AerialToggle` and back (Avoid this! Use `:AerialNavToggle` (<kbd>leader</kbd><kbd>bb</kbd>) instead!)
   - to go to nvim-tree and back
 
 # Edit Code

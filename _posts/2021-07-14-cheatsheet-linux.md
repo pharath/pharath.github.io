@@ -428,6 +428,7 @@ Differences between two directory trees
 `sudo apt update` |
 `sudo apt [-y] upgrade` | `-y` oder `—yes` für automatic yes to prompts	
 `apt --help` |
+`sudo apt remove package` | uninstall `package_file.deb`
 `sudo apt autoremove` | remove not needed packages (NOTE: This command will remove all unused packages (orphaned dependencies). Explicitly installed packages will remain.)
 `sudo apt-mark auto $PACKAGES` | mark packages in variable `PACKAGES` as `automatically installed`, if accidentally marked as `manually installed`
 
@@ -496,37 +497,40 @@ sudo apt install ./name.deb | install a .deb file
 | command | description |
 | :--- | :--- |
 `sudo dpkg -l | less` | list all installed dpkg packages [meaning of tags ii, rc, ...](https://askubuntu.com/questions/18804/what-do-the-various-dpkg-flags-like-ii-rc-mean)
+`sudo dpkg -L package` | show all files which were installed by a package
+`sudo vim /var/lib/dpkg/info/nvidia-cuda-toolkit.list` | in `/var/lib/dpkg/info/` sind die installation files (`.conffiles`, `.list`, `.md5sums`) für alle packages (hier: `nvidia-cuda-toolkit`)
+`dpkg -l | grep ^..r` | list all broken packages (`r` state (on the third field) means: reinst-required (package broken, reinstallation required))
+
+### Basics
 
 | command | description |
 | :--- | :--- |
-| **Tipp:** | AM BESTEN DIE FOLGENDEN 3 ALLE AUSFÜHREN, DA JEDER EINEN ANDEREN OUTPUT HAT !
-`sudo dpkg -l package` | confirm whether package is already installed (wenn nicht installed, dann wird "no packages found matching package" angezeigt) (ACHTUNG: exakten Namen schreiben, zB "lua" findet "lua5.1" nicht !) 
-`sudo dpkg -l | grep package` | confirm whether package is already installed (wenn nicht installed, dann wird nichts angezeigt) (ACHTUNG regexp: zB "lua" findet "lua5.1" !)
-`sudo dpkg-query -s package` | prüfe ob package installiert ist (ACHTUNG regexp: exakten Namen schreiben, zB "lua" findet "lua5.1" nicht !) und print weitere Informationen zum package
+`sudo dpkg -i package_file.deb` | install `package_file.deb` (alternative: `sudo apt install ./name.deb`)
+`sudo dpkg -P some_package` | purge `some_package`
+`sudo dpkg -r some_package` | remove `some_package`
+
+### Confirm Whether Package Is Already Installed
+
+<span style="color:red">**Tipp:** AM BESTEN DIE FOLGENDEN 3 ALLE AUSFÜHREN, DA JEDER EINEN ANDEREN OUTPUT HAT !</span>
+
+<span style="color:red">**ACHTUNG**</span>: bei allen folgenden commands den exakten Namen schreiben, zB `lua` findet `lua5.1` nicht !
+
+| command | description |
+| :--- | :--- |
+`sudo dpkg -l package` | confirm whether package is already installed (wenn nicht installed, dann wird `no packages found matching package` angezeigt)
+`sudo dpkg -l | grep package` | confirm whether package is already installed (wenn nicht installed, dann wird nichts angezeigt)
+`sudo dpkg-query -s package` | prüfe ob package installiert ist und print weitere Informationen zum package
+
+### Show History Of Installed Packages
 
 see also [how-to-show-history-of-installed-packages](https://www.linuxuprising.com/2019/01/how-to-show-history-of-installed.html)
 
 | command | description |
 | :--- | :--- |
-`grep " install \| remove " /var/log/dpkg.log` | list recently installed OR removed packages (in the current month)
+`grep " install | remove " /var/log/dpkg.log` | list recently installed OR removed packages (in the current month)
 `grep " install " /var/log/dpkg.log.1` | list recently installed packages (in the previous month)
-`zgrep " install " /var/log/dpkg.log.2.gz` | list recently installed packages (go back 2 months, same for >2 months)
+`zgrep " install " /var/log/dpkg.log.2.gz` | list recently installed packages (go back 2 months, same for `>2` months)
 `vim /var/log/apt/history.log` | view apt history
-
-| command | description |
-| :--- | :--- |
-`sudo dpkg -i package_file.deb` | install `package_file.deb` (alternative: `sudo apt install ./name.deb`)
-`sudo dpkg -P *some_package*` | purge `*some_package*`
-`sudo dpkg -r *some_package*` | remove `*some_package*`
-`sudo apt remove package` | uninstall `package_file.deb`
-
-| command | description |
-| :--- | :--- |
-`dpkg -l | grep ^..r` | list all broken packages (**r** state (on the third field) means: reinst-required (package broken, reinstallation required))
-
-| command | description |
-| :--- | :--- |
-`sudo vim /var/lib/dpkg/info/nvidia-cuda-toolkit.list` | in `/var/lib/dpkg/info/` sind die installation files (`.conffiles`, `.list`, `.md5sums`) für alle packages (hier: `nvidia-cuda-toolkit`)
 
 ## snap
 
@@ -719,6 +723,7 @@ cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen 
 
 ### regex
 
+- <span style="color:red">**in vim's "find and replace"**</span>: you must escape `{, }, /, (, ), |, +` (but not: `[, ]`) and some other characters with a backslash "\\" for the regex find pattern and the replace pattern to work
 - match URLs: `https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)`, [stackoverflow](https://stackoverflow.com/a/3809435)
   - without http protocol: `[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)`
 
@@ -745,6 +750,23 @@ cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen 
 - `X`, at least n but not more than m times: `X{n,m}`
 - related:
   - [regexp-quantifiers](https://javascript.info/regexp-quantifiers)
+
+**Character Classes:**
+
+- `\w` (word)
+- `\d` (digit)
+- `\s` (whitespace)
+- `\S` (not whitespace)
+- `(\w|\d)` (word or digit)
+- `(\w{1,}|\d)` (at least one word or more words or exactly one digit)
+- etc
+
+**Numeric References and Capture Groups:**
+
+- `([A-Z])\w+\1` (numeric reference `\1` refers to the results of capture group number 1, which is `([A-Z])` in this example)
+  - eg. in the string `RegRxr was created by gskinner.com.` this would match `RegRxr`
+  - eg. in the string `RegExr was created by gskinner.com.` this would <span style="color:red">**not**</span> match `RegExr`
+- this is <span style="color:red">**very useful for "find and replace" in vim**</span> because you can replace text with a numeric reference, eg. `:%s/\([A-Z]\)\w\+/\1/g` replaces all matches of the pattern `([A-Z])\w+` with the first capture group in the find pattern (here: `([A-Z])`)
 
 ### grep
 

@@ -105,7 +105,7 @@ E.g. [this link]({% post_url 2022-09-22-notes-OS %}) is a link to the post "Oper
 - **problem**: suddenly, the incremental build which used to take ca. 2 seconds, now takes ca. 8 seconds
 - **solution**:
   - stop the currently running `bundle exec jekyll serve -I`,
-  - delete the `.jekyll-metadata` file
+  - delete the `.jekyll-metadata` file ([what is `.jekyll-metadata`?](https://jekyllrb.com/docs/structure/))
   - rebuild with `bundle exec jekyll serve -I`
 
 ### Markdown Syntax

@@ -130,41 +130,51 @@ printf '\033]11;?\007'
 printf '\033]10;?\007'
 ```
 
-# regex/regexp
+# Regex
 
 (Achtung: in Windows manchmal bisschen anders s. [https://superuser.com/a/518231](https://superuser.com/a/518231)
 
-## Trick
+| command | description |
+| :--- | :--- |
+`^` | regexp: beginning of line (praktisch für netrw: zB für jump to nächstem Ordner der mit "i" anfängt: `/^i`)
+`\n` oder `\r` | linebreak (man kann damit auch linebreaks suchen und mit einem whitespace (ie einfach 1x Leertaste) ersetzen)
+`^\R`  | blank line (exact empty line)
+`^\h\*\R` | for empty lines with blanks, only
 
-Use [regexr.com](https://regexr.com/) to ...
-- **read regex**: paste the regex expression you want to understand into the "Expression" field and read the "Tools" field. This field will show what each symbol in the expression means.
-- **write regex**: write something into the "Expression" field and see if it works by looking into the "Text/Tests" field with the example text.
+## regexr.com
 
-## In Vim
+- Use [regexr.com](https://regexr.com/) to ...
+  - **read regex**: paste the regex expression you want to understand into the "Expression" field and read the "Tools" field. This field will show what each symbol in the expression means.
+  - **write regex**: write something into the "Expression" field and see if it works by looking into the "Text/Tests" field with the example text.
+
+## Regex In Vim
+
+### Characters That Must Be Escaped
+
+- you must escape `{, }, /, (, ), |, +` (but not: `[, ]`) and some other characters with a backslash "\\" for the regex find pattern and the replace pattern to work
+
+### Substitute `:h substitute`
+
+`g`: Replace all occurrences in the line. (`:h s_g`)
+`%`: a "range" (`:h range`), tells the regex to work on **all lines** (the entire file)
 
 | command | description |
 | :--- | :--- |
-`:%s/pattern/xyz/g` | find `pattern` (regexp) and replace with `xyz`. The basic construct of the command is `s#search#replace#`. `%`: tells the regex to work on **all lines** in the vim buffer. `g`: match multiple times in a single line. **Achtung**: Sonderzeichen (eg. Klammern, Punkt, ...) muss ein `\` vorangestellt werden!
+`:%s/pattern/xyz/g` | find `pattern` (regexp) and replace with `xyz`. The basic construct of the command is `s#search#replace#`.
 `:%s/pattern/xyz/gc` | `c`: interactive replace
 `:s///` | find and replace **just on the current line**. 
-`^` | regexp: beginning of line (praktisch für netrw: zB für jump to nächstem Ordner der mit "i" anfängt: `/^i`)
-`\n` oder `\r` | linebreak (man kann damit auch linebreaks suchen und mit einem whitespace (ie einfach 1x Leertaste) ersetzen)
+`:%s/^.*John.*$//g` | match the entire line that **contains** `John`
 
-### Match Lines Containing xyz
+### Global `:h global`
+
+- executes a command on all lines that match a regex
+- `g` stands for "global"
+- `d` stands for "delete"
 
 | command | description |
 | :--- | :--- |
 `:g/pattern/d` | remove all lines containing `pattern`
 `:g/^$/d` | remove blank lines
-`:%s/^.*John.*$//g` | match the entire line that **contains** `John` 
-
-### Whitespaces
-
-| command | description |
-| :--- | :--- |
-`:%s/  /    /g`	| replace two spaces with four spaces
-`^\R`  | blank line (exact empty line)
-`^\h\*\R` | for empty lines with blanks, only
 
 # Starting vim from Terminal
 
@@ -221,6 +231,7 @@ Note: You can check the current value of a variable via `:set variable?`.
 
 | command | description |
 | :--- | :--- |
+|`:setfiletype` (with a space afterwards), then press Ctrl-d | list all known filetypes, [vi.stackexchange](https://vi.stackexchange.com/questions/5780/list-known-filetypes)
 |`:set filetype=cmake` | wenn Syntax nicht automatisch aktiviert wird, diesen Befehl ausführen
 |`:scriptnames` | To find out which files Vim has actually loaded. Generally, only the last one listed is "active", and even it may not be if you've turned syntax highlighting off. 
 |`:echo b:current_syntax` | To see the syntax currently in effect. 
