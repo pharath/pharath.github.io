@@ -507,7 +507,7 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
     - sometimes when there are multiple brackets and parentheses <kbd>[{</kbd> or <kbd>[(</kbd> can be faster than <kbd>[%</kbd>
     - see [vi.stackexchange](https://vi.stackexchange.com/a/16854)
   - <kbd>%</kbd> (jump out of parenthesized block to 1st parenthesis)
-  - <kbd>%%</kbd> (jump out of parenthesized block to 1st parenthesis)
+  - <kbd>%%</kbd> (jump out of parenthesized block to 2nd parenthesis)
 - <kbd>backtick</kbd> (list possible jumps and marks)
   - <kbd>backtick</kbd> <kbd>.</kbd> (jump to last change in current buffer)
   - <kbd>m</kbd> + <kbd>markLetter</kbd> (set jump mark)
