@@ -902,8 +902,10 @@ We should escape literal `.` because in regex `.` means any character, unless it
 
 | command | description |
 | :--- | :--- |
-`Befehl | head -3` | zeige oberste 3 Zeilen des Outputs
-`Befehl | tail -3` |
+`command | head -3` | show the first 3 rows of the output of `command`
+`command | tail -3` | show the last 3 rows of the output of `command`
+`command | tail +3` | show all rows <span style="color:red">**starting at row 3**</span> of the output of `command`
+`command | tail +24 | head -100` | show the first 100 rows <span style="color:red">**starting at row 24**</span> of the output of `command`
 `tail -n +10 input.txt | head -n 91` | prints rows 10-100, ie. `tail -n +10` prints out the entire file starting from line 10, and `head -n 91` prints the first 91 lines of that (up to and including line 100 of the original file)
 
 ### redirection
