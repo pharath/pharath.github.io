@@ -784,6 +784,7 @@ cmd + oben | focus letzte input Zeile (zB gut, wenn man zB schnell hochscrollen 
 | command | description |
 | :--- | :--- |
 `grep -c` | count matches, **best practice**: instead of `grep | wc -l`
+`grep -i pattern` | case insensitive
 `grep -o pattern "$file"` | option `-o` to only print the matching part
 `l | grep -e pattern1 -e pattern2` | logical "OR": greps `pattern1` or `pattern2`
 `grep -r -E 'orange|mango' .` | logical "OR" operator

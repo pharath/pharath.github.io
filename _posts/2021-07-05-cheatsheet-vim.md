@@ -130,6 +130,31 @@ printf '\033]11;?\007'
 printf '\033]10;?\007'
 ```
 
+# Ex Commands
+
+## Substitute `:h substitute`
+
+`g`: Replace all occurrences in the line. (`:h s_g`)
+`%`: a "range" (`:h range`), tells the regex to work on **all lines** (the entire file)
+
+| command | description |
+| :--- | :--- |
+`:%s/pattern/xyz/g` | find `pattern` (regexp) and replace with `xyz`. The basic construct of the command is `s#search#replace#`.
+`:%s/pattern/xyz/gc` | `c`: interactive replace
+`:s///` | find and replace **just on the current line**. 
+`:%s/^.*John.*$//g` | match the entire line that **contains** `John`
+
+## Global `:h global`
+
+- executes a command on all lines that match a regex
+- `g` stands for "global"
+- `d` stands for "delete lines (default: current line)"
+
+| command | description |
+| :--- | :--- |
+`:g/pattern/d` | remove all lines containing `pattern`
+`:g/^$/d` | remove blank lines
+
 # Regex
 
 (Achtung: in Windows manchmal bisschen anders s. [https://superuser.com/a/518231](https://superuser.com/a/518231)
@@ -152,29 +177,6 @@ printf '\033]10;?\007'
 ### Characters That Must Be Escaped
 
 - you must escape `{, }, /, (, ), |, +` (but not: `[, ]`) and some other characters with a backslash "\\" for the regex find pattern and the replace pattern to work
-
-### Substitute `:h substitute`
-
-`g`: Replace all occurrences in the line. (`:h s_g`)
-`%`: a "range" (`:h range`), tells the regex to work on **all lines** (the entire file)
-
-| command | description |
-| :--- | :--- |
-`:%s/pattern/xyz/g` | find `pattern` (regexp) and replace with `xyz`. The basic construct of the command is `s#search#replace#`.
-`:%s/pattern/xyz/gc` | `c`: interactive replace
-`:s///` | find and replace **just on the current line**. 
-`:%s/^.*John.*$//g` | match the entire line that **contains** `John`
-
-### Global `:h global`
-
-- executes a command on all lines that match a regex
-- `g` stands for "global"
-- `d` stands for "delete"
-
-| command | description |
-| :--- | :--- |
-`:g/pattern/d` | remove all lines containing `pattern`
-`:g/^$/d` | remove blank lines
 
 # Starting vim from Terminal
 

@@ -236,9 +236,11 @@ to `.clangd`
 
 ## nvim-tree
 
+- <kbd>P</kbd> (parent directory)
+  - <kbd>P</kbd><kbd>tab</kbd> (collapse parent)
 - <kbd>f</kbd> `somepattern` (filter the tree)
 - <kbd>-</kbd> (show more (show parent folder))
-- <kbd>ctrl</kbd> <kbd>]</kbd> (show less (only show the folder on which the cursor is placed, ie. this works only if the cursor is placed on a folder))
+- <kbd>ctrl</kbd><kbd>]</kbd> (show less (only show the folder on which the cursor is placed, ie. this works only if the cursor is placed on a folder))
 - <kbd>c</kbd> then <kbd>p</kbd> (duplicate file, automatically shows "rename" where you have to choose a new name)
 - for Firefox-Bookmarks-like behavior use
   - `init.lua`: `on_attach` keymap: bind <kbd>ctrl</kbd><kbd>e</kbd> to `api.tree.toggle`
