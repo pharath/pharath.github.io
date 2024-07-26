@@ -19,10 +19,24 @@
           {%- endfor -%}
         </ul>
         {% if site.search == true %}
-        <button class="search__toggle" type="button" accesskey="s">
+        <button class="search__toggle" type="button" accesskey="s" id="search_button">
           <span class="visually-hidden">{{ site.data.ui-text[site.locale].search_label | default: "Toggle search" }}</span>
           <i class="fas fa-search"></i>
         </button>
+        <script> 
+            function showSearch() { 
+                $("#search_button").click();
+            } 
+      
+            document 
+                .addEventListener("keydown", 
+                    function (event) { 
+                        if (event.ctrlKey && event.key === "k") { 
+                            event.preventDefault(); 
+                            showSearch(); 
+                        } 
+                    }); 
+        </script> 
         {% endif %}
         <button class="greedy-nav__toggle hidden" type="button">
           <span class="visually-hidden">{{ site.data.ui-text[site.locale].menu_label | default: "Toggle menu" }}</span>
