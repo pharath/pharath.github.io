@@ -24,6 +24,9 @@ tags:
     - working directory, 
     - staging area, 
     - the repository.
+- **Plumbing and Porcelain** (see [git-scm.com](https://git-scm.com/book/en/v2/Git-Internals-Plumbing-and-Porcelain)):
+  - This book covers primarily how to use Git with 30 or so subcommands such as checkout, branch, remote, and so on. But because Git was initially a toolkit for a version control system rather than a full user-friendly VCS, it has a number of <span style="color:green">**subcommands that do low-level work and were designed to be chained together UNIX-style or called from scripts**</span>. These commands are generally referred to as Git’s <span style="color:red">**“plumbing”**</span> commands, while the more <span style="color:green">**user-friendly commands**</span> are called <span style="color:red">**“porcelain”**</span> commands.
+  - As you will have noticed by now, this book’s first nine chapters deal almost exclusively with porcelain commands. But in this chapter, you’ll be dealing mostly with the lower-level plumbing commands, because they give you access to the inner workings of Git, and help demonstrate how and why Git does what it does. Many of these commands aren’t meant to be used manually on the command line, but rather to be used as building blocks for new tools and custom scripts.
 
 # Basics
 
@@ -147,7 +150,16 @@ Track another branch, [stackoverflow](https://stackoverflow.com/a/2286030/122822
 | :--- | :--- |
 `git reflog` | view history of `git checkout` operations
 
-## git log, git shortlog
+## What is the difference between git log and git show?
+
+- [reddit: What is the difference between git log and git show?](https://www.reddit.com/r/git/comments/30qcpg/what_is_the_difference_between_git_log_and_git/)
+  - `git show` is primarily for showing a <span style="color:red">**single**</span> commit. It defaults to a verbose display, including the entire diff. It can also show other, non-commit objects.
+  - `git log` is primarily for showing a <span style="color:red">**range**</span> of commits. It defaults to only showing the commit message, and can be reduced to one line.
+  - Both take similar options for the format. You can, with an appropriate command line, persuade `git log` to display a single commit with full diff just like `git show`.
+
+## git log
+
+- [What is the difference between git log and git show?](#what-is-the-difference-between-git-log-and-git-show)
 
 | command | description |
 | :--- | :--- |
@@ -155,14 +167,33 @@ Track another branch, [stackoverflow](https://stackoverflow.com/a/2286030/122822
 `git log --oneline` | show SHA1 + commit messages
 `git log --oneline filename` | get the commits that contain a specific file
 `git log -- filename` | commit history of a file
-`git log -p -- filename` | Like `git log`, but shows the file content that changed, as well. Generates the patches for each log entry.
 `git log --all` | all commits of all branches, tags and other refs (why `--all` isn't the default: you normally won't want that. For instance, if you're on branch `master`, and you run `git log`, you typically aren't interested in the history of any feature branches, you typically want to see the history of `master`, [stackoverflow](https://stackoverflow.com/a/29756754))
-`git show HEAD` | just the diff for a specific commit
-`gitk [filename]` | To browse the changes visually
-`git shortlog` | show the commit messages grouped by author and title (for creating release announcements)
-`git show 35e32b6a00dec02ae7d7c45c6b7106779a124685` | find a commit given the commit hash
-`git log -p -1 35e32b6a00dec02ae7d7c45c6b7106779a124685` | find a commit given the commit hash
+`git log --all --full-history -- filename` | commit history of a (possibly deleted) file (in all branches which touched that file)
+`git log --all --full-history -- "**/thefile.*"` | commit history of a (possibly deleted) file that matches `"**/thefile.*"` (useful if you do not know the exact path)
+`git log -p -- filename` | Like `git log`, but shows the file content that changed, as well. Generates the patches for each log entry.
+`git log -p -1 35e32b6a00dec02ae7d7c45c6b7106779a124685` | find a commit given the commit hash; `-1` flag: to show the specified commit only, otherwise all commits prior to the specified commit will be shown as well
 `git log -L110,110:/lib/client.js` | will return every commit which touched the line 110, [stackoverflow: Show all of the various changes to a single line in a specified file over the entire git history](https://stackoverflow.com/a/27108677/12282296)
+
+## git shortlog
+
+| command | description |
+| :--- | :--- |
+`git shortlog` | show the commit messages grouped by author and title (for creating release announcements)
+
+## git show
+
+- [What is the difference between git log and git show?](#what-is-the-difference-between-git-log-and-git-show)
+
+| command | description |
+| :--- | :--- |
+`git show HEAD` | just the diff for a specific commit
+`git show 35e32b6a00dec02ae7d7c45c6b7106779a124685` | find a commit given the commit hash
+
+## gitk
+
+| command | description |
+| :--- | :--- |
+`gitk [filename]` | To browse the changes visually
 
 ## git blame
 
