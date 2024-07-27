@@ -47,6 +47,7 @@ tags:
 | command | description |
 | :---: | :---: |
 `bundle install` | install all missing gems
+`bundle config set --local path 'vendor/bundle'` | to install the gems into `./vendor/bundle/`
 `bundle info [gemname]` | to see where a bundled gem is installed
 
 # Jekyll
@@ -82,6 +83,7 @@ bundle exec jekyll -v
 `sudo gem install bundler` |
 `sudo gem install jekyll` | Seite funktioniert nicht richtig, wenn dieses Gem **nicht** installiert wurde (z.B. bei Seitenvergrößerung über <kbd>ctrl</kbd><kbd>+</kbd> werden die einzelnen Teile der Seite nicht automatisch ausgerichtet)! 
 `sudo bundle install` | im github-pages repo **root** folder
+`bundle config set --local path 'vendor/bundle'` then `bundle install` | to install the gems into `./vendor/bundle/`
 `bundle exec jekyll serve` | warten bis "Server running... press ctrl-c to stop." message und dann <kbd>ctrl</kbd> gedrückt halten und auf server address clicken (oder in Browser `http://localhost:4000` aufrufen)
 
 ## Create a new site
@@ -124,6 +126,17 @@ Liquid Exception: Liquid syntax error (line 194): Variable 'double-{-without-whi
              Error: Run jekyll build --trace for more information.
 ```
 - do **not** use \{\{, use \{ \{, i.e. there **must** be a whitespace between the two curly brackets!
+
+### Other
+
+<span style="color:red">**problem**</span>: When running `ALGOLIA_API_KEY='a8bd11b9f583a3d1f24be7b912c5f430' bundle exec jekyll algolia`
+
+```bash
+jekyll 3.9.4 | Error:  ["//"] is not a symbol nor a string
+/var/lib/gems/2.7.0/gems/jekyll-algolia-1.7.1/lib/jekyll/algolia/file_browser.rb:180:in `respond_to?': ["//"] is not a symbol nor a string (TypeError)
+```
+
+<span style="color:red">**solution**</span>: Remove all `[//]: # ( xyz )`-style comments from the frontmatters of all markdown posts.
 
 # Latex in Jekyll
 

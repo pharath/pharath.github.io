@@ -646,6 +646,10 @@ In the Ubuntu terminal profile settings set `Hack Nerd Font Regular` as the term
   - `lazygit --git-dir=$HOME/.cfg/ --work-tree=$HOME`
   - note: `<leader>gd` triggers this command in my config
 
+### telescope
+
+- if telescope's "Recent Files" function is slow because it spins up the external hard drive, see section "telescope" in `./2023-10-01-cheatsheet-coding.md`
+
 ## Syntax Highlighting
 
 ### nvim-treesitter

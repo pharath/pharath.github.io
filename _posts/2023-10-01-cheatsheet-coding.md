@@ -150,7 +150,8 @@ Shortcuts:
 ## Diagnostics
 
 - [definition in neovim doc](https://neovim.io/doc/user/diagnostic.html)
-  - "Nvim provides a framework for displaying errors or warnings from external tools, otherwise known as **"diagnostics"**. These diagnostics can come from a variety of sources, such as **linters** or **LSP servers**. The diagnostic framework is an extension to existing error handling functionality such as the quickfix list."
+  - "Nvim provides a framework for displaying errors or warnings from external tools, otherwise known as **"diagnostics"**. These diagnostics can come from a variety of sources, such as **linters** or **LSP servers**. The diagnostic framework is an extension to existing error handling functionality such as the **quickfix list**."
+- <kbd>leader</kbd><kbd>e</kbd> (open floating diagnostic message, useful if you cannot read the inline message)
 
 ## Formatter
 
@@ -315,6 +316,7 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
   - <kbd>A</kbd> (amend)
     - erst <kbd>space</kbd> und dann <kbd>A</kbd>
 - in "commits" panel
+  - <kbd>ctrl</kbd><kbd>o</kbd> (copy commit SHA to clipboard; useful eg. when writing commit messages that refer to other commits)
   - um mehr vom file zu sehen:
     - im "Commits" panel den commit fokussieren (aber nicht <kbd>enter</kbd> drücken) und dann mehrmals <kbd>\}</kbd> drücken, sodass am Ende der ganze file sichtbar ist
     - better: press <kbd>enter</kbd> on the file in the "files" panel, then press <kbd>+</kbd> to rotate to the view where the file spans the full width of the screen
@@ -370,6 +372,7 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
     - eg. you can install `michaeljsmith/vim-indent-object` and then use `:g/pattern/norm dai`
     - note: `nvim` has a different `:oldfiles` system than `vim` (see [vi.stackexchange](https://vi.stackexchange.com/a/17260))
     - useful if you accidentally put some files in the `:oldfiles` list that are on an external hard drive (the hard drive has to spin up each time you press this telescope shortcut while the frozen telescope window is blocking `nvim`)
+      - in this case you can run `:g/\/media\/bra-ket\/INTENSO\//norm dai` to clear the `:oldfiles` list from all entries that are causing this behavior
 - ignoring files ([comment](https://github.com/nvim-telescope/telescope.nvim/issues/2471#issuecomment-1513758675)):
   - put them in `.ignore`
   - use the `file_ignore_patterns` telescope option (`:h telescope.defaults.file_ignore_patterns`)
