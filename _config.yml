@@ -25,12 +25,6 @@ twitter_username: pharath_one
 github_username: pharath
 minimal_mistakes_skin: default
 search: true
-search_provider: algolia
-algolia:
-  application_id         : 9QG197234T
-  index_name             : pharathio
-  search_only_api_key    : a8bd11b9f583a3d1f24be7b912c5f430
-  powered_by             : true
 
 # phth:
 # TODO: "teaser:" will also appear in the search results. But we only want to
