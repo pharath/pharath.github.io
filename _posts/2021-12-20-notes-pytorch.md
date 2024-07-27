@@ -9,7 +9,6 @@ header:
   caption: "Photo credit: [**Yann LeCun**](http://yann.lecun.com/)"
   actions:
     - label: "Some Content"
-[//]: # (      url: "https://htmlpreview.github.io/?https://github.com/pharath/home/blob/master/_posts_html/2021-09-23-Databases.html")
 categories:
   - PyTorch
   - Machine_Learning
