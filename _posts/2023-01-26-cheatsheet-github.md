@@ -5,7 +5,7 @@ excerpt: "Some essential Github tricks"
 header:
   teaser: /assets/images/github_logo.png
   overlay_image: /assets/images/github_logo.png
-  overlay_filter: 0.5 
+  overlay_filter: 0.5
 toc: true
 toc_sticky: true
 categories:
@@ -19,13 +19,13 @@ tags:
 
 see [docs.github.com](https://docs.github.com/en/get-started/using-github/keyboard-shortcuts)
 
-Blacklist `github.com` in the vimium extension settings. 
+Blacklist `github.com` in the vimium extension settings.
 
 press the `?` key on the github.com site to show all shortcuts
 
 # SSH Keys
 
-- generate the ssh key on your local machine: `ssh-keygen -o -t rsa -C "ssh@github.com"`, where `-C "comment"` is just a comment/description 
+- generate the ssh key on your local machine: `ssh-keygen -o -t rsa -C "ssh@github.com"`, where `-C "comment"` is just a comment/description
 - `cat ~/.ssh/id_rsa.pub` and copy and paste the full output into the **key** field on **github.com** &rarr; **Account Settings** &rarr; **SSH Keys**
 
 # Github Actions
@@ -50,19 +50,20 @@ gh repo create
 
 ## gh repo
 
-```bash
-gh repo view -h
+### gh repo view
 
-gh repo view dotfiles   # no "pharath/" prefix needed for "dotfiles"!
+| command                                                 | description                                 |
+| :------------------------------------------------------ | :------------------------------------------ |
+| `gh repo view -h`                                       |
+| `gh repo view dotfiles`                                 | no "pharath/" prefix needed for "dotfiles"! |
+| `gh repo view -b some_branch`                           |
+| `gh repo view --json name -q ".name"`                   | name of the repository                      |
+| `gh repo view --json nameWithOwner -q ".nameWithOwner"` | owner/repository                            |
+| `gh repo view --json url -q ".url"`                     | the complete url                            |
 
-gh repo view -b some_branch
+### gh repo edit
 
-# name of the repository
-gh repo view --json name -q ".name"
-
-# owner/repository
-gh repo view --json nameWithOwner -q ".nameWithOwner"
-
-# the complete url
-gh repo view --json url -q ".url"
-```
+| command                                            | description                       |
+| :------------------------------------------------- | :-------------------------------- |
+| `gh repo edit <repository> --description <string>` | edit the description in your repo |
+| `gh repo edit <repository> --<tab><tab>`           | show available edit options       |

@@ -117,6 +117,16 @@ Shortcuts:
 - `:LspStop 1 (tailwindcss)` (because the treesitter markdown parser is sufficient)
 - <kbd>alt</kbd><kbd>f</kbd> (insert arrow symbol)
 
+## vim-markdown
+
+- ge (format a table)
+  - when the table contains code with a pipe symbol "`|`" this won't work, but you can use the following workaround: 
+    - first escape all pipe symbols with a backslash `\`, but not the `|`-symbols of the table
+    - format the table with <kbd>ge</kbd>
+    - manually remove all `\` again
+  - this works only if all rows of the table start with a "`|`"-symbol
+    - you can run something like ``:%s/\(^`.*`\s|\)/| \1/g`` to reformat all tables in your markdown files, so that <kbd>ge</kbd> works
+
 ## LaTex
 
 - math mode
@@ -124,10 +134,33 @@ Shortcuts:
   - <kbd>alt</kbd><kbd>u</kbd>
   - <kbd>alt</kbd><kbd>t</kbd> ($\[ \text{Let}\ x=\text{number of cats}. \]$)
 
+# nvim
+
+## Useful Help Pages
+
+- `:h lua-vim-variables`
+- `:h highlight-groups` (meaning of each highlight-group, ie. which vim objects each highlight-group affects)
+- `:h runtimepath`
+- `:help lspconfig-all` (lsp server configuration: configuration options for each lsp server)
+- `:h lspconfig-setup` (lsp server configuration: global)
+- lazy
+  - [plugin config table fields](https://lazy.folke.io/spec)
+  - [keymap syntax](https://lazy.folke.io/spec/lazy_loading#%EF%B8%8F-lazy-key-mappings)
+
+## Variables
+
+- `:echo $SOME_ENV_VAR` (print the value of `SOME_ENV_VAR`)
+- `:echo g:someGlobalVar` (print the value of `vim.g.someGlobalVar`)
+- `:echo b:someBufferVar` (print the value of `vim.b.someBufferVar`)
+  - eg. `:echo b:AutoPairs` shows the list of all currently set AutoPairs for the current buffer
+- `:set someOption?` (print the value of `someOption`)
+- `:lua =table` (print a lua table)
+
 # nvim Plugins
 
 ## Lazy
 
+- [plugin spec: list of properties when adding plugins to init.lua](https://lazy.folke.io/spec)
 - [dev.to](https://dev.to/vonheikemen/lazynvim-how-to-revert-a-plugin-back-to-a-previous-version-1pdp)
   - restore specific plugin to previous state/version
   - revert all plugins to previous state/version
@@ -147,6 +180,13 @@ Shortcuts:
 - `:LspStop serverName`
   - eg. to stop tailwindcss server for markdown files (&rarr; [markdown](#markdown))
 
+## lsp_signature.nvim
+
+- shows the function signature in a floating window while typing
+- highlights the current parameter in the signature
+- <kbd>alt</kbd><kbd>p</kbd> (focus the floating window, put the cursor in the floating window)
+  - <kbd>alt</kbd><kbd>u</kbd>, <kbd>alt</kbd><kbd>d</kbd> (while in the floating window: move cursor up/down)
+
 ## Diagnostics
 
 - [definition in neovim doc](https://neovim.io/doc/user/diagnostic.html)
@@ -155,10 +195,21 @@ Shortcuts:
 
 ## Formatter
 
+- list
+  - markdown: `prettier.formatfile`
+  - lua: `:Format` (LSP format buffer)
+  - cpp: `:ClangFormat` (rhysd/vim-clang-format)
+- TODO: install [conform.nvim](https://github.com/stevearc/conform.nvim)
 - <kbd>leader</kbd><kbd>j</kbd><kbd>key-for-language</kbd>
 - available **formatters**:
   - `:ClangFormat`
-  - `coc-prettier`
+  - `coc-prettier`, [github](https://github.com/neoclide/coc-prettier)
+    - typical workflow:
+      - To install prettier in your project and pin its version [as recommended](https://prettier.io/docs/en/install.html), run: `npm install prettier -D --save-exact`
+      - Then, create an empty config file to let editors and other tools know you are using Prettier: `node --eval "fs.writeFileSync('.prettierrc','{}\n')"`
+      - Next, create a .prettierignore file to let the Prettier CLI and editors know which files to not format. Here’s an example: `node --eval "fs.writeFileSync('.prettierignore','# Ignore artifacts:\nbuild\ncoverage\n')"`
+      - Now, format all files with Prettier: `npx prettier . --write`
+        - `prettier --write .` is great for formatting everything, but for a big project it might take a little while. You may run `prettier --write app/` to format a certain directory, or `prettier --write app/components/Button.js` to format a certain file.
   - `:Format`, alias for `vim.lsp.buf.format()` (defined in `init.lua`)
 
 ## clang, clangd
@@ -178,6 +229,25 @@ Shortcuts:
   - create a `compile_flags.txt`
     - in the folder where the source code is
     - eg. with the content `-std=c++20`
+
+Example `compile_flags.txt`:
+
+```txt
+-nostdlibinc
+-I/home/bra-ket/osbook/devenv/x86_64-elf/include
+-I/home/bra-ket/osbook/devenv/x86_64-elf/include/c++/v1
+-I.
+-D__ELF__
+-D_LIBCPP_HAS_NO_THREADS
+-O2
+-Wall
+-g
+--target=x86_64-elf
+-fno-exceptions
+-ffreestanding
+-fno-rtti
+-std=c++2a
+```
 
 ### .clangd (project configuration file, yaml)
 
@@ -208,25 +278,58 @@ to `.clangd`
 - <kbd>ctrl</kbd> <kbd>x</kbd> followed by <kbd>ctrl</kbd> <kbd>f</kbd> (Path completion)
   - select with <kbd>ctrl</kbd> <kbd>n</kbd> then press <kbd>ctrl</kbd> <kbd>x</kbd> followed by <kbd>ctrl</kbd> <kbd>f</kbd> again to select the next subfolder etc.
 
-### nvim-cmp
+### nvim-cmp, LuaSnip, friendly-snippets
 
 - das **completion popup** mit den Kategorien (`Variable`, `Function`, `Keyword`, usw) in der rechten Spalte (zB `completionVorschlag1 Variable`, `completionVorschlag2 Keyword`, `completionVorschlag2 Function`, usw) wird von `nvim-cmp` erzeugt
 - servers must be added to the LSP server list `local servers = {}` in `init.lua`, otherwise `nvim-cmp` will not autocomplete
-- requires a <span style="color:red">snippet engine</span>
-  - in use: `luasnip`
-  - <kbd>tab</kbd>, <kbd>shift</kbd> <kbd>tab</kbd>
+- `luasnip` (snippet engine)
+  - `nvim-cmp` requires a snippet engine
+  - <kbd>tab</kbd>, <kbd>shift</kbd><kbd>tab</kbd>
     - select item in drop-down
       - if the item is a function a snippet is inserted
     - edit next/previous function parameter in the function snippet
   - luasnip config: [Example-mappings#luasnip](https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#luasnip)
   - TODO:
     - maybe configure a loader: [LuaSnip#add-snippets](https://github.com/L3MON4D3/LuaSnip#add-snippets)
+- `friendly-snippets` (snippet collection)
+  - requires `luasnip`
+  - some snippets contained in this collection are disabled by default, but you can enable them
+  - see [tips for using friendly-snippets](#friendly-snippets)
 - `nvim-cmp` steuert scrolling im "documentation preview" popup
   - press <kbd>ctrl</kbd> <kbd>f</kbd> to scroll down
   - alle key mappings in `.config/nvim/init.lua` bei `cmp.setup { ..., mapping = ... }`
   - **problem**: you cannot jump into the documentation preview window in nvim-cmp (which is important to open links in the documentation preview window, eg. MDN links for JavaScript)
     - **solution**: instead, you can first autocomplete an expression and then press <kbd>ctrl</kbd> <kbd>k</kbd> or <kbd>shift</kbd> <kbd>k</kbd> while the cursor is on the completed expression
   
+### friendly-snippets
+
+<span style="color:red">**important**</span>: Each language has its own [Wiki](https://github.com/rafamadriz/friendly-snippets/wiki) page where you can find all <span style="color:red">**keymaps**</span> to trigger the snippets.
+
+- [JavaScript](https://github.com/rafamadriz/friendly-snippets/wiki/Javascript,-Typescript,-Javascriptreact,-Typescriptreact)
+- [React](https://github.com/rafamadriz/friendly-snippets/wiki/Javascript,-Typescript,-Javascriptreact,-Typescriptreact#react-snippets)
+- [html](https://github.com/rafamadriz/friendly-snippets/wiki/HTML,-Pug,-Jade)
+
+Other Tricks:
+
+How to type the following code?:
+
+```
+<div className='wrapper'>
+  |
+</div>
+```
+
+- steps:
+  - press <kbd>j</kbd> and select the "jsx element" snippet
+  - write `div` into the first jsx tag and press <kbd>Esc</kbd> (or <kbd>jj</kbd>)
+    - this will write another `div` into the second jsx tag while the cursor remains in its current position
+  - press <kbd>a</kbd> and write `classN`, then press tab to select `className?~ Field`, press <kbd>Enter</kbd> on `className?~ Field`
+    - this will put a `className='|'` attribute into the first jsx tag with the cursor positioned in between the single quotes (where the vertical bar `|` is)
+  - write `wrapper`
+  - after typing the last `r` of `wrapper` press <kbd>ctrl</kbd><kbd>o</kbd> and then <kbd>j</kbd>
+    - this will place the cursor in the middle line between the first and second jsx tag (where the vertical bar `|` is) in insert mode
+    - you can press <kbd>ctrl</kbd><kbd>o</kbd><kbd>j</kbd> even <span style="color:red">**after**</span> just typing `wra`, pressing tab and selecting `wrapper` and <span style="color:red">**before**</span> pressing <kbd>Enter</kbd> on `wrapper` in the popup (ie. once you select `wrapper`, the completed word `wrapper` will not disappear when you press <kbd>ctrl</kbd><kbd>o</kbd><kbd>j</kbd>)
+
 ### coc.nvim
 
 - das **completion popup** mit den eckigen Klammer Symbolen in der rechten Spalte (zB `completionVorschlag1 [A]`, `completionVorschlag2 [B]`, usw) wird von `coc.nvim` erzeugt, wobei jedes eckige Klammer Symbol für jeweils eine "source" steht, die in `:CocList` &rarr; "sources" registriert wurde
@@ -284,15 +387,20 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
 - diff
   - <kbd>space</kbd> <kbd>h</kbd> <kbd>d</kbd> (diff zu letztem commit)
   - <kbd>space</kbd> <kbd>h</kbd> <kbd>D</kbd> (diff zu vorletztem commit)
-  - besser: <kbd>space</kbd> <kbd>g</kbd> <kbd>f</kbd> (see fugitive)
+  - better use fugitive: <kbd>space</kbd> <kbd>g</kbd> <kbd>f</kbd> (see fugitive)
 
 ### lazygit
 
+- [meaning of keymaps (official doc)](https://github.com/jesseduffield/lazygit/blob/master/docs/keybindings/Keybindings_en.md)
+- <kbd>alt</kbd><kbd>enter</kbd> (when writing a commit message: starts a new line)
+- when lazygit spins up the external hard drive so that lazygit lags, open `nvim ~/.config/lazygit/state.yml` and run `:g/^-\ \/media/d` to remove all "recent repo" paths to a git repo on the external hard drive
 - start lazygit
   - <kbd>space</kbd> gg (for normal repos)
   - <kbd>space</kbd> gd (for dotfiles repo)
 - each panel has its own help menu!
 - commands that work in all panels
+  - <kbd>R</kbd> (Refresh the git state (i.e. run `git status`, `git branch`, etc in background to update the contents of panels). This does not run `git fetch`.)
+    - does not work in the "branches" panel because "rename branch" is also mapped to <kbd>R</kbd>
   - <kbd>W</kbd> (**groß** W, diff menu)
   - <kbd>ctrl</kbd> <kbd>r</kbd> (switch repo)
     - does not work when a commit is selected during cherry-picking (see commands under "commits" panel)
@@ -316,6 +424,8 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
   - <kbd>A</kbd> (amend)
     - erst <kbd>space</kbd> und dann <kbd>A</kbd>
 - in "commits" panel
+  - <kbd>/</kbd> (search commits, <span style="color:red">**Warning**</span>: if a commit message has more than one line the search will only search in the first line of the commit message, [doc](https://github.com/jesseduffield/lazygit/blob/master/docs/Searching.md))
+  - <kbd>+</kbd> (view awesome [commit graph](https://github.com/jesseduffield/lazygit#commit-graph), or just to make the <span style="color:red">**commit messages**</span> more readable)
   - <kbd>ctrl</kbd><kbd>o</kbd> (copy commit SHA to clipboard; useful eg. when writing commit messages that refer to other commits)
   - um mehr vom file zu sehen:
     - im "Commits" panel den commit fokussieren (aber nicht <kbd>enter</kbd> drücken) und dann mehrmals <kbd>\}</kbd> drücken, sodass am Ende der ganze file sichtbar ist
@@ -327,6 +437,9 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
     - <kbd>c</kbd> (select cherry-pick)
     - <kbd>v</kbd> (apply cherry-pick to the current branch)
     - <kbd>ctrl</kbd> <kbd>r</kbd> (unselect cherry-pick)
+- in "stash" panel (first you have to stash changes in the "files" panel)
+  - <kbd>space</kbd> (apply)
+  - <kbd>g</kbd> (pop)
 
 #### lazygit: Git actions
 
@@ -345,14 +458,15 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
 ### fugitive
 
 - for normal git commands use exclamation mark "`:!git ...`"
-- :G (former "Gstatus", press g? to see what you can do)
-- :G `<tab><tab>` to see available commands
-- :G log
-- :G shortlog
+- `:G` (former "Gstatus", press g? to see what you can do)
+- `:G <tab><tab>` to see available commands
+- `:G log`
+- `:G shortlog`
 - `:Gdiffsplit HEAD~1` (horizontal view)
 - `:Gvdiffsplit HEAD~1` (vertical view)
-  - <kbd>space</kbd> g f (diff zu weiter zurück liegenden commits)
-- :Gread `%` (git checkout) (use u to undo/go back)
+  - <kbd>space</kbd> <kbd>g</kbd> <kbd>f</kbd>
+  - in the right buffer select the changes you want to add with <kbd>v</kbd> and then press <kbd>d</kbd><kbd>p</kbd> (so that the changes are added to the left buffer), then `:write` the left buffer to stage (aka git add) these changes, see `:h :Gdiffsplit`
+- `:Gread %` (git checkout) (use u to undo/go back)
 
 ### GV
 
@@ -363,6 +477,7 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
 
 ## telescope
 
+- `'` (prefix `'` to the search string to get an exact match instead of a fuzzy match, eg. useful when searching keymaps by writing the key combination)
 - `:h` (telescope.mappings)
 - <kbd>ctrl</kbd><kbd>/</kbd> (in insert mode), <kbd>?</kbd> (in normal mode) (show shortcuts)
 - <kbd>space</kbd><kbd>space</kbd> (recent files)
@@ -399,12 +514,21 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
   - `:TSInstall parserName` (install a specific parser)
     - in use: `markdown`, `markdown_inline`
   - `:TSInstallInfo` (list all installed parsers)
+  - `:TSModuleInfo` (colorful overview of installed features `:h :TSModuleInfo`)
   - `:TSUninstall parserName`
-- <kbd>ctrl</kbd> + <kbd>space</kbd> multiple times (select nodes, von innen nach außen)
-- press `]` (next) or `[` (previous) to see keybindings
+- <kbd>v</kbd> multiple times (select nodes, von innen nach außen)
+  - <kbd>alt</kbd><kbd>v</kbd> (decrement selection)
+  - <kbd>shift</kbd><kbd>v</kbd> ("select line" works as usual)
+- press <kbd>]</kbd> (next) or <kbd>[</kbd> (previous) to see keybindings
   - jumps to
     - start of next function/class
     - end of next function/class
+
+### treesitter-textobjects
+
+- an external plugin for the main treesitter plugin
+- <kbd>i</kbd><kbd>f</kbd> and <kbd>a</kbd><kbd>f</kbd> (inner/outer function)
+  - eg. <kbd>cif</kbd> to delete the inner part of a function
     
 ## Aerial
 
@@ -427,6 +551,7 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
 
 ## vim illuminate
 
+- [advantages of using vim-illuminate in nvim](https://www.reddit.com/r/neovim/comments/z6s4qo/is_vimilluminate_useful_for_neovim_users/)
 - <kbd>alt</kbd><kbd>n</kbd>
 - <kbd>alt</kbd><kbd>p</kbd>
 
@@ -436,6 +561,32 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
   - <kbd>c-s</kbd> **restores** the previously opened session. This can give you a nice flow if you're constantly switching between two projects.
   - <kbd>c-d</kbd> will **delete** the currently highlighted session. This makes it easy to keep the session list clean.
 - <kbd>space</kbd> <kbd>cs</kbd> (**save** session)
+
+# nvim Profiling
+
+[reddit.com](https://www.reddit.com/r/neovim/comments/ht6mk4/neovim_starts_being_really_slow_when_working_on/)
+
+Try run nvim with `nvim -u NONE`. Is it still slow?
+
+Try profiling when inside that file.
+
+```
+:profile start profile.log
+:profile func *
+:profile file *.
+```
+
+Now start doing what is slow
+
+```
+:profile pause.
+```
+
+Quit vim and open `profile.log`.
+
+At the end you should see sum of functions exec times and count of usage. Should point you.
+
+bot summon `:help profile` 
 
 # Finding Keymaps
 
@@ -481,7 +632,7 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
 
 - <kbd>;</kbd> (undo repeat)
 - <kbd>,</kbd> (repeat)
-- <kbd>g</kbd> <kbd>a</kbd> (show ascii code of letter under cursor)
+- <kbd>g</kbd><kbd>a</kbd> (show ascii code of letter under cursor)
 
 ## custom
 
@@ -601,6 +752,8 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
 - tabs
   - next tab: <kbd>gt</kbd> or <kbd>ctrl</kbd><kbd>P</kbd>ageDown (by default in vim)
   - previous tab: <kbd>gT</kbd> or <kbd>ctrl</kbd><kbd>P</kbd>ageUp (by default in vim)
+  - last accessed tab: <kbd>g</kbd><kbd>tab</kbd> (by default in vim, `:h ctrl-<tab>`)
+  - list tabs: `:tabs` (also shows which ones are modified, `:h :tabs`)
 - <kbd>alt</kbd><kbd>h</kbd> and <kbd>alt</kbd><kbd>l</kbd> (switch viewports)
   - to go to `:AerialToggle` and back (Avoid this! Use `:AerialNavToggle` (<kbd>leader</kbd><kbd>bb</kbd>) instead!)
   - to go to nvim-tree and back
@@ -626,3 +779,7 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
 - vSo (surround letter under cursor)
 - ys3iw" (surround **ohne select**)
 - ys3iW" (see word vs WORD)
+
+# Troubleshooting
+
+- auto-session errors can often be resolved by simply deleting the session (with <kbd>ctrl</kbd><kbd>d</kbd>) in the session list (press <kbd>leader</kbd><kbd>s</kbd><kbd>s</kbd>) and then restarting nvim
