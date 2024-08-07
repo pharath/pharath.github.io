@@ -217,6 +217,10 @@ Shortcuts:
 - **clang** is the **compiler**
 - **clangd** is the **language server**
 
+### clang
+
+- [doc: all flags](https://clang.llvm.org/docs/ClangCommandLineReference.html#compilation-options)
+
 ### compile commands json
 
 - From `:LspInfo` &rarr; press tab:
@@ -224,6 +228,7 @@ Shortcuts:
 
 ### compile flags txt
 
+- [doc](https://clangd.llvm.org/installation#compile_flagstxt)
 - run `:LspRestart` to reload
 - for simple projects (eg. compile one file only):
   - create a `compile_flags.txt`
@@ -283,6 +288,7 @@ to `.clangd`
 - das **completion popup** mit den Kategorien (`Variable`, `Function`, `Keyword`, usw) in der rechten Spalte (zB `completionVorschlag1 Variable`, `completionVorschlag2 Keyword`, `completionVorschlag2 Function`, usw) wird von `nvim-cmp` erzeugt
 - servers must be added to the LSP server list `local servers = {}` in `init.lua`, otherwise `nvim-cmp` will not autocomplete
 - `luasnip` (snippet engine)
+  - `:LuaSnipListAvailable`
   - `nvim-cmp` requires a snippet engine
   - <kbd>tab</kbd>, <kbd>shift</kbd><kbd>tab</kbd>
     - select item in drop-down

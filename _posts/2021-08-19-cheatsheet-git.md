@@ -523,6 +523,12 @@ git checkout branchA
 git reset --soft HEAD~; git reset # get all stashed untracked .gitignore files back to branchA
 ```
 
+## detached HEAD
+
+Detached head means you are no longer on a branch, you have checked out a single commit in the history.
+
+Run `git checkout master` to checkout the latest commit in `master` again.
+
 # git diff
 
 ## Side-by-Side View
