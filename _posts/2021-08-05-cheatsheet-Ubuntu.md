@@ -214,9 +214,61 @@ Aufruf über Einstellungen -> Suchen. Dort gibt es oben in der Titelleiste den B
 
 In this GUI excluding the "Home" folder stopped `tracker-miner-fs` which was stuck (see above in the output of "tracker daemon") and had about `95%` CPU in `htop`.
 
-# Disk
+# Storage
+
+## Disk
 
 `baobab` aka **Disk Usage Analyzer**
+
+## mega.io CLI
+
+[github repo](https://github.com/meganz/MEGAcmd)
+
+[UserGuide](https://github.com/meganz/MEGAcmd/blob/master/UserGuide.md)
+
+install:
+
+```bash
+wget https://mega.nz/linux/repo/xUbuntu_20.04/amd64/megacmd-xUbuntu_20.04_amd64.deb && sudo apt install "$PWD/megacmd-xUbuntu_20.04_amd64.deb"
+```
+
+There is a "interactive mode" (like python repl) and a "scriptable mode".
+
+[list of commands](https://github.com/meganz/MEGAcmd/blob/master/UserGuide.md#command-summary)
+
+### Login
+
+| command | description |
+| :--- | :--- |
+`mega-login email password` | where `!` in `password` must be escaped with backslash
+
+### Upload
+
+| command | description |
+| :--- | :--- |
+`mega-put localfile remotedest` | upload `localfile`, where `localfile` is relative to the current directory of the shell (not relative to `mega-lpwd`!), automatically creates a new version of `localfile` if it is already existing in the remote
+
+### Download
+
+| command | description |
+| :--- | :--- |
+`mega-ls -lh dir/` | list of files with size, Modification date for files and creation date for folders (see `mega-ls --help`)
+`mega-ls --versions remotefile` | list versions of `remotefile`
+`mega-get remotefile` | download the latest version of `remotefile` into the current directory
+`mega-get remotefile#1723078907` | download the version `#1723078907` of `remotefile` into the current directory
+
+### Remote File Operations
+
+| command | description |
+| :--- | :--- |
+`mega-cp remote/src/path/ remote/dest/path/` | only for copying remote files (you cannot `mega-cp` local files to the remote! use `mega-put` for that)
+`mega-rm remotefile` | remove all versions of `remotefile`
+
+### Interactive Mode
+
+| command | description |
+| :--- | :--- |
+`mega-lpwd` | only used for "interactive mode", whereas in "scriptable mode" the current directory of the shell is used as `lpwd`
 
 # Appearance
 

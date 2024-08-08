@@ -15,13 +15,19 @@ tags:
   - cheatsheet
 ---
 
-# Shortcuts
+# github.com (Shortcuts)
 
 see [docs.github.com](https://docs.github.com/en/get-started/using-github/keyboard-shortcuts)
 
 Blacklist `github.com` in the vimium extension settings.
 
-press the `?` key on the github.com site to show all shortcuts
+| command     | description              |
+| :---------- | :----------------------- |
+| `?`         | show all shortcuts       |
+| `c-b`       | file explorer            |
+| `>`         | open vscode in a new tab |
+| `c-shift-s` | download raw file        |
+| `t`         | jump to file             |
 
 # SSH Keys
 

@@ -749,7 +749,8 @@ bot summon `:help profile`
   - enter (confirm cmp-complete)
   - <kbd>ctrl</kbd><kbd>e</kbd> (abort complete) (both cmp-complete and vim-complete)
 - buffers
-  - `:b partialName<tab>`
+  - `:b partialName<tab>` (open buffer)
+  - `:ls` (list buffers)
 - sessions
   - <kbd>space</kbd><kbd>fod</kbd> (load default session)
   - <kbd>space</kbd><kbd>fsd</kbd> (save default session)

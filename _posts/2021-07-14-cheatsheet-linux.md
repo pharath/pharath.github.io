@@ -326,6 +326,11 @@ In `~/.bash_aliases`:
 
 ## symlinks
 
+Main disadvantages:
+
+- **dangerous**: `rm -r symlinkToDirectory/` deletes the contents of the symlinked directory, [stackoverflow](https://stackoverflow.com/a/62647612/12282296)
+  - whereas `rm -r symlinkToDirectory` deletes the symlink only
+
 Main advantages:
 
 - when you need to have a folder in multiple locations on your machine
@@ -708,6 +713,7 @@ Change the title of the current terminal: `echo -ne "\033]0;SOME TITLE HERE\007"
 | `find /opt/ ( -iname "pattern1" -o -iname "pattern2" )`                                  | logical "OR"                                                                                                                                                                                                                                                                                               |
 | `find /opt/ ( -iname "pattern1" -or -iname "pattern2" )`                                 | logical "OR", not POSIX compliant                                                                                                                                                                                                                                                                          |
 | `find /opt/ -size +1G`                                                                   | nur files, die über 1GB groß sind                                                                                                                                                                                                                                                                          |
+| `find . -iname "pattern" -printf '%Tc %p\n'`                                             | show timestamps (modified time)                                                                                                                                                                                                                                                                            |
 | `find . -newermt "2024-07-26" -not -newermt "2024-07-27"`                                | find by modified time                                                                                                                                                                                                                                                                                      |
 | `find /path/to/dir -newermt "yyyy-mm-dd HH:mm:ss" -not -newermt "yyyy-mm-dd HH:mm:ss+1"` | list file in the folder `/path/to/dir` modified between `yyyy-mm-dd HH:mm:ss` and `yyyy-mm-dd HH:mm:ss + 1` second, [unix.stackexchange](https://unix.stackexchange.com/questions/424319/how-to-find-files-based-on-timestamp)                                                                             |
 | `find /path/to/dir -newerat`                                                             | find by access time                                                                                                                                                                                                                                                                                        |

@@ -13,6 +13,8 @@ tags:
 
 # yt-dlp
 
+- [how-do-i-pass-cookies-to-yt-dlp](https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp)
+- [How to install PhantomJS on Ubuntu](https://gist.github.com/julionc/7476620) (PhantomJS is used in extractors where javascript needs to be run.)
 - if the `path/to/destination` does not exist, it will be created automatically
 
 ```bash
