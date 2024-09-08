@@ -201,6 +201,7 @@ related:
 | `git log -p -- filename`                                 | Like `git log`, but shows the file content that changed, as well. Generates the patches for each log entry.                                                                                                                                                                                                                                                         |
 | `git log -p -1 35e32b6a00dec02ae7d7c45c6b7106779a124685` | find a commit given the commit hash; `-1` flag: to show the specified commit only, otherwise all commits prior to the specified commit will be shown as well                                                                                                                                                                                                        |
 | `git log -L110,110:/lib/client.js`                       | will return every commit which touched the line 110, [stackoverflow: Show all of the various changes to a single line in a specified file over the entire git history](https://stackoverflow.com/a/27108677/12282296)                                                                                                                                               |
+| `git log -L150,+11:/lib/client.js`                       | log lines 150 to 150+11                                                                                                                                                                                                                                                                                                                                             |
 
 ## git shortlog
 
@@ -226,6 +227,10 @@ related:
 ## git blame
 
 "`git blame` <span style="color:red">does not</span> show the per-line modifications history in the chronological sense. It only shows <span style="color:red">who was the last person</span> to have changed a line in a document up to the last commit in `HEAD`.", [What does 'git blame' do?](https://stackoverflow.com/a/31204980/12282296)
+
+| command                        | description                                                                                     |
+| :----------------------------- | :---------------------------------------------------------------------------------------------- |
+| `git blame -L 150,+11 -- file` | look at the lines 150 to 150+11, [stackoverflow](https://stackoverflow.com/a/19757493/12282296) |
 
 ## git ls-tree
 
@@ -277,6 +282,13 @@ Git normally checks `gitignore` patterns from multiple sources, with the followi
 - Patterns read from a `.gitignore` file
 - Patterns read from `$GIT_DIR/info/exclude`
 - Patterns read from the file specified by the configuration variable `core.excludesFile`
+
+## git update-index
+
+read: [how-to-stop-tracking-and-ignore-changes-to-a-file-in-git](https://stackoverflow.com/questions/936249/how-to-stop-tracking-and-ignore-changes-to-a-file-in-git)
+
+- do use: `git update-index --skip-worktree path`: to stop tracking a certain file and have your own version of this file
+- do not use: `git update-index --assume-unchanged path`: to stop tracking a certain file, <span style="color:red">**but**</span> file(s) are overwritten if there are upstream changes to the file/folder (when you pull)
 
 # Reset/undo changes
 

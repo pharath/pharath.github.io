@@ -36,6 +36,8 @@ tags:
 | `ffmpeg -i input.mp4 -ss 00:05:20 -t 00:10:00 -c:v copy -c:a copy output1.mp4`                                  | take the input video `input.mp4`, and cut out 10 minutes from it starting from 00:05:20 (5 minutes and 20 second mark), i.e. the output video will be from 00:05:20 to 00:15:20. If you specify a duration that will result in a stop time that is beyond the length of the input video, the output video will end where the input video ends. [source](https://shotstack.io/learn/use-ffmpeg-to-trim-video/)                                                                                                                                                                            |
 | `ffmpeg -i input.mp4 -ss 00:05:10 -to 00:15:30 -c:v copy -c:a copy output2.mp4`                                 | uses `-to` to specify an exact time to cut to from the starting position. The cut video will be from 00:05:10 to 00:15:30, resulting in a 10 minutes and 20 seconds video. If you specify a time `-to` that is longer than the input video, e.g. `-to 00:35:00` when the input video is 20 minutes long, the cut video will end where the input video ends. If you specify a `-to` that is smaller than `-ss`, then the command won't run. You'll get the following error: `Error: -to value smaller than -ss; aborting.` [source](https://shotstack.io/learn/use-ffmpeg-to-trim-video/) |
 | `ffmpeg -i animated.gif -movflags faststart -pix_fmt yuv420p -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" video.mp4` | gif2mp4: convert `animated.gif` to `video.mp4`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `ffmpeg -i input.mp4 -ss 00:00:30 -t 00:00:50 -q:a 0 -map a output.mp3`                                         | mp42mp3: extract audio                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `ffmpeg -i input.mp4 -vcodec libx265 -crf 28 output.mp4`                                                        | push the compression lever further by increasing the CRF value — add, say, 4 or 6, since a reasonable range for H.265 may be 24 to 30. Note that lower CRF values correspond to higher bitrates, and hence produce higher quality videos., [unix.stackexchange](https://unix.stackexchange.com/a/38380)                                                                                                                                                                                                                                                                                  |
 
 ## vlc
 
@@ -165,7 +167,7 @@ tags:
 
 | command | description                                                                                                                                                               |
 | :------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| psensor | Unter "sensor preferences" im Tab "Application Indicator" das Kästchen "Display sensor in the label" aktivieren, damit ein bestimmter Wert im System Tray angezeigt wird. |
+| psensor | CPU and GPU temperature, Unter "sensor preferences" im Tab "Application Indicator" das Kästchen "Display sensor in the label" aktivieren, damit ein bestimmter Wert im System Tray angezeigt wird. |
 | conky   | see [configuration](https://linuxconfig.org/ubuntu-20-04-system-monitoring-with-conky-widgets)                                                                            |
 
 | command    | description                       |
@@ -796,8 +798,10 @@ Change the title of the current terminal: `echo -ne "\033]0;SOME TITLE HERE\007"
 
 **Only match the first occurrence of a character in the line**:
 
-- <span style="color:red">**problem**</span> to solve: `".*"` will match a double quoted string <span style="color:red">**only if**</span> there is <span style="color:red">**only one**</span> double quoted string in the line. When there are <span style="color:red">**multiple**</span> double quoted strings in the line this pattern will match from the first double quote sign `"` in the line until the last which is likely not intended
-- <span style="color:red">**solution**</span>: use negation: `"[^"]+"` to match anything but `"` until the next `"`
+- <span style="color:red">**problem**</span>: `".*"` will match a double quoted string <span style="color:red">**only if**</span> there is <span style="color:red">**only one**</span> double quoted string in the line. When there are <span style="color:red">**multiple**</span> double quoted strings in the line this pattern will match from the first double quote sign `"` in the line until the last which is likely not intended
+  - <span style="color:red">**solution**</span>: use negation: `"[^"]+"` to match anything but `"` until the next `"`
+  - <span style="color:red">**example**</span>:
+    - vim regex: `%s/\*\*\([^\*]\+\)\*\*/<span style={{ color: "red" }}>**\1**<\/span>/g`
 
 ### Types of regex
 
@@ -920,6 +924,7 @@ We should escape literal `.` because in regex `.` means any character, unless it
 - "Sed uses basic regular expressions (BRE). In a BRE, in order to have them treated literally, the characters `$.*[\^` need to be quoted by preceding them by a backslash, except inside character sets (`[…]`). Letters, digits and `(){}+?|` must not be quoted (you can get away with quoting some of these in some implementations)." ([more](https://unix.stackexchange.com/a/33005))
 - [Command Summary for sed](https://docstore.mik.ua/orelly/unix/sedawk/appa_03.htm)
 - [Bash Variables in sed](https://askubuntu.com/a/76842)
+- [sed one liners](http://sed.sourceforge.net/sed1line.txt)
 
 | command                                           | description                                                                                                                                                                                                                                                                                                                                                                                                 |
 | :------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -929,6 +934,7 @@ We should escape literal `.` because in regex `.` means any character, unless it
 | `sed '0,/Apple/{s/Apple/Banana/}' input_filename` | replace only the first occurrence in a file, "The first two parameters `0` and `/Apple/` are the range specifier. The `s/Apple/Banana/` is what is executed within that range. So in this case "within the range of the beginning (`0`) up to the first instance of `Apple`, replace `Apple` with `Banana`. Only the first `Apple` will be replaced.", [stackoverflow](https://stackoverflow.com/a/9453461) |
 | `sed 's/$/ pattern/' filename`                    | appending `pattern` to end of a line                                                                                                                                                                                                                                                                                                                                                                        |
 | `sed '/Fred Flintstone/ s/$/ pattern/' filename`  | append only to lines containing a specific string                                                                                                                                                                                                                                                                                                                                                           |
+| `sed '/pattern/{G;}' filename`                    | add a newline after a pattern                                                                                                                                                                                                                                                                                                                                                                               |
 
 ### tr
 
@@ -1122,7 +1128,6 @@ From [superuser](https://superuser.com/questions/142945/bash-command-to-focus-a-
 | pydf                 |
 | sudo fdisk -l        |
 | `mount \| column -t` |
-| free -m              |
 
 | command                     | description |
 | :-------------------------- | :---------- |
@@ -1137,6 +1142,21 @@ From [superuser](https://superuser.com/questions/142945/bash-command-to-focus-a-
 | cat /proc/version    |
 | cat /proc/scsi/scsi  |
 | cat /proc/partitions |
+
+### Memory
+
+| command                       | description |
+| :---------------------------- | :---------- |
+| `free -m`                     |
+| `watch free -m`               | update every 2 seconds
+| `dmesg -T \| grep oom-killer` | `-T`: show timestamps; shows the OutOfMemory-killer at work. This should not show any output! If it does, it is a bad sign!
+
+### GPU
+
+| command                                  | description                                                                       |
+| :--------------------------------------- | :-------------------------------------------------------------------------------- |
+| nvidia-smi -q -d temperature             | temperature info including critical temperature values, shutdown temperature etc. |
+| nvidia-smi --query-gpu=name --format=csv | get GPU name                                                                      |
 
 ## Udev
 
@@ -1157,7 +1177,7 @@ From [superuser](https://superuser.com/questions/142945/bash-command-to-focus-a-
 | `xrandr`                | list all display modes; set the size, orientation and/or reflection of the outputs for a screen; can also set the screen size                                                                                                                                                                                                                                                    |
 | `xrandr --fb 2560x1440` | set the screen resolution, when no physical display is connected (e.g. when connecting to Jetson AGX via Teamviewer or VNCviewer, put this in `/etc/xdg/autostart/resolution_screen_teamviewer.sh`, `chmod +x /etc/xdg/autostart/resolution_screen_teamviewer.sh`, create `/etc/xdg/autostart/resolution_screen_teamviewer.desktop` and reboot and connect via Teamviewer again) |
 
-# Manage Drives (hard drive, usb flash drive)
+# Storage
 
 | command                    | description |
 | :------------------------- | :---------- |
@@ -1284,13 +1304,6 @@ $ du --help
 | `v4l2-ctl -d /dev/video2 --list-formats-ext`                                                                                                                      | check supported pixel formats, fps and resolutions of camera `/dev/video2` |
 | `v4l2-ctl --device /dev/video3 --set-ctrl=zoom_absolute=120`                                                                                                      | zoom in                                                                    |
 
-# GPU information
-
-| command                                  | description                                                                       |
-| :--------------------------------------- | :-------------------------------------------------------------------------------- |
-| nvidia-smi -q -d temperature             | temperature info including critical temperature values, shutdown temperature etc. |
-| nvidia-smi --query-gpu=name --format=csv | get GPU name                                                                      |
-
 # curl, wget
 
 `curl` and `wget` are retrieval commands.
@@ -1331,6 +1344,7 @@ The software utility cron also known as cron job is a time-based job scheduler i
 
 | command                           | description                                                                                                                                                                                                                              |
 | :-------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `netstat -tulpn \| grep ':80'`    | check if port `:80` is in use                                                                                                                                                                                                            |
 | `sudo netstat -lpn \| grep :8889` | zeigt pid des Prozesses auf port 8889 (port kann dann mit `kill \<pid\>` frei gemacht werden)                                                                                                                                            |
 | `ss`                              | `ss` is the new `netstat` (`ss` is faster, more human-readable and easier to use); displays stats for PACKET, TCP, UDP, DCCP, RAW, and Unix domain sockets, [linux.com](https://www.linux.com/topic/networking/introduction-ss-command/) |
 

@@ -136,13 +136,21 @@ Shortcuts:
 
 # nvim
 
+## Debugging
+
+- `print(lua-variable)`
+- `print'some-string'`
+
 ## Useful Help Pages
 
+- `:h lua-guide` (basics of lua)
 - `:h lua-vim-variables`
 - `:h highlight-groups` (meaning of each highlight-group, ie. which vim objects each highlight-group affects)
-- `:h runtimepath`
+- `:h 'runtimepath'`
 - `:help lspconfig-all` (lsp server configuration: configuration options for each lsp server)
 - `:h lspconfig-setup` (lsp server configuration: global)
+- lua
+  - [lua modules, what does init.lua do in a folder?](https://neovim.io/doc/user/lua-guide.html#_lua-modules)
 - lazy
   - [plugin config table fields](https://lazy.folke.io/spec)
   - [keymap syntax](https://lazy.folke.io/spec/lazy_loading#%EF%B8%8F-lazy-key-mappings)
@@ -370,9 +378,11 @@ How to type the following code?:
 
 ## toggleterm (for lazygit integration in nvim)
 
-- scroll
+- enter terminal mode: press <kbd>i</kbd>
+- scroll (= enter normal mode)
   - <kbd>ctrl</kbd><kbd>\</kbd> <kbd>ctrl</kbd><kbd>n</kbd> to exit terminal mode, then you can use vim motions to move around
-  - scroll with mouse first and then you can use pageUp/pageDown
+  - scroll with mouse first and then you can use <kbd>pageUp</kbd>/<kbd>pageDown</kbd>
+  - press <kbd>i</kbd> to enter terminal mode again
 - written in lua
 - better than floaterm (written in vimscript)
 - <kbd>1</kbd><kbd>ctrl</kbd><kbd>\</kbd>, <kbd>2</kbd><kbd>ctrl</kbd><kbd>\</kbd>, <kbd>7</kbd><kbd>ctrl</kbd><kbd>\</kbd>, etc. to create and access terminals
@@ -430,6 +440,8 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
   - <kbd>A</kbd> (amend)
     - erst <kbd>space</kbd> und dann <kbd>A</kbd>
 - in "commits" panel
+  - <kbd>ctrl</kbd><kbd>s</kbd> (show commits for a specific file only)
+    - when you want to see the commits of a deleted file you have to checkout one of the commits before the commit where the file was deleted, then <kbd>ctrl</kbd><kbd>s</kbd> will work for this file (when you are done, you can checkout `master` in the "branches" panel to get back the latest commits)
   - <kbd>/</kbd> (search commits, <span style="color:red">**Warning**</span>: if a commit message has more than one line the search will only search in the first line of the commit message, [doc](https://github.com/jesseduffield/lazygit/blob/master/docs/Searching.md))
   - <kbd>+</kbd> (view awesome [commit graph](https://github.com/jesseduffield/lazygit#commit-graph), or just to make the <span style="color:red">**commit messages**</span> more readable)
   - <kbd>ctrl</kbd><kbd>o</kbd> (copy commit SHA to clipboard; useful eg. when writing commit messages that refer to other commits)

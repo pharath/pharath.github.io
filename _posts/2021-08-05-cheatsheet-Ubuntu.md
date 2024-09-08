@@ -220,6 +220,14 @@ In this GUI excluding the "Home" folder stopped `tracker-miner-fs` which was stu
 
 `baobab` aka **Disk Usage Analyzer**
 
+## duck
+
+supports many "protocols" like Google Drive, Dropbox, Amazon S3, OneDrive, ownCloud, WebDAV, etc
+
+TODO: duck CLI commands
+
+[doc: duck CLI](https://docs.duck.sh/cli/)
+
 ## mega.io CLI
 
 [github repo](https://github.com/meganz/MEGAcmd)
@@ -263,6 +271,7 @@ There is a "interactive mode" (like python repl) and a "scriptable mode".
 | :--- | :--- |
 `mega-cp remote/src/path/ remote/dest/path/` | only for copying remote files (you cannot `mega-cp` local files to the remote! use `mega-put` for that)
 `mega-rm remotefile` | remove all versions of `remotefile`
+`mega-mkdir remotefolder` | create a new folder `remotefolder` on the remote (warning: do not use a trailing slash behind the foldername like in `mega-mkdir remotefolder/` or you will get an error `Use -p to create folders recursively`)
 
 ### Interactive Mode
 
