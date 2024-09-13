@@ -250,6 +250,15 @@ There is a "interactive mode" (like python repl) and a "scriptable mode".
 | :--- | :--- |
 `mega-login email password` | where `!` in `password` must be escaped with backslash
 
+### Storage Space Management
+
+- <span style="color:red">**Unlike Git**</span>, in mega a file version that has a size of X MB will use X MB space! (You can check this via `mega-du --versions`.)
+
+| command | description |
+| :--- | :--- |
+`mega-du -h` | Prints size used by files/folders
+`mega-du --versions -h remotefile` | total size of all file versions of `remotefile` together
+
 ### Upload
 
 | command | description |
@@ -261,7 +270,8 @@ There is a "interactive mode" (like python repl) and a "scriptable mode".
 | command | description |
 | :--- | :--- |
 `mega-ls -lh dir/` | list of files with size, Modification date for files and creation date for folders (see `mega-ls --help`)
-`mega-ls --versions remotefile` | list versions of `remotefile`
+`mega-ls --versions remotefile` | list versions of `remotefile` (<span style="color:red">**warning:**</span> mega supports only <span style="color:red">**100 file versions**</span>! mega uses a smart algorithm to decide which version to remove first, see [help.mega.io](https://help.mega.io/files-folders/restore-delete/file-version-history))
+`mega-ls -lh --versions remotefile` | list versions and sizes of `remotefile`
 `mega-get remotefile` | download the latest version of `remotefile` into the current directory
 `mega-get remotefile#1723078907` | download the version `#1723078907` of `remotefile` into the current directory
 
@@ -271,6 +281,7 @@ There is a "interactive mode" (like python repl) and a "scriptable mode".
 | :--- | :--- |
 `mega-cp remote/src/path/ remote/dest/path/` | only for copying remote files (you cannot `mega-cp` local files to the remote! use `mega-put` for that)
 `mega-rm remotefile` | remove all versions of `remotefile`
+`mega-rm remotefile#1723078907` | remove a specific version of `remotefile`, workaround to remove the latest version (A): STEP 1: download and upload the previous version (B), STEP 2: then the latest version (A) is assigned an ID so that you can `mega-rm remotefile#1723078907` on the ID of the latest version (A), STEP 3: then delete the previous version (B) (which is unnecessary now because you have uploaded the same file in STEP 1)
 `mega-mkdir remotefolder` | create a new folder `remotefolder` on the remote (warning: do not use a trailing slash behind the foldername like in `mega-mkdir remotefolder/` or you will get an error `Use -p to create folders recursively`)
 
 ### Interactive Mode

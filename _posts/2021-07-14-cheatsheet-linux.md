@@ -165,10 +165,10 @@ tags:
 | :------- | :------------------------------------------ |
 | droidcam | use Android smartphone cam as Ubuntu webcam |
 
-| command | description                                                                                                                                                               |
-| :------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| command | description                                                                                                                                                                                        |
+| :------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | psensor | CPU and GPU temperature, Unter "sensor preferences" im Tab "Application Indicator" das Kästchen "Display sensor in the label" aktivieren, damit ein bestimmter Wert im System Tray angezeigt wird. |
-| conky   | see [configuration](https://linuxconfig.org/ubuntu-20-04-system-monitoring-with-conky-widgets)                                                                            |
+| conky   | see [configuration](https://linuxconfig.org/ubuntu-20-04-system-monitoring-with-conky-widgets)                                                                                                     |
 
 | command    | description                       |
 | :--------- | :-------------------------------- |
@@ -319,12 +319,29 @@ In `~/.bash_aliases`:
 | `sudo su postgres`   | Switches to the specified user's account (here: `postgres`) **and** it will inherit the original user's environment variables to target user                                                        |
 | `sudo su - postgres` | Switches to the specified user's account (here: `postgres`), **but does not** inherit the original user's environment variables, instead it resets all environment variables and creates them again |
 
-## Nohup
+## Job Control
 
-| command          | description                                                                                                                                                                                                                                                                                                                                                                                                  |
-| :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `some_command &` | run process `some_command` in the background                                                                                                                                                                                                                                                                                                                                                                 |
-| `nohup gedit &`  | start gedit in the background AND do not stop gedit, when shell is stopped. (Dies war ein einfaches Beispiel, aber es macht den eigentlichen Nutzen klar, wenn man z.B. per SSH auf einem fremden Rechner arbeitet und dort einen langwierigen Prozess starten möchte, die ssh-Verbindung aber während des Prozesses nicht permanent aktiv sein soll, weil man etwa den eigenen Rechner ausschalten möchte.) |
+### jobs
+
+| command   | description                        |
+| :-------- | :--------------------------------- |
+| `jobs`    | list all jobs of the current shell |
+| `jobs -l` | show the PID of each job           |
+| `jobs -p` | shows just the PIDs                |
+
+### bg
+
+- `some_command &`: run process `some_command` in the background
+  - `bg`: alternatively, once you've started a process, you can background it by first stopping it (hit <kbd>ctrl</kbd><kbd>z</kbd>) and then typing `bg` to let it resume in the background. It's now a "job", and its `stdout`/`stderr`/`stdin` are still connected to your terminal., [superuser](https://superuser.com/a/178592)
+  - terminal exit, <kbd>ctrl</kbd><kbd>d</kbd>: sends `SIGHUP` to all jobs in the closed shell's job list
+  - note: `&` is a <span style="color:red">**control operator**</span> and you are only allowed to put <span style="color:red">**one**</span> of those at the end of a simple command, thus, in bash one-liners you must write `some_command & next_command` and not `some_command &; next_command`
+
+### nohup, disown
+
+good explanation: [superuser](https://superuser.com/a/178592)
+
+- `nohup gedit &`: start gedit in the background AND <span style="color:red">**do not stop gedit (do not send `SIGHUP` to gedit), when shell is stopped**</span>. (Dies war ein einfaches Beispiel, aber es macht den eigentlichen Nutzen klar, wenn man z.B. per SSH auf einem fremden Rechner arbeitet und dort einen langwierigen Prozess starten möchte, die ssh-Verbindung aber während des Prozesses nicht permanent aktiv sein soll, weil man etwa den eigenen Rechner ausschalten möchte.)
+- `disown <tab>`, eg. `psensor &` followed by `disown "%psensor"`: a bash builtin that removes a shell job from the shell's job list. What this basically means is that you can't use `fg`, `bg` on it anymore, but more importantly, when you close your shell it won't hang or send a `SIGHUP` to that child anymore. Unlike `nohup`, `disown` is used <span style="color:red">**after**</span> the process has been launched and backgrounded., [superuser](https://superuser.com/a/178592)
 
 ## symlinks
 
@@ -354,15 +371,15 @@ Main advantages:
 
 ## Process Management
 
-| command                                 | description                                                                                                                                                                                                   |
-| :-------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `top`                                   | activity monitor                                                                                                                                                                                              |
-| `ps`                                    | wie `top`, aber keine real-time updates (dh. nur ein snapshot)                                                                                                                                                |
-| `ps -eo pid,lstart,cmd \| grep 2127686` | start time of PID 2127686 (e.g. to get terminal start time, run `echo $$`, and then this command)                                                                                                             |
-| `echo $$`                               | show PID of current shell                                                                                                                                                                                     |
-| `kill PID`                              | stop process with id `PID`, sends SIGTERM (i.e. kills gracefully) (see [notes bash]({% post_url 2021-09-25-cheatsheet-bash %}#job-control) and [kill doc](https://man7.org/linux/man-pages/man1/kill.1.html)) |
-| `pkill process_name`                    | stop all processes containing `process_name` (which is a regular expression), sends SIGTERM (i.e. kills gracefully), _Warning:_ use `pgrep` first to check which processes will be killed                     |
-| `pgrep process_name`                    | list all PIDs containing `process_name` (which is a regular expression)                                                                                                                                       |
+| command                                 | description                                                                                                                                                                                                     |
+| :-------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `top`                                   | activity monitor                                                                                                                                                                                                |
+| `ps`                                    | wie `top`, aber keine real-time updates (dh. nur ein snapshot)                                                                                                                                                  |
+| `ps -eo pid,lstart,cmd \| grep 2127686` | start time of PID 2127686 (e.g. to get terminal start time, run `echo $$`, and then this command)                                                                                                               |
+| `echo $$`                               | show PID of current shell                                                                                                                                                                                       |
+| `kill PID`                              | stop process with id `PID`, sends `SIGTERM` (i.e. kills gracefully) (see [notes bash]({% post_url 2021-09-25-cheatsheet-bash %}#job-control) and [kill doc](https://man7.org/linux/man-pages/man1/kill.1.html)) |
+| `pkill process_name`                    | stop all processes containing `process_name` (which is a regular expression), sends SIGTERM (i.e. kills gracefully), _Warning:_ use `pgrep` first to check which processes will be killed                       |
+| `pgrep process_name`                    | list all PIDs containing `process_name` (which is a regular expression)                                                                                                                                         |
 
 Check PID of a window (pick a window with the cursor):
 
@@ -1145,11 +1162,11 @@ From [superuser](https://superuser.com/questions/142945/bash-command-to-focus-a-
 
 ### Memory
 
-| command                       | description |
-| :---------------------------- | :---------- |
+| command                       | description                                                                                                                 |
+| :---------------------------- | :-------------------------------------------------------------------------------------------------------------------------- |
 | `free -m`                     |
-| `watch free -m`               | update every 2 seconds
-| `dmesg -T \| grep oom-killer` | `-T`: show timestamps; shows the OutOfMemory-killer at work. This should not show any output! If it does, it is a bad sign!
+| `watch free -m`               | update every 2 seconds                                                                                                      |
+| `dmesg -T \| grep oom-killer` | `-T`: show timestamps; shows the OutOfMemory-killer at work. This should not show any output! If it does, it is a bad sign! |
 
 ### GPU
 

@@ -719,9 +719,14 @@ See also:
 
 - sends a `SIGSTOP`
 
-#### ctrl - q 
+#### ctrl - q
 
 - sends a `SIGCONT`
+
+#### ctrl - d
+
+- sends a `SIGHUP` ("signal hang up") to all jobs in the shell's job list (run `jobs` to see the job list)
+  - this includes foreground and background jobs
 
 # Formatting
 
