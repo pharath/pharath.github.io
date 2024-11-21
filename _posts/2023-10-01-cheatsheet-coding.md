@@ -164,6 +164,11 @@ Shortcuts:
 - `:set someOption?` (print the value of `someOption`)
 - `:lua =table` (print a lua table)
 
+## Options
+
+- [list of all options (lua code)](https://github.com/brainfucksec/neovim-lua/blob/main/nvim/lua/core/options.lua)
+  - shows how to set values for options in `init.lua`
+
 # nvim Plugins
 
 ## Lazy
@@ -238,6 +243,7 @@ Shortcuts:
 
 - [doc](https://clangd.llvm.org/installation#compile_flagstxt)
 - run `:LspRestart` to reload
+  - or: run `:e` to reload
 - for simple projects (eg. compile one file only):
   - create a `compile_flags.txt`
     - in the folder where the source code is
@@ -354,6 +360,9 @@ How to type the following code?:
 
 ## nvim-tree
 
+- tricks:
+  - [wiki: Recipes](https://github.com/nvim-tree/nvim-tree.lua/wiki/Recipes)
+  - [h-j-k-l-style-navigation-and-editing](https://github.com/nvim-tree/nvim-tree.lua/wiki/Recipes#h-j-k-l-style-navigation-and-editing)
 - <kbd>P</kbd> (parent directory)
   - <kbd>P</kbd><kbd>tab</kbd> (collapse parent)
 - <kbd>f</kbd> `somepattern` (filter the tree)
@@ -657,6 +666,10 @@ bot summon `:help profile`
 - <Space>fc (`keymaps.lua`)
 - <Space>fi (`init.lua`)
 - <Space>fp (`plugins/init.lua`)
+
+## scroll
+
+- zz (center this line)
 
 ## motion (in a line)
 

@@ -492,6 +492,23 @@ bukuserver run --host 127.0.0.1 --port 5001
 buku --import ~/Downloads/bookmarks27jan24.html
 ```
 
+```bash
+# OR
+buku -t tag1, tag2
+
+# AND
+buku -t tag1 + tag2
+
+# NOT
+buku -t tag1 - tagToExclude1, tagToExclude2
+
+# add tags
+buku -t tag1 -s pattern -u --tags + newTag
+
+# print just urls
+buku -t tag1, tag2 -f 1
+```
+
 # rofi
 
 ## Install

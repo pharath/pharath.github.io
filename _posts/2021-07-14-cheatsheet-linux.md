@@ -54,6 +54,7 @@ tags:
 | `convert path/to/image.png -quality 50% path/to/output_image.png` | compress an `image.png` by reducing its quality ([source](https://askubuntu.com/a/781588))                                                                                                                                                                                                                                                                         |
 | `convert *.PNG mydoc.pdf`                                         | create a pdf from all `.PNG` files in the current folder; **important:** must run `sudo mv /etc/ImageMagick-6/policy.xml /etc/ImageMagick-6/policy.xmlout` first to fix `convert-im6.q16: attempt to perform an operation not allowed by the security policy PDF' @ error/constitute.c/IsCoderAuthorized/413.` error, [askubuntu](https://askubuntu.com/a/1081907) |
 | `convert EXAMPLE.png EXAMPLE.svg`                                 | convert png to svg                                                                                                                                                                                                                                                                                                                                                 |
+| `convert *.jpg -auto-orient pictures.pdf`                         | convert jpg to pdf                                                                                                                                                                                                                                                                                                                                                 |
 
 ## pdftoppm (poppler)
 
@@ -1131,26 +1132,24 @@ From [superuser](https://superuser.com/questions/142945/bash-command-to-focus-a-
 
 ## Hardware
 
-| command              | description                                                                                                                                   |
-| :------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------- |
-| lscpu                |
-| lshw                 |
-| hwinfo --short       |
-| lspci                |
-| lsscsi               |
-| lsusb                |
-| inxi -Fx             |
-| lsblk                | list [block devices](#block-device-vs-character-device), e.g. to see all drives attached to your system, including their sizes and partitions |
-| df -H                |
-| pydf                 |
-| sudo fdisk -l        |
-| `mount \| column -t` |
+| command                  | description                                                                                                                                              |
+| :----------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `lscpu`                  |
+| `lshw`                   | list hardware. report exact memory configuration, firmware version, mainboard configuration, CPU version and speed, cache configuration, bus speed, etc. |
+| `hwinfo --short`         | must be installed via `apt install`                                                                                                                      |
+| `lspci`                  | list all PCI devices                                                                                                                                     |
+| `lsscsi`                 | list SCSI devices (or hosts) and their attributes                                                                                                        |
+| `lsusb`                  |
+| `inxi -Fx`               | shows system hardware, CPU, drivers, Xorg, Desktop, Kernel, gcc version(s), Processes, RAM usage, and a wide variety of other useful information.        |
+| `lsblk`                  | list [block devices](#block-device-vs-character-device), e.g. to see all drives attached to your system, including their sizes and partitions            |
+| `sudo fdisk -l /dev/sdb` | List the partition tables for the specified devices and then exit.                                                                                       |
+| `mount \| column -t`     | lists all mounted filesystems (`column -t` just formats the output to a table (`-t` flag). Columns are delimited with whitespace)                        |
 
-| command                     | description |
-| :-------------------------- | :---------- |
-| sudo dmidecode -t processor |
-| sudo dmidecode -t memory    |
-| sudo dmidecode -t bios      |
+| command                       | description                                                                                                                                                           |
+| :---------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sudo dmidecode -t processor` |
+| `sudo dmidecode -t memory`    | shows form factor (DIMM vs. SODIMM), size (8192 MB), speed (in megatransfer per second, eg. 3200 MT/s), type (DDR4, DDR3, etc), Manufacturer, Configured Voltage, etc |
+| `sudo dmidecode -t bios`      |
 
 | command              | description |
 | :------------------- | :---------- |
