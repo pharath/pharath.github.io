@@ -74,7 +74,7 @@ Jekyll is written in Ruby.
 bundle exec jekyll -v
 ```
 
-## Install and Serve Locally
+## Install Jekyll
 
 | command | description |
 | :--- | :--- |
@@ -84,7 +84,16 @@ bundle exec jekyll -v
 `sudo gem install jekyll` | Seite funktioniert nicht richtig, wenn dieses Gem **nicht** installiert wurde (z.B. bei Seitenvergrößerung über <kbd>ctrl</kbd><kbd>+</kbd> werden die einzelnen Teile der Seite nicht automatisch ausgerichtet)! 
 `sudo bundle install` | im github-pages repo **root** folder
 `bundle config set --local path 'vendor/bundle'` then `bundle install` | to install the gems into `./vendor/bundle/`
-`bundle exec jekyll serve` | warten bis "Server running... press ctrl-c to stop." message und dann <kbd>ctrl</kbd> gedrückt halten und auf server address clicken (oder in Browser `http://localhost:4000` aufrufen)
+
+## Jekyll Basics
+
+| command | description |
+| :--- | :--- |
+`bundle exec jekyll serve` or `jekyll s` | Serve Locally. Warten bis "Server running... press ctrl-c to stop." message und dann <kbd>ctrl</kbd> gedrückt halten und auf server address clicken (oder in Browser `http://localhost:4000` aufrufen)
+`bundle exec jekyll build` or `jekyll b` | Performs a one off build your site to `./_site` (by default).
+`bundle exec jekyll clean` | Removes all generated files: destination folder, metadata file, Sass and Jekyll caches.
+`bundle exec jekyll new PATH` | Creates a new Jekyll site with default gem-based theme at specified path. The directories will be created as necessary.
+`bundle exec jekyll new PATH --blank` | Creates a new blank Jekyll site scaffold at specified path.
 
 ## Create a new site
 
