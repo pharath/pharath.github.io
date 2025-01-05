@@ -33,13 +33,24 @@ tags:
   - `wmctrl -i -a 0x066f5d24 -T "documentation"` (rename)
   - `wmctrl -i -a 0x0667167d -T "main-tmux"` (rename)
   - [more complex commands](https://superuser.com/a/950287)
-  
+
+# windows
+
+- `$env:Path` (show value of `PATH` variable)
+- `$Env:Path | sls conda` (like `grep`)
+- `$Env:Path | findstr.exe conda` (like `grep`, but `sls` is better)
+- ERROR: `set PATH=%PATH%;C:\Users\H1524\Appdata\Local\Continuum\miniconda3\` does not work! Use GUI: Press Windows &rarr; type "Umgebungsvariablen für dieses Konto bearbeiten" (WARNING: NOT "Umgebungsvariablen bearbeiten"!) &rarr; Select "Path" &rarr; "Bearbeiten" &rarr; add all new paths via "Neu" &rarr; Click "Ok" &rarr; Click "Ok"
+- `Add-AppxPackage -Path .\file.msixbundle` (install an msixbundle)
+- `Get-AppxPackage *WindowsTerminal*` (check if package was installed successfully)
+- `cat (Get-PSReadlineOption).HistorySavePath` (powershell history)
+
 # terminal
 
 - <kbd>ctrl</kbd><kbd>l</kbd> (clear)
 
 # firefox
 
+- `about:about` (shows all about pages)
 - <kbd>ctrl</kbd> <kbd>u</kbd> (view page source code)
 
 ## Page Info
