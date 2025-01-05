@@ -1173,6 +1173,9 @@ From [superuser](https://superuser.com/questions/142945/bash-command-to-focus-a-
 | :--------------------------------------- | :-------------------------------------------------------------------------------- |
 | nvidia-smi -q -d temperature             | temperature info including critical temperature values, shutdown temperature etc. |
 | nvidia-smi --query-gpu=name --format=csv | get GPU name                                                                      |
+| nvidia-smi -lms 100 -q -d POWER          | loop every 100 ms                                                                 |
+| nvidia-smi -lms 100 -q -d TEMPERATURE    | loop every 100 ms                                                                 |
+| nvidia-smi -lms 100 -q -d UTILIZATION    | loop every 100 ms                                                                 |
 
 ## Udev
 
