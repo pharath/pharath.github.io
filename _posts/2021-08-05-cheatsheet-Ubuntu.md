@@ -503,7 +503,7 @@ buku -t tag1 + tag2
 buku -t tag1 - tagToExclude1, tagToExclude2
 
 # add tags
-buku -t tag1 -s pattern -u --tags + newTag
+buku -t tag1 -s pattern -u --tag + newTag
 
 # print just urls
 buku -t tag1, tag2 -f 1
