@@ -432,6 +432,10 @@ Exec=dolphin %u --new-window
 
 - set `most` as default pager is `.bashrc` to get coloured `man` pages
 
+# Mail
+
+use Thunderbird
+
 # Converter
 
 ## pptx (or ppt) to pdf
