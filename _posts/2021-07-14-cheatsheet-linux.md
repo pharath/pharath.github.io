@@ -1092,15 +1092,16 @@ From [superuser](https://superuser.com/questions/142945/bash-command-to-focus-a-
 
 # Unzipping
 
-| command                                                  | description                                                                                                      |
-| :------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------- |
-| `unzip file -d destination`                              | unzip to destination                                                                                             |
-| `tar -C ./data/ -zxvf ~/Downloads/mnist.tgz`             | für **.tgz** (wobei `-C target_location -zxvf source.tgz`), **.tar.gz**                                          |
-| _oder andersrum:_                                        |
-| `tar -zxvf ~/Downloads/mnist.tgz -C ./data/`             |
-| `tar -C ./data/ -jxvf ~/Downloads/datei.tar.bz2`         | für **.tar.bz2** (dh. `-j` flag statt `-z` flag)                                                                 |
-| `tar -C ~/ -xvf tor-browser-linux64-10.5.2_en-US.tar.xz` | für **.tar.xz**                                                                                                  |
-| `zip -FF 210211.zip --out 210211-2.zip -fz`              | "fix" a broken zip file, then run `unzip 210211-2.zip`, [stackexchange](https://unix.stackexchange.com/a/634316) |
+| command                                                        | description                                                                                                      |
+| :------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------- |
+| `unzip file -d destination`                                    | unzip to destination                                                                                             |
+| `tar -xvzf community_images.tar.gz -C some_custom_folder_name` | für **.tar.gz**                                                                                                  |
+| `tar -C ./data/ -zxvf ~/Downloads/mnist.tgz`                   | für **.tgz** (wobei `-C target_location -zxvf source.tgz`), **.tar.gz**                                          |
+| _oder andersrum:_                                              |
+| `tar -zxvf ~/Downloads/mnist.tgz -C ./data/`                   |
+| `tar -C ./data/ -jxvf ~/Downloads/datei.tar.bz2`               | für **.tar.bz2** (dh. `-j` flag statt `-z` flag)                                                                 |
+| `tar -C ~/ -xvf tor-browser-linux64-10.5.2_en-US.tar.xz`       | für **.tar.xz**                                                                                                  |
+| `zip -FF 210211.zip --out 210211-2.zip -fz`                    | "fix" a broken zip file, then run `unzip 210211-2.zip`, [stackexchange](https://unix.stackexchange.com/a/634316) |
 
 # Convert
 
