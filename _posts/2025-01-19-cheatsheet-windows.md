@@ -17,6 +17,7 @@ tags:
 
 | command                                      | description                                                          |
 | :------------------------------------------- | :------------------------------------------------------------------- |
+| `Get-Help command`                           | show help for `command`                                              |
 | `(Get-PSReadLineOption).HistorySavePath`     | to get the path of the Powershell `history.txt`                      |
 | `cat (Get-PSReadLineOption).HistorySavePath` | to print the content of the Powershell `history.txt`                 |
 | `gci env:`                                   | list all Powershell environment variable names and their values      |
@@ -32,10 +33,14 @@ tags:
   - `-CaseSensitive`: by default false.
   - `-SimpleMatch`: by default false. Indicates that the cmdlet uses a simple match rather than a regular expression match. In a simple match, `Select-String` searches the input for the text in the `Pattern` parameter. It doesn't interpret the value of the `Pattern` parameter as a regular expression statement.
 
-| command                                      | description                                                          |
-| :------------------------------------------- | :------------------------------------------------------------------- |
-| `ipconfig.exe \| Select-String "ipv4"` | like `grep` on Linux
+| command                                | description          |
+| :------------------------------------- | :------------------- |
+| `ipconfig.exe \| Select-String "ipv4"` | like `grep` on Linux |
 
 ### Special Locations
 
 - Current Spotlight Background Image: `C:\Users\H1524\AppData\Roaming\Microsoft\Windows\Themes\CachedFiles`
+
+### winget
+
+- `winget --info` (show where packages are installed/stored)
