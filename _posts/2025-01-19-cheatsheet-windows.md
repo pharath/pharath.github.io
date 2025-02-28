@@ -11,18 +11,18 @@ tags:
   - cheatsheet
 ---
 
-# Windows
-
 ## Powershell
 
 | command                                      | description                                                          |
 | :------------------------------------------- | :------------------------------------------------------------------- |
 | `Get-Help command`                           | show help for `command`                                              |
+| `command -Verbose`                           |                                                                      |
+| `rm -Force .\dir\`                           |                                                                      |
 | `(Get-PSReadLineOption).HistorySavePath`     | to get the path of the Powershell `history.txt`                      |
 | `cat (Get-PSReadLineOption).HistorySavePath` | to print the content of the Powershell `history.txt`                 |
 | `gci env:`                                   | list all Powershell environment variable names and their values      |
 | `$env:VARIABLE`                              | eg. `%AppData%`: to get the path of `%AppData%` enter `$env:APPDATA` |
-| `cd $env:APPDATA`                            |
+| `cd $env:APPDATA`                            |                                                                      |
 
 ### select-string
 
