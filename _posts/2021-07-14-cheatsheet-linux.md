@@ -497,8 +497,9 @@ You can also remove PPAs by deleting the `.list` files from `/etc/apt/sources.li
 
 | command                                         | description                |
 | :---------------------------------------------- | :------------------------- |
-| sudo apt install ./name.deb                     | install a .deb file        |
+| `sudo apt install ./name.deb`                   | install a .deb file        |
 | `sudo apt-get install <package name>=<version>` | install a specific version |
+| `sudo apt install --only-upgrade <packagename>` | update `<packagename>`     |
 
 ### Uninstall
 
