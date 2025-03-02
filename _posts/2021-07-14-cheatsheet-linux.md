@@ -444,8 +444,11 @@ Differences between two directory trees
 
 # apt, apt-get, snap, dpkg, pkg-config
 
-## Difference between apt and apt-get + apt-cache:
+## Difference between apt and apt-get + apt-cache
 
+- [reddit](https://www.reddit.com/r/linuxquestions/comments/79x16w/whats_the_difference_between_apt_list_and/)
+  - Traditionally, Debian's APT package manager has been split into several tools, most notably `apt-cache` and `apt-get`. `apt-cache` provides information about packages, but doesn't change the state of the system. `apt-get` does those operations that change something, e.g. install, remove, or update packages.
+  - `apt` combines the most commonly used functionality of `apt-cache` and `apt-get`. So `apt search` does the same as `apt-cache search`, `apt install` does the same as `apt-get install`, etc. Also `apt`'s default settings are a bit different. E.g. it uses colors, shows progress bars, `apt update` tells you if there are packages that can be updated (`apt-get update` doesn't do that), etc.
 - `apt` = most commonly used command options from `apt-get` and `apt-cache` see [here](https://itsfoss.com/apt-vs-apt-get-difference/)
 - So with `apt`, you get all the necessary tools in one place. You won’t be lost under tons of command options. The main aim of `apt` is to provide an efficient way of handling packages in a way "pleasant for end users".
 - `apt`:
@@ -493,13 +496,21 @@ sudo add-apt-repository --remove ppa:whatever/ppa
 
 You can also remove PPAs by deleting the `.list` files from `/etc/apt/sources.list.d` directory.
 
+### Upgrade
+
+| command                      | description                                                                                                        |
+| :--------------------------- | :----------------------------------------------------------------------------------------------------------------- |
+| `sudo apt-get -V -s upgrade` | To see all possible upgrades, run an upgrade in verbose mode and (to be safe) with simulation; press `n` to cancel |
+
 ### Install
 
-| command                                         | description                |
-| :---------------------------------------------- | :------------------------- |
-| `sudo apt install ./name.deb`                   | install a .deb file        |
-| `sudo apt-get install <package name>=<version>` | install a specific version |
-| `sudo apt install --only-upgrade <packagename>` | update `<packagename>`     |
+| command                                         | description                                                                                                                                                                                                                                                                                                    |
+| :---------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sudo apt install <packagename>`                | installs the package (and its dependencies) if it doesn't exist, or upgrades it if it does exist                                                                                                                                                                                                               |
+| `sudo apt -s install <packagename>`             | simulate install to see what would happen if you upgrade/install a package, [askubuntu](https://askubuntu.com/a/1022518)                                                                                                                                                                                       |
+| `sudo apt install ./name.deb`                   | install a `.deb` file (and its dependencies)                                                                                                                                                                                                                                                                   |
+| `sudo apt-get install <package name>=<version>` | install a specific version                                                                                                                                                                                                                                                                                     |
+| `sudo apt install --only-upgrade <packagename>` | update only `<packagename>` <span style="color:red">**without**</span> dependencies (use `apt install` instead), particularly useful when you want to be selective about updates, especially in server environments where you may want to control which packages are upgraded without introducing new software |
 
 ### Uninstall
 
@@ -510,12 +521,19 @@ You can also remove PPAs by deleting the `.list` files from `/etc/apt/sources.li
 | `sudo apt autoremove`         | remove the **dependencies** that are no longer needed                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | `sudo apt --purge autoremove` | remove **systemwide configuration files and the dependencies** that are no longer needed                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 
+### apt show
+
+| command              | description              |
+| :------------------- | :----------------------- |
+| `sudo apt show code` | same as `apt-cache show` |
+
 ### apt-cache
 
-| command                           | description                                                                                                                                       |
-| :-------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `apt-cache policy <package name>` | shows installed package version and also all the available versions in the repository according to the version of Ubuntu in which you are running |
-| `apt-cache search <package_name>` | find specific package names                                                                                                                       |
+| command                          | description                                                                                                                                                                          |
+| :------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `apt-cache policy <packagename>` | shows installed package <span style="color:red">**version**</span> and also all the available versions in the repository according to the version of Ubuntu in which you are running |
+| `apt-cache search <packagename>` | find specific package names                                                                                                                                                          |
+| `sudo apt-cache show code`       | show information about package `code`                                                                                                                                                |
 
 ### apt-mark
 
@@ -536,11 +554,11 @@ You can also remove PPAs by deleting the `.list` files from `/etc/apt/sources.li
 
 ### Basics
 
-| command                         | description                                                             |
-| :------------------------------ | :---------------------------------------------------------------------- |
-| `sudo dpkg -i package_file.deb` | install `package_file.deb` (alternative: `sudo apt install ./name.deb`) |
-| `sudo dpkg -P some_package`     | purge `some_package`                                                    |
-| `sudo dpkg -r some_package`     | remove `some_package`                                                   |
+| command                         | description                                                                                                                     |
+| :------------------------------ | :------------------------------------------------------------------------------------------------------------------------------ |
+| `sudo dpkg -i package_file.deb` | install `package_file.deb` <span style="color:red">**without**</span> dependencies (use `sudo apt install ./name.deb` instead!) |
+| `sudo dpkg -P some_package`     | purge `some_package`                                                                                                            |
+| `sudo dpkg -r some_package`     | remove `some_package`                                                                                                           |
 
 ### Confirm Whether Package Is Already Installed
 

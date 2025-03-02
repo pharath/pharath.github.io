@@ -123,6 +123,7 @@ Shortcuts:
 
 # markdown
 
+- <kbd>space</kbd><kbd>c</kbd><kbd>c</kbd> (toggle line wrap)
 - <kbd>alt</kbd><kbd>i</kbd> (next `# `)
 - <kbd>alt</kbd><kbd>o</kbd>
 - `:LspStop 1 (tailwindcss)` (because the treesitter markdown parser is sufficient)
