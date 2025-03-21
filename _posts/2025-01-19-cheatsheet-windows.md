@@ -15,6 +15,7 @@ tags:
 
 | command                                      | description                                                          |
 | :------------------------------------------- | :------------------------------------------------------------------- |
+| `cmd`                                        | start a new sub-command-prompt in the current command prompt         |
 | `Get-Help command`                           | show help for `command`                                              |
 | `command -Verbose`                           |                                                                      |
 | `rm -Force .\dir\`                           |                                                                      |
@@ -23,6 +24,16 @@ tags:
 | `gci env:`                                   | list all Powershell environment variable names and their values      |
 | `$env:VARIABLE`                              | eg. `%AppData%`: to get the path of `%AppData%` enter `$env:APPDATA` |
 | `cd $env:APPDATA`                            |                                                                      |
+| `pushd`                                      | use `pushd` without a path to list all directories on the stack      |
+| `popd`                                       |                                                                      |
+| `start file`                                 | like `xdg-open file`                                                 |
+
+### find
+
+| command                                                                                                                                                                      | description                                                                                                                   |
+| :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------- |
+| `Get-ChildItem *.foo`                                                                                                                                                        |                                                                                                                               |
+| `Get-ChildItem -Recurse 'C:\Program Files' -Include log4j-core-*.*.[0-9].jar, log4j-core-*.*.[1-9][0-9].jar -ErrorAction SilentlyContinue -Force \| ForEach-Object FullName` | `[1-9][0-9]` matches exactly 2 characters (digits), and also matching just one digit (`[0-9]`) requires an additional pattern |
 
 ### select-string
 
