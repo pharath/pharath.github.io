@@ -27,6 +27,8 @@ tags:
 | `pushd`                                      | use `pushd` without a path to list all directories on the stack      |
 | `popd`                                       |                                                                      |
 | `start file`                                 | like `xdg-open file`                                                 |
+| `powershell .\myscript.ps1 1> outfile.txt`   | Pipe/Redirect the success stream (`1>`)                              |
+| `powershell .\myscript.ps1 *> outfile.txt`   | Pipe/Redirect all streams (`*>`)                                     |
 
 ### find
 
@@ -34,6 +36,19 @@ tags:
 | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------- |
 | `Get-ChildItem *.foo`                                                                                                                                                        |                                                                                                                               |
 | `Get-ChildItem -Recurse 'C:\Program Files' -Include log4j-core-*.*.[0-9].jar, log4j-core-*.*.[1-9][0-9].jar -ErrorAction SilentlyContinue -Force \| ForEach-Object FullName` | `[1-9][0-9]` matches exactly 2 characters (digits), and also matching just one digit (`[0-9]`) requires an additional pattern |
+
+### ls (aka Get-ChildItem)
+
+`ls` is an alias for `Get-ChildItem`.
+
+| command                                                  | description                           |
+| :------------------------------------------------------- | :------------------------------------ |
+| `Get-ChildItem \| Sort-Object LastWriteTime -Descending` |                                       |
+| `ls \| Sort-Object LastWriteTime -Descending`            |                                       |
+| `ls \| sort LastWriteTime -Descending`                   |                                       |
+| `ls \| sort LastAccessTime -Descending`                  |                                       |
+| `ls -File \| sort LastAccessTime -Descending`            | only files (not directories)          |
+| `ls *pattern* \| sort LastAccessTime -Descending`        | only filenames that contain `pattern` |
 
 ### select-string
 
