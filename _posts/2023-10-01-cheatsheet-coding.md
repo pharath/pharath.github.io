@@ -205,6 +205,11 @@ Shortcuts:
 - `:LspStop serverName`
   - eg. to stop tailwindcss server for markdown files (&rarr; [markdown](#markdown))
 
+### pyright
+
+- [configuration: pyrightconfig.json file](https://github.com/microsoft/pyright/blob/main/docs/configuration.md)
+  - virtual environments: see [reddit](https://www.reddit.com/r/neovim/comments/v0wk77/python_virtual_environment_pyright/)
+
 ## lsp_signature.nvim
 
 - shows the function signature in a floating window while typing
@@ -794,8 +799,8 @@ bot summon `:help profile`
   - <kbd>space</kbd><kbd>fon</kbd> (load new session)
   - <kbd>space</kbd><kbd>fsn</kbd> (save new session)
 - tabs
-  - next tab: <kbd>gt</kbd> or <kbd>ctrl</kbd><kbd>P</kbd>ageDown (by default in vim)
-  - previous tab: <kbd>gT</kbd> or <kbd>ctrl</kbd><kbd>P</kbd>ageUp (by default in vim)
+  - next tab: <kbd>gt</kbd> or <kbd>ctrl</kbd><kbd>PageDown</kbd> (by default in vim)
+  - previous tab: <kbd>gT</kbd> or <kbd>ctrl</kbd><kbd>PageUp</kbd> (by default in vim)
   - last accessed tab: <kbd>g</kbd><kbd>tab</kbd> (by default in vim, `:h ctrl-<tab>`)
   - list tabs: `:tabs` (also shows which ones are modified, `:h :tabs`)
 - <kbd>alt</kbd><kbd>h</kbd> and <kbd>alt</kbd><kbd>l</kbd> (switch viewports)

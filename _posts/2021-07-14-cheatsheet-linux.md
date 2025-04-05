@@ -917,9 +917,9 @@ We should escape literal `.` because in regex `.` means any character, unless it
 
 ### nl
 
-| command                    | description                                                                                                                 |
-| :------------------------- | :-------------------------------------------------------------------------------------------------------------------------- |
-| `command \| nl -w2 -s'> '` | add line numbers in front of each line of the output of `command`, [stackexchange](https://unix.stackexchange.com/a/222220) |
+| command                    | description                                                                                                                                         |
+| :------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `command \| nl -w2 -s'> '` | add line numbers in front of each line of the output of `command`, `-w`idth, `-s`eparator, [stackexchange](https://unix.stackexchange.com/a/222220) |
 
 ### tee
 
