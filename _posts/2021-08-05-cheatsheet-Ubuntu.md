@@ -497,6 +497,16 @@ buku --import ~/Downloads/bookmarks27jan24.html
 ```
 
 ```bash
+# buku -S:
+
+# Search bookmarks with ALL the keywords "kernel" and "debugging" in URL, title or tags:
+buku -S kernel debugging
+
+# buku -t:
+
+# whitespaces are considered, eg. in "some tag with whitespaces"
+# minus signs are not considered, eg. in "some - tag - with - minus - signs"
+
 # OR
 buku -t tag1, tag2
 
@@ -507,7 +517,11 @@ buku -t tag1 + tag2
 buku -t tag1 - tagToExclude1, tagToExclude2
 
 # add tags
+# (omitting the "+" removes all tags and replaces them with "newTag")
 buku -t tag1 -s pattern -u --tag + newTag
+
+# remove tags
+buku -t tag1 -s pattern -u --tag - newTag
 
 # print just urls
 buku -t tag1, tag2 -f 1
