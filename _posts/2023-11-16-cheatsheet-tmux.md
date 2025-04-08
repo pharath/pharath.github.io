@@ -121,7 +121,7 @@ source: [reddit.com](https://www.reddit.com/r/neovim/comments/11usepy/how_to_pro
 | :--- | :--- |
 `c-b [` | copy-mode, or (if enabled) [copy-mode-vi](https://dev.to/iggredible/the-easy-way-to-copy-text-in-tmux-319g)
 `space` | start selection
-`arrowkeys` | select
+`arrowkeys` | select (after pressing `space`)
 `enter` | copy selection
 `c-b ]` | paste selection
 
