@@ -30,6 +30,11 @@ tags:
 | `powershell .\myscript.ps1 1> outfile.txt`   | Pipe/Redirect the success stream (`1>`)                              |
 | `powershell .\myscript.ps1 *> outfile.txt`   | Pipe/Redirect all streams (`*>`)                                     |
 
+## Path
+
+- reload `Path` while in Powershell (eg. when `Path` has changed while working in Powershell):
+  - `$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")`
+
 ### find
 
 | command                                                                                                                                                                      | description                                                                                                                   |
