@@ -32,7 +32,7 @@ tags:
 
 ## Path
 
-- reload `Path` while in Powershell (eg. when `Path` has changed while working in Powershell):
+- reload `Path` while in Powershell (eg. when `Path` has changed while working in Powershell, after installing programs, etc.):
   - `$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")`
 
 ### find
