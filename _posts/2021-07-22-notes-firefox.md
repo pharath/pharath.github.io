@@ -43,6 +43,15 @@ Firefox stores your history and bookmarks together in a database file named *pla
 ctrl + shift + i | [Toolbox](https://firefox-source-docs.mozilla.org/devtools-user/tools_toolbox/index.html)
 ctrl + i | page info (i.e. general, media, permissions, security)
 
+# Settings
+
+## Vertical Tabs
+
+[doc: turn-on-vertical-tabs](https://support.mozilla.org/en-US/kb/use-sidebar-access-tools-and-vertical-tabs#w_turn-on-vertical-tabs)
+
+- **hide the vertical tab bar**: use the settings button in the vertical tab bar to hide the vertical tab bar when it is in the collapsed view
+- use <kbd>ctrl</kbd><kbd>alt</kbd><kbd>z</kbd> to collapse/expand the view
+
 # Shortcuts
 
 | command | description |
