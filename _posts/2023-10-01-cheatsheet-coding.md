@@ -435,7 +435,8 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
 
 - [meaning of keymaps (official doc)](https://github.com/jesseduffield/lazygit/blob/master/docs/keybindings/Keybindings_en.md)
 - <kbd>alt</kbd><kbd>enter</kbd> (when writing a commit message: starts a new line)
-- when lazygit spins up the external hard drive so that lazygit lags, open `nvim ~/.config/lazygit/state.yml` and run `:g/^-\ \/media/d` to remove all "recent repo" paths to a git repo on the external hard drive
+- Troubleshooting
+  - when lazygit spins up the external hard drive so that lazygit lags, open `nvim ~/.config/lazygit/state.yml` and run `:g/^-\ \/media/d` to remove all "recent repo" paths to a git repo on the external hard drive
 - start lazygit
   - <kbd>space</kbd> gg (for normal repos)
   - <kbd>space</kbd> gd (for dotfiles repo)
@@ -502,7 +503,7 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
 ### fugitive
 
 - for normal git commands use exclamation mark "`:!git ...`"
-- `:G` (former "Gstatus", press g? to see what you can do)
+- `:G` (former `:Gstatus`, press `g?` to see what you can do)
 - `:G <tab><tab>` to see available commands
 - `:G log`
 - `:G shortlog`

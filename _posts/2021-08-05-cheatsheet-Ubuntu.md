@@ -177,6 +177,16 @@ see [Switch Workspace](https://extensions.gnome.org/extension/1231/switch-worksp
 | :--- | :--- |
 `gnome-terminal --title="TITLE"` |
 
+# Gnome Display Manager (GDM)
+
+- a display manager
+- a graphical login manager
+- for x11 and Wayland (windowing systems)
+
+| command | description |
+| :--- | :--- |
+`sudo systemctl restart gdm.service` | restart GDM (kills the current login session, so that you have to log in again, but some processes keep running, eg. `tmux`, `nohup` processes (eg. `nohup process &`), [disowned background processes](https://www.networkworld.com/article/969269/how-to-keep-processes-running-after-logging-off-in-linux.html), etc.)
+
 # Tracker
 
 see [wiki.ubuntuusers.de](https://wiki.ubuntuusers.de/Tracker/)
