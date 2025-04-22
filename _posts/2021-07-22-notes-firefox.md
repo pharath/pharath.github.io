@@ -97,6 +97,7 @@ So it logs the same sorts of information as the Web Console - network requests, 
 - Grammarly: Grammar Checker and Writing App
 - Fast Tab Switcher
 - Auto Tab Discard by tlintspr
+- Shortkeys (Custom Keyboard Shortcuts) for Firefox
 
 ## Video Downloadhelper CoApp
 
