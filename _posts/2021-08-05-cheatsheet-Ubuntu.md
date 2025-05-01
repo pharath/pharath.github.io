@@ -482,6 +482,10 @@ aplay `/tmp/test-mic.wav`
 - check if the Volume for this video is **enabled** and is **sufficiently high**
 - in addition, check the Volume in the Totem Video App
 
+**Problem 2**: No sound at all (eg. after update)
+
+- `pulseaudio -k && sudo alsa force-reload` ([link](https://askubuntu.com/a/1175014))
+
 # Webcam
 
 ## Troubleshooting
@@ -507,6 +511,16 @@ buku --import ~/Downloads/bookmarks27jan24.html
 ```
 
 ```bash
+# buku -d:
+
+buku -d 15012014
+Index 15012020 moved to 15012014
+
+buku -d
+
+buku -d 100-200
+buku -d 100 15 200
+
 # buku -S:
 
 # Search bookmarks with ALL the keywords "kernel" and "debugging" in URL, title or tags:
