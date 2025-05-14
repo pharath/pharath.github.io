@@ -18,6 +18,7 @@ tags:
 | `cmd`                                        | start a new sub-command-prompt in the current command prompt         |
 | `Get-Help command`                           | show help for `command`                                              |
 | `command -Verbose`                           |                                                                      |
+| `cat file`                                   | print `file` to stdout                                               |
 | `rm -Force .\dir\`                           |                                                                      |
 | `(Get-PSReadLineOption).HistorySavePath`     | to get the path of the Powershell `history.txt`                      |
 | `cat (Get-PSReadLineOption).HistorySavePath` | to print the content of the Powershell `history.txt`                 |
