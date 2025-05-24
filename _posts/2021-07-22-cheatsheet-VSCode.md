@@ -61,6 +61,8 @@ ctrl + n | new file
 
 ## Focus
 
+| command | description |
+| :---: | :---: |
 ctrl + 0 | focus file explorer
 ctrl + 1 | focus editor group 1
 ctrl + 2 | focus editor group 2, usw.
@@ -132,8 +134,8 @@ Symbols next to the filename in each vscode tab:
     - Basics: see "Menu" &rarr; "Run" (Alt + R)
     - Toggle **Debug Console**: ctrl + shift + Y
 
-To get out of `for` loops:
-- "Command Palette" &rarr; "Debug: Run to Cursor"
+- To get out of `for` loops:
+    - "Command Palette" &rarr; "Debug: Run to Cursor"
 
 ## venv
 
