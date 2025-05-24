@@ -16,6 +16,8 @@ tags:
 
 # Setup
 
+## Extensions
+
 - install extensions:
   - Remote-Containers
     - on Ubuntu: only Dev-Containers
@@ -33,6 +35,12 @@ tags:
   - Markdown PDF
     - for md2pdf conversion
 - set "Toggle Vim Mode" command keybinding "ctrl + alt + v" in menu "Manage" (unten links) -> keyboard shortcuts -> search "togglevim"
+
+### Github Copilot
+
+- Copilot Status Menu:
+  - Click on "Toggle Chat" (to right of the vscode search bar) &rarr; "Configure Code Completions ..."
+  - **or**: <kbd>ctrl</kbd><kbd>p</kbd> and then search for "Github Copilot: Open Status Menu"
 
 ## Reset
 
