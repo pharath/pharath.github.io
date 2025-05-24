@@ -69,18 +69,18 @@ tags:
 
 ## Focus
 
-|     command      |                                description                                 |
-| :--------------: | :------------------------------------------------------------------------: |
-|     ctrl + 0     |                            focus file explorer                             |
-|     ctrl + 1     |                            focus editor group 1                            |
-|     ctrl + 2     |                         focus editor group 2, usw.                         |
-|     ctrl + w     | close current editor group (after all tabs in this group have been closed) |
-|     alt + 1      |                  focus first tab in current editor group                   |
-|     alt + 2      |               focus second tab in current editor group, usw.               |
-|     ctrl + j     |           show panel (problems, output, terminal, debug console)           |
-|     ctrl + ö     |                           view: toggle terminal                            |
-| ctrl + shift + y |                         view: toggle debug console                         |
-|     ctrl + b     |                       show side bar (file explorer)                        |
+|         command         |                                description                                 |
+| :---------------------: | :------------------------------------------------------------------------: |
+|        ctrl + 0         |                            focus file explorer                             |
+|        ctrl + 1         |                            focus editor group 1                            |
+|        ctrl + 2         |                         focus editor group 2, usw.                         |
+|        ctrl + w         | close current editor group (after all tabs in this group have been closed) |
+|         alt + 1         |                  focus first tab in current editor group                   |
+|         alt + 2         |               focus second tab in current editor group, usw.               |
+|        ctrl + j         |           show panel (problems, output, terminal, debug console)           |
+| ctrl + shift + backtick |                           view: toggle terminal                            |
+|    ctrl + shift + y     |                         view: toggle debug console                         |
+|        ctrl + b         |                       show side bar (file explorer)                        |
 
 ## Fold
 
