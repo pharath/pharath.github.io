@@ -44,3 +44,4 @@ tags:
 ### winget
 
 - `winget --info` (show where packages are installed/stored)
+- `winget install --id Git.Git -e --source winget`
