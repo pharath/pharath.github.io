@@ -45,3 +45,4 @@ tags:
 
 - `winget --info` (show where packages are installed/stored)
 - `winget install --id Git.Git -e --source winget`
+- `winget install someApp --scope user` (installer should target `user` or `machine` scope)
