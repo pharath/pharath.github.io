@@ -109,15 +109,15 @@ tags:
 - for newly created GitHub repos:
   - When you just created an empty repo on GitHub the repo will not have any branches yet. You cannot track a remote branch with `git branch -u remote/branch` that does not exist on the remote.
 
-| command                                                | description                                                                                   |
-| :----------------------------------------------------- | :-------------------------------------------------------------------------------------------- |
-| `git branch -u upstream/foo`                           | As of Git 1.8.0, make the local branch `foo` track remote branch `foo` from remote `upstream` |
-| `git branch -u upstream/foo foo`                       | if local branch `foo` is not the current branch                                               |
-| `git branch --set-upstream-to=upstream/foo`            | if you like to type longer commands, these are equivalent to the above two                    |
+| command                                                | description                                                                                                                                                                                   |
+| :----------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `git branch -u upstream/foo`                           | As of Git 1.8.0, make the local branch `foo` track remote branch `foo` from remote `upstream`. If you added a new remote, run `git fetch remote` first to get the branches of the new remote. |
+| `git branch -u upstream/foo foo`                       | if local branch `foo` is not the current branch                                                                                                                                               |
+| `git branch --set-upstream-to=upstream/foo`            | if you like to type longer commands, these are equivalent to the above two                                                                                                                    |
 | `git branch --set-upstream-to=upstream/foo foo`        |
-| `git branch --set-upstream foo upstream/foo`           | As of Git 1.7.0 (before 1.8.0)                                                                |
-| `git branch --set-upstream my_branch origin/my_branch` | (similar to `git push --set-upstream origin <new_branch>`)                                    |
-| `git branch --unset-upstream`                          | untrack a branch (eg. to update a branch that is still tracking a deleted branch)             |
+| `git branch --set-upstream foo upstream/foo`           | As of Git 1.7.0 (before 1.8.0)                                                                                                                                                                |
+| `git branch --set-upstream my_branch origin/my_branch` | (similar to `git push --set-upstream origin <new_branch>`)                                                                                                                                    |
+| `git branch --unset-upstream`                          | untrack a branch (eg. to update a branch that is still tracking a deleted branch)                                                                                                             |
 
 related:
 
