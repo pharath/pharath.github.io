@@ -31,7 +31,7 @@ tags:
 | `powershell .\myscript.ps1 1> outfile.txt`   | Pipe/Redirect the success stream (`1>`)                              |
 | `powershell .\myscript.ps1 *> outfile.txt`   | Pipe/Redirect all streams (`*>`)                                     |
 
-## Path
+### Path
 
 - reload `Path` while in Powershell (eg. when `Path` has changed while working in Powershell, after installing programs, etc.):
   - `$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")`
@@ -76,3 +76,18 @@ tags:
 ### winget
 
 - `winget --info` (show where packages are installed/stored)
+
+### Processes
+
+| command                                       | description                                         |
+| :-------------------------------------------- | :-------------------------------------------------- |
+| `Get-Process`                                 | list all processes                                  |
+| `Get-Process  \| Sort-Object CPU -Descending` | list all processes sorted by CPU usage (descending) |
+| `Get-Process \| Get-Member`                   | list all properties of the processes                |
+| `Stop-Process -Name "notepad" -Force`         | forcefully stop the process named `notepad`         |
+| `Stop-Process -Id 1234 -Force`                | forcefully stop the process with ID `1234`          |
+
+## Windows Terminal
+
+- closing a Windows Terminal tab will generally **kill the process running inside** that tab
+
