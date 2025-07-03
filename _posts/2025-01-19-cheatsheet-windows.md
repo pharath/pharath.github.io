@@ -79,6 +79,8 @@ tags:
 
 ### Processes
 
+Press Ctrl + Shift + Esc to open the Task Manager.
+
 | command                                       | description                                         |
 | :-------------------------------------------- | :-------------------------------------------------- |
 | `Get-Process`                                 | list all processes                                  |
