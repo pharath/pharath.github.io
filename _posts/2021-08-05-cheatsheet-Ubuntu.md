@@ -746,3 +746,16 @@ Examples:
     </engine>
 </tool>
 ```
+
+# Latex
+
+First, install
+
+```bash
+sudo apt-get install texlive texstudio
+sudo apt install texlive-science texlive-latex-extra texlive-extra-utils latexmk texlive-publishers texlive-science
+sudo apt-get install texlive-bibtex-extra biber
+```
+
+Then, install the extension `Latex Workshop` in vscode.
+
