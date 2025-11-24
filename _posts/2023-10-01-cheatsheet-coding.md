@@ -124,8 +124,8 @@ Shortcuts:
 # markdown
 
 - <kbd>space</kbd><kbd>c</kbd><kbd>c</kbd> (toggle line wrap)
-- <kbd>alt</kbd><kbd>i</kbd> (next `# `)
-- <kbd>alt</kbd><kbd>o</kbd>
+- <kbd>ctrl</kbd><kbd>n</kbd> (next `# `)
+- <kbd>ctrl</kbd><kbd>p</kbd> (previous `# `)
 - `:LspStop 1 (tailwindcss)` (because the treesitter markdown parser is sufficient)
 - <kbd>alt</kbd><kbd>f</kbd> (insert arrow symbol)
 

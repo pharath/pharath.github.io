@@ -135,6 +135,7 @@ source: [reddit.com](https://www.reddit.com/r/neovim/comments/11usepy/how_to_pro
 `new -s mysession` | Start a new session with the name `mysession`
 `kill-session -t 3` | kill the session with index 3 (ie. this number is in the `c-b w` view the number **without** parentheses next to `# windows`)
 `kill-session -t name` | kill the session with name `name`
+`:set -g mouse on` | enable mouse support in tmux
 
 ### send-keys
 
