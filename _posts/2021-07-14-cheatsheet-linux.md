@@ -15,6 +15,33 @@ tags:
   - cheatsheet
 ---
 
+# Distros
+
+## Market Share
+
+The Linux market features dominant players like **Ubuntu (strong desktop & server)** and **Red Hat Enterprise Linux (RHEL) (enterprise leader)**, alongside popular choices for different users, including **Linux Mint** (beginners), **Fedora** (developers/cutting-edge), **Debian** (stable foundation), **Manjaro/Arch** (customization), and **Pop!_OS** (gaming/creators). While Ubuntu leads general Linux usage, RHEL dominates enterprise, and many niche distros cater to specific needs like security (**Kali**) or simplicity (**MX Linux**).
+
+## Key Market Segments and Top Distros
+
+- General Desktop/Beginners:
+  - **Ubuntu**: Huge community, versatile (desktop, server, IoT), strong for general use, development, and cloud.
+  - **Linux Mint**: User-friendly, great for Windows switchers, stable, and excellent for older hardware.
+  - **Zorin OS**: Polished, designed for Windows/macOS users transitioning.
+  - **MX Linux**: Popular, user-friendly, based on Debian.
+- Enterprise & Servers:
+  - **Red Hat Enterprise Linux (RHEL)**: Market leader in managed servers, strong commercial support, stable.
+  - **SUSE Linux Enterprise Server (SLES)**: Another major enterprise player.
+  - **Ubuntu Server**: Widely used in cloud and web hosting.
+  - **Rocky Linux/AlmaLinux**: Community-supported RHEL alternatives.
+- Developers & Power Users:
+  - **Fedora**: Bleeding-edge, sponsored by Red Hat, great for developers.
+  - **Arch Linux / Manjaro**: Highly customizable, rolling release, advanced users.
+  - **Debian**: The stable, foundational system for many others (like Ubuntu).
+- Specialized/Niche:
+  - **Pop!_OS**: Gaming, creative work, good hardware support.
+  - **Kali Linux / Parrot Security**: Penetration testing, security auditing.
+  - **Tails / Whonix**: Privacy and anonymity.
+
 # Apps
 
 ## system info
