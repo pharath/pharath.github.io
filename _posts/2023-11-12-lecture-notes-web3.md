@@ -208,65 +208,334 @@ available, but it was completely bought over then by Facebook. Wikipedia, Amazon
 - And what we experience now is that somehow also now happening really on a **data sector**. I mean, people become more and more aware that we are completely locked into Microsoft, Google, Apple and all of them. We are completely locked into the system. They're so convenient at the moment they're still cheap to use. We are also locked into ChatGPT. We need a more decentralized approach to that, which is not that easy. I mean, there have been a lot of approaches.
   - Munich, 20 or 30 years ago, they wanted to get rid of Microsoft and they used Linux.
   - I think now it's Schleswig-Holstein who tries to get rid of Microsoft to put everything on Linux and open source software. It's not that easy in the end.
-  - Fraunhofer Gesellschaft there was a big discussion whether we go on Teams or not. Then we had Corona and we got on Teams. So it's often these kind of effects. But this is not a big discussion.
+  - in the Fraunhofer Gesellschaft there was a big discussion whether we go on Teams or not. Then we had Corona and we got on Teams. So it's often these kind of effects. But this is not a big discussion.
 
 ## slide: "Web developments with an impact on digitization" (Seite 26)
 
 - So if we follow this up, **information economy**, **platform economy**, and now we call it **token economy**.
   - Token economy is because tokens are things that we can register on the blockchain and they allow us to associate a value with a token, put it on a blockchain, make it irreversible, transparent, unchangeable, immutable, whatever you like, and that means we can **own** something.
-  - And the technology is the **blockchain**. Here it was the **world wide web**. Here it was suddenly **active server pages** or **CGI scripts**. Now it's the blockchain that brings the new technology behind to **own** something. We're really **writing and owning** something and that makes us from **prosumer** to **prownsumer**.
-- And there's new people coming up on the sky, which is then suddenly **IPFS**. We have this fox which is **Metaverse**, the wallet owner, **OpenSea**, it's a big, big marketplace where you can own, where you can trade assets, NFTs, pictures and the rest.
+  - And the technology is the **blockchain**. Here it was the **world wide web**. Here it was suddenly **active server pages** or **CGI scripts**. Now it's the **blockchain** that brings the new technology behind to **own** something. We're really **writing and owning** something and that makes us from **prosumer** to **prownsumer**.
+- And there's new people coming up on the sky, which is then suddenly
+  - **IPFS**,
+  - we have this fox (image) which is **Metamask**, the wallet owner,
+  - **OpenSea**, it's a big, big marketplace where you can own, where you can trade assets, NFTs, pictures and the rest.
 - And now we talk about **provenance and sustainability**, **authentication**, **automation** and all the rest. So these are the topics we talk about now at the moment.
 
 ## slide: "Essential components of Web3"
 
-- So actually, and there are a lot of things now on this particular slide, the essential components
-of this map three is decentralization. We aim for decentralization, make it as decentralized as
-possible. And I mean, we had already, when we look at peer to peer networks, a lot of this is
-based on peer to peer networks. That's how we're known when peer to peer networks became really
-famous before blockchain. That was the last big hype of peer to peer networks. So I could imagine
-that everybody of you at this time participated in the peer network when you were still at the age
-at that time. I don't know, sharing music was true too. Yeah, sharing music, music sharing,
-Napstar and all the music sharing. That was completely peer to peer based. Everybody was running a
-computer. You had a small server on that one that allowed you to get music stuff from somewhere else.
-That was the origin. And a lot of that is a foundation for blockchain.
-So peer to peer networks, data sharing directly between users without sample servers.
-Now we have.
-Sorry.
-Smart contracts. Yeah, we can have code that is the, that does some kind of automation. We
-learn that smart contracts have nothing to do with legal stuff and that they're not smart,
-not clever, whatever, just some lines of code, nothing more.
-It's tokens and group accountings, which means suddenly we now have some kind of
-representation of assets, whether it's a digital asset, like an image or kind of a coin,
-or some kind of real assets like saying, well, this particular chair is currently being owned
-by the university by just mapping that onto its own. We can build ecosystems now. We can have real
-chains of things. So then I can now have a supply chain. I can say, look, I have a token about the
-original of this particular piece of wood. And this is coming from a forest that is not being
-cut in a rain forest and so on. And that carries along the whole ecosystem. Decentralized apps
-are really based on smart contracts. They have no server. They run completely on the blockchain.
-So it's not this kind of jungle stuff server client or so. It's completely based on the
-blockchain. And we discuss about governance. How do we govern such a blockchain? The question
-that we often ask is who determines what's happening on the blockchain? Is it the user?
-Is it the community? And that's also something that we are going to discuss. So these are things
-that are relevant for the Web 3. And this is what we actually then do within the lecture.
-So after today's very broad introduction into what it's all about,
-the next lecture will come out some kind of foundation. So we talk about hashing public
-and private keys, what is more that and how is Bitcoin actually going to be? We start with
-Bitcoin because it's just interesting to do with, as you learn what the proof of work is,
-why Bitcoin is energy intensive, where bitcoins come from, where are they in mind,
-so the mysteries. And then we also discuss some kind of use cases that can be used in blockchain.
-So foundation is more IT stuff, use case before you discuss some more application stuff,
-some kind of blockchain implementations, because there is not the blockchain, there are a lot of
-different blockchains. And very interesting at the moment are second level chains, so chains that
-are built upon other chains. So we have a hierarchy of blockchains in the meantime,
-which makes it extremely scalable, cheap to use. It's often saying, well, blockchain doesn't cost
-anymore, anything. We talk about that three applications and also the economy of things.
-And when we talk about the economy of things, we talk about weather stations, we talk about
-low-route stations and just the approach to earn money by just operating a weather station.
-And this is going back, you said, really spreading the benefit of something equally. And this comes
-back to that. That you own something, you own a device, and this device is producing data and you
-are being paid by sharing this data with other people. And that delivers tokens to you, which are
-extra kind of data. Okay, so now you can get your first talk. This is something
-which is a so-called pro-app, pro-app stands for proof of attendance protocol.
-Proof of attendance protocol means that you can prove that you have been here. And we are to do
-it.
+- So actually, and there are a lot of things now on this particular slide
+- the essential component of this Web3 is **decentralization**. We aim for decentralization. Make it as decentralized as possible. And I mean, we had already, when we look at **peer to peer networks**, a lot of this is based on peer to peer networks. Does someone know when peer to peer networks became really famous, before blockchain? That was the last big hype of peer to peer networks. I could imagine that everybody of you at this time participated in a peer to peer network when you were still at the age at that time.
+  - student: I don't know, sharing music.
+    - prof: Yeah, sharing music, music sharing, Napster and all the music sharing. That was completely peer to peer based. Everybody was running a computer. You had a small server on that one that allowed you to get music stuff from somewhere else.
+  - student: Torrent?
+    - prof: Torrent is peer to peer, yeah. That was the origin. And a lot of that is a foundation for blockchain. So peer to peer networks, data sharing directly between users **without central servers**. ... Napster was illegal.
+- **Smart contracts**.
+  - Yeah, we can have code that does some kind of **automation**. We learn that smart contracts have nothing to do with legal stuff and that they're not smart, not clever, whatever, **just some lines of code**, nothing more.
+- **tokens and cryptocurrencies**,
+  - which means suddenly we now have some kind of **representation of assets**, whether it's
+    - a **digital asset**, like an image or a kind of a coin, or
+    - some kind of **real assets** like saying, well, this particular chair is currently being owned by the university by just mapping that onto the token.
+- We can **build ecosystems** now.
+  - We can have real **chains of things**. So I can now have a **supply chain**. I can say, look, I have a token about the origin of this particular piece of wood. And this is coming from a forest that is not being cut in a rainforest and so on. And that carries along the whole ecosystem.
+- **Decentralized apps**
+  - are really **based on smart contracts**. They have **no server**. They **run completely on the blockchain**. So it's not this kind of Django (back-end server side web framework) stuff, server-client or so. It's completely based on the blockchain.
+- And we discuss about **governance**.
+  - How do we govern such a blockchain?
+  - The question that you often ask is "who determines what's happening on the blockchain?". Is it the user? Is it the community? And that's also something that we are going to discuss.
+- So these are things that are relevant for the Web3.
+
+## slide: "Lecture Objective"
+
+- And this is what we actually then do within the lecture.
+- So after today's very broad introduction into what it's all about, the next lecture will cover some kind of foundation.
+- So we talk about
+  - hashing,
+  - public and private keys,
+  - what is a **wallet** and
+  - how is **Bitcoin** actually working?
+    - We start with Bitcoin because it's just requested to deal with, and
+  - you learn what the **proof of work** is,
+    - why Bitcoin is **energy intensive**,
+    - where bitcoins come from,
+    - where are they being **mined**,
+    - so the big mysteries.
+  - And then we also discuss some kind of **use cases** that can be on the blockchain.
+    - So foundations is more IT stuff, and then use cases before we discuss some more application stuff,
+  - some kind of **blockchain implementations**,
+    - because there is not "the" blockchain, there are a lot of different blockchains.
+  - And very interesting at the moment are **second level chains**,
+    - so chains that are built upon other chains. So we have a hierarchy of blockchains in the meantime, which makes it extremely scalable, cheap to use, often saying, well, blockchain doesn't cost anymore anything.
+  - We talk about **Web3 applications**
+  - and also the **economy of things**.
+    - And when we talk about the economy of things, we talk about **weather stations**, we talk about **LoRaWAN (a network protocol, long range wide-area networking) stations** and just the approach to earn money by just operating a weather station. And this is going back, you said, really spreading the benefit of something equally. And this comes back to that. That you own something, you own a device, and this device is producing data and you are being paid by sharing this data with other people. And that delivers tokens to you, which are extra kind of data.
+
+## POAPs
+
+- Okay, so now you can get your first **token**. This is something which is a so-called **POAP**, POAP stands for **"proof of attendance protocol"**. Proof of attendance protocol means that you can **prove that you have been here**.
+
+...
+
+- I have met Wolfgang and then we meet each other and when you also collect POAPs you just scan this and then you have **proof that you have met me**.
+- So it sounds strange.
+- **What is it good for?**
+  - We are already getting into the discussion on applications.
+  - On the one hand it's just nice. We just **collect** a lot of things.
+  - So on the other hand what I have now is a **collection**.
+    - So maybe you are not gonna see it, but that's a collection of all the POAPs that I got. So it's like a **sticker book**. It's my digital sticker book. No value. But, we can **associate value with that**.
+    - So I got, for example, from some companies I got the sticker, I got stickers from some people from Bayer. Bayer is using it heavily. So Bayer is a pharmaceutical company. They use it for all the seminars. So when you participate in a particular seminar you get it and they just use it as a proof that you have been there. It's kind of a certificate.
+    - But what I could also do is, this was just a proof of the attendency that you have been there. Next time what I can do is that I ask a very difficult question and the clever boy or girl of you who is answering it, I just show him the QR code, he scans it or she scans it and then you get the **POAP for answering the most difficult question** in the web3 lecture.
+- Next thing is that I say, OK, I would like to **get you some goodies for those of you who have participated in the lecture 90% of all the time**. For those, they **get access to a particular web page where you find some very important information for the exam**. So how do you get there? You have to look in with your wallet. Then by accessing this, you provide your address, your wallet address, your identity. I can check with the program that you have at least eight of ten POAPs and then I give you access to the web page. So, this is then called **"token-gated access"**. You get access to something because you have a token. Sometimes people do that at a fare. If you have a VIP pass, you get a coffee if not you're outside.
+- With **NFTs**, it's already a story for another lecture, but with NFTs, people have entrance to a particular concert.
+  - By having a certain kind of NFT, you could participate in a concert of a famous rock star. It's like an entrance ticket. It's like a certificate. That's only available for those.
+- Also, something is that this POAP, as I said, **you can copy it** and publish it on Twitter or whatever and then even somebody in Russia, for example, could just take this POAP and claim that he participated in this lecture.
+  - solution: One thing is that they can be **rolling**. It's a website. It's not just a copy of that one. And you have to hurry up because after four o'clock, they are no longer valid. So if you copy it after four o'clock, it says the event is over. Sorry.
+  - So all these things are possible. But you have a question?
+    - student: Yeah, I know you answered already. I was like, okay, that's cool and all, but what if I'm staying at home and someone from here just sends me a picture?
+      - prof: That's possible. And I think in one of the next lectures, we just do it as an exercise, to create POAPs for some for the other ones. Or we just do it here together just to create one so that you see how it works. It's not that difficult. I think it's a nice stuff.
+- There has been some kind of **hype** around it. At the moment, it's going a little bit down. There was a big, big discussion about POAPs. Even Vitalik Buterin, who is founder of the Ethereum blockchain, he promoted it, having this whole idea of indicating that you have been somewhere by getting such a POAP.
+- So I really recommend downloading the **app** because then it's much easier and then in the app you can collect all the NFTs of the lecture. So you have a lecture collection.
+  - student: I saw that the app basically just manages your wallet for you. You have your wallet. But technically you can use **Metamask** for example, if you have that address in the wallet.
+    - prof: Yeah, you can do so. **Metamask** is really clumsy in the end. But if you use Coinbase, Coinbase can understand, if you use for the POAP the same address that you also have registered in the Coinbase wallet, the same public address, then Coinbase will list all the POAPs. Then suddenly they pop up also in the Coinbase wallet. So there's a lot of interoperability in the new app. So all that is possible there. Yeah, good.
+
+## org
+
+- Okay, so what's all about the lecture Wednesday, tutorials bi-weekly.
+So next lecture you will get some kind of an exam, I don't know, exam, like access time.
+And then we'll discuss it the next week.
+There is Moodle, there's a Moodle space.
+There are upload slides, these slides, and there are also other kinds of material.
+And other kinds of readings and material.
+And during the course I will also announce the time for the final written exam.
+And if you pass the exam, you may also get it.
+
+## student questions
+
+On the Arbettian Arc and the lectures until the...
+Yeah, it's just... I think we wouldn't need all the time.
+Sometimes I may stop the lecture in the area.
+It's how it's fluent. So we just stop the lecture and then if you like you can get something to train out of the rest of the lecture.
+What would be possible to upload the slides before lecture?
+Yeah, can use all that.
+Thank you.
+The good thing is, or the bad thing is, I'm not here next week.
+So next week is cancer.
+There are a lot of professors who are not here next week.
+I mean normally the lectures often start only next week.
+But I thought, well, let's start because if I skip it two times...
+There are an exam admission.
+Sorry again.
+There is an exam admission.
+In 10-4 hours.
+Yeah, in 10-4 hours.
+Oh, Bitcoin?
+No.
+That's an exam admission for example.
+Yeah, any questions?
+Are there homeworks that we have to do?
+Yeah, homeworks. That's what I call for the exercises.
+So that was the exam homework.
+And this will be maybe sometimes to read something.
+That's really a bit of a lie and such that we can discuss it.
+Maybe watch a video on programmes for our country.
+Things like that.
+Or just some other kind of programming.
+The exercises, for example in some courses, they come towards some bonus points.
+Yeah, I have to think about that.
+I know that I gave this lecture in the past and she has to go to Stomach's house and he retired at the meantime.
+And she did that and that very often led to some strange situations in the end.
+I think there will be at least a few submissions.
+So, two submissions of the homework.
+But not to attend the exam.
+Yes, to attend the exam.
+Okay, then that's the prerequisite for the exam.
+Yeah, it doesn't count for the exam.
+Yeah, so the exam is the exam.
+That's a cat in my mind.
+
+prof: Yeah, a programming. Are you all capable of programming.
+student: What language?
+How will?
+Well, I mean, it's sometimes interesting just to do some kind of...
+I mean, it will be somehow a must when we talk about smart contracts because they are a good program.
+And you're a computer scientist, so I hope that you can at least deliver the program.
+Maybe for one or two homeworks it's just that you access an API, you get some data and you realize it's a good one.
+Well, I mean, actually sometimes...
+I mean, we have some difficulty at the most.
+I give you a task to access an API and to write some kind of output in Python from writing a good prompt solves the problem.
+I know that. That's how it's what I'm doing.
+So, why should we use it?
+Nevertheless, it's good to do it because at least you see what's going on.
+Or when you talk about the **interplanetary file system**, the **IPFS**, which is very counterpart to the blockchain and used for a lot of use cases.
+It's also something...
+I mean, understanding what it's all about.
+Sometimes it's easier to discuss with the chatGPT you can do instead of reading a paper.
+Nevertheless, I think you should at least know some of the basics how research actually goes.
+And if you would like to produce code and an exercise is chatGPT you can do fine.
+I don't care about this.
+Because actually it's the process that is what you learn and the result.
+
+## POAPs
+
+- Ah, still, with POAPs, they also form some kind of **social network**.
+  - Now, once you got your first POAP and once you have really registered your existence, so you got a wallet and an identity, you can see how many people own this particular POAP here. And then you see those people who own this POAP. Which other POAPs do they own? And then you will see that there's one user who owns a lot of other POAPs, which is me. Which is then actually a nice indication of a **social network**. Suddenly you get a social network of people who have been present at a certain location or at a certain event.
+  - And we did a master thesis on that. That someone just pulled all the data. He really retrieves all the data from the POAP system. He completely retrieved it and then he made some nice **social graphs** on one of the most famous events. And you will see some kind of basics there. We will discuss it later on.
+- But you can check now to see what's happening with this particular POAP here.
+- student: Could you show it again?
+  - prof: Yeah, I can show it again.
+- So what it says is, it says one out of eight. So it says eight people have collected. You and 27 more were there. So at least 26 people did this. And the cool thing is most of you can already see there.
+- So there are already a lot of people who collected it with an address. So not just collected it with an e-mail address, but collected it already with an address. So we have eight **mints**. Minutes means you really **minted** it. You have a public address and you minted it to your address. And you have 20 e-mail reservations, which means 20 people just reserved it by e-mail. And as soon as you download the **wallet**, the app, and register it, then your e-mail reservation becomes a **mint**.
+- And that is also what the student analyzed. What is the ratio normally? So if I do this, for example, at a business conference, you have business people sitting there and really to get this into the head that there is something they should look that, for example, for audio systems or things like that, they normally scan it and then you see e-mail reservation. And the turnover from an e-mail reservation to a real mint is a factor really on how Web3 are you. So if after the whole lecture, there are still 20 e-mail reservations, so in three months, I did something wrong. So I didn't convince you to go into this direction.
+
+## student questions
+
+student: Do we have to download the app?
+Is it necessary to download the app?
+It's necessary to download the app.
+Because with the app, you actually get an ID, an identity.
+You get a key.
+So we do need the theorem wallet in the app, right?
+You need the poor wallet.
+Just the poor wallet.
+But you could also associate it later on with the theorem.
+Because the e-mail set the poor wallet.
+Yeah, maybe then they changed something.
+I did it about several years ago.
+How does this registration?
+Which registration?
+For the **minting**.
+prof: The minting. We discuss next time.
+Ah, okay.
+Because this means that really the token is generated and things like that.
+So if you have this minted on it, we have these options.
+Different options.
+Ah, okay.
+prof: **Minting** means that you really mint it to your wallet.
+Ah, we need to connect to the token.
+Yeah.
+Sven?
+Yeah.
+Can you also see how many people have minted the very clear in all those coins?
+Yeah, that's at least what I think here is that we have eight mints.
+At least these people have been walleted.
+Can you see how many theorem points are connected to that?
+Oh, but you have to read them.
+So, yeah.
+Something else.
+I wanted to highlight.
+No, it's gone.
+
+## org
+
+For the next course which will be on today, will we have a exercise for then?
+Sorry, no, it's coming to the game then.
+We'll have exercises to do for the next one.
+No, for the next one.
+And next week there is no lecture.
+I also have a question about the lecture.
+Like it was the other page, like it was online.
+It changed from 5 to 4.
+Can you verify it?
+Like is it like 4 pages for the course?
+Oh, I have to check.
+Yeah.
+Since it's a two lecture, two lecture, one hour exercise lecture.
+So it's a 2.1.
+Some of us have to check how much it works.
+So currently it's like 14 minutes.
+This is far could be.
+I can't see the tutorial.
+No, on the calendar I couldn't.
+I will announce them.
+Okay, and there is a location for the tutorial.
+Sorry, again, location.
+Oh, here.
+I'll give you all the details.
+
+## Blockchain Club
+
+Yeah, and if you...
+Ah, that's all right.
+Just in case that you think you would also spend some kind of free time.
+Who is this?
+You are there?
+I'm actually at the club for a year now.
+Yeah, you are Mr. Fahram.
+I look, you are.
+There are some students of mine who founded it.
+And some others who have been associated with us.
+Actually, everyone has told me about the course.
+Yeah, he is working with us.
+Because I think he is the chair of...
+Mike.
+Mike was a student of mine in the prosimina.
+Then he did the bachelor thesis.
+And he was a good teacher.
+Yeah, yeah, he finished.
+He just did this master thesis.
+So what they do is they organize a lot of different events.
+So they organize a lot of different events.
+I advise.
+There is a lot of free food all the time.
+They have free food from some of the blockchain companies.
+So there is a lot of funds.
+It's also really good for networking.
+So a lot of people who actually are from the club,
+just do positions in the club.
+They get internships in companies or even companies that are interested in them.
+Just from conferences, networking and stuff like this.
+So it could be a really nice entry like gateway into blockchain in Germany.
+So for example, I'm going next week to a Solana hackathon just through the club.
+So even though I don't know much,
+it's just a little bit through signing up to the club.
+Yeah, so the hackathon is...
+Okay, that's unfortunately just in German.
+That's the homepage of our particular project here.
+And there you will...
+It's in German because it's addressing German companies basically.
+But there are also events and some other things that you can look up there.
+The show on demonstration.
+I will upload more information about places to go or places to go or to see during the next one.
+
+## org
+
+The first tutorial is going to be in two weeks, right?
+Not the tutorial, no?
+In two weeks we have a lecture and then I will give you some homework and then we have to talk.
+The first one will be earliest in three weeks.
+Okay.
+
+## Blockchain Club
+
+Well, I think we're doing onboarding in two or three weeks and we only do it once a year.
+So if people really want to join, I think it's the chance to work like that.
+I'm not sure. You can't write something in Google, can you?
+Me? I don't know.
+Otherwise you can just send a message to me about something that is interesting and then I can just put it up on Google.
+Sure.
+There are a lot of hackathons in this area.
+It's really the case that all these business, all these blockchain companies, they really have a lot of money.
+They really have a lot of money because they earn a lot of money and they really put it back into the community
+because they want to raise it.
+Zolana is not doing that for free. They want to have good students and they want to have advertisers.
+That's why you get to put something.
+The price pool is 500,000.
+Actually, friends of mine that I took my first blockchain course, they attended the hackathon and they won 20,000 US dollars.
+Also here, they also participate in the hackathon, so they also put back this first price.
+So there's a lot of money.
+But normally you won't get it in euros, you get it in tokens.
+So you have to have a wallet to get it back.
+The last month we did actually two events with like 1,500 dollars price pool and another one of those.
+So there's always money. I'm surprised. It's a student club, but like...
+
+prof: That's also something. If you come up with some kind of hackathon, I'm really free that we do this as some kind of tutorial.
+So if you come up, like you say, well, there was a hackathon in January or December or late November,
+otherwise it's late, and that's the following topic.
+I'm really happy that we spend, for example, one lecture on just discussing that.
+Not discussing this so that I can provide some input and they have some wisdom of the crowds to say,
+well, what kind of application could be better there?
+So I was really open for that one.
+Okay, so then thanks for participating in the first lecture.
+I hope to see you then in the next one.
+Yeah, yeah.
+Yeah.
+Yeah.
