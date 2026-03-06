@@ -19,7 +19,7 @@ tags:
 
 ## Market Share
 
-The Linux market features dominant players like **Ubuntu (strong desktop & server)** and **Red Hat Enterprise Linux (RHEL) (enterprise leader)**, alongside popular choices for different users, including **Linux Mint** (beginners), **Fedora** (developers/cutting-edge), **Debian** (stable foundation), **Manjaro/Arch** (customization), and **Pop!_OS** (gaming/creators). While Ubuntu leads general Linux usage, RHEL dominates enterprise, and many niche distros cater to specific needs like security (**Kali**) or simplicity (**MX Linux**).
+The Linux market features dominant players like **Ubuntu (strong desktop & server)** and **Red Hat Enterprise Linux (RHEL) (enterprise leader)**, alongside popular choices for different users, including **Linux Mint** (beginners), **Fedora** (developers/cutting-edge), **Debian** (stable foundation), **Manjaro/Arch** (customization), and **Pop!\_OS** (gaming/creators). While Ubuntu leads general Linux usage, RHEL dominates enterprise, and many niche distros cater to specific needs like security (**Kali**) or simplicity (**MX Linux**).
 
 ## Key Market Segments and Top Distros
 
@@ -38,7 +38,7 @@ The Linux market features dominant players like **Ubuntu (strong desktop & serve
   - **Arch Linux / Manjaro**: Highly customizable, rolling release, advanced users.
   - **Debian**: The stable, foundational system for many others (like Ubuntu).
 - Specialized/Niche:
-  - **Pop!_OS**: Gaming, creative work, good hardware support.
+  - **Pop!\_OS**: Gaming, creative work, good hardware support.
   - **Kali Linux / Parrot Security**: Penetration testing, security auditing.
   - **Tails / Whonix**: Privacy and anonymity.
 
@@ -796,6 +796,7 @@ Change the title of the current terminal: `echo -ne "\033]0;SOME TITLE HERE\007"
 | `find . -iname "searchPattern" -print0 \| xargs -0 du -sh`                               | show the size of each found file                                                                                                                                                                                                                                                                           |
 | `find . -iname "searchPattern" -exec rm -v "{}" \+`                                      | remove the found files; from `man find`: `-exec`: "The specified command is run once for each matched file."; `+`: best explanation: [stackoverflow](https://stackoverflow.com/a/6085237)                                                                                                                  |
 | `find path_A -name '*AAA*' -exec mv -t path_B "{}" \+`                                   | move the found files                                                                                                                                                                                                                                                                                       |
+| `find . -maxdepth 1 -type f -print0 \| xargs -0 sed -i 's/ /\n/g'`                       | replace all spaces with new lines for all files in the current directory                                                                                                                                                                                                                                   |
 
 ### locate
 
@@ -1011,6 +1012,7 @@ We should escape literal `.` because in regex `.` means any character, unless it
 | `sed 's/$/ pattern/' filename`                    | appending `pattern` to end of a line                                                                                                                                                                                                                                                                                                                                                                        |
 | `sed '/Fred Flintstone/ s/$/ pattern/' filename`  | append only to lines containing a specific string                                                                                                                                                                                                                                                                                                                                                           |
 | `sed '/pattern/{G;}' filename`                    | add a newline after a pattern                                                                                                                                                                                                                                                                                                                                                                               |
+| `sed -i 's/ /\n/g' filename`                      | `-i`: edit files in place, replace all spaces with new lines                                                                                                                                                                                                                                                                                                                                                |
 
 ### tr
 
@@ -1394,6 +1396,33 @@ $ du --help
 | `wget -A pdf,jpg -m -p -E -k -K -np http://site/path/`                                                                                 | get all pdfs and jpgs from site                                                                                                                                                               |
 | `wget --accept pdf,jpg --mirror --page-requisites --adjust-extension --convert-links --backup-converted --no-parent http://site/path/` | same as above using long option names                                                                                                                                                         |
 | `curl -s https://checkip.amazonaws.com`                                                                                                | `-s` für silent                                                                                                                                                                               |
+| `wget -i text_file.txt`                                                                                                                | Read URLs from a local or external file. If `-` is specified as file, URLs are read from the standard input.                                                                                  |
+| `wget --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64)" -i input_dl_links.txt`                                                  | Spoof a browser User-Agent                                                                                                                                                                    |
+
+## Troubleshooting
+
+```
+wget "HTTP request sent, awaiting response... 403 Forbidden" when downloading jpg image
+```
+
+A `403 Forbidden` error in `wget` when downloading a JPG usually means the server is **blocking your request**, not that the file doesn’t exist.
+
+This commonly happens because:
+
+- The server blocks non-browser user agents
+- The request is missing a Referer header
+- Hotlink protection is enabled
+- Authentication (cookies/login) is required
+- The URL is temporary or expired
+
+**Fix**: Spoof a browser User-Agent (most common fix)
+
+Many sites block default `wget` agents.
+
+```bash
+wget --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64)" \
+"https://example.com/image.jpg"
+```
 
 # gpg, apt-key
 
