@@ -329,189 +329,225 @@ That's actually what they say.
 
 Okay, so the other thing was **e-gold**.
 That was something, and that was at the end really killed by money laundering.
-And what they did is that users transfer fiat, normal money, yeah, euros or dollars or whatever, to e-gold.
-Or they just provided e-gold.
+And what they did is that users transfer fiat, normal money, yeah, euros or dollars or whatever, to e-gold
+or they just provided e-gold.
 Yeah.
 And then they topped up an internal balance.
 So you say, well, I want to have 100 euros in e-gold.
-What they do is they buy some gold in the value of 100 euros.
-They put it in a safe and then you get e-gold, digital e-gold in your wallet for 100 euros.
+What they do is, they buy some gold with the value of 100 euros,
+they put it in a safe and then you get e-gold, digital e-gold in your wallet for 100 euros.
 And then when you do some kind of internal transfer, yeah, so if Alice does something to Bob,
 then the e-gold reduces Alice's balance and increases Bob's balance and that's an immediate credit effect.
-So they just do this internal, you know, I mean you can do this in a relational database that we use.
-No, that's not a problem at all.
-And in the end, when you want to get then this kind of is Bob then has 100 e-gold,
+So they just do this internally, I mean you can do this in a relational database that we use.
+That's not a problem at all.
+And in the end, if Bob then has 100 e-gold,
 and he wants to get it into dollars, then they pay it in 100 dollars,
 and then they remove the gold or put it somewhere away because then they have left, let's say,
-only 900 e-gold left and they put 100 e-gold or gold in the value of 100 e-gold that they sell it.
-So it was actually something backing this to Mr. Gold standard.
-What we learned at the beginning, where the ideal was every dollar is backed up with one appropriate amount of gold.
+only 900 e-gold left and they put 100 e-gold or gold in the value of a 100 e-gold and they sell it.
+
+So it was actually something backing this to the gold standard.
+What we learned at the beginning, where the idea was every dollar is backed up with the appropriate amount of gold.
 And here it was just done in a similar way, but they also had this kind of e-gold and that was used because it was sometimes
-misused with money laundering, with all closed arms, or they shut it all down and there was no longer a follow-up.
-And it was a very centralized process. You had to trust them, you have to completely trust them.
+misused with money laundering, it was all closed down, so they shut it all down and there was no longer a follow-up.
+And it was a very centralized process. You had to trust them, you had to completely trust them.
 That has nothing to do with decentralization.
+
+## slide: Hashcash
+
 But now we come to something that is really interesting because this is actually a foundation of the proof of work in blockchain
-and that was called hash-cache. And that is something you can actually say that the most prominent feature of blockchain is originates in spam email.
-Yeah, it's so strange, but that's the funny thing to remember. The motivation was the reduction of spam emails.
+and that was called **Hashcash**. You can actually say that the most prominent feature of blockchain originates in **spam email**.
+Yeah, it's so strange, but that's the funny thing to remember. The **motivation** was the **reduction of spam emails**.
 So when I started working in our institute, we were working on email actually.
-We had the first email system in Europe, distributed email system running in Europe.
-And so we were very early email users and at the beginning you looked up your email client once a day and you were disappointed that there were no emails.
-Because there were not many people sending your email. And there were still discussions at this point in time with every person having an email address.
-No, probably not. Maybe one for a company. You all know what's happening and that we are just flooded with email. That's the way to follow.
-And the idea of hash-cache was to say, well, the senders must prove that they have invested computing power before sending the email.
-So the border to send email or the hurdle to send email must be very high.
-Because normally when you send postal advertisements, you have to pay the post office. You have to put a stamp on it. It costs you money.
-Sending around a thousand emails costs you nothing. Unless in the end you are blacklisted. But it costs you nothing.
-And the idea was we have to provide some proof that people invested something. And that was done in the following way.
+We had the first email system in Europe running, distributed email system running in Europe
+and so we were very early email users and at the beginning you looked up your email client once a day and you were disappointed that there were no emails
+because there were not many people sending you emails. And there were still discussions at this point in time "will every person have an email address?",
+no, probably not. Maybe one for a company. You all know what's happening and that we are just flooded with email. That's the big problem.
+
+And the idea of Hashcash was to say, well, the senders must prove that they have invested computing power before sending the email.
+So the border to send email or the hurdle to send email must be very high,
+because normally when you send postal advertisements, you have to pay the post office. You have to put a stamp on it. It costs you money.
+Sending around a thousand emails costs you nothing, unless in the end you are blacklisted, but it costs you nothing.
+And the idea was we have to provide some proof that people invested something. And that was done in the following way:
+
 So the sender had to solve a puzzle before sending the email and to send the result of the puzzle as a stamp to the email.
-And the puzzle was actually in the following. They had the following format. That was the actual stamp. And the stamp had this format.
-There was one. That was the version number. Hash-cache version one. They didn't actually claim the version two. But hash-cache version one.
-Then the difficulty, how difficult was the puzzle to solve? That's the 20. Then the date. So 26th of October, 25.
-Then the sender, Alice at example.com. Then a random number, which is this, which is actually just a hash of this.
-So this year it was just being created by that. So this changes constantly because internally they don't use just the date.
-They also use time in milliseconds. So hashing that results into that. And then they said, okay, now this is something we can compute easily.
-But now we have to find a solution. We have to find a number. That in combination with this provides us another number that has at least 20 zeros at the beginning.
-And they did this with hashing. So what they did is they hashed this in combination with that.
-And the resulting hash should have at least 20. That was the difficulty. 20 zeros at the beginning.
-But now I'm thinking correctly. Is the same effort involved in sending the thing to one recipient or to 200 recipients, right?
-Yeah, in some sense. But since you get every email, you send every email in another millisecond, the time will change.
+And the puzzle was actually in the following. They had the following format. That was the actual stamp. And the stamp had this format:
+
+- There was `1` that was the version number. Hashcash version one. They didn't actually come to version two. But Hashcash version one.
+- Then the difficulty, how difficult was the puzzle to solve? That's the `20`.
+- Then the date `251026`, So 26th of October, 2025.
+- Then the sender, `alice@example.com`.
+- Then a random number, which is this `30f64fbb`, which is actually just a hash of this `1:20:251026:alice@example.com`.
+  - So this `30f64fbb` here is just being created by that `1:20:251026:alice@example.com`. So this changes constantly because internally they don't use just the date, but they also use time in milliseconds. So hashing that `1:20:251026:alice@example.com` results into that `30f64fbb`.
+    - phth: ChatGPT:
+      - **The random value** could technically be **derived from earlier header fields**.
+      - But doing so would reduce security because tokens could become predictable or reusable.
+      - Therefore, in Hashcash the rand field is normally generated using independent randomness.
+-  And then they said, okay, now this `1:20:251026:alice@example.com::30f64fbb:` is something we can compute easily. But now we have to find a solution. We have to find a number, that in combination with this `1:20:251026:alice@example.com::30f64fbb:` provides us another number that has at least 20 zeros at the beginning. And they did this with hashing. So what they did is they hashed this `1:20:251026:alice@example.com::30f64fbb:` in combination with that `378923`. And the resulting hash should have at least 20 (that was the difficulty) zeros at the beginning.
+
+student1: There is the same effort involved in sending the thing to one recipient or to 100 recipients, right?
+
+prof: Yeah, in some sense. But since you get every email, you send every email in another millisecond, the time will change.
 And therefore the random number changes. So in order to get there, we need to have a look at hashes.
-Sorry, maybe a very security question. But how do you ensure when hashing the version could be at sender, you have to write a number.
-And then again, with the solution that you have, one in zeros.
-I have a demo for that.
-Just about hashes. You're all aware of how a hash works. So if not just go here to this hash generator.de and then you provide some kind of ABC.
-And then you hash it down here.
+
+student2: Sorry, maybe a security question. But how do you ensure when hashing the version and the sender with the random number
+and then again with the solution that you have twenty zeros in front?
+
+prof: I have a demo for that.
+
+Just about hashes. You're all aware of how a hash works. So if not just go here to this `hashgenerator.de` and then you provide some kind of `ABC`
+and then you hash it down here and then you see the result.
 And the feature of this kind of hashes is that when we just change a little bit of that, the whole result changes.
-So here.
-So we would just say here ABC. You see that the hash of ABC is this and the hash of ABC is this.
-So the hash of ABC is this one. And now the whole can just enlarge it.
+So we would just say here `ABC`. You see that the hash of `ABC` is this, eg. uppercase or lowercase etc.
 That's the whole thing of hashes. And now what I can do now is that I just say, okay, let's say that's my stamp.
-So it's one. We need, well, let's say at least two zeros at the beginning.
-And today is the 251113.
-And use Alice at example.com.
-And what we've not now also do is we use another the hash that we put it behind that let's avoid that at the moment.
-We now need just to find the number that provides us a hash down there, which starts as a zero.
-And now we have. So five.
-Five ones provides us with this illusion that we have one zero.
+So it's one. We need, let's say at least two zeros at the beginning.
+And today is the `251113`.
+And we use `alice@example.com`.
+And what we now also do is we hash that and we put it behind that, let's avoid that at the moment.
+We now need just to find a number that provides us a hash down there, which starts with a zero.
+And now I can just type in. And now we have it.
+Five ones provides us with the solution that we have one zero down here.
 So that was easily done.
-Yeah, but as I said, there is just a demo here and I just provided with a simple proof of work.
-And it's here we have the email address and we have the difficulty in bits.
+
+Yeah, but as I said, we have a demo here, it is a simple proof of work demo.
+So we have `alice` here, we have the email address and we have the difficulty in bits.
 And now I say, okay, try to find it and you found it.
-You now have your stamp.
-And you can enlarge it so that also you can see.
-So here we have version number one, we have 13 as a difficulty.
+You now have the stamp.
+So here we have this version number one, we have `13` as a difficulty.
 That's the date of today. That's the email address.
-That's the random number, which is just a hash of that and a short and cash.
-So they just use that here in a way that changes constantly when we bring the new one.
+That's the random number, which is just a hash of that and a shortened cash.
+So they just use that here in a way that changes constantly when we produce a new one.
 And we used 27,361 tries to find the number such that at the beginning we have 13 bits.
-So now you see just three zeros. This is by this corresponds to.
-So anything play around with that now and we just increase that.
+So now here you see just three zeros. This is byte and this corresponds then to this.
+So if you play around with that now and we just increase that.
 And we say, okay, let's go up once. Let's go to 20.
-And now we create the hash cash stamp.
-I know now we use already thought almost 500,000 tries.
-Yeah, let's be careful there.
-No, no, it's comes in more digital.
-So we need a lot of tries to find the number that is in combination eight seconds.
+And now we create the Hashcash stamp.
+Now we used already over 500,000 tries.
+Yeah, let's increase it further on.
+Now it becomes even more difficult.
+So we need a lot of tries to find the number that is the combination, eight seconds,
 Yeah, and now we have 5 million.
 So you did 5 million tries.
-So the number of 5 million 67,000 is then the number such that you get 23 zeros, which corresponds to 5.
-And this now the original way just to do some kind of proof of work because what you do now is when you receive an email, when you get an email is you do the following.
-You just build the hash of that in order to see if you have has the appropriate numbers and you can just try this out.
+So the number of 5 million, `67,000` is then the number such that you get 23 zeros, which corresponds here to 5 bytes.
+
+And this now the original way just to do some kind of proof of work because what you do now is when you receive an email, when you get an email, you do the following:
+You just build the hash of that in order to see if you have the appropriate numbers and you can just try this.
 So now you get an email and the email contains that.
 Actually I haven't tried it, but it should work.
 And you just put it in here.
-And use, yeah, you have to see what's happening.
-You obviously will do this manually, but just your email program was just checked.
-And the sender provide us with a hash cash and you check the hash cash them and those emails that actually have a hash cash them.
-Those are the ones that have a priority because people paid for it with some effort and everything that doesn't have the hash cash them is just being thrown away.
+And, yeah, you have the zeros at the beginning.
+
+You obviously would not do this manually, but just your email program would just check
+did the sender provide us with a hash cash stamp and you check the hash cash stamp and those emails that actually have a hash cash stamp
+those are the ones that have a higher priority because people paid for it with some effort and everything that doesn't have the Hashcash stamp is just being thrown away.
 So you don't look into that.
-And actually that is something that is the basis for the proof of work of the different culture.
-So that's really cool thing that we can do.
-So way later on for another example.
+
+And actually that is something that is the basis for the proof of work of the Bitcoin blockchain.
+
+So that's a really cool thing that we can do.
+So let's move this away. We will use this later on for another example.
 So that's the very simple solution for that.
-Yeah, so we don't send our own as a one by just one.
-Okay, yeah, you don't need to send it because the only thing that you actually sent here is the only thing what you said is just a sense.
-Yeah, I send this to you and then you just throw it into a shower one.
-And it is all because at this time they only had shall one that you can check six or five hundred as well.
-So we send this and then I check it.
-Okay, that was to.
-Okay, so now.
-Oh, that's a good one.
-The point here is that when you normally talk to people about the back chain, very often learn about these different issues.
-So people say, well, it's time.
-And just recently they got to this bill.
-I think in Dortmund, they just caught someone who used also crypto to collect money for paying assassins for politicians or so.
-So there is still this case.
-It's energy consumption.
-That's also something that people talk about energy consumption and ever they talk about the big rock chain.
-So it's always the GDPR that was going for.
-Or are they talking about chlisco or keys and hashes or banks and no tools.
-So that was actually something that we also learned over the past years that when people approached us about rock chains and unions,
-that there was a lot of weird about this kind of energy consumption and the whole problems or dark net and things like that.
-So it always had some kind of negative connotation.
+
+student: Yeah, so we don't send our own SHA-1 digest in this case?
+
+prof: Yeah.
+
+student: Okay.
+
+prof: yeah, you don't need to send it because the only thing what you send is just that `1:20:251026:alice@example.com::30f64fbb:378923`.
+Yeah, I send this to you and then you just throw it into a SHA-1.
+And it is old because at this time they only had SHA-1, they did not have SHA-256 or SHA-512.
+So you send this and then I check it and if it is okay, I trust you.
+
+## slide: "What do you think of when you hear the term blockchain?"
+
+The point here is that when you normally talk to people about blockchain, you very often learn about these different issues here, eg.
+
+- people say, well, it's **dark net**. Just recently they got, two days ago, I think in Dortmund, they just caught someone who used also crypto to collect money for paying assassins for murdering politicians or so. So there is still this case.
+- It's **energy consumption**. That's also something that you hear very often. People talk about energy consumption whenever they talk about Bitcoin or blockchain.
+- Big trouble with the **GDPR** (Datenschutzgrundverordnung).
+- Or they talk about "Schlüssel" or **keys and hashes**
+- or **banks** and **notaries**.
+
+So that was actually something that we also learned over the past years that when people approached us about blockchain solutions,
+that there was a lot heard about this kind of energy consumption and the whole problems or dark net and things like that.
+So it always had some kind of **negative connotation**.
 This has changed recently.
 So there is some kind of change in how people understand blockchain or Bitcoin in general.
 And there is more openness now recently.
-Obviously in other countries, there's been more openness than in Germany.
-And this probably because the case that I think that at the beginning, the whole blockchain and Bitcoin discussion was very much overhired.
-They are completely overhired.
-So there have been conferences that we would say we get rid of all notaries.
-You get rid of all banks and all the rest.
+Obviously in other countries, there's even more openness than in Germany.
+And this is probably because I think that at the beginning, the whole blockchain and Bitcoin discussion was very much overhyped, completely overhyped.
+So there have been conferences where people said we would get rid of all notaries, you get rid of all banks and all the rest.
 And you shouldn't tell that to Germans.
 I mean, Germans like banks and notaries and things like that.
 On the other hand, there are a lot of countries, obviously, where you probably don't trust the state that much.
-And therefore, rock chains can have a big role in them.
-So one thing really now is,
-let me see.
-One thing now is really to understand how digitization in the recent years work and how people now become more open to blockchain based solutions.
+And therefore, blockchains can have a big role in them.
+
+## slide: Digitalization (of a Bookkeeping Department)
+
+One thing now is really to understand how digitization in the recent years worked and how people now become more open to blockchain based solutions.
 And I often use this kind of picture here to jump into this overall topic.
-So that's a picture of an old bookkeeping office around the time of the century, the 1900s.
+So that's a picture of an old bookkeeping office around the turn of the century, the 1900s century.
 So what you see here is a lot of documents.
 You see some people working on the documents.
 They do some sort of sorting.
 And if you go for digitization of that, how do you digitize that?
-What's your first database?
-This becomes database.
-This becomes MySQL or my reality or whatever you use or how it should be.
+What's your first... ?
+
+student: database?
+
+prof: This becomes a **database**.
+This becomes MySQL or my MariaDB or whatever you use or CouchDB.
 And this becomes your application.
 So this becomes your application on top of the database.
-And this is how you digitize a lot of companies.
+And this is how you digitize a lot of documents.
 And that's straightforward and that works.
-On the other hand, you have the problem that there are a lot of companies around and they all have to somehow interact.
-So we see they all, I mean, this is probably not very cooking good, some kind of cooking good stuff.
+
+## slide: Network (of Bookkeeping Departments) and the Cloud
+
+On the other hand, you have the problem that there are a lot of companies around and they all have to somehow **interact**.
+So we see they all, I mean, this is probably not bookkeeping, some kind of bookkeeping stuff.
 But they all have to exchange information.
-So what we need are some kind of interfaces.
-We need some kind of standards to do that.
+So what we need are some kind of **interfaces**.
+We need some kind of **standards** to do that.
 And the big trouble is that very often they thought that they have sent some kind of information to them and they forwarded it here.
-But what they receive is completely different to what they actually send.
-So the big trouble is that very often we don't have any global understanding or any global consensus or any global standard status of what we actually did.
+But what they received is completely different to what they actually sent.
+So the big trouble is that very often we don't have any global understanding or any global consensus or any global status of what we actually did.
 And that's the problem.
 So very often we have some kind of digitization processes where people need to negotiate what's actually the status of our shared process.
 Do we all have the information that are sent to 10 containers or 9 containers?
-And we have some kind of standardization problem in the exchange.
-And then there is now the big solution to that, which is in the first step, not blockchain, but the cloud.
+Some kind of standardization problem in the exchange.
+And then there is now the big solution to that, which is in the first step, not blockchain, but the **cloud**.
 So now the cloud comes along and they say, okay, come on, give me all your data, put it into the cloud.
-And I solved all the problems with the interoperability.
-So we use SAP or we all use Oracle or a Dexfair or whatever.
+And I solve all the problems with the interoperability.
+So if we all use SAP or we all use Oracle or a Dexfair or whatever.
 We don't have any trouble because we all interact within the cloud and it's their problem to do that.
-And then we have all the trouble with this kind of knocking into this particular cloud if you just once narrowed yourself with SAP or whatever you never get out.
-And then gives the whole direction, can we get rid of all these kind of intermediaries that provide us with security or transactions?
-So again, we have this and that.
+On the other hand, then we have all the trouble with this kind of locking in to this particular cloud if you just once narrow yourself with SAP or whatever you never get out.
+
+## slide: "We rely on central services and platforms"
+
+And that then gives the whole direction, can we get rid of all these kind of **intermediaries** that provide us the security for transactions?
+So again, we have Alice and Bob.
 And the whole thing is that at the moment, whenever we do some kind of bank transactions or whatever, we completely rely on central services and platforms.
-I mean, they provide us the trust and the security by their organizational processes.
-So they tell us that they are doing anything right or wrong or whatever, but actually we completely rely on their process.
-If we have the Spark Gasse in Aachen, if they want to change your bank account, they can just do it.
-They have a super little password of the database. They wouldn't do it. They would never do it, but they can do it.
+And these central services and platforms, I mean, they provide us the trust and the security by their organizational processes.
+So they tell us that they are doing everything right or wrong or whatever, but actually we completely rely on their process.
+If here the Sparkasse in Aachen, if they want to change your bank account, they can just do it.
+They have a super user password of the database. They wouldn't do it. They would never do it, but they can do it.
+
+## slide: "How can you manage an account balance between several partners without a central trusted authority?"
+
 And that was the idea then to say, well, can we actually do the following?
-Let me manage an account balance between several partners without a central authority.
+That we manage an account balance between several partners **without a central authority**.
 That's the whole magic or the whole question that is behind the blockchain.
-How can we do that in a decentralized way such that we don't need to trust intermediary?
-And that was at the beginning, and blockchain came up, always the question.
-Can we substitute an intermediary? Or do we have an intermediary that we don't trust that we want to replace?
-Or do we have an intermediary that is too expensive such that we can replace it?
-They say that it's a blockchain.
+How can we do that in a decentralized way such that we don't need to trust the intermediary?
+And that was at the beginning, when blockchain came up, always the question.
+Can we **substitute an intermediary**? Or do we have an intermediary that we don't trust that we want to replace?
+Or do we have an intermediary that is too expensive such that we can replace it with a blockchain?
+
+## slides: "tally stick" (2 slides)
+
 And I'm not sure if I showed this example already, did I show that at the first lecture?
-Yeah, I'm sure you know about this kind of statistic that actually provided that already in the Middle Ages.
+student: Yes.
+prof: Yeah, then you know about this kind of telestick that actually provided that already in the Middle Ages.
 So what we do now is that we develop a digital statistic.
 And the digital statistic is now at the beginning that we say, okay, we remove the big central agent in the middle and replace it with a network.
 That's the first approach.
