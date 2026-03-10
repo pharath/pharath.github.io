@@ -546,209 +546,259 @@ Or do we have an intermediary that is too expensive such that we can replace it 
 ## slides: "tally stick" (2 slides)
 
 And I'm not sure if I showed this example already, did I show that at the first lecture?
+
 student: Yes.
-prof: Yeah, then you know about this kind of telestick that actually provided that already in the Middle Ages.
-So what we do now is that we develop a digital statistic.
-And the digital statistic is now at the beginning that we say, okay, we remove the big central agent in the middle and replace it with a network.
+
+prof: Yeah, then you know about this tally stick that actually provided that already in the Middle Ages.
+So what we do now is that we develop a **digital tally stick**.
+
+## slide: "Network replaces platform"
+
+And this tally stick is now at the beginning that we say, okay, we remove the big central agent in the middle and we replace it with a **network**.
 That's the first approach.
 And that's really the idea to say the network replaces the overall platform.
-The second thing is if we have a network, what we need to do is now we need to also distribute our data.
+
+## slide: "Database is distributed"
+
+The second thing is if we have a network, what we need to do is now we need to also **distribute our data**.
 So we distribute also the data across the whole network.
-So this pretty much looks like this into database.
-Now I'm not sure if you're using the database next to already, but there you also want to distribute the database, the federated database and things like that.
-The point is now that we don't really use some kind of relational database or couching the or something like that here at least different nodes, which are all the bigger nodes,
-but that we use a different kind of data structure to do that.
-And this data structure is a list of blocks instead of just a table that we have in relational database.
-So we substitute actually the standard databases that you all know, like SQL database or something like that, and we substitute it by this kind of linked tables.
+So this pretty much looks like a distributed database.
+Now I'm not sure if you have visited the database lecture already, but there you also talk about distributed databases, federated databases and things like that.
+The point is now that we don't really use some kind of relational database or CouchDB or something like that here at these different nodes, which are all computer nodes, but we use a different kind of data structure to do that.
+
+## slide: "Linked blocks instead of list/table"
+
+And this data structure is a **list of blocks** instead of just a table that we have in a relational database.
+So we substitute actually the standard databases that you all know, like SQL database or something like that, and we substitute it by this kind of **linked tables**.
 And we do that for a very particular reason.
-The reason for that is the following.
-What we want to achieve is actually to pack transactions that we receive into smaller formats.
-And that's put in the next slide and then we go into the different blocks.
-The idea is actually or the need for that is actually that we send transactions now into this network and each bunch actually something like a is transferring to be 10 tokens or 10 euros, bitcoins or whatever you want.
-And this information is then being received by the different nodes.
-But it's not received by everybody because we have some kind of network disconnections.
-Some nodes are probably down for some time.
-This whole is receiving very early.
-This is not because that's a slow line between the nodes.
-And the other thing is that this can be further that we have another transaction like the transfer into the 20.
-It is only received by this node and by that node.
+The reason for that is the following:
+What we want to achieve is actually to **pack transactions** that we receive into **smaller formats**.
+Let's go to the next slide and then we go into the different blocks.
+
+## slide: "Transactions are distributed"
+
+The idea is actually or the need for that is actually that we send transactions now into this network and each transaction is something like A is transferring to B 10 tokens or 10 euros (see figure on slide), bitcoins or whatever you want.
+And this information is then being received by the different nodes,
+but **it's not received by everybody** because
+
+- we have some kind of network disconnections,
+- some nodes are probably down for some time,
+- this node is receiving it very early,
+- this node is not receiving it because that's a slow line between the different nodes.
+
+## slide: "Transactions distributed – but not evenly"
+
+And the other thing is that this can go further that we have another transaction like D is transferring to E 20 (see figure on slide)
+which is **only received by** this node and by that node.
+
 So we have some kind of problems that we need to solve here.
 You have the problem.
-How do we achieve in this decentralized approach where every node is completely independent, but just exchanging information about possible transactions.
-Among each other, how can we actually achieve in the end a status that is shared among all the different nodes.
-If everybody would just put in his database the information that they get after five minutes, we would have already the complete inconsistent state.
+How do we achieve in this decentralized approach where every node is completely independent, but just exchanging information about possible transactions
+among each other, how can we actually achieve in the end a status that is shared among all the different nodes?
+If everybody would just put in his database the information that they get, after five minutes, we would have already a complete **inconsistent state**.
 Here, if you ask that node what's the account of B, they would say 10 and the account of B is 20.
-And if you ask that node, they would say well B and G, they don't have any money.
-We haven't seen anything about it.
-So we need to find a way that we find some consensus about the transactions that we have received and that we all have the same state.
-And that's the magic what blockchain solves, Bitcoin and also the other blockchain actually solves.
-So the first thing is that we have to find consensus about it.
-And the second thing is also that we have to make sure that the data that is being stored here at the different nodes is not being manipulated.
-And if we go back to that slide, let's say here at this particular state, we all know that X transferred to Y100.
+And if you ask that node, they would say well B and E, they don't have any money. We haven't seen anything about it.
+So we need to find a way that we find some **consensus about the transactions** that we have received and that we **all have the same state**.
+And that's the magic what blockchain solves, or Bitcoin and also the other blockchains actually solve.
+
+So the first thing is that we have to find **consensus** about it.
+And the second thing is also that we have to make sure that the **data that is being stored** here at the different nodes is **not being manipulated**.
+
+And if we go back to that slide, let's say here at this particular state, we all know that X transferred to Y 100.
 And that's something that is being stored here in these nodes in this data.
-You have to make sure that that cannot be manipulated, that any manipulation, for example, by just removing 1, 0 from that would be immediately detected.
+You have to make sure that that cannot be manipulated, that any manipulation, for example, by just removing one "0" from that would be immediately detected.
 And that is something we need to solve.
 Now, how do we do that?
-Let's have a look first on how we actually work on this different data structure.
-So what we have is, hopefully you can see a little bit.
-Not very good at all.
-That's the only one I can find here.
-And as you can imagine now we have these kind of blocks here.
+
+## Whiteboard: Blockchain Drawing
+
+Let's have a look first on how we actually work on this different data structures.
+Let's imagine now we have these kind of blocks here.
 So the first thing is that these blocks, let's say that's block number 100, that's 101, that's 102.
 And they have been generated.
-That's our block chain.
-No, that's where the name comes from.
-The chain of blocks.
-The first thing is that we need to link the blocks among each other.
+That's our blockchain.
+That's where the name comes from.
+The **chain of blocks**.
+The first thing is that we need to **link the blocks** among each other.
 How do we do that?
 You know this already.
 How do we link block 101 to block 100?
-You say it's in 100 block.
-Yeah, I can say it.
-So your suggestion is we say, okay, we put a link.
+
+student: You save the **previous block** 101?
+
+prof: Yeah, I can save... So your suggestion is we say, okay, we put a link.
 And we say we are linked to block number 100.
 Any other guess?
-Do we really start the number of the previous block or something different?
-You put the hash and the hash.
-So we use the hash.
-So what we start is actually the hash of block number 100.
+Do we really store the number of the previous block or something different?
+
+student: The **hash**.
+
+prof: So we use the hash.
+So what we store is actually the hash of block number 100.
 Why do we do that?
-It means that if we just start 100 and we have the transaction fix,
-why 100?
-This would mean, okay, we just link to that particular block.
-But this link does not provide any information about the content of that block.
-If we start the hash of this one, then we connect actually this block to the content of this block.
-This is probably what we meant.
+It means that if we just store 100 and we have the transaction X to Y 100,
+this would mean, okay, we just link to that particular block,
+but this **link does not** provide any **information about the content of that block**.
+If we store the hash of this one, then we connect actually this block to the content of this block.
+This is probably what you meant (prof to the student).
 And by doing that, we automatically detect, let's say the hash of this one is now,
-let's say, two, very simple, again, block of 7-11.
-And immediately, if we remove this zero, what you have learned is that the hash changes immediately.
-So the hash of that block is no longer for the 7-11, but different, and then the link breaks down.
+let's say, to keep it very simple, again, `4711`
+and immediately, **if we remove this zero**, what you have learned is that the **hash changes** immediately,
+so the hash of that block is no longer `4711`, but different, and then the link breaks down.
 So just by checking this, we can check this.
+
 And here is another thing we're really to easily exemplify that.
-The locked in mining demo, yeah.
+The locked in **mining demo**, yeah.
 So I just have this small demo here.
 So we see here we have the block zero.
-That's our Genesis block.
-We currently have the visibility of three.
+That's our **Genesis block**.
+We currently have a difficulty of three.
 And what we can do now, I think, now I have to shorten it a bit.
 Okay, so we just now get another block.
 And you see the transactions that are being added are always random.
-And what we do now is that we link this block here to the previous one in the way that the previous hash is this one,
-C02, which corresponds to that particular hash.
+And what we do now is that we link this block here to the previous one in a way that the previous hash is this one,
+`C02`, which corresponds to that particular hash.
 And then I get another block.
-I just link this to 089 to this particular one.
+I just link this to `0089` to this particular one.
+
 So each block actually contains the link to the previous one, but not a number, but as a hash.
-And as soon as I change something, and I want to manipulate this here, let's say this is 100, you can see.
-So immediately we see that the data has been manipulated because the hash and the non-satve come to that,
-which is similar to the proof of working hash cache, they don't meet each other anymore.
+And as soon as I change something, and I want to **manipulate** this here, let's say this is 100, you can see.
+So immediately we see that the data has been manipulated because the **hash** and the **nonce** and we come to that,
+which is similar to the **proof of work** in **Hashcash**, they don't meet each other anymore.
 They are wrong.
+
 And also here we see that the link is this one.
-So you see the previous hash, what we believe is 0089 and the hash is now seen to 33.
+So you see the previous hash, what we believe is `0089` and the hash is now `cd33`.
 And by that you immediately detect that something manipulated the data in our blockchain.
 And that now makes it possible that these kind of blocks or that these nodes can run everywhere.
-So we don't need to trust any more the server itself, because the server delivers us some kind of data,
+So we don't need to trust anymore the server itself, because the server delivers us some kind of data,
 and we can immediately check if the data is correct.
 So that solves the problem of manipulating the data that is being stored.
-But now you could argue, but I just could recompute the hash when this node becomes 4712,
-that I can just control the 712 here.
+
+But now you could argue, but I just could recompute the hash, when this now becomes `4712`,
+I can just put `4712` here.
 And then I just manipulate all the different links within the block to do that.
 So there must be some kind of difficulty to do that.
 It must not be easy to do that.
 And this brings us now to the point, if we have all the different transactions in our network,
-so one thing is that it must be difficult to manipulate the data structures here.
+so one thing is that **it must be difficult to manipulate** the data structures here.
 It shouldn't be easy, that's one thing.
-The second thing that we have to solve is actually who of these 7 nodes is the one who shall add a new block to our blockchain.
+
+## Bitcoin: Mining, Hash, Nonce
+
+The second thing that we have to solve is actually **who of these 7 nodes is the one who shall add a new block** to our blockchain.
 So the problem is the following. We have now our blockchain here.
-And let's say here, just a blockchain of two blocks.
+And let's say we have just a blockchain of two blocks.
 And now we get a lot of new transactions.
 We say A to B, 10 and D to C, 5 and A to D, 5.
-So these are new transactions that we have to proceed.
+So these are new transactions that we have to receive.
 And now we would like to add this as information to our blockchain.
 And everybody wants to do that now. Everybody wants to each node here,
 wants now to add this information to the particular blockchain.
-And how we do that is by now creating a new block.
+And how we do that is by now **creating a new block**.
 So we create a new block.
 We put the three transactions, one, two, three into the block.
 And now we would like to link that one to this here.
 So first we take the hash of that one, so we take the hash of 101.
-We take a timestamp, take the time, let me write into our header.
+We take a timestamp, take the time, let me write it into our header.
 And we need to do something in addition.
 Because we need to find a solution that only one is being selected,
-almost one is being selected as the one who is in this network
+or almost one is being selected as the one who is in this network
 who can add the block to our blockchain.
-So the problem we have to solve is who is the one who is adding this block to the blockchain.
-So we have the question that we are now the network, so we have about 30 nodes.
+So the **problem** we have to solve is, **who is the one who is adding this block** to the blockchain.
+So imagine that we are now the network, so we are about 30 nodes.
 And everybody of you is now trying to add this block to the blockchain.
 How shall we select who the miner or who the node is?
-The person who finds a valid nonce in order to produce a low enough double-shot-reflexible solution.
-That's already the perfect answer. Why should we use the oldest one?
-The oldest what? The oldest miner. Let's say we are all personal.
+
+student: The person who finds a valid **nonce** in order to produce a low enough double SHA-256 hash.
+
+prof: That's already the perfect answer. Why shouldn't we use the **oldest one (ie. person's age)?**
+
+student: The oldest what?
+
+prof: The oldest miner. Let's say we are all persons.
 So we could all check who is the owner of this particular computer and we use the oldest one.
-Why should we do that?
-Concentralize.
-Why shouldn't we do some kind of round robin?
-So which means that first it's even, then me, then you, then you, then you, then you.
+Why shouldn't we do that?
+
+student: It is **centralized**.
+
+prof: Yeah because it is centralized.
+
+Why shouldn't we do some kind of **round robin**?
+So which means that first it's Ivan, then me, then you, then you, then you, then you.
 Could also be done because then it's not always the same. We don't have centralization.
 We just use...
-Either it's not dynamic, like we need to fix the amount of people and we all know about the participants
-or it's like a mess to that everybody knows who is in charge.
-The problem is that then it becomes predictable.
+
+student: Either it's not dynamic, ie. we need a fixed amount of people and we all know about the participants
+or it's like a master so that everybody knows who is in charge.
+
+prof: The problem is that then it becomes **predictable**.
 It becomes very much predictable who is going to be next.
 What we want to have is that you don't know who is going to be the next.
 Such that you can try to manipulate because then you foresee what's coming up.
-You try to somehow manipulate it.
+you try to somehow manipulate it.
 You want to have it completely random.
 Okay, so another suggestion.
 If you do it randomly, I could just think about a random number
 and then between one and a hundred and the person who is being closest to that gets it.
 Why shouldn't we do that?
-You yourself are being closest if you want to.
-Let's say I'm not providing a minor, but the problem is again we are centralizing.
-Again, you have to trust me.
+
+student: You yourself are being closest if you want to.
+
+prof: Let's say I'm not providing a miner, but the point is, again, we are **centralizing**.
+Again, **you have to trust me**.
 I become the central trust point and I do it correctly.
+
 So these are all approaches that are somehow not applicable
 if you want to have a complete random solution
-and if you want to have a non-predictable solution
+and if you want to have a **non-predictable solution**
 and if you want to have some kind of trusted solution.
 Therefore, we do what you suggested.
-We use the proof of work that we learned from hash catch.
-You may not cook a work or pay because if you pay to compute this one or two times
+We use the **proof of work** that we learned from **Hashcash**.
+
+student: You may not cook a work or pay because if you pay to compute this one or two times
 it's the same as you may pay, but not for this.
 I'm like one manipulation is already enough to manipulate the network.
-Therefore, it must be very cost intensive to do it.
-Not in the way that I did it here was just a few, let's say one million tries.
+
+prof: Therefore, it **must be very cost intensive** to do it.
+Not in a way how I did it here with just a few, let's say one million tries.
 So we need to find something where we have really hard work to do that.
 And it's the same principle.
-But isn't it very inefficient if you want to use the conformity of that translation?
+
+student: But isn't it **very inefficient** if you want to use Bitcoin for transactions?
+
+prof: **Yes, it is**.
 Yes, it is.
-Yes, it is.
-It's inefficient if you compare it to the amount of energy that you need.
+It's inefficient if you compare it to the **amount of energy** that you need.
 And therefore, but that's the next lecture, you think about alternative solutions.
 But the point is really first to understand how Bitcoin actually works and how this works.
-If you were to use the hash catch, when we're going after probability theory, right?
-Let's say in Georgia I would need one million tries per average.
+
+student: If you were to use the Hashcash, when we're going after probability theory, right?
+Let's say in total I would need one million tries per average.
 Then wouldn't that be the risk of several parties finding the solution at roughly the same time
 and then by connections, then yes, you'll get the whole thing?
-So let's put this on, we discussed that.
-Okay.
+
+prof: So let's hold this on, we discuss that.
 Yeah, good thing.
-But we're actually doing now with hash catch, what we say is, okay, now you need to find the nonce,
-the number only used once, that was the number we were computing with hash catch.
-You need to find the number only used once, that depends on the content of the block.
-So we take our transactions, we take the time, we take the hash of the previous one
-and adding all that, so we have the hash of the content plus nonce.
-And it will hash that.
-This must be below a certain number, which means it must have at the beginning the number of zeros.
+
+But we actually do it now with **Hashcash**, what we say is, okay, now we need to find a nonce,
+a number only used once, that was the number we were computing with Hashcash,
+we need to find the number only used once, that depends on the content of the block.
+So we take our transaction, we take the time, we take the hash of the previous one
+and adding all that, so we have the hash of the content plus nonce
+and if we hash that
+this must be below a certain number, which means it **must have at the beginning** the **number of zeros**.
 That's how we interpret below.
 And that's our requirement.
-And the minor, the note or the minor, they're often called minor because you see later on why they're also called minors.
-The note who is doing that first is the one who is sending this information that we found in the new block
+And the miner, the node or the miner, they're often called **miners** because you see later on why they're also called miners,
+the **node who is doing that first** is the one who is sending this information that we found in the new block
 to the network and then the network checks it.
-So actually he's putting a stamp on that, like hash catch.
-And he's putting a stamp that he found a solution to the puzzle and he's sending that to the only blocks.
-And let's see how it looks like also here.
-What we did here is actually, here we had difficulty 3 and we wanted to have here it's really 3 zeros.
-To be able to just reset the blockchain, okay, let's create a new one, okay.
+So actually he's putting a **stamp** on that, like Hashcash,
+and he's putting a stamp that he found a solution to the puzzle and he's sending that to all the blocks.
+
+And let's see, this is how it looks like, also here.
+What we did here is actually, here we had the difficulty 3 and we wanted to have, here it's really 3 zeros.
+To do that I just reset the blockchain, okay, let's create a new one, okay.
 With the difficulty of 3, we need at least 3 zeros that we find here.
 And the nonce was 2003 and 57. That was easy to do.
 Let's increase it.
@@ -759,130 +809,157 @@ Now let's do it with 6.
 It takes already longer.
 Now you see.
 10 seconds now to find this.
-Okay, and now it will increase it higher.
-It takes longer.
-So, you see now we are.
+Okay, and now if we increase it higher,
+it takes longer.
+So, you see now we are...
+
 And now you see, if everybody who's doing that now,
 if all of you would now start this application,
 then you would have one who's first.
-Who would be the first one at the moment?
-The one with the fastest CPU.
-The one with the fastest CPU.
+**Who would be the first** one at the moment?
+
+student: The one with the **fastest CPU**.
+
+prof: The one with the fastest CPU.
 And the one with the fastest CPU will win.
 And he will probably win every time.
 Therefore, there is a race of just becoming the fastest one.
-Which means that at the beginning was just a race.
-Really, we have machines that do good ashing.
+Which means that **at the beginning** was **just a race**,
+really, to have machines that do good hashing.
 So there is a particular kind of hardware.
-And this particular kind of hardware is very good in computing ashing.
+And this particular kind of **hardware is very good in computing hashing**.
 So that's actually what you now do.
+
 What other kind of idea?
-So the first is everybody of you gets a, gets a Dell laptop with the same CPU time.
-What would you try in order to become first?
+So the first is everybody of you gets a Dell laptop with the same CPU time.
+What would you try in order to become the first?
 So we all have the same.
 You all have the same software.
 We have any other kind of guesses?
-It's a different approach than the other.
-I would time it at the same time.
-Different approach could be, all of them, they start with one.
-And you start, so this program is just counting from one upwards.
-You probably would say, I start with 10,000.
-Because if all the others do, because they start with one,
-I start with 10,000 and then they're probably become different to all the rest.
-I mean, every miner has a different coin-based transaction to their own address,
-which would change the hash and then change all the,
+
+student: It's a different approach than the other.
+All at the same time.
+
+prof: Different approach could be, all of them, they start with one.
+So this program is just counting from one upwards.
+However, you probably would say, I **start with 10,000**.
+Because if all the other stupid guys start with one,
+I start with 10,000 and then they probably become different to all the rest.
+
+student: I mean, every miner has a different (Coinbase) transaction to their own address,
+which would change the hash and then change all the...,
 so they would all be searching different hash spaces.
-Different hash spaces.
+
+prof: Different hash spaces.
 That's something you're right.
-What I said assumes that we all have the same, have the same content hash.
-But that's not the case.
+**What I said assumes that we all have the same content hash.**
+But **that's not the case**.
 Because you may have received other transactions than you.
 You have received these three transactions,
-but you may have received these three transactions,
-because something else.
+but you may have received these three transactions is something else.
 And again, you have your own address, which is also being involved here.
 So it's your own address that is in here.
 So it's an address that you also add.
 And there will also be a very special transaction that also makes it different.
-So everybody has actually another content hash for which he needs to find the nonce.
+So **everybody has actually another content hash for which he needs to find the nonce**.
 So you could say, well, I'm not starting at one,
 because I think starting at one million is probably better,
 because then the other hash can be found easier.
-I have no idea of that.
+I have no idea.
 But you can do some kind of guessing.
 But there are other ways to do it.
-Isn't there like the conflict that if we make it too easy,
+
+student: Isn't there like the **conflict** that if we make it **too easy**,
 too many people would find it at once,
-and make it too difficult, and no one will ever find it.
-And you see here, my computer is now shortly before burning.
+and make it **too difficult**, no one will ever find it.
+
+prof: And you see here, my computer is now shortly before burning.
 It's now trying to find, specifically, seven, it's really already working a lot.
 About this, we also discussed that.
 I mean, these are all features that are built into Bitcoin,
 which are not problems, but actually features.
-Okay, so let's...
-Computing.
+
+Okay, so let's compute.
 But there is still one way that you could do as a group to become faster.
-Like a mining pool, you mine together.
-Yeah, you're going together.
+
+student: Like a **mining pool**, you mine together.
+
+prof: Yeah, you're going together.
 So what you could do is that you two say,
 okay, we get the same data,
 we become one node to the outside,
 but internally we have two computers,
 and you start at one, and you start at one million to find it.
-Which means that you now have two computers trying to find the nodes.
-Obviously, you don't start at one, because that would make sense,
-but you start at different nodes, and then you use that.
-And then you two have almost a double power than all the others,
+Which means that you now have two computers trying to find the nonce.
+Obviously, you use not the nonces that start at one, because that would not make sense,
+but you start at different nonces, and then you use that.
+And then you two have almost the double power than all the others,
 which means that you will then be almost the first node.
-And that's the mining pool.
+And that's then a mining pool.
 You just put together all your computing power,
 and you distribute the solving of the puzzle to all your computers that you have available.
-Okay, maybe I didn't understand a part of it.
+
+student: Okay, maybe I didn't understand a part of it.
 So like, we have two computers,
 but doesn't it just mean that they're looking at the same time
 in different spaces to find a solution?
 But not necessarily they're going to find first,
 but they can, because it's probability is a bit higher,
 but they have two slow computers, one very fast computer can beat them.
-Definitely, yeah, that's the case.
+
+prof: Definitely, yeah, that's the case.
 So if they have two slow laptops, and you have a very fast one,
 then you probably overrun them.
 But nevertheless, it may be that most of the time it's the others.
 And that makes it so interesting.
-But you can't really predict what's going on.
-Maybe we'll talk a little bit, but right now I do not understand
-why do I want to be the first one to find a good one.
-Right, now, from my perspective, everyone gets the same data eventually,
+You can't really predict what's going on.
+
+student: Maybe we'll talk a little bit, but right now I do not understand
+**why do I want to be the first** one to find a good one.
+
+prof: Right.
+
+student: From my perspective, everyone gets the same data eventually,
 so every data will land on the blockchain.
-Yeah, and this question is something that we discuss now.
+
+prof: Yeah, and this question is something that we discuss now.
 So it's really the point why.
-Let's keep it working.
-The point actually now is this is the mining process.
+
+The point actually now is... This is the **mining process**.
 That's the whole mining process.
 It's so easy.
 It's just a loop that we do, we hash the block header plus the nonce,
-and then we hash it again, and then we see is this below the difficulty,
+and then we hash it again, and then we see, is this below the difficulty,
 so 4070 was what we discussed here.
-No add one to the nonce, and yes, send the block to all neighbors
+If no, add one to the nonce, and if yes, send the block to all neighbors
 that you have available, and this is what's happening now,
 that you send all the blocks to your neighbors with the solution of the crypto puzzle,
 and then what they do is they just check it, and that's easy.
 They just need to check is this hash of the content plus the nonce in total
-as the certain amount of zeroes.
+has the certain amount of zeroes.
 Fine, then that is being accepted.
+
+## Bitcoin: Block Reward, Transaction Fees
+
 So now we come to some questions.
-One question is why should I do that?
+One question is **why should I do that?**
 What's my incentive?
 What's my benefit?
-You get the block reward.
-You get a block reward.
+
+student: You get the **block reward**.
+
+prof: You get a block reward.
 You get money.
 But how do you get money?
 Where do you get the money from?
-In addition to the block reward, you also get the gas and mining fees.
-Gas is something we discuss when we talk about material.
-But transaction fees.
-Transaction fees, yeah.
+
+student: In addition to the block reward, you also get the gas and mining fees.
+
+prof: No, gas is something we discuss when we talk about Ethereum.
+
+student: But **transaction fees**.
+
+prof: Transaction fees, yeah.
 Transaction fees, yeah, that's what you get.
 First thing is that a transaction within these kind of blockchains,
 they don't do it just for fun.
@@ -890,25 +967,25 @@ They want to earn money.
 It's not for free.
 A blockchain transaction is not for free.
 If I want to send you some coins, they want to send you a token, some crypto or whatever,
-I have to add fees like with a bank.
+I have to add fees **like with a bank**.
 You also pay.
 I mean, this is something where very often people think, well,
 Bitcoin transactions are for free.
-That's what it differentiates from bank transfers.
+That's what differentiates it from bank transfers.
 No, they cost you money.
-And very often it's calculated in an amount that depends on the current traffic in the network.
-If the Bitcoin network or the blockchain network is busy,
+And very often it's **calculated** in an **amount** that **depends on the current traffic in the network**.
+If the Bitcoin network or if the blockchain network is busy,
 you pay more fees than if it's not busy.
 This is Uber.
-You all know that you want to go on a Saturday evening out of Aachen, back home.
-Uber is expensive and then Monday morning is for the cheese.
-So the mining fees really depend on the traffic in the network.
+You all know that when you want to go on a Saturday evening out of Aachen, back home,
+Uber is expensive and on a Monday morning it is cheap.
+So the **mining fees** really depend on the traffic in the network.
 And what these people do here is that when they get all the transactions,
 they select those transactions with the highest fees,
 which means that when you submit a transaction into this network and you don't provide any fees,
 you could do that.
-You could say, please, I would like to send you one Bitcoin, but I don't provide any mining fees.
-What happens?
+You could say, please, I would like to send you one Bitcoin, but **I don't provide any mining fees**.
+**What happens?**
 This will not be included.
 All the miners, they want to have transactions with high fees.
 So they probably just put it aside.
@@ -916,26 +993,35 @@ And only if there probably is no traffic at all,
 they probably put it into their list of transactions.
 But maybe never.
 But it could be taken a day or a week after the transaction.
-But is there for every block just one transaction?
-No, every block has...
-3,000 to 1,000.
-Okay, but it's a fixed amount.
-It's a fixed amount.
-That's been discussed, always discussed,
-because the community also depends on the blockchain.
+
+student: But is there **for every block just one transaction?**
+
+prof: No, every block has...
+
+student: ~3,000 transactions. (Gemini: As of March 2026, the average number of Bitcoin transactions per block is approximately 3,300 to 3,400.)
+
+student: Okay, but it's a fixed amount.
+
+prof: It's **a fixed amount**.
+That's being discussed, always discussed,
+within the community, it also depends on the blockchain.
 At the beginning, there was not that many transactions, but they're now increasing it.
-Really, you can't go up to it.
-So the whole process doesn't make much difference.
-Yeah, because otherwise you could just put every transaction in.
-Yeah, but they also want to get money.
-Yeah, if one might not probably take every transaction limiting of the people that spend money on.
-So, first thing is they get transaction fees.
+So for the whole process it doesn't make much difference.
+
+student: Yeah, because otherwise you could just put every transaction in.
+
+prof: Yeah, but they also want to get money.
+Yeah, if one miner probably on every transaction...
+
+student: It's like limiting of the people that spend money on blockchain.
+
+prof: So, first thing is they get **transaction fees**.
 And they get a reward.
-They get a block reward.
+They get a **block reward**.
 So what they do is...
-And that also makes every content different.
-Even if you all get the same 3 transactions, you're okay.
-You all have your own ID, which is being stored in your block header.
+And that also makes **every content different**.
+Even if you all get the same 3 transactions here,
+you all have your own ID, which is being stored in the block header.
 And there is one particular transaction where you say,
 just one, let's say one Bitcoin, BTC, to me.
 So you just include one transaction.
@@ -943,88 +1029,99 @@ Then you put one Bitcoin to your own wallet.
 So you just create this kind of Bitcoin out of nothing.
 It has never been there.
 You just say, my account has now plus one Bitcoin.
-And at the beginning, when Bitcoin was launched in 2009, that was 50 Bitcoins.
+And at the beginning, when Bitcoin was launched **in 2009**, that was **50 Bitcoins**.
 So for every block, you got 50 Bitcoins, which would nowadays be 50 times 100,000, 5 million.
 That was 2009.
 So 50 Bitcoin, every block.
 That means with every block that we add to the blockchain,
-the money that is available is being increased by 50 Bitcoins,
-which is quite some inflation.
-It's like our Bundesbank or the European Bank, who is constantly 20 Euros.
-We print Euro, we print Bitcoins here.
-But only every 10 minutes.
+the **money** that is **available** is being **increased by 50 Bitcoins**,
+which is quite some **inflation**.
+It's like our Bundesbank or the European Bank, who is constantly printing Euros.
+**We print Bitcoins** here.
+But only **every 10 minutes** (Gemini: The network typically generates one block every 10 minutes.).
 The 10 minutes is something that comes into the game.
-There is also something.
+That is also something.
 We don't want to have inflation too fast.
 We want to have inflation in a calculated way.
-So therefore we say a block should, among all yourself, be found within 10 minutes.
+So therefore we say, a block should, among all yourself, be found within 10 minutes.
 And the difficulty is therefore adapted such that the community of all miners finds a block on average every 10 minutes.
-But then in the case of Bitcoin, the block reward gets hard every 210,000 blocks.
-That is something I would like to come to.
+
+student: But then in the case of **Bitcoin**, the **block reward gets halved every 210,000 blocks**.
+
+prof: That is something I would like to come to.
+
 So let's see what our miner is doing.
 He found it.
 462 seconds.
-And at C difficulty 7, the nonce is 185,808,000.
+And at difficulty 7, the nonce is 185,808,000.
 So it took him 46 seconds, which is about 7 minutes.
 Oh, we are quite there.
 So for us, the difficulty of 7 would mean that we can be in the game.
 But I think the current difficulty is about 14, or 15.
-You see how dramatically it increased.
-We need to find this knowledge.
+You see how dramatically it increased really to find this nonce.
+
 So what we want to have is a block every 10 minutes.
-And with this particular block, we create new tokens.
-We create new Bitcoins out of nothing.
+And with this particular block, we create new tokens, we create new Bitcoins out of nothing.
 So we increase the number of Bitcoins that are available.
 And this should be done almost every 10 minutes.
+
 And if you all now invest in computing power, and suddenly you find the block every 5 minutes,
 what do we do?
 We increase the difficulty.
 And by that, we bring it back to 10 minutes.
 I think this is extremely elegant.
-You just increase the difficulty back to 10 minutes.
+You just increase the difficulty, you come back to 10 minutes.
+
 Suddenly, you all say, well, now I'm doing large language fine tuning.
 So I hate all this Bitcoin stuff.
-My computer now on fine tuning and large language models.
+I put my computer now on fine-tuning and large language models.
 So suddenly, we find blocks only every 20 minutes.
-We reduce the difficulty.
+We **reduce the difficulty**.
 So we just adopt our difficulty to the current power that is available,
-the current computing power that is available is in the network.
-There is certain harm in it.
-So not really like minor points and stuff, but like the step of 67 was of time factor, I think, 70.
+the current computing power that is available in the network.
+
+student: There is certain harm in it.
+So not really like miner points and stuff, but like the step of 67 was of time factor, I think, 70.
 So what is there is no probability to reduce it from 20 to 10,
 but if you reduce it by 1, you already get 5.
-So you mean that 1, if you just increase it from 100 and 201,
-you don't find it anymore because the solution space is so small.
+
+prof: So you mean that, if you just increase it from 100 to 101,
+that nobody would find it anymore because the solution space is so small.
 That's interesting.
 Could be, could be that this happens,
 but then they probably use some other kind of difficulty measure.
-So something they're creating.
-It's an average over the last 2016 blocks,
+So something they have created.
+
+student: It's an average over the last 2016 blocks,
 and it can only be adjusted up by 4 and down by a factor of 4.
 But depending on the average, it can go up also a very, very small amount,
 or down a very small amount.
-And you see here, I'm using now seven bytes.
-If you do it on bits, then it becomes much higher, right?
-With hash cache, I do it on bits, here I do it on bytes.
+
+prof: And you see here, I'm using now seven bytes.
+If you do it in bits, then it becomes much higher, right?
+With Hashcash, I do it in bits, but here I do it in bytes.
 And a byte is just 8 bits that you need to find.
-So it becomes, so the solution space is every number becomes really small.
-And you get some time, right? That's probably the right answer.
-Okay, so we now, we do it because we get money.
-We get bitcoins as a minor every time.
+So the solution space is, every number becomes really small.
+It takes some time to provide the right answer.
+
+## Bitcoin: Halving Mechanism
+
+Okay, so we now, we learned, we do it because we get money.
+We get bitcoins as a miner every time.
 We increase the amount of bitcoins that are in the market.
 We have some kind of inflation,
-and if you already have too fast computers,
-you just increase the difficulty.
+and if you already have too fast with the computers,
+we just increase the difficulty.
 Nevertheless, it means every 10 minutes, 50 bitcoins.
 That's too much.
 At the beginning, we wanted to have a lot of coins immediately in the market.
-And we want to have, flood the market with bitcoins so that we get some kind of,
-not just a big market.
+And we really wanted to flood the market with bitcoins so that we get some kind of, just a big market.
 After some time, this becomes problematic.
 You need to reduce it.
-What we do is, we just halve the amount of bitcoins that you get for the money,
+What we do is, we just **halve the amount of bitcoins that you get** for the mining,
 from 50 to 25, from 25 to 12.5, from 12.5 to 6.75,
-and from there to 3.5, something which is the current amount that you get.
+and from there to 3. something which is the current amount that you get.
+
 And you sometimes get these kind of spam emails,
 Bitcoin halving, buy Bitcoin, Bitcoin becomes more valuable.
 That's the Bitcoin halving.
@@ -1032,239 +1129,285 @@ They don't halve bitcoins.
 They just halve the amount that the miners get,
 which means that actually, at the moment, it's 3.75,
 and then after a certain, I think, yeah,
-3.125.
-3.125, ETC with everyone.
+
+student: 3.125.
+
+prof: 3.125, ETC with everyone.
 And next time, when we do the halving, that is 1.6 something.
 And we do it every 210,000 blocks, as I showed you.
 So we do it every 210,000 blocks,
 which means that if you divide it by 10 minutes,
 it's every two years or so.
-Every four years.
-So every four years, you do the halving.
+
+student: Every four years.
+
+prof: So every four years, you do the halving.
 And the last one was what, one and a half or two years ago.
-April 2024.
-Yeah, I agree.
+
+student: April 2024.
+
+prof: Yeah, I agree.
 You see, I'm not dealing with this event so much.
-So that's something that will happen next time.
+So that's something that will happen in the next time.
 So the next one will be in...
-2028.
-2028, yeah, so 2028, still great.
-So two years ago, almost.
+
+student: 2028.
+
+prof: 2028, yeah, so 2028, still great.
+So in two years, almost.
 And then...
+
 So, but if we halve and halve and halve and halve,
 after some time, there will be no incentive,
-there will be no proper reward.
+there will be no block reward.
 How will the system then still be running?
 Why should people...
-What, no, transaction please.
-That's the idea.
+
+student:  transaction please.
+
+prof: That's the idea.
 The idea is that then, and this will take place in year 2000...
-2140.
-Yeah.
+
+student: 2140.
+
+prof: Yeah.
 2140.
 That's the year when there will be no more block rewards.
-So still more than a year ago.
+So still more than a hundred years away.
 And until then, they just speculate,
-or the inventors speculate that then this will just be based on transaction.
+or the inventors speculated back then that this will just be based on transaction fees.
 I don't know, I just wanted to look this up.
 Could be a nice task for you to look this up.
-What is the count ratio between block reward and mining fees?
-It could already be that we soon reach that.
-Miners get more mining fees, more transaction fees than what they want.
+What is the current ratio between block reward and mining fees?
+It could already be that we soon reach that miners get more transaction fees than block reward.
 Because there are almost 10,000 transactions in there.
-And imagine that there is someone sending five bitcoins.
-And if you get them, one or two percent as a transaction fee,
-you get already quite fast.
+And imagine that there is someone sending five bitcoins and if you get them, one or two percent as a transaction fee,
+you would get already quite fast...
 This is why people do that.
 Actually.
-That is why people do that.
-This is why people do that.
-Actually.
-That is why you can now start mining.
+That is why you can still start mining.
 You wouldn't have much luck, you see, with this example here.
-What's the minor from putting more bitcoins in itself while mining the block?
-Yeah.
-If you put in 10 bitcoins,
-and you send that block to all the other blocks,
-to other miners, what will they do?
-Reject it.
-Reject it and reject it.
-You are just playing for us and probably they are just like this.
+
+student: What stops the miner from putting more bitcoins in itself while mining the block?
+
+prof: Yeah.
+If you put in 10 bitcoins to me,
+and you send that block to other miners, what will they do?
+
+student: Reject it.
+
+prof: They check it and reject it.
+You are just playing false and probably they will just blacklist you.
 From then on, you are gone.
 You have to find a new IP number then.
-Because they are like this.
-So that's something that would work.
-So I think what we learn now is that we do,
-what we learn now is that how this is all being organized.
+Because they blacklist you.
+So that's something that wouldn't work.
+
+So I think what we learned now is how this is all being organized.
 So we have these kind of blocks.
-We learn how you actually, why we do that.
-The incentive for doing that, to invest money and computing power into that.
-Because you get a rock reward.
-Beyond probably just the idea of I would like to be part of the community.
-Because I believe in Bitcoin and cryptocurrencies also.
-And one question, one thing that you also should know about is this.
-And then stop because that's probably the right rate.
-And then next time we discuss what happens if we have two blocks.
-Being found.
-How the actual transaction works.
-But this would open up now pretty much.
+We learned why we do that.
+The incentive for doing that, to invest money and computing power into that:
+because you get a block rewards - beyond probably just the idea of I would like to be part of the community because I believe in Bitcoin and cryptocurrencies also.
+
+## org
+
+And one thing that you also should know about is this...
+And then we can stop because that's probably then a good break.
+And then **next time** we discuss **what happens if we have two blocks being found**.
+**How the actual transaction works**.
+But this would open up now too much.
+
+## slide: "Hash-Funktionen and Merkle Tree"
+
 Merkle tree. Do you know Merkle trees?
 I mean it has nothing to do with our old chancellor.
-Same name but it's not.
-What's named after her.
+Same name but it's not named after her.
 The Merkle tree is the way we organize the transactions in a block.
 So I was actually cheating here.
-I said, well we have a header.
-And below that we have a list of all the transactions.
-This is not what we do.
-We do it a little bit of a way.
-So what we actually do here is that we have.
-This kind of organization of each block.
+I said, well we have a **header**.
+And below that we have a **list of all the transactions**.
+This is **not what we do**.
+We do it in a different way.
+So what we actually do here is that we have this kind of organization of each block.
 So each block has the previous hash.
 That's what we have.
-We have timestamp, also code.
-We have the nodes.
+We have timestamp, also cool.
+We have the nonce.
 And we have the root of the Merkle tree.
-And you see we are not listing our transaction just in a list.
+And you see we are not listing our transactions just in a list.
 And we hash that.
 What we do is we take transaction number zero.
 So we have four transactions in this example here.
 Zero, one, two, three.
-And then we take the hash of transaction number zero.
-And we have to hash of number one.
+And then we take the hash of transaction number zero and the hash of number one.
 We have two hashes.
 We combine that into a hash.
 And do the same here in our tree.
 And then actually we hash these pairs against each other.
 And that gives the root.
-So actually some miners which are called light nodes.
-These light nodes, they don't contain all the information here.
+So actually some miners which are called the **light nodes**,
+these light nodes, they don't contain all the information here.
 They just contain that.
 So they just work in the network.
 And they just work in the network.
 And they do some kind of proof that the new node is correct or things like that.
 But they don't contain all the information because that information is quite large.
-Downloading the whole Bitcoin blockchain.
-So really the data is gigabytes.
-I'm not sure 900 gigabytes or so.
-800 gigabytes.
-800 gigabytes.
+Downloading the whole Bitcoin blockchain, so really the data, is gigabytes.
+I'm not sure, 900 gigabytes or so.
+
+student: 800 gigabytes.
+
+prof: 800 gigabytes.
 That means that if you want to now become a miner to download the software,
 it takes a minute.
 Installing it, probably just a minute.
 Downloading 900 gigabytes takes days.
-So although, but you would then run something like a light node,
-which are some of the lighting network or things like that,
-that would be run on the rest of the time.
+So although, but you could then run something like a light node,
+or the lighting network or things like that,
+that could be run even on a Raspberry Pi.
 But that's something we will probably discuss later on.
-So what we actually organize this is that within the core data,
-we just have one hash.
+
+So how we actually organize this is that within the core data we just have one hash.
 And that's the hash of all the transactions that is combined as this Merkle tree.
 And when I saw this first, I thought why?
-I mean, why do we hash always the pairs and then we hash the pairs
+I mean, why do we hash all these pairs and then we hash the pairs
 and put it there.
 We could just hash that and put it there.
 Do you have any idea why?
-Why do we do this kind of tree?
+**Why do we use this kind of tree?**
 I mean, computer scientists, they love trees, obviously.
-Yeah, so we do everything in trees, but the list and then hash it.
-I was thinking maybe we can, using that somehow find out if somebody cheated.
-Where are you cheated?
-No, no.
+Yeah, so we do everything in trees, but the list and then hashing it?
+
+student: I was thinking maybe we can, using that somehow find out if somebody cheated where he cheated.
+
+prof: No, no.
 Any other guess?
-To avoid like going over the side of the block, having this one hash.
-Yeah, but that's the same.
+
+student: To avoid like going over the side of the block, having this one hash.
+
+prof: Yeah, but that's the same.
 If we, why don't we just hash this pair-wise and we put the hash in there
 or just taking that and put the hash in there.
 That's almost the same.
-That can work with something too.
-Yeah, it goes into the right direction.
-If I manipulate H1, the hash to three would still be correct.
+
+student: That can work with subtrees.
+
+prof: Yeah, it goes into the right direction.
+
+student: If I manipulate transaction one, the hash to three would still be correct.
 I could identify which way I'm going to go.
-Yeah, it goes also in the right direction.
+
+prof: Yeah, it goes also in the right direction.
 Yeah.
-It allows also miners to change the Merkle route slightly.
-In case, for example, they run out of non-space,
-you can also change a little bit the Merkle route and then go over a new hash space.
+
+student: It allows also miners to change the **Merkle root** slightly.
+In case, for example, they run out of **nonce space**,
+you can also change a little bit the Merkle root and then go over a new **hash space**.
 I'm not sure that's the answer you're looking for.
-No, I don't get this.
+
+prof: No, I didn't get this.
 I'm looking for another solution.
-The point is that what happens if you want to check if a certain transaction is actually within this example here.
-So we store all the transactions and we just hash everything and put this into our business ticket route.
-So we have all the transactions and we hash it and we get it into TXROO.
+
+The point is that what happens if you want to check if a certain transaction is actually within, this example here,
+so we store all the transactions and we just hash everything and put this into our, this is `Tx_Root` (see figure on slide).
+So we have all the transactions and we hash it and we get it into `Tx_Root`.
 And we have that one.
 If I give you now a transaction, I give you transaction number one, which is this one.
-This is TX0 and this is TX1.
+This is `Tx0` and this is `Tx1` (see figure on slide).
 I give you transaction number one.
-What do you need to know if this transaction is in this particular block?
-If I give you also the TXROO.
-So the question is the following.
+What do you need to know if this transaction is in this particular block, if I give you also the, if you know the `Tx_Root`?
+So the question is the following:
 I give you a transaction and I claim that this transaction is actually being in block number 11.
 Which kind of information do you need to know to check if transaction number one is in block number 11?
 In this example.
-In this example first, using the mark to do the reverse hash.
-Not the reverse hash but like the bit mask.
-This is not concatenated.
+Let's take this example first.
+
+student: Do the math to do the reverse hash.
+
+prof: Not the reverse hash but...
+
+student: ... like the bit mask to ...
+
+prof: This is not, they are not concatenated to identify them.
 They are just hashed and hashed and hashed.
-All the transactions.
-In this case, I need all the transactions to check if transaction number one is here.
+
+student: All the transactions.
+
+prof: All the transactions. Yeah, in this case here, I need all the transactions to check if transaction number one is here.
 So I need 1000 transactions or in this case, let's say, I need 4 transactions.
-Let's say it's just a 4.
+Let's say, just a 4.
 I need 4 transactions to check if transaction number one is in this block.
-How many other transactions information do I need to know if transaction number one is in this block using a mercury?
-I need transaction number 0.
-I compute this, I compute that and I need the hash 23.
-I don't need this and this so I need 1, 2, 3.
-The hash 0 would be already enough right?
-The transaction 0 could be anonymous.
-The Yama, this is not stored.
+
+How many other transactions' information do I need to know if transaction number one is in this block using a Merkle tree?
+
+student: ... subtree ...
+
+prof: Subtree, which is I need transaction number 0 and
+I compute this, I compute that and I need the hash...
+I don't need this and this, so I need 1, 2, 3.
+
+student: The hash 0 would be already enough right?
+The transaction 0 could be anonymous?
+
+prof: Yeah, but this is not stored.
 The only thing that is actually stored in the node is this.
 That's the interesting thing and that also gives these light nodes some kind of sense.
 If I claim that my transaction is in block number 12 and this node doesn't know all the other hashes,
 I just need to provide my transaction, transaction number 0 and that can be computed if this is the same as this one.
-So normally I would need to provide all the false transactions.
-Here I just need to provide 3.
-Now imagine that you don't have such a simple mercury.
-We have a much larger mercury where we have much more nodes.
-Then again the information I need to provide to check that a transaction is in the mercury is normally only the number of levels of the tree.
-You automatically get up and you just need to provide the pairing hashes and that reduces computing power and data that you need to provide.
-How do I know in this case for example hash 23, 24 in the root of the store?
-This is then often stored here within the node.
-That's how they know that.
+So, normally I would need to provide all the four transactions.
+Here, I just need to provide 3.
+Now imagine that you don't have such a simple Merkle tree.
+We have a much larger Merkle tree where we have much more nodes.
+Then again the information I need to provide to check that a transaction is in the Merkle tree is normally only the number of levels of the tree.
+You automatically get up and you just need to provide the pairing hashes and that then reduces computing power and data that you need to provide.
+
+student: How do I know in this case for example hash 23 is in the root stored?
+
+prof: This is then often stored here within the nodes themself.
+They know that.
 They need to do less comparisons.
-This is the head-out.
+
+student: This is the header.
 Then the block itself really contains all the data.
-For example if one node wants to communicate that to another node,
+
+prof: For example, if one node wants to communicate that to another node,
 then it just needs to send this, this, this and that.
-Actually in mercurys they have been invented before blockchain.
+
+Actually, Merkle trees they have been invented before blockchain.
 They have been invented in communication technology.
 In communication technology you want to save computing power and you want to save bandwidth.
 If you want to communicate that to someone else,
 you just need to reduce the amount of information instead of the whole information.
-With a reduced amount of information you can check that part of the information is contained in that information.
-So in mercurys, maybe someone can look it up on where mercurys came from.
+With a reduced amount of information you can check that parts of the information is contained in that information.
+So Merkle trees, maybe someone can look it up on where Merkle trees came from.
 I believe they came from communication technologies.
-They wanted to make communication more like that.
+They wanted to make communication more light.
+
+## org
+
 Okay, good.
 With this we can stop today.
-What we do next time is then to discuss what happens if we have more than one front-section.
+What we do next time is then to discuss what happens if we have more than one transaction.
 How do we actually send if we have one bitcoin?
-But I only want to pay you a half of bitcoin.
+But I only want to pay you a half bitcoin.
 How can I cut a bitcoin into two pieces?
 I don't know.
-I know that you don't know that.
+I know that, you don't know that.
 Next time we discuss that.
 Some other very interesting issues.
 Then we also go to some other kind of blockchain principles.
-Because at the moment bitcoin is the only blockchain that is still using 2K.
-But there are others in the group of state.
-Then we discuss how the group of state works and what they actually do.
-I will think if I can give you already some kind of exercises.
-Maybe it will just be some questions that you ask for yourself.
-So that you can recap that you understood all the things.
+Because at the moment **bitcoin is the only blockchain that is still using proof of work**.
+But there are others which use **proof of stake**.
+Then we discuss how proof of stake works and what they actually do.
+
+I will think if I can give you already some kind of exercises,
+maybe it will just be some questions that you can ask for yourself,
+so that you can recap that you understood all the things.
+
 Okay, good.
 See you next time.
 Next time.
+
 Okay, exam date.
 Normally I do it in week one or two after the last lecture.
 Would that be okay?
