@@ -17,42 +17,47 @@ tags:
 
 # Blockchain Basics (Part 2)
 
-The hash is somehow, again, double-hatching more.
-In pre-hatching, so in our block,
+## Recap: Merkle Tree
+
+The hash is somehow, again, double-hashing ~~more~~.
+~~In pre-hashing~~, so at least in our block,
 we could also store not just the hash of the pairwise hash,
 but just hash all that.
 How do we do that?
-How do we do the trip of doing this pairwise hash?
-Because then you can prove to someone else
+How do we do the trick of doing this pairwise hashes?
+
+student: Because then you can prove to someone else
 that our transaction is on this block,
 by just providing the hash of our transaction,
-the neighborhood transaction, and the on top of our hash.
-Yeah.
+and the neighboring transaction on top of our hash.
+
+prof: Yeah.
 That's the right thing.
 If you want to prove that transaction number zero
 is in this here, we only need to provide this hash
 and that hash.
 So two hashes, otherwise we need to provide three transactions.
-So we say one.
+So we save one.
 It's not that much here, but if we
-take the three much farther, much further,
+take the tree much further,
 then it makes sense.
-So we just need to give less information
-to prove that particular transaction is within this particular block.
+So we just need to give out less information
+to prove that a particular transaction is within this particular block.
 So we have less operations to do.
 We need to provide less information.
-And actually, I think I mentioned it last time.
-It comes from communication technology.
+And actually, I think I mentioned it last time,
+it comes from communication technology.
 So it also has been used to prove
 that the transmission of something between two endpoints
 is correct.
 So it just saves information that we need to transmit.
 Yeah.
 OK.
-So then come on.
-Do something.
+
+## Recap: What happens when you pay one Bitcoin?
+
 We went further and we discussed also that this is the case.
-Then did you discuss the point that what happens if we want to pay
+Did we discuss the point that what happens if we want to pay
 one bitcoin and we discussed that last time?
 No.
 Good.
@@ -60,102 +65,110 @@ Yeah.
 Then we jump in.
 Yeah.
 OK.
-So now, how do they actually prove that you have a bitcoin when
+
+## slide: "That was just the beginning ..."
+
+### "How do you actually prove in the Bitcoin Chain that you have the necessary balance?"
+
+So, **how do you actually prove that you have a bitcoin** when
 you want to transmit a bitcoin?
 Let's imagine I want to pay you a bitcoin.
 How can I show that I have a bitcoin at all?
 I mean, the blockchain, in particular, bitcoin,
-the theorem is a bit different.
-I think bitcoin doesn't have any account statement from you.
-It doesn't store what conference has one bitcoin or two
-bitcoins like a normal bank account.
-Your bank account stores 100 euros.
+Ethereum is a bit different, I think, **bitcoin doesn't have any "account statement" from you**.
+It doesn't store "Wolfgang Prinz has one bitcoin" or "two bitcoins" like a normal bank account.
+Your bank account stores "100 euros".
 And then you can transmit 1 euro.
 In bitcoin, you don't have that.
-Bitcoin is actually, in general, a blockchain.
-I mean, it's a ledger of transactions.
+Bitcoin is actually, or in general, a blockchain is a **ledger of transactions**.
 So far, we just, I mean, when we look at the diagram here,
-all we start is just that we have a lot of different transactions
+**all we stored is just that we have a lot of different transactions**
 in our system.
 Each block just stores transactions that A sent B
-to send something, 10 bitcoins.
-And that is all in.
-And there is no account telling B has 20.
+something, 10 bitcoins.
+And that is **all linked**.
+And there is no account telling "B has 20".
 That's not part of the whole system.
 That's not part of the game.
 This means that if B wants to send now a bitcoin,
-B wants to send a bitcoin to C, 1, you can see.
-It must prove that it owns already 10 bitcoins.
-And it does that by providing the information
-about that particular transaction.
+**B wants to send a bitcoin to C**, 1 BTC,
+**B must prove that it owns already 10 bitcoins**.
+And B does that **by providing the information about that particular transaction**.
 So you send the system, hey, here is my transaction in which
 I have received 10 bitcoins.
 And now I would like to send 1 bitcoin to someone else.
-What happens was the remaining 9 bitcoins.
+
+What happens with the remaining 9 bitcoins?
 I mean, you must do some magic computation.
 How do we get that?
-You produce a new output that hasn't changed the address.
-So what we do is then actually we put 1 bitcoin there
+
+student: You produce a new output that hasn't changed the address.
+
+prof: So what we do is then actually we put 1 bitcoin there
 and we prove it by providing 10 bitcoins.
-And in return, we get 9 bitcoins sent.
-And I was going to say, if you forget to do that,
+And in return, we get 9 bitcoins back.
+
+student: And I was going to say, if you forget to do that,
 you end up paying a fee of 9 bitcoins.
 Which is a bad state.
-That can happen.
-But this is not automatically by the wallet.
+
+prof: That can happen.
+But this is normally done automatically by the wallet.
 And again, you also have to provide some kind of transaction
 fees.
 We discussed it.
-And I think you mentioned last time the transaction fees.
-Not really depending on the amount,
+And I think you mentioned last time the transaction fees are
+not really depending on the amount,
 but on the overall traffic.
-The number of bytes that you get at the transaction.
-Consist off.
+
+student: The number of bytes that...
+
+prof: The number of bytes that the transaction consists of.
+
 And recently we did a similar tutorial.
 And then somebody mentioned just, I think it was at a bank.
-And they mentioned that someone sent a few Satoshis.
-He wanted to send a bitcoin.
+And they mentioned that someone sent a few Satoshis, no, he wanted to send a bitcoin.
 It was a large transaction.
 Or 1 bitcoin is even enough.
 And he wanted to provide some fees.
 And he just mixed it up.
-So we sent only a few Satoshis, which is the send in Bitcoin.
+So he sent only a few Satoshis, which is the "cent" in Bitcoin.
 He sent some Satoshis.
 And he provided a transaction fee of a bitcoin.
-And that was just before he just mixed it.
-Those of you who learn the bitcoin.
+And that was just because he just mixed
+both of the user inputs.
 Or if you just do this programmatically,
-I mean, you can use an API to do that.
-Then you learn about smart contracts and so on.
-You can use some programmatic transactions.
-If you just mixed the two variables, it's done.
-And what happens, every miner is happy.
+I mean, you can use an API to do that,
+when you learn about smart contracts and so on,
+you can do some programmatic transactions,
+if you just mix the two variables, it's done.
+And what happens is, every miner is happy.
 He gets a lot of transaction fees.
-So we do this regular for transactions.
+
+student: So we do this regular for transactions.
 So we'll quickly find the balance of this before.
 Because we basically, if not immediately,
 you can just find the full transaction register.
 Or a full measure and understand what is the balance.
 You might sum it up all.
-Yeah.
-Actually, and this is proven.
-I mean, this is being provided.
-But what?
+
+prof: Yeah.
+Actually, and this is proven, I mean, this is being provided by the wallet.
 On the other hand, the miner who is taking a transaction
 is also checking that this is true.
-But in this case, he doesn't need to traverse every second.
-You have to find any transaction where this happened.
+But in this case, he doesn't need to traverse everything.
+You have to find **any** transaction where this happened.
 So that is one thing.
-But what happens now if we want to send two bitcoins
-that we received, one Bitcoin there
-and another Bitcoin over there?
+
+But **what happens now if we want to send two bitcoins, but we received, one Bitcoin there and another Bitcoin over there?**
 We need to send both transactions.
-We need to send, well, we got this Bitcoin Bitcoin over here.
+We need to send, well, we got this Bitcoin over here.
 We got two Bitcoins over there.
 And now I want to transfer two and a half Bitcoins.
 So we need to send that.
-And then we get a half of Bitcoin back.
-And I think it's all done automatically somehow.
+And then you get a half a Bitcoin back.
+
+And it's all done automatically somehow.
 But it's something to remember that such a blockchain
 is not keeping an account for you.
 The blockchain is a list of transactions
@@ -163,33 +176,37 @@ that happened in the past.
 And your account is actually just
 the sum of all the transactions that
 are being stored for your particular wallet.
-So when you do a transaction, you
-need to provide every transaction since the last transaction.
-Because by performing the last transaction,
-you get this total amount.
-And then you have to sum everything up.
-So you have to pay for it.
-Actually, that means you have to provide the transaction that
-proves that you own this particular Bitcoin.
-And it hasn't been spent already.
-Yeah, so you don't need to provide every single transaction,
+
+student1: So when you do a transaction, you
+need to provide every transaction since the last transaction
+because by performing the last transaction,
+you get this total amount
+and then you have to sum everything up.
+
+prof: Actually, you have to provide a transaction that
+proves that you own this particular Bitcoin
+and it hasn't been spent already.
+
+student2: Yeah, so you don't need to provide every single transaction,
 just the ones that you need to spend the amount you want to send.
-But what does stop me from spending it twice?
+
+student3: But what does stop me from spending it twice?
 Like, I can provide the transaction from two months ago
 where I received the Bitcoin.
-And then provide that to multiple?
-Maybe you know better about it.
-I think it's being stored in the system.
-It's being part of the transaction
-that this has already been used.
-But it's already spent.
-Yeah, it's less than spent.
+And then provide that to multiple...?
+
+prof: Maybe you know better, but I think it's being stored in the system.
+It's being part of the transaction that this has already been used.
+
+student4: But it's already spent.
+
+prof: Yeah, it's has been spent.
 So it's being marked as spent.
 Not in the block where you got it,
 but in the new block where you used it.
 Because the old block can't be changed.
 If we got it here, and we are now doing this over here
-in the block, then we can't go back and say, well, this is done.
+in a block, then we can't go back and say, well, this is done.
 We just need to do it here.
 So the miner checks if this transaction appears later again.
 And it's marked as spent.
@@ -199,94 +216,134 @@ You can't change from that block to that block
 because there's no link.
 There is no link from here to there.
 It's only a link from here to there.
-Because at this point, we didn't know that there was another block.
-So I provide from two months ago the block with my transaction.
-And then from there on, not the block, just the transaction.
-The transaction.
+Because at this point, we didn't know that there is another block.
+
+student5: So I provide from two months ago the block with my transaction.
+And then from there on, ...
+
+prof: not the block, just the transaction.
+
+student5: The transaction.
 And from there on, you can go through all the blocks today
 and just check if this transaction appears.
 And you don't need to check all the transactions.
-Yes.
+
+prof: Yes.
 And it's also the case.
 I mean, I'm not sure how they really implemented that.
-Maybe it's just as an exercise to the code Bitcoin.
+Maybe interesting just as an exercise to look into the code of Bitcoin.
 I believe that all the miners, they keep local databases
-that they use as cash.
+that they use as cache.
 Yeah.
-I think they don't use just, they don't traverse all the blocks.
-I mean, they use database locally in which they somehow
+I think they don't traverse all the blocks.
+I mean, they use a database locally in which they somehow
 simulate your account.
-Yeah, they have basically a list of all unspent transaction
-outputs.
-And then they can just check where that database runs.
-Implementation level there is an account level,
+
+student1: Yeah, they have basically a list of all unspent transaction outputs.
+And then they can just check whether that database contains...
+
+student2: On an implementation level there is an account balance,
 but on a methodology level not.
-Yes.
+
+prof: Yes.
 That's exactly it.
-That's a very nice answer phrase it.
+That's a very nice way to phrase it.
 So if we wouldn't optimize the whole thing,
-then we would have, then we would
-be to traverse the whole blockchain.
+then we would need to traverse the whole blockchain.
 But obviously, we optimize it.
-And then they have local caches and unspent
-for UXTO.
-UX with UT.
-So yeah, there where we saw all the others.
-OK, so some other things that we asked.
+And then we have local caches and unspent transaction output, UTXO...
+
+student: UTXO.
+
+prof: where we store all the problems.
+
+---
+
+Gemini: "bitcoin The remaining sum is 'remitted' as a new transaction meaning"
+
+In Bitcoin, the phrase "the remaining sum is remitted as a new transaction" refers to the **change mechanism** in the Unspent Transaction Output (UTXO) model. Because Bitcoin UTXOs (analogous to physical coins or cash) must be spent in their entirety, any amount not sent to the recipient must be "remitted" (sent back) to a new address controlled by the sender as change.
+
+Here is a detailed breakdown of what this means:
+
+1. The "Cash" Analogy
+
+Imagine you have a $50 bill (a 50 BTC UTXO) but only want to buy a coffee for $5 (0.5 BTC). You cannot tear off 1/10th of the bill. You must give the cashier the entire $50 bill. The cashier then returns $45 in change.
+
+- **The Input**: The $50 bill (the entire 50 BTC).
+- **The Output 1 (Recipient)**: $5 (0.5 BTC) to the coffee shop.
+- **The Output 2 (Change)**: $45 (49.5 BTC) "remitted" back to you.
+
+2. What "Remitted" Means in This Context
+
+- **Automatic Return**: Your wallet software automatically generates a new, hidden address (a "change address") to receive the leftover funds from your own transaction.
+- **New UTXO**: The leftover amount becomes a new, separate "coin" (UTXO) in your wallet that you can spend in the future.
+- **Complete Consumption**: The original input (e.g., 50 BTC) is considered "spent" and destroyed on the blockchain, and replaced by two new outputs (the 0.5 BTC payment + 49.5 BTC change).
+
+3. Why it is Called a "New Transaction"
+The change is returned as a "new transaction" because it is a new UTXO that must be recorded on the ledger. It serves two main purposes:
+
+- **Privacy**: It helps break the link between your original address and your remaining balance.
+- **Transaction Fee Handling**: The difference between the total input and the total output (including the change) is what miners collect as a fee.
+
+If you send 1 BTC from a 2 BTC input, and the fee is 0.001, your wallet will create a transaction sending 1 BTC to the recipient and 0.999 BTC back to you.
+
+---
+
+### "Why is there a recommendation that you should wait 6 transactions, i.e. ~ 1 hour, to be sure that the transaction is valid?"
+
+OK, so some other things that we have.
 OK.
-Does somebody know why we should wait six transactions
-before a transaction is valid?
+
+Does somebody know **why we should wait six transactions before a transaction is valid?**
 I mean, obviously what we do is we have our transactions here.
 So let's try to construct this.
 So let's say that is our blocks here now.
 And we have just submitted our transaction.
 And this transaction has been recorded here A to B to 10.
-And we got from the system back, we saw.
-Later on we see this.
-There's a nice user interface.
-This block is now in the blockchain.
-Why should we still wait six more transactions
-before we really are sure that this is done?
-And my example is that I would like to say,
-I don't have a Porsche.
-Imagine that I have a Porsche.
+And we got from the system back, we saw - later on we will see this, there's a nice user interface - this block is now in the blockchain.
+Why should we still wait six more transactions before we really are sure that this is done?
+And my example is that I would like to sell you my, I don't have a Porsche, imagine that I have a Porsche,
 I want to sell it to him for a Bitcoin.
 And so he provides me the Bitcoin.
-And I give him the key as soon as I see, ah, it's there.
-It's in the block.
+And I give him the key as soon as I see, ah, it's there,
+it's in the block.
 He gets the key and drives away.
 What could happen?
 Yeah.
-Like I could spend in two very different places
-at the same time.
-And due to the physical distance, they couldn't communicate
-in time that was spent twice.
+
+student: Like I could spend in two very different places at the same time.
+And due to the physical distance, they couldn't communicate in time that was spent twice.
 Like I could buy both types of the car at the same time.
-Did I mention that it's not already done?
+
+prof: Did I mention that example already last time?
 OK, now, that's right.
 That's the case.
 That's something I can do.
 Another thing?
-I believe there is some consensus on what
-blocks and is currently in use.
-So the longest one is shown all the time.
-Yeah.
+
+student: I believe there is some consensus on what blocks is currently in use.
+So that longest one is chosen all the time.
+
+prof: Yeah.
 And this builds on that one.
-Yeah, both is one.
-Or maybe some miners are operating on one kind of block.
-And some others are.
-Yeah, we are operating on the same one.
-Yeah, but after some time there is a consensus again.
-Or some.
-Let's try to construct something.
-And so I'm selling him.
+Yeah, both is fine.
+
+student: Or maybe some miners are operating on one kind of block.
+And some others are...
+
+prof: Yeah, you all are operating on the same one.
+
+student: Yeah, but after some time there is a consensus again.
+Or some...
+
+prof: Let's try to construct something.
+And so I'm selling him...
 He seems to be experienced.
 So I'm very unexperienced.
-So I sell him my car for a bit.
-What he does, what he can do is to follow it.
-He, since you are friends, yeah.
-So what you do is that he gives you his access.
-He gives you access to his wallet.
+So I sell him my car for a bitcoin.
+What he does, what he can do is the following:
+He, since you are friends, yeah,
+so what you do is that he gives you access to his wallet.
 And he submits his transaction down here.
 You connect to another miner somewhere in China
 at the other end of the world.
@@ -295,23 +352,23 @@ And then you just hope.
 You hope that this transaction is in one block.
 Let's imagine.
 It's not yet there.
-So this transaction, A2B, gets here in Europe.
-This is German theater.
-Let's assume that Bitcoin mining is German theater.
+So this transaction, A to B, gets here in Europe.
+This is German Telekom.
+Let's assume that Bitcoin mining is German Telekom.
 You connect to a miner somewhere
 or to the network in Asia, somewhere else.
-So A2B, you just hope that there is some way, not
+So A to B. You just hope that there is some way, not
 a fast connection between these.
-But you don't go to A2B or to A2C.
-You're transferring somewhere else.
-Maybe you're transferring yourself.
+But you don't do A to B or you do A to C,
+you're transferring somewhere else.
+Maybe you're transferring to yourself.
 So what you hope is that this is not being recognized.
 Because each miner, this one here in Europe,
 or this one in Europe, this one is in Asia,
 maybe because of some communication problems or so
-that don't recognize that both transactions are being sent.
+they don't recognize that both transactions are being sent.
 If we would send both transactions to that miner here,
-you would immediately see that we
+he would immediately see that we
 try to use the same bitcoins for two different transactions.
 It would be rejected immediately.
 You just hope they don't talk to each other fast enough.
@@ -320,12 +377,12 @@ And then we hope that both find the new block
 within the next period.
 So already two assumptions, which are very strange,
 but they could happen.
-So what happens now is that both find the non-stake,
-provide the header information, and they both submit it,
+So what happens now is that both find the nonce,
+they provide the header information, and they both submit it,
 both into the network.
 Which means we have two different blocks now.
 This one has been mined, and this one has been mined.
-Both found the right non-stake.
+Both found the right nonce.
 Both submitted it to the network.
 We submit it to all the miners.
 All miners receive two new blocks.
@@ -341,7 +398,7 @@ This happened in Asia.
 Let's see.
 We do it in the US.
 USA.
-That's USA.
+That's the USA.
 That's Asia.
 We are in Europe.
 So now we get new transactions.
@@ -349,45 +406,48 @@ And now we start building a new block.
 And for this new block, we need to decide
 to which previous block do we connect.
 Do we connect to that block or to that block?
-What could be a good rule to decide?
-To which block we connect?
-We don't have more money.
-Similar?
+What could be a good rule to decide to which block we connect?
+
+student: Where we have more money.
+
+prof: Similar.
 Similar.
 Similar.
-But really, with them, we would, yeah,
+Not really, yeah,
 more money could be something.
 It's not more money.
-I don't know.
-Somehow it's work.
-Work.
+
+student: I don't know.
+Somehow we have work to do.
+
+prof: Work.
 Work.
 It has a little bit to do with work also.
-But not all of what we have to do.
+But not our work that we have to do.
 Yeah.
-The one that the majority connects to.
-We don't know which majority connects to at this point
+
+student: The one that the majority connects to.
+
+prof: We don't know which majority connects to at this point
 directly.
 But we know something else.
 We know how big the block is.
 So the size of the block, the length of this particular block.
 So we want to continue the chain actually
-at a point where has been already most transactions have
+at a point where most transactions have
 already been somehow included.
 So if this, for example, has 6,000 transactions
 and that has 4,000 transactions, we
 will choose that one.
-Because here, I'm not transaction inside.
+Because here are more transaction inside.
 It's more valuable.
-It has a little bit to do with the value of the money.
-That's in there.
+It has a little bit to do with the value of the money that's in there.
 And if the length is the same, then the next decision point
-is that we say, we look at the nonce.
-And then we say, the back of the nonce is, we choose that one.
+is that we say, we look at the nonce,
+and then we say, the better the nonce is, we choose that one.
 Let's imagine we need four zeros, 0, 0, 0, 9, something.
 And this one has 0, 0, 0, 5.
-This is data.
-It wasn't smaller.
+This is better because it's smaller.
 It was more difficult to find.
 Or even this has another 0 here.
 Then it's even much better.
@@ -396,14 +456,14 @@ So the longest chain survives.
 So what we do now is that we say, OK,
 both have the same number of transactions.
 So let's keep the game.
-This is my best transaction to me.
+That's the transaction to me.
 I've sold my car for that one.
 And that is you're trying to cheat me.
 So what we do now is we connect to that block.
 What happens now?
 Next time, we would like to try the next block.
 But we would like to connect to this one now.
-But now what happens is that we cut that block here.
+But now what happens is that we get that block here.
 So we need to find the difference between that block
 and that block, because these transactions are already done.
 These transactions, there may be a few transactions in that block
@@ -417,9 +477,8 @@ So they become again free.
 They come back to the mempool, to this pool of transactions
 that still have to be worked upon.
 And they are free.
-Now what we do now is that we take these transactions,
-they react to include them in here.
-And then we see, hold on, a spent already 10 bitcoins here.
+Now what you do now is that we take these transactions and we include them in here.
+And then we see, hold on, A spent already 10 bitcoins here.
 So that transaction is no longer valid.
 So it will be rejected.
 And then, although I got the information
@@ -427,42 +486,49 @@ that it has already been consumed in a block,
 suddenly I get the transaction, sorry.
 It's not.
 It has been rejected, because it has been spent already
-on here.
-But here's the way with my car.
+over here.
+But he is away with my car.
 And then I'm in trouble.
 And that's the reason why you should wait six transactions
 which is approximately 10 minutes each.
 So we always get a block after 10 minutes
 before you really sell something valuable.
-Selling the pixel, so it doesn't matter.
+Selling a pizza or so, then it doesn't matter.
 But we wouldn't make such a big deal about it.
 Some questions?
-I did not have any understanding why I would
+
+student: I did not understand why I would
 with the same amount of transactions choose the one
-with the lower loans.
-Decision.
-OK.
-Because the lower loans is not difficult to find
-than a higher loan.
-How does it affect them?
-Because it doesn't affect you.
+with the lower nonce.
+
+prof: Decision.
+Because the lower nonce is more difficult to find
+than a higher nonce.
+
+student: How does it affect me?
+
+prof: It doesn't affect you.
 That's the miners' decision.
 It's just a rule that's being implemented in the protocol.
-And the second one would be why would I
-wait six transactions?
-There are reasons not to detect the issue.
-It's just a recommendation.
+
+student: And the second one would be why would I
+wait six transactions if there is no reason to make a mistake?
+
+prof: It's just a recommendation.
 It could be that again, we have this.
 It's just a matter that we say, OK, after six transactions,
-the whole chain will not stable.
+the whole chain is unstable.
 And on the other hand, after six transactions,
 even with something like a 51% attack,
 it's somehow, with a 51% attack, it's somehow very difficult
 really to modify six blocks back.
 Yeah.
 That's the point.
-60% to 51% attack is that we have 51% of the mining pool
-available for you so that you somehow can do something
+
+### 51% attack
+
+**51% attack** is that we have 51% of the mining pool
+available to you so that you somehow can do something
 that you somehow manipulate the previous block.
 And you have so much computing power
 that you can manipulate the previous block, that block,
@@ -470,10 +536,11 @@ and the next one.
 And you find much faster these blocks than the others
 find the next one.
 So you have so much computing power
-that you can do some reconflictation of previous blocks.
+that you can do some recomputation of previous blocks.
 And suddenly, you send it to the whole network,
 hey, this is now the longest chain.
 So imagine that we have something like this here.
+(drawing)
 So we now, that's the normal chain that's going on.
 And they are computing every 10 minutes, 10 minutes, 10
 minutes.
@@ -489,7 +556,7 @@ Then we do very quickly that one, that one, and that one.
 And define that, maybe, for example, within five, five,
 five minutes.
 So let's say, you know that's already 50 minutes.
-So this 20 minutes.
+So this is 20 minutes.
 And then we submit that chain into the network.
 And suddenly, this chain becomes longer than that chain.
 So this means the next block of all the other miners
@@ -497,131 +564,129 @@ who are in good assumption that everything is fine
 connect their blocks to this one.
 And this means that we did some kind of modifications over here.
 And that's this 51% attack.
+
 Could also be, and that's a similar attack,
-that we somehow try to do some somehow
+that we somehow try to do somehow
 disconnecting them off by doing some kind of, how do you call it,
-where you send too many requests to WebSolve or Denial of Service
-attack.
+where you send too many requests to a WebServer, Denial of Service attack.
 Yeah, you do some kind of Denial of Service attacks to them.
 So that they are just being cut off from the network for some time.
 In the meantime, you do some kind of re-chaining the whole thing.
 And suddenly, they come back and then they see,
-oh, that's not how the account stayed.
+oh, that's now the current state.
 So we have to connect to that one.
 And here you did some tricks.
+
 The point is the 51% attack is real.
 It can happen.
-But if this happens, what would happen in the same thing,
-everybody would lose trust in Bitfarm.
-So you earn a lot of money by this versus.
-So the one question is, I was going to ask more that, OK,
+But if this happens, what would happen at the same time,
+everybody would lose trust in Bitcoin.
+So you earn a lot of money but it is worthless.
+So there was one question over there.
+
+student: I was going to ask more that, OK,
 you have first a lot of computing power to do this.
-And then you have to do it subsequently three times
-for you to beat the other person that did it one time.
-And it didn't wait 10 minutes, for example.
+And then you have to do it subsequently, like three times,
+for you to beat the other person that did like one time,
+and didn't wait 10 minutes, for example.
 How doable is this?
-How much computing power is it even possible?
+How much computing power is it? Is it even possible?
 I mean, one computer won't do it.
-No, no, you would need the whole computing center to do that.
+
+prof: No, no, you would need a whole computing center to do that.
 And we will have a look at Mempool.
-Then we see who is company mining.
-And then let's move a little bit.
+There we see who is currently mining.
+And then... let's move a little bit.
 Let's wait a little bit.
 Let's delay the answer.
 Yeah?
-I can.
+
+student: I can.
 And the one that I'm going to move on,
 can I come to the end of the table?
 I can get all the data and I can get the correct one.
-You don't claim it's the correct one.
+
+prof: You don't claim it's the correct one.
 You just submit the whole blocks.
 And the blocks are correct in themselves.
-You just manipulate it one transaction in there.
+You just manipulated it one transaction in there.
 So what you did is that I transferred one Bitcoin
 to you.
 And you just insert here not one Bitcoin,
-but maybe 10 however.
+but maybe 10 or whatever.
 Maybe even I have 10.
 Maybe then I got 10.
-If everything is correct.
+Everything is correct.
 I had 10 and you're just stealing the 10 Bitcoin instead of one.
 And then you're just computing all the different blocks.
 So the blocks in themselves are correct.
-They have the right non-stay, change to each other.
-You just manipulate one transaction
-by stealing real money.
-And if this is that long lot, then the other ones,
+They have the right nonce, they are chained to each other.
+You just manipulated one transaction
+by stealing really money.
+And if this is then longer than the other ones,
 then it's being accepted.
 You don't pretend it's correct.
 It is correct.
-It's a correct change.
+It's a correct chain.
 But you just manipulated one of the transactions.
-But they wouldn't be able to steal Bitcoin that hasn't been spent.
+
+student: But they will be able to steal Bitcoin that hasn't been spent.
 What they could do is they could rearrange transactions
 that have already occurred.
-Because it would require validating signatures instead of that.
-So it's not easy to do.
-But it's just something could happen.
+Because it would require validating signatures and stuff like that.
+
+prof: So it's not easy to do.
+But it's just something that could happen.
 And when you talk to people about blockchain,
-they come along, ah, 51% of the tech.
+they come along, ah, 51% attack.
 Blockchain is insecure.
-Because we have the 51% of it.
-We have similar techs.
-I've heard that a lot of Bitcoins have been stolen.
-We discussed later on a little bit
+Because we have the 51% attack.
+We have simple attacks.
+"I've heard that a lot of Bitcoins have been stolen."
+We discuss later on a little bit
 how you really can steal Bitcoins, but not using that.
+
+## slide: "Bitcoin - A few facts"
+
 OK.
 So something else, what we can also say,
-is that some numbers, so in the end,
-we will have a maximum number of Bitcoins,
-which is 21 million Bitcoins.
-We will not have more than 21 million Bitcoins.
-That's in the protocol.
-And I told you already that we have this Bitcoin halving.
-So approximately every 210,000 blocks,
-we do some kind of halving.
-Which means that the incentive is coming here 3.1.
-And then it will be 1.56 something.
-And this takes place in April last year.
-We have the last halving.
-And in 2140, the last Bitcoin will be mine.
-And then there's no more Bitcoins.
-There will be no more new Bitcoins.
-There will be 21 million Bitcoins.
-And this is now the point that everybody says,
-and that's the reason why Bitcoin will increase in value.
-Because there will be no more Bitcoins,
-but we need more money.
-This means that the individual Bitcoin
-will become more valuable.
-We need to learn more, I don't know.
-But that's the point.
-And something interesting that I also just learned last week
-is the following.
-So which means that we have one period in time
-where we got 50 Bitcoins as an incentive
-for our mining fees.
+is that some numbers,
+
+- so in the end, we will have a **maximum number of Bitcoins**, which is **21 million Bitcoins**. We will not have more than 21 million Bitcoins. That's in the protocol.
+- And I told you already that we have this **Bitcoin halving**. So approximately **every 210,000 blocks** we do some kind of halving.
+  - Which means that the **incentive** is currently at **3.125 BTC**. And then it will be **1.5625 BTC** per block.
+  - And this takes place in **2028**, so April last year we had the last halving.
+- And in **2140**, the **last Bitcoin will be mined**.
+  - And then there's no more Bitcoins. There will be no more new Bitcoins. There will be 21 million Bitcoins.
+  - And this is now the point that everybody says, and that's the reason why Bitcoin will increase in value. Because there will be no more Bitcoins, but you need more money. This means that the individual Bitcoin will become more valuable. Believe it or not, I don't know. But that's the point.
+
+And something interesting that I also just learned last week is the following
+which means that we had one period in time
+where we got 50 Bitcoins as an incentive for our mining fees.
 That was just at the beginning, the first years.
 So it took about four years.
 Then it was decreased to a period where we got 25.
 Then it was decreased to a period of 12.5, 6.5, and the rest.
 And just a very interesting thing is the following.
-That in this time, 50% of all Bitcoins have been produced.
+That in this time, 50% of all Bitcoins had been produced.
 So during the time that we got 50 Bitcoins per block
 as an incentive, we produced 10,500,000 Bitcoins.
 50%.
 Then in the next time, when we got 25 Bitcoins as an incentive,
 we produced 25% of the total number.
-So it's some kind of what you call it anecdotal knowledge,
-somehow, which is quite funny, which you can tell in the background.
+So it's some kind of, what you call it, anecdotal knowledge,
+somehow, which is quite funny, which you can tell everybody in the pub.
 And that's how it works.
 So at the moment, the current period of five years,
 we actually produced only 3.1% of the whole sum of Bitcoins,
 which means that most of the Bitcoins have already been produced.
 There will not be that much coming in the end.
-So that's the time that we go to this web page here.
+
+## Mempool Demo
+
+So that's now the time that we go to this web page here.
 Let's see.
-That's Mempool.
+That's **Mempool**.
 Mempool is a web page that is here.
 It's come in live.
 And what we see here are the Bitcoin blocks that have been mined.
