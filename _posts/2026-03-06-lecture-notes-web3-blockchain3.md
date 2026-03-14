@@ -1305,7 +1305,7 @@ So it's solving a crypto-puzzle, and it requires energy, computing, performance 
 
 What we could do is, we can run a blockchain,
 everybody of us is running a node, and we just have one very **explicit validation node**.
-In the areas in the **old blockchains, in particular, did this**.
+BigchainDB, in the areas in the **old blockchains, in particular, did this**.
 We can just tell you, you are the one who's always validating the blocks.
 We trust you, and then you distribute the blocks to all of us.
 So we all have the status of our transactions, but he is our trust provider.
@@ -1352,39 +1352,11 @@ Are we a single node or is each person a single node?
 
 prof: Each person is a single node.
 
-student2: Okay, so if a node tries to cheat the other nodes, they take all the money.
-
-prof: They take the money and turn it off.
-They get the money.
-Or they put it into a pool.
-I think they put it into a pool.
-
-Ivan: They first **"slash"** him and I think the rule is... it's not directly...
-
-prof: But I'm not sure where the money goes actually.
-
-Ivan: Probably it's distributed...
-
-prof: Maybe it's distributed or they just send it to zero (ie. **they "burn" it**).
-
-student3: How do they do it?
-Take the money, the money pool, and the pool...
-
-prof: It's a voting procedure.
-It's probably interesting to check in more detail how they actually do it.
-But as soon as they detect it, they just take the money.
-
-student3: They work like they do more than they do.
-
-prof: They can't do it.
-They can't do it.
-Good question.
-Yeah, good question.
-I don't know.
+student2: Okay, so if a node tries to cheat the other nodes, they take all the money?
 
 ---
 
-ChatGPT: "In Ethereum proof of stake, if a node tries to cheat the other nodes, what happens? Who takes all the money?"
+## ChatGPT: "In Ethereum proof of stake, if a node tries to cheat the other nodes, what happens? Who takes all the money?"
 
 In **Ethereum’s Proof-of-Stake (PoS)** system, cheating doesn’t pay—because the protocol **automatically punishes the validator by destroying part of its stake.** This mechanism is called **slashing**.
 
@@ -1442,7 +1414,7 @@ If you want, I can also explain **why Ethereum burns most of the slashed ETH ins
 
 ---
 
-ChatGPT: Follow-up: "Yes"
+## ChatGPT: Follow-up: "Yes"
 
 Good question—this is where the **game theory** behind **Ethereum Proof-of-Stake gets interesting.
 
@@ -1455,7 +1427,7 @@ Because that would create **dangerous incentives**.
 
 ---
 
-## 1. Prevents validators from trying to trap each other
+### 1. Prevents validators from trying to trap each other
 
 If slashed ETH went entirely to other validators, they might try to **trick competitors into making mistakes**.
 
@@ -1468,7 +1440,7 @@ By **burning most of the stake**, nobody can make big money from someone else’
 
 ---
 
-## 2. Removes profit from attacking the system
+### 2. Removes profit from attacking the system
 
 If attackers knew someone else would profit from slashing them, it could lead to **collusion attacks**.
 
@@ -1483,7 +1455,7 @@ Burning the funds **eliminates this possibility**.
 
 ---
 
-## 3. Keeps the focus on network security
+### 3. Keeps the focus on network security
 
 The goal is:
 
@@ -1513,101 +1485,150 @@ If you're studying blockchain concepts, another interesting thing is **how Ether
 
 ---
 
+## slide: "Validation of Transactions in a Community - Consensus building" (continued)
+
+prof: They take the money and turn it off.
+They get the money.
+Or they put it into a pool.
+I think they put it into a pool.
+
+Ivan: They first **"slash"** him and I think the rule is... it's not directly...
+
+prof: But I'm not sure where the money goes actually.
+
+Ivan: Probably it's distributed...
+
+prof: Maybe it's distributed or they just send it to zero (ie. **they "burn" it**).
+
+student3: How do they do it?
+Take the money, the money pool, and the pool...
+
+prof: It's a voting procedure.
+It's probably interesting to check in more detail how they actually do it.
+But as soon as they detect it, they just take the money.
+
+student3: They work like they do more than they do.
+
+prof: They can't do it.
+They can't do it.
+Good question.
+Yeah, good question.
+I don't know.
+
+### trade-off: openness vs. performance
+
 prof: What is happening now is actually with this.
-Here we get not very open.
+Here we get **not very open**.
 Selected validation.
 In order to, let's say, we trust each other.
-And we run the network with an explicit validation node with him.
+And we run the network with an **explicit validation node**, with him.
 And this validation node is probably every week we choose something different.
-That is very much based on trust, organizational trust.
+That is **very much based on trust**, organizational trust.
 That we all trust each other.
 That we keep things clear.
 There's a newcomer coming into the door.
 We just didn't allow him to join.
-First we probably would like to check in.
+First, we probably would like to check him.
 Is he trusted or not?
-So this is very much for not open networks.
+So this is very much **for not open networks**.
 It's for a network that we operate as a test for our supply chain or something else.
-The more we come down here, the more open we can be.
-Here the miners can really come from, not Korea or Russia.
+**The more we come down here, the more open we can be.**
+Here the miners can really come from, North Korea or Russia or whatever.
 Even with proof of work it works.
 But further we come down here, it's not working.
-On the other hand, here we have good performance.
+
+On the other hand, here we have **good performance**.
 It's just he is doing the mining and running like hell.
 Here we have proof of work, which takes time.
-That's what it's really, kind of, a design decision that we need to make.
-And something that we operate there on this is actually the way how we can...
-Yeah, this one.
+That's what it's really, kind of, **a design decision** that we need to make.
+
+## slide: "CLASSIFICATION OF BLOCKCHAINS - DEGREE OF PUBLICITY AND ACCESS RESTRICTION"
+
 Actually the point is then, is how we actually run our particular blockchain.
-So we can run a blockchain, as a public blockchain network with permissionless access.
-Which means that it's completely public and everybody can access.
+So we can run a blockchain, as a **public blockchain network with permissionless access**, which means that it's completely public and **everybody can access**.
 And that's Bitcoin.
-Anyone can restore ValiDev and mine.
-You can set up your miner, you can ValiDev, you can do whatever you like in the Bitcoin network.
+Anyone can read, store, validate and mine.
+You can set up your miner, you can validate, you can do whatever you like in the Bitcoin network.
 There is no regulation. Everybody can join.
-What we can do is also, if we say, well it's a public network,
-but it has a permissionless access, which means that anyone can read,
-but only authorized persons are allowed to store ValiDev and mine.
-This would mean, let me run miners here, but only those who run a miner can store data.
+
+What we can do is also, that we say, well it's a **public network, but it has a permissioned access**, which means that anyone can read, but only authorized persons are allowed to store, validate and mine.
+This would mean, that we run miners here, but only those who run a miner can store data.
 Only those are allowed to deploy a smart contract or execute a transaction.
 So the access control is somehow, for example, only with those people who run the miner.
-And who is not running the miner is not allowed to do that.
-Or we give them a particular access, we allow it to them.
+And who is not running a miner is not allowed to do that.
+Or we give him a particular access, we allow it to him.
 But we organize that as a community. It's not just for free.
-So what you can do is, the theory of making this with some other permission,
-a very public blockchain, everybody can store data.
+So what you can do with Ethereum and with some other permissioned public blockchains, everybody can store data.
 You just have to pay for it.
-What we can also do is that we have authorized persons allowed to read, store, ValiDev and mine.
-Only authorized persons can read.
+
+**Private blockchain network with permissionless access**: What we can also do is that we have authorized persons are allowed to read, store, validate and mine.
+Only authorized persons can do this.
 This means we are running a network and then only authorized persons are allowed to read.
-Not everybody. So something that ISAS can would not work here.
+Not everybody. So something that **EtherScan** would not work here.
 Because you need to have some kind of access allowance to do that.
 Not everybody could check our blockchain. It's a hidden blockchain.
-You can run it as a cloud.
-Or you have complete private blockchain network with permission to access.
-So only selected authorized entities are allowed to read, store, ValiDev and mine.
-And this is something you can do, for example, with cyber and fabric.
+We **run it as a club** more or less.
+
+Or you a have complete **private blockchain network with permissioned access**.
+So only selected authorized entities are allowed to read, store, validate and mine.
+And this is something you can do, for example, with **Hyperledger Fabric**.
 This has been done by IBM for particular use cases.
-So you can really operate your network in really different modes.
-So far we were talking about theory about Bitcoin.
+
+---
+
+Hyperledger Fabric, an open source project from the Linux® Foundation, is the modular blockchain framework and has become the unofficial standard for enterprise blockchain platforms.
+
+---
+
+So **you can really operate your network in really different modes**.
+So far we were talking about Ethereum, about Bitcoin, etc.
 But you can also run something in a very private way.
 You can actually download Hyperledger Fabric and start it on your PC and then you run the blockchain node on your PC.
 Whether that makes sense or not, I don't know.
-But it would make sense.
-Where would you put Monero on that store?
-Because it's a public blockchain that is encrypted and only readable by your bands.
-It's only readable by your bands.
-So it's somehow a public blockchain with permission to access.
-So you have some kind of a permission to access.
-You need permission to access. You need to know the keys to the project.
+But you could do it.
+
+student: Where would you put **Monero** on that list?
+Because it's a public blockchain that is encrypted and only readable by your ~~bands~~.
+It's only readable by your ~~bands~~.
+
+prof: So it's somehow a public blockchain with permissioned access.
+So you have some kind of a permissioned access.
+You need permission to access it. You need to know the keys.
 I think Monero would be there.
+
 That's one thing.
-So really something about the governance.
+So that's really something about the **governance**.
 How you organize the blockchain.
 And the governance for Bitcoin is for free.
-The governance of something like that.
+The governance of something like that here...
 You could also use Hyperledger Fabric to do something like that.
 It's possible. But it's just a decision how you organize the blockchain.
 It's like how you organize your football club.
-Everybody could join. Everybody can play with you.
+Everybody can join. Everybody can play with you.
 I think that's the same.
 They will be on Saturdays. You can go to some football pitch and say,
-I wish you and they say, yes, come in.
-You're welcome. Or I say, no, we are closed.
+can I play with you and they say, yes, come in. We are open.
+You're welcome. Or they say, no, we are closed.
 We actually need some permission.
-The next thing is then also to say, okay, what kind of layers do exist?
-And this is then often the mixture of these different chains.
-The layer one chain, the red one, that's a chain like Bitcoin, Ethereum.
-It's a public chain.
-But it has the disadvantage like transaction fees are high.
-You see by just sending things around with us and send.
-And they are not very fast.
-And therefore we say, let's build another chain that is organized,
+
+## slide: "Blockchain Networks / Layers"
+
+The next thing is then also to say, okay, what kind of **layers** do exist?
+And this is then often a mixture of these different chains.
+
+The **layer one chain**, the red one, that's a chain like Bitcoin, Ethereum.
+It's **a public chain**.
+But it has the disadvantage like **transaction fees are high**.
+You see by just sending things around **we lost ten cent**.
+And they are **not very fast**.
+
+And therefore, we say, let's build another chain that is organized,
 for example, with proof of stake or even with a centralized node.
 And we anchor this particular chain in a public chain.
-And then we get to a layer two chain.
-Very often they are permission chains like Kvohom,
-where the status information is anchored in the level one chain.
+And then we get to a **layer two chain**.
+Very often they are **permissioned chains** like [Quorum](https://github.com/Consensys/quorum),
+where the status information is **anchored in a level one chain**.
+
 Why do we do that?
 Let's imagine that we run a particular blockchain here and we all trust each other.
 But somehow we don't trust each other that much.
@@ -1618,127 +1639,150 @@ And in order to avoid that, we do some kind of anchoring our blockchain.
 Let's say every day at 12 o'clock, we keep the hash of our blockchain
 and store that particular hash in Ethereum.
 And by doing that, we somehow anchor our blockchain in Ethereum in such a way
-that if we would modify our blockchain, everybody could prove that.
+that **if we would modify our blockchain, everybody could prove that**.
 Because we hashed the status of our blockchain today at 2 o'clock in Ethereum.
 And if you would now make some modifications to a transaction that happened at 10 o'clock in the morning,
 everybody could check it because then the hash is no longer the same.
-Couldn't you also have a similar effect if you take a level one chain
-and first select one random block and then say, okay, my genesis block
+
+student1: Couldn't you also have a similar effect if you take a level one chain
+and first select one random block and then say, okay, this is my genesis block
 and then from there, starting your own chain?
-You could do that, but this would mean that in block number 100, I start modifying it.
+
+prof: You could do that, but this would mean that in block number 100, I start modifying it.
 Because this same level chain here is not really running under the same mechanisms as the level one chain.
 So it would be possible if this chain is just being operated by 10 people,
-they just need to agree on that they just wouldn't make a modification to the transaction.
-But they would only be able then to make a change to the transaction history between the last checkpoints.
-So what we do is actually create checkpoints.
-But then for a really significant action, I would need to tell the next part of the summary.
-Read to be sure that nobody has changed in the tree.
-The next point is that if we have larger ones of data, let's say we have large database.
+they just need to agree on that they just wouldn't make modifications to the transactions.
+But they would only be able then to make a change to the transaction history between the last **checkpoints**.
+So what we do is actually we create checkpoints.
+
+student1: But then for a really significant action, I would need till the next 12 hours.
+
+prof: Somehow you would need to do that. Really to be sure that nobody has been changed in the tree.
+
+## slide: "Polygon Anchor in Ethereum"
+
+The next point is that if we have **large amounts of data**, let's say we have a large database.
 So for example, the slides of this particular lecture,
-we wouldn't put the slides of this lecture here into a blockchain because it's much too large.
+we wouldn't put the slides of this lecture here **into a blockchain** because it's much too large.
 Again, you just take the hash and you put the hash in here and then put it over there.
-And you can see that actually, Polygon is such a chain and that's quite interesting to see.
-So we have a user who is sending a transaction to the Polygon chain.
-The Polygon chain is now validating and finalizing the block using the Polygon validator.
-And then after some time, they start with a checkpoint.
-So we can see that it's a mercury to Ethereum level one to a particular smart contract,
+
+And you can see that actually, **Polygon** is such a chain and that's quite interesting to see.
+So we have a **user** who is sending a **transaction** to the Polygon chain.
+The Polygon chain is now **validating and finalizing the block** using a **Polygon validator**.
+And then after some time, they **submit a checkpoint**, again, it's a **Merkle tree**, to **Ethereum level one** to a particular **smart contract**,
 which is the checkpoint smart contract that is running on Ethereum.
-And then everybody somehow can use this one to verify the state.
-And you see there is a link. Let's go there and let's see.
-That's the smart contract that is being used by Polygon, which is the second level chain on Ethereum.
-So you just scan and what we see now here is that about 23 minutes ago, they submitted a checkpoint.
-The method of this particular smart contract here is something checkpoint and that was done 23 minutes ago.
-Again, 24 minutes ago. So about every 20 minutes, it's not really about the lead idea,
-but every 20 minutes, Polygon is submitting a checkpoint to Ethereum.
+And then everybody somehow can use this one to **verify the state**.
+
+And you see there is a [link](https://etherscan.io/address/0x86E4Dc95c7FBdBf52E33D563BbDB00823894C287) (on the slide). Let's go there and let's see.
+That's the smart contract that is being used by **Polygon**, which is the **second level chain on Ethereum**.
+So we go to **Etherscan** and what we see now here is that about 23 minutes ago, they submitted a checkpoint.
+The method of this particular smart contract here is "submit checkpoint" and that was done 23 minutes ago, again, 44 minutes ago. So, about every 20 minutes, but every 20 minutes, Polygon is submitting a checkpoint to Ethereum.
 So you see, it's quite not that much distance. You only need to wait 20 minutes until you're sure that they can't change anything.
 They still can change something, but it's immediately detected.
-You still can change, obviously, but you can't.
+You still can change, obviously, but you check and you detect it.
 So if we go there, so for example, we go to the contract and then we go to the right contract.
-And then there should be something like, it's using proxies, but there must be something like check bucket.
+And then there should be something like, it's using proxies, but there must be something like "submit"... "check bucket".
 That's the method.
-And this particular method has been called and this is on Ethereum.
-So on Ethereum, we have smart contract and on Polygon, we have another one that is just every 20 minutes calculating the check sum.
-Of the Polygon blockchain and sending it to this particular function of that smart contract on Ethereum.
+And this particular method is being called and this is on Ethereum.
+So on Ethereum, we have a smart contract and on Polygon, we have another one that is just every 20 minutes calculating the **checksum** of the Polygon blockchain and sending it to this particular function of that smart contract on Ethereum.
 And that's how the two chains operate.
-Okay, so, I was wondering about the energy consumption of Bitcoin because it does correlate with the amount of land action in the chain
-because it simply increases the block size.
-We could save energy and compute more transactions.
-We would reduce the energy consumption per transaction, but the overall energy consumption would be the same because this is not much dependent.
-Whether you hash 10,000 or 1 million, it's not that much difference.
-Really, the computation of finding the random number, that's what is taking the energy consumption.
+
+Okay, so,...
+
+student: I was wondering about the **energy consumption of Bitcoin** because... does it correlate with the amount of transactions in the chain
+because, if you would simply increase the block size, you could save energy and compute more transactions.
+
+prof: We would reduce the energy consumption per transaction, but the overall energy consumption would be the same because this is not much dependent,
+whether you hash 10,000 or 1 million, it's not that much difference.
+Really, the computation of finding the random number, that's what is taking the energy.
 But you could reduce the energy consumption per transaction.
-So the energy consumption reaches like a photo and then doesn't matter anymore.
+
+student: So energy consumption reaches like a plateau and then it doesn't matter anymore.
+
+prof: Yeah.
+
+## org
+
 Okay, so, I would like to discuss this now.
-We go to Ethereum staking the next time because I would like to associate with this also an exercise for you.
-The next point is now, how do we find the blockchain?
-In this case, you see here, little bit and I just took it from the database.
-That was about five years ago. Everybody wanted to have a blockchain application.
-And then the point was, when is a blockchain application a good application?
-And then there was something by Rist and Javai, they are from the ETH Zurich and they published a paper, it's linked down there.
-And they made this decision diagram that allows you to check if your application requires a blockchain or not.
-And the first thing is that you need to ask yourself, do you need to store a stake?
-If you don't need to store a stake, you don't need a blockchain.
-If you have a transaction, you need to store a stake, which is the Vamico, therefore you need a blockchain.
-But if you don't have anything to store, don't use blockchain. That's a symbol.
-The second thing is, do we have multiple writers?
-No, we have just a single writer. If you are not working in a group or something like that, if this is not relevant for more than one user, we don't need a blockchain.
-Then you can just store it on your blockchain.
-The next question is, can you use an always online TTP, trusted time, trusted transaction provider?
-If you have something like that, like a trusted transaction provider, don't use a blockchain.
-That is something that has been criticized, this particular decision.
-Because somehow what we do is with a blockchain, we replace this particular trusted transaction provider.
-So that is something that I don't somehow disagree with them.
-The next question is, we need to store a stake, we have multiple writers, we don't have an always on TTP.
-Are all the writers known?
-Known. Then we need a permissionless blockchain.
-So we have multiple writers, we don't know who is writing, we don't have someone who is doing it for us.
-We need a permissionless blockchain, which is, we can't, here we go.
-When all writers are known, which is our community here, imagine we run a blockchain and you would like, we have multiple writers, yes.
-We don't have someone we trust who can do it for us.
-No, then we are here, then we say, are all writers known?
-Yes, we are all known, we know each other.
-Then we go down here, are all writers trusted, do we trust each other?
-Yes, no blockchain.
-If we trust each other, we don't need a blockchain.
-Because blockchain is for providing trust in an environment where you don't trust everybody.
-Obviously we don't trust each other.
-Therefore, this public verifiability required, do we need someone else to verify what we put on a blockchain?
-No, then we make a private permissioned blockchain.
-So we just run a blockchain among ourselves, nobody is allowed to look into it.
-We don't tell anybody that we have a blockchain running, we just use it for our own purposes in order to secure the state that we have among ourselves.
-Imagine that we just run this blockchain, for example, for a Christmas party where we have our own token to buy the food.
-Now we just create this blockchain among ourselves, everybody is running a note on your mobile and that is what we use to create the currency for our Christmas party.
-It wouldn't make much sense, but that would be this way.
-Or if public verifiability is required, yes, so for example, if we need the ZPA to look into our blockchain because I gave tokens for good questions and good answers,
-I give tokens away and we run this on our particular blockchain, but the ZPA needs to look into that to check the grades that I give in the end.
-Then we use a public permissioned blockchain.
-So that's their decision tree and you will find that in a lot of blockchain servers.
+We go to **Ethereum staking the next time** because I would like to associate with this also an exercise for you.
+
+## slide: "The concept is clear, how should the application look alike?"
+
+The next point is now, how do we find a **good blockchain use case**?
+And, you see here,  and I just took it from a database.
+That was the point about five years ago. Everybody wanted to have a blockchain application.
+
+## slide: "Do we need a Blockchain?"
+
+And then the point was, **when is a blockchain application a good application?**
+
+And then there was something by Wüst and Gervais, from the ETH Zurich, and they published a paper, it's linked down there.
+And they made this **decision diagram** that allows you to **check if your application requires a blockchain or not**.
+
+- And the first thing is that you need to ask yourself, **do you need to store a state?**
+  - If you don't need to store a state, you don't need a blockchain.
+  - If you have a transaction, you need to store a state, which is the bank account, therefore you need a blockchain.
+  - But if you don't have anything to store, don't use blockchain. That's simple.
+- The second thing is, **do we have multiple writers?**
+  - No, we have just a single writer. If we are not working in a group or something like that, if this is not relevant for more than one user, we don't need a blockchain. Then you can just store it on your local PC.
+- The next question is, **can you use an always online TTP, trusted transaction provider?**
+  - If you have something like that, like a trusted transaction provider, don't use a blockchain.
+  - That is something that has been criticized, this particular decision. Because somehow what we do is with a blockchain, we replace this particular trusted transaction provider. So that is something that I don't,... I somehow disagree with them.
+- The next question is, we need to store a state, we have multiple writers, we don't have an always online TTP, **are all the writers known?**
+  - Known. Then we need a permissionless blockchain. So we have multiple writers, we don't know who is writing, we don't have someone who is doing it for us. We need a permissionless blockchain, which is, Bitcoin, Ethereum.
+- **When all writers are known**, which is,... our community here, imagine we run a blockchain and **we have multiple writers**, yes.
+  - We don't **have someone we trust who can do it for us.**
+    - No, then we are here.
+- Then we say, **are all writers known?**
+  - Yes, we are all known, we know each other.
+    - Then we go down here, **are all writers trusted, do we trust each other?**
+      - **Yes**, no blockchain. If we trust each other, we don't need a blockchain. Because blockchain is for providing trust in an environment where you don't trust everybody.
+      - Obviously, **we don't trust each other**.
+        - Therefore, **is public verifiability required? Do we need someone else to verify what we put on a blockchain?**
+          - **No**, then we make it a private permissioned blockchain.
+            - So we just run a blockchain among ourselves, nobody is allowed to look into it. We don't even tell anybody that we have a blockchain running, we just use it for our own purposes in order to secure the state that we have among ourselves. Imagine that we just run this blockchain, for example, for a Christmas party where we have our own token to buy the food. We just create this blockchain among ourselves, everybody is running a node on your mobile and that is what we use to create the currency for our Christmas party. It wouldn't make much sense, but that would be this way.
+          - Or **if public verifiability is required, yes**, so for example, if we need the ZPA to look into our blockchain because I gave tokens for good questions and good answers, I give tokens away and we run this on our particular blockchain, but the ZPA needs to look into that to check the grades that I give in the end, then we use a public permissioned blockchain. It's public, but permissioned, ie. the ZPA can look into it.
+
+So that's their **decision tree** and you will find that in a lot of blockchain papers.
 So it's very often it's being checked whether an application is being a good blockchain application or not.
-We modified it and we did it in the following way.
-So the first thing is that we said if you look for a use case on blockchain, the first thing that you need to look for is can you remove the intermediate?
+
+## slide: "Looking for a use case?"
+
+We modified it and we did it in the following way:
+
+So the first thing is that we said if you look for a use case on blockchain, the first thing that you need to look for is **can you remove the intermediate?**
 Do we have someone here in our game that is our intermediate that you would like to remain?
 Do we have something like a notary? Do we have someone to pay money? We pay money for that he provides trust to us.
 So somehow the ZPA is somehow a trust provider for us in some sense. They are keeping tracks of your records.
 That's right to remove it, put smart contracts on the blockchain.
-Or am I intermediate? If I am the intermediate, then I should be careful because my job, my business can be replaced with a smart contract on the blockchain.
-Or we need to find a new intermediate.
-That we say okay, we have different stakeholders here, but we don't really have a very high trust level.
+
+Or **am I intermediate?** If I am the intermediate, then I should be careful because my job, my business can be replaced with a smart contract on the blockchain.
+
+Or we need to **find a new intermediate**.
+That we say okay, we have **different stakeholders here, but we don't really have a very high trust level**.
 We would need to find someone who is trusted among us.
 For example, we would like to collect money for a Christmas party who is going to collect it.
 Do we trust anybody here to give him 100 euros from each of us?
 We probably say hold on, 100 euros, we have 20 people, well, it's quite a lot, 2000 euros, no, we don't trust someone.
 Let's move it to a blockchain.
 Then we find the intermediary on the blockchain that we use as the trusted partner.
-Or am I partner in such a process?
+
+Or **am I partner in such a process?**
 Am I partner in a supply chain network that is probably sometimes moving towards a blockchain solution that also has to be careful.
-Questions to ask, who costs money in that process and where am I a trust provider?
-If you are a trust provider, be careful because the whole business model can be disrupted by a blockchain.
-Or where can't we cooperate because we lack a trust instance?
-We would like to have a Christmas party but we have nobody who is collecting the money.
-Or where am I involved in a process that will change soon?
-Up to now, he was the big trusted guy and he's not leaving, he's taking his exams.
-We need someone else, we need to change the process, therefore we become blockchain ready.
-Some other questions we need to ask from a process perspective.
+
+Questions to ask:
+
+- Who costs money in that process and where am I a trust provider?
+  - If you are a trust provider, be careful because the whole business model can be disrupted by a blockchain.
+- Or where can't we cooperate because we lack a trust instance?
+  - We would like to have a Christmas party, but we have nobody who is collecting the money. Then we could use a blockchain.
+- Or where am I involved in a process that will change soon?
+  - Up to now, he was the big trusted guy and he's now leaving, he's taking his exam. We need someone else, we need to change the process, therefore we now need to become blockchain ready.
+
+## slide: "Looking for a use case? - From a process perspective"
+
+Some other questions we need to ask **from a process perspective**.
+
 Do we need a high level of data integrity?
 So look very much for routine processes where you need a high process of data integrity,
 grades, university, high data integrity, nobody should be able to change it.
