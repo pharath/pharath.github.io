@@ -1750,15 +1750,16 @@ So it's very often it's being checked whether an application is being a good blo
 
 We modified it and we did it in the following way:
 
-So the first thing is that we said if you look for a use case on blockchain, the first thing that you need to look for is **can you remove the intermediate?**
-Do we have someone here in our game that is our intermediate that you would like to remain?
-Do we have something like a notary? Do we have someone to pay money? We pay money for that he provides trust to us.
-So somehow the ZPA is somehow a trust provider for us in some sense. They are keeping tracks of your records.
-That's right to remove it, put smart contracts on the blockchain.
+1. So the first thing is that we said if you look for a use case on blockchain, the first thing that you need to look for is:
+**can you remove the intermediate?**
+Do we have someone here in our game that is our **intermediate** that you would like to remove?
+Do we have something like a **notary**? Do we have **someone we pay money for** that **he provides trust** to us.
+So somehow **the ZPA** is somehow a trust provider for us in some sense. They are keeping tracks of your records.
+Let's try to remove it, put smart contracts on the blockchain.
 
-Or **am I intermediate?** If I am the intermediate, then I should be careful because my job, my business can be replaced with a smart contract on the blockchain.
+2. Or **am I an intermediate?** If I am the intermediate, then I should be careful because my job, my business can be replaced with a smart contract on a blockchain.
 
-Or we need to **find a new intermediate**.
+3. Or we need to **find a new intermediate**.
 That we say okay, we have **different stakeholders here, but we don't really have a very high trust level**.
 We would need to find someone who is trusted among us.
 For example, we would like to collect money for a Christmas party who is going to collect it.
@@ -1767,14 +1768,14 @@ We probably say hold on, 100 euros, we have 20 people, well, it's quite a lot, 2
 Let's move it to a blockchain.
 Then we find the intermediary on the blockchain that we use as the trusted partner.
 
-Or **am I partner in such a process?**
+4. Or **am I partner in such a process?**
 Am I partner in a supply chain network that is probably sometimes moving towards a blockchain solution that also has to be careful.
 
-Questions to ask:
+Questions to ask (orange boxes on slide):
 
 - Who costs money in that process and where am I a trust provider?
   - If you are a trust provider, be careful because the whole business model can be disrupted by a blockchain.
-- Or where can't we cooperate because we lack a trust instance?
+- Or why can't we cooperate because we lack a trust instance?
   - We would like to have a Christmas party, but we have nobody who is collecting the money. Then we could use a blockchain.
 - Or where am I involved in a process that will change soon?
   - Up to now, he was the big trusted guy and he's now leaving, he's taking his exam. We need someone else, we need to change the process, therefore we now need to become blockchain ready.
@@ -1783,50 +1784,66 @@ Questions to ask:
 
 Some other questions we need to ask **from a process perspective**.
 
-Do we need a high level of data integrity?
-So look very much for routine processes where you need a high process of data integrity,
-grades, university, high data integrity, nobody should be able to change it.
-Or look for documentation and proof intensive processes.
-Avoid any legal or regulated processes because then you get in trouble with circulation.
-So as soon as you deal with money.
-So what you will find in the slides is this is the same question but you will also find this.
-And when we look for a use case and you call it the use case, Canvas for Blockchain,
-and let's say we find something of the use case of storing the grades of the student.
+- Do we need a **high level of data integrity?**
+  - So look very much for **routine processes** where you need a high percent of data integrity.
+  - Grades in university: high data integrity, nobody should be able to change it.
+  - Or look for **documentation and proof intensive processes**.
+- **Avoid** any **legal or regulated processes** because then you get in trouble with regulation.
+  - So, as soon as you deal with money, this becomes a problem.
+
+## slide: "USE CASE IDENTIFICATION FRAMEWORK"
+
+So what you will find in the slides is... this (slides: "USE CASE IDENTIFICATION FRAMEWORK") is **essentially the same questions**, but you will also find this (slide: "USE CASE CANVAS").
+
+## slide: "USE CASE CANVAS"
+
+And, when we look for a use case, and you call it the **"Use case canvas for Blockchain"**,
+and let's say we find something of the use case of **storing the grades of the student**.
 That's our use case.
-What are the unique characteristics?
-So it's storing grades of students and to make them mutable.
-What is the data that you want to store? It's grades.
-Do we need to store the data on chain or off chain?
-We will store the grades from the on chain but the exams itself off chain because they are so big.
-Partner, so what a partner is there?
-Students, ZPA, maybe the German Education Authority.
-What are the values and rights that we store? It's grades.
-And what is the automation?
-Your automation could be that as soon as you have all the grades of all the necessary courses,
-you automatically get slacked as ready for doing your master's degree.
-That could be automation.
-So we could somehow automate the study guidelines.
-What is this?
+
+- What are the **unique characteristics**?
+  - So it's storing grades of students and to make them immutable.
+- What is the data that you want to store?
+  - It's grades.
+- Do we need to store the **data** on-chain or off-chain?
+  - We will store the grades probably on-chain, but the exams itself off-chain because they are so big.
+- **Partners**, who are the partners in there?
+  - Students, ZPA, maybe the German Education Authority.
+- What are the **values and rights** that we store?
+  - It's grades.
+- And what is the **automation**?
+  - The automation could be that as soon as you have all the grades of all the necessary courses, you automatically get flagged as ready for doing your master's thesis. That could be automation.
+  - So we could somehow automate the study guidelines with this.
+
+## Exercise
+
 So your task for the exercise is now to think about possible use cases for Blockchain
 and then to fill in this particular form with the appropriate elements.
 You can use one or two of the use cases and just think about the use case by filling out this here.
-So what can you automate? What kind of values do we store?
-And then also look up here because here you find something like doing replace, establish some intermediate.
-And is the data that is being saved? Is it very important that it becomes immutable or not?
-You could also think about use cases where the immutability of the data is not that relevant
-but you would like to make it public.
-It's not so important that nobody can change it but you would like to make it public for someone like what you do with an NFT.
+So what can you **automate**? What kind of **values** do we store?
+
+And then also look up here (slides: "USE CASE IDENTIFICATION FRAMEWORK") because here you find something like doing "replace", "establish" some "intermediary".
+And is the "data" that is being saved, is it very important that it becomes "immutable" or not?
+
+You could also think about use cases where the **immutability** of the data is **not that relevant**
+but you would like to **make it public**.
+It's not so important that nobody can change it, but you would like to make it public for someone else, **like what you do with an NFT**.
 I would like to publicize my nice picture as the form of an NFT.
 Not so important that nobody can change it and how much can be automated.
-So your task is coming, I will also formulate it tomorrow in our root system.
-And then next time what we do is we just discuss some of the findings that you have to see what kind of use cases that you find.
-Maybe it's a good idea for a new staff that you find with running Blockchain.
-And then later on when we look at the implementation of smart contracts we can pick one or two of these to do this as an example for smart contracts.
-Maybe we also find smart contracts that are available for them because there is a large library of smart contracts.
+
+So your task is going... I will also formulate it tomorrow in our Moodle system.
+And then next time what we do is we just discuss some of the findings that you have to see what kind of use cases did you find.
+Maybe it's a good idea for a new start-up that you find with running Blockchain.
+And then later on when we look at the implementation of smart contracts we can pick one or two of these to do this as an example for a smart contract implementation.
+Maybe we also find already smart contracts that are available for that because there is a large library of smart contracts.
+
+## org
+
 I think that's good.
 Okay, good.
-Thanks and next time we go back to staking on Ethereum, how this actually works, what they actually do there.
-Then we discuss this one and I think then it's probably time to do some kind of smart contract program and then Ivan will show you how to do that.
+Thanks and next time we go back to **staking on Ethereum**, how this actually works, what they actually do there.
+Then we discuss this one and I think then it's probably time to do some kind of smart contract programming and then Ivan will show you how to do that.
+
 Okay, good. See you next week.
 Thank you.
 Thank you.
