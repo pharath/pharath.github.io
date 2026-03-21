@@ -1004,7 +1004,9 @@ Okay, so we start.
 ## 1
 
 So I think sometimes, but with you, yeah, so I think the **first question** is just for learning purposes.
-So it's what we get for breakfast today.
+
+- So it's "what we get for breakfast today?".
+
 Okay, so you see the correct answer was here, but you wouldn't get any points for that.
 So that was just the test though that you know what works.
 Okay, so from the next question onwards, you will get points.
@@ -1325,24 +1327,24 @@ Okay.
 So, I think it gives you an idea of how much you really understood about the lecture and where you probably had some kind of what.
 Some kind of knowledge gets.
 Yeah.
-The final exam will have similar questions sometimes.
+**The final exam will have similar questions sometimes.**
 Yeah.
-I mean, I will not ask you about the Bitcoin price.
+I mean, I will **not** ask you about the **Bitcoin price**.
 This is just to make some difference.
 Just to give some, some random factor to it.
 But the.
-So, I think when you, when you look at the slides and when you work through the exam, you see some kind of questions like the question about the properties of the hash function, what can you do with a market tree.
-I will not ask why blockchain is called blockchain.
-These are questions that we probably asked sometimes in our exam.
-Now, just to get the ball rolling.
-I think there will be so many people participating in the final exam that it will be working.
-And then there's questions like also the questions other ones here with the.
-And then there's also questions about public private things like that, where should what kind of new schedule.
-Also the total, there's a wallet question, what we actually started a wallet.
-These are some of the questions that you also find in the final exam.
-We can do a similar one at the, at the end of the lecture.
-Yeah.
-Whether you really know it or not.
+So, I think when you, when you **look at the slides** and when you work through the exam, you see **some kind of questions like the question about the properties of the hash function**, **what can you do with a Merkle tree**, etc.
+I will **not** ask **why blockchain is called blockchain**.
+These are questions that we probably ask sometimes in an oral exam, just to get the ball rolling, to warm up.
+I think there will be so many people participating in the final exam that it will be written.
+And then there's questions like... also good questions are the ones here with the... the last one is **about public private**, things like that, where should... **what kind of use case should be applied for what**, **what are verifiable credentials**,
+also the wallet question, **what we actually store in the wallet**.
+These are typical questions that you also find in the final exam.
+We can do a similar one at the, at the end of the lecture,
+so that you see whether you really know it or not.
+
+## org
+
 Okay.
 Any questions?
 Yes, yes.
@@ -1362,24 +1364,23 @@ eleventh will be the last.
 No, no.
 The first will be the last one.
 So it's five.
-Yeah, by lectures and things that we cover up my contact program.
+Yeah, five lectures and things that we cover are **smart contract programming**.
 I think there's something we talked about right away.
 January.
 You want to do something.
 It still has to learn something.
 I would tell you, please.
-So we started on smart contract programming.
-Then we talked about, once we did this, we can talk about NFTs, how to create NFTs,
-talk about things.
-Then we have a lecture on the IPFS, the Interest and Empowery System, free.
-Then we have a lecture on the Decentralized Finance, 4 and 5.
-This will be the last one, so we check whether we have something on the test again,
+So we started on **smart contract programming**.
+Then we talked about, once we did this, we can talk about **NFTs**, how to create NFTs, tokenize things, etc.
+Then we have a lecture on the **IPFS**, the Interplanetary File System, three.
+Then we have a lecture on the **DeFi**, Decentralized Finance, 4.
+And 5, this will be the last one, so we check whether we have something on the test again,
 or question and answer, all that.
-Okay, good.
 
-So regarding the exercise for the next time, I suggest I will put up something about the lighting network.
-So they can understand what is and about the color.
-It's also quite relevant and interesting.
+Okay, good.
+So regarding the **exercise for the next time**, I suggest I will put up something about the **lighting network**.
+So that you understand what this is about.
+Because I think it's also quite relevant and interesting.
 
 And then I wish you a nice holiday time, Christmas or whatever you celebrate,
 and then we see each other next year.
