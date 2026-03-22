@@ -961,252 +961,267 @@ And now I try to check the exam.
 ab 58:16
 
 That's all about Bitcoin, I would say.
-I mean, I never tried the white Bitcoin, I never actually understood why people spend minor amount of money
-for buying stuff on Bitcoin.
-Usually you can use cheaper ways.
-But in order to explore the cheaper ways,
-you need to also look for other kinds of blockchain, not for life.
-And one of them is Ethereum.
-So the idea of today's lecture was to take a little bit of a freak out
+I never really understood why people spend minor amount of money for buying stuff with Bitcoin. Usually there are cheaper ways.
+But in order to explore the cheaper ways you need to also explore other kinds of blochchains that are live. One of them is **Ethereum**.
+So the idea of **today's lecture** was to give a little bit of recap
 about how the blockchain worked, and then jump into Ethereum.
 So before I show you how Ethereum works, and introduce you to the Ethereum ecosystem,
-I will just freak out basic stuff, because this is important.
+I will just recap basic stuff, because this is important.
 
 ### slide: Blockchain Recap - hash functions
 
 I mean, I'm pretty sure you already covered in your previous lecture.
-But you should already know that **hash functions** are one of the most important things
+But you should already know that **hash functions** are one of the most important things,
 they are used everywhere in the blockchain.
-And should I explain it, or someone who do want to just give a guess how they work?
+And should I explain it, or someone who want to just give a guess how they work?
 Yeah?
-Does anyone want to know how they work?
+Does anyone want? Or know how they work?
 You should know.
 No, I'm not going to talk about that.
 Okay, I'll do it.
 So we don't need to go into the details.
-We just need to remember that we have an input and output, and that is the output of this gadget.
+We just need to remember that we have an input and output, and that is the output is this **digest**.
 And whatever input we give, we have the same length, the same size of output.
 The only interesting thing is whatever small change we add into the input,
 for example, we add a small letter or some sign or anything,
-the output is the gadget through this computer.
+the output, this digest, will be completely different.
 So in case we are sure that we can upload a whole book
-and change only one letter of that book, and to keep it completely digital.
+and change only one letter of that book and you have a completely different digest.
+
+### slide: Blockchain Recap - What are Merkle Trees?
+
 Why is this important?
-Because we need to somehow store transactions.
+Because we need to somehow **store transactions**.
 And how do we store the transactions?
 We do it on the blockchain.
-Pretty sure we already have our code to this.
-We store them in the merkle tree.
-Because we cannot combine all the transactions with one book.
+Pretty sure we already talked about this.
+We store them in the **merkle trees**.
+Because we cannot combine all the transactions into one book.
 Basically that's why we get those merkle trees,
 where they pack all the transactions into one small hash,
 and we upload this hash on the blockchain.
-Basically we upload a hash inside a book on a book.
-The merkle trees are different types.
-So the simplest one is this binary merkle tree,
-where we give binary values.
+Basically we upload a hash inside a block on a blockchain.
+The **merkle trees** are different **types**.
+So the simplest one is this **binary merkle tree**,
+where we have **binary values**.
 So two values produce one leaf.
 Here you see another two values will produce another leaf.
-The last leaf is basically called root.
+The last leaf is basically called **root**.
 This is root of the merkle tree.
 And this is, as I said, the most basic one.
-But as different bookchains, we use different kinds of merkle trees.
-For example, Ethereum uses a merkle of visual drives.
-So one uses a current merkle tree.
-So they are different specifics of the merkle tree.
-And you get different properties, but you don't need to understand that.
+But **different bookchains use different kinds of merkle trees**.
+For example, **Ethereum** uses a **Merkle Patricia Tries**.
+**Solana** uses a **concurrent merkle tree**.
+So they are different specifics of the merkle tree, they have different properties, but you don't need to understand that.
 The basic stuff you need to understand is how they work,
-and the purpose why they work.
-So the purpose is you want to combine information into a small package.
+and the **purpose** why they work.
+So the purpose is you want **to combine information into a small package**.
 Let's say you get a bunch of transactions,
-and you pack it in a small book, a small root cache,
-which is then stored in the book.
-And that brings us to the books, basically.
-I assume you already covered how to work books.
+and you pack it in a small **block**, a small root cache,
+which is then stored in the block.
+
+### slide: Blockchain Recap - What does a block contain?
+
+And that brings us to the **blocks**, basically.
+I assume you already covered how a block looks like.
 But this is a simple explanation.
-Not all bookchains give the same structure,
+Not all blockchains have the same structure,
 but let's say that basic, basic stuff is this one.
-And this is how most of the architecture of the bookchains are designed.
+And this is how most of the architectures of the blockchains are designed.
 On the bottom here, we have a bunch of transactions.
 So basically those transactions, which we see, for example,
-on the lightning network to buy some, I don't know, beer or anything from the bookchains,
-or simply sending 20 to one account to another account.
-By doing so, we create a transaction.
+on the lightning network to buy some, I don't know, beer or anything from the blockchains,
+or simply **sending money to one account** or to another account.
+**By doing so**, we **create a transaction**.
 This transaction, then here, basically on the bottom.
-I mean, they are not in the book,
-but those transactions are basically in the verified form of the book.
+I mean, they are not in the block,
+but those **transactions are basically in the payload/data section of the block**.
 On Ethereum, we don't only send transactions from one account to another account.
-On Ethereum, we have those so-called smart contracts,
+On Ethereum, we have those so-called **smart contracts**,
 which are really interesting.
-We'll work into them later from next time.
+We'll look into them later, probably next time.
 But it's important to say now that whatever we do with a smart contract,
 or whenever we interact with a smart contract, we create a transaction.
-And those transactions are all protected here inside the book.
-So now you'll note here are the transactions.
-Those transactions, if we go back to the previous site,
-we'll take them into the worker tree and we get a route over here.
-So basically here you see the worker route of all the transactions,
-which have been inside the book.
-Then we have the previous book hash,
-which is from the era which was the previous book.
-We have the timestamp.
-Ethereum doesn't have timestamp.
-We use the Linux universe on number 4.
-Timing, basically a deep integer number.
-And by this, you can determine what time you need and the convenience and the second.
-And you have the notes.
-We already named the last time on them.
-Sometimes, some may say, well, this does not work.
-Notes is used for calculating the book hash.
-And it's different from the different.
-This is, for now, this is for let's say, group of work.
-Because group of work is for Ethereum, for BitWare,
-group of stake is for Ethereum.
-So we can differentiate between the consensus mechanism,
-but this one is for in that case for the group of work.
+And those **transactions are all protected here inside the blocks**.
+
+So now you know here are the transactions.
+Those transactions, if we go back to the previous slide,
+we'll pack them into the **merkle tree** and we get a root over here.
+So basically here you see the merkle root of all the transactions,
+which have been inside the block.
+Then we have the **previous block hash**,
+which is `#600` which is from the previous block.
+We have the **timestamp**.
+In Ethereum **you don't have timestamp**.
+We use the Linux universal number for timing, it is basically a **integer number**.
+And by this, you can determine what time in minutes and seconds it is right now.
+And you have the **nonce**.
+We already, you remember the last time, or some lectures ago we discussed the nonce.
+Nonce is used for calculating the block hash.
+And it's different based on the difficulty of...
+This is for, let's say, proof of work.
+Because proof of work is for Bitcoin,
+proof of stake is for Ethereum.
+So we can differentiate between those **consensus mechanisms**,
+but this nonce is now used for in that case for the proof of work.
 Any questions on this?
 Any questions?
-I'll be in the description.
 No questions?
-No questions.
+No questions. Ok.
+
 Yeah.
-So you know how the book looks like.
-Again, Ethereum is not used in group of work.
-Before it was used, it started as a group of work.
-But then I think, in 2002 or 2003, it changed to group of stake,
+So you know how the blocks looks like.
+Again, Ethereum is not used in proof of work.
+Before it was using it, it started as a proof of work.
+But then I think, in 2022 or 2023, they changed to proof of stake,
 where we don't have any more miners.
-Miners are strictly for group of work consensus mechanism.
-In Ethereum, now we can change the data.
-And how it was the difference.
+Miners are strictly for proof of work consensus mechanisms.
+In Ethereum, now we have **validators**.
+And how and what's the difference?
 Basically, miners are providing this computing power
-to mine the new work, to create the new work.
-For Ethereum, we can validate the stake money,
-which is a deposit to create Ethereum.
-And when they create a new work,
-they are rewarded for the creation of that.
-Of that new work.
-But in that case, they are asset-reviewed.
+to mine the new block, basically to create those new blocks.
+On Ethereum, we have validators with stake money,
+so basically **they deposit Ether (ETH) to create Ethereum**.
+And when they create a new block,
+they are rewarded for the creation of that new block.
+But in that case, they are as I said...
 Maybe I can go a little bit deeper later, how they work.
-But for now, it's important to go deeper.
-You might get a good idea.
-The overview is ongoing.
-I will come a little bit to the introduction.
+But for now, I don't think it's important to go deeper because you might get confused.
+
+### slide: Overview
+
+The overview is ~~ongoing~~...
+Now I will come a little bit to the introduction.
 I will explain you what is Ethereum,
 what kind of cryptocurrency,
 the currency behind Ethereum,
-how production works, how accounts are created,
-and what's the, but I assume it's for the next picture,
+how a transaction looks like, how accounts are created,
+and Solidity,... but I assume it's for the next lecture,
 how the smart contracts are going to be built.
 I mean, the smart contracts will be built.
-So, a little bit big story about Ethereum.
-It's the second part of the book,
-which is working by the forum at Bitcoin.
-It is a third complete book here,
+
+### slide: Ethereum Overview
+
+So, a little bit backstory about Ethereum:
+It's the **second largest public blockchain by value (market cap) after Bitcoin**,
+
+It is a **Turing-complete** blockchain,
 meaning that you have enough amount of time,
 and computing power, you can basically
 develop every operation on it.
-It runs on nodes, again, at Bitcoin.
-But in that case, we give here something very interesting.
-It's called Ethereum Virtual Machine, or EVM,
+
+It runs on **nodes**, again, as Bitcoin.
+But in that case, we have here something very interesting.
+It's called **Ethereum Virtual Machine, or EVM**,
 which is basically the operating system on those nodes.
-You get an operating system on all machines,
-but you also have macOS or whatever, or Linux.
-You get Ethereum, it's Ethereum Virtual Machine,
+You have an operating system on normal machines,
+like Windows or MacOS or whatever, or Linux.
+And here on Ethereum, it's Ethereum Virtual Machine,
 which is the arc of the node.
 It's basically doing all the operations
-and doing all the metrics on the other node.
-As I said, it's first used on Group of Work,
-as a consensus.
-By consensus, I mean a consensus mechanism,
-which means how the books are created.
-First started with Group of Work, again, mining.
+and doing all the magic on the blockchain.
+
+As I said, it first used Proof of Work as a **consensus mechanism**,
+which means how the blocks are created.
+First started with Proof of Work, again, mining.
 Lots of people were interested in mining Ethereum,
-but now it's moved to Group of Take,
-where the risk to consumption is reduced.
-And yeah, it's more than just made a money.
-The main cryptocurrency behind the Ethereum network
-is called Ether or ETH.
-So for whatever, those gates will send transactions
+but now it moved to **Proof of Stake**,
+where the increased energy consumption is reduced.
+And yeah, it's more or less...
+
+The main **cryptocurrency behind the Ethereum network**
+is called **Ether or ETH**.
+So for whatever use case we send transactions
 or we interact with the smart contract
-to use the ETH currency for paying the transaction.
-And it's roughly active, I mean, officially from 2015.
-And here, they also, even here in Akhen,
-because small parties, they were reading 10 years ago.
+we use the ETH currency for paying the transaction.
+
+And it's roughly **active**, I mean, officially **from 2015**.
+Last year basically was a,... even here in Aachen,
+there was a small party, so everything came here.
+
 Yeah, so far so good, no question.
 Okay.
+
+### slide: ETH (ether) as Cryptocurrency
+
 Yeah, so as I said, Ethereum has its own cryptocurrency
 and it's called Ether.
 And this is basically the economic incentives
-for those value-seekers that we have here.
-And we have the data from China
-to share their resources on the network.
-How is this creating?
-Basically, whenever a validator creates a book,
-he receives a taking reward.
-This is how basically new bonds or new currencies
+for those validators to share their resources on the network.
+
+How is this created?
+Basically, whenever a validator creates a block,
+he receives a **staking reward**.
+This is how basically new coins or new currencies
 are coming into circulation.
-Those stakes, rewards are received by proposing books,
-testing those books or participating in the consensus.
+
+Those **stake rewards** are received by proposing blocks,
+testing those blocks or participating in the consensus correctly.
 By this, we create a computational market
-where there is an integration for everyone
-to participate and to support the change.
+where there is an incentivation for everyone
+to participate and to support the chain.
 This is more or less how almost all the chains are working.
+
 What else do we have?
 Whenever we send a transaction,
-we get a sender and receiver.
-And again, while in Bitcoin,
-the sender needs to pay a transaction fee
-in order for this transaction,
-not for this transaction to be executed
-in full with the network.
-This transaction fee is, again, dynamic,
+we have a sender and receiver.
+And again, like in Bitcoin,
+the sender needs to pay a **transaction fee**
+in order for this transaction to be executed
+and included in the block.
+This transaction fee is, again, **dynamic**,
 meaning that if we send simple transfers,
 for example, money from one wallet to another,
-we usually pay around 23,000 photographs.
-You will see this later on the next slide.
-But if we interact with some kind of smart contract,
-we need to help the transaction.
+we usually pay around 23,000 gas,
+you will see this later on the next slide,
+but if we **interact with** some kind of **smart contracts**,
+we **need to calculate the transaction fee**.
 So it's not a fixed amount,
-different transactions cost different amounts.
+**different transactions cost different amounts**.
 Yeah, and again, by different transactions,
 I mean different transactions with the smart contract.
+
 So I think we discussed this when we sent money
 from one wallet to another,
-like I mentioned before,
+like two lectures ago,
 but I will recap this briefly
 because it's a little bit confusing.
-The transaction fee is basically
-a combination of those three elements.
-We have a base fee, which is, as it sounds,
+The **transaction fee** is basically
+**a combination of those three elements**.
+
+We have a **base fee**, which is, as it sounds,
 like a base, this is the fixed amount of money
 we need to pay in order for our transactions
 to be accepted on the blockchain.
-And then we have a priority fee.
+
+And then we have a **priority fee**.
 Priority fee is the amount of money
 we are willing to give to the miner
-to prioritize our transaction from all costs.
-If we don't pay or we pay a low transaction fee,
-the product of our transaction will end up later on the blockchain
-after two seconds or two minutes in an hour
-depending on how many transactions are there to be accepted.
-And then we get our gasoline,
+to prioritize our transaction from all rest.
+If you don't pay or we pay a low transaction fee,
+probably our transaction will end up later on the blockchain
+after two seconds or two minutes or in an hour
+depending on how many transactions are there executed.
+
+And then we have a **gas limit**,
 which is the maximum amount of gas
-you are willing to pay for your transactions.
+you are willing to pay for your transaction.
+
 So here is the thing.
 Think about you are going to a petrol station
-and you want to petrol on your car.
-The base fee says, okay,
+and you want to put petrol in your car.
+The **base fee** says, okay,
 on the petrol station, one liter of petrol costs,
 let's say one euro,
-but then there is a very huge queue on the petrol.
-What's on heart?
-And then I say, okay, I will pay 150,
-so that I go before eight months.
-So you can't just prioritize.
-But when you go to the machine
-when you start to think about your car,
+but then there is a very huge queue on the petrol,
+like lots of cars,
+and then I say, okay, I will pay 150,
+so that I go before everyone else.
+So you have this priority to go faster.
+But when you go to the machine,
+when you start putting petrol in your car,
 you put a gas limit saying, okay,
-right now I am willing to pay for a small 50 liter of petrol.
+right now I am willing to pay for at most 50 liters of gas.
 If it goes above 50, then it's just because I don't get 100.
 So this is the example you should keep in mind
 when you think about how the transaction
