@@ -761,9 +761,11 @@ and if you send more money to that address,
 you can in the Lightning network verify that there was more send to that address
 and then you probably spend more money on the Lightning network.
 
+### Time Locks
+
 student7: But you have multi-signature release,
 a contract that when you close off the channel,
-you are time locked.
+you are **time locked**.
 So then the party that closed off the channel is time locked
 in order to prevent the party to publish more beneficial state or an older state.
 For example, let's say we open a channel to `true`,
@@ -777,11 +779,13 @@ student8: Yeah, maybe, I don't know.
 
 prof: I don't know either.
 
+### move between the different channels, multi-channel transactions
+
 But something that is interesting is the point,...
 what happens if,... since we share the channel,
 he's on a channel at Phoenix, I'm on a channel at wallet of Satoshi,
-how did we move between the different channels?
-And then you need to have a multi-channel transaction,
+**how did we move between the different channels?**
+And then you need to have a **multi-channel transaction**,
 which goes with a complicated algorithm,
 which nobody really of you addressed.
 I also jumped into it. Does somebody really know how it works?
@@ -795,8 +799,8 @@ And there are some algorithms to do that.
 student: (question) time locks?
 
 prof: Yeah, there are some time locks,
-but they also use some kind of zero-knowledge proof,
-so the final recipient has to be provided with a secret.
+but they also use some kind of **zero-knowledge proof**,
+so the final recipient has to be provided with a **secret**.
 
 student: Yeah, the secret.
 
@@ -810,28 +814,33 @@ That's the secret.
 prof: That's probably also something, maybe, another exercise on.
 It's not part of the exam.
 
+### Summary
+
 But something that you... I think what is interesting to remember,
-and that's why I mentioned this whole... why I mentioned, this whole issue really is that,
-yes, there is a solution really to use Bitcoin as a kind of payment media.
-Yeah, it's something like PayPal.
-It's a PayPal on top of Bitcoin, that's also something to remember.
-It's not a blockchain.
-The Lightning network is not a blockchain.
-And you can really operate it more or less by yourself.
+and that's why I mentioned this whole... **why I mentioned this whole issue** really is that,
+**yes, there is a solution really to use Bitcoin as a kind of payment media.**
+Yeah, it's something **like PayPal**.
+It's **a PayPal on top of Bitcoin**, that's also something to remember.
+It's **not a blockchain**.
+The **Lightning network is not a blockchain**.
+And **you can really operate it more or less by yourself**.
 And something that is interesting, that I think maybe we can reach it within this lecture, otherwise we just do it ourselves,
-is really to run your own Lightning node.
-And with your own Lightning node then from then on, you really can operate local transactions.
+is really **to run your own Lightning node**.
+And with your own Lightning node then from then on, **you really can operate local transactions**.
 So it may be something that you start working here on in the Aachen Blockchain Club.
 So next time you have a Blockchain Club meeting,
 you just do some kind of Satoshi transactions for the beer you buy,
 but you just do it locally.
 Completely locally.
-You don't need any stablecoins and all the rest...
+You **don't need any stablecoins** and all the rest...
 
 Okay, good.
 So there were also some other kind of submissions talking about some basic issues
 and also how it's being used.
-Did you one where you said the distribution of the world, there were some statistics?
+
+### Statistics, Distribution over the World
+
+Did you one where you said **the distribution of the world**, there were some statistics?
 Somebody did, so the one with statistics,
 and that most of the wallets actually exists in the United States.
 
@@ -867,6 +876,8 @@ student: I speed read the presentation, so I only looked at one website.
 student2: They had the extensions for Bitcoin Lightning.
 
 student3: They banned it, I think.
+
+### Story about Project with China
 
 prof: Actually, yeah, in China it's not allowed to do any cryptocurrencies.
 Except for,... actually, it's quite a nice story.
@@ -927,16 +938,18 @@ But then it's completely running in your browser, just communicating with the sm
 And they could have a point by saying that this is probably not allowed in their particular country.
 We will see how this works.
 
-But that brings us now to the point that we are talking about next, distributed apps, or decentralized apps,
-about smart contracts.
+### org
+
+But that brings us now to the point that we are talking about next, distributed apps, or **decentralized apps**,
+about **smart contracts**.
 And with this, I hand over to Ivan, who is going to tell you something about smart contracts,
-how to develop them, how they actually work on the Ethereum blockchain.
+how to develop them, how they actually work on the **Ethereum blockchain**.
 And he will do the rest of this lecture.
 And then also the next one, because next week I can't come to Aachen,
 because we have an important meeting in our institute, so I won't be able to come,
 but he will take over then, and then next week I'll be back.
 And we will also do then some kind of, I'm not sure if you can do it already today,
-an exercise on developing your own smart contract, but we will see.
+an exercise on **developing your own smart contract**, but we will see.
 
 Ivan: Today we don't talk about this.
 
