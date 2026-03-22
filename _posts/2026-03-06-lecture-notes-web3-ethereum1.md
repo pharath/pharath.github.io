@@ -720,160 +720,182 @@ So that was really a channel to channel transaction.
 All the gimmicks that I did was just putting database entries around.
 And not yet any Bitcoin transaction took place.
 
----
+student5: So also maybe why Bitcoin is really essential,
+because you said "you need a channel for a transaction, but you need a transaction for a channel"
+so to create a channel you do a Bitcoin transaction on the blockchain
+and then do something in the Lightning network,
+you can then use this channel, it was created from the transaction on the Bitcoin blockchain,
+so you don't need Lightning to make Lightning.
 
-ab hier
-
-student5: So also maybe what the comments do is stem from the cost of sat,
-you need a channel for the transaction, but you need to create a channel
-with your access Bitcoin transaction on the blockchain.
-And then do something in the Lightning network,
-you can then use this channel, it was created from the transaction with the connection.
-You don't need the Lightning to make money.
-
-student6: No, but like you.
-You have your channel, but like you want it to have more money.
+student6: No, but like you have your channel, but like you want to have more money.
 So you have to close this channel and you create the new one.
 
-prof: No, you can just upload this channel.
-You can just fill it up.
+prof: No, you can just upload Bitcoins to this channel.
 
-student6: And how does it work with the wallet?
+student6: Ah, okay.
 
-prof: I assume I'm not sure if you can do with the very simple wallet of Satoshi,
-if you can fill it up with Bitcoin, I tried with that and I know I have to check it.
+prof: You can ~~spessed the~~ put it up.
+
+student6: Okay. And how does it work with the wallet of Satoshi?
+
+prof: Uhm, I assume,... I'm not sure if you can do it with the very simple wallet of Satoshi,
+you can fill it up with Bitcoin, I've tried with that, I don't know, I have to check this.
 I think with the custodial wallet is that you actually fill up Bitcoins
 into this particular channel to which you have access with your wallet.
 It's somehow that they somehow manage your particular bank account
 within this particular channel.
 But I'm not sure maybe I'm not sure maybe with my wallet,
 with my custodial wallet, with my non-custodial wallet,
-so my own one, maybe with my own one I even have a channel.
+so my own one, maybe with my own one I can even have a channel, but I don't know.
 Something to test.
-So how I understood from the very good, is that the channel always needs to be quality.
-And that means that you need a workspace transaction on the active blockchain
-to create the channel that needs to be quality.
-How would you want to manage the parcels, which are the coin ones in the channel?
-Good question.
-So I think there's probably an address and transaction on the main chain
+
+student7: So how I understood from my research, is that the channel always needs two parties.
+And that you need a multi-signature transaction on the active blockchain
+to create a channel between two parties.
+How would you want to manage to upload actual bitcoin on two existing channels?
+
+prof: Good question.
+
+student8: So I think there's probably an address and transaction on the main chain
 and if you send more money to that address,
-you can in the Lightning network verify that there was more money to that address
+you can in the Lightning network verify that there was more send to that address
 and then you probably spend more money on the Lightning network.
-So I think that with this immature release,
-a compact that when you close off the channel,
+
+student7: But you have multi-signature release,
+a contract that when you close off the channel,
 you are time locked.
-So there's a party that closes off the channel with time locked
-in order to prevent the party to publish more beneficial states than the older states.
-For example, let's say we open a channel to do,
-like if you want to call, then you have three ones,
+So then the party that closed off the channel is time locked
+in order to prevent the party to publish more beneficial state or an older state.
+For example, let's say we open a channel to `true`,
+I give you one bitcoin, then you have free one,
 so I want to publish the older channel to do the same thing.
 Then the release is time locked.
 But if you do an additional transaction to the same channel,
-you need to create a second, then you have two parallel release contracts.
-Yeah, I don't know.
-I don't know either.
-Something that is interesting is the point,
-what happens if, since we didn't share the channel,
-he's on the channel at Phoenix, I'm on the channel of what is associated,
-how did we move between the different channels,
-and then you need to have a monthly channel transaction,
+you would need to create a second, then you have two parallel release contracts.
+
+student8: Yeah, maybe, I don't know.
+
+prof: I don't know either.
+
+But something that is interesting is the point,...
+what happens if,... since we share the channel,
+he's on a channel at Phoenix, I'm on a channel at wallet of Satoshi,
+how did we move between the different channels?
+And then you need to have a multi-channel transaction,
 which goes with a complicated algorithm,
 which nobody really of you addressed.
-I also jumped into it, there's somebody who really know how it works.
-It has something to do with nobody can...
+I also jumped into it. Does somebody really know how it works?
+It has something to do with, nobody can...
 What's actually happening is that if I want to transfer some money to you,
 and we can't do it directly, we go through his channel,
-but it could be that on the way he steals some of these autoshows,
-that must be sure that that is not the case.
+but it could be that on the way he steals some of the Satoshis,
+that must be ensured that that is not the case.
 And there are some algorithms to do that.
-Yeah, there are some time blocks,
+
+student: (question) time locks?
+
+prof: Yeah, there are some time locks,
 but they also use some kind of zero-knowledge proof,
-so the panel of secret has to be provided.
-Yeah, the secret.
-Yeah, right.
-So the one who is actually receiving the money
-needs to know secret, which is then being provided to all the rest,
+so the final recipient has to be provided with a secret.
+
+student: Yeah, the secret.
+
+prof: Yeah, right.
+So the one who is actually receiving the money needs to know a secret, which is then being provided to all the rest,
 and only when you know the secret, the money is being transferred to you.
-The pre-image of a hash, yeah.
+
+student3: The pre-image of a hash, yeah.
 That's the secret.
-That's probably also something, maybe, another exercise on.
-It's not part of the example.
+
+prof: That's probably also something, maybe, another exercise on.
+It's not part of the exam.
+
 But something that you... I think what is interesting to remember,
-and that's why I mentioned this whole...
-That's kind of back.
-What I mentioned, this whole issue really is that,
-yes, there is a solution, we need to use Bitcoin as a kind of payment media.
+and that's why I mentioned this whole... why I mentioned, this whole issue really is that,
+yes, there is a solution really to use Bitcoin as a kind of payment media.
 Yeah, it's something like PayPal.
 It's a PayPal on top of Bitcoin, that's also something to remember.
 It's not a blockchain.
-The Bitcoin network, the Lightning network is not a blockchain.
+The Lightning network is not a blockchain.
 And you can really operate it more or less by yourself.
-And something that is interesting, that I think many of you can reach it
-with this lecture, otherwise we just do it ourselves,
-is really to run your own Lightning node,
-and with your own Lightning node.
-Then from then on, you really can operate local transactions.
-So it may be something that you will start working here in the Aachen Blockchain Club.
+And something that is interesting, that I think maybe we can reach it within this lecture, otherwise we just do it ourselves,
+is really to run your own Lightning node.
+And with your own Lightning node then from then on, you really can operate local transactions.
+So it may be something that you start working here on in the Aachen Blockchain Club.
 So next time you have a Blockchain Club meeting,
-you just do some kind of Satoshi transactions for the BAU buy,
+you just do some kind of Satoshi transactions for the beer you buy,
 but you just do it locally.
 Completely locally.
-You don't need to stay the coins, otherwise...
+You don't need any stablecoins and all the rest...
+
 Okay, good.
 So there were also some other kind of submissions talking about some basic issues
 and also how it's being used.
-Did you, one way you said the distribution of the world, there were some statistics?
-Somebody didn't know, so even the one is statistics,
-and that most of the world actually exists in the United States.
-Yeah, like the absolute majority of the Bitcoins in the network are in the United States,
-but I think what is more accurate for looking how much it is adopted
-is the amount of nodes,
-and the absolute majority of the United States, but not as much.
-Is there this one, though?
-Yeah, that one.
+Did you one where you said the distribution of the world, there were some statistics?
+Somebody did, so the one with statistics,
+and that most of the wallets actually exists in the United States.
+
+student: Yeah, like the absolute majority of the Bitcoins in the network are in the United States,
+but I think what is more accurate for looking how much this is adopted
+is the amount of nodes.
+And the absolute majority is in the United States, but not as much.
+
+prof: Is there this one, though?
+
+student: Yeah, that one (submission).
 Yeah, there you can see the amount of Bitcoins in the network,
 where I think about 60% of all Bitcoins in the Lightning Networks are in the United States,
-and then goes down.
-But I think this is the more accurate statistic for how much it is adopted by a common keeper kind of,
+and then it goes down.
+But I think this is the more accurate statistic for how much it is adopted by common people kind of,
 because, for example, in Germany, about 350 nodes operate,
-and there we learn, yeah, that's a bit more in the Middle East.
-Is that just recent data?
-Some according to the website, some in the internet.
-Ah, okay, good, yeah, yeah, you got it.
-If you go to mempool.space you can see live stats on the Lightning Network.
-So it works out, okay, we can do this, then.
-I'm wondering because the...
-I speed read the presentation, so I only looked at what website it looked to credit, so I made the product.
-They had the extensions for the...
-They banned it, I think.
-Actually, yeah, in China it's not allowed to do any critical promises.
-Except for, actually, it's quite a nice story.
+and there we ..., that's a bit more in the distribution.
+
+prof: Is that just recent data?
+
+student: From,... according to the website, from yesterday.
+
+prof: Ah, okay, good, yeah, yeah, you got it.
+
+student3: If you go to mempool.space you can see live stats on the Lightning Network.
+
+prof: So it works out, okay, we can do this, then.
+
+student2: I'm wondering because the...
+
+student: I speed read the presentation, so I only looked at one website.
+
+student2: They had the extensions for Bitcoin Lightning.
+
+student3: They banned it, I think.
+
+prof: Actually, yeah, in China it's not allowed to do any cryptocurrencies.
+Except for,... actually, it's quite a nice story.
 We did a project with a local German company,
 and they sell particular kind of products in China,
 which are then being manufactured in China and then delivered to the United States.
 So what they deliver is a high-quality product, very expensive.
 What happens?
 The manufacturers in China, from time to time, they use more simple products.
-So they wanted to prove that, at least in the final customer in the United States,
+So they wanted to prove that, at least the final customer in the United States,
 they wanted to have the proof that the Chinese people actually used the German product.
 And so we managed that with a blockchain application.
-So what we did is this average product that's being sold in some kind of foil.
+So what we did is this product that's being sold is some kind of foil.
 The foil is in particular roles, and the roles are tokenized.
 So we put a token on the blockchain and then the Chinese people use that.
 They need to get a token out of that.
 So, and then they deliver to the people in the United States, actually,
 that this token is used for that particular product.
-So it wouldn't make sense then, so they have to prove that they got a token for this particular product.
+So it wouldn't make sense then,... so they have to prove that they got a token for this particular product.
 If they just mix in some other stuff, they wouldn't be able to show the token.
 That's the whole issue of that.
 So we implemented it and they tested it with the people in China.
-Then the people in China said, hey, for long week, we are not allowed to use that.
+Then the people in China said, hey, hold on, we are not allowed to use that.
 Because we are banned to use any kind of blockchain that involves sending cryptocurrencies away.
 So what we argued is, no, you're not sending cryptocurrencies around, it's a token.
 And I'm not sure how it ends.
 So we wrote them a long statement that this is still allowed,
 because they're actually not sending any cryptocurrencies.
-What they do is just sending tokens around, which I'm not related to the cryptocurrency.
+What they do is just sending tokens around, which are not related to a cryptocurrency.
 That was the first solution.
 So we are arguing about this.
 I'm not sure what the current situation is.
@@ -882,7 +904,7 @@ The other point is that what we could do is to install our smart contracts on th
 The Chinese are running their own blockchain.
 And that would be allowed.
 But that's probably not in our interest.
-Providing, moving the trust there just to the Chinese blockchain.
+Providing,... moving the trust then just to the Chinese blockchain.
 So that's quite an interesting issue in general, that we actually also haven't thought about it.
 That we develop a kind of blockchain application, which in the country where it should be used,
 and where it should protect someone, they just say, no, we're not allowed to use that in general.
@@ -890,21 +912,22 @@ So it's quite interesting.
 The other point would be to do something like a custodial wallet, that could be the next solution,
 to do a custodial wallet by saying, okay, the people in China,
 let's say the people in this country, the people in this country are not allowed to do that.
-They just, they don't have a wallet themselves.
+They just,... they don't have a wallet themselves.
 They just have access to a website.
 And this website is then being hosted in Germany.
 And this website is then doing somehow the transaction on behalf of them.
 This means they are not actually doing any currency or cryptocurrency transactions in China.
-What they do is they just use a website and they just don't know that there are some cryptocurrencies behind it.
+What they do is they just use a website and they just even don't know that there are some cryptocurrencies behind it.
 So we completely hide all the blockchain stuff. That could be the other solution.
-But then there's no longer really a distributed app, which is at the moment, at the moment,
-it's really a JavaScript app running in the browser that is completely communicating with the blockchain through a smart contract.
+But then there's no longer really a distributed app, which is at the moment.
+At the moment, it's really a JavaScript app running in the browser that is completely communicating with the blockchain through a smart contract.
 So there's nothing on a server. It's completely serverless.
-Just a smart contract. There is the app that you download from a server in Germany, okay?
+Just a smart contract. There is the app that you have to download from a server in Germany, okay.
 But then it's completely running in your browser, just communicating with the smart contract.
 And they could have a point by saying that this is probably not allowed in their particular country.
-We would see how this works.
-But that brings us now to the point that we are talking about apps, distributed apps, or decentralized apps,
+We will see how this works.
+
+But that brings us now to the point that we are talking about next, distributed apps, or decentralized apps,
 about smart contracts.
 And with this, I hand over to Ivan, who is going to tell you something about smart contracts,
 how to develop them, how they actually work on the Ethereum blockchain.
@@ -912,10 +935,12 @@ And he will do the rest of this lecture.
 And then also the next one, because next week I can't come to Aachen,
 because we have an important meeting in our institute, so I won't be able to come,
 but he will take over then, and then next week I'll be back.
-And we will also do then some kind of, I'm not sure if you can do already today,
-an exercise on developing your own smart contract.
-Today we don't talk about this.
-Okay, today just the introduction. I took so much time again for other stuff.
+And we will also do then some kind of, I'm not sure if you can do it already today,
+an exercise on developing your own smart contract, but we will see.
+
+Ivan: Today we don't talk about this.
+
+prof: Okay, today just the introduction. I took so much time again for other stuff.
 And now I try to check the exam.
 
 ## Smart Contracts and Applications in Ethereum
