@@ -1921,14 +1921,14 @@ and by this we create a smart contract,
 and this code has a **storage**,
 so we can save some kind of information inside the smart contract.
 
-And if you now think about the externally-owned account,
+And if you now think about the **externally-owned account**,
 it's **just a simple wallet**.
 Thus, if you already saw it in the last time,
 Metamask or some other wallet.
 "Externally-owned account" is just a simple wallet,
 you have on your wallet,
 which is controlled by public-private key.
-And Smart contract it is not.
+**And Smart contract it is not.**
 This is the externally-owned account,
 you have a private key,
 where you can create a transaction,
@@ -1938,7 +1938,7 @@ you only control the code,
 basically write the code,
 and you define how the smart contract should perform.
 
-student3: But is the owner of the smart contract then the deployer?
+student3: But **is the owner of the smart contract then the deployer?**
 
 Ivan: Yeah, you can create the owner,
 and later I will show you on the other slides,
@@ -1954,8 +1954,8 @@ that you later want to change,
 or to change, for example,
 the state of the smart contract, then you cannot do it.
 
-student3: So any control that you want yourself to have as the owner,
-you have to have baked into it beforehand?
+student3: So **any control** that you want yourself to have as the owner,
+**you have to have baked into it beforehand?**
 
 Ivan: Yes, you need to define the logic.
 You need to, because I can create a smart contract now,
@@ -1963,8 +1963,8 @@ and if I don't put myself as an owner,
 everyone who sends money to the smart contract,
 will just stay in the smart contract,
 and they will never be able to go out of the smart contract.
-So this is like a not a bug,
-but usually a thing you need to pay attention to when you create a smart contract.
+So **this is like a not a bug**,
+**but usually a thing you need to pay attention to when you create a smart contract**.
 If with this smart contract,
 we want to receive some money on our balance,
 we need to somehow create a logic inside the code
@@ -1974,19 +1974,18 @@ should be the owner,
 and this guy should be able to withdraw money from the smart contract,
 otherwise, it will be stuck forever.
 
-So, yeah, difference again.
-Externally-owned account, it's just a simple wallet,
+So, yeah, **difference** again.
+**Externally-owned account, it's just a simple wallet,**
 like Metamask or like a Bitcoin wallet,
-where you have your public-private keys.
-Smart contract, they don't use private keys,
-everything is controlled by the code.
+where **you have your public-private keys**.
+**Smart contract, they don't use private keys, everything is controlled by the code.**
 If we define in the code how to control the smart contract,
 then we can do it, but not after we deployed.
 Any other thing?
 
 student3: **Where exactly does the smart contract data live** on the blockchain, in a block?
 
-Ivan: Yeah, so that's why I said, usually these Merkle trees are a little bit different in Ethereum, so we don't have this binary, we have these **Merkle Patricia trees**, where they have a specialized storage, where you store the data and the code of the smart contract when you change the state of the... Yeah, it is a little bit confusing, but everything, for example, the code and the storage itself, is stored inside the blockchain, not directly inside the block.
+Ivan: Yeah, so that's why I said, usually these Merkle trees are a little bit different in Ethereum, so we don't have this binary, we have these **Merkle Patricia trees**, where they have a specialized storage, where you store the data and the code of the smart contract when you change the state of the... Yeah, it is a little bit confusing, **but everything, for example, the code and the storage itself, is stored inside the blockchain, not directly inside the block**.
 
 ---
 
