@@ -1217,435 +1217,887 @@ but then there is a very huge queue on the petrol,
 like lots of cars,
 and then I say, okay, I will pay 150,
 so that I go before everyone else.
-So you have this priority to go faster.
+So you have this **priority (fee)** to go faster.
 But when you go to the machine,
 when you start putting petrol in your car,
-you put a gas limit saying, okay,
+you put a **gas limit** saying, okay,
 right now I am willing to pay for at most 50 liters of gas.
-If it goes above 50, then it's just because I don't get 100.
+If it goes above 50, then just stop it because I don't get charged more than I want to pay.
+
+---
+
+#### ChatGPT: "does the gas limit include base fee and priority fee"
+
+No — **the gas limit does NOT include the base fee or the priority fee**.
+
+They are **separate concepts**:
+
+##### 🔹 Gas limit
+
+* The **maximum amount of gas units** your transaction is allowed to use
+* Think: *“How much work can this transaction do at most?”*
+
+##### 🔹 Base fee + Priority fee
+
+* These are **prices per unit of gas**
+* Think: *“How much am I paying for each unit of work?”*
+
+##### 🧠 How they work together
+
+What you actually pay is:
+
+> **total cost = gas used × (base fee + priority fee)**
+
+* **Gas limit** → caps the *quantity*
+* **Fees** → determine the *price per unit*
+
+##### ⛽ Back to the analogy
+
+* **Gas limit (50 liters)** → maximum fuel you’ll take
+* **Base fee (€1/liter)** → standard price
+* **Tip (€0.50/liter)** → extra to skip the line
+
+👉 Total cost = liters used × price per liter
+
+##### ⚠️ Important nuance
+
+* You don’t always use the full gas limit
+* You only pay for **gas actually used**, not the maximum
+* But if your transaction fails, you still pay for the gas consumed before it failed
+
+##### ✅ Final takeaway
+
+* Gas limit = **quantity cap**
+* Base fee + priority fee = **price per unit**
+* They multiply together, but they are **not included in each other**
+
+---
+
 So this is the example you should keep in mind
-when you think about how the transaction
-is going to sound out to the people.
-Fixed amount, priority amount,
-and this is money, and this is the amount the liter is going to amount.
-And it's not going to go on your car to small?
-Yeah, exactly.
-So basically, we keep...
-Actually, no, maybe it's also small.
-But the smaller transactions, I say,
+when you think about how the transaction fees work.
+
+- two prices, one amount:
+  - Fixed amount, priority amount, and this is **money (in €)** and **money (in €)** and
+  - this (gas limit) is the **amount in liters** in our case.
+
+student: And the **gas limit only applies to smart contracts**, right?
+
+Ivan: Yeah, exactly.
+So basically, we have...
+Actually, no, maybe **also to small transactions**.
+But the small transactions, I say,
 if I pay something,
 if I send from my wallet to your wallet,
 I already know how much amount of gas I am going to consume.
-This is more, I would say, for smart contracts,
+So, this is more, I would say, for smart contracts,
 for smart contracts, you just need to calculate
-how much is possible for this operation
+how much is the possible for this operation
 for this activity to happen.
 And then we can say, okay, there is some fixed smart contract
 which requires a bunch of amount of gas
-and then we can...
+and then we can limit it.
 Any other examples?
-Yeah, you said that validators all have to put up to 32...
-Yeah, this is basically...
-Yeah, so if I want to mine a Ethereum,
-I either need to become part of a pool
+
+student: Yeah, you said that **validators all have to put up 32**...
+
+Ivan: Yeah, this is basically...
+Yeah, so **if I want to mine Ethereum**,
+I either need to become part of a **pool**
 which has 32...
 I mean, if we combine ourselves and all of us
 put some small amount of Ethereum
-and then we get to 32,
-then we can become one with data
-and mine any data transaction together.
-I think I want to do it by my own, by myself,
-or just by the...
-So you can't really validate
-if you don't have anything in stock?
-Yeah, the idea for saving
+and **then we get to 32, then we can become one validator**
+and **validate transactions together**.
+But if I want to **do it by my own, by myself**,
+I need to (buy and) **stake 32 ETH**.
+
+student: So you can't really validate
+if you don't put anything in?
+
+Ivan: Yeah, the **idea for staking**
 is that I put my money in order
-to prove that I am on it.
+**to prove that I am honest**.
 Because if I validate both transactions
-for private or transaction, then I get less.
-Less means that I would part of my Ethereum.
-I don't put all of them,
-I think there is some mechanism where I do it for half of them
-and I do it for another half,
+or ___ transactions, then I get **slashed**.
+
+---
+
+#### ChatGPT: "would "fraudulent transactions" be right"
+
+Not really — **“fraudulent transactions” is not the right term here**.
+
+---
+
+##### ❌ Why it doesn’t fit
+
+* “Fraudulent transactions” suggests **illegal or malicious user activity**
+* Validators are **not responsible for judging whether a transaction is fraudulent**
+* Ethereum doesn’t slash validators for including “bad” transactions
+
+---
+
+##### ✅ What actually causes slashing
+
+Validators get slashed for **protocol violations**, such as:
+
+* Signing **conflicting blocks**
+* Attesting to **inconsistent chain states**
+
+So the key idea is **conflict / contradiction**, not fraud.
+
+---
+
+##### ✔️ Best wording
+
+* **conflicting transactions** ✅
+* **conflicting blocks** (even more precise) ✅
+* **double-signing** (technical term) ✅
+
+---
+
+##### 🧠 Bottom line
+
+> Slashing happens because of **inconsistency**, not because of **fraud detection**.
+
+So stick with:
+
+> **conflicting transactions** (or even better: **conflicting blocks**)
+
+---
+
+**"Slashed"** means that I loose part of my 32 ETH.
+I don't loose all of them,
+I think there is some mechanism where I loose first half of them
+and then I loose another half,
 but in that case, I say, okay, I am honest,
 I put my 32 Ethereum,
 if I do something bad,
 you are allowed to take half of my Ethereum.
-And if you are just curious and want to validate these transactions,
-can you do any kind of validation to it?
-Probably, but yeah, then you are not included on the chain.
+
+student: And if you are just curious and want to validate these transactions,
+can you do it independently of the validation pool?
+
+Ivan: Probably, but yeah, then you are not included on the chain.
 In order to be on chain,
 so that you communicate with other nodes,
-you need to put them on.
+you need to put them on (ie. stake 32 ETH (and become a validator)).
 If you want to do it just for fun,
-you can connect to some info
+you can connect to some mempool
 where you get all the transactions and validate them,
 but you are not part of the network
 and you are doing it for fun.
-But if you are running your own Ethereum node,
+
+student3: But if you are running your own Ethereum node,
 but you are not validating,
-then I guess you are like a non-mining Bitcoin network.
-Yeah, of course, of course.
-You can run your own network and just don't participate.
-I mean, if you,
-for most of the people who are in the community,
+then I guess you are like a non-mining Bitcoin node, right?
+
+Ivan: Yeah, of course, of course.
+You can run your own validator and just don't participate.
+It's up to you. I mean, if you,...
+most of the people do it for the money,
 I assume that most of them are just participating
-in order to get some money out of that relation.
-Just like Bitcoin, where we get
-Satoshi's and Bitcoin,
-in Ethereum we get also this denomination.
+in order to get some money out of the validation.
+
+### slide: ETH Denomination
+
+Just like Bitcoin, where we have
+Satoshis and Bitcoin,
+in Ethereum we have also this **denomination**.
 You don't need to remember them.
 Usually, you use only the first one,
-which is the way you integrate,
-which is the larger one.
-One Ethereum is 1.8.0.
-One way is just one way.
-This is, think about this, is one same.
-One euro is 100,000, so one way is 1,000,
-and one Ethereum is 1.310.0.
-In the contact,
-you need me, like in the second show,
+which is the **"wei"**
+and **"Ether"**, which is the largest one.
+One Ethereum is 1 with 18 zeros.
+One "wei" is just one "wei".
+This is, think about this, is one cent.
+One euro is 100 cents, so one wei is 1,000 "Kwei",
+and one Ethereum is 1 with 18 zeros (wei).
+
+---
+
+ChatGPT:
+
+In Ethereum, Ether has multiple denominations:
+
+wei → smallest unit
+**gwei** → commonly used for **gas fees**
+ether (ETH) → standard unit
+
+👉 Example:
+
+1 ETH = 1,000,000,000 gwei
+1 gwei = 1,000,000,000 wei
+
+---
+
+In the second column,
+**"unit name"**, like in the second column,
 most of them are like famous scientists
-or people from computer science department
-who participate in that.
-Computer science department.
-So, two are part of
-type of contact,
-which means,
-design of people who start with you,
-think about privacy, privacy problems.
-They get some decorations of,
-like, you might be,
-you go from the founder to the founder.
+or people from computer science departments
+who participated either in Computer science or in Bitcoin.
+
+---
+
+⚠️ Important practical note
+
+- In real usage, people mostly use:
+  - **wei**
+  - **gwei**
+  - **ETH**
+- Names like **finney** or **szabo** are:
+  - mostly **historical / educational**
+  - rarely used in everyday transactions
+
+---
+
+So, those two (**Finney** and **Szabo**) are part of
+Cypherpunk, I think,
+those people who started to think about privacy, privacy problems.
+They get some speculation that this might be people from the founders of the bitcoin.
 This was just a community,
 I think, from 1994 or something like this,
 where they were just discussing about
-how they could integrate.
-How much is one gas unit equal to?
-That gas is basically,
+how they could **preserve privacy in the digital world**.
+
+student3: **How much is one gas unit** equal to?
+
+Ivan: That gas is basically,
 no, so, yeah, okay.
-Gas is the leader,
-like, to take the card with just the amount of it.
-It's not a unit.
-So, basically, depending on the transaction volume,
+**Gas is the liter**,
+like, you take a car with just the amount of liters.
+
+student3: It's **not a unit**.
+
+Ivan: It's not a unit. So, basically, **depending on the transaction volume**,
 right now, you calculate how much is one gas
 based on the current amount of transactions.
-So, it's like a unit,
+
+student3: So, it's like a unit,
 but it changes based on the transaction volume.
-Basically, if there are lots of people sending transactions,
-one gas will cost more weight.
-If there are less people working some part of the day
-when there is less demand for transaction,
-then one gas unit will be,
-so it's literally like a pet rotation where you go,
-pay for one liter of pet flow,
-but you don't know the price of the pet flow.
-It just changes depending on the situation.
-And currently, do you know about how much one gas is?
-It's dynamic.
-So, it really changes the volume.
-Okay.
-It's very dynamic.
-Thank you.
-So, there's one way to do this.
-It's the smallest unit, so, yeah, you can see,
+
+Ivan: Basically, **if there are lots of people sending transactions, one gas will cost more wei**.
+If there are less people, like in some part of the day
+when there is less **demand for transaction**,
+then one gas unit will be less.
+So, it's **literally like a petrol station where** you go,
+**pay for one liter** of petrol,
+but **you don't know the price of the petrol**.
+It just changes depending on the day and situation.
+
+student3: And currently, do you know about **how much one gas is?**
+
+Ivan: It's **dynamic**.
+**Every twelve seconds** ___.
+
+---
+
+ChatGPT:
+
+The correct completion is:
+
+> Every twelve seconds **it changes**.
+
+---
+
+✔️ Full answer
+
+> It's dynamic. Every twelve seconds **it changes**.
+
+---
+
+💡 Why?
+
+* In Ethereum, the **base fee** is adjusted:
+
+  * **every block**
+  * and a new block is produced roughly **every ~12 seconds**
+
+👉 So gas prices are constantly updated based on network demand.
+
+---
+
+You can check it, but **it's very dynamic**. I will not say that right now it is this amount of money.
+
+student3: So it changes a lot. Thank you.
+
+student4: So, there's no way to know how much it is?
+
+Ivan: It's the smallest unit, so, yeah, you can see,
 but in terms of price,
-I mean, once a dollar,
-she was put there,
-and there was one point where she was put there.
-So, it's a very dynamic unit.
-So, it's a very dynamic unit.
-So, it really changes the volume.
-I mean, once a dollar, she was put there,
-and there was one point where she was put there.
+I mean, one Satoshi was 0.0006€ at one point (March 2026), it's a very dynamic unit.
 I mean, one Ethereum right now is, I don't know,
-two, three thousand euro, one Bitcoin is ninety three thousand dollars,
-or something like this, or you need to tell people.
-Yeah, basically, they get different value.
-But way is, you can see ways like,
-so, a dollar, she was put there,
-the smallest unit, but it doesn't keep as much as the price is less.
-It's like giving one cent here,
-and Europe and one cent in the US dollar, for example,
-they get different value based on the currency exchange rate.
-Yeah, that's about the video.
-Welcome.
+two, three thousand euro, one Bitcoin is 92 thousand dollars,
+or something like this.
+Yeah, basically, they have different values.
+But wei is, you can see, wei is like Satoshi,
+because it is the smallest unit, but it doesn't have as much value. Price is less, of course.
+It's like having one cent here in Europe,
+and one cent in US dollar, for example,
+they have different values based on the currency exchange rate.
+Yeah, that's about the Ethereum tokens.
+
+### slide: Transactions in Ethereum (slide 1)
+
 So, yeah.
-How do we create transactions?
+How do we create transactions in Ethereum?
 So, now you know when you create transactions,
-you need to create transaction fees.
+you need to pay transaction fees.
 But how, when you go one step back,
 how do you create the transactions,
-and what's the unique property behind those options transactions?
-Why do we see a paid transaction on blockchain experience?
+and what's the unique property behind those blockchain transactions?
+Why do we say, ok, a transaction on blockchain is really secure?
 Because, first, like on Bitcoin,
-we get this idea of public-private key pairs.
-So, this is your private key,
-which is your security, you want to share it,
-and then we have a public, which is public for everyone.
+we have this idea of **public-private key pairs**.
+So, this is your **private key**,
+which is your secret key, you don't need to share it,
+and then we have a **public key**, which is public for everyone.
+
+### slide: Ethereum Key-Pair
+
 And, if we go one step further,
-we can see this key pair, how it works.
-I mean, you don't need to understand this in videos,
-because this is just your private property,
-but it's close to get some basic knowledge
+we can see this **key pair**, how it works.
+I mean, you don't need to understand this in detail,
+because this is just cryptography,
+but it's good to have some basic knowledge
 of what is really my private key
-and how do I really sign that transaction.
+and how do I really sign the transaction.
+
 On Ethereum, and I think also on Bitcoin,
-we use a signature algorithm,
-which is called an elliptic digital signature algorithm.
-And this algorithm has different kinds of forms.
-One of those forms, this takes me to 5.6 to 1, whatever,
-and it works like this.
+we use a **signature algorithm**,
+which is called an **elliptic digital signature algorithm**.
+And this algorithm has different kinds of **forms**:
+
+One of those forms is this `secp256k1`, whatever,
+and it looks like this (see graph on slide).
 What's the idea here?
-We have, by using this geometric figure,
-we can ensure that out of our private key,
-out of our public key, we cannot go back to our private key.
+We have, by using this **geometric figure**,
+we can ensure that out of our public key, we cannot go back to our private key.
 I mean, this is just simply a thing,
-and digital is much more difficult than we should.
+and really is much more difficult, but you should...
 And I just put this as an illustration
-so that you know how the mathematics would be
-and the curve would be in public private key.
-The fun part of the private key is that it's 256 bits of a number,
-and then out of this public key,
-we generate basically, we need to,
+so that you know how the mathematics looks behind the...
+what curve would create a public-private key.
+The fun part of the private key is that it's this **256 bits number**,
+and then out of this public key we generate basically, we need to,
 now going back to the hash functions,
-we need to hash this private key using hash algorithm,
-which on Ethereum we call this checkout 26.
-And then we get an address.
-Basically, address is just a one number,
+we need to **hash this private key** using **hashing algorithm**,
+which on Ethereum we call this `keccak256`.
+And then we get an **address**.
+Basically, **an address is just a long number**,
 but on Ethereum we say,
-okay, take the last bit byte of this one number,
-we can get generated, and then you have our address.
+okay, take the **last 20 bytes** of this long number,
+which we have generated, and then you have our address.
 Usually it's in a hexadecimal form,
-starting with 0x, and then you have numbers
-and letters from A to F.
+starting with `0x`, and then you have numbers
+and letters from `A` to `F`.
+
 So now when you know, okay,
 this is how my private key create my public key
 or my address, because there is a different address.
-It's not your private key.
+It's not ...
 I mean, it is, but the address you use for receiving the money
 is just the public key which you use for receiving the money
-is just the last 20 bytes of your private key.
+is just the last 20 bytes of your address.
 So in essence, there is a difference,
-even though people usually use the same.
+even though people usually say it is the same.
+
 How does it work?
-I mean, how does signing actually work?
-Why do we need that?
-We need a signing because whenever we create a transaction,
-we need to indicate that this is us, our word,
+I mean, **how does signing actually work?**
+Why do we need a sign?
+We need a sign because whenever we create a transaction,
+we need to indicate that this is us, our wallet,
 and we are creating this transaction.
-It's not someone else who is creating our transaction,
-our word.
+It's not someone else who is creating our transaction.
 And whenever we create a transaction,
 we use our private key to sign this transaction hash
-and it will produce an output which is called signature.
-We use our private key to sign the transaction hash
+and it will produce an output which is called **"signature"**.
+Basically, we use our private key to sign the transaction hash
 and then we produce a signature.
-This signature has three elements, which are r, h, and b.
-r is usually a point from this curve.
-s is a secret.
-It's a proof that we know a private key
-that corresponds to our address.
-And b is algorithm used to decipher the whole transaction.
-So basically, they are two types of algorithms,
-I think 27 and 23.
-So depending on which kind of deciphering algorithm
-we use, we just use here.
+
+- This signature has three elements, which is `r`, `s`, and `v`.
+  - `r` is usually a point from this curve.
+  - `s` is a secret.
+    - It's a proof that we know a private key that corresponds to our address.
+  - And `v` is algorithm used to decipher the whole transaction.
+    - So basically, they are two types of algorithms, I think 27 and 28. So depending on which kind of deciphering algorithm we use, we just use here.
+
+---
+
+#### ChatGPT: "is that correct"
+
+You’re **close**, but there are a few important corrections to make.
+
+---
+
+##### ✅ What’s correct
+
+* Ethereum transactions use an **ECDSA signature** with three values: **r, s, v** ✔️
+* They prove that you **own the private key** ✔️
+
+---
+
+##### ❌ What needs correction
+
+###### 🔹 1. `r` is NOT “a point”
+
+* `r` is actually a **number (integer)**
+* It is **derived from a point on the elliptic curve**, but it is **not the point itself**
+
+👉 Better:
+
+> `r` is derived from the x-coordinate of a point on the elliptic curve
+
+---
+
+###### 🔹 2. `s` is NOT a “secret”
+
+* `s` is also a **number (integer)**
+* It is part of the **signature proof**, but it is **not the private key** and not secret
+
+👉 Better:
+
+> `s` is a value computed using the private key and proves ownership of it
+
+---
+
+###### 🔹 3. `v` is NOT an “algorithm”
+
+This is the biggest mistake.
+
+* `v` does **not represent an algorithm**
+* It is a **recovery identifier**
+
+👉 It tells you:
+
+* which of the possible public keys is the correct one
+* (since multiple keys could match r and s)
+
+---
+
+###### 🔹 About “27 and 23”
+
+* It’s actually:
+
+  * **27 or 28** (historically)
+* In modern Ethereum (EIP-155), `v` also encodes the **chain ID**
+
+---
+
+##### ✅ Correct explanation (clean version)
+
+* **r** → derived from elliptic curve point (integer)
+* **s** → proves knowledge of the private key (integer)
+* **v** → recovery ID used to reconstruct the public key
+
+---
+
+##### 🧠 Simple intuition
+
+The signature `(r, s, v)` lets the network:
+
+1. Recover your **public key**
+2. Check it matches your **address**
+3. Verify you **authorized the transaction**
+
+---
+
+##### ✔️ Final verdict
+
+* Your structure: ✅ good
+* Your details: ⚠️ partially incorrect
+
+Biggest fix:
+
+> ❌ v = algorithm
+> ✅ v = recovery identifier
+
+---
+
+If you want, I can show you how `(r, s, v)` actually reconstructs the sender address step-by-step — that’s usually what makes it fully click.
+
+---
+
 And with this signature, which is produced again
 from our private key and from the hash of the transaction,
-we can prove that this user is behind the probability.
+we can prove that this user is behind the public key.
 Or in other words, when I sign a transaction,
-I don't use my private key, I use my public key.
-Without this public key, anyone who gets my signature can barely
-get the keys.
-This transaction was rarely signed by the owner of this project.
-So a little bit confusing, I agree.
-But you just need to, that's why I say you don't need
-to understand this in detail, but just to hear from
-a brief understanding why do we need the hash,
+I don't use my public key, I use my private key.
+Without this private key, anyone who gets my signature can directly verify that
+this transaction was really signed by the owner of this private key.
+
+So it is a little bit confusing, I agree.
+But you just need to,... that's why I say you don't need
+to understand this in detail, but just to have
+a brief understanding, why do we need the hash,
 why do we need the proof, and how does it work.
-What is the advantage, I guess, by adding my address
+
+student: What is the advantage I get by adding my address
 in the different hash than my public key?
-So far, it's not a Bitcoin, you just use public key.
-No, you also use a hash for Bitcoin.
-Basically, this address is generated public keys to us,
+So eg. in Bitcoin, you just use public key.
+
+student3: No, you also use a hash for Bitcoin.
+
+Ivan: Basically, this address is derived from generated public keys by hashing them,
 so for the purpose of making everything easier,
-you just take the hash.
+you just take the last 20 bytes.
+
 Okay.
-So what kind of security properties do we get?
-Again, this is one-layer cryptography where you need
-to just remember that private key cannot be derived from the hash.
-So we can't derive it from the signature hash.
-Anyone can derive it pretty fast because it's straightforward.
+So what kind of **security properties** do we have?
+Again, this is **one-way cryptography** where you need
+to just remember that private key cannot be derived from the public address or from the signature hash.
+Anyone can verify it pretty fast because it's straightforward.
 No secrets, I mean, in that case, no secrets means no private keys.
-And ownership in that case is proven mathematically
-using this, the new formula, rather than using some kind
-of centralized way of the hash port.
-So what we do is we obtain the key that we want.
+And **ownership** in that case is **proven mathematically using this cryptography** rather than using some kind
+of centralized way like a password or whatever we use to authenticate a user.
 Any questions?
-So now, this was just, as I said, a one-day quote
-with a presentation, how it went to work.
-But in order to come to the end of the video,
-we need to know that whenever we send transactions,
-those transactions will be sent to the website.
+
+### slide: Transactions in Ethereum (slide 2)
+
+In order to understand smart contracts,
+you need to know that whenever we send transactions,
+those transactions will be recorded on the blockchain.
 Whenever we send transactions in Ethereum,
-we create a state change on the box.
-State change will change, means that we basically
+we create a **"state change"** on the blockchain.
+State change means that we basically
 save some information on the blockchain.
-We change the status of how it looks right now,
-and this is not reversible.
-And once we've already appalled it to the blockchain,
-we cannot go back to the whole state yet.
+We change the status of how it looks like now,
+and this is **not reversible**.
+I mean, once we've already uploaded to the blockchain,
+we **cannot go back to the previous state**.
 That's why we can see previous transactions,
 previous directions, previous money transfers
 between one wallet and another.
-But whenever I read some information from the blockchain,
-I don't change the state.
+But whenever I **"read"** some information from the blockchain,
+I **don't change the state**.
 And why do I think state change is important?
-Because reading means I don't change it,
-and therefore I don't pay any transaction fees,
+Because "reading" means I don't change it,
+and therefore **I don't pay any transaction fees**,
 so it's free.
 That means if I want to prove that my transaction
 really was received, I just go to the blockchain
 and I read, and by reading I don't pay any fees.
 But if I send a transaction, then in that case,
-I change the state and that is the state of the transaction.
+I would change the state and that gives a... pay the transaction fees.
 That's why it's important to differentiate
-whether you change the state of the blockchain or the law.
-The simplest transaction on the blockchain is just like
-on Bitcoin, transferring Ethereum between two accounts.
-From one account, I change the transfer in my token,
-in that case, my Ethereum is gone up.
+whether you change the state of the blockchain or you don't.
+
+The **simplest transaction on Ethereum** is just like
+on Bitcoin, **transferring Ethereum between two accounts**.
+From one account, I transfer my tokens,
+in that case, my Ethereum tokens.
 This is usually the simplest.
-And the more complex ones, if you look later again,
-are those which interact with smart contracts.
-These connect with smart contracts,
-if they have some activity or do some calculation
-or creating a contract.
-Those are, again, dynamic.
+
+And the more complex ones, which we will look later again,
+are those which **interact with smart contracts**.
+These interactions with smart contracts,
+they have some activity or do some calculation
+or creating a transaction.
+
+Those are, again, **dynamic**.
 We don't know how much gas we will pay,
-and those are fixed.
-I think I hear it from the context.
-I think that's a long-term difference
-between the units of that.
+and **those are fixed**.
+I think it was **21,000 units gas**.
 Any questions or no?
+
+---
+
+🧠 Key idea
+
+- Simple transfer → fixed cost (21,000 gas)
+- Smart contract interaction → variable cost
+
+---
+
+### slide: Ethereum accounts
+
 Okay.
 So, now we look into the transactions.
 Now, after you know how the transaction looks like,
-another very important thing to understand are the accounts.
-Ethereum is famous because it has two types of accounts.
-The first type of account is called an external account,
-and the second type of account is a smart contract.
+another very important thing to understand are the **accounts**.
+
+Ethereum is famous because it has **two types of accounts**:
+The first type of account is called an **"Externally-owned Accounts (EOA)"**,
+and the second type of account is a **"smart contract account"**.
 That's why a smart contract is called a smart contract account.
-Usually, people call it a smart contract because of the contract,
+Usually, people call it a "smart contract" because it is shorter,
 but those are basically two types of accounts.
-Every account is an address,
-because it's a security board,
-it takes a decimal form, that's 0x,
+
+---
+
+#### ChatGPT: "is this correct"
+
+You’re **very close**, but not entirely correct. Here’s a precise clarification:
+
+---
+
+##### ✅ What is correct
+
+* Ethereum has **two types of accounts**:
+
+  1. **Externally Owned Accounts (EOAs)** ✔️
+  2. **Contract accounts** ✔️
+
+---
+
+##### ❌ What needs correction
+
+###### 🔹 “smart contract account” (wording issue)
+
+* The correct term is:
+
+  > **contract account**, not “smart contract account”
+
+* A **smart contract** is the **code** stored inside a **contract account**
+
+👉 So:
+
+* Account = container
+* Smart contract = code inside that account
+
+---
+
+###### 🔹 Why people say “smart contract”
+
+* It’s just shorthand:
+
+  * Instead of saying “contract account running code”
+  * people say “smart contract”
+
+But technically:
+
+> A smart contract is **not the account itself**, it’s what the account contains.
+
+---
+
+##### ✅ Corrected version (minimal changes)
+
+> Ethereum has two types of accounts: Externally Owned Accounts (EOAs) and contract accounts. Smart contracts run on contract accounts, which is why people often just call them “smart contracts”.
+
+---
+
+##### 🧠 Simple mental model
+
+* **EOA** → controlled by a private key (a user)
+* **Contract account** → controlled by code (a smart contract)
+
+---
+
+###### ✔️ Final verdict
+
+* Core idea: ✅ correct
+* Terminology: ⚠️ slightly inaccurate (important for exams)
+
+---
+
+**Every account** has an **address**,
+which, as I said, takes a **hexadecimal form**, starting with 0x,
 then you get these numbers and letters from A to F.
-And it doesn't matter whether it's external or smart contract,
-it just works as an address,
-that's why you cannot differentiate from the others.
-It's just a smart contract.
+And it doesn't matter whether it's **externally-owned or smart contract**,
+it just **looks the same**,
+that's why you **cannot differentiate from the address itself if it's a smart contract or externally-owned**.
+
 A common feature is that both types of accounts,
-if you're an anonymous smart contract, they have a balance.
-Why do we need a balance?
+externally-owned and smart contract, they have a **balance**.
+Why do you need a balance?
 This is simply for receiving money,
-for receiving Ethereum power.
-So, if you see on this picture here,
-you can see here on the left side, the external account,
-and then on the right side is the smart contract account.
-Both of them are shloms,
+for receiving Ethereum tokens.
+
+So, you see on this **picture (on slide)** here,
+you can see here on the left side, the **externally-owned account**,
+and then on the right side is the **smart contract account**.
+
+**Both of them** have **nonce**,
 basically this number which counts how many transactions
-are easy to stream from our work.
+are executed from our wallet.
 It's not the same as the amount on the block.
-And they have a balance,
-meaning that both the smart contract and the external account
-can receive this need to be given to their balance.
-The difference is only those two parts here,
-where the smart contracts give us storage hash and quota.
-Quote means basically we can write quote,
+And they have a **balance**,
+meaning that both the smart contract and the externally-owned account
+can receive money, this Ethereum to their balance.
+
+**The difference** is only those two parts here,
+where the **smart contracts** have a **storage hash** and **code**.
+**Code** means basically we can write code,
 and by this we create a smart contract,
-and this quote has a storage,
+and this code has a **storage**,
 so we can save some kind of information inside the smart contract.
-And if you now think about the external account,
-it's just a simple wallet.
+
+And if you now think about the externally-owned account,
+it's **just a simple wallet**.
 Thus, if you already saw it in the last time,
-Metamask or some other wallet,
-external account is just a simple wallet,
-you take from your wallet,
-which is controlled by public private.
-Smart contract is not.
-This is the main story on account,
-you take from private key,
-where you can create the transaction,
-but the smart contract you don't get private key,
+Metamask or some other wallet.
+"Externally-owned account" is just a simple wallet,
+you have on your wallet,
+which is controlled by public-private key.
+And Smart contract it is not.
+This is the externally-owned account,
+you have a private key,
+where you can create a transaction,
+but for smart contract you don't have private key,
 you don't control the smart contract,
 you only control the code,
 basically write the code,
-and to define how the smart contract should perform.
-But is the owner of the smart contract then the deployer?
-Yeah, you can create the owner,
-and later I will show you on the other side,
-on the other side you can create a so-called modifiers,
-where the person who deploy the smart contract is owner,
+and you define how the smart contract should perform.
+
+student3: But is the owner of the smart contract then the deployer?
+
+Ivan: Yeah, you can create the owner,
+and later I will show you on the other slides,
+you can create a so-called **modifiers**,
+where the person who deploys the smart contract is owner,
 and basically can perform different operations on that smart contract,
-but by being an owner of the smart contract,
+but by being an owner of this smart contract,
 it doesn't mean that you can control the smart contract.
 I mean, you are the owner,
-I mean, you are the person who deploy the smart contract,
+I mean, you are the person who deployed the smart contract,
 but if you don't define that in the logic of the smart contract,
 that you later want to change,
-or two changes, for example,
-we throw the money out of the smart contract, then you can't know.
-So any control that you want yourself to have as the owner,
+or to change, for example,
+the state of the smart contract, then you cannot do it.
+
+student3: So any control that you want yourself to have as the owner,
 you have to have baked into it beforehand?
-Yes, you need to define the logic.
+
+Ivan: Yes, you need to define the logic.
 You need to, because I can create a smart contract now,
 and if I don't put myself as an owner,
 everyone who sends money to the smart contract,
-they will just stay in the smart contract,
+will just stay in the smart contract,
 and they will never be able to go out of the smart contract.
 So this is like a not a bug,
-but usually, you need to pay attention to when you create a smart contract.
-With this smart contract,
-we want to receive some money from our power.
-We need to somehow create a logic inside the protocol
-to take the owner or the warden,
-which is deploying this smart contract,
+but usually a thing you need to pay attention to when you create a smart contract.
+If with this smart contract,
+we want to receive some money on our balance,
+we need to somehow create a logic inside the code
+ok, the owner of the wallet,
+who is deploying this smart contract,
 should be the owner,
 and this guy should be able to withdraw money from the smart contract,
-otherwise, it will be stuck for a long time.
+otherwise, it will be stuck forever.
+
 So, yeah, difference again.
-It's the R and N account, it's just simple wallet,
-by PentaMark or the WIPerDecone wallet,
-where you get your public private keys,
-smart contract, they don't use private keys,
+Externally-owned account, it's just a simple wallet,
+like Metamask or like a Bitcoin wallet,
+where you have your public-private keys.
+Smart contract, they don't use private keys,
 everything is controlled by the code.
-If we define in the code how to do it on the code of smart contract,
-we will get it, but not after the report.
+If we define in the code how to control the smart contract,
+then we can do it, but not after we deployed.
 Any other thing?
-Where exactly does the smart contract enter live on the blockchain, in a block?
-Yeah, so that's why I say usually this
-Markov trees are a little bit different in the video,
-so we don't give this binary, we give this Markov efficient list,
-where they get us HOS storage,
-we restore the storage in the code of the smart contract
-and we change the state of the...
-Yeah, a little bit confusing,
-but there is everything that's, for example, the code and the storage itself,
-it is also stored inside the walk of the walk.
+
+student3: **Where exactly does the smart contract data live** on the blockchain, in a block?
+
+Ivan: Yeah, so that's why I said, usually these Merkle trees are a little bit different in Ethereum, so we don't have this binary, we have these **Merkle Patricia trees**, where they have a specialized storage, where you store the data and the code of the smart contract when you change the state of the... Yeah, it is a little bit confusing, but everything, for example, the code and the storage itself, is stored inside the blockchain, not directly inside the block.
+
+---
+
+#### ChatGPT: "but if it not stored inside the block, how is it stored inside the blockchain?"
+
+Great question — this is exactly where Ethereum gets a bit unintuitive.
+
+---
+
+##### 🧠 Short answer
+
+Smart contract data is **not stored directly inside blocks**, but in the **global state**, which is stored as a **Merkle Patricia Trie**, whose **root hash is stored in each block**.
+
+---
+
+##### 🔹 How it actually works
+
+###### 1. 📦 Blocks do NOT store full data
+
+A block in Ethereum contains:
+
+* transactions
+* metadata
+* **state root (hash)**
+
+👉 It does **not** store all account balances or contract storage directly.
+
+---
+
+###### 2. 🌳 The actual data lives in the “state”
+
+Ethereum maintains a **global state**, which includes:
+
+* account balances
+* smart contract code
+* smart contract storage
+
+This state is stored in a:
+
+> **Merkle Patricia Trie**
+
+---
+
+###### 3. 🔗 Block → State connection
+
+Each block contains a:
+
+* **stateRoot**
+
+👉 This is a cryptographic hash pointing to the **entire state tree**.
+
+So:
+
+* Block = pointer (via hash)
+* Trie = actual data
+
+---
+
+###### 4. 🔄 What happens on a transaction?
+
+1. Transaction executes
+2. Smart contract state changes
+3. Trie updates
+4. New **stateRoot** is computed
+5. That root is stored in the next block
+
+---
+
+##### 🧠 Analogy
+
+* Block = **table of contents**
+* State trie = **actual book pages**
+
+The block doesn’t hold the data — it holds a **fingerprint of it**.
+
+---
+
+##### ⚠️ Why this design?
+
+* Efficient verification
+* Cryptographic integrity
+* Ability to prove any piece of data (Merkle proofs)
+
+---
+
+##### ✅ Final takeaway
+
+> Smart contract data lives in the **state (Merkle Patricia Trie)**, and each block only stores a **hash (state root)** that commits to that entire state.
+
+---
+
+If you want, I can draw a simple diagram of block → state root → trie → storage (this is usually what makes it click instantly).
+
+---
+
+### org: Ivan
+
 I think we should stop soon,
 let me just check what the next slide is,
 it's really good with this one,
 but I think we can stop now here,
-because later I will go a little bit deeper into the private keys,
+because later I will **go a little bit deeper into the private keys**,
 but we can leave that for tomorrow,
 not for tomorrow, for the next time,
-and then I will show you how to get out of the work.
-Okay, good, yeah, even I took your phone, I thought it was mine.
+and then I will show you, basically, **how to create the smart contract out of the wallet**.
+
+### org: Prinz: exam registration
+
+prof: Okay, good, yeah, Ivan I took your phone, I thought it was mine.
 Yeah, I put it here.
-Yeah, I checked the registration,
+Yeah, I checked the **registration**,
 three people registered already,
 so three people succeeded,
 so if they are here,
@@ -1741,60 +2193,19 @@ Yes, princeatfit.famhofer.db.
 Okay.
 Must be princeatfit.fmh?
 Yeah, maybe it was.
+
+### org: Prinz
+
 Okay, good.
 So, then next time,
 you continue,
 and then you also go
-building programming.
+a little **programming**.
 And then we also find
 an exercise.
-And then we have two,
-I think then we have two remaining lectures.
-We still have NFTs then.
-And we have an IPFS.
+And then we have two,... I think then we have two remaining lectures.
+We still have **NFTs** then.
+And we have an **IPFS**.
 Which is very interesting.
 Okay, good.
-So, then some last,
-I hope I get home back to the zone.
-It seems to, it's not too much.
-And I was afraid that I wouldn't be able to come back.
-They promised me the big,
-that are the chaos called tomorrow.
-But I think it's just raining.
-Nothing will go ahead.
-Okay, then see you in a bit.
-Okay, then see you in two weeks time.
-And you also,
-you guys will be in one week time.
-Okay.
-Gloria,
-you're going to make a,
-a second or three.
-Yeah,
-you're going to set up a whole,
-one hash.
-One hash.
-Yeah, so,
-I hope it's over.
-I think it's over.
-Okay,
-I hope it's over.
-Okay,
-I hope it's over.
-I hope it's over.
-I was looking for stuff that I could run on it.
-And I saw some,
-maybe a meeting.
-Disclosure,
-yeah.
-Yeah.
-And then animations.
-And when you press the button,
-one hashes.
-One hashes.
-So if you press the button a few,
-a few times.
-So let's,
-let's go.
-Okay.
-Okay.
+
