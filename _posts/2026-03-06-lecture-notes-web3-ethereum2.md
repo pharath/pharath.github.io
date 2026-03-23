@@ -17,18 +17,24 @@ tags:
 
 # Ethereum and Smart Contracts (Part 2)
 
-So, the thing, last time I reached this slide here, about the account.
+So, the thing, last time I reached this slide here, about the **Ethereum account**.
+
 The idea of lecture today is basically I will finish this presentation, I will try to explain how the accounts work, how the smart contracts work,
-and then in the end we can deploy one or two smart contracts together depending on how much time we get, so that I basically give you an idea how it works,
-if you want to deploy your own smart contract, what can you do, how can you do it easily, so that you don't waste time back.
-So, yeah, just a small recap on the last presentation, last week, on this slide here where we live.
-You see here that we get the external account and the smart contract, again now we are going to the smart contract,
-but before we jump to the smart contract, just to remember, because this week we have some relevant questions, like what's the difference between external account and smart contract accounts.
-Again, to recap, the external account, the external notes and balance, they don't keep us storage and code, but it's self-explanatory and the smart contract, they keep us storage,
+and then in the end we can deploy one or two smart contracts together depending on how much time we have, so that I basically give you an idea how it works,
+if you want to deploy your own smart contract, what can you do, how can you do it easily, so that you don't waste some time.
+
+## Recap
+
+So, yeah, just a small **recap** on the last presentation, last week, on this slide here where we left.
+
+You see here that we get the externally-owned account and the smart contract, again now we are going to the smart contract,
+but before we jump to the smart contract, just to remember, because this is also the **exam relevant question**, like what's the difference between externally-owned account and smart contract accounts?
+Again, to recap, the externally-owned accounts, they have a nonce and balance, they don't have a storage and code, but it's self-explanatory and the smart contract accounts, they have both storage hashes and code,
 so basically inside the smart contract you can write code and deploy it, and based on this code you can do different functions,
-depending on what you have included in the smart. So, yeah, this is more of this tradition.
-And just keep in mind this is your ETA-MASC format or whatever you want to use from a provider, and this is just a smart contract which you deploy on Ethereum.
-Again, the difference here is that with this external account, we have a private team, unlike smart contracts, smart contracts, they don't keep any private team.
+depending on what you have included in the smart contract. So, yeah, this is more or less the thing.
+And just keep in mind this is your Metamask wallet or whatever wallet you use from a provider, and this is just a smart contract which you deploy on Ethereum.
+
+Again, the difference here is that with this externally-owned account, we have a private key, unlike smart contracts. Smart contracts, they don't have any private key.
 Here you keep a private team, and with this private team, basically this is a key pair, public-private key pair, it's called, where you can sign transactions from the wallet and take the key.
 For example, interact with smart contracts and money or whatever you want to do. Everything is derived from this wallet.
 And usually it's confusing, but I'm not sure whether you spoke about this with your Facebook friends, but private key is not the same like C-Praise.
