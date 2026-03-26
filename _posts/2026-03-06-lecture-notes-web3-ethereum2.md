@@ -231,119 +231,195 @@ we are talking about Ethereum or **EVM chains**, which are Ethereum virtual mach
 typically like not only on Solidity, there are other languages like Viper and some new ones,
 but let's say **80-90% of the smart contracts are written in Solidity**.
 
-What else do we get here?
-The smart contracts, as I said, the Artificative is only the functions,
-and we call the smart contracts Artificative is only from the externally-owned own accounts.
-We can get multiple, in one transaction we can call multiple smart contracts together,
-I mean they can be in Ethereum or just in the visual smart contract,
+What else do we have here?
+The smart contracts, as I said, are executed only,... the functions when you call the smart contracts are **executed only from the externally-owned accounts**.
+
+We can have multiple,... in one transaction we can call multiple smart contracts together,
+I mean, they can be **nested** (informally: "chained") or just **individual** smart contracts,
 we can call them in one transaction.
-A really important feature which you also should remember is that all the transactions are at home,
-meaning that either they will succeed or they will be completed in the report.
+
+---
+
+In Ethereum terminology:
+
+* Contract calls inside other contract calls are typically described as **nested calls**
+* Example:
+
+  * EOA → Contract A
+  * Contract A → Contract B
+  * Contract B → Contract C
+
+➡️ These are **nested within the same transaction execution**
+
+---
+
+🔑 Key distinction
+
+* **Nested** → one call happens *inside* another
+* **Chained** → more informal description of the sequence
+
+For lectures and exams, **“nested”** is usually the more precise term.
+
+---
+
+A really important feature which you also should remember is that all the transactions are **atomic**,
+meaning that either they will succeed or they will be completely reverted.
 So I will call a smart contract and I need to be sure 100% of whatever function I call in the smart contract will succeed.
-If it doesn't succeed, then the whole transaction is reverted and it's not recorded function.
+If it doesn't succeed, then the whole transaction is reverted and it's not recorded on chain.
 Basically it's like I didn't call the smart contract at all.
+
 There are some...
-First of all, it's immutable, once again, whatever we deploy once, it stays forever,
-so that's why it's important to be sure that if it's a project which is going to be used from in-device,
+First of all, it's **immutable**, once again, whatever we deploy once, it stays forever,
+so that's why it's important to be sure that if it's a project which is going to be used from many users,
 and it's a final version, there is some audit, so we are sure that it's working,
 otherwise if there is some bug, then we cannot change it anymore.
-There is an option where you can delete the smart contract,
-but it's not actually deleting, you are deleting the story of the smart contract,
-meaning that all the information which will be installed,
-but I think since last year Ethereum removed this opcode, it's called the opcode cell disk.
-Later I will explain what is an opcode, but I just wanted to keep that in the initial version of Ethereum,
-this was also an option to delete the smart contract, but again, it's not going to delete all the interactions,
-I mean all the transactions which have been in the past executed from the smart contract will still be used for launching.
-So basically only delete the whole of the smart contract,
-and you cannot create the transactions if you want to exit the cell disk.
+
+There is an option where you can **delete the smart contract**,
+but it's **not actually deleting**, you are **deleting the storage of the smart contract**,
+meaning that all the information which has been stored,
+but I think since last year Ethereum removed this opcode, it's called the opcode `SELFDESTRUCT`.
+Later I will explain what is an opcode, but I just wanted to keep that because in the initial version of Ethereum this was also an option to delete the smart contract, but again, it's not only deleting, all the interactions,
+I mean **all the transactions which have been in the past executed from this smart contract will still be visible on chain**.
+So you basically **only delete the code of the smart contract**,
+but you **cannot create new transactions later on** once you execute this `SELFDESTRUCT`.
 Any questions?
+
 Yeah.
-It's possible to have a smart contract with limited time,
-but after it's constructed, it doesn't work anymore.
-Yeah.
+
+student: Is it possible to have a **smart contract with limited time**,
+so after a specific date it doesn't work anymore.
+
+Ivan: Yeah.
 Yeah.
 Yes?
-So how to do the confirmation with the cell system on the blockchain?
-As I said, I mean you don't delete exactly the smart contract,
-you more or less disable it from being used later on.
-So everything, again all the transactions which have been executed with the smart contract,
-everything which is being done in the past with Ethereum,
-it's something like a switch, you are not aware of it,
-because you do the same transaction anymore,
-that's why they call it cell destructing,
-it's the stoppage, it prevents from being used again.
+
+student2: So how would you do the code deletion if it would be stored on the blockchain?
+
+Ivan: As I said, I mean you don't delete exactly the smart contract,
+you more or less **disable** it from being used later on.
+So everything, again, all the transactions which have been executed with this smart contract,
+everything which is being done in the past with it,
+it's something like a switch, you are not allowed to execute or do the same transactions anymore in the future,
+that's why they call it `SELFDESTRUCT`, basically, it stops,... **it prevents from being used again**.
+
+---
+
+🧠 Key concept behind this
+
+* Smart contracts are **immutable**
+* You **cannot truly delete history or code from the blockchain**
+* `SELFDESTRUCT`:
+
+  * disables future interaction
+  * may remove code/state from the current state
+  * but **past transactions remain forever**
+
+---
+
+⚠️ Important modern note
+
+In newer Ethereum updates:
+
+* `SELFDESTRUCT` behavior has been **restricted/deprecated**
+* It no longer fully “deletes” contracts in the old sense
+
+---
+
+🔑 Takeaway
+
+You don’t *delete* a smart contract — you **deactivate it going forward**, while history stays permanently on-chain.
+
+---
+
+## slide: Smart Contracts in Ethereum (2)
+
 So here, I mean it's a little bit complicated,
 but you will see it later on when you deploy the smart contract,
-that's why I want you to give you a brief introduction on what you should expect.
+that's why I wanted to give you a brief introduction on what you should expect.
 Like a smart contract, which you see as a smart contract,
-is just written in Solidityi, which is again a two-unreadable language,
-but on a war lever what is happening,
-we get a bytecode which is executed from the Ethereum desktop machine tools.
-I mean we use Solidityi to create a working everything,
-but then this is compiled with a compiler to bytecode,
-and on Ethereum, on the blockchain you will see the bytecode.
-There is also another terminology which is called API,
-and this is basically a JSON file,
-which is showing all the functions and methods which you get from your smart contract,
-and this is like an instruction on how you can connect your front end to your smart contract.
-For example, if I click a website,
-and I click a button, I need to call a certain function on the smart contract,
-this is pretty fine in this JSON file, and this JSON file is called API.
+is just **written in Solidity**, which is, again, a **human-readable language**,
+but **on a low level** what is happening,
+we have a **bytecode** which is **executed from the Ethereum virtual machine**.
+I mean **we use Solidity to create the logic and everything**,
+but **then this is compiled with a compiler to bytecode**,
+and on Ethereum, like **on the blockchain you only see the bytecode**.
+
+There is also another terminology which is called **ABI**,
+and this is basically **a JSON file**,
+which is **showing all the functions and methods which you have on your smart contracts**,
+and this is like an instruction how you can connect your front-end to the smart contract.
+For example, if I have a website,
+and I click a button, I need to call a certain function of the smart contract,
+this is predefined in this JSON file, and this JSON file is called ABI.
 You will see it later on, I mean it's not very important to remember it,
-but if you see it later on just on the Watson API,
-this is the bridge between your front end and my front end.
-I saw something about how you call some function on a smart contract,
-you're actually using the first and last four bytes of the hash of the part of the ABI.
+but if you see it later, just remember ABI,
+this is the **bridge between your front-end and the smart contract**.
+
+student3: I saw something about like when you call some function on a smart contract,
+you're actually using the first or last four bytes of the hash of the part of the ABI.
 Is that true?
-The ABI is more like a human read-about way so that you see the functions,
+
+Ivan: The ABI is more like a human-readable way so that you see the functions,
 but in reality if you call the first or last bytes, you call the bytecode,
-but you see the hash or the data on the side of the end, we need to call it.
-Whenever we deploy it again, there is a transaction fee which needs to be paid from your work,
-in our case again from our externally-owned account.
-The smart contract again is its own balance to remember the initial image,
-which I showed you here, the smart contract.
-The Ethereum wallet, we get now our balance,
-that means we can send and receive my name from the smart contract.
-We can call the functions from the smart contract,
+but you see it later, I will show you later on the other slide.
+
+Whenever we deploy it, again, there is a **transaction fee** which needs to be paid from your wallet,
+in our case, again, **from our externally-owned account**.
+
+The **smart contract**, again, **has its own balance**, if you remember the initial image,
+which I showed you here, with the smart contract and the Ethereum wallet.
+We have now a balance,
+that means **we can send and receive money from the smart contract**.
+
+We **can call the functions from the smart contract**,
 but again, one smart contract can call another smart contract,
-but the initial transaction needs to be paid from your wallet,
-not from the smart contract itself.
-And yeah, now we come to a small example,
+but **the initial transaction needs to be executed from your wallet, not from the smart contract itself**.
+
+## slide: Smart Contracts: Example
+
+And yeah, now we come to a small **example**,
 because I'm talking, talking, but this is how it looks like.
-This is just a simple storage, I name it like a simple storage,
-where you have two functions, right, a set function and a get function.
-Every smart contract has a name, now our case is called simple storage.
-You also have a version of a compiler which we will see later,
-but usually it always starts with this program's validity,
-in the version of the compiler which you are going to use,
+
+This is just a **simple storage**, I name it like a `SimpleStorage`,
+where you have two functions, a `set()` function and a `get()` function.
+
+Every smart contract has a **name**, in our case it is called `SimpleStorage`.
+
+You also have a **version of the compiler** which we will see later,
+but usually it always starts with this `pragma solidity` and the version of the compiler which you are going to use,
 we have different versions of it.
-You will see different numbers here,
-but the idea here is to get a small smart contract
-which is storing unsigned integer, called num.
-And here we can basically send the number,
-like num, we call it file, we call it file,
-and then if you call this function, what's the value of num,
-it will get back pretty much straightforward.
-You'll hear from signed integers and normal integers,
+You will see different numbers here.
+
+But the idea here is we have a small smart contract
+which is a storing unsigned integer, called `Num`.
+And here we have basically set the number,
+like `Num = 5;`, it will be `5`,
+and then if you call this function, what's the value of `Num`,
+we will get `5`. Pretty much straightforward.
+
+You have unsigned integers and normal integers,
 basically signed integers, where it's a negative and positive number,
 so you should keep that in mind what kind of numbers you want to use.
-And you also should keep in mind what kind of SVT versions
-you will use to compile a smart contract,
-because some SVT versions get bugs,
-and usually the stable versions are after 8.0.
-I will give you a nine, I will give you a point.
+And you also should keep in mind what kind of Solidity versions
+you use to compile a smart contract,
+because some Solidity versions have bugs,
+and usually the stable versions are after `8.0`, I will say, or nine and above.
+
+## slide: Smart Contracts: Turing-completeness
+
 Okay, again going back to the features of a smart contract,
-I mentioned it last time, but all the smart contracts are still incomplete,
-meaning that if we get enough time, we are sure that
-eventually we will get a smart contract, however,
-if you think more about testing, the more execution you get,
-the more gas fees you need to pay, therefore it's not infinite,
+I mentioned it last time, but all the smart contracts are Turing-complete,
+meaning that if we have enough time, we are sure that
+eventually we will execute the smart contract, however,
+if you think more about testing, the more execution you have,
+the more gas fees you need to pay, therefore, it's not infinite,
 it will be eventually limited by the transaction fees,
-and this is why we don't get infinite moves here.
-I mean, infinite moves you cannot get because eventually you run out of gas
+and this is why we don't have infinite loops here.
+I mean, infinite loops you cannot get because eventually you run out of gas
 and the program will be stopped.
-I mean, stop means the transaction will be reverted.
-How long would the longest be that it could run?
+I mean, stopped means the transactions will be reverted, since they are atomic.
+
+student3: How long would the longest be that it could run?
 I would not say, I think it's based on the...
 Every block has a maximum size limit,
 so basically the amount of gas you can pay,
