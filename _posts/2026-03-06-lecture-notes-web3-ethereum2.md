@@ -27,112 +27,213 @@ if you want to deploy your own smart contract, what can you do, how can you do i
 
 So, yeah, just a small **recap** on the last presentation, last week, on this slide here where we left.
 
+## slide: Ethereum accounts
+
 You see here that we get the externally-owned account and the smart contract, again now we are going to the smart contract,
 but before we jump to the smart contract, just to remember, because this is also the **exam relevant question**, like what's the difference between externally-owned account and smart contract accounts?
-Again, to recap, the externally-owned accounts, they have a nonce and balance, they don't have a storage and code, but it's self-explanatory and the smart contract accounts, they have both storage hashes and code,
+Again, to recap, the **externally-owned accounts (EOA)**, they have a **nonce** and **balance**, they don't have a **storage** and **code**, but it's self-explanatory and the **smart contract accounts (SCA)**, they have both **storage hashes** (see picture) and **code**,
 so basically inside the smart contract you can write code and deploy it, and based on this code you can do different functions,
 depending on what you have included in the smart contract. So, yeah, this is more or less the thing.
-And just keep in mind this is your Metamask wallet or whatever wallet you use from a provider, and this is just a smart contract which you deploy on Ethereum.
+And just keep in mind **this EOA is your Metamask wallet** or whatever wallet you use from a provider, and **this SCA is just a smart contract** which you deploy on Ethereum.
 
-Again, the difference here is that with this externally-owned account, we have a private key, unlike smart contracts. Smart contracts, they don't have any private key.
-Here you keep a private team, and with this private team, basically this is a key pair, public-private key pair, it's called, where you can sign transactions from the wallet and take the key.
-For example, interact with smart contracts and money or whatever you want to do. Everything is derived from this wallet.
-And usually it's confusing, but I'm not sure whether you spoke about this with your Facebook friends, but private key is not the same like C-Praise.
-So usually people get confused, okay, I keep a wallet, if I export my private key, then I get the same wallet from my other device.
-Yeah, in theory it's something similar, but your wallet like ETA-MASC or Coinbase wallet or whatever wallet you use, they have this C-Praise which is like a master password for all your accounts which are stored underneath your wallet.
-So basically in one wallet I can get much more account flow. Account 1, 2, 3, 4, I can get a limit.
-So if I export only the private key, I will just export my account, because I'm not exporting my wallet.
-And if I want to export the wallet, basically I need to take my C-Praise and put it in some other wallet provider.
+## slide: Ethereum accounts: EOAs
+
+Again, the difference here is that with this **externally-owned account**, we **have a private key**, unlike smart contracts. **Smart contracts**, they **don't have any private key**.
+Here (for EOAs) you have a **private key**, and with this private key, basically this is a key pair, **public-private key pair**, it's called, where you can **sign transactions** from your wallet and take the key, for example, interact with smart contracts, send money or whatever you do on blockchain. Everything is derived from this wallet.
+
+And usually it's confusing, but I'm not sure whether you spoke about this with Prof Prinz, but **private key is not the same like seed phrase**.
+
+---
+
+### "seed phrase in crypto"
+
+A **seed phrase** (also called a *recovery phrase* or *mnemonic phrase*) in crypto is a **list of 12–24 simple words** that acts as the **master key to your wallet**.
+
+---
+
+#### 🔑 What it does
+
+* It is used to **generate all your private keys**
+* It allows you to **restore your wallet** on any device
+* Whoever has it can **fully control your funds**
+
+👉 Example (DO NOT use this — just illustration):
+
+> `apple river chair sunset ...` (12–24 words)
+
+---
+
+#### 🧠 How it works (simple idea)
+
+Seed phrases follow a standard like BIP-39:
+
+* Words come from a fixed list (2048 words)
+* Each phrase encodes a large random number
+* That number → generates your private keys → controls your crypto
+
+---
+
+#### ⚠️ Why it’s extremely important
+
+* No password reset exists in crypto
+* If you **lose your seed phrase → funds are gone forever**
+* If someone **steals it → they can drain your wallet instantly**
+
+---
+
+#### 🔐 Best practices
+
+* Write it down **offline** (paper or metal backup)
+* Never store it in:
+
+  * screenshots
+  * email
+  * cloud storage
+* Never share it with anyone (no legit service will ask for it)
+
+---
+
+#### 🪙 Where you see it
+
+When creating a wallet (e.g. MetaMask or Trust Wallet), you’ll be shown the seed phrase once and asked to confirm it.
+
+---
+
+#### 💡 Key takeaway
+
+A seed phrase = **your crypto wallet itself**
+Not just access — **ownership**
+
+---
+
+If you want, I can explain how a seed phrase actually turns into private keys step-by-step (it’s surprisingly elegant).
+
+---
+
+So usually people get confused, okay, I have a wallet, if I export my private key, then I have the same wallet on my other device.
+Yeah, in theory it's something similar, but your wallet like Metamask or Coinbase wallet or whatever wallet you use, they have this **seed phrase** which is like a **master password** for all your accounts which are stored underneath your wallet.
+So basically **in one wallet I can have multiple accounts**, so account 1, 2, 3, 4, I can have unlimited.
+So if I **export only the private key**, I will **just export my account**, but I'm **not exporting my wallet**.
+And if I want to **export the wallet**, basically I need to **take my seed phrase** and put it in some other wallet provider. Some other wallet.
 Yes?
-But if I export my private key, you will be able to use the account.
-Yeah, but a new wallet then should be able to determine my balance for example.
-I think it's a comp, yeah, but if you get an account from your wallet and you export only the private key of account 1 to the new wallet, then you take on that account 1.
-But if you export, I mean, you take the C-Praise, you export all the accounts together.
+
+student: But if I export my private key,...
+
+Ivan: ... you will export to a new account.
+
+student: Yeah, but the new wallet then should be able to determine my balance, right?
+
+Ivan: If you need this account, yeah, but if you have ten accounts in your wallet and you export only the private key of account 1 to the new wallet, then you have only that account 1.
+But if you export, I mean, you take the seed phrase, you export all the accounts together.
 So it's an easier transfer.
-Between external accounts, I mean between QA's, you can only send money, in that case, a period.
-And with external accounts you can interact with smart contracts.
-This is very important. Later you will see one smart contract can co-another smart contract.
-But the first co-art smart contract should always be in code from external account.
+
+Between externally-owned accounts, I mean between users (or wallets), you can only send money, in that case, Ethereum.
+And with the externally-owned accounts you can interact with smart contracts.
+This is very important. Later you will see one smart contract can call another smart contract.
+But the first caller smart contract should always be in code from externally-owned account.
 Basically only this wallet can initiate a transaction. Only a person, the smart contract itself, cannot start any transaction.
-Unless it is, I mean, if you create something like a wallet where you implement your private key and then you see each private key controls my wallet, you can call those smart contracts, yes, but in that case, you out need this process.
-But a smart contract cannot co-another smart contract without external account.
+Unless it has,... I mean, if you create something like a script (or bot), implement your private key and then you see this private key controls my wallet, you can call those smart contracts, yes, but in that case, you automate this process.
+But a smart contract cannot call another smart contract without externally-owned account.
 Okay.
-So now we come to the topic of smart contract.
-Again, every smart contract is an identifier address.
-And this identifier address has been derived out of the deployment of a smart contract.
-So whenever we create a smart contract, and we deploy it on G, we create a hash and transaction,
-and usually with this smart contract address is derived out of this transaction.
-Similarly, like the external account, so in that case we derive it from the transaction.
-When you create a smart contract on Ethereum, you always pay some gas fees.
+
+## slide: Ethereum accounts: Smart Contract Accounts
+
+So, now we come to the topic of **smart contract**.
+Again, every smart contract has an **identifier address**.
+And this identifier address has been **derived out of the deployment** of the smart contract.
+So whenever we create a smart contract, and we deploy it on chain, we create a hash and transaction,
+and usually this smart contract address is derived out of this transaction.
+Similarly, like the externally-owned account, so in that case we derive it from the transaction.
+
+When you create a smart contract on Ethereum, you always pay some **gas fees**.
 Because this is, remember, you are changing the state of the blockchain,
-and every time you change the state of the blockchain, you need to pay gas.
-So usually the more complicated the smart contract is, the more gas fees you need to pay,
+and every time you **change the state** of the blockchain, you need to pay gas.
+So usually **the more complicated the smart contract is, the more gas fees you need to pay**,
 so you need to get prepared to pay this money on your wallet.
-And yeah, this is the last one, cannot initiate transactions,
+
+And yeah, this is the last one, **cannot initiate transactions**,
 meaning that every time you call a function on a smart contract,
-it is executed initially from external account.
-Normal wallet.
-Just keep in mind, external account is the simplest wallet you should get from your device.
-And yeah, what is a smart contract?
+it is being executed initially from externally-owned account, this normal wallet, Metamask.
+Just keep in mind, **externally-owned account is the simplest wallet you should have on your device**.
+
+## slide: Smart Contracts
+
+And yeah, **what is a smart contract?**
 Like the idea is actually old, it's from 1990s,
-and there is this guy, Savo, I think he created the concept behind a smart contract,
+and there is this guy, **Nick Szabo**, he **created the concept behind a smart contract**,
 and the idea is that it's not smart, it's not a contract,
-it's basically a symbol program which you can create on every programming language,
-but in that case the difference is that this program is of normal, it's deployed on chain,
-and you are sure that whatever you write in the watching of the smart contract will be executed on chain.
-And no idea here is no one can change either.
-One that's contract is important.
-The example which usually gives is with the vending machine,
+it's basically a simple program which you can create in every programming language,
+but in that case the difference is that this program is **immutable**, it's deployed on chain,
+and you are sure that whatever you write in the logic of the smart contract will be executed on chain.
+And no, but... the idea is **no one can change it later once that contract is deployed**.
+
+## slide: Smart Contracts: Vending Machine
+
+The **example** which we usually give is with the **vending machine**,
 so we know how the vending machine works.
 If we want to buy a snack or a drink, we just insert a coin,
 then we need to choose the code of the item we want to buy,
 and if we put more money then we are sure that we will get a change back.
 If we put less money then the vending machine will let us take our drink or snack,
 and if there is no drink or snack inside the machine under this code, we will get our money back.
-Think about this example also with the smart contract.
+
+So, think about this example **also with the smart contract**.
 Everything is predefined, everything is secured, whatever you do there you are sure that you will execute it eventually,
 unless there is some bug or issue which no one knows,
-and you can also also explain later if you want to talk about some working hacks,
-but pretty much if you have audited the code and you know what it is doing,
-you will be sure that you are 100% to do it.
+and I can also explain later if you want to talk about some blockchain hacks,
+but pretty much if you have audited the code and if you know what it is doing,
+you should be sure that 100% it will happen.
+
+## slide: Smart Contracts: Escrow Contract
+
 This is a project, I mean I simplified this example of the smart contract,
-it is called an ESCO smart contract, it was also a project we did with Vancouver,
-like three years ago I guess, it's about selling in a free space,
-and usually while we are working here on that example you get two parties,
-Alice and Bob, Alice is selling electricity, Alice wants to buy electricity,
-and Bob is selling electricity, but here we don't have a trust,
-I'm not going to put trust between Alice and Bob,
-so we decided okay why don't we create a smart contract,
+it is called an **ESCROW smart contract**, it was also a project we did with Fraunhofer,
+like three years ago I guess, it's about **selling electricity**.
+
+And usually, like we do on blockchain, here on that example you have **two parties**,
+Alice and Bob, Alice is selling electricity. Alice wants to buy electricity,
+and Bob is selling electricity, but here we don't have a trust,...
+**we don't want to put trust between Alice and Bob**,
+so we decided, okay, why don't we create a smart contract,
 and we can enable basically electricity trading between different people
-without going to each other based on smart contracts,
-and how does it work, whenever for example Alice who is the buyer of the electricity,
-when she deposits money inside the smart contract,
-the other guy in our case Bob can generate electricity, send it to her house,
-and if the houses receive, I mean there could be some signals,
-anything determined that they risk to receive the smart contract will release again,
-or this is just a trivial simple example of what you can do with a smart contract,
-and it's called ESCO smart contract, I mean it's pretty famous, they use the golden finger.
-Okay, so the internet goes down with this little bell?
-Yeah, and in the end they should somehow connect it to the blockchain
-if you don't get internet to talk, get away from the central transaction,
-so yeah in case you don't get internet connection, that won't work.
-I mean how to imagine where exactly the code to satisfy the strut,
-and how to get the network to run on every node, on the blockchain or like?
-I will show you, no it's not to run on every node, it's just a smart contract,
+without going to each other based on smart contracts.
+
+And how does it work? Whenever for example Alice who is the buyer of the electricity,
+when she **deposits money inside the smart contract**,
+the other guy, in our case Bob, can generate electricity, send it to her house,
+and if the houses receive - I mean there should be some **sensors (oracles)** to determine that electricity was received - the **smart contract will release the funds (to Bob)**.
+
+So, this is just a trivial, simple example of what you can do with a smart contract,
+and it's called ESCROW smart contract, I mean it's pretty famous, they use it...
+
+student: Okay, so, if the internet goes down, would this go down?
+
+Ivan: Yeah, I mean they should be somehow connected to the blockchain,
+if you don't have internet, if you don't have a way to send the transaction.
+So yeah, in case you don't have internet connection, that won't work.
+
+student: I mean it is hard to imagine where exactly the code is run,
+does it run on every node on the blockchain or?
+
+Ivan: I will show you, no it's not run on every node, it's just a smart contract,
 you deploy it, but this version of the code has access to every node in blockchain,
-I mean every node, not even every node, you also have access to the blockchain
+I mean not even every node, you also have access to the blockchain
 because it's transparent, I mean I will show you later,
-you have to focus or you see everything, if you deploy it,
-if you keep aware you can direct it, so I mean I can deploy it and it's used together to do it,
-but I don't need to know the solution.
-So how do we write a smart contract?
-Typically it's written in Solit, I mean on Ethereum,
-we are talking about Ethereum or PNM chains, which are Ethereum virtual machines,
-typically like not only on Solit, there are other languages like Viper and some new ones,
-but let's say 80-90% of the smart contracts are written in Solit.
+you have a block explorer, you see everything if you deploy it,
+if you have a wallet you can directly see it. So, I mean I can deploy it and you together do it,
+but even I don't need to know...
+
+## slide: Smart Contracts in Ethereum (1)
+
+So **how do we write a smart contract?**
+Typically it's written in **Solidity**, I mean **on Ethereum**,
+we are talking about Ethereum or **EVM chains**, which are Ethereum virtual machines chains,
+typically like not only on Solidity, there are other languages like Viper and some new ones,
+but let's say **80-90% of the smart contracts are written in Solidity**.
+
 What else do we get here?
 The smart contracts, as I said, the Artificative is only the functions,
-and we call the smart contracts Artificative is only from the external own accounts.
+and we call the smart contracts Artificative is only from the externally-owned own accounts.
 We can get multiple, in one transaction we can call multiple smart contracts together,
 I mean they can be in Ethereum or just in the visual smart contract,
 we can call them in one transaction.
@@ -175,10 +276,10 @@ So here, I mean it's a little bit complicated,
 but you will see it later on when you deploy the smart contract,
 that's why I want you to give you a brief introduction on what you should expect.
 Like a smart contract, which you see as a smart contract,
-is just written in Soliti, which is again a two-unreadable language,
+is just written in Solidityi, which is again a two-unreadable language,
 but on a war lever what is happening,
 we get a bytecode which is executed from the Ethereum desktop machine tools.
-I mean we use Soliti to create a working everything,
+I mean we use Solidityi to create a working everything,
 but then this is compiled with a compiler to bytecode,
 and on Ethereum, on the blockchain you will see the bytecode.
 There is also another terminology which is called API,
@@ -198,7 +299,7 @@ The ABI is more like a human read-about way so that you see the functions,
 but in reality if you call the first or last bytes, you call the bytecode,
 but you see the hash or the data on the side of the end, we need to call it.
 Whenever we deploy it again, there is a transaction fee which needs to be paid from your work,
-in our case again from our external account.
+in our case again from our externally-owned account.
 The smart contract again is its own balance to remember the initial image,
 which I showed you here, the smart contract.
 The Ethereum wallet, we get now our balance,
