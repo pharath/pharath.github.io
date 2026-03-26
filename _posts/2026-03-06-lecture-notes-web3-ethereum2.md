@@ -408,16 +408,16 @@ and usually the stable versions are after `8.0`, I will say, or nine and above.
 ## slide: Smart Contracts: Turing-completeness
 
 Okay, again going back to the features of a smart contract,
-I mentioned it last time, but all the smart contracts are Turing-complete,
+I mentioned it last time, but all the smart contracts are **Turing-complete**,
 meaning that if we have enough time, we are sure that
 eventually we will execute the smart contract, however,
 if you think more about testing, the more execution you have,
-the more gas fees you need to pay, therefore, it's not infinite,
-it will be eventually limited by the transaction fees,
-and this is why we don't have infinite loops here.
+the more gas fees you need to pay, therefore, it's **not infinite**,
+it will be **eventually limited by the transaction fees**,
+and this is why **we don't have infinite loops** here.
 I mean, infinite loops you cannot get because eventually you run out of gas
 and the program will be stopped.
-I mean, stopped means the transactions will be reverted, since they are atomic.
+I mean, stopped means the **transactions will be reverted**, since they are **atomic**.
 
 student3: How long would the longest be that it could run?
 I would not say, I think it's based on the...
