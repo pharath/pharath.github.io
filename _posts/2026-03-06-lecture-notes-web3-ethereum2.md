@@ -420,79 +420,90 @@ and the program will be stopped.
 I mean, stopped means the **transactions will be reverted**, since they are **atomic**.
 
 student3: How long would the longest be that it could run?
-I would not say, I think it's based on the...
+
+Ivan: I think it's based on the...
 Every block has a maximum size limit,
 so basically the amount of gas you can pay,
-so if your transaction will not fit inside the port, it will be eventually reverted.
-And if a transaction is reverted, do you get back the gas fee or is it lost?
-It's lost.
-It's still lost.
-Yeah, so basically you lose the money.
+so if your transaction will not fit inside the block, it will be eventually reverted.
+
+student3: And if a transaction is reverted, do you get back the gas fee or is it lost?
+
+Ivan: No, it's lost.
+
+student3: It's still lost.
+
+Ivan: Yeah, so basically you lose the money.
+
+## slide: Smart Contracts: Opcodes
+
 Okay.
 So, now that you saw what the smart contract is,
-like, being that this smart contract is actually compiled to By-Port,
+and I explain you that this smart contract in Solidity is compiled to bytecode,
 you...
-I just generated this image to basically give you a visual explanation
-what's a By-Port and what's an Up-Code.
-Because on a lower level, I mean, when you write this smart contract in the street,
-you write it by functions and payment everything,
-but on a compiler level, we execute this By-Port.
-And these By-Ports are basically a version of the Up-Codes,
-and the Up-Codes are basically those operations where we need to pay gas fees.
+I just generated this image to basically give you a **visual explanation**
+what's a **bytecode** and what's an **opcode**.
+Because on a lower level, I mean, when you write a smart contract in Solidity,
+you write it by functions and variables and everything,
+but on a compiler level, we execute these bytecodes.
+And these bytecodes are basically a version of the opcodes,
+and the opcodes are basically those operations where we need to pay gas fees.
 So, it might be a little bit confusing,
 but we pay...
-Our payment for executing or for deploying a smart contract is based on how many Up-Codes we use,
-and those Up-Codes are later on converted to the By-Port itself.
-So, here this is some Up-Codes, like push.
-Push is basically pushing to the stack,
-and yet, for example, adding one number to another number,
+Our payment for executing or for deploying a smart contract is based on how many opcodes we use,
+and **those opcodes are later on converted to the bytecode itself**.
+
+So, here this is some opcode, like `PUSH`.
+`PUSH` is basically pushing to the stack,
+and `ADD`, for example, adding one number to another number,
 I think on the next slide I'll give you an example.
-But you should remember here that the Up-Codes are basically the codes which are paid,
-and based on the Up-Codes, you can calculate how much gas fees you need to pay
-for deploying a smart contract for calling a certain function on that smart contract.
-And, yeah, I found out that there are more than 140 Up-Codes,
-so based on what kind of operation you do on Chink,
-depending on how much money you need to pay again.
-We think about this example you showed in the previous slide.
+But you should remember here that the opcodes are basically the codes which are paid,
+and based on the opcodes, you can calculate how much gas fees you need to pay
+for deploying a smart contract or for calling a certain function on the smart contract.
+
+And, yeah, I found out that there are more than 140 different opcodes,
+so basically depending on what kind of operation you do on chain,
+depending on that you can calculate how much money you need to pay again.
+
+student: We think about this example you showed in the previous slide.
 If we store a value, like, imagine it as basically like an API that I can call of a server,
-like, it's in a model that makes sense.
-Like, somebody calls it and says, okay, I want to store a number 42,
-and then somebody else calls the gather function and says, okay, I now want to receive the number that's stored,
-and you get 42, and if so, where is this number actually stored?
-It's a blockchain-based server, not on the machine-based server, but actually stored.
-Yeah, so basically you execute it on the node,
-and you see the virtual machine node, which is running the virtual machine software,
+like, is that a model that makes sense?
+Like, somebody calls it and says, okay, I want to store the number 42,
+and then somebody else calls the getter function and says, okay, I now want to receive the number that's stored,
+and he gets 42? And if so, where is this number actually stored?
+
+Ivan: On blockchain.
+
+student: It's a blockchain-based server, not on the machine-based server, but actually...
+
+Ivan: Yeah, so basically you execute it on the node,
+on this Ethereum virtual machine node, which is running Ethereum virtual machine software,
 or operating system in our case.
-But every time when you call, for example, store number 5, I think,
-so then it's like, you can just add here, here is a good explanation.
-There is a function called add, so basically here in that case, I'm summing a group with, right?
-And this is the needy, this is now the opcodes.
-Opcodes is push, add, and store, and present.
-And when you're on a computer, you get like, this is the card drive,
-you can also add RAM, here you get also a memory storage,
-and the stack is basically the lowest...
-Okay, let's start first with the storage.
-So whatever you store on the storage, you store it on the blockchain,
-so basically you get access data on the blockchain,
-I can retrieve it from the blockchain source.
-The memory is basically only storing information inside the function,
-so when this function is completed, then memory is deleted,
-and stack is basically a small operation, when I just store...
-If my function is A to B, and then I say, the result of A to B should be summed with C,
-A to B, the result of A to B is stored on the stack.
-So this is a spacing where you store information, but for a really short amount of time,
-within the function in the memory.
-This is memory of the function.
-So if we have an example of the number storage, and people like...
-If I call it, I say it's a 42, so 0 to the 42, like all the time,
+But every time when you call, for example, store number 5, I think, it's on the next slide... Yeah, here is a good explanation.
+
+## slide: Smart Contracts: From Function to Bytecode (1)
+
+There is a function called `add()`, so basically here in that case, I'm summing `a + b`, right?
+And this is Solidity, this is now the opcodes.
+Opcodes is `PUSH1`, `ADD`, `MSTORE`, and `RETURN`.
+And when you're on a computer, you have like, this is the hard drive,
+you have also RAM, here you have also a memory, storage,
+and the stack. Stack is basically the lowest...
+
+- Okay, let's start first with the **storage**. So whatever you store on the storage, you store it on the blockchain, so basically you have access later on on the blockchain, I can retrieve it from the block explorers.
+- The **memory** is basically only storing information inside the function, so when this function is completed, then memory is deleted.
+- And **stack** is basically a small operation, when I just store... if my function is `a + b`, and then I say, the result of `a + b` should be summed with `c`, the result of `a + b` is stored on the stack. So this is a space where you store information, but for a really short amount of time, within the function in the memory. This is memory of the function.
+
+student: So if we have an example of the number storage, and people like...
+if I call it, I set it to 42, set it to 0, set it to 42, all the time,
 then all these different states will be stored on blockchain forever.
-Yeah, so basically what we'll do, we'll hold this function just normally,
-this function will be executing this op-codes,
-so basically take the first place, A, and the second place, B, then add them together,
+
+Ivan: Yeah, so basically what we'll do, we'll call this function just normally,
+this function will be executing these opcodes,
+so basically take the first place, `a`, and the second place, `b`, then add them together,
 then store this information.
 This is just storing it for the function, for the lifetime of the function,
-and then return, but if we want to store it for the lifetime of the smart contract,
-we just need to add a store, which stands for storage,
+and then return it, but if we want to store it for the lifetime of the smart contract,
+we just need to have `SSTORE`, which stands for storage,
 and then we'll store it on the state of the blockchain,
 which is basically here, think about it, just a big number,
 think about the smart contract, it's a big number,
@@ -501,330 +512,358 @@ This number is basically a transaction hash.
 So if you want to retrieve this number, you go to the transaction hash and say,
 okay, what was stored on that smart contract with this transaction hash,
 and this transaction hash gets some access to the storage.
+
 I probably explained it super stupid and you don't get it,
 but it's confusing, it's not so simple,
-but the thing is that you hear this, if you go to this Merkle tree for a while,
-and these other transactions are stacked in the tree structure or something like that,
+but the thing is that you hear this, if you go to this Merkle tree from last time,
+where basically all the transactions are stacked in the tree structure or something like that,
 all those transactions are part of this tree,
 and all those transactions are basically changing the state of the tree
-and changing the state of the blockchain,
+and, hence, changing the state of the blockchain,
 and whenever I need to retrieve information from the blockchain,
 I just go and ask, okay, this smart contract, it gets a storage,
-I told you that there is a storage, just tell me what's the number stored on the storage source,
-and it's a one or two or whatever storage storage is,
-and then you can retrieve the number which I stored on that tree.
-But this number is also correlated to the state of the Merkle tree chain early.
-The only thing that's confusing me is that if we have an actual application running there,
-where every stage is basically stored in the blockchain,
+I told you that, there is a storage, just tell me what's the number stored on the storage source,
+let's say one or two or whatever storage source it is,
+and then it will retrieve directly the number which I stored on that list.
+But this number is also correlated with the state of the Merkle tree change early.
+
+student: The only thing that's confusing me is that if we have an actual application running there,
+where every state is basically stored in the blockchain,
 doesn't that generate an incredible amount of data?
-And that's why it's constantly increasing the size of the blockchain.
+
+Ivan: Yeah, that's why it's constantly increasing the size of the blockchain.
 Every time when you save some information, you basically save some more information on the blockchain,
 and you make it bigger.
-That's why last time when Professor Prince was talking about retrieving code on the box,
-he said that the later you go with the box, the slower it becomes to retrieve information,
-because there were more transactions, more interactions, so everything becomes slower and slower.
+That's why last time when Professor Prince was talking about retrieving all the blocks,
+he said that the later you go with the blocks, the slower it becomes to retrieve the information,
+because there are more transactions, more interactions, so everything becomes slower and slower.
 But think about it just as an SSD card which is shared among all of us,
 and whenever we send information to this hard drive,
 basically everyone has access to this hard drive, everyone can save information there,
 and everyone can retrieve information.
 And this hard drive is not one hard drive,
-it's just a copy of this hard drive that's saved from all nodes running from the blockchain.
-Whenever I change something from my node, from my hard drive,
-I basically say, okay, I changed the state of the blockchain,
+it's just a copy of this hard drive that's saved from all nodes running on the blockchain.
+So, whenever I change something from my node, from my hard drive,
+then I basically say, okay, I changed the state of the blockchain,
 please synchronize all your other nodes around the world,
-that we get the same state, the same information which I saved from this platform.
-What do you want to answer?
-Thank you.
-It's confusing, I have an idea, probably I also didn't get it from first five, ten times,
+that we have the same state, the same information which I saved from this smart contract on your hard drive.
+
+student: Thank you.
+
+Ivan: It's confusing, I agree, probably I also didn't get it from the first time,
 but the longer you use it, the easier it will become.
 That's why I would say this is not something you should understand from the beginning,
-I don't think even the traditional testing application is something personal,
-but for example, don't take this for real,
-I just wanted to explain how it works,
-so that you can talk more knowledge about how it works.
+I don't think even the professor does...,
+don't take this for relevant,
+I just wanted to explain you how it works,
+so that you have a little more knowledge about how it works.
+
+## slide: Smart Contracts: From Function to Bytecode (2)
+
 And yeah, as I explained on the previous slide,
-those opcodes, they are different types of opcodes, more than 140,
-and those opcodes, they have task fees,
+those opcodes, there are different types of opcodes, more than 140,
+and those opcodes, they have gas fees,
 so basically depending on what we do on the blockchain,
 we call different opcodes,
-and these opcodes we need to pay for example, for push,
-and they have much trigger, three units of that,
-and for pop, for adding, quantifying, saving for memory,
-saving for storage, jumping, holding data like we have,
-different pricing, tax, how much we need to pay for the opcodes.
-And yeah, pretty much that's the, on a war level, on a combined level.
-So now going again to the smart contracts,
-as I said, it's written in utility,
-it can be also the second most famous language is Bifar,
-both of them are just object-oriented languages,
-like Kawa and Kawa script, I would say,
-the utility compiler is called S-O-C,
-so it comes with a compiler,
-this is the compiler which is combined with a bytecode,
-and that's combining the utility and bytecode,
-and then we have, what do we get?
-Yes, we can see code smart contracts.
-I'm not trying to get you to know,
-every time when I call it a transaction,
-this compiler is basically running from the virtual machine,
-which is the OS of the node.
-Yeah, do these prices, these gas prices change?
-No, they just fix, but the guy's from Ethereum,
+and these opcodes we need to pay for example, for `PUSH` we pay three units of gas,
+and for `POP`, for adding, multiplying, saving on memory,
+saving on the storage, jumping, calling data, like we have different pricing, tax, how much we need to pay for the opcodes.
+And yeah, pretty much that's the,... on a lower level, on a compiler level.
+
+## slide: Smart Contracts: Solidity introduction
+
+So now going again to the smart contracts.
+As I said, it's written in Solidity,
+it can be also the second most famous language is **Vyper**.
+Both of them are just **object-oriented languages**,
+like Java and JavaScript, I would say.
+
+The **Solidity compiler** is called **SOC**,
+so basically it comes with a Soldity compiler,
+this is the compiler which is compiling the bytecode,... that's compiling the Solidity to bytecode,
+and then we have,... what do we have?... Let me see...
+Yeah. Every time when you call it is a transaction.
+This compiler is basically running on the Ethereum virtual machine,
+which is the OS of the nodes.
+Any questions?
+
+student: Yeah, do these prices, these gas prices change?
+
+Ivan: No, they are just fixed,
+
+student: But the guys from Ethereum,
 think about it, can they change it?
-Yeah, they change the earth,
-of course, updates of the EDM and updates of the sweet opus,
+
+Ivan: Yeah, they changed the...
+of course, updates of the EVM and updates of the Solidity also,
 so eventually at some time, probably they can change it.
-I actually never check whether they can change
-in the future, but eventually they can reach the content
-where they make, for example, storing more expensive things.
-But the gas fee rate does change all the time?
-Gas fee rate, yeah, changes in a minute there,
+I actually never checked whether they have been changed since the beginning,
+but eventually they can reach the consensus
+where they make, for example, storing more expensive.
+
+student3: But the gas fee rate does change all the time, as you said.
+
+Ivan: Gas fees' rate changes every minute,
 depending on the usage of Ethereum,
 so if there are lots of people right now using it,
-there will be lots of calls into the work space,
-but this is probably, if it's changed,
-it's probably changed on a few years' time.
-Are these gas prices for deploying the contract?
-For deploying, basically for interacting with the smart contract,
+there will be lots of calls and it will be more expensive,
+but this is probably,... if it's changed,
+it's probably changed on some few years' time or something.
+
+student: Are these gas prices for deploying the contract or using the cotract?
+
+Ivan: For deploying and basically for interacting with the smart contract,
 if you look at this, this is a function,
 this function is basically calling those opcodes,
-so basically it's calling push, it's calling hit,
-and it's calling can store.
+so basically it's calling `PUSH`, it's calling `ADD`,
+and it's calling `MSTORE`.
 And those opcodes, they have gas fees,
-so whenever I call this function, I know how much gas fees there are.
-When I deploy it,
-deploy it, you deploy it, you change the user.
-Another one, right?
-Yeah, deploying the smart contract,
+so whenever I call this function, I know how much gas fees it will take.
+
+student: When I deploy it, there is another fee, right?
+
+Ivan: Yeah, deploying the smart contract,
 you pay only for the opcodes used for the deployment.
-But if you use the, after you deploy the smart contract,
-it's already existing, so you get now those functions.
+But if you use the... after you deploy the smart contract,
+it's already existing, so you have now those functions of the smart contract.
 And then, depending on the functions,
 you can go to the bytecode and calculate it.
-I mean, the wallet itself is calculated automatically,
-but if you want to go one safe deeper,
+I mean, the wallet itself calculates it automatically,
+but if you want to go one step deeper,
 you can also just look into the opcode
 and say, okay, the opcode costs three units of gas,
 do I pay three or do I pay more?
-So the example with the edge is doing the five opcodes,
+
+student: So the example with the edge is doing the five opcodes,
 that's for executing it,
-and if I want one to execute the smart contract,
+and if I want to execute the smart contract,
 I would pay the gas fee for those five opcodes.
-And for deploying it,
-for deploying it, for probably the deployment,
-or not another set of opcodes.
-The point is basically when you create a smart contract,
-you generate your compiler,
-you generate the opcodes for deployment of the smart contract,
-and they will be probably some other.
+And for deploying it would probably be another set of opcodes.
+
+Ivan: Deploying basically means you create a smart contract,
+your compiler will generate the opcodes for deployment of the smart contract,
+and there will be probably some other.
 This is only for the execution, this is only when I call the function.
-But for the deployment to be something,
-you don't pay this for the term.
-So the gas fees work like, for example,
-the cost of the story costs like $20,000 I think,
-so it's $20,000 times C,
-and the C is that when the gas price changes,
-or like, what is C?
-Like any constant?
-Ah, the constant, yeah, exactly.
-So the cost of deploying such a smart contract
+But for the deployment you pay something else,
+you don't pay this (on the slide) for deployment.
+
+student: So the gas fees work like, for example,
+storing costs like 20,000 I think,
+so it's 20,000 times `c`,
+and the `c` is that when the gas price changes, right?
+
+Ivan: what is `c`?
+
+student: Like any constant?
+
+Ivan: Ah, the constant, yeah, exactly.
+
+student2: So the cost of deploying such a smart contract
 depends on the constant of the smart contract.
-Exactly, so the longer the bigger the smart contract is,
+
+Ivan: Exactly, so the longer... the bigger the smart contract is,
 the more operations I get,
-and that means the working group is more complicated,
-I need to do more.
-Does it just depend on the size of the smart contract,
+and that means the logic will be more complicated,
+and you need to pay more.
+
+student3: Does it just depend on the size of the smart contract,
 or also on what it contains?
 When you deploy it?
-In the case of the onus, I never moved that deep.
+
+Ivan: Good question. To be honest, I never looked that deep.
 I would assume both, but I'm not sure.
 I'm not sure.
-I need to deploy it.
+I need to divulge it.
 Definitely the size, because the bigger the smart contract is,
-the bigger the exchange, and the priority, everything.
-But this is for sure,
-but what else?
-And what's the point of the same smart contract?
-Yeah, you can deploy it, but it's not in the same work,
-it will be in different work.
-Or, yeah, in the same work, work with different transactions.
-So who cares if the gas is in the work,
-if people deploy it?
-If you deploy your own version, it will be the same version,
-but you pay from your order.
-I can copy the same smart contract,
-which you deploy, and I can deploy from my order.
-So eventually, you will get the same logic smart contract
+the bigger the state change, and the storage, everything.
+So this is for sure paid, but what else I'm not sure.
+
+student4: Can multiple people deploy the same smart contract?
+
+Ivan: Yeah, you can deploy it, but it's not in the same block,
+it will be in different blocks, or, yeah, in the same block, but different transactions.
+
+student4: So who pays the gas fee if all the people deployed it?
+
+Ivan: If you deploy your own version, it will be the same version,
+but you pay from your wallet.
+I can copy the same smart contract, which you deployed, and I can deploy it from my wallet.
+So eventually, you will have the same logic smart contract
 with different addresses,
 but I will pay for my own, and you pay for your own version.
-So I just upload in an image, for example.
+So I just upload an image, for example.
 You upload the image from your computer,
-I have to upload it from my computer.
+I upload it from my computer.
 There are two instances of this image,
-leaving from internet, but one is uploaded from you,
+living on the internet, but one is uploaded from you,
 one is uploaded from me, so the one I uploaded,
 I pay for it, and the one you uploaded, you pay for it.
-The same constant code with two different contracts.
-Yeah, but they get two different addresses.
-So if I deploy the same important,
-if you deploy, we will eventually,
-you know, get two different smart contract addresses.
-So if the smart contract involves
-me telling one place, someone else.
-So the personal place, the gas fee,
+
+student3: The same constant code with two different contracts.
+
+Ivan: Yeah, but they have two different addresses.
+So if I deploy the same smart contract that you deploy, we will eventually get two different smart contract addresses.
+
+student5: So if the smart contract involves
+me paying monthly someone else.
+So the person who pays the gas fee,
 is the person who deployed the contract.
-Yeah, but if you remember again,
+
+Ivan: Yeah, but if you remember again,
 you cannot pay the gas fees automatically.
-You need to, every time when you pay your monthly fees,
+You need to,... every time when you pay your monthly fees,
 you need to call the smart contract,
 hey, please pay to my landlord,
 my apartment fee, yeah, my rent.
 In that case, your wallet is calling the smart contract,
-which is having a function, pay, render,
-pay your rent worth or whatever,
+which is having a function, `pay_renter()`,
+`pay_your_landlord()` or whatever,
 and then you pay for the execution of these transactions
 from your wallet, and if the smart contract has balance,
-probably it will send the money to the rent point.
-But in that case, I don't,
+probably it will send the money to the landlord.
+But in that case, I don't,...
 if I call your smart contract,
-I would pay your fees, I would pay your rent
+I would pay your fees, I will pay your rent
 using my wallet fees.
 So think about, we have the same version of the smart contract,
 every month you call a function of that smart contract
 to pay your landlord, and every time you call this function,
-you pay a small transaction.
+you pay a small transaction fee.
 And if I call this function on your smart contract,
-I will pay the transaction,
+I will pay the transaction fees,
 but I will also pay your rent from the smart contract.
 If the smart contract has a balance,
 you're not to pay for the rent,
 because if the balance is zero,
 then the execution will revert,
-I thought it was atomic,
+because, I told you, it is atomic,
 if there is not enough money in the smart contract,
 it will just revert,
 I would eventually pay the fees,
 but the rent won't be paid,
-or there is no money in it.
-So you're not to pay for the rent,
-you're not to pay for the rent,
-you're not to pay for the rent,
-you're not to pay for the rent,
-you're not to pay for the rent,
-you're not to pay for the rent,
-you're not to pay for the rent,
-you're not to pay for the rent,
-you're not to pay for the rent,
-you're not to pay for the rent,
-you're not to pay for the rent,
-you're not to pay for the rent,
-you're not to pay for the rent,
-you're not to pay for the rent,
-you're not to pay for the rent,
-you're not to pay for the rent,
-so again if we go back to the sample,
-we have the Progmo summertime,
-which I sent this is a bespot version.
-And we have the name of the smart contract,
-and then we can give different types,
-like, as I said,
-we can give unsigned into JET stroke,
-signed into JET stroke,
-So I said everyone on blockchain has an address,
-so we need a type of address to determine
+because there is no money in it.
+
+student: (question)
+
+Ivan: (answer)
+
+## slide: Smart Contracts: Solidity introduction (1)
+
+So again if we go back to the example,
+we have the `pragma solidity`,
+which I said is a **compiler version**.
+And we have the **name** of the smart contract,
+and then we can have different **types**, like, as I said,
+we can have unsigned integers (`uint`), signed integers (`int`), we can have boolean (`bool`), `string`, `address`.
+Addresses are especially interesting.
+So I said everyone on blockchain has an **address**,
+so we need a **type of `address`** to determine
 where the transactions are coming from.
-Those are KF bytes, and they are different types.
+We also have bytes, and there are different types.
 I would say this is just informative,
 so you know what to expect,
-but depending on what smartphone that you want to create,
+but depending on what smart contract you want to create,
 you can look into different types.
-I am very important, there is no thanks
-on all the smartphones.
-We use this, I think it's called
-an epoch, you know, something like this,
-which is picked number from 1917s,
-which is representing our current time date
-and seconds.
+
+And very important, there is **no timestamp (type)** on the smart contract.
+**We use** this, I think it's called an **epoch**, **Unix timestamp**, something like this,
+which is a big number from 1970s, which is representing our current time, date and seconds.
+
+## slide: Smart Contracts: Solidity introduction (2)
+
 What else do we have?
-So it's very important that we get different variables,
-so we get contract variables, functional local variables,
-and blockchain global variables.
-And most interesting are the blockchain global variables,
-which means that those variables are publicly accessible.
+So it's very important that we have different variables,
+so we have
+- **contract-wide** variables,
+- **function-local** variables, and
+- **blockchain-global** variables.
+
+And most interesting are the **blockchain-global** variables,
+which means that those variables are **publicly accessible**.
 So usually the person who send the transaction
-to the smart contract is called message-rock sender.
+to the smart contract is called `msg.sender`.
 Everyone has access to this.
 We can see the value, if we deposit, for example,
 the example from before with the rent.
 If we send money to the smart contract,
-we, there is a message-rock value,
+we,... there is a `msg.value`,
 basically writing the value of the money
 which we send to the smart contract,
 and it's stored there.
-And we also get walk number,
+And we also have `block.number`,
 because every transaction eventually will be saved
-from some walk, so we can use the walk number
+on some block, so we can use the block number
 to reference where the transaction was sent.
-And there is also walk time sender,
-so basically, again, in this unique state of time,
+And there is also `block.timestamp`,
+so basically, again, in this unique strip of time,
 we can determine what was the time and date
 of calling the smart contract.
-We also get just simple operation like arithmetic,
-with minus, you know,
-Teo, and comparison, logical and forward-in-patient assignments,
-just like normal, normal, okay?
-How is it made sure that the blockchain global variables
-are in the main space?
-Is there a transaction ID in front of the message-rock sender?
-So message-rock value can be same.
-If I send you one, you can do all the same value.
-Walk number is always unique,
-because walk number basically is
-the end of the transaction, as you always prefer.
-But if I want access to walk number,
-from the transaction, you can see
-the areas on the walk explorer,
-you can see the open, they are available.
-Those walk explorer is the website
-where everything is visually accessible.
-I mean, that's probably the main point, I get it,
+We also have just simple operation like arithmetic,
+plus, minus, whatever,
+and comparison, logical and assignments,
+just like normal.
+
+student: How is it made sure that the blockchain global variables
+are unique in the namespace?
+Is there a transaction ID in front of the `msg.sender`?
+
+Ivan: So `msg.value` can be same.
+If I send you one, you always have the same value.
+`block.number` is always unique,
+because `block.number` basically is
+~~the end of the transaction, as you always prefer.~~
+
+student: But if I want to access the `block.number`,...
+
+Ivan: From the transaction, you can see there is on the block explorer,
+you can see the...
+Those block explorer is the website where everything gets visually represented.
+
+student: I mean, that's publicly available, I get it,
 but if I want to, for example,
-access them from some...
-Yeah, it's the best...
-...the next thing I have a unique name, no?
-Yeah, it's walk-off number.
+access them from somewhere they need to have a unique name, no?
+
+Ivan: Yeah, it's `block.number`.
 So if you write a smart contract and you say,
-I want the walk-off number to be bigger than that,
-and that means this function can be called only
-from walk number, which is in the future,
-and in the future.
+I want the `block.number` to be bigger than that,
+in that case this function can be called only
+from `block.number` which is in the future, in the near future.
 This is the example where you say,
 can we limit it, for example,
-to not do the smart contract after this session?
+to not do the smart contract after this lecture, for example.
 We can say whoever sends a transaction
 to our smart contract,
-and this transaction ends in a walk number
-that is later done in the specified way,
+and this transaction lands in a `block.number`
+that is later than we specified,
 when it's the deadline of this lecture,
-then it will be rewards every time someone tries
+then it will be reverted every time someone tries
 to send the transaction to the smart contract
-after the lecture, it will be rewarded.
-And I can, from the site, the smart contract?
-Yeah, I can access message.sender,
-and you always will need this message.sender
-from the guidance column.
-Yes.
-Okay, because there are probably thousands of messages
-to send that are removed, right?
-Yeah, okay.
-That's why it's called a warning.
+after the lecture, it will be reverted.
+
+student: And I can, from the site, the smart contract, for example,
+I can access `msg.sender`,
+and you will always only need this `msg.sender`
+from the guy who called it.
+
+Ivan: Yes.
+
+student: Okay, because there are probably thousands of messages
+to send, right?
+
+Ivan: Yeah.
+That's why it's called ___.
 The smart contract just compiles it without any errors,
-and then sometimes someone is going to just take it.
-So sorry, those values are then in the global namespace,
-and they are performable?
-Yeah, yeah, performable.
-What else do we get?
-We get loops, but they are not really a good option
+and every time someone is calling it will just do it.
+
+student3: So sorry, those values are then in the global namespace,
+and they are per contract?
+
+Ivan: Yeah, yeah, per contract.
+
+## slide: Smart Contracts: Solidity introduction (3)
+
+What else do we have?
+We have loops, but they are not really a good option
 to be used because the longer the loop is,
 the more gas fees you need to pay.
 So eventually, if you end up creating a smart contract
