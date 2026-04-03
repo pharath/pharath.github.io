@@ -851,9 +851,63 @@ student: Okay, because there are probably thousands of messages
 to send, right?
 
 Ivan: Yeah.
-That's why it's called ___.
+That's why it's called **deterministic**.
+The smart contract just compiles it without any errors,
+and every time someone is calling it will just execute.
+
+---
+
+### deterministic
+
+The missing word is:
+
+👉 **deterministic**
+
+---
+
+#### ✔️ Filled version:
+
+That's why it's called **deterministic**.
 The smart contract just compiles it without any errors,
 and every time someone is calling it will just do it.
+
+---
+
+#### 🧠 What “deterministic” means here
+
+In Ethereum, **deterministic execution** means:
+
+* Same input → **same output**
+* Every node executes the **exact same logic**
+* No randomness or ambiguity during execution
+
+---
+
+#### 🔗 Why this matters in your example
+
+* `msg.sender` → always the caller of the function
+* `block.number` → same value for all nodes in that block
+* Function logic → behaves identically for everyone
+
+➡️ So:
+
+> If the condition fails once, it will fail **for everyone**
+
+---
+
+#### 🔑 Key takeaway
+
+Smart contracts must be **deterministic** so that:
+
+* All nodes agree on the result
+* The blockchain stays **consistent**
+* No conflicting states occur
+
+---
+
+If you want, I can give examples of what would *break* determinism (e.g., randomness, external APIs)—very important concept.
+
+---
 
 student3: So sorry, those values are then in the global namespace,
 and they are per contract?
@@ -863,184 +917,346 @@ Ivan: Yeah, yeah, per contract.
 ## slide: Smart Contracts: Solidity introduction (3)
 
 What else do we have?
-We have loops, but they are not really a good option
+We have **loops**, but they are not really a good option
 to be used because the longer the loop is,
 the more gas fees you need to pay.
 So eventually, if you end up creating a smart contract
 with a big list where you need to loop
-to the items and the list,
+over the items in the list,
 you are basically saying,
 hey guys, whoever calls my contract
 needs to pay a bunch of gas fees.
-Some people won't be relegated before the smart contract.
-That's why we use mapping,
+So people would not be interested in using the smart contract.
+That's why we use **mapping**,
 on the next slide.
-We use arrays, I mean here is the creation of arrays,
-how you can initialize it,
-then creating element taxes and elements,
-it's just three-day old stuff, yeah.
-What's the difference between the two initializations?
-Not just different type of initialization,
+
+We use **arrays**, I mean here is the **declaration** of an array,
+how you can **initialize** it,
+then **adding elements** and **accessing elements**,
+it's just trivial stuff, yeah.
+
+student3: What's the difference between the two initializations of arrays?
+
+Ivan: Just different type of initialization,
 I mean both of them do the same thing,
 just different syntax.
 You can choose.
 I usually use the first one, but you can use the second one.
-So then it doesn't change where it's stored.
-Yeah, just different.
-What else we get?
-We get the emulation, yeah, I'm not sure.
-In all of them, we have structures,
-so basically like a struct,
-and each struct can also be initialized.
-In our case, we create a struct called student,
-student struct, there's a name, semester, and grade,
-so we can get those objects inside those elements
-inside the struct.
-And then we get this mapping,
-which I told you it's very popular in the smart contract
-because it costs lots of money,
-so usually we get a mapping.
-The mapping is between address,
+
+student3: So then it doesn't change where it's stored.
+
+Ivan: Yeah, just different syntax.
+
+## slide: Smart Contracts: Solidity introduction (4)
+
+What else do we have?
+We have the **enumerations**, yeah, I'm pretty sure you know them.
+We have **structures**,
+so basically like a `struct`,
+and each `struct` can also be initialized.
+In our case, we create a `struct` called `student`,
+this student `struct` has a `name`, `semester`, and `grade`,
+so we can basically have those in an instance of the `struct`.
+
+And then we have this **mapping**,
+which I told you it's very popular in the smart contracts
+because loops they cost lots of money,
+so we usually have a `mapping`.
+The `mapping` is between address,
 usually between address and something else.
 For example, if I'm the owner of a smart contract,
 my address will read to, for example,
-the owner balance will be 10, so it will read to 10.
+the owner balance will be 10 ETH, so it will read to 10.
 If you are just user, maybe you put your address
-and you get five things.
-So this is how you map your address
-to some integer or string or Julian or whatever.
-You can get a nested mapping, which is a mapping,
-inside a mapping, but it's a little bit more complicated.
+and you have 5 ETH.
+So this is a way how you map your address
+to some integer or string or boolean or whatever.
+You can have a **nested mapping**, which is a mapping inside a mapping, but it's a little bit more complicated.
 But this is usually when you create a list of elements
-and to say I want this student to get five zero,
-you don't go to the loop of this list,
-you create a mapping so that you can discuss
-the repeat elements on the smart contract.
+and you say I want this student to get five Euros,
+you don't go through the **loop** of this list,
+you create a `mapping` so that you spend less gas fees and
+repeat the elements from the smart contract.
+
+---
+
+### Loop
+
+The missing word is:
+
+👉 **loop**
+
+---
+
+#### ✔️ Filled version:
+
+…you create a list of elements
+and you say I want this student to get five Euros,
+you don't go through the **loop** of this list,
+you create a `mapping` so that you spend less gas fees and repeat the elements from the smart contract.
+
+---
+
+#### 🧠 What he means here
+
+Instead of:
+
+* Iterating through a list (**loop**) ❌ expensive
+
+You use:
+
+* Direct lookup via `mapping` ✅ efficient
+
+---
+
+#### ⚡ Why mappings are better
+
+* **O(1) access** (constant time)
+* No iteration needed
+* Much lower gas cost
+
+---
+
+#### 🔑 Simple comparison
+
+##### ❌ Loop approach
+
+* Go through entire list
+* Cost grows with size
+
+##### ✅ Mapping approach
+
+* Direct access:
+
+  ```solidity
+  balances[address] = 5;
+  ```
+* No iteration needed
+
+---
+
+#### 🧠 Key takeaway
+
+Mappings replace loops when you need:
+
+* Fast lookups
+* Low gas costs
+* Scalable smart contracts
+
+---
+
+If you want, I can show a real Solidity example comparing both approaches side-by-side.
+
+---
+
+## slide: Smart Contracts: Solidity introduction (5)
+
 Okay, so what's that?
-Yeah, so now we go to the functions.
-The functions, they get different properties.
-Some of the functions are called view,
+Yeah, so now we go to the **functions**.
+The functions, they have different **properties**.
+
+Some of the functions are called **view (functions)**,
 which means that if you call this function,
-you retrieve, you read the load from the blockchain.
-Some of the functions are called pure,
+you retrieve, you read values from the blockchain.
+
+Some of the functions are called **pure (functions)**,
 means that they are not even reading from the blockchain,
-they are very rarely viewed, I would say.
-And if this function doesn't have a property
-where you are pure, it means that usually this function
-can save information, so write and treat from the blockchain.
-Usually the syntax of the function looks like this.
-So we have the function, then name it,
-then we have a parameter or a simple parameter,
-then we have this property, whether it's view or string,
-and that's the function that we have here.
-So the prefer string, maybe it doesn't prefer string.
-And there is this public feature coming from the next slide.
+they are very rarely used, I would say.
+
+And if this **function doesn't have a property** like view or pure, it means that usually this function
+can save information, so write and read from the blockchain.
+
+Usually the **syntax** of the function looks like this.
+So we have the `function`, then `name` it,
+then we have a `parameter` or a simple parameter,
+then we have this property, whether it's `view` or `pure`,
+and does the function return something, maybe it doesn't return anything.
+
+## slide: Smart Contracts: Function Visibility
+
+And there is this `public` which is coming on the next slide.
 It is basically saying who can call that function,
 because not everyone, not all users
-can call that function function.
+can call that function on chain.
 This is actually, I would say,
-in some reddit, because it's my expression,
-to say what's the different between public and external,
-what's the different between external and private.
-It's pretty steep, straightforward,
-and you don't, from the name of the function,
-you can derive it.
-Public means that it's open for everyone,
-can call this function, external,
-and then you can call this one,
-smart contract can call this function.
+**exam relevant**, because it's nice question,
+to say what's the difference between `public` and `external`,
+what's the difference between `external` and `private`.
+It's pretty straightforward,
+I mean even from the name of the function you can derive it.
+
+`public` means that it's open for everyone,
+so everyone can call this function, externally-owned accounts can call this one,
+smart contracts can call this function.
 It's publicly available and open for everyone.
-Then we use external functions,
-which is somehow like public,
+
+Then we have `external` functions,
+which is somehow like `public`,
 except it cannot be called within the contract.
-So the contract is sealed,
-maybe there is a function called add,
-and there is another function called subtract.
+So the contract itself,
+maybe there is a function called `add()`,
+and there is another function called `subtract()`.
 Those two functions cannot call each other
 within the smart contract.
-Then we get another function, which is called internal.
-In that case, you restrict, right?
-No one can call, no one from outside can call your function.
-Only your inherited smart contract can call them,
+
+Then we have another function, which is called `internal`.
+In that case, you restrict, like no-one from outside can call your function.
+Only your inherited smart contracts can call them,
 or the smart contract itself.
-Then you get a private, which is the most restrictive function,
-and that is this function can only be called
+
+Then you have a `private`, which is the **most restrictive function**,
+and in that case this function can only be called
 from the smart contract itself,
 even the derived smart contract.
-Because here we get an example,
-like there is an inheritance,
-like an NTF, or another smart contract,
-and choose a smart contract,
-which is inheriting all the properties
-from the another smart contract.
-In that case, internal means that the children
+Because like there is an inheritance,
+like I can have a mother smart contract, a children smart contract, which is inheriting all the properties from the mother smart contract.
+In that case, `internal` means that the children
 can call the function from the mother,
-and in private, it means that the children
+and in `private`, it means that the children
 can call only functions inside the children.
-For the external, with the explicitly prefix
-of this keyword, is this,
-this is like in Java, for example,
+
+student: For the `external`, with the explicitly prefix
+of `this` keyword, is this `this` like in Java, for example,
 where you refer them to your own method?
-Yes, yes, exactly.
-The actual is very similar to Java.
-But why does the external then exist,
+
+Ivan: Yes, yes, exactly.
+Actually, Solidity is very similar to Java.
+
+student: But why does the `external` then exist,
 if it can be called from the contract,
-when you really do what this,
-I mean, this is again specific situation,
-I would say just before it,
-just if you get this question,
-say external smart contract cannot be called from outside,
-can be called only from outside,
-not from the contract itself,
-that would be sufficient.
+when you really the keyword this.
+
+Ivan: I mean, this is again a specific situation,
+I would say just ignore it.
+Just if you get this question,
+say `external` smart contract cannot be called from outside,
+I mean, can be called only from outside,
+not from the contract itself.
+That would be sufficient.
 So basically, it means everyone can call it,
-exists as smart contracts,
-the smart contract itself or other smart contracts.
-And so this means that with external,
+except the smart contract itself,
+or other smart contracts. I would say this is sufficient.
+
+student: And so this means that with `external`,
 it can only be called by its own contract
-and externally all the counts,
-but not following smart contracts.
-Not from own, from only from external,
-from what it's from other smart contracts.
-But not from, because there is a function, for example,
-do you have a smart contract with these functions,
-one, two, three, four,
+and externally-owned accounts,
+but not foreign smart contracts?
+
+Ivan: Not from own, only from external,
+from wallets or from other smart contracts.
+But not from,... because there is a function, for example,
+do you have a smart contract with 10 functions,
+one, two, three, four,...
 probably this function needs to call this one,
+and this needs to call this one.
 and this needs to call that one.
-On that case, you have function one,
-is calling function two,
+In that case, you have function one is calling function two,
 in that case, you cannot.
-Because external means that function two
+Because `external` means that function two
 can be called only from outside.
-But if I, you cannot call it from here.
-Three things to call with this?
-Don't care about this, it will become too confusing,
-just think if you can be called only from outside.
-It's not going to, don't worry.
+
+student: But if I prefix the call with `this`?
+
+Ivan: ...you cannot call it from here.
+Don't think about this, it will become too confusing,
+just think it can be called only from outside.
+Don't worry.
 It will be just more confusing.
-Just think that public, public means everyone,
+Just think that `public`, `public` means everyone,
 if everyone can do everything,
-private means no one can do
-only the smart contract they want to.
-And then think external, which is external,
+`private` means no-one can do,
+only the smart contract.
+And then think `external`, which is `external`,
 only from outside the smart contract.
-Internal means probably it's internal,
-but internal in a way that the smart contract
+`internal` means probably it's internal,
+but `internal` in a way that the smart contracts
 derived out of this parent, mother example.
-Okay, so what else do we get here?
-We get events, which is something like a notification.
+
+## slide: Smart Contracts: Solidity introduction (6)
+
+Okay, so what else do we have here?
+We have **events**, which is something like a **notification**.
 We can create an event,
 and every time an event is triggered,
-we get notifications,
-you are like mobile phone and apps.
-So every time we, someone creates a transaction
-or everything, we can subscribe to an event
-that is important for someone just paid
+we get a notification,
+similar like a mobile phone and apps.
+So every time someone creates a transaction
+or everything, we can **subscribe** to an event
+that **that shows** someone just paid
 to the smart contract,
 or someone just called function A from that smart contract.
-So think about event is just a notification.
-This is, I think this is important.
-Then we have here different types of structures
+So think about **event is just a notification**.
+I think this is important.
+
+---
+
+The missing word is:
+
+👉 **that shows**
+
+---
+
+✔️ Filled version:
+
+…we can **subscribe** to an event
+that **shows** someone just paid
+to the smart contract,
+or someone just called function A from that smart contract.
+
+---
+
+🧠 What this means
+
+Events in Solidity are like **logs/notifications**:
+
+* Smart contract emits an event
+* Frontend or backend can **listen (subscribe)**
+* When triggered → you get notified
+
+---
+
+🔔 Real-world analogy
+
+Like:
+
+* 📱 “You received a payment” notification
+* 🛒 “Order confirmed” message
+
+---
+
+⚡ Example in Solidity
+
+```solidity
+event PaymentReceived(address from, uint amount);
+
+function pay() public payable {
+    emit PaymentReceived(msg.sender, msg.value);
+}
+```
+
+---
+
+🔑 Why events are important
+
+* Enable **frontend updates**
+* Used in apps with libraries like web3.js or ethers.js
+* Cheaper than storing data on-chain
+
+---
+
+🧠 Key takeaway
+
+Events = **communication layer from blockchain → outside world**
+
+---
+
+If you want, I can show how a frontend actually listens to an event step-by-step.
+
+---
+
+## slide: Smart Contracts: Solidity introduction (7, with code)
+
+Then, we have here different types of structures
 we can create in the smart contract.
 First we have a constructor,
 which is initializing function like C for example.
