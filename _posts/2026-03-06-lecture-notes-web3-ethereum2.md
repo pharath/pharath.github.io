@@ -1678,289 +1678,304 @@ but I will show you like a brief example
 of how you deploy a smart contract.
 Because before we end I want to show you something else which is cool.
 
-## Recommendations: Learn Smart Contract Programming
+## Recommendations: Learn Smart Contract Programming, Remix
 
 So if you want to **learn smart contract programming**,
 I personally did it from this website
 called [www.smartcontract.engineer](https://www.smartcontract.engineer/).
 It's a nice website where they have different challenges.
-This guy also has a bunch of YouTube videos
-so you can watch in cases in everything.
-Right now, the contract is back with all the teaching class
-because it's for Ethereum,
+This guy also has a bunch of YouTube videos,
+so you can watch, where he explains everything.
+Right now, the guy actually started also teaching Rust,
+because Solidity is for Ethereum,
 but if you want to deploy smart contracts,
-for example, other teams,
-but one usually uses different languages.
-Some of it is Italian or Russian.
+for example, on other chains, like Solana,
+usually you would use different languages.
+Some of it is in Rust.
 Yeah, you can use that as well.
+
 Now that you know this website,
 I just took an example,
 and the example is this one here.
-So you can deploy the smart contract using YouTube.
-There is a really cool online compiler
-which is called remix.
-Remix.etherion.org.
+So you can deploy the smart contract using VSCode, for example.
+But there is a really cool online compiler
+which is called [Remix](https://remix.ethereum.org/).
 I would say just write it down
-because professor asked you to use Amazon
-to extract easier free to do.
+because if professor asks you to do some assignment
+it is easier to do it.
 And here on the left side,
-we have a compiler and we have a learning device.
-So this you need to balance.
+we have a compiler and we have a run and deploy.
+So basically you need those two buttons.
+
 Once you have a smart contract,
 for example, I have a smart contract here
-which is you can check what this smart contract is.
-Yeah, so we have an owner.
-Maybe I need to put it somewhere.
+which is, if you check what this smart contract...
+Yeah, so we have an `owner`.
+Maybe I need to make it a little bit bigger.
 So we have a smart contract where
 I just say when I deploy my smart contract,
-I want to be the owner.
+I want to be the `owner`.
 So the guy who is deploying the smart contract
-will be automatically sent to the owner.
+will be automatically set to the `owner`.
 And then I want to have a function
-where probably in the future I want to change the owner
+where probably in the future I want to change the `owner`
 of this smart contract.
-But I want to be sure that the owner is not address 0.
-address 0 means that if you assign the owner to address 0,
-no one has access because no one has access
-to a word called 0.
-There is no private fee assigned to this.
+But I want to be sure that the `owner` is not address 0.
+Address 0 means that if you assign the `owner` to address 0,
+no one has access because no one has access to a wallet called 0.
+There is no private keys assigned to this.
 And yeah, if I want to deploy that,
 basically I have an option here on the left side
-which I use, I can see different compiler version.
-Usually, as I said, if you use compiler,
-which is about 8, it's 3dc.
+which I use, I can see different compiler versions.
+Usually, as I said, if you use a compiler which is above 8, it's pretty safe.
 I compile it.
 And if there are no errors, here you see the green tick.
 That means it's ready to be deployed.
 Then I click here on the button below
-which is deploy and turn the transaction.
-I deploy the function as a result.
+which is "deploy and run transaction".
+I deployed it once so I delete it.
 I can choose the name of the smart contract
-because think about here I can get
-which post-mart contract is on the file.
+because think about here I can have
+multiple smart contracts inside the file.
 I choose to deploy the smart contract called allnobov.
 And here on the environment, I can choose
 whether I want to deploy it locally.
-It means using remix.
-I don't need any money.
-Or do I want to deploy it using my metamask wallet?
-So here on the browser station, I give two wallets.
-One is Panto, one is Vana.
-I think they also support Ethereum and metamask.
-So I said, okay, I want to deploy this with my metamask.
+It means using Remix I don't need any money.
+Or do I want to deploy it using my Metamask wallet?
+So here on the browser extension, I have two wallets,
+one is **Phantom for Solana**.
+I think they also support Ethereum and Metamask.
+
+---
+
+Gemini: "metamask vs phantom wallet"
+
+**MetaMask** and **Phantom** are both leading, non-custodial wallets designed for Web3, with **MetaMask specializing in Ethereum/EVM chains** and **Phantom in Solana**. Choose MetaMask for vast DeFi/DApp access on Ethereum/Polygon, or Phantom for superior user experience, built-in NFT management, and low-fee transactions on Solana, Ethereum, and Bitcoin.
+
+---
+
+So I said, okay, I want to deploy this with my Metamask.
 So I will pay some fees,
 but I want to see my smart contract on-chain.
-If I don't, if I don't get money,
-I'll just use the remix virtual machine.
+If I don't, if I don't have money,
+I'll just use the **Remix virtual machine**.
 So it means that it will simulate a compilation
-and deploy my protocol on the mix,
+and deploy locally on Remix,
 but you don't see it on-chain.
 Let's say I deploy it now.
-I'll deploy it.
+I click "deploy".
 I create a new hash here.
-Metamask just pops up at the end.
-You hear this smart contract.
-You need to pay network fee,
-then the maximum gas fees.
-Okay, well, I agree.
-And I pay whatever metamask is calculating
+Metamask just pops up and says "Hey, you have this smart contract. You need to pay network fee, then the maximum gas fees.", whatever, I agree.
+And I pay whatever Metamask is calculating
 for my smart contract.
 And here now the smart contract is pending.
-I can do it on Peter's app.
+I can view it on Etherscan.
 It will take some seconds.
-So you know, pending, over here, in the middle.
-So once here, it stops seeing pending,
+So now it is pending, over here.
+So once here, it stops showing pending,
 I will eventually see this is my wallet
-and I will see the smart contract address,
-both of my contract will eventually deploy this.
-Okay, official website.
-Okay, it was deployed.
-Now I give the smart contract.
-It is blank.
+and I will see the smart contract address of the smart contract which I just deployed.
+Okay, it was deployed. You see "success".
+Now I have the smart contract which is blank.
 You don't see anything.
 But if I click here on the contract,
-you'll see the buy code.
-And because you don't want to see the buy code,
+you'll see the **bytecode**.
+And because you don't want to see the bytecode,
 because you don't understand anything,
 we just want to verify.
-But the thing is only the guy who hears the smart contract
+But the thing is only the guy who has the smart contract
 can verify it because I know which compiler did I use.
-In that case, I used 3D compiler.
+In that case, I used Solidity compiler.
 Then I need to check which version did I use for the compiler,
-which is here, 3.31.
-So I go to this page, 3.31.
+which is here, 8.31.
+So I go and enter 8.31.
 I hope it's this one or the other one.
 Then I click continue, 3.
 And I should...
-Yeah, I should put the smart contract in the code.
-Here, and if it's verified,
-it should be verified what is working on.
-What is working on.
-What is working.
-Think about it working,
+Yeah, I should put the smart contract,... just copy and paste it.
+Here,... and if it's verified,
+it should be verified...
+Think about it is working,
 then you should see basically the same code here.
-But you should see on the address of the smart contract.
-On the text, which is here.
+But you should see on the address of the smart contract, which is here.
 So here you'll see the code.
-This is like this.
+This is the idea.
 So think about this is, again, this is the website
-where you can go and find smart contracts
-who can enter their code
-and interact with the smart contract directly from the wallet.
-I mean, in order to interact, you need to connect the wallet
-because again, for every transaction you need to take piece.
+where you can go and find smart contracts,
+look into their code
+and interact with the smart contract directly from the block explorer.
+I mean, in order to interact, you need to connect your wallet
+because again, for every transaction you need to pay fees.
 But eventually, what you should remember is
 that if you want to deploy a smart contract for the first time,
-I would suggest using this one, a remix.
+I would suggest using this one, a Remix.
 You just copy a smart contract,
-you decide what you really want to do,
-you compile it and then import.
+you decide whatever you want to do,
+you compile it and then deploy.
 I mean, it's literally one to two minutes work.
-Pretty sure you could be easy to do.
+Pretty sure it would be easy to do.
 Any questions on that part?
+
 Because I know you were expecting something fancy.
 How can I create a smart contract?
 I mean, nowadays,
-strategy became creating on the darkmail contract with me.
-I would say I spent three years on creating smart contracts
-and now it's the level that strategy is beating me sometimes
+ChatGPT can create even better smart contracts than me.
+I would say I spent three years only creating smart contracts
+and now it's the level that ChatGPT is beating me sometimes
 if you want to compete.
-So I would say it's good to understand how it really works.
+So I would say it's good to understand how Solidity works.
 I would say that it's always nice to understand
 what your smart contract is doing
 because whenever you deploy something
 or you use it in production, especially with money,
 you need to be sure that your smart contract is not going to be hacked.
+
+## Bug Bounties, code4arena, immunefi
+
 And coming to the hacks,
-I would say that you lose a lot of business
+I would say that we use the last five to ten minutes
 for me showing you that
 if you're interested in the blockchain stuff,
 there are pretty cool places and websites you can explore.
-One of them is Code for Arena,
+One of them is [code4arena](https://code4rena.com/bounties),
 which is I started this journey like probably two to three years ago.
 There are a bunch of protocols or projects for companies
 which are deploying their smart contracts
 and those smart contracts, they need to be audited.
-And those protocols or those companies,
-they spend a lot of money for using the smart contract.
+And those protocols of those companies,
+they spend a lot of money for auditing smart contracts.
 And I would say if you go to this Code for Arena website,
-there's a contest, you can audit smart contracts
+there are contests, you can audit smart contracts
 and you earn really good amount of money.
-And I would say six billion per year is kind of to be able to do this.
+And I would say six digits per year is realistic. I know two people who did this with less than six months of experience.
 There is also a huge opportunity for...
-How much money is this?
-Six, seven billion.
-I know I'm going to get six million in one year.
-Okay, from this one and...
-And you earn this five.
-So here you find protocols which are already void,
-but you can still look into the smart contracts
-and you see the big marks on this.
-This one is paying one million for some clients.
-Usually the bugs are critical, medium and low probability.
-So you can find critical bugs,
-you pay up to one million into high, medium,
-but they only pay like two hundred thousand and more for this.
-But from this website are four project that are wide,
+
+student: How much money is realistic?
+
+Ivan: Six, seven digits.
+I know one that made six million in one year.
+From this one and... and [immunefi](https://immunefi.com/bug-bounty/)...
+
+So here you find protocols which are already deployed,
+but you can still look into their smart contracts
+and you see how big "MAX BOUNTY" is.
+So, this one is paying one million for a person who finds...
+Usually the bugs are critical, medium and low probability to happen.
+So if you find critical bug,
+they pay you one million, if you find medium bug, they probably pay you like two hundred thousand and low probability bug less.
+But on this websites are already projects that are live,
 there are thousands of projects.
-Some people when they do, they just look into hacks
+Some people what they do, they just look into hacks
 that happened in the past month.
-And because most of the hacks, they can happen in multiple protocols.
-So if they identify that the hack happened on some protocol from here,
+And because most of the hacks, they can happen in multiple protocols simultaneously.
+So if they identify that a hack happened on some protocol from here,
 they just look for similar smart contracts
-which are using similar functions for similar idea
-and they just report the problem if it exists.
-In 1991, students, I supervised with virtual art teachers,
+which are using similar functions or similar idea
+and they just report the problem if it exists and they make money.
+I mean, I had one student, I supervised a Bachelor's thesis,
 he found a bug from here.
-I think it was awarded, I think, five thousand or something.
+I think it was rewarded, I think, five thousand or something.
 And he didn't really find the bug.
-If you get an article about this bug, he said,
-no, but I know another project which is doing exactly the same thing.
-Let me see if they are called basically the same.
-And it came up to be asked to be a smart contract with some serious smart reports.
-But he reported the bug and then I came to this user and it was awarded.
-So if you are putting solutions, I would say you can look into this unified.
-If you want to look into a smart contract which has not yet been production,
-it's this code for arena which is basically projects
-for deploying the smart contracts to report production.
-And here in that case you are competing with other people.
-For one contest, for example here on active projects,
-there is currently this code, here but it's rest, it's not ready,
-you see the current address, but the past,
-until then under the agreement,
-so there are probably like a thousand people here competing
-and eventually they will change $56,000 to all the people who report the bugs.
+He created an article about this bug, and he said,
+no, but I know another project who is doing exactly the same thing.
+Let me see if their code is basically the same.
+And it happened to be absolutely the same smart contract with some small differences, of course.
+But he reported the bug, I mean I think two days later and he was rewarded.
+So if you are good in Solidity, I would say you can look into this [immunefi](https://immunefi.com/bug-bounty/).
+If you want to look into a smart contract which are not yet in production,
+it's this [code4arena](https://code4rena.com/bounties) which is basically projects
+for deploying their smart contracts before production.
+And here in that case you are **competing with other people**.
+Because on one contest, for example, here on "active projects",
+there is currently this contest, here but it's Rust, it's not Solidity,
+you see there is currently Rust, but the past, probably ... Solidity,
+so there are probably like a thousand or two thousand people here competing
+and eventually they will give $56,000 to all the people who reported some bugs.
 But here you are sure that there are bugs.
 Those people are always spent.
-It's the matter of how much share from this pool you get to see.
-The more bugs you find, the more money you get to work.
-Next, you just pay the material.
-Yeah, they pay you to see the material.
-But you can ask them to pay you to see.
+It's the matter of how much share from this pool you get to win.
+The more bugs you find, the more money you get rewarded.
+
+student: Do you get paid in ETH?
+
+Ivan: Yeah, they pay you ETH.
+But you can ask them to pay you in different currencies.
+
+## Blockchain Forensics
+
 So if you want to jump into a blockchain space,
-I would say if you are interested of course in the security, you can do this.
+I would say if you are interested of course in the **security**, you can do this.
 If you don't want to look into the smart contracts,
-you can use forensics.
-Forensics is basically finding hats outside the smart contracts.
-The funny thing is like there was a project with it,
+you can use **forensics**.
+Forensics is basically **finding hacks outside the smart contracts**.
+The funny thing is like there was a project with this hack,
 which happened five days ago for $26 million.
-The smart contract was before I think 2020, so it was 21, it was 8 of 1.
+And this smart contract was deployed I think 2020, or 21, it was 2021.
 They never found a bug for five years.
 That's why even if you think your smart contract is super secure,
-my team came under the after five years someone found the bug.
-And that's what came up five days ago, someone found the bug
-and drained $26 million from the smart contract.
-When it came, I found that I reported him.
-So through the smart contract, we came different.
+might happen that after five years someone finds a bug.
+And that's what happened five days ago, someone found the bug
+and drained $26 million from this smart contract.
+Funny thing is, I found and I reported him.
+But not through the smart contract, we have different... I mean...
 Okay, probably here is a good thing to show you something else.
-There is a second blockchain book, which is a book here at the university.
+
+## Aachen blockchain club
+
+There is **Aachen blockchain club**, which is a club here at the university.
 It's a small community where we are interested in blockchain stuff
-and to lay the trust of.
-This is our former president, last semester I was five years old,
-and I was interested in the blockchain stuff.
-I was invited to jump here.
-We organized different events.
-We thought we would workshop each blockchain world smart contract
-with the smart contract here, we are in the lecture also here.
+and to play with different stuff.
+This is our former president, last semester I was vice president,
+so if you are interested in the blockchain stuff,
+I would advise you to come here.
+We organize different events.
+We also do workshops, each... how blockchain works, smart contract, whatever
+you could hear in the lecture here.
 And we basically worked with different students from the industries.
 We participated on hackathons.
 We win some hackathons.
 Usually those hackathons are really well paid,
-so four digits, five digits, numbers, using it from one to three days of work.
+so four digits, five digits numbers, easily from one to three days of work.
 So if you are interested, again if you are interested,
-there is an application until next week, or five until then more like four or five days left.
-I would probably go to K-Pi link,
+there is an application until next week, or there are like four or five days left.
+I would probably go to have a link,
 but you can go on the WhatsApp group.
-There is a water group.
-And here on the link, there should be a water link,
+There is a Whatsapp group.
+And here on the link, there should be a Whatsapp link,
 and you can join the group and go.
-There is a link to the forum where you can participate in the group.
-I would encourage you to do it because we do lots of hackathons.
-Hackathons are those institutions on blockchain.
-I mean, it is not only blockchain in general, but we try a lot.
+There is a link to the forum where you can participate in the club.
+I would highly encourage you to do it because we do lots of **hackathons**.
+Hackathons are those competitions on blockchain.
+I mean, it is not only blockchain in general, but we travel a lot.
 We spoke with cool guys.
-The first picture here is the one with Ethereum.
-Here we did some workshops, we did some audios.
-Here we participate, for example, on the global hackathon with one function crisis.
-And if you are looking for virtual or master thesis, you can also end the blockchain.
-Of course, I can help you with finding a topic.
+The first picture here is Vitalik, the founder of Ethereum.
+Here we did some workshops, I don't know what else.
+Here we participated, for example, on the global hackathon, we won prices.
+And if you are looking for bachelor, master thesis, you can also in the blockchain club,
+of course, I can help you with finding a topic.
 Because Professor Prince is basically also part of the team and of the group,
-so all the blockchain topics are easy to partner with the image.
-This guy is supervising the virtual thesis.
-He is now a startup here in Berlin.
-This guy and I are also supervising to finish like two months ago.
-He started at 3WDC after watching the console.
-This guy started with a startup, raised lots of money.
-This guy won a 6-digit hackathon here from Hacken, which he organized.
-So it is a cool community to be in.
-It is nice for you to find talented people who are in the blockchain.
-So with that, I would say, we are 5.
-If you don't have any questions, just write them down.
-I can just find where the tickets you can see the circle.
+so all the blockchain topics are easy to partner ~~with the~~ ~~image~~.
+This guy is supervising all the Bachelor theses.
+He is now at a startup here in Berlin.
+This guy I also supervised finished like few months ago.
+He started at 3WC as a blockchain consultant like few months ago.
+This guy started a startup, raised lots of money.
+This guy won a 6-digit hackathon here from Aachen, which organized.
+
+Yeah, so it is a cool community to be in.
+It is nice for you to find talented people who are deep into the blockchain stuff.
+
+## Q&A
+
+So with that, I would say, it is 2:35.
+If you don't have any questions, I just write them down...
+I can just find where the tickets you can... see the circle...
 By the way, do you have any questions?
 Yes.
-How did you find and report the guy that sold the...
-Here I can tell you.
+
+student: How did you find and report the guy that stole the...
+
+Ivan: Here I can tell you.
 So here is the thing.
 With this guy, with the startup, we created one project where we tried the blockchain transaction history.
 Based on this transaction history, we can predict what you are interested in.
