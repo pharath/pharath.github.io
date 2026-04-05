@@ -1257,140 +1257,144 @@ If you want, I can show how a frontend actually listens to an event step-by-step
 ## slide: Smart Contracts: Solidity introduction (7, with code)
 
 Then, we have here different types of structures
-we can create in the smart contract.
-First we have a constructor,
-which is initializing function like C for example.
+we can have inside the smart contract.
+First we have a `constructor`,
+which is an initializing function like in C for example.
 This is a function which is called only once
 when the smart contract is deployed.
-And usually this mark, this function
-is determining the owner of the smart contract.
-So if I say in the constructor owner
-is equal message.sinder, which is the global variable,
+And usually this function
+is determining the `owner` of the smart contract.
+So if I say in the constructor `owner = msg.sender;`, which is the global variable,
 means that whenever I create the smart contract
 and deploy it, I automatically assign myself
-message.sinder in the owner of the smart contract.
-And then I can give different functions
-where I can create a modifier,
-meaning that only the owner of the smart contract
-can create, can call this function.
-For example, this one.
-I can have a special function called destroy
-and then want to destroy my smart contract.
+as `msg.sender` and the `owner` of the smart contract.
+And then I can have different functions
+where I can create a `modifier`,
+meaning that only the `owner` of the smart contract
+can call this function.
+For example, this one (`destroy()`).
+I have a special function called `destroy()`
+and then I want to destroy my smart contract.
 I don't know other people,
-even though it's public and everyone can call it.
-I just want to restrict that access
-that only me plus an owner,
-which is derived from only owner modifier,
+even though it's `public` and everyone can call it.
+I just want to **restrict that access**
+that only me plus an `owner`,
+which is derived from  `modifier onlyOwner` ,
 can call this function and destroy the smart contract.
-Otherwise everyone will be able to call it
-and just destroy the smart contract.
-But again, still destructive.
-I think it's not very many more since last year.
-So those are just examples how you can use only owner
-but also the service contract.
+Otherwise, everyone would be able to call it
+and just destroy my smart contract.
+But again, `selfdestruct()`, I think it's not valid anymore since last year.
+So those are just examples how you can use `onlyOwner`
+but also `selfdestruct()`.
 Yeah.
-What are the function names
+
+student: What are the function names
 like these functions are actually predefined, right?
-Functions you show destroy, this is very fine.
-You can call it destroy, right?
-For example, you can change it.
-You use the term only.
+
+Ivan: The function is called `destroy()`.
+You can call it `destroy()`.
+You can change it.
 Ah, this is predefined.
-The modifier, the red thing is predefined.
+The `modifier`, the red ink is predefined.
 This is predefined and this is predefined.
-This is like initializing function.
-And the red then it's part of the sweet.
-If it's good, then okay,
+This is like the initializing function.
+If it's in red then it's part of the Solidity.
+If it's blue, then okay,
 in that case, it's confusing,
 but yeah, you can think about here,
-the name of the function.
-This is try functions asymmetrically the same, right?
-Yeah, this here, we use this requirement.
-We have basically required the matrix of center
-in the overall variable.
-It's equal to the owner.
-The case with owner is this owner
+the naming of the function.
+
+student2: This is try functions are symmetrically the same, right?
+
+Ivan: Yeah, this here, we use this `requirement`.
+where basically I require that the `msg.sender`,
+I mean the global variable,
+is equal to the `owner`.
+Basically the `owner` is this `owner`
 which we defined in the beginning
-with the requirement of the variable.
-But they will the same.
-Just here you get the requirement here.
-And here you have the requirement inside the modifier.
+with the requirement of the...
+But they will be the same.
+Just here you have the requirement here.
+And here you have the requirement inside the `modifier`.
 Usually this is for saving for spacing
-to create a modifier.
-And instead of just writing here the function required,
+to create a `modifier`.
+And instead of just writing every function required,
 you just put the modifier name
 and you know that this is already defined.
-This is the, I don't know,
-some point of length,
-underscore.
-Yeah.
-You need it because this is the case
-for everything.
-I will work.
-I will work.
-I always need this.
-Okay, by the way, do we have to do better?
-Yeah, of course.
+
+~~student2: This is the, I don't know, some point of length, underscore.~~
+
+~~Ivan: Yeah.~~
+
+~~student2: You need it because this is basically the case for everything. I will work. I will work.~~
+
+~~Ivan: I always need this.~~
+
+## org
+
+Okay, by the way, do we have until 2:30 or 3:30?
 Because I'm not sure.
-I don't know how long it is.
-The room is booked to three,
+I don't know how long is the lecture.
+
+student: The room is booked till three,
 but the usual lecture time is later.
-Okay, I'll try to go past those.
-Yes, lots of stuff here, but I can do this.
-This was just an example of smart contracts.
+
+Ivan: Okay, I'll try to go fast.
+Because there's lots of stuff here, but I can do this.
+
+## Use Cases for Smart Contracts
+
+This was just an example of a smart contract.
 So going again backwards.
-Smart contracts are probably boring.
-And then you'll find a useful situation
+Smart contracts are probably boring, unless you find a useful situation
 where you create a smart contract.
 Usually most of the smart contracts
 are deployed for creating some kind of projects.
-On-bop chain, 90% of the projects are related
-to an initial stuff,
-for example, tending money, investing money.
-They were related to money.
+**On blockchain, 90% of the projects are related to financial stuff,**
+for example, sending money, investing money, whatever related to money.
+
+### Fake Product Detection
+
 But you can also create smart contracts,
-which are just, I created for example,
-a smart contract which is saving
-between the different smart contracts,
+which are just,... I created for example,
+a smart contract which is saving...
+ok, there are different smart contracts,
 but it was saving the,
-you know, if you buy for example,
-some expensive goods,
-they get this unique identifier number.
+you know, if you **buy for example, some expensive goods**,
+they get this **unique identifier number**.
 And usually, some people can take this number
-and produce fake, for example,
-watch your check for dealer,
+and produce **fake**, for example,
+**watches or bags** or whatever,
 with this same identifier.
-That case, you can avoid this problem
+In that case, you can avoid this problem
 because you can create a smart contract,
 which every time there is a new fake produced
-or new watch, this watch has a unique identifier
+for a new bag or a new watch, this bag or watch has a unique identifier
 and this identifier can be stored,
-for example, inside a smart contract.
-So whenever someone buys this smart product,
-this watch or a fake or this watch,
-they assign this identifier to this wallet.
-So if a second big is produced
-with the same word that identifier,
-rather with the same product identifier,
-in that case, the user who is buying the big
-can go on-chain because again,
-everything is totally clear,
-they can go to the retail or official website
-and compare, okay, is there another item
-with this identifier already sold?
+for example, inside the smart contract.
+So whenever someone buys this bag or watch,
+they assign this identifier to his wallet.
+So if a second bag is produced
+with the same product identifier,
+in that case, the user who is buying the bag
+can **go on-chain** because again,
+everything is publicly available,
+they can **go to the retailer official website and compare, okay, is there another item with this identifier already sold?**
 If there is, in that case,
-means a person who is selling this big or this watch
+means that a person who is selling this bag or this watch
 is basically malicious, he's fake,
-because he's selling another big with the same identifier.
-Eventually, you can prevent fraud works.
-Yeah, fraud works.
-I mean, this is if you think about some off-chain.
+because he's selling another bag with the same identifier.
+Eventually, you can prevent fraud.
+I mean, this is if you think about some off-chain use case.
+
+### Fake Patient Information Leaflet (Packungsbeilage) Detection
+
 We also created a version of a smart contract
 where every time you open a medicine,
-you give this paper with the instruction
-how we take the medicine.
-And it's not a work, I mean, just paper, you need to read it.
-We created a version where you can scan up your code
+you have this paper with the instruction
+how you take the medicine.
+I mean, it is just paper, you need to read it.
+We created a version where you can scan a QR code
 and you basically take the whole instruction
 of this medicine online and you can read it, for example,
 from your phone or from your computer.
@@ -1399,8 +1403,8 @@ I can just store it on Google Drive,
 I can store it on my server wherever I need.
 But what happens if at some point there is a hack
 and someone changed, for example, the instructions
-to instead of take one pill thing, take five pills,
-you're out, maybe dangerous for the person.
+to instead of take one pill, take five pills,
+maybe dangerous for the person.
 In that case, what did we do?
 We hashed this version of the instruction,
 we put it on chain and you see every time
@@ -1411,18 +1415,23 @@ then the instruction which you see
 will be right to another hash
 and you can see that it was basically changed.
 And if this change is not from the pharmaceutical company,
-then you should ask the patient,
-should they really trust these instructions
+then you should ask yourself,
+should I really trust these instructions
 from the medicine or not?
-This is just like examples of how
-they create smart contracts
-which are not related to financial.
+
+These are just like examples of how
+you can create smart contracts
+which are not related to financial stuff.
+
 One last example I give you
-and then we go to the financial progression.
+and then we go to the financial stuff again.
+
+### Checking Correct Wind Turbine Inspection by Insurers
+
 There was a big project where people in Denmark
 were producing those wind turbines
 for creating electricity.
-In those turbines, they kept on the break very often,
+In those turbines, they happened to break very often,
 especially when there is strong wind or some,
 yeah, bad weather conditions.
 So the insurance needs to pay for the repayment
@@ -1430,96 +1439,100 @@ of the broken thing.
 But the insurance pays only if the guys who inspected
 the turbine did their job correct.
 And how did they do it?
-They kept a big, how do you call them?
-Like this gadget, it's in German, it's real one,
-it's like torque, I can pick device which is just,
-yeah, torque, I can't put that.
+They have a big, how do you call them?
+Like these gadgets, it's in German, it's Drehmomentschlüssel,
+it's like torque ..., like a big device which you just,...
+
+student: torque wrench
+
+Ivan: yeah, torque wrench, I think it is that.
 So they need to basically make an inspection
 with a certain power that every bolt
 and every basically is done correctly,
 which is every bolt is put correctly
 and with certain amount of power.
 So that in case there is a huge wind and everything,
-if it breaks, you can always say,
-okay, but this guy has to be able to do the proper inspection.
+if it breaks, they can always say,
+well, but this guy who inspected it he did not do the proper inspection.
 So this device is a booted device
-which I connected with the blockchain
+which is connected with the blockchain
 and it sends the data to the blockchain.
 So if in the future this wind turbine breaks down,
 we have the data from the inspector,
-save on chain and the insurance company
-can go to the smart contract and state all the data
-which were stored on chain and if everything was great,
-they would just be for the repairman
-because they're sure that the repairman was in the right place.
-This is example of creating smart contract
-outside the financial.
+saved on chain and the insurance company
+can go to the smart contract and state all the values
+which were stored on chain and if everything was correctly,
+they would just pay for the repairment
+because they're sure that the repairment was done correctly.
+This is an example of creating smart contract
+outside the financial domain.
+
 But usually also, as I said,
-most of the smart contracts are inside the financial
-in-sync division, like I want to make money
-and work with the sum.
+most of the smart contracts are inside the financial incentivation, like I want to make money off of this smart contract.
 Yeah.
-What does message.sendle.call.value do?
-Which one?
-This is the sum.
-The left near the bottom message.sender.call.value.
-Just a last one.
-Yeah.
+
+## slide: Smart Contracts: Solidity introduction (8, Reentrancy, Attack)
+
+student3: What does the `msg.sender.call.value` do?
+
+Ivan: Which one?
+
+student3: On the left near the bottom `msg.sender.call.value`.
+Just the last one.
+
+Ivan: Yeah.
 This one.
 Yeah, this is basically, yeah, I will explain how it works.
-So this was one of the first hacks
-kept on Ethereum in the smart contract
-where people deployed a bunch of Ethereum
-inside the smart contract and they were early in the morning.
-And at some point they were a bunch of Ethereum,
-so I think even in percent of all Ethereum
-in-sync division where that smart contract
-captured the guys from the other team
-who created the smart contract, it's really a nice project.
-But there was a small bug,
+So this was **one of the first hacks**
+that happened **on Ethereum**. It is a smart contract
+where people deployed a bunch of Ethereums
+inside the smart contract and they were earning money.
+And at some point there were lots of Ethereums,
+I think even 10 percent of all Ethereums in circulation were in that smart contract
+~~captured the guys from the other team who created the smart contract~~, it's really a nice project.
+But **there was a small bug**,
 and the bug is actually here.
-Here's a problem where think about you have a smart contract
-which is storing some Ethereum inside the balance
-and then you have this function called withdrawal funds.
-And withdrawal funds is basically asking,
-okay, who is the sender or who is calling this function?
-Message.sender.
-And this is balance which is a mapping.
+Here's a problem where, think about, you have a smart contract
+which is storing some Ethereum inside the `balance`
+and then you have this function called `withdrawFunds()`.
+And `withdrawFunds()` is basically asking,
+okay, who is the sender or who is calling this function, `msg.sender`?
+And this is `balance` which is a mapping.
 Yeah, this is a mapping.
-Thus he has more,
-because everyone who posts this money has a balance.
-So if I post one Ethereum, my balance will be one Ethereum.
-And think about this is in wave.
-It basically has more units of Ethereum,
-but think about this is one Ethereum just before.
-So if I call this function and I hit previously
-posted one Ethereum to the smart contract,
-and if I call withdrawal funds,
+Thus he has more,...
+because everyone who deposits his money has a `balance`.
+So if I deposit money on Ethereum, my `balance` will be one Ethereum.
+And think about this... this is in Wei, basically the smaller unit of Ethereum,
+but think about this is one Ethereum ~~just before~~.
+So if I call this function and I have previously
+deposited one Ethereum to the smart contract,
+and if I call `withdrawFunds()`,
 usually what should happen?
-The smart contracts should check my balance.
-So in this guy has deployed one Ethereum.
-If he deployed it,
-if he wants to, does he want to withdraw more money
+The smart contract should check my `balance`.
+So this guy has deposited one Ethereum.
+Did he deposit it,...
+Did he want to,... does he want to withdraw more money
 than I'm allowed to withdraw?
-For example, there is a hard cap per transaction.
-I cannot withdraw more than one Ethereum,
+For example, there is a hard cap per transaction,
+I cannot withdraw more than that on Ethereum,
 but I want one.
 So in that case I satisfy this requirement.
-Then there is another requirement.
-Did I want to withdraw less than one,
-we for more than one, we can also ignore that.
+Then there is another requirement:
+Do I want to withdraw less than one Wei,
+or more than one Wei, we can also ignore that.
 And if I meet all those three requirements,
-then the smart contracts okay, everything is fine.
-Now just take the sender and send him the money
-he wants to withdraw basically the one Ethereum
-which I look here.
+then the smart contract says okay, everything is fine.
+Now just take the `sender` and send him the money
+he wants to withdraw, basically the one Ethereum
+which I have here.
 And when I receive my money,
-then my balance needs to be complete.
-So basically now I don't get one Ethereum anymore,
-I get zero.
-Of course my balance is one minus one, which is zero.
+then my `balance` needs to be updated.
+So basically now I don't have one Ethereum anymore,
+I have zero.
+Because my `balance` is one minus one, which is zero.
 And then they store my last transaction.
 So everything looks fine, right?
+
 But there is a small problem because the transactions
 Ethereum they literally execute in the way
 they are written here.
