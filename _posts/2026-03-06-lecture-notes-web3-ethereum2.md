@@ -1534,128 +1534,155 @@ And then they store my last transaction.
 So everything looks fine, right?
 
 But there is a small problem because the transactions
-Ethereum they literally execute in the way
+on Ethereum they literally execute in the way
 they are written here.
 So there was one guy who said okay,
-there is a problem, he identified this book
-couple months later and he created this attack
-smart contract which is really simple.
+there is a problem, he identified this bug
+couple months later and he created this attack which is really simple.
 I mean just one contract for the attack.
-There is a basically a structure that you don't need
+There is basically a `constructor` that you don't need
 to know this, but what is the attack actually doing?
 It says okay, I want to withdraw my deposit.
-Basically first he creates a deposit
+Basically, first he creates a deposit
 and then he wants to withdraw the deposit.
 And then what is he doing?
-He basically has again here to deposit one Ethereum.
+He has again here to deposit one Ethereum.
 And then he says now when I deposit my Ethereum,
 I want to withdraw it.
 Think about it, there is no withdrawal time,
-everything is satisfied, so he immediately deposit
+everything is satisfied, so he immediately deposits
 and after the deposit he wants to withdraw the same deal.
-And usually I know too the smart contract
-can receive some money.
+And usually, I told you, the smart contract can receive some money.
 And in order to receive some money,
-you need to have a function called payable
+you need to have a function called `payable`
 meaning that I can send money to the smart contract.
 Otherwise I'm not able to send money to the smart contract
-and transaction will be over.
+and transactions will revert.
 So this guy just said okay, I will deposit one Ethereum
 and then I will withdraw this deal.
 But whenever I try to withdraw this Ethereum
-and I reach to this point here,
-and try to get my money.
-The money will be sent, so think about one Ethereum
-pure point here, the payable function.
-Then the balance of this smart contract becomes plus one.
+and I reach this point here,
+exactly the time which is sent,
+the money will be sent, so think about one Ethereum
+going here, the `function () payable`.
+Then the `balance` of this smart contract becomes `+1`.
 But this function has something else.
 Like whenever it receives the money, it doesn't stop.
 It just calls the same withdrawal function one more time.
 So in that case we send the money, we go here,
-we send the money, but we don't reach to the update of the balance.
+**we send the money, but we don't reach to the update of the `balance`**.
 So essentially what is this attack link?
 It's just calling again the withdrawal function.
 It checks again the requirement, it satisfies the requirement,
-then send the holiday.
-Then does this like in the loop,
+then sends another Ethereum.
+Then does this like in a loop,
 probably there are hundreds of Ethereum here,
 then withdraw all the money,
 and when the balance is basically,
-I mean here doesn't have more Ethereum to withdraw,
+I mean here, it doesn't have more Ethereum to withdraw,
 it just updates the final status
 and this guy ends up stealing 100 Ethereum
-from the smart contract despite the initial amount
-before it withdraws.
-And how does it fix?
+from the smart contract despite he initially only deposited one Ethereum.
+
+And how was it fixed?
 The fix was really simple,
-you just need to swap the ones.
+you just need to **swap the lines**.
 So basically you first need to update the balance
 and then you need to send it.
 I mean at first it doesn't look really problematic,
-but yeah, it can be one of the first and largest assets.
-And everything is fine as I said,
-you just need to swap the basis of the balance.
-How much did the interest open?
-I will.
-Just Google DAO half 2017 or something like this.
-Like it was our turn.
-Is this some kind of concurrency?
-Yeah.
-Because I feel like if you send,
-if you record this with draw hands function,
+but, yeah, it happened in the one of the first and largest hacks/attacks.
+And everything is fine, as I said,
+you just need to swap the places of the functions.
+
+student3: How much ETH was stolen?
+
+Ivan: Just Google it. The **DAO Hack**. It happened 2017 or something like this.
+Like it was **around 3.6 million ETH** (**about 10% of all ETH supply** at the time).
+
+student: Is this some kind of concurrency between calls generally?
+
+Ivan: Yeah.
+
+student: Because I feel like, if you send,
+if you call this `withdrawFunds` function,
 100 times in the same second or in the same moment,
 then also you would have the same problem, right?
 Because you check it once in the beginning
 and then in the end you end up...
-Yeah, this is actually the problem,
+
+Ivan: Yeah, this is actually the problem,
 I would say more or less with Ethereum,
 because in that case this compiler version,
 I think right now the different compiler
-is checking everything, not sequences,
+is checking everything, not sequentially,
 like one by one, but at that point
 this compiler also doing the...
-I think there is now by the code of convention.
-This is called re-enterncetaph.
-Google re-enterncetaph.
+I think there is now by the code a prevention.
+This is called **reentrancy attack**.
+Google "reentrancy attack".
+
+## slide: Smart Contracts: Solidity introduction (9, Other Attacks)
+
 And there are other attacks which I would say
 we will skip them because we don't have much time.
-I will just briefly give you explanation on the left side.
-You see over 4 attack,
-which means that we have a UIN, for example,
-which is storing numbers between 1 to 56.
-You can over throw, if it surpasses to 56
+I will just briefly give you explanation.
+
+### overflow attack
+
+On the left side you see **overflow attack**,
+which means that we have a Uint8 (`uint8`), for example,
+which is storing numbers between 1 and 256.
+
+---
+
+From [Solidity docs](https://docs.soliditylang.org/en/latest/types.html#integers):
+
+`int` / `uint`: Signed and unsigned integers of various sizes. Keywords `uint8` to `uint256` in steps of `8` (unsigned of `8` up to `256` bits) and `int8` to `int256`.
+
+`uint` and `int` are aliases for `uint256` and `int256`, respectively.
+
+---
+
+You can overflow, if it surpasses 256
 it will go again from 0.
 So we can have this attack.
+
+### front running attack
+
 We can also have another attack where...
 Here in that case,
 we are looking for some word.
-In this word, it basically is hash
-which equals to the hash version of this word.
+And this word is basically... the hash
+is equal to the hash version of this word.
 And if someone finds a word that satisfies this hash,
 he publishes this word here,
-he should get 100.
+he should get 100 ETH.
 But in real world,
-there are people who are basically observing an input.
+there are people who are basically **observing the mempool**.
 And if someone finds that you found already a solution,
 you will just create the same transaction,
-there will be a little bit more gas fees
-and QO from running.
+**pay a little bit more gas fees**
+and **queue a front running**.
 So basically without any effort,
 he will use your solution to get the money.
-This is called front running attack.
-You won't avoid this.
+This is called **"front running attack"**.
+You want to avoid this.
+
 But I would not explain you how to avoid this
-because it's really complicated,
-but there are other tricks out there.
+because it's, again, too complicated,
+but there are also tricks how to avoid this.
+
 So I would literally skip those stuff
 because it's not really cool,
 but I will show you like a brief example
 of how you deploy a smart contract.
-We're going to do it before the end.
-I want to show you something else which is cool.
-So if you want to learn smart contract programming,
+Because before we end I want to show you something else which is cool.
+
+## Recommendations: Learn Smart Contract Programming
+
+So if you want to **learn smart contract programming**,
 I personally did it from this website
-called Smart Contract Engineer.
+called [www.smartcontract.engineer](https://www.smartcontract.engineer/).
 It's a nice website where they have different challenges.
 This guy also has a bunch of YouTube videos
 so you can watch in cases in everything.
