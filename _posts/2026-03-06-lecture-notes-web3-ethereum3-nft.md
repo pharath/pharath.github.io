@@ -582,7 +582,7 @@ is try to balance the reserve of both coins,
 and usually if I deposit too much of one currency,
 I will depreciate the other currency.
 
-So there are bots, or people who do **arbitrages**,
+So there are **bots**, or people who do **arbitrages**,
 they basically check the currency,
 what's the value of Ethereum in Uniswap,
 and what's the value of Ethereum
@@ -683,7 +683,7 @@ Basically, I don't need an account, I'll do it faster.
 On Binance, I probably need to create an account first,
 upload my passport, ID and everything,
 so everyone chooses where it is more better.
-I cannot say, okay, this is better than the other,
+**I cannot say, okay, this is better than the other**,
 this is basically just a smart contract,
 which is deployed once and it's working.
 There is no-one,... there is a team
@@ -731,7 +731,7 @@ so if they see that there is a huge price difference,
 or if there is... there is another problem,
 probably someone is swapping a really large amount of money
 and he is getting a really good rate of that currency which he is swapping,
-there are bots which are **front-running** you.
+there are **bots** which are **front-running** you.
 Front-runs means that they will execute
 the transaction before you,
 so that you create a slippage,
