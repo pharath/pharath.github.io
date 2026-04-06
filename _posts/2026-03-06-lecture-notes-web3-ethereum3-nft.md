@@ -1532,6 +1532,8 @@ And there we see the information.
 So it **costs us 0.02 Polygon**.
 So all together 0.03 dollars to do this.
 
+### OpenSea
+
 And we can also check it on **OpenSea**.
 So, here it is.
 So, that's it.
@@ -1558,17 +1560,22 @@ So it happens from time to time that people send you an offer to **buy this part
 Very often it's fake and you have to be careful because it's fake, because nobody should be interested in this particular thing.
 But it means actually, this is not an NFT that we created here for any value, it's more NFT that we create for a particular kind of purpose.
 
+### token-gated access
+
 So what I can do now is that if I distribute this NFT to all of you, next time when you would like to enter the room, I ask you, show me that you own this NFT.
 Or we have some kind of **token-gated access**, so that means that you would like to access a web page where I put the answers of the exam questions.
 And you can only access that if you own this particular NFT.
 Which would mean that then the web page asks you, please open your wallet and then the wallet needs to provide its address and then you check if your address appears here in the NFT.
 And that is then so-called token-gated access.
-So it's no longer an access that depends on user ID and password, it's an access that depends on the ownership of such a token.
+So it's no longer an **access that depends on user ID and password**, it's an **access that depends on the ownership** of such a token.
 And that is where all these different things now become really interesting also in business applications and in other kind of applications.
 Because this provides you very nicely individual access to something.
 Because you don't need to have user ID and password that you give away, if you want to share this with someone else, you only can do it by transferring the NFT.
 And that's the way to do that.
 Yeah, that's how you can do this in a very easy way.
+
+### NFT JSON builder
+
 And this is all done here with this **"NFT JSON builder"**.
 And all in all, this is, not sure,
 did you come across **streamlit** already?
