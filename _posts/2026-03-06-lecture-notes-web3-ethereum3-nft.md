@@ -66,336 +66,542 @@ Thanks.
 ## Ethereum and Smart Contracts (Part 3)
 
 Ivan: So I will just shortly continue from what we left last time because last time I showed you how we can
-get to the last contract.
-But we didn't spend so much time on remixes and supporting it.
-So I will submit with a full another contract.
-I will also give you like a small assignment to a home so that you can know who fits it out.
-And of course your home smart contract.
+program a smart contract.
+But we didn't spend so much time on **Remix** and **deploying** it.
+So I would suggest we upload another smart contract.
+I will also give you like a small assignment for home so that you can also test it out and upload your own smart contract.
 So for those who didn't start or for those who had some problems,
-you can just come here and another version which we can go together.
+I will just show my account here and another version which we can deploy together.
 Yeah.
-So I'm a lean on the remixes.
+So I'm again on Remix.
 So this is a simple smart contract
-where we can report it to the video.
-We can send it using the function reported.
-And then the smart contract is called out or all here.
-So the title is just like that.
-At this point, it was like a meme or a sent on to people in the post or in the future.
-Here.
-So the smart contract is actually reported to the video.
-You need to hold it for the whole duration time.
+where we can deposit Ethereum.
+We can send using the function `deposit()`.
+And then the smart contract is called `hodl` with `odl`.
+It is not a typo, it is just like a...
+On Bitcoin there was like a meme or a sentence where people need to hold, so they spell it like this with `dl` instead of `ld`.
+So the smart contract is basically a **time-lock contract** actually, you deposit Ethereum
+and you need to hold it for the whole duration time which is 3 times 3, 36 minutes.
 It's very simple.
-I'll just demonstrate again how it can be used.
-You can work with the smart contract.
-You can also deploy the business so that you know how you can verify it also on the phone.
+I'll just demonstrate again how you can use Remix.
+You upload the smart contract, interact with the smart contract
+and we can eventually also **deploy it on testnet** so that you know how you can verify it also on the **block explorer**.
 Like it was pretty straightforward.
-And last time you work, it was here on the top.
-You can choose how the compiler is.
-You can choose from the top of the compiler.
-You can choose whether you want to use the Ethereum and the remixed virtual machine.
-And here in that case, you don't need to open to deploy the smart contract.
-The smart contract with all the everything is on the remixed.
-It's not going to be deployed on the engine.
-But if I choose my words, I'll put my name on the report in the folder.
-I'll just now deploy here.
-And again, you can do the same thing on your computer during the assignment.
-You can basically have it just work with the remote output.
-The working tool again, the transaction is pending.
-So you can check it out here.
-It will require like a few seconds of the experience verified and deployed.
+I mean last time it worked, you **first need to compile it**.
+And here on the top you can choose...
+You can choose from the top the **compiler**.
+But when you deploy, you can choose whether you want to use the Remix virtual machine.
+And here in that case, you don't need any tokens to deploy the smart contract.
+Because everything is on Remix and it's not going to be deployed on any chain.
+But if I choose my wallet, and I'll choose my Metamask to deploy it on Sepolia.
+I'll just now deploy it there.
+And again, you can do the same thing on your computer doing the assignment.
+The block explorer again, the transaction is pending.
+So you can check it out there.
+It will require like a few seconds probably until it is verified and deployed.
 It's still pending.
-Here this is the point, but for your assignment, you can use any other machine.
-At the risk of verifying the smart contract and doing the same thing.
-So that you see that you're successful in the project.
+Here this is Sepolia, but for your assignment, you can use any other chain, it does not really matter.
+Matter is to **verify the smart contract** and just send it to us, so that we see that you successfully deployed it.
 Yeah?
-So the smart contract is something specific that's a handle, that uses the Ethereum.
-Yeah, in the assignment, you can get the idea if you...
+
+student: Does the smart contract have to be something specific that uses Ethereum?
+
+Ivan: Yeah, in the assignment, I basically have the idea if you...
 There are two options.
-If you take your own idea for a smart contract that you saw in 2009,
-for your intelligence, if you don't find any ideas,
-you can just use some marketing strings to think that you could work with the editor.
-Yeah, just repair something simple where you show how to use it.
+If you have your own idea for a smart contract that is nice,
+you can upload your version, if you don't find any ideas what to deploy,
+you can just use some mappings, strings, those things I discussed the last time in the lecture.
+Yeah, just create something simple where you show how to use them and then deploy.
 It should be something easy.
+
 Okay, now the transaction was verified.
 Again, it was successful.
 So when I click on the smart contract, I think this is the tricky part,
-which was time we couldn't do this contract, verify and publish.
-Once I'm...
-...fault clear, I would not have wanted to do it, so I just try it for my words.
+which last time we couldn't do. This contract verify and publish.
+Last time the **block explorer** was not able to do it, so let's try it now if it works.
 I click on verify and publish, and here is the things we need to select.
-First of all, it's a single 3D file, which means we don't have different files.
-It's also completely the project.
-If you have your smart contract, it will also be the single file,
-so you can just choose the first one.
+First of all, it's a **single Solidity file**, which means we don't have different files, it's not some complicated project.
+Your **smart contract will also be a single file**, so you can just choose the first one.
 Then here is the important part.
-If you don't choose the correct compiler...
-I have re-entrance and protections, or multi-file...
-Ah, okay, then in that case you can do...
-Multi-file and then nothing.
-Yeah, I thought that you wouldn't do something simple, but yeah.
-If you have decided to also...
-Yes, then the compiler version is 8.31, so we need to set it to 7.31,
-and the Snow Lison, so we create and set it right here, right now.
-Okay, now we just need to copy the port on here.
-Okay, so we just...
-And we don't know where it's going.
-Yes, successfully, there.
-So basically, now we need to click on the smart contract.
-Here it was... Before it was founded a bytecode here, under contract.
-Now you see actually the entire smart contract written in 3.
-Basically, now you see how the smart contract works.
-So every time when you go to the focus board and look into addresses,
-which are smart contracts, you can see their code if they are real.
-So here you have those smart contracts which are not verified,
-like, I can't just don't interact with them,
-because I don't want them to be in my train of work.
+If you don't **choose the correct compiler** ...
+
+student: I have reentrancy protections, so it is multi-file control...
+
+Ivan: Ah, okay, then in that case you can do...
+
+student: Multi-file and ...
+
+Ivan: Yeah, I thought that you would code something simple, but yeah.
+If you have decided to code something complicated...
+
+Yes, then the compiler version is 8.31, so we need to set it to 8.31,
+and so we agree, and try to verify it now, hope it works.
+Okay, now we just need to copy the code from here.
+And I don't know why it's not working.
+Yes, successfully verified.
+So basically, now when you click on the smart contract,
+here it was... before it was only the **bytecode** here, under contract.
+Now you see actually the **entire smart contract written in Solidity**.
+Basically, now you see how the smart contract looks like.
+So every time when you go to the **block explorer** and look into addresses,
+which are smart contracts, you can see their code, **if they are verified**, of course.
+Usually those smart contracts which are **not verified**,
+like, I can't interact with them,
+because I don't want to risk it. They might drain your wallet or something like that.
 Here, under the code section, you see the code,
-and there are also two options, whether you can read or write with the smart contract.
-Read means that I can... Basically, here again, I don't pay any gas fee,
+and there are also two options, whether you can **read or write with the smart contract**.
+**Read** means that I can... basically, here again, I don't pay any gas fee,
 I can read the balance of some address, for example, I read the balance of...
-My address here should be zero, because I didn't deposit it in tokens,
-and I can see, since I didn't deposit, it should go to zero.
+my address here should be zero, because I didn't deposit any tokens,
+and I can see, since I didn't deposit, this should also be zero.
 Basically, I read the state of the smart contract,
-everything code is being saved on the smart contract,
-indeed, there are three codes from this page here.
-On the right, I can deposit now, but in order to deposit,
-I need to... I am changing the state of the smart contract,
-going to pay gas fees that I need, I need my metamask or wallet provider.
-So I'll try to deposit one, I think this is in way,
-so I'm not depositing one Ethereum, but one way,
-I need to check, confirm, and it should be actually...
+everything what has been saved on the smart contract,
+and then retrieve those from this page here.
+On the right, I can **deposit** now, but in order to deposit,
+I need to... I am **changing the state** of the smart contract,
+so I need to pay gas fees. That is why I **need to connect my Metamask** or my wallet provider.
+So I'll try to deposit one, I think this is in Wei,
+so I'm not depositing one Ethereum, but one Wei, let me check...
+confirm, and it should be actually... send...
 Okay, successful.
-On that case, I send one, let me read my address here.
-I'm sorry, the transaction...
-Okay, I did different...
-So, I will transfer from this wallet,
-it should be one, indeed, I can send one Ethereum one way,
-so now I have locked my Ethereum, the time period,
-let's see, when it works, so important here,
-you will not see the date, you will see the...
-this digit, which is in...
-okay, we call it data, we don't...
-But yeah, the important thing was how to verify the smart contract,
+In that case, I sent one, let me read my address here...
+So, balance of this wallet should be one. Ok, indeed, I have sent one Ethereum, not one Wei,
+so now I lock my Ethereum, the time period,
+let's see, when it works. So important here, you will not see the date, you will see the... this digit, which is in Unix time...
+
+But yeah, the important thing was how to **verify the smart contract**,
 and when you verify the smart contract,
-you will see instead of the byte code,
-you will see the smart contract code itself here,
-and you will be able to read and write this smart contract,
-read basically, read all the things that they didn't see,
-and write if I want to interact with the smart contract.
+you will see instead of the **bytecode**,
+you will see the **smart contract code** itself here,
+and you will be **able to read and write** this smart contract.
+**Read** basically, read all the states that have been saved,
+and **write** if I want to interact with the smart contract.
+
 Usually, those people who develop smart contracts,
-they build a content where they connect those functions
-to the content, and instead of going to the walking floor,
-this website, and read the address from the smart contract,
-you can go on your content and interact with the smart contract.
+they build a **frontend** where they connect those functions
+to the frontend, and instead of going through the block explorer,
+this website, and read directly from the smart contract,
+you can go on your frontend and interact with the smart contract.
 But this is more for your familiarity to understand how it works.
-You can be in question for that.
-Where do you find this content?
+You have many questions of that?
+
+student: Where do you find this frontend?
 Is it like dedicated websites or what is it?
-Yeah, so basically I can view my own webpage, for example,
-my own content, where I have two buttons,
-which will be the Power and Soap user,
-and if the user, for example, connects to the product,
-I will be able to check the content from the product instead of the word.
-You need to develop the database, and you will need to use it in the case.
+
+Ivan: Yeah, so basically I can develop my own webpage, for example,
+my own frontend, where I have two buttons,
+which will be "balance of user",
+and if the user, for example, connects his wallet,
+I will be able to check and on the frontend show directly the balance instead of going...
+You need to develop, so based on your need you can create.
+
+### Projects which use Smart Contracts, DeFi
+
 But this is a good question, because I just wanted to show you
-like I have one on one slide.
+like I have only one slide.
 This is an example of projects which use smart contracts.
 Because so far we talked about smart contracts,
-how do we use the smart contract, how do we deploy them,
+how do we use the smart contracts, how do we deploy them,
 how do we create them, but there is a question like,
 why do we really use those smart contracts?
-Like is there any purpose, like we need to purpose for creating smart contracts?
-And here I just very briefly opened a website for CoimarticCup,
-which is giving you here the top five projects with their own tokens.
-So the five projects means this entire financial,
-those projects are more related to the financial stuff,
+Like is there any purpose, like **meaningful purpose for creating smart contracts?**
+And here I just very briefly, I opened a website called **Coinmarketcap**,
+which is giving me here the **top Defi projects** with their own tokens.
+So Defi projects means **decentralized finance**,
+so those projects are more related to the financial stuff,
 but at least we can see how they work,
-and why do they need smart contracts, for example, to operate the algorithm.
-And I took here a bunch of them, some of them may be familiar to me,
-some of them not, and we can go by their creation
-or to connect them so that you see real uses of smart contracts.
-One of the most famous, does anyone of you know any of these projects?
-Which one do you want?
+and why do they need smart contracts, for example, to operate their business.
+And I took here a bunch of them, like some of them may be familiar to you,
+some of them not, and we can go like very briefly through them so that you see real use cases of smart contracts.
+One of the most famous,... does anyone of you know any of these projects?
+Which one do you know?
+
 All of them.
+
 Abe.
+
 Which one?
+
 Abe.
+
 Abe, yeah.
-That's what you need to talk about.
-Yeah, exactly. Open C will talk about any piece later,
-but technically, can you ever interact with them or not?
-Never do.
-So technically, if you use them, you use your smart phone.
-How they work, for example, when you start using Windows,
-open the page here.
-So basically, the idea here is you can swap any token,
-and you can use it to operate.
+
+Uniswap.
+
+OpenSea.
+
+Ivan: Yeah, exactly. **OpenSea**, we will talk about later,
+but technically, have you ever interacted with them or not?
+Never used.
+So technically, **if you use them, you use their smart contracts**.
+
+### Uniswap
+
+How they work, for example, let me start then with **Uniswap**,...
+open the page here...
+So basically, the idea here is you can **swap any token**,
+and **provide liquidity**.
+
+---
+
+**Why “provide liquidity” fits**
+
+* On Uniswap, the two core actions are:
+
+  1. **Swap tokens**
+  2. **Provide liquidity (LP)**
+* In lectures, these are almost always introduced together:
+
+  > “You can swap tokens and provide liquidity”
+
+---
+
+**Quick intuition**
+
+* **Swapping** → You trade ETH ↔ USDT
+* **Providing liquidity** → You deposit tokens into a pool and earn fees
+
+---
+
+If you want, I can break down **exactly how Uniswap pools work (x·y = k)**—that’s the key concept behind everything here.
+
+---
+
 So it means that now I take Ethereum,
 I want to swap my Ethereum to some other token,
-for example, I can swap them to stable coins.
+for example, I can swap them to **stable coins**.
 Stable coins are related to our currencies.
-If there is a stable here, it's over,
-like this data, which is already here,
-you can see it's using it to take the view over.
-Here, also stable coins, for example,
+If there is a stable US dollar, like this Tether which is USDT,
+you can see if it is USD then it is pegged with US dollar,
+there are also stable coins, for example,
 in different currency, Euro, Swiss francs, etc.
-And we can swap basically Ethereum to both table ones.
+And you can swap Ethereum to those stable coins.
 Something which you need to pay attention to
 is that those coins here, like the stable coins,
-is just a smart phone.
+is just a smart contract.
 Basically, this is smart contract,
-deployed on Ethereum in it.
-That's why there is a USDT, for example,
-of stable coin on Ethereum.
-There is a USDT stable coin on Polygon, on Arbitrum,
-on different chains.
-And those stable coins are just smart contracts.
-We are a company theater.
-This is a company that's running behind in the room.
-USDT stable coin on Circle.
-That's why there is another stable coin of USDT.
-They basically do.
-I'm not sure.
-I never looked into videos about how their smart contracts work,
+deployed on Ethereum mainnet.
+That's why there is a USDT, for example, stable coin on Ethereum.
+There is a USDT stable coin on Polygon, on Arbitrum, and on different chains.
+And those stable coins are just smart contracts where the company Tether, this is the company behind USDT stable coin or Circle.
+That's why there is another stable coin called USDC.
+That's basically what they do. I'm not sure.
+I never looked into details about how their smart contracts work,
 but I assume when someone is depositing
-USDT in a physical bank account,
+US dollar in a physical bank account,
 they just mint a stable coin, for example,
-USDT or USDT on the blockchain,
-so that you are sure that one goer is equal to one USDT,
-like one cryptocurrency goer of USDT,
-and you can basically use those goers for things.
+USDT or USDC on the blockchain,
+so that you are sure that one dollar is equal to one USDC,
+like one cryptocurrency dollar of USDT,
+and you can basically use those dollars for paying.
 And why do I want to use stable coins?
-A typical example is if I make a cross-border payment
-between different countries or between different continents.
-Usually, in the banks, they take one coin for transaction.
-Even if they take zero coins, some amount of money,
+Like a typical example is if I make a cross-border payment
+between different countries or between different continents
+usually the banks, they take large fees for transaction.
+Even if they take zero point some amount of your money,
 if you transfer like huge amounts of money, like millions,
-usually you need to pay more.
+usually you need to pay a lot.
 And here, you just need to pay your transaction fees,
-which are the same.
+which are cents.
 So think about, I can send one million or one billion dollars,
 and I always pay the same like two cents.
-So this is the idea of how I can, for example, this website,
-I can, if I can exchange material, I can exchange this material
+So this is the idea how I can, for example, this website,
+I can, even if I have Ethereum, I can exchange this Ethereum
 to USDC and I use the USDC, for example,
-to pay someone on the blockchain.
+to pay someone on the blockchain directly.
 Some countries, I think they have already adopted stable coins,
-where you can pay in the supermarkets or in the stores
+where you can directly pay in the supermarkets or in the stores
 with stable coins or with cryptocurrency.
-I think in Argentina, they get very wide adoption of USDC.
-You pay for the cryptocurrency?
-Yeah, you pay, but it's very small.
-I'm not sure how much, I'm a bit strong here,
-but see if I swap one Ethereum to US dollars,
-it's 2,513 dollars I would get.
-And I would pay, let's see, right, simple, this is a slippage.
-Slippage means like, usually because this is one chain,
+I think in Argentina, they have very wide adoption of USDC.
+Any questions?
+
+student: You pay a transaction fee?
+
+Ivan: Yeah, you pay, but it's a very small amount.
+I'm not sure how much, it's shown here,
+but let's say if I swap one Ethereum to US dollars,
+it's 2,913 dollars I would get.
+And I would pay, let's see, right, simple, this is a **slippage**.
+Slippage means like, usually because this is on-chain,
 and this value here can change.
 So basically based on the exchange rate of Ethereum,
-then it goes up and down, up and down,
+sometimes it goes up and down, up and down,
 so now it says, okay, for my Ethereum, I will get 2,915,
 but it can happen that I send a transaction,
 and this transaction takes 30 seconds, for example, to execute,
 because you see there is a small delay.
 And until that 30 seconds, probably this rate changes,
-it will become 2,912, for example.
+and it becomes 2,912, for example.
 So I can change my slippage, meaning that if the exchange rate
-changed by, let's say 1%, just revert to the other,
-don't get the money, you see, now I get 2,917,
+changed by, let's say 1%, just revert the transaction,
+don't get the money. You see, now I get 2,917,
 but this is based on the exchange rate,
 because it's dynamically changing the value.
-Okay, this is Ethereum, so this is a,
-this is a smart contract behind,
-and here is, I think the smart contract will be also public.
-When you go to the adiff portal, you will see like the addresses,
-you can Google the address, you can open the bucket board,
-let me check, for example,
-because for every pool, they give different smart contracts,
-for every exchange rate.
+
+Okay, so this is Uniswap,
+this is a smart contract behind.
+There is, I think the smart contract should be also public.
+When you go to their dev portal, you will see exactly the addresses,
+you can Google the address, you can open the block explorer,...
+let me check, for example,... Uniswap smart contract addresses...
+because for every pool, they have different smart contracts, for every exchange net.
 Okay, this is for creating the pairs,
-because every pool can exchange,
-let's go ahead and check.
-Every, it's called pool, because here I can,
-it doesn't look like a smart contract.
-Okay, yeah, when I click on the address, come.
-Basically, this here interface, this front end,
+because every pool can exchange,...
+It's called pool, because here I can,...
+it doesn't look like a smart contract...
+Okay, here, when I click on the Etherscan...
+Basically, this here interface, this frontend,
 should be connected to some smart contract,
-which is the source of the exchange rate,
-and this is the source of the exchange rate,
-this front end should be connected to some smart contract,
-which is visible on the computer scan,
+which is visible on Etherscan,
 and when you open the smart contract,
 and when you go to contract,
 I'm just opening here some random one,
-and don't move the system.
-Uniswap, but you will see all the functions,
+and this is from Uniswap, but you will see all the functions,
 for example, the balance,
-you read my balance, what is swap,
-it will be something like swap Ethereum,
-the function will be swap,
-and probably you need to give an input to tokens,
-which want to swap, for example, Ethereum to your desired token,
-for example, USB-C, and when you click swap,
-you will be able to swap it directly to the,
-to the wanted swap,
+to read my balance, or to swap,
+it will be something like "swap Ethereum",
+the function will be `swap()`,
+and probably you need to give an input the tokens which you want to swap, for example, Ethereum to your desired token,
+for example, USDC, and when you click "swap",
+you will be able to swap it directly through the block explorer,
 but because this is a little bit more complicated,
-people create their own functions
-and do their own things.
-Yes, so just a question,
+people create their own frontends
+to do everything visually.
+Yes.
+
+student: So just a question,
 like the functionality of the smart contract,
-and during this scenario where the shopping happens,
+like during this scenario where the swapping happens,
 so what is the main functionality of smart contract,
 it's like taking this amount of money,
-which one we want to swap,
-and then add up, comparing another blockchain,
-yes, so basically the smart contract behind Uniswap
-is a function for x times y equal to k,
+which we want to swap,
+and then add up, **and give us back the corresponding amount of tokens** on another blockchain, or what is it?
+
+---
+
+Here’s the most natural and technically correct way to fill that gap:
+
+---
+
+**student:**
+So just a question,
+like the functionality of the smart contract,
+like during this scenario where the swapping happens,
+so what is the main functionality of smart contract,
+it's like taking this amount of money,
+which we want to swap,
+and then add up, **and give us back the corresponding amount of tokens** on another blockchain, or what is it?
+
+---
+
+🧠 Why this fits (and what the student is trying to say)
+
+The student is slightly confused about **how swaps actually work**, especially:
+
+* ❌ It’s **not on another blockchain**
+* ❌ It’s not “sending somewhere else”
+* ✅ It’s **all happening inside one smart contract (liquidity pool)**
+
+---
+
+💡 What actually happens (simple explanation)
+
+On Uniswap:
+
+1. You send ETH to the smart contract
+2. The contract:
+
+   * adds your ETH to the pool
+   * calculates output using **x · y = k**
+3. It sends you back **the other token (e.g., USDT)**
+
+👉 No bridging
+👉 No other blockchain
+👉 Just **one pool + math**
+
+---
+
+🔑 Key correction to the student’s assumption
+
+* Swaps are **not cross-chain**
+* Everything happens **within the same smart contract**
+* The contract simply:
+
+  * **takes input tokens**
+  * **returns output tokens**
+
+---
+
+If you want, I can show you a **step-by-step transaction flow (what exactly happens in the EVM)**—that’s usually the “aha moment” for this topic.
+
+---
+
+Ivan: yes, so basically the smart contract behind Uniswap
+is a function for x times y equals k,
+
+---
+
+ChatGPT: "break down exactly how Uniswap pools work (x·y = k)—that’s the key concept behind everything here."
+
+Great—this is the **core idea behind Uniswap**, and once you get it, most DeFi protocols start making sense.
+
+---
+
+🔁 The Uniswap Formula (Constant Product)
+
+At the heart of Uniswap is this rule:
+
+x \cdot y = k
+
+---
+
+🧠 What this means
+
+* **x** = amount of Token A (e.g., ETH) in the pool
+* **y** = amount of Token B (e.g., USDT) in the pool
+* **k** = constant (must stay the same after trades)
+
+---
+
+⚙️ How a Swap Works
+
+Let’s say a pool has:
+
+* 10 ETH
+* 20,000 USDT
+
+So:
+
+* k = 10 × 20,000 = **200,000**
+
+---
+
+💱 You swap 1 ETH into the pool
+
+Now the pool has:
+
+* 11 ETH
+* ??? USDT (must adjust to keep k constant)
+
+We solve:
+
+[
+11 \cdot y = 200{,}000
+]
+
+[
+y = 18{,}181.82
+]
+
+---
+
+🎯 What happened?
+
+* Before: 20,000 USDT
+* After: ~18,181 USDT
+
+👉 You receive ≈ **1,818 USDT**
+
+---
+
+📉 Why price changes (Slippage)
+
+When you add ETH:
+
+* ETH becomes **more abundant**
+* USDT becomes **scarcer**
+
+➡️ So ETH price **goes down slightly** in that pool
+
+This is called **slippage**.
+
+---
+
+💧 Liquidity Providers (LPs)
+
+People who **provide liquidity**:
+
+* Deposit both tokens (e.g., ETH + USDT)
+* Earn **fees (≈0.3%)** from trades
+
+---
+
+🧠 Key intuition
+
+* No order book (like Binance)
+* No buyers/sellers matching
+* Just a **pool + math formula**
+
+---
+
+⚠️ Important Risks
+
+* **Impermanent loss** (if prices move a lot)
+* **Smart contract risk**
+* **Slippage on large trades**
+
+---
+
+🔥 Simple Mental Model
+
+Think of it like a **balance scale**:
+
+* If you push one side (add ETH),
+* the other side (USDT) must go down to keep balance.
+
+---
+
+If you want next, I can show you:
+
+* how **price is derived from the formula**
+* or what **impermanent loss actually looks like with numbers** (this is where most people get confused)
+
+---
+
 which means that every time I deposit here
 one currency, for example, Ethereum,
-H, or USB,
-if, for example, we will be sitting at the door,
+ETH, or USDT,
+for example, or USDC, US dollar,
 the curve is something like this,
-there is a lot,
-so the more money you get in one of the coins,
-so for example, if I have here USB,
-and here is my Tino,
-so if I have more USB,
-if I have less USB,
+so the more money you have in one of the coins,
+so for example, if I have here USD,
+and here is my ETH,
+so if I have more USDT,
+if I have less USDT,
 the Ethereum will be more expensive,
-if I have more USB, Ethereum will be cheaper,
-that means, as usual,
-so the idea here is you deposit both currencies
+if I have more USDT, Ethereum will be cheaper,
+that means, that usually,
+so the idea here is, you deposit both currencies
 inside the smart contract,
 and some people will deposit one currency,
 to get the other one,
-people, or the other way around,
-will deposit Ethereum to get the other currency,
+or the other way around,
+I will deposit Ethereum to get USDT,
 so the idea of this smart contract
 is try to balance the reserve of both coins,
 and usually if I deposit too much of one currency,
-I will depreciate the other currency,
-so there are both,
-or people who do arbitrages,
+I will depreciate the other currency.
+
+So there are bots, or people who do **arbitrages**,
 they basically check the currency,
 what's the value of Ethereum in Uniswap,
 and what's the value of Ethereum
 on some other exchange,
-like, it can be decentralized exchange,
-or centralized,
-centralized, they don't do smart contracts,
+like, it can be **decentralized exchange**,
+or **centralized**,
+centralized, they don't use smart contracts,
 centralized exchanges are like,
-the biggest one is finance,
+the biggest one is I think **Binance**,
 so basically here you can also buy Ethereum
-with your USB,
-USB-T or USB-C,
-but they don't do smart contracts here,
-they basically use their centralized order,
+with your USDT or USDC,
+but they don't use smart contracts here,
+they basically use their centralized order books,
 so it's like trading on a stock exchange,
 something like that,
-here this is called 6,
+that's why it is called **CEX**,
 it's CEX, centralized exchange,
-or Uniswap is Dex, decentralized exchange,
-so the idea of Uniswap is instead of
+or Uniswap is **DEX**, decentralized exchange.
+So the idea of Uniswap is instead of
 having those order books,
 or matching how much is the value of Ethereum
 and how much is the value of US dollar,
@@ -409,154 +615,175 @@ in that cases, there are always people
 who say, okay, now if I can buy Ethereum
 for 2,000 euros on Uniswap,
 and I can sell it for 2,900 euros on Binance,
-I will direct the go and buy as much Ethereum
+I will directly go and buy as much Ethereum
 as I can on Uniswap and sell it on Binance,
 and the moment I do it,
 I will again balance the price,
 so that approximately Uniswap and Binance
-show the same price with CEX,
-for example, I could go to Ethereum,
-if I can, I never use the real-life Binance,
+show the same price, let's see,
+for example, if I Google here "Ethereum",
+I never really used Binance,
 but we can see, for example,
 if I swap one Ethereum here,
-I will get 2,500 euros tonight,
+I will get 2,559 euros,
 and if I swap it on Uniswap,
 I will get a different rate,
 which is...
-2,500 euros.
+2,508 euros.
 So there is like 50 dollars difference,
 there is an opportunity for arbitrage,
 meaning that I can now go directly and buy this Ethereum,
 buy this on Uniswap and sell it here,
 because I will buy it for less,
 and I will sell it for more here,
-for the other way around.
-Yeah, I mean, you should be able to use USDC also,
-they should be data-notch,
-and that is how Binance is taken from the point,
-but usually, with the euro-USDC,
+or the other way around.
+
+student: (question)
+
+Ivan: Yeah, I mean, you should be able to use USDC also,
+they should be better,
+I'm not sure exactly how Binance is handling it,
+but usually, USDC or USDT,
 they should almost have the same rate,
-probably less than the same difference,
-but this should be big with the US dollar exchange rate.
+probably less than a cent difference,
+because this should be pegged with the US dollar exchange rate.
+
 So yeah, again, differences here,
 Binance, they don't use smart contracts,
 Uniswap, they use smart contracts,
-they use this function for basically the entire smart contract,
-with this function, which is tracking the default
+they use this functions or basically the entire smart contract is this function, which is tracking the deposit of
 one currency and another currency,
-and then calculates this interface,
-I mean, the smart contract,
-which they'll calculate the price,
+and then calculates decentralized,
+I mean, the smart contract itself calculates the price,
 and if there is too huge difference between the prices,
-the people actually touch those differences,
-and they really find out where I can buy cheap and sell more,
+people actually find those differences and directly find out where I can buy cheap and sell more,
 and they basically do it online,
 and pretty fast, and usually those transactions are made by bots,
 so they're both observing in real time both exchanges,
-and they get some opportunity to just buy one exchange
-and buy on another, and this is how they make them.
-So that's why we are not sure,
-we cannot be sure that the price on Binance and Uniswap
+and if they have some opportunity, they just buy in one exchange
+and buy on another to make money, but this is how they make money.
+So that's why we cannot be sure that the price on Binance and Uniswap
 is almost the same,
 but we'll be almost sure that it will be close,
-because they will be both for country-level transactions.
-So they are not really, again, Binance is synchronizing.
-Some questions on this one?
-How does it operate since we are in Binance, Uniswap,
+because the bots will find those differences.
+But they are not related, again, Binance is centralized and Uniswap is decentralized.
+Some questions on this?
+
+student: How does it operate since we are in Binance, Uniswap,
 and I'm getting the idea here,
 in the central network,
-what's the outcome data of having this smart contract?
-Newly central.
-Yeah, and here, for example, I think in order to work,
-you need to do K-wide seeds,
-or basically you need to avoid a fast-forward image,
+**what's the advantage of having this smart contract?**
+
+Ivan: Yeah, here, for example, I think in order to swap,
+you need to do KYC,
+so basically you need to upload a passport image,
 create an account and everything,
-and to Uniswap, I just need to create my wallet and everything.
-Basically, I don't need an account,
-so it's not about that.
+and on Uniswap, I just need to connect my wallet and I'm done.
+Basically, I don't need an account, I'll do it faster.
 On Binance, I probably need to create an account first,
-support my password, idea, and everything,
-so everyone through this,
-they are more better.
-I cannot say, okay, this is better than that,
+upload my passport, ID and everything,
+so everyone chooses where it is more better.
+I cannot say, okay, this is better than the other,
 this is basically just a smart contract,
 which is deployed once and it's working.
-There is no one, there is a team
+There is no-one,... there is a team
 which is basically supervising Uniswap
-and working with Uniswap,
+and working with the Uniswap protocol,
 but once deployed, basically it's an autonomous system
 and everyone can use it,
 and you don't need people to continue
-to maintain the difficulty of work,
-so now it will work for you.
-Maybe they change something from the UI
+to maintain. Because it works,
+so now it will work forever.
+Probably if they change something on the UI
 or if they want to improve,
-because sometimes now Uniswap offers
-slots between multiple tokens
-or you don't have different Ethereum in the entity,
+because sometimes,... now Uniswap offers
+swaps between multiple tokens,
+so you don't swap between Ethereum and USDT,
 you can swap into multiple tokens together,
-so basically the LTE, the smart contract,
+so basically they update the smart contracts,
 creates new architecture,
-and that gives the LTE a team
-which is working behind the network,
-but if you give any LTE, there is no team,
+and in that case there is a team
+which is working behind Uniswap,
+but even if there is no team,
 this website will work,
-as long as it's posted.
-But even if it's not posted,
-you can again go to the Ethernet stand
-and interact with the customer.
-But in Uniswap, because there is,
+as long as it's hosted.
+**But even if it's not hosted**,
+you can, again, **go to the Etherscan and interact directly with the smart contract**, you don't need the frontend.
+
+student: But in Uniswap, because there is,
 I mean, they have their protocol and the function,
-threadfully you could inundate the market
+theoretically you could inundate the market
 on one of the sides,
 and then you would make the other coin very cheap.
-Exactly.
-And then, but wouldn't the other people
+
+Ivan: Exactly.
+
+student: And then, but wouldn't the other people
 that are selling being in a bad position,
 because if you artificially inundate the market,
 then somebody's gonna be fucked,
 so to say.
-Yeah, exactly, that's right.
+
+Ivan: Yeah, exactly, that's right.
 I mean, usually those smart contracts,
 as I said, they are observed by bots already,
 so if they see that there is a huge price difference,
-or if there is another problem,
-probably someone is walking a really large amount of money
-and is getting a really good rate of that currency,
-which he's walking,
-there are bots which are front-runner.
-Front-run means that they will execute
+or if there is... there is another problem,
+probably someone is swapping a really large amount of money
+and he is getting a really good rate of that currency which he is swapping,
+there are bots which are **front-running** you.
+Front-runs means that they will execute
 the transaction before you,
 so that you create a slippage,
 so basically your rate will be different,
-it's 1,202,000, 570,000, it will be 2,800,000.
+it won't be 2,907, it will be 2,800, for example.
 And there are some preventions
 how you can avoid these things to happen.
-I think when we talk,
-they get by default some measurements
-which are preventing that problem,
-preventing bots from front-running you
+I think Uniswap,
+they have by default some measurements
+which are preventing bots from front-running you
 and get better rate,
-but technically, keep in mind that this is smart contract,
+but technically, keep in mind that this is smart contracts,
 so in a sense it's not controlled,
 but there are so many bots observing the smart contract
-and interacting with it that whatever it happens,
-this price will be almost similar like on other exchanges,
-even if there is a 2-art slope
-or someone is trying to do something viciously,
-it will be always 2,
-it will be like 2% or 100% negative,
-it will go too much, but in general, I don't think so.
-I mean, I haven't talked so much about it yet,
-but here you already did that.
-Really small difference.
+and interacting with it that whatever happens,
+this price will be almost similar like on the other exchanges,
+even if there is a **large volume of** swaps
+or someone is trying to do something malicious,
+it will be always,... probably it will be like few percent, like 1-2% negative,
+if you swap too much, but, in general, I don't think so.
+I mean, I haven't swapped so much yet,
+but usually you have like a really small difference.
+
+---
+
+**Why “large volume of swaps” fits best**
+
+* Matches the context: **big trades affecting price**
+* Explains:
+
+  * slippage
+  * arbitrage bots reacting
+* Common phrasing in DeFi:
+
+  * “large volume”
+  * “high volume swaps”
+
+---
+
+If you want next, I can explain **MEV (Maximal Extractable Value)**—that’s the deeper concept behind front-running and bots.
+
+---
+
+### Chainlink
+
 Yeah, okay.
-A little bit about this was about business laws.
+A little bit about... This was about Uniswap.
 There are also different protocols.
-I mean, we don't need to go to all of them,
-but I can show you, for example, chain link,
+I mean, we don't need to go through all of them,
+but I can show you, for example, **Chainlink**,
 which is, again, a smart contract.
-And it's Oracle.
+And it's an **oracle**.
 I think we might talk about Oracle in the next lecture.
 It's not basically, this is a smart contract,
 which is a place where you can put real-world information
