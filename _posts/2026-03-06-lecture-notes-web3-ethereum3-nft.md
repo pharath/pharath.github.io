@@ -784,91 +784,89 @@ I mean, we don't need to go through all of them,
 but I can show you, for example, **Chainlink**,
 which is, again, a smart contract.
 And it's an **oracle**.
-I think we might talk about Oracle in the next lecture.
-It's not basically, this is a smart contract,
-which is a place where you can put real-world information
+I think we might talk about oracles in the next lecture.
+It's not... basically, this is a smart contract,
+which is... it is a place where you can put real-world information
 into smart contracts.
 In that case, it's observing the price of Bitcoin
-into the U.S. with you, and you can see it here.
+into USDC, and you can see it here.
 And there is a smart contract, which when you call,
-it gives you a real bank that is available.
-It's here, $88,000 to $300,000.
-So it means that if I keep a smart contract,
-which requires to pitch the real-time data of Bitcoin
+it gives you in real time that value.
+It's here, $80,320.
+So it means that if I have a smart contract,
+which requires to fetch the real-time data of Bitcoin
 for my smart contract, for my smart contract,
-I can subscribe to the smart contract.
-Or chain link, and it will pitch nearly real-time.
-Or Google, and can use it for different fees.
-But Oracle is not only about price.
-Oracle is a rule, for example, for getting information
-about a sport event, which team won from the game,
-or weather forecast, for example.
-What's the weather in Akan today?
-Since you cannot inject the written weather information
-into a smart contract, you need an Oracle.
-Basically, an Oracle is a place where different people
-validate this information.
-So now in Akan, it's 30 degrees.
-No one will be able to go to some 30 degrees.
-So people who are here who are using the chain link Oracle
-or they are using the data as a chain link,
-they will say, no, in Akan, it's not 30 degrees.
-It's 10 degrees.
-Then you will provide data to the weather forecast
-that in Akan right now it's 10 degrees.
-So these 10 degrees, the value will be sort of
-a changing smart contract.
-And I can use it in my smart contract
-to keep my input something with the weather in Akan.
-What's the difference between different polymarkets?
-Oh, I can show.
-So basically, polymarkets use Oracle in order to get the real time date.
-I can show it for example.
-So polymarkets is a tradition, right?
-I go here to the cryptocurrency and I want to get on the 50 minutes.
-Rour.
-Yeah.
-And now that you use the Oracle on Xynos,
-I go here to the right.
-There is a 50 minutes market, which should be the same.
+I can subscribe to the smart contract
+on Chainlink, and it will fetch the real-time
+price values. I can use it for different cases.
+But **oracles is not only about prices**.
+Oracles are used, for example, for getting information
+about **sport events**, which team won the game,
+or **weather forecast**, for example,
+what's the weather in Aachen today?
+Since you cannot inject directly the weather information
+into a smart contract, you need an oracle.
+**Basically, an oracle is a place where different people validate this information**.
+If I say now in Aachen, it's 30 degrees,
+no-one will agree with me because it's not 30 degrees.
+So people who are here who are using the Chainlink oracles
+or they are basically validators on Chainlink,
+they will say, no, in Aachen, it's not 30 degrees, it's 10 degrees.
+And then they will provide data to the weather forecast
+that in Aachen right now it's 10 degrees.
+So these 10 degrees, the value will be stored on the
+Chainlink smart contract and I can use it in my smart contract
+if I input something with the weather in Aachen.
+
+student: What's the difference between this and Polymarket?
+
+Ivan: Oh, I can show.
+So basically, Polymarket uses oracles in order to get the real-time data.
+I can show you, for example...
+So Polymarket is the prediction, right?
+So if I go here to the cryptocurrency and I want to get on the 50 minutes...
+Or hour. Let's say hour...
+Yeah...
+They use oracles on Binance,...
+But I go here...
+There is a 50 minutes market, which should be this one...
 Okay.
 So they predict, for example, you can predict
-where the price of this one will be above or below the zero.
-And they use a more Oracle, which is here,
-data.changing.com, which is basically the Oracle of changing.
-So in that case, the Oracle of changing means that
-the polymarked smart contract, they fetch the data of the changing
+will the price of Bitcoin will be above or below the value.
+And they use some oracle, which is here,
+"data.chainlink.com", which is basically the oracle of Chainlink,
+means that the Polygon smart contracts, they fetch the data of the Chainlink
 protocol and they say, okay, was the price really above the threshold
 or below?
-So in that case, the market is different from the changing
-because they rely on changing to use their data source for
-the data in the region.
+So in that case, Polymarket is different from Chainlink
+because they rely on Chainlink to use their data source for
+validating the data.
 So in that case, I can use, for example,
+Polymarket to go to climate, for example,
 whether 2026 will be the hottest year.
-So now we need to take the temperature for some to resolve this market.
+So now we need to take the temperature for some... to resolve this market.
 And to take the temperature, they will usually say, okay,
 we take the temperature or the information to resolve this market
 from this place here.
-And the direct link to some new page about NASA.
+And they directly give you a link to some new webpage from NASA.
 In that case, NASA is not decentralized.
 It's centralized, but we can trust them because we trust that
-if they provide some data, we will be able to take.
-If we don't trust them, then we will need some decentralized Oracle,
-probably going again to change the link and changing the
-patient information about the temperature, we will take
-the information from there.
-You can see whether 2026 was really the hottest year on that.
+if they provide some data, we will be safe.
+If we don't trust them, then we will need some decentralized oracle,
+probably going again to Chainlink and if Chainlink is fetching the
+information about the temperature, we will take
+the information from there and you can say whether 2026 was really the hottest year or not.
+
 Okay, I will then stop now and we'll continue with another topic,
-which is open now, which is NAPS, which is type of smart
-complex, how we can use them.
-Only just before that, there is a script to identity planning
-in the NASA, organized by the Oracle Workshare Group this Friday.
+which is NFTs, which is a type of smart contracts, how we can use them.
+Only just before that, there is a crypto event happening in Aachen
+organized by the Aachen Blockchain Club this Friday.
 I will be there if you are free.
-You will hear something and you will take place into the digital hub,
-which is the church in the National Church.
-It's a white-and-white working space.
-On Friday at 7 o'clock, they will be free to eat and drink,
-to talk about blockchain stuff, terms, and kind of the church.
+It will take place in the digital hub,
+which is this church in Aachen.
+It's a co-working space.
+On Friday at 7 o'clock, there will be free food and drinks,
+we will talk about blockchain stuff, and yeah, if you are free, join.
 Thank you.
 
 ## NFTs
