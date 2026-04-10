@@ -1560,7 +1560,7 @@ So it happens from time to time that people send you an offer to **buy this part
 Very often it's fake and you have to be careful because it's fake, because nobody should be interested in this particular thing.
 But it means actually, this is not an NFT that we created here for any value, it's more NFT that we create for a particular kind of purpose.
 
-### token-gated access
+### Token-gated access
 
 So what I can do now is that if I distribute this NFT to all of you, next time when you would like to enter the room, I ask you, show me that you own this NFT.
 Or we have some kind of **token-gated access**, so that means that you would like to access a web page where I put the answers of the exam questions.
@@ -1574,122 +1574,226 @@ Because you don't need to have user ID and password that you give away, if you w
 And that's the way to do that.
 Yeah, that's how you can do this in a very easy way.
 
-### NFT JSON builder
+### Streamlit: NFT JSON builder
 
 And this is all done here with this **"NFT JSON builder"**.
-And all in all, this is, not sure,
-did you come across **streamlit** already?
-In other kind of applications.
+And all in all, this is, I'm not sure,
+did you come across **streamlit** already in other kind of applications?
 If you want to do Python, I am now a fan in the meantime.
-So I'd like to do some programming.
-I do it in Python.
+So if I do some programming, I do it in Python.
 But then I do it in streamlit.
-In streamlit it allows you in a very nice way to realize very easily and very nicely any kind of Python application together with very less user interface.
-So it's very often used in data science and AI applications for accessing large language modes and so on.
-And you see here with just the different Python statements to access here the kind of information.
-So for example, this is here now to get the contract details is of addressing the difference.
-I'm also addressing here.
-The polygon chain.
-I hear the polygon.
-The police can web page.
-And for example, if you just would like to get now the total supply, you address this by addressing the contact functions, the total supply and supply is actually a method that is being offered by this particular.
+And streamlit allows you in a very nice way to realize very easily and very nicely any kind of Python application together with a very nice user interface.
+So it's very often used in data science and AI applications for accessing large language models and so on.
+
+And you see here are just the different Python statements to access here some kind of information.
+So for example, this is here now to get the contract details,...
+of addressing here the Polyscan web page.
+And for example, if you just would like to get now the total supply, you address this by addressing the `contract.functions.total_supply()` and `total_supply()` is actually a method that is being offered by this particular smart contract.
 So this is somehow the interface here.
 You have smart contracts that have different kind of methods that you can also see on the web page.
-And then you have to be in Python, the proper libraries where you can access the different functions by their name.
-What library are you using?
-This is the web3 library.
+And then you have, here in Python, public libraries where you can access the different functions by their name.
+
+student3: What library are you using?
+
+prof: This is the `web3` library.
 Let's see what I'm importing here.
-Gindling web3.
-So using that library you can interact directly with your smart contract.
-You do that, you do that and you have to provide the, you have to provide the ABB, which is somehow the describing the interface to the smart contract.
+`web3`, yeah.
+
+student3: So using that library you can interact directly with your smart contract?
+
+prof: Yeah. You do that, you do that and you have to provide the,... you have to provide the **ABI**, which is somehow describing the interface to the smart contract.
 So it's a meta description of the smart contract.
-ABB stands for?
-You know it, yes.
-This JSON file which you see when you provide the contact and the mix, there is EBI.
-And this you see with JSON representation of the smart contract with right.
-I mean JSON representation in basic means the function names inside the file.
-So you know when you pull this function you need to go to the smart contract.
-Exactly at that place where the function is.
-So you have to see the smart contract.
-Yeah, that's the.
-No, this is not the function.
-We have to do the work.
-Yeah, exactly.
-Interactive tool.
-Yeah, exactly.
-Okay, so that's the contract.
-Yeah, that's the smart contract that even deployed.
-And you can also see the different things that I can do contract.
-Yeah, and here you see the app.
-So the contract.
-That's the contract.
-No, so this is what I just took a copy into my personal environment.
-And from that on, I know how the smart contract can be addressed.
-So the blockchain itself has no API.
-Now where you can say, well, what's the API of this particular smart contract?
+ABI stands for...?
+Ivan, you know that?
+
+Ivan: No idea.
+So, last time I showed this JSON file which you see when you deploy the contract in Remix, there is ABI.
+Basically, you see this **JSON representation of the smart contract**.
+I mean, JSON representation, it basically means the function names inside the file.
+So you know, when you call this function you need to call the smart contract exactly at that place where the function is.
+When you click on the smart contract...
+
+prof: Yeah, that's the...
+
+Ivan: No, this is not the function.
+We have to do the...
+Yeah, exactly this...
+Interactive tool...
+Yeah, exactly...
+
+prof: Okay, so that's the contract.
+Yeah, that's the smart contract that Ivan deployed.
+And here you can also see the different things that I can do with the contract.
+Yeah, and here you see the ABI.
+
+Ivan: So the contract...
+
+Prof: That's the contract ABI.
+So this is what I just took, I copied it into my Python environment and from that on, Python knows how the smart contract can be addressed/accessed.
+So the blockchain itself has no API where you can say, well, what's the API of this particular smart contract?
 But this is being stored here.
 Yeah, and this now tells the Python program how to actually interact with the smart contract.
-And so if you want to interact with the smart contract, go to your two programs can or to any kind of other scanner check if they published the army.
+And so if you want to interact with the smart contract, go here to Polygon Scan or to any kind of other scanner, check if they publish the ABI.
 Not everybody does it.
-There's something for people to do it.
-They just want to hide it and then you copy it into your Python program and then you can start programming against.
-Is the API derived from the bike code?
-Or is the other way around?
-Yeah, yeah.
+Some people don't do it.
+They just want to hide it. And then you copy it into your Python program and then you can start programming again.
+
+student3: Is the ABI derived from the bytecode?
+Or is it the other way around?
+
+Ivan: Yeah.
+
+prof: Yeah.
 Okay.
 Good.
+
+### slide: Is an NFT limited to art objects?
+
 So, yeah, that's it about the different kind of NFTs.
-See, yeah, can you go?
+See, yeah, can you go?...
 Yeah.
-Okay, yeah, you see, actually, the whole thing is not just showed like this.
-It's not limited to any kind of art.
-So we can also put documents on this.
-Imagine that you get your final master degree as an NFT done.
-So the NFTs somehow being stored somewhere and you get the NFT handed over and then you can show the somewhere else.
-You can move machines.
-Everything can become an NFT.
-And then what we did in our lab is that we had a master thesis on that special master thesis to have an inventory where every object that we have like a laptop project or becomes an NFT.
-And then if you want to borrow something, you just borrow the NFT.
-So and then you can check who currently has borrowed what you just go into the wallet and then you see, ah, this is what even company has been borrowed.
-And if he returns it, he just makes a return transfer make a transaction back into a wallet that represents the storage or whatever.
-A lot of people do this with commodities like for example, resources like CO2, oil or gold or whatever.
-So for example, one of the biggest examples is Everledger.
+
+Okay, yeah, you see, actually, the whole thing is **not limited to any kind of art**.
+
+So we can also put **documents** on this.
+Imagine that you get your final **master degree as an NFT**.
+So the NFT is somehow being stored somewhere and you get the NFT handed over and then you can show this somewhere else.
+
+You can have **machines** (as NFTs).
+Everything can **become an NFT**.
+And then, what we did in our lab is that we had a Master's thesis on that, Bachelor or Master's thesis, to have an inventory where every object that we have, like a **laptop or projector**, **becomes an NFT**.
+And then, if you want to borrow something, you just borrow the NFT.
+So and then you can check who currently has borrowed what. You just look into the wallet and then you see, ah, this is what Ivan currently has been borrowing.
+And if he returns it, he just makes a return transaction, a transaction back into a wallet that represents the storage or whatever.
+
+A lot of people do this with **commodities** like for example, resources like CO2, oil or gold or whatever.
+So for example, one of the biggest examples is **Everledger**.
 Everledger is a diamond.
-Diamonds are being represented as NFTs.
-And then you may argue how can I actually map a real world object like a diamond to an NFT.
+**Diamonds** are being represented as NFTs.
+And then you may argue **how can I actually map a real world object like a diamond to an NFT?**
 And then we often get into trouble.
 Yeah, so for example, how would we map this particular laptop here to a NFT?
-The only thing is that it has a serial number.
-That's its unique identifier.
-With a human, we could do fingerprint or VLA.
-With a diamond, actually a diamond has some kind of unique fingerprint.
-If you put it under light, it has a very certain kind of pattern that it produces.
+The only thing is that it has a **serial number**.
+That's its **unique identifier**.
+With a **human**, we could do **fingerprint or DNA**.
+With a **diamond**, actually a diamond has some kind of unique fingerprint.
+If you put it **under light**, it has a very certain kind of **pattern** that it produces.
 And that is being used to track diamonds individually.
 And the idea was to identify blood diamonds.
-So that diamonds are often dictated in a normal mind but in other circumstances.
-But the big trouble here is always, if you have now, let's say you have a piece of land from where you produce.
-Chocolate, cacao, which is this or banana.
-Like you said, this is being produced without any chocolate.
+So blood diamonds that have not been digged in a normal mine, but under other circumstances.
+
+But the big trouble here is always, if you have now, let's say you have a **piece of land** from where you produce chocolate, cacao, or bananas or whatever.
+Like you say, this is being **produced without any child labour**.
 Yeah, so this can be approved.
 That means when this piece of chocolate comes from this particular piece of land,
-then it's being approved as being not associated with chocolate or whatever.
-And the point really is that who guarantees that there are not two smart contracts in the world
-that both guarantee that for the same piece of land.
+then it's being approved as being not associated with child labour or whatever.
+And the **problem** really is that **who guarantees that there are not two smart contracts in the world that both guarantee that for the same piece of land?**
 That's also always this kind of problem that people have there.
 It's really, on the one hand, blockchain is unique,
-but it doesn't hinder you to have two times the same truth on the blockchain.
+but **it doesn't hinder you to have two times the same truth on the blockchain**.
 And both refer to the same truth.
-So it would be something like UNO, smart contract,
-unique representation of each farmland and from there on you have the things.
-So that makes it, at the beginning a lot of people oversold the ideal
-and there was a lot of mistakes also than this energy.
+So it would be something like one global smart contract,
+unique representation of each farmland and from there on you have the **traceability**.
+So that makes it,... at the beginning a lot of people oversold the whole idea
+and there was a lot of mistakes also with this NFTs.
 So people said, well, we can now make all this whole chain, the supply chain trustful.
-On the other hand, people cheated with double entries.
+On the other hand, **people cheated** with **double entries** and things like that.
 So we always have to keep that in mind.
+
+---
+
+Here’s the most natural and contextually correct way to fill in the gaps:
+
+---
+
+And both refer to the same truth.
+So it would be something like **one global**, smart contract,
+unique representation of each farmland and from there on you have the **traceability**.
+
+---
+
+Why these fit:
+
+✅ “one global (smart contract)”
+
+* The problem described is **duplication of truth**
+* The ideal solution would be:
+
+  * a **single, universally accepted registry**
+* So “one global smart contract” captures that idea perfectly
+
+✅ “traceability”
+
+* Standard term in **supply chains**
+* Refers to:
+
+  * tracking origin → production → distribution
+* Exactly what they want for:
+
+  * cacao, bananas, etc.
+
+---
+
+🧠 Key insight (very important limitation)
+
+Blockchain guarantees:
+
+* ✅ Data **cannot be changed**
+* ❌ Data is **not guaranteed to be true**
+
+---
+
+⚠️ The core problem explained
+
+Even with blockchain:
+
+* You can create:
+
+  * Contract A → “This land has no child labour”
+  * Contract B → “Same land, same claim”
+
+👉 Both exist
+👉 Both look “valid”
+
+But:
+
+* No built-in mechanism to enforce **real-world uniqueness**
+
+---
+
+🔑 This is called the “Oracle / Identity Problem”
+
+* Blockchain cannot verify:
+
+  * physical land
+  * real-world facts
+* It depends on:
+
+  * trusted sources
+  * governance
+  * standards
+
+---
+
+💡 Real-world takeaway
+
+To make this work, you need:
+
+* Standardized registries
+* Trusted authorities or decentralized validation
+* Possibly systems like Chainlink for data input
+
+---
+
+If you want, I can explain **how real projects try to solve this (e.g. tokenized real estate, supply chain tracking)**—this is where theory meets messy reality.
+
+---
+
+## org
+
 Okay, good.
-So this brings me to the end of the NFTs and we got the links to the IPFS that we discussed next time.
-And for those who came late next Wednesday,
-I need to get to a proposal meeting for a project proposal that we submitted
+So this brings me to the end of the NFTs and we got the link to the IPFS that we discuss next time.
+And for those who came late, next Wednesday I need to get to a proposal meeting for a project proposal that we submitted
 and this date is not negotiable.
 They just sent you a date and you have to come if you want to have the money or not.
 So we agreed upon that the next lecture is online on Friday morning, 9 o'clock.
