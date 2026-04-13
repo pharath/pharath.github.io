@@ -177,6 +177,16 @@ see [Switch Workspace](https://extensions.gnome.org/extension/1231/switch-worksp
 | :--- | :--- |
 `gnome-terminal --title="TITLE"` |
 
+# Gnome Display Manager (GDM)
+
+- a display manager
+- a graphical login manager
+- for x11 and Wayland (windowing systems)
+
+| command | description |
+| :--- | :--- |
+`sudo systemctl restart gdm.service` | restart GDM (kills the current login session, so that you have to log in again, but some processes keep running, eg. `tmux`, `nohup` processes (eg. `nohup process &`), [disowned background processes](https://www.networkworld.com/article/969269/how-to-keep-processes-running-after-logging-off-in-linux.html), etc.)
+
 # Tracker
 
 see [wiki.ubuntuusers.de](https://wiki.ubuntuusers.de/Tracker/)
@@ -432,6 +442,10 @@ Exec=dolphin %u --new-window
 
 - set `most` as default pager is `.bashrc` to get coloured `man` pages
 
+# Mail
+
+use Thunderbird
+
 # Converter
 
 ## pptx (or ppt) to pdf
@@ -468,6 +482,10 @@ aplay `/tmp/test-mic.wav`
 - check if the Volume for this video is **enabled** and is **sufficiently high**
 - in addition, check the Volume in the Totem Video App
 
+**Problem 2**: No sound at all (eg. after update)
+
+- `pulseaudio -k && sudo alsa force-reload` ([link](https://askubuntu.com/a/1175014))
+
 # Webcam
 
 ## Troubleshooting
@@ -493,6 +511,26 @@ buku --import ~/Downloads/bookmarks27jan24.html
 ```
 
 ```bash
+# buku -d:
+
+buku -d 15012014
+Index 15012020 moved to 15012014
+
+buku -d
+
+buku -d 100-200
+buku -d 100 15 200
+
+# buku -S:
+
+# Search bookmarks with ALL the keywords "kernel" and "debugging" in URL, title or tags:
+buku -S kernel debugging
+
+# buku -t:
+
+# whitespaces are considered, eg. in "some tag with whitespaces"
+# minus signs are not considered, eg. in "some - tag - with - minus - signs"
+
 # OR
 buku -t tag1, tag2
 
@@ -503,7 +541,11 @@ buku -t tag1 + tag2
 buku -t tag1 - tagToExclude1, tagToExclude2
 
 # add tags
+# (omitting the "+" removes all tags and replaces them with "newTag")
 buku -t tag1 -s pattern -u --tag + newTag
+
+# remove tags
+buku -t tag1 -s pattern -u --tag - newTag
 
 # print just urls
 buku -t tag1, tag2 -f 1
@@ -704,3 +746,16 @@ Examples:
     </engine>
 </tool>
 ```
+
+# Latex
+
+First, install
+
+```bash
+sudo apt-get install texlive texstudio
+sudo apt install texlive-science texlive-latex-extra texlive-extra-utils latexmk texlive-publishers texlive-science
+sudo apt-get install texlive-bibtex-extra biber
+```
+
+Then, install the extension `Latex Workshop` in vscode.
+

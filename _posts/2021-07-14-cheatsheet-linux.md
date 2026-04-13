@@ -15,6 +15,33 @@ tags:
   - cheatsheet
 ---
 
+# Distros
+
+## Market Share
+
+The Linux market features dominant players like **Ubuntu (strong desktop & server)** and **Red Hat Enterprise Linux (RHEL) (enterprise leader)**, alongside popular choices for different users, including **Linux Mint** (beginners), **Fedora** (developers/cutting-edge), **Debian** (stable foundation), **Manjaro/Arch** (customization), and **Pop!\_OS** (gaming/creators). While Ubuntu leads general Linux usage, RHEL dominates enterprise, and many niche distros cater to specific needs like security (**Kali**) or simplicity (**MX Linux**).
+
+## Key Market Segments and Top Distros
+
+- General Desktop/Beginners:
+  - **Ubuntu**: Huge community, versatile (desktop, server, IoT), strong for general use, development, and cloud.
+  - **Linux Mint**: User-friendly, great for Windows switchers, stable, and excellent for older hardware.
+  - **Zorin OS**: Polished, designed for Windows/macOS users transitioning.
+  - **MX Linux**: Popular, user-friendly, based on Debian.
+- Enterprise & Servers:
+  - **Red Hat Enterprise Linux (RHEL)**: Market leader in managed servers, strong commercial support, stable.
+  - **SUSE Linux Enterprise Server (SLES)**: Another major enterprise player.
+  - **Ubuntu Server**: Widely used in cloud and web hosting.
+  - **Rocky Linux/AlmaLinux**: Community-supported RHEL alternatives.
+- Developers & Power Users:
+  - **Fedora**: Bleeding-edge, sponsored by Red Hat, great for developers.
+  - **Arch Linux / Manjaro**: Highly customizable, rolling release, advanced users.
+  - **Debian**: The stable, foundational system for many others (like Ubuntu).
+- Specialized/Niche:
+  - **Pop!\_OS**: Gaming, creative work, good hardware support.
+  - **Kali Linux / Parrot Security**: Penetration testing, security auditing.
+  - **Tails / Whonix**: Privacy and anonymity.
+
 # Apps
 
 ## system info
@@ -379,6 +406,11 @@ Main advantages:
 | `ps -eo pid,lstart,cmd \| grep 2127686` | start time of PID 2127686 (e.g. to get terminal start time, run `echo $$`, and then this command)                                                                                                               |
 | `echo $$`                               | show PID of current shell                                                                                                                                                                                       |
 | `kill PID`                              | stop process with id `PID`, sends `SIGTERM` (i.e. kills gracefully) (see [notes bash]({% post_url 2021-09-25-cheatsheet-bash %}#job-control) and [kill doc](https://man7.org/linux/man-pages/man1/kill.1.html)) |
+| `kill -l`                               | `-l` or `-L` to list available signals                                                                                                                                                                          |
+| `kill -l 2`                             | convert signal number (here: 2) to signal name and vice versa                                                                                                                                                   |
+| `kill -2 PID`                           | sent `SIGINT`                                                                                                                                                                                                   |
+| `kill -s 2 PID`                         | sent `SIGINT`                                                                                                                                                                                                   |
+| `kill -SIGINT PID`                      | sent `SIGINT`                                                                                                                                                                                                   |
 | `pkill process_name`                    | stop all processes containing `process_name` (which is a regular expression), sends SIGTERM (i.e. kills gracefully), _Warning:_ use `pgrep` first to check which processes will be killed                       |
 | `pgrep process_name`                    | list all PIDs containing `process_name` (which is a regular expression)                                                                                                                                         |
 
@@ -444,8 +476,11 @@ Differences between two directory trees
 
 # apt, apt-get, snap, dpkg, pkg-config
 
-## Difference between apt and apt-get + apt-cache:
+## Difference between apt and apt-get + apt-cache
 
+- [reddit](https://www.reddit.com/r/linuxquestions/comments/79x16w/whats_the_difference_between_apt_list_and/)
+  - Traditionally, Debian's APT package manager has been split into several tools, most notably `apt-cache` and `apt-get`. `apt-cache` provides information about packages, but doesn't change the state of the system. `apt-get` does those operations that change something, e.g. install, remove, or update packages.
+  - `apt` combines the most commonly used functionality of `apt-cache` and `apt-get`. So `apt search` does the same as `apt-cache search`, `apt install` does the same as `apt-get install`, etc. Also `apt`'s default settings are a bit different. E.g. it uses colors, shows progress bars, `apt update` tells you if there are packages that can be updated (`apt-get update` doesn't do that), etc.
 - `apt` = most commonly used command options from `apt-get` and `apt-cache` see [here](https://itsfoss.com/apt-vs-apt-get-difference/)
 - So with `apt`, you get all the necessary tools in one place. You won’t be lost under tons of command options. The main aim of `apt` is to provide an efficient way of handling packages in a way "pleasant for end users".
 - `apt`:
@@ -493,12 +528,21 @@ sudo add-apt-repository --remove ppa:whatever/ppa
 
 You can also remove PPAs by deleting the `.list` files from `/etc/apt/sources.list.d` directory.
 
+### Upgrade
+
+| command                      | description                                                                                                        |
+| :--------------------------- | :----------------------------------------------------------------------------------------------------------------- |
+| `sudo apt-get -V -s upgrade` | To see all possible upgrades, run an upgrade in verbose mode and (to be safe) with simulation; press `n` to cancel |
+
 ### Install
 
-| command                                         | description                |
-| :---------------------------------------------- | :------------------------- |
-| sudo apt install ./name.deb                     | install a .deb file        |
-| `sudo apt-get install <package name>=<version>` | install a specific version |
+| command                                         | description                                                                                                                                                                                                                                                                                                    |
+| :---------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sudo apt install <packagename>`                | installs the package (and its dependencies) if it doesn't exist, or upgrades it if it does exist                                                                                                                                                                                                               |
+| `sudo apt -s install <packagename>`             | simulate install to see what would happen if you upgrade/install a package, [askubuntu](https://askubuntu.com/a/1022518)                                                                                                                                                                                       |
+| `sudo apt install ./name.deb`                   | install a `.deb` file (and its dependencies)                                                                                                                                                                                                                                                                   |
+| `sudo apt-get install <package name>=<version>` | install a specific version                                                                                                                                                                                                                                                                                     |
+| `sudo apt install --only-upgrade <packagename>` | update only `<packagename>` <span style="color:red">**without**</span> dependencies (use `apt install` instead), particularly useful when you want to be selective about updates, especially in server environments where you may want to control which packages are upgraded without introducing new software |
 
 ### Uninstall
 
@@ -509,12 +553,19 @@ You can also remove PPAs by deleting the `.list` files from `/etc/apt/sources.li
 | `sudo apt autoremove`         | remove the **dependencies** that are no longer needed                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | `sudo apt --purge autoremove` | remove **systemwide configuration files and the dependencies** that are no longer needed                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 
+### apt show
+
+| command              | description              |
+| :------------------- | :----------------------- |
+| `sudo apt show code` | same as `apt-cache show` |
+
 ### apt-cache
 
-| command                           | description                                                                                                                                       |
-| :-------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `apt-cache policy <package name>` | shows installed package version and also all the available versions in the repository according to the version of Ubuntu in which you are running |
-| `apt-cache search <package_name>` | find specific package names                                                                                                                       |
+| command                          | description                                                                                                                                                                          |
+| :------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `apt-cache policy <packagename>` | shows installed package <span style="color:red">**version**</span> and also all the available versions in the repository according to the version of Ubuntu in which you are running |
+| `apt-cache search <packagename>` | find specific package names                                                                                                                                                          |
+| `sudo apt-cache show code`       | show information about package `code`                                                                                                                                                |
 
 ### apt-mark
 
@@ -535,11 +586,11 @@ You can also remove PPAs by deleting the `.list` files from `/etc/apt/sources.li
 
 ### Basics
 
-| command                         | description                                                             |
-| :------------------------------ | :---------------------------------------------------------------------- |
-| `sudo dpkg -i package_file.deb` | install `package_file.deb` (alternative: `sudo apt install ./name.deb`) |
-| `sudo dpkg -P some_package`     | purge `some_package`                                                    |
-| `sudo dpkg -r some_package`     | remove `some_package`                                                   |
+| command                         | description                                                                                                                     |
+| :------------------------------ | :------------------------------------------------------------------------------------------------------------------------------ |
+| `sudo dpkg -i package_file.deb` | install `package_file.deb` <span style="color:red">**without**</span> dependencies (use `sudo apt install ./name.deb` instead!) |
+| `sudo dpkg -P some_package`     | purge `some_package`                                                                                                            |
+| `sudo dpkg -r some_package`     | remove `some_package`                                                                                                           |
 
 ### Confirm Whether Package Is Already Installed
 
@@ -745,6 +796,7 @@ Change the title of the current terminal: `echo -ne "\033]0;SOME TITLE HERE\007"
 | `find . -iname "searchPattern" -print0 \| xargs -0 du -sh`                               | show the size of each found file                                                                                                                                                                                                                                                                           |
 | `find . -iname "searchPattern" -exec rm -v "{}" \+`                                      | remove the found files; from `man find`: `-exec`: "The specified command is run once for each matched file."; `+`: best explanation: [stackoverflow](https://stackoverflow.com/a/6085237)                                                                                                                  |
 | `find path_A -name '*AAA*' -exec mv -t path_B "{}" \+`                                   | move the found files                                                                                                                                                                                                                                                                                       |
+| `find . -maxdepth 1 -type f -print0 \| xargs -0 sed -i 's/ /\n/g'`                       | replace all spaces with new lines for all files in the current directory                                                                                                                                                                                                                                   |
 
 ### locate
 
@@ -834,6 +886,10 @@ mostly from [stackoverflow](https://stackoverflow.com/a/76099444/12282296)
 - <span style="color:red">**JavaScript Regular Expressions**</span>: This is the syntax used by the JavaScript programming language. It is similar to PCRE but has some differences, such as the use of `\b` for word boundaries instead of `\y`.
 - <span style="color:red">**.NET Regular Expressions**</span>: This is the syntax used by the .NET Framework. It is similar to PCRE but has some differences, such as the use of `(?)` for named capture groups instead of `(?P)`.
 - <span style="color:red">**Vim Regex**</span>
+- <span style="color:red">**in VSCode**</span>: [examples](https://blog.devsense.com/2022/find-and-replace-with-regexp)
+  - use `$1` for capture groups in replace patterns (in the "Replace" field in VSCode)
+  - use `\1` for capture groups in search patterns (in the "Find" field in VSCode)
+  - eg. `^([a-zA-z]*):` in the "Find" field and `- $1:` in the "Replace" field to prepend a minus `-` to a word at the beginning of a line followed by a colon
 
 ### grep
 
@@ -900,7 +956,8 @@ We should escape literal `.` because in regex `.` means any character, unless it
 
 | command                    | description                                                                                                                 |
 | :------------------------- | :-------------------------------------------------------------------------------------------------------------------------- |
-| `command \| nl -w2 -s'> '` | add line numbers in front of each line of the output of `command`, [stackexchange](https://unix.stackexchange.com/a/222220) |
+| `command \| nl`            | add line numbers in front of each line of the output of `command`, [stackexchange](https://unix.stackexchange.com/a/222220) |
+| `command \| nl -w2 -s'> '` | `-w`idth, `-s`eparator, [stackexchange](https://unix.stackexchange.com/a/222220)                                            |
 
 ### tee
 
@@ -955,6 +1012,7 @@ We should escape literal `.` because in regex `.` means any character, unless it
 | `sed 's/$/ pattern/' filename`                    | appending `pattern` to end of a line                                                                                                                                                                                                                                                                                                                                                                        |
 | `sed '/Fred Flintstone/ s/$/ pattern/' filename`  | append only to lines containing a specific string                                                                                                                                                                                                                                                                                                                                                           |
 | `sed '/pattern/{G;}' filename`                    | add a newline after a pattern                                                                                                                                                                                                                                                                                                                                                                               |
+| `sed -i 's/ /\n/g' filename`                      | `-i`: edit files in place, replace all spaces with new lines                                                                                                                                                                                                                                                                                                                                                |
 
 ### tr
 
@@ -1032,7 +1090,7 @@ We should escape literal `.` because in regex `.` means any character, unless it
 | :------------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `mv -iv`                                                                                    | **Tipp:** IMMER -iv BENUTZEN! (-i für bestätigen, -v für ausgeführte Aktion zeigen)                                                                                                                                                                                                            |
 | `mv "$file" "${file%???????}"  # 7 question marks to match 7 characters`                    | rename file and remove the last 7 characters of the filename                                                                                                                                                                                                                                   |
-| `rename 's/pattern/replacepattern/' *.jpg`                                                  | rename all `.jpg` files by replacing `pattern` with `replacepattern` in their filenames (`sudo apt install rename`)                                                                                                                                                                            |
+| `rename 's/pattern/replacepattern/' *.jpg`                                                  | rename all `.jpg` files by replacing `pattern` with `replacepattern` in their filenames (`sudo apt install rename`), you can use eg. `'s/pattern(capturegroup1)$/replacepattern$1/'`                                                                                                           |
 | `rm -iv`                                                                                    | **Tipp:** IMMER -iv BENUTZEN! (-i für bestätigen, -v für ausgeführte Aktion zeigen)                                                                                                                                                                                                            |
 | `cp -iv`                                                                                    | **Tipp:** IMMER -iv BENUTZEN! (-i für bestätigen, -v für ausgeführte Aktion zeigen)                                                                                                                                                                                                            |
 | `find ../path/to/search/ -iname *searchpattern* -exec cp -iv "{}" ./destination/folder/ \;` | find and copy the found files                                                                                                                                                                                                                                                                  |
@@ -1092,15 +1150,16 @@ From [superuser](https://superuser.com/questions/142945/bash-command-to-focus-a-
 
 # Unzipping
 
-| command                                                  | description                                                                                                      |
-| :------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------- |
-| `unzip file -d destination`                              | unzip to destination                                                                                             |
-| `tar -C ./data/ -zxvf ~/Downloads/mnist.tgz`             | für **.tgz** (wobei `-C target_location -zxvf source.tgz`), **.tar.gz**                                          |
-| _oder andersrum:_                                        |
-| `tar -zxvf ~/Downloads/mnist.tgz -C ./data/`             |
-| `tar -C ./data/ -jxvf ~/Downloads/datei.tar.bz2`         | für **.tar.bz2** (dh. `-j` flag statt `-z` flag)                                                                 |
-| `tar -C ~/ -xvf tor-browser-linux64-10.5.2_en-US.tar.xz` | für **.tar.xz**                                                                                                  |
-| `zip -FF 210211.zip --out 210211-2.zip -fz`              | "fix" a broken zip file, then run `unzip 210211-2.zip`, [stackexchange](https://unix.stackexchange.com/a/634316) |
+| command                                                        | description                                                                                                      |
+| :------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------- |
+| `unzip file -d destination`                                    | unzip to destination                                                                                             |
+| `tar -xvzf community_images.tar.gz -C some_custom_folder_name` | für **.tar.gz**                                                                                                  |
+| `tar -C ./data/ -zxvf ~/Downloads/mnist.tgz`                   | für **.tgz** (wobei `-C target_location -zxvf source.tgz`), **.tar.gz**                                          |
+| _oder andersrum:_                                              |
+| `tar -zxvf ~/Downloads/mnist.tgz -C ./data/`                   |
+| `tar -C ./data/ -jxvf ~/Downloads/datei.tar.bz2`               | für **.tar.bz2** (dh. `-j` flag statt `-z` flag)                                                                 |
+| `tar -C ~/ -xvf tor-browser-linux64-10.5.2_en-US.tar.xz`       | für **.tar.xz**                                                                                                  |
+| `zip -FF 210211.zip --out 210211-2.zip -fz`                    | "fix" a broken zip file, then run `unzip 210211-2.zip`, [stackexchange](https://unix.stackexchange.com/a/634316) |
 
 # Convert
 
@@ -1331,12 +1390,39 @@ $ du --help
 
 | command                                                                                                                                | description                                                                                                                                                                                   |
 | :------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `wget -nc`                                                                                                                             | `-nc` for "do not overwrite existing files"                                                                                                                                                   |
+| `wget -nc file`                                                                                                                        | `-nc` for "do not overwrite existing files", refuse to download newer copies of `file` (without `-nc` the files are downloaded and are named `file.1`, `file.2`, etc.)                        |
 | `wget -O output_file -q https://checkip.amazonaws.com -P DESTINATION`                                                                  | `-O output_file`: benutze Minuszeichen "-" statt `output_file` wenn output direkt in Terminal erscheinen soll; `-q` für quiet; `-P` für Zielordner                                            |
 | `torsocks wget "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-10.1.0-amd64-xfce-CD-1.iso"`                          | download anonymously (need to install `sudo apt-get install tor torsocks`), [reddit](https://www.reddit.com/r/privacytoolsIO/comments/ddnx6x/how_to_download_files_properly_and_anonymously/) |
 | `wget -A pdf,jpg -m -p -E -k -K -np http://site/path/`                                                                                 | get all pdfs and jpgs from site                                                                                                                                                               |
 | `wget --accept pdf,jpg --mirror --page-requisites --adjust-extension --convert-links --backup-converted --no-parent http://site/path/` | same as above using long option names                                                                                                                                                         |
 | `curl -s https://checkip.amazonaws.com`                                                                                                | `-s` für silent                                                                                                                                                                               |
+| `wget -i text_file.txt`                                                                                                                | Read URLs from a local or external file. If `-` is specified as file, URLs are read from the standard input.                                                                                  |
+| `wget --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64)" -i input_dl_links.txt`                                                  | Spoof a browser User-Agent                                                                                                                                                                    |
+
+## Troubleshooting
+
+```
+wget "HTTP request sent, awaiting response... 403 Forbidden" when downloading jpg image
+```
+
+A `403 Forbidden` error in `wget` when downloading a JPG usually means the server is **blocking your request**, not that the file doesn’t exist.
+
+This commonly happens because:
+
+- The server blocks non-browser user agents
+- The request is missing a Referer header
+- Hotlink protection is enabled
+- Authentication (cookies/login) is required
+- The URL is temporary or expired
+
+**Fix**: Spoof a browser User-Agent (most common fix)
+
+Many sites block default `wget` agents.
+
+```bash
+wget --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64)" \
+"https://example.com/image.jpg"
+```
 
 # gpg, apt-key
 

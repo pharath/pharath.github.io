@@ -632,6 +632,17 @@ printf "${RED}phth: Need to rename some windows to make some shortcuts work:${NC
       - `2>&1` redirects `stderr` (file descriptor value: `2`) to `stdout` (file descriptor value: `1`)
   - phth note: `> /dev/null 2>&1` idea came from `~/git/geohot/openpilot/update_requirements.sh`
 
+## Meaning of `2>&1`
+
+[source](https://stackoverflow.com/a/818284)
+
+File descriptor 1 is the standard output (`stdout`).
+File descriptor 2 is the standard error (`stderr`).
+
+At first, `2>1` may look like a good way to redirect `stderr` to `stdout`. However, it will actually be interpreted as "redirect `stderr` to a file named `1`".
+
+`&` indicates that what follows and precedes is a file descriptor, and not a filename. Thus, we use `2>&1`. Consider `>&` to be a redirect merger operator.
+
 # Job control
 
 ## List running jobs

@@ -133,6 +133,11 @@ printf '\033]10;?\007'
 
 # Ex Commands
 
+| command | description                           |
+| :------ | :------------------------------------ |
+| `:q:`   | will show you command history in Vim. |
+| `:q/`   | will show you history of searches.    |
+
 ## Substitute `:h substitute`
 
 `g`: Replace all occurrences in the line. (`:h s_g`)

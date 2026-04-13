@@ -123,8 +123,9 @@ Shortcuts:
 
 # markdown
 
-- <kbd>alt</kbd><kbd>i</kbd> (next `# `)
-- <kbd>alt</kbd><kbd>o</kbd>
+- <kbd>space</kbd><kbd>c</kbd><kbd>c</kbd> (toggle line wrap)
+- <kbd>ctrl</kbd><kbd>n</kbd> (next `# `)
+- <kbd>ctrl</kbd><kbd>p</kbd> (previous `# `)
 - `:LspStop 1 (tailwindcss)` (because the treesitter markdown parser is sufficient)
 - <kbd>alt</kbd><kbd>f</kbd> (insert arrow symbol)
 
@@ -203,6 +204,11 @@ Shortcuts:
   - (Note: die "installierten" server sind in der Zeile ganz unten in der Ansicht! Die server, die oben in der Liste sind, sind die "aktiven" für aktuelle buffer!)
 - `:LspStop serverName`
   - eg. to stop tailwindcss server for markdown files (&rarr; [markdown](#markdown))
+
+### pyright
+
+- [configuration: pyrightconfig.json file](https://github.com/microsoft/pyright/blob/main/docs/configuration.md)
+  - virtual environments: see [reddit](https://www.reddit.com/r/neovim/comments/v0wk77/python_virtual_environment_pyright/)
 
 ## lsp_signature.nvim
 
@@ -429,7 +435,8 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
 
 - [meaning of keymaps (official doc)](https://github.com/jesseduffield/lazygit/blob/master/docs/keybindings/Keybindings_en.md)
 - <kbd>alt</kbd><kbd>enter</kbd> (when writing a commit message: starts a new line)
-- when lazygit spins up the external hard drive so that lazygit lags, open `nvim ~/.config/lazygit/state.yml` and run `:g/^-\ \/media/d` to remove all "recent repo" paths to a git repo on the external hard drive
+- Troubleshooting
+  - when lazygit spins up the external hard drive so that lazygit lags, open `nvim ~/.config/lazygit/state.yml` and run `:g/^-\ \/media/d` to remove all "recent repo" paths to a git repo on the external hard drive
 - start lazygit
   - <kbd>space</kbd> gg (for normal repos)
   - <kbd>space</kbd> gd (for dotfiles repo)
@@ -496,7 +503,7 @@ This plugin is only active in git-tracked folders. Ie. `:map` (and, therefore, <
 ### fugitive
 
 - for normal git commands use exclamation mark "`:!git ...`"
-- `:G` (former "Gstatus", press g? to see what you can do)
+- `:G` (former `:Gstatus`, press `g?` to see what you can do)
 - `:G <tab><tab>` to see available commands
 - `:G log`
 - `:G shortlog`
@@ -793,8 +800,8 @@ bot summon `:help profile`
   - <kbd>space</kbd><kbd>fon</kbd> (load new session)
   - <kbd>space</kbd><kbd>fsn</kbd> (save new session)
 - tabs
-  - next tab: <kbd>gt</kbd> or <kbd>ctrl</kbd><kbd>P</kbd>ageDown (by default in vim)
-  - previous tab: <kbd>gT</kbd> or <kbd>ctrl</kbd><kbd>P</kbd>ageUp (by default in vim)
+  - next tab: <kbd>gt</kbd> or <kbd>ctrl</kbd><kbd>PageDown</kbd> (by default in vim)
+  - previous tab: <kbd>gT</kbd> or <kbd>ctrl</kbd><kbd>PageUp</kbd> (by default in vim)
   - last accessed tab: <kbd>g</kbd><kbd>tab</kbd> (by default in vim, `:h ctrl-<tab>`)
   - list tabs: `:tabs` (also shows which ones are modified, `:h :tabs`)
 - <kbd>alt</kbd><kbd>h</kbd> and <kbd>alt</kbd><kbd>l</kbd> (switch viewports)

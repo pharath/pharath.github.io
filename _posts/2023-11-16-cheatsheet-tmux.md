@@ -93,7 +93,7 @@ source: [reddit.com](https://www.reddit.com/r/neovim/comments/11usepy/how_to_pro
 | command | description |
 | :--- | :--- |
 `c-b ?` | list all keymaps (eg. all `c-b` keymaps have the word `prefix` in their 3rd column, scroll with pageUp/pageDown keys)
-`c-b [` | copy-mode, see also [copy-mode-vi](https://dev.to/iggredible/the-easy-way-to-copy-text-in-tmux-319g)
+`c-b [` | copy-mode, or (if enabled) [copy-mode-vi](https://dev.to/iggredible/the-easy-way-to-copy-text-in-tmux-319g)
 `c-b d` | detach
 `c-b :` | command-prompt
 
@@ -115,6 +115,16 @@ source: [reddit.com](https://www.reddit.com/r/neovim/comments/11usepy/how_to_pro
 `c-b x` | close pane
 `c-b z` | Toggle pane zoom (pressing this twice may help if a pane is "messed up")
 
+### Copy and Paste
+
+| command | description |
+| :--- | :--- |
+`c-b [` | copy-mode, or (if enabled) [copy-mode-vi](https://dev.to/iggredible/the-easy-way-to-copy-text-in-tmux-319g)
+`space` | start selection
+`arrowkeys` | select (after pressing `space`)
+`enter` | copy selection
+`c-b ]` | paste selection
+
 ## tmux Commands
 
 ### in command-prompt
@@ -125,6 +135,7 @@ source: [reddit.com](https://www.reddit.com/r/neovim/comments/11usepy/how_to_pro
 `new -s mysession` | Start a new session with the name `mysession`
 `kill-session -t 3` | kill the session with index 3 (ie. this number is in the `c-b w` view the number **without** parentheses next to `# windows`)
 `kill-session -t name` | kill the session with name `name`
+`:set -g mouse on` | enable mouse support in tmux
 
 ### send-keys
 
