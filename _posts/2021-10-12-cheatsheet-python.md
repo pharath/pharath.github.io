@@ -13,7 +13,7 @@ toc_label: "Contents"
 
 ---
 
-# Installing multiple Python Versions
+## Installing multiple Python Versions
 
 - [source](https://askubuntu.com/a/682875):
   - `sudo add-apt-repository ppa:deadsnakes/ppa`
@@ -23,29 +23,29 @@ toc_label: "Contents"
     - It will not overwrite your existing `python3.4` which is still symlinked as `python3`.
     - Instead, to run `python3.5`, run the command `python3.5` (or `python3.X` for any other version of python).
 
-## venv using multiple Python Versions
+### venv using multiple Python Versions
 
 - install `sudo apt install python3.7-venv` or `sudo apt install python3.x-venv` for **each python version**!
 
-# Uninstalling multiple Python Versions
+## Uninstalling multiple Python Versions
 
 - `sudo apt purge python3.6 libpython3.6-minimal libpython3.6-stdlib python3.6-minimal`
 
-# python packages and modules
+## python packages and modules
 
 - [source](https://realpython.com/absolute-vs-relative-python-imports/)
 - `.py` files are **modules**
 - folders (containing modules) are **packages**
   - importing a package essentially imports the package's `__init__.py` file as a module
 
-# pyenv
+## pyenv
 
 - For Python version management, e.g. 
   - if you want to use multiple python versions on the same machine
   - if a project requires an older python version
 - `pipenv install` (see below) will automatically install a python version using `pyenv`, if the project requires it 
 
-## Prerequisites
+### Prerequisites
 
 ```bash
 sudo apt-get update; sudo apt-get install make build-essential libssl-dev zlib1g-dev \
@@ -53,7 +53,7 @@ libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
 libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 ```
 
-## Install
+### Install
 
 ```bash
 curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
@@ -67,18 +67,18 @@ exec $SHELL
 pyenv update
 ```
 
-## Usage
+### Usage
 
 **Remember**: `pyenv` works by inserting a directory of **shims** at the front of your `PATH` (see [Understanding Shims](https://github.com/pyenv/pyenv#understanding-shims)).
 
-### Run a program in a poetry environment
+#### Run a program in a poetry environment
 
 ```bash
 pyenv shell 3.10.4
 poetry run python3 some_python_script.py
 ```
 
-### Install Python versions
+#### Install Python versions
 
 ```bash
 # list available Python versions that can be installed
@@ -86,7 +86,7 @@ pyenv install -l
 pyenv install 3.10.4
 ```
 
-### Switch between Python versions
+#### Switch between Python versions
 
 from [official doc](https://github.com/pyenv/pyenv#switch-between-python-versions)
 
@@ -108,13 +108,13 @@ Now whenever you invoke `python`, `pip` etc., an executable from the Pyenv-provi
 
 Using "`system`" as a version name would reset the selection to your system-provided Python.
 
-# pip
+## pip
 
 - use `pipenv` (see subsection below) instead of `venv` and `pip`
 - pip caches downloaded packages, so that you can resume downloads and installations by running `pip install` again, if e.g. 
   - the installation is aborted because there was no space left on the device
 
-## Basics
+### Basics
 
 | command | description |
 | :---: | :---: |
@@ -122,7 +122,7 @@ pip show *package* | show location of *package* (and other package information)
 pip install -h | show install options/settings
 python3 -m pip install --upgrade pip | upgrade pip (old pip versions cause many errors, always upgrade pip first and keep pip updated!)
 
-## PyPI
+### PyPI
 
 [Wikipedia](https://en.wikipedia.org/wiki/Python_Package_Index)
 
@@ -132,9 +132,9 @@ As of 6 May 2024, more than 530,000 Python packages are available.
 
 PyPI primarily hosts Python packages in the form of source archives, called "**sdists**", or of "**wheels**" that may contain binary modules from a compiled language.
 
-## Wheels vs Source Distributions
+### Wheels vs Source Distributions
 
-### sdist
+#### sdist
 
 [realpython.com](https://realpython.com/python-wheels/)
 
@@ -144,7 +144,7 @@ The `tar.gz` tarball that `pip` retrieves is a source distribution, or `sdist`, 
 
 A **source distribution** contains source code. That includes not only Python code but also the source code of any extension modules (usually in **C** or **C++**) bundled with the package. With source distributions, extension modules are compiled on the user’s side rather than the developer’s.
 
-### Wheel
+#### Wheel
 
 [realpython.com](https://realpython.com/python-wheels/)
 
@@ -152,21 +152,21 @@ A **source distribution** contains source code. That includes not only Python co
 
 (...) Installing `chardet` downloads a `.whl` file directly from PyPI. The wheel name `chardet-3.0.4-py2.py3-none-any.whl` follows a specific naming convention that you’ll see later. What’s more important from the user’s perspective is that there’s no build stage when `pip` finds a compatible wheel on PyPI.
 
-### Wheels Make Things Go Fast
+#### Wheels Make Things Go Fast
 
 (...) Above, you saw a comparison of an installation that fetches a prebuilt wheel and one that downloads a `sdist`. Wheels make the end-to-end installation of Python packages faster for two reasons:
 
 - All else being equal, wheels are typically **smaller in size** than source distributions, meaning they can move faster across a network.
 - Installing from wheels directly avoids the intermediate step of **building** packages off of the source distribution.
 
-## Install packages
+### Install packages
 
 | command | description |
 | :---: | :---: |
 pip install -U,	--upgrade | Upgrade all specified packages to the newest available version. The handling of dependencies depends on the upgrade-strategy used. 
 pip install -q,	--quiet | Give less output. Option is additive, and can be used up to 3 times (corresponding to WARNING, ERROR, and CRITICAL logging levels).
 
-## Cache
+### Cache
 
 - [issue: cache is always disabled and cannot be enabled via pip.conf](https://github.com/pypa/pip/issues/11832)
   - **fix**: remove **ALL** `no-cache-dir = false` lines in **ALL** `pip.conf` files in the hierarchy, ie. at the global level, the user level and the site level, see [levels](https://pip.pypa.io/en/stable/topics/configuration/#configuration-files)
@@ -184,20 +184,20 @@ pip cache purge | will clear all files from pip’s wheel and HTTP caches.
 pip install --download-cache /path/to/pip/cache matplotlib | cache downloaded packages to avoid downloading them again, [stackoverflow](https://stackoverflow.com/a/10336348/12282296)
 pip install --no-cache-dir | pip’s caching behaviour is disabled by passing the `--no-cache-dir` option.
 
-## Uninstall packages
+### Uninstall packages
 
 | command | description |
 | :---: | :---: |
 pip install pip-autoremove | utility to remove a package plus unused dependencies
 pip-autoremove *package* | remove a package plus unused dependencies (install `pip install pip-autoremove` first)
 
-## pip config
+### pip config
 
 | command | description |
 | :---: | :---: |
 pip config list | show all current settings. (There are multiple config files, see [doc](https://pip.pypa.io/en/stable/topics/configuration/#configuration-files))
 
-## pip cache
+### pip cache
 
 [doc](https://pip.pypa.io/en/stable/topics/caching/)
 
@@ -206,11 +206,11 @@ pip config list | show all current settings. (There are multiple config files, s
 pip cache -h | help
 pip cache dir | show cache folder
 
-# pipx
+## pipx
 
 - `pipx` relies on `pip` (and `venv`)
 
-## pipx vs npx
+### pipx vs npx
 
 - Both can run cli tools (`npx` will search for them in `node_modules`, and if not found run in a temporary environment. `pipx` run will search in `__pypackages__` and if not found run in a temporary environment)
 - `npx` works with JavaScript and `pipx` works with Python
@@ -218,7 +218,7 @@ pip cache dir | show cache folder
 - `pipx` can also install tools globally; `npx` cannot
   - `npx` looks into the local `/node_modules` folder for the package and if it can't find it, it will download and run it **without** having that package globally installed. [source](https://blog.scottlogic.com/2018/04/05/npx-the-npm-package-runner.html)
 
-# venv (python3)
+## venv (python3)
 
 - **Warning:** Do not move or copy the `env` folder to other locations! Always re-create environments by using `python3 -m venv env` and re-installing all packages from a `requirements.txt` file. 
 
@@ -229,7 +229,7 @@ source env/bin/activate | activate the environment `env`
 deactivate | deactivate the environment that is currently activated
 rm -r env/ | delete the environment `env`
 
-# virtualenv (python2)
+## virtualenv (python2)
 
 | command | description |
 | :---: | :---: |
@@ -237,13 +237,13 @@ virtualenv -p /home/username/opt/python-2.7.15/bin/python venv | create a virtua
 
 - the rest is similar to venv
 
-# requirements.txt files
+## requirements.txt files
 
 | command | description |
 | :---: | :---: |
 `pip install -r requirements.txt` | install all packages from a `requirements.txt` file
 
-## pip freeze
+### pip freeze
 
 - `pip freeze` has some issues
   - a better tool for generating `requirements.txt`: [pip-compile](https://github.com/jazzband/pip-tools?ref=alexo.dev)
@@ -257,7 +257,7 @@ Problems:
   - `pip freeze` also includes `pkg_resources==0.0.0` in the `requirements.txt` which can cause errors, when running `pip install -r requirements.txt`
     - you can safely remove this line (see [stackoverflow](https://stackoverflow.com/questions/39577984/what-is-pkg-resources-0-0-0-in-output-of-pip-freeze-command))
 
-# pipenv
+## pipenv
 
 - **Warning**: not much development here, i.e. maybe official support ends soon? Use `poetry` instead !
 
@@ -272,16 +272,16 @@ pipenv --rm | remove the virtualenv created under /home/bra-ket/.local/share/vir
 pipenv run python blockchain.py | Spawns a command installed into the virtualenv.
 pipenv graph | shows installed dependencies
 
-# poetry
+## poetry
 
-## Install poetry
+### Install poetry
 
 | command | description |
 | :---: | :---: |
 curl -sSL https://install.python-poetry.org \| python3 - | install poetry
 pip3 install poetry==1.1.15 | install poetry
 
-## Basics
+### Basics
 
 Activate the virtual environment (like `source env/bin/activate`):
 
@@ -316,7 +316,7 @@ poetry install | reads the `pyproject.toml` file from the current project, resol
 poetry install --no-dev | like `poetry install`, but do not install the development dependencies
 poetry show | like `pip list`
 
-# conda
+## conda
 
 Vorinstallierte modules: [List](https://docs.anaconda.com/anaconda/packages/py3.8_linux-64/)
 
@@ -332,7 +332,7 @@ conda install --file requirements.txt |
 conda deactivate |
 conda remove --name myenv --all |
 
-# CLI
+## CLI
 
 `man python`:
 ```bash
@@ -349,17 +349,17 @@ conda remove --name myenv --all |
 Examples:
 - `python3 -c "print('hello')"`
 
-# Syntax
+## Syntax
 
-## relative imports
+### relative imports
 
 - if there is a `from .somemodule import somefunc` (the dot is important!) in a Python file `somepackage/somefile.py`, you have to run it via `python3 -m somepackage.somefile` or else the relative import will fail
 
-## ternary
+### ternary
 
 - ternaries **must** have an `else` statement!
 
-## Check if variable exists
+### Check if variable exists
 
 ```python
 if 'myVar' in locals():
@@ -372,65 +372,65 @@ if hasattr(obj, 'attr_name'):
   # obj.attr_name exists.
 ```
 
-# repl
+## repl
 
-## Start flags
+### Start flags
 
 | command | description |
 | :---: | :---: |
 python3 -v | zeige Details der ausgeführten Befehle (eg. automatische imports, andere getriggerte Befehle, Konstruktor calls, etc.)
 
-# package source code location
+## package source code location
 
 | command | description |
 | :---: | :---: |
 pip show torch | show the location of package "torch" (there you can find the source code of the package)
 
-# Useful Packages
+## Useful Packages
 
-## argparse
+### argparse
 
 [argparse](https://docs.python.org/3/library/argparse.html)
 - erlaubt zB mit `python prog.py 1 2 3 4 5  —sum`  einen command line Befehl selber zu definieren: 
   - The `argparse` module makes it easy to write user-friendly command-line interfaces. The program defines what arguments it requires, and `argparse` will figure out how to parse those out of `sys.argv`. The `argparse` module also automatically generates **help and usage messages** and **issues errors** when users give the program invalid arguments. 
 
-## functools
+### functools
 
-### partial()
+#### partial()
 
 `new_function = partial(some_function, *args)` 
 - [functools.partial documentation](https://docs.python.org/3/library/functools.html#functools.partial)
 - definiert eine neue Funktion `new_function`, die genau das gleiche macht wie `some_function`
   - Praktisch, um bestimmte Argumente einer Funktion festzulegen, damit sie nicht wieder eingegeben werden müssen: zB `basetwo = partial(int, base=2)` um nicht jedes mal `base=2` eingeben zu müssen um binäre Zahlen in Dezimalzahlen umzuwandeln
 
-## sys
+### sys
 
 `sys.path`
 - [doc](https://docs.python.org/3/library/sys.html#sys.path)
 - A list of strings that specifies the search path for modules. Initialized from the environment variable `PYTHONPATH`, plus an installation-dependent default.
 
-## setuptools
+### setuptools
 
-### setup.py
+#### setup.py
 
 - package name: [underscores converted to dashes](https://github.com/pypa/setuptools/issues/2522)
 
-## protobuf
+### protobuf
 
 - **WARNING**: each `protobuf` version runs only under specific Python versions, install it via `python3.Y -m pip install protobuf=X.Y.Z`
   - otherwise you will get the error: `protobuf requires Python '>=3.7' but the running Python is 3.6.4`, [stackoverflow](https://stackoverflow.com/a/75080916)
 
-# Coding Tricks
+## Coding Tricks
 
-## Python Script cannot be killed
+### Python Script cannot be killed
 
 `ps ax | grep python`, find the PID of your running script and then run `kill <PID>`
 
 or: `ps ax | grep python | cut -c1-5 | xargs kill -9`
 
-# Using C++
+## Using C++
 
-## Create Python bindings of existing C++ code
+### Create Python bindings of existing C++ code
 
 see 
 - [pybind11](https://github.com/pybind/pybind11)
