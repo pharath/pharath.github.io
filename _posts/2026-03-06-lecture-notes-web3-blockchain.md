@@ -1016,6 +1016,139 @@ Yeah, if one miner probably on every transaction...
 
 student: It's like limiting of the people that spend money on blockchain.
 
+---
+
+### ChatGPT: "what is the role of the number of bitcoin transactions per block? what changes when this number is changed?"
+
+The “number of transactions per block” in Bitcoin isn’t fixed directly—it’s a consequence of the **block size limit** (≈4 MB weight units) and the size of individual transactions. But thinking in terms of “how many transactions fit in a block” is still very useful, because it affects how the whole system behaves.
+
+---
+
+### ⛓️ Blocks and transactions (quick intuition)
+
+![Image](https://images.openai.com/static-rsc-4/4vDxnCh5cND6kd2x4lJt4esocgh_96uj3xriNTubAvhGfBaG6A3zkhGXhSiYtwlVjNBRrxXPFUExKvXsoOEO6-zcBxHKT6EUEJneL76_RzMhoDWu7D-8Ofwd7GxgAyGUZpUzBJY00AmxiVxzan8dHcw40QFP9ZlOqS-6kNYEBn7uViyGeAdznO3K4s9bfipl?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/Fr_rTcvPICcucNBjBHMP-tfDaOaOEBF6SBILS9yXZ66cbBQB062NRuBi9t3xdBiFvam65SURTt-KuPztJ6O9c2I8DT-f7Tnw1gbEIW7P-6mW1-ipYYbDq4age4vW01od_FiUleEzyT1FNkLNqgD0wjtp7Ip-V0J59nHpzT_K6vf-re17vQgvuHIVEN0redZj?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/mQnltXwHWSBoSYNhfuQuRdLvGQDATpawzducGRLtHYnkwO7A1M4i4yT-xRQRMkHij630wngkjKYSdieoBYo5Y0aDB1kFotwWSt_fFLjep6AlsBNMrTegGcduhWXc-qGsQOsRsBbrDqejjKFWo5i7gavHCo1e8-37HQFZ5lCpbg2mdwCVckgLoX7pKLkAh9mG?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/LPDmtPtm_k2H3CZ4R_bUYlBnI1oj0egGiyG72Tg6pfOe4JEom6qZbXJX2pv7PJendGI74IY86Ap6haf4P7Pxu9UvoL6UaY5Z4viY5-lBBlWkuUSauPsKA-F8vjhhlKKC73THJY__xAFdrEoXWx104Zfr_m_Qlz-clRuCraeuvVwS-QRomxrcr77MwLG-z6Iy?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/FchRk6raOdQu1tlAKkV1dwUX-BB15IEDDp8vVnWHj-Sw0UDawN7iAOiwCs9G0zGRQVVqM4WFfDQEIpPaXgEiz9jW5qRls1PX9fXlnjyPyVF0Mgi17PWqiYHDrAXxRv9hOjZVk4qwLuVmXqVT3lmmUiTYcffRetQC16b_MvPuo0CVkr6ub58o6qCp8PV3fHC6?purpose=fullsize)
+
+Every ~10 minutes, a new block is added. That block can only include a limited number of transactions.
+
+👉 So the number of transactions per block determines how many payments Bitcoin can process every 10 minutes.
+
+---
+
+### 🚦 1. Throughput (transactions per second)
+
+* **More transactions per block → higher throughput**
+* **Fewer transactions → lower throughput**
+
+Example:
+
+* Small blocks → maybe ~3–7 transactions per second
+* Larger blocks → more transactions per second
+
+👉 This directly affects scalability.
+
+---
+
+### 💸 2. Transaction fees (supply vs demand)
+
+Bitcoin has a **mempool** (a queue of pending transactions).
+
+* If blocks are small (few transactions):
+
+  * Many transactions compete for limited space
+  * Users bid higher fees → fees go up
+
+* If blocks are larger (more transactions):
+
+  * More space available
+  * Less competition → fees go down
+
+👉 Block capacity = “supply” of transaction space.
+
+---
+
+### ⏱️ 3. Confirmation time
+
+* If blocks fit **more transactions**, your transaction is more likely to get included quickly
+* If blocks are **full**, you may wait multiple blocks unless you pay higher fees
+
+👉 Bigger capacity → shorter waiting times (on average)
+
+---
+
+### 🌐 4. Decentralization vs. centralization trade-off
+
+Here’s the tricky part:
+
+* Larger blocks (more transactions):
+
+  * Require more storage, bandwidth, and processing
+  * Harder for individuals to run nodes
+  * Risk: fewer nodes → more centralization
+
+* Smaller blocks:
+
+  * Easier for anyone to run a node
+  * Stronger decentralization
+  * But limited capacity
+
+👉 This is one of Bitcoin’s core design tensions.
+
+---
+
+### 🔒 5. Network security and propagation
+
+* Bigger blocks take longer to spread across the network
+* Slower propagation can:
+
+  * Increase orphaned blocks
+  * Slightly weaken consensus efficiency
+
+👉 Smaller blocks propagate faster and keep the network tighter.
+
+---
+
+### ⚖️ What happens if you change it?
+
+#### If you increase transactions per block:
+
+* ✅ Higher throughput
+* ✅ Lower fees
+* ❌ More centralization pressure
+* ❌ Slower block propagation
+
+#### If you decrease it:
+
+* ✅ Stronger decentralization
+* ✅ Faster propagation
+* ❌ Higher fees
+* ❌ Lower throughput
+
+---
+
+### 🧠 Big picture
+
+The number of transactions per block is really about **how Bitcoin balances three things**:
+
+* Scalability (more users)
+* Decentralization (more nodes)
+* Security (robust network)
+
+You can’t maximize all three at once—changing block capacity shifts that balance.
+
+---
+
+If you want, I can connect this to the **Bitcoin block size wars** and explain why this became such a controversial topic.
+
+---
+
 prof: So, first thing is they get **transaction fees**.
 And they get a reward.
 They get a **block reward**.
