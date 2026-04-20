@@ -516,6 +516,7 @@ And that's the problem.
 So very often we have some kind of digitization processes where people need to negotiate what's actually the status of our shared process.
 Do we all have the information that are sent to 10 containers or 9 containers?
 Some kind of standardization problem in the exchange.
+
 And then there is now the big solution to that, which is in the first step, not blockchain, but the **cloud**.
 So now the cloud comes along and they say, okay, come on, give me all your data, put it into the cloud.
 And I solve all the problems with the interoperability.
@@ -592,9 +593,10 @@ And the other thing is that this can go further that we have another transaction
 which is **only received by** this node and by that node.
 
 So we have some kind of problems that we need to solve here.
+
 You have the problem.
-How do we achieve in this decentralized approach where every node is completely independent, but just exchanging information about possible transactions
-among each other, how can we actually achieve in the end a status that is shared among all the different nodes?
+How do we achieve in this **decentralized approach** where **every node is completely independent**, but just exchanging information about possible transactions
+among each other, how can we actually achieve in the end a **status that is shared** among all the different nodes?
 If everybody would just put in his database the information that they get, after five minutes, we would have already a complete **inconsistent state**.
 Here, if you ask that node what's the account of B, they would say 10 and the account of B is 20.
 And if you ask that node, they would say well B and E, they don't have any money. We haven't seen anything about it.
@@ -602,11 +604,13 @@ So we need to find a way that we find some **consensus about the transactions** 
 And that's the magic what blockchain solves, or Bitcoin and also the other blockchains actually solve.
 
 So the first thing is that we have to find **consensus** about it.
+
 And the second thing is also that we have to make sure that the **data that is being stored** here at the different nodes is **not being manipulated**.
 
 And if we go back to that slide, let's say here at this particular state, we all know that X transferred to Y 100.
 And that's something that is being stored here in these nodes in this data.
-You have to make sure that that cannot be manipulated, that any manipulation, for example, by just removing one "0" from that would be immediately detected.
+You have to make sure that that **cannot be manipulated**, that any manipulation, for example, by just removing one "0" from that **would be immediately detected**.
+
 And that is something we need to solve.
 Now, how do we do that?
 
