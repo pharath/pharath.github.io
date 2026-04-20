@@ -896,7 +896,7 @@ but internally we have two computers,
 and you start at one, and you start at one million to find it.
 Which means that you now have two computers trying to find the nonce.
 Obviously, you use not the nonces that start at one, because that would not make sense,
-but you start at different nonces, and then you use that.
+but you **start at different nonces**, and then you use that.
 And then you two have almost the double power than all the others,
 which means that you will then be almost the first node.
 And that's then a mining pool.
@@ -908,8 +908,8 @@ So like, we have two computers,
 but doesn't it just mean that they're looking at the same time
 in different spaces to find a solution?
 But not necessarily they're going to find first,
-but they can, because it's probability is a bit higher,
-but they have two slow computers, one very fast computer can beat them.
+but they can, because its probability is a bit higher,
+but **if they have two slow computers, one very fast computer can beat them**.
 
 prof: Definitely, yeah, that's the case.
 So if they have two slow laptops, and you have a very fast one,
@@ -932,16 +932,13 @@ So it's really the point why.
 The point actually now is... This is the **mining process**.
 That's the whole mining process.
 It's so easy.
-It's just a loop that we do, we hash the block header plus the nonce,
-and then we hash it again, and then we see, is this below the difficulty,
-so 4070 was what we discussed here.
-If no, add one to the nonce, and if yes, send the block to all neighbors
-that you have available, and this is what's happening now,
-that you send all the blocks to your neighbors with the solution of the crypto puzzle,
-and then what they do is they just check it, and that's easy.
-They just need to check is this hash of the content plus the nonce in total
-has the certain amount of zeroes.
-Fine, then that is being accepted.
+It's **just a loop** that we do, we
+
+- **hash the block header plus the nonce**,
+- and then we **hash it again**,
+- and then we see, **is this below the difficulty (ie. number of zeros in front)?**, so 4070 was what we discussed here.
+  - **If no (ie. not enough zeros in front)**, add one to the nonce, and
+  - **if yes (ie. enough zeros in front)**, send the block to all neighbors that you have available, and this is what's happening now, that you send all the blocks to your neighbors with the solution of the crypto puzzle, and then what they do is they just check it, and that's easy. They just need to check is this hash of the content plus the nonce in total has the certain amount of zeros. Fine, then that is being accepted.
 
 ## Bitcoin: Block Reward, Transaction Fees
 
