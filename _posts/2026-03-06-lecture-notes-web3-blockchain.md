@@ -1403,9 +1403,7 @@ Bitcoin asks:
 
 ##### 🎯 Step 3: Adjust difficulty proportionally
 
-The new difficulty is scaled based on:
-
-$$\begin{equation*} \text{new difficulty} \propto \frac{\text{expected time}}{\text{actual time}} \end{equation*}$$
+The new difficulty is scaled based on: $$\text{new difficulty} \propto \frac{\text{expected time}}{\text{actual time}}$$
 
 So:
 
