@@ -1370,8 +1370,6 @@ This exchange is about how **Bitcoin automatically keeps block production close 
 
 ![Image](https://images.openai.com/static-rsc-4/6Ysy3kfMNgJ0sFbiPpYK3srYHBRJTtrRacS2BDv9GxrYErrM7pggoQLqgy98bb_45rEpfUl9M5appRY_gvVDQBQPR_v-OITgiNNxS_vVsiALdHJFF8nYVmAOWXHlHVaCqTlKeRA8E4FGUon6h7H-dR8TFpMjwFhnrLdshzQhFpCuArvGFdIQ_r3RtowP0Pe6?purpose=fullsize)
 
-![Image](https://images.openai.com/static-rsc-4/jGoIIognQQ9dYokLa42RxXtLx5FtrvtkxYS9UsBXB8AT17JOaCzYqD_J_XhX6-0UocKFnW4JkafJ34-rKiGQWMuQM7bo0xD6vpfNVhzgD-DMR2BQtsETm6cAAwf-UK-CVm2XqMADmnJQ22BviSitFptQs9kMorQBzdB160KOwdHw20KW05hlrh1G_vJXPzLU?purpose=fullsize)
-
 ##### 🧠 Core idea
 
 Bitcoin doesn’t fix how *hard* mining is forever.
