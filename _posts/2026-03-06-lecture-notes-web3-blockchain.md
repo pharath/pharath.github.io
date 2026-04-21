@@ -785,9 +785,9 @@ and then by connections, then yes, you'll get the whole thing?
 prof: So let's hold this on, we discuss that.
 Yeah, good thing.
 
-But we actually do it now with **Hashcash**, what we say is, okay, now we need to find a nonce,
-a number only used once, that was the number we were computing with Hashcash,
-we need to find the number only used once, that depends on the content of the block.
+But we actually do it now with **Hashcash**, what we say is, okay, now we need to find a **nonce**,
+a **number only used once**, that was the number we were computing with Hashcash,
+we need to find the number only used once, that **depends on the content of the block**.
 So we take our transaction, we take the time, we take the hash of the previous one
 and adding all that, so we have the hash of the content plus nonce
 and if we hash that
@@ -795,9 +795,8 @@ this must be below a certain number, which means it **must have at the beginning
 That's how we interpret below.
 And that's our requirement.
 And the miner, the node or the miner, they're often called **miners** because you see later on why they're also called miners,
-the **node who is doing that first** is the one who is sending this information that we found in the new block
-to the network and then the network checks it.
-So actually he's putting a **stamp** on that, like Hashcash,
+the **node who is doing that first** is the one who is **sending this information that we found in the new block to the network** and then the **network checks it**.
+So actually he's putting a **stamp** on that, **like Hashcash**,
 and he's putting a stamp that he found a solution to the puzzle and he's sending that to all the blocks.
 
 And let's see, this is how it looks like, also here.
@@ -850,9 +849,9 @@ However, you probably would say, I **start with 10,000**.
 Because if all the other stupid guys start with one,
 I start with 10,000 and then they probably become different to all the rest.
 
-student: I mean, every miner has a different (Coinbase) transaction to their own address,
+student: I mean, **every miner has a different (Coinbase) transaction to their own address**,
 which would change the hash and then change all the...,
-so they would all be searching different hash spaces.
+so **they would all be searching different hash spaces**.
 
 prof: Different hash spaces.
 That's something you're right.
@@ -862,11 +861,124 @@ Because you may have received other transactions than you.
 You have received these three transactions,
 but you may have received these three transactions is something else.
 And again, you have your own address, which is also being involved here.
-So it's your own address that is in here.
-So it's an address that you also add.
+So it's **your own address that is in here**.
+So **it's an address that you also add**.
 And there will also be a very special transaction that also makes it different.
 So **everybody has actually another content hash for which he needs to find the nonce**.
-So you could say, well, I'm not starting at one,
+
+---
+
+### ChatGPT: "meaning"
+
+What that passage is getting at is a subtle but very important point about how mining works in Bitcoin:
+
+---
+
+#### 🧩 Why miners don’t all hash the same thing
+
+![Image](https://images.openai.com/static-rsc-4/2GIbzgu19u7ywJrkEbPBg4KfKh1p_yEagxh6Rjpu72qhsJzcohKQNvlf76iXpiojIu4QWrNkAI_aS4xY7DKTnEDnUsXF387xP6A9WIKAAXXO1tROl6p8wHyfSxQuBAMXLeD5ZDAUJJcq2vJY7Ar1r6udGOi7BNnGYhN9bh1xPqwyuZ01rZjyd_cqm4SFcx4l?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/ZP1EgErovTeIfguIBulcjayqRUR03UTtCiMo2pQ04nBEj37ag6MokgLFYWl0JP9BwSvRoayXTfIOw88NVtwi4yEr45niOxJhPRBHw9HAQMpnWkbiqAQSkVf0G62v6NUkrFM_hcgBnNQ3xwRjW-TFDUZOi-UzN3I_zK4B4mED-gTtxHx8ytzT-h3jBOgHHyDn?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/Lm2bVPORZThT23F89cGmlbI2_55AuAxIv6IYfGszaRJd6nTOPqqhLo1Q8Mr29jVqMOsF1LyUKwbPvhbtTwgGJmrJr013L6HbfMWXue1mgsoLVexWJFBdWUUpDJ4XmYVyGr2vhY0ZLhdJvEaQLcu_NLvfYhttECN4tKTeOdjqaI7blaBPeBmP7TNPJp3leS1y?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/aWYo_HB8DX_0NA4hqja79WfVsQEvqyhbhY1DpHM_gCcmMcVeF6tfSdW8tGqqrrZAhWcxbA-PKJ_xTo-kPh-RhjyRZsRM-0Y2xOLen9oQ9Xl6p1QDYriqBWK_xVyC9itlifLCGEULxkPdKoUTYpO-0quPRENeCGIVyjOqMNShnl8zoCD_ZegAcZTp-TvTJAos?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/mQnltXwHWSBoSYNhfuQuRdLvGQDATpawzducGRLtHYnkwO7A1M4i4yT-xRQRMkHij630wngkjKYSdieoBYo5Y0aDB1kFotwWSt_fFLjep6AlsBNMrTegGcduhWXc-qGsQOsRsBbrDqejjKFWo5i7gavHCo1e8-37HQFZ5lCpbg2mdwCVckgLoX7pKLkAh9mG?purpose=fullsize)
+
+Even though everyone is working on “the next block,” **they are not hashing identical data**.
+
+##### 1. 🧾 Different transaction sets (mempool differences)
+
+Each miner has their own view of pending transactions:
+
+* You might have seen transactions A, B, C
+* Another miner might have A, D, E
+
+👉 So the **block contents differ**, which already changes the hash.
+
+---
+
+##### 2. 💰 The coinbase transaction (miner’s reward)
+
+Every block includes a special first transaction called the **coinbase transaction**:
+
+* It creates new bitcoin (block reward + fees)
+* It sends that reward to the miner’s own address
+
+👉 Since each miner uses **their own address**, this transaction is different for everyone.
+
+---
+
+##### 3. 🔗 Result: different block headers
+
+Because of:
+
+* Different transactions
+* Different coinbase transaction
+
+→ the **Merkle root** changes
+→ the **block header changes**
+→ the **hash target puzzle is different**
+
+---
+
+#### 🎯 So what does the statement mean?
+
+> “Everybody has actually another content hash for which he needs to find the nonce.”
+
+It means:
+
+👉 Each miner is solving **their own version of the puzzle**, not a shared identical one.
+
+* The *difficulty target* is the same for everyone
+* But the *input (block data)* is different
+
+So:
+
+* Miner A searches for a nonce for *their* block
+* Miner B searches for a nonce for *their* block
+
+---
+
+#### ⚡ Why this is important
+
+##### ✔️ No duplicated work (mostly)
+
+Miners aren’t all hashing the exact same block → less direct overlap
+
+##### ✔️ Competition still works
+
+Even though inputs differ:
+
+* Whoever finds a valid hash first wins
+* Their block gets accepted by the network
+
+##### ✔️ Flexibility
+
+Miners can:
+
+* Choose which transactions to include
+* Prioritize high-fee transactions
+
+---
+
+#### 🧠 Simple analogy
+
+Think of it like a lottery where:
+
+* Everyone must find a number that makes their ticket valid
+* But **each person has a slightly different ticket**
+
+👉 Same rules, different inputs, same race.
+
+---
+
+If you want, I can go one level deeper and explain **how miners still end up converging on one chain despite working on different block versions**—that’s where consensus really kicks in.
+
+---
+
+prof: So you could say, well, I'm not starting at one,
 because I think starting at one million is probably better,
 because then the other hash can be found easier.
 I have no idea.
@@ -929,6 +1041,8 @@ so every data will land on the blockchain.
 prof: Yeah, and this question is something that we discuss now.
 So it's really the point why.
 
+## slide: "Mining Process"
+
 The point actually now is... This is the **mining process**.
 That's the whole mining process.
 It's so easy.
@@ -982,12 +1096,12 @@ You all know that when you want to go on a Saturday evening out of Aachen, back 
 Uber is expensive and on a Monday morning it is cheap.
 So the **mining fees** really depend on the traffic in the network.
 And what these people do here is that when they get all the transactions,
-they select those transactions with the highest fees,
+**they select those transactions with the highest fees**,
 which means that when you submit a transaction into this network and you don't provide any fees,
 you could do that.
 You could say, please, I would like to send you one Bitcoin, but **I don't provide any mining fees**.
 **What happens?**
-This will not be included.
+This **will not be included**.
 All the miners, they want to have transactions with high fees.
 So they probably just put it aside.
 And only if there probably is no traffic at all,
@@ -995,11 +1109,13 @@ they probably put it into their list of transactions.
 But maybe never.
 But it could be taken a day or a week after the transaction.
 
+## Bitcoin: Number of Transactions per Block
+
 student: But is there **for every block just one transaction?**
 
 prof: No, every block has...
 
-student: ~3,000 transactions. (Gemini: As of March 2026, the average number of Bitcoin transactions per block is approximately 3,300 to 3,400.)
+student: ~3,000 transactions. (Gemini: As of March 2026, the **average number of Bitcoin transactions per block** is approximately 3,300 to 3,400.)
 
 student: Okay, but it's a fixed amount.
 
@@ -1024,7 +1140,7 @@ The “number of transactions per block” in Bitcoin isn’t fixed directly—i
 
 ---
 
-### ⛓️ Blocks and transactions (quick intuition)
+#### ⛓️ Blocks and transactions (quick intuition)
 
 ![Image](https://images.openai.com/static-rsc-4/4vDxnCh5cND6kd2x4lJt4esocgh_96uj3xriNTubAvhGfBaG6A3zkhGXhSiYtwlVjNBRrxXPFUExKvXsoOEO6-zcBxHKT6EUEJneL76_RzMhoDWu7D-8Ofwd7GxgAyGUZpUzBJY00AmxiVxzan8dHcw40QFP9ZlOqS-6kNYEBn7uViyGeAdznO3K4s9bfipl?purpose=fullsize)
 
@@ -1042,7 +1158,7 @@ Every ~10 minutes, a new block is added. That block can only include a limited n
 
 ---
 
-### 🚦 1. Throughput (transactions per second)
+#### 🚦 1. Throughput (transactions per second)
 
 * **More transactions per block → higher throughput**
 * **Fewer transactions → lower throughput**
@@ -1056,7 +1172,7 @@ Example:
 
 ---
 
-### 💸 2. Transaction fees (supply vs demand)
+#### 💸 2. Transaction fees (supply vs demand)
 
 Bitcoin has a **mempool** (a queue of pending transactions).
 
@@ -1074,7 +1190,7 @@ Bitcoin has a **mempool** (a queue of pending transactions).
 
 ---
 
-### ⏱️ 3. Confirmation time
+#### ⏱️ 3. Confirmation time
 
 * If blocks fit **more transactions**, your transaction is more likely to get included quickly
 * If blocks are **full**, you may wait multiple blocks unless you pay higher fees
@@ -1083,7 +1199,7 @@ Bitcoin has a **mempool** (a queue of pending transactions).
 
 ---
 
-### 🌐 4. Decentralization vs. centralization trade-off
+#### 🌐 4. Decentralization vs. centralization trade-off
 
 Here’s the tricky part:
 
@@ -1103,7 +1219,7 @@ Here’s the tricky part:
 
 ---
 
-### 🔒 5. Network security and propagation
+#### 🔒 5. Network security and propagation
 
 * Bigger blocks take longer to spread across the network
 * Slower propagation can:
@@ -1115,16 +1231,16 @@ Here’s the tricky part:
 
 ---
 
-### ⚖️ What happens if you change it?
+#### ⚖️ What happens if you change it?
 
-#### If you increase transactions per block:
+##### If you increase transactions per block:
 
 * ✅ Higher throughput
 * ✅ Lower fees
 * ❌ More centralization pressure
 * ❌ Slower block propagation
 
-#### If you decrease it:
+##### If you decrease it:
 
 * ✅ Stronger decentralization
 * ✅ Faster propagation
@@ -1133,7 +1249,7 @@ Here’s the tricky part:
 
 ---
 
-### 🧠 Big picture
+#### 🧠 Big picture
 
 The number of transactions per block is really about **how Bitcoin balances three things**:
 
@@ -1156,8 +1272,8 @@ So what they do is...
 And that also makes **every content different**.
 Even if you all get the same 3 transactions here,
 you all have your own ID, which is being stored in the block header.
-And there is one particular transaction where you say,
-just one, let's say one Bitcoin, BTC, to me.
+And there is **one particular (coinbase) transaction** where you say,
+just one, let's say one Bitcoin, BTC, **to me**.
 So you just include one transaction.
 Then you put one Bitcoin to your own wallet.
 So you just create this kind of Bitcoin out of nothing.
@@ -1195,13 +1311,15 @@ But I think the current difficulty is about 14, or 15.
 You see how dramatically it increased really to find this nonce.
 
 So what we want to have is a block every 10 minutes.
-And with this particular block, we create new tokens, we create new Bitcoins out of nothing.
-So we increase the number of Bitcoins that are available.
+And with this particular block, we create new tokens, **we create new Bitcoins out of nothing**.
+So **we increase the number of Bitcoins that are available**.
 And this should be done almost every 10 minutes.
+
+## Bitcoin: Mining Difficulty Adjustment
 
 And if you all now invest in computing power, and suddenly you find the block every 5 minutes,
 what do we do?
-We increase the difficulty.
+We **increase the difficulty**.
 And by that, we bring it back to 10 minutes.
 I think this is extremely elegant.
 You just increase the difficulty, you come back to 10 minutes.
@@ -1211,8 +1329,9 @@ So I hate all this Bitcoin stuff.
 I put my computer now on fine-tuning and large language models.
 So suddenly, we find blocks only every 20 minutes.
 We **reduce the difficulty**.
-So we just adopt our difficulty to the current power that is available,
-the current computing power that is available in the network.
+
+So **we just adopt our difficulty to the current computing power that is available**,
+the current computing power that is available **in the network**.
 
 student: There is certain harm in it.
 So not really like miner points and stuff, but like the step of 67 was of time factor, I think, 70.
@@ -1226,10 +1345,274 @@ Could be, could be that this happens,
 but then they probably use some other kind of difficulty measure.
 So something they have created.
 
-student: It's an average over the last 2016 blocks,
-and it can only be adjusted up by 4 and down by a factor of 4.
+student: It's **an average over the last 2016 blocks**,
+and it **can only be adjusted up by 4 and down by a factor of 4**.
 But depending on the average, it can go up also a very, very small amount,
 or down a very small amount.
+
+---
+
+### ChatGPT: "meaning"
+
+This exchange is about how **Bitcoin automatically keeps block production close to ~10 minutes**, even when total mining power changes.
+
+---
+
+#### ⚙️ Difficulty adjustment in Bitcoin
+
+![Image](https://images.openai.com/static-rsc-4/lEmkGfsW4hnpErJ02-_H43-F5nRhmUFqH75cqZ6D6l6MaFdt4DZdBIBIjxbag_vpr8C9Aak8UFJSo8cUh6Kzn6LUDkfUSiI471HcZXsHSp3mt6g7qpg24qhNq2sweZbJwUZhkdpSuXoAeDENZ7Cis2JR_DCvmdUgmYnG2-WJOl1JKudnjN4DQIVPrGFEGA07?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/wsyN1xf1jGFu5IBISnGnIfAgyoI9uGRWg10vmYnddKNckwe3LU7g8wwdJZV-s71D11Ju2ntqiAsLEcGZmPix42r-y8A6oLDgqm5HudgVfIIsP6GfaQTsd519FUm6snAbMfbogDBEPhgG6qoqHIb89EnEQkXZfRGEF-t0Unt9nZ0dJFbpT1go4mNwtWXhjhFP?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/oDU9lxdcxAOrdZWYUl61l9gI5fzAHoGKDv21RPCR0FrDnSCIJ_QSC4-k4SA6_wXSFxbGQAWxY2ctxsIaOjnedv9GdEMiPYSi7L5ePg-6VmmlL-HqxAPXHe9AR3O5pDlHpWiTB2vkoZJCbPzd2DxWSsI2PaOfgskZDPrtFw1rGsIfpMLnvLFk-RdNj8-6BbYs?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/72422FaWOhetiCAn_wkXQ04tNb0IQWjAal7cT4zBfAOigKtNMqzLu5QUA_qltH_TjOWSLeANRX_jAcEgYYxuR_TloBf8E6HniVIskGGorH12ZzvhCH-6NEoKJ2K1yLV6orKUZTH9e9fBomoZK3GQMlE09G51GDeXxichW6YKS0NPBgoGFK2QlRGbUT9tloco?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/6Ysy3kfMNgJ0sFbiPpYK3srYHBRJTtrRacS2BDv9GxrYErrM7pggoQLqgy98bb_45rEpfUl9M5appRY_gvVDQBQPR_v-OITgiNNxS_vVsiALdHJFF8nYVmAOWXHlHVaCqTlKeRA8E4FGUon6h7H-dR8TFpMjwFhnrLdshzQhFpCuArvGFdIQ_r3RtowP0Pe6?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/jGoIIognQQ9dYokLa42RxXtLx5FtrvtkxYS9UsBXB8AT17JOaCzYqD_J_XhX6-0UocKFnW4JkafJ34-rKiGQWMuQM7bo0xD6vpfNVhzgD-DMR2BQtsETm6cAAwf-UK-CVm2XqMADmnJQ22BviSitFptQs9kMorQBzdB160KOwdHw20KW05hlrh1G_vJXPzLU?purpose=fullsize)
+
+##### 🧠 Core idea
+
+Bitcoin doesn’t fix how *hard* mining is forever.
+Instead, it **continuously adapts the difficulty** so that:
+
+👉 One block is found roughly every **10 minutes**, no matter how much computing power is in the network.
+
+---
+
+#### 🔄 How the adjustment actually works
+
+##### ⏱️ Step 1: Look at the last 2016 blocks
+
+* 2016 blocks ≈ 2 weeks (because 2016 × 10 minutes ≈ 14 days)
+
+Bitcoin asks:
+
+> “How long did it *actually* take to mine these 2016 blocks?”
+
+---
+
+##### ⚖️ Step 2: Compare with the target
+
+* Expected time: **2 weeks**
+* If it took:
+
+  * **1 week** → blocks were too fast → increase difficulty
+  * **3 weeks** → blocks were too slow → decrease difficulty
+
+---
+
+##### 🎯 Step 3: Adjust difficulty proportionally
+
+The new difficulty is scaled based on:
+
+[
+\text{new difficulty} \propto \frac{\text{expected time}}{\text{actual time}}
+]
+
+So:
+
+* Faster mining → harder puzzle
+* Slower mining → easier puzzle
+
+---
+
+#### 🚧 Important constraint (student’s point)
+
+The student is correct:
+
+👉 The adjustment is **bounded**:
+
+* Can increase at most **×4**
+* Can decrease at most **÷4**
+
+This prevents extreme swings that could destabilize the network.
+
+---
+
+#### 🤔 About the professor’s question
+
+> “If you increase difficulty slightly, could it suddenly become impossible?”
+
+This reveals a misunderstanding.
+
+##### ✔️ Reality:
+
+Difficulty is **not a small discrete step like 100 → 101**
+
+Instead:
+
+* It adjusts a **target threshold for hashes**
+* The hash space is astronomically large (2²⁵⁶ possibilities)
+
+👉 So:
+
+* There are always *many* valid solutions
+* Increasing difficulty just makes them **rarer**, not nonexistent
+
+---
+
+#### 🎲 Intuition: searching in a huge space
+
+Mining = trying random hashes until one is below a target.
+
+* Easier difficulty → large target → many valid hashes
+* Harder difficulty → small target → fewer valid hashes
+
+But:
+👉 The space is so huge that you never “run out” of solutions.
+
+---
+
+#### 🔁 Putting the lecture together
+
+The lecturer’s point:
+
+* If more computing power joins → blocks come too fast → difficulty increases
+* If miners leave → blocks slow down → difficulty decreases
+
+The student adds:
+
+* This adjustment happens every 2016 blocks
+* And it’s smoothed + bounded to avoid instability
+
+---
+
+#### 🧠 Why this is “elegant”
+
+It’s a **self-regulating system**:
+
+* No central authority
+* No manual tuning
+* Automatically tracks global computing power
+
+👉 Bitcoin behaves like a thermostat:
+
+* Too fast → cool down (increase difficulty)
+* Too slow → heat up (decrease difficulty)
+
+---
+
+If you want, I can show you **the exact formula Bitcoin uses (with the target and bits field)**—that’s where it gets a bit more technical but very insightful.
+
+---
+
+### ChatGPT: "what is 'target'"
+
+Great question—**“target” is the key piece that makes Bitcoin mining work.**
+
+---
+
+#### 🎯 What is the “target” in Bitcoin?
+
+The **target** is simply a **number** that sets how hard mining is.
+
+A block is valid only if:
+
+👉 So the target is a **threshold**:
+
+* If your hash is **below it → success**
+* If not → try again with a different nonce
+
+---
+
+#### 🔢 What kind of number are we talking about?
+
+* Hashes in Bitcoin are **256-bit numbers** (from SHA-256)
+* That means values between:
+
+  * 0 and ~2²⁵⁶
+
+👉 The target is also a number in this same range.
+
+---
+
+#### 🎲 Why the target controls difficulty
+
+##### Big target (easy)
+
+* Example:
+  “Any hash starting with `0000...` is fine”
+* Many hashes satisfy the condition
+* Blocks are found quickly
+
+##### Small target (hard)
+
+* Example:
+  “Hash must start with `000000000000...`”
+* Very few hashes qualify
+* Takes much longer
+
+👉 So:
+
+* **Smaller target = higher difficulty**
+* **Larger target = lower difficulty**
+
+---
+
+#### 🧠 Intuition: lottery analogy
+
+Think of:
+
+* Each hash = a lottery ticket
+
+* Target = winning cutoff
+
+* High target → many winning tickets
+
+* Low target → very rare winners
+
+---
+
+#### ⚙️ Where does the target come from?
+
+The Bitcoin protocol:
+
+* Recalculates it every **2016 blocks**
+* Based on how fast blocks were found
+
+If mining was:
+
+* Too fast → **target is lowered** (harder)
+* Too slow → **target is raised** (easier)
+
+---
+
+#### 🔐 How it looks in practice
+
+In real Bitcoin blocks:
+
+* The target is stored in a compact format called **“bits”**
+* Nodes expand it into the full 256-bit number
+
+And hashes look like:
+
+```
+0000000000000000000a3f... (very small number)
+```
+
+👉 The many leading zeros are just a visual clue that:
+
+* The number is **very small**
+* → below the target
+
+---
+
+#### 🧩 Big picture
+
+* **Target** = the actual rule
+* **Difficulty** = a derived measure humans use
+
+👉 Mining is just:
+
+> “Keep hashing until your number is small enough.”
+
+---
+
+If you want, I can walk you through a **real Bitcoin block example** and show exactly how its hash compares to the target—that makes this concept click instantly.
+
+---
 
 prof: And you see here, I'm using now seven bytes.
 If you do it in bits, then it becomes much higher, right?
