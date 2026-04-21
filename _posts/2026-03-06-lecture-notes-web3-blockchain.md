@@ -1407,9 +1407,9 @@ Bitcoin asks:
 
 The new difficulty is scaled based on:
 
-[
+$$
 \text{new difficulty} \propto \frac{\text{expected time}}{\text{actual time}}
-]
+$$
 
 So:
 
