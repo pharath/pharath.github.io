@@ -1624,80 +1624,81 @@ It takes some time to provide the right answer.
 Okay, so we now, we learned, we do it because we get money.
 We get bitcoins as a miner every time.
 We increase the amount of bitcoins that are in the market.
-We have some kind of inflation,
+We have some kind of **inflation**,
 and if you already have too fast with the computers,
 we just increase the difficulty.
 Nevertheless, it means every 10 minutes, 50 bitcoins.
 That's too much.
+
 At the beginning, we wanted to have a lot of coins immediately in the market.
 And we really wanted to flood the market with bitcoins so that we get some kind of, just a big market.
 After some time, this becomes problematic.
 You need to reduce it.
-What we do is, we just **halve the amount of bitcoins that you get** for the mining,
+What we do is, we just **halve the amount of bitcoins that you get for the mining**,
 from 50 to 25, from 25 to 12.5, from 12.5 to 6.75,
 and from there to 3. something which is the current amount that you get.
 
 And you sometimes get these kind of spam emails,
 Bitcoin halving, buy Bitcoin, Bitcoin becomes more valuable.
 That's the Bitcoin halving.
-They don't halve bitcoins.
-They just halve the amount that the miners get,
+**They don't halve bitcoins. They just halve the amount that the miners get**,
 which means that actually, at the moment, it's 3.75,
 and then after a certain, I think, yeah,
 
 student: 3.125.
 
-prof: 3.125, ETC with everyone.
+prof: 3.125, BTC with everyone.
 And next time, when we do the halving, that is 1.6 something.
-And we do it every 210,000 blocks, as I showed you.
+And **we do it every 210,000 blocks**, as I showed you.
 So we do it every 210,000 blocks,
 which means that if you divide it by 10 minutes,
 it's every two years or so.
 
-student: Every four years.
+student: **Every four years.**
 
 prof: So every four years, you do the halving.
-And the last one was what, one and a half or two years ago.
+And the **last one was** what, one and a half or two years ago.
 
-student: April 2024.
+student: **April 2024**.
 
 prof: Yeah, I agree.
 You see, I'm not dealing with this event so much.
 So that's something that will happen in the next time.
-So the next one will be in...
+So the **next one will be in**...
 
-student: 2028.
+student: **2028**.
 
 prof: 2028, yeah, so 2028, still great.
 So in two years, almost.
 And then...
 
 So, but if we halve and halve and halve and halve,
-after some time, there will be no incentive,
-there will be no block reward.
+**after some time**, there will be no incentive,
+there will be **no block reward**.
 How will the system then still be running?
 Why should people...
 
-student:  transaction please.
+student: ... transaction fees.
 
 prof: That's the idea.
 The idea is that then, and this will take place in year 2000...
 
-student: 2140.
+student: **2140**.
 
 prof: Yeah.
 2140.
-That's the year when there will be no more block rewards.
+That's **the year when there will be no more block rewards**.
 So still more than a hundred years away.
 And until then, they just speculate,
-or the inventors speculated back then that this will just be based on transaction fees.
+or the inventors speculated back then that **this will just be based on transaction fees**.
+
 I don't know, I just wanted to look this up.
 Could be a nice task for you to look this up.
-What is the current ratio between block reward and mining fees?
+What is the current **ratio between block reward and mining fees**?
 It could already be that we soon reach that miners get more transaction fees than block reward.
-Because there are almost 10,000 transactions in there.
+Because there are almost 10,000 transactions in there (March 2026: about 3,300 to 3,400 transactions per block, see above).
 And imagine that there is someone sending five bitcoins and if you get them, one or two percent as a transaction fee,
-you would get already quite fast...
+you would get already quite a lot...
 This is why people do that.
 Actually.
 That is why you can still start mining.
@@ -1718,11 +1719,145 @@ You have to find a new IP number then.
 Because they blacklist you.
 So that's something that wouldn't work.
 
+---
+
+### ChatGPT: "meaning"
+
+The exchange is getting at **why miners can’t just “pay themselves extra bitcoin”** when creating a block in Bitcoin.
+
+---
+
+#### ⛏️ The temptation: “why not give myself more?”
+
+![Image](https://images.openai.com/static-rsc-4/_lhq0SVYjG--M9IlkeELEzJV5QpncryLdViivYS897GkxLorXXgvJwnK0cUMYa5QbnY87MBErJ1o6tE8SOGCUsMWcFFQMZ9VIkVHQxqyhVnIqfIuCcz5OTgBL4JIvPjUcKb-CVxNeaNsLmrlCai10S6lUiTdJTSeqwfk_-gWrzWCpFCLD35m7EbFeVs560Qk?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/wwC6qV_KBy8X7TqM7k3R3otCI3SSMU6yadN0BMj9w8n1USK6TI1nsf6xSNuTtn0l28v-_Xy1aW7UcdedrUQSnHDUG4rx7y4AkeGb4CccSgI4In74CzLx4-9G0jRRYS7CXlGqugX6cySYAWg80hJi5nqxAxwtwgrdKKXlK7XPWcBfx646gk0ZOKZWIUkibUor?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/HMfx2BKN9nFHtmEGLZhLVyfe4-eYfDkLxptkcoVeyTHaGxflyWl2Ssk0lwgLejYH_HHVQplN7uyHRxgfVEchkVI9KhL2FKyJF9GL1sHo9PtvC3LYatD1_wXx3HHBgpEo_cBp4eCh1mnYdwvXdFObVH9lzfM7JSq_1sIDN0UkOpEl7vbnN6MJI8Fqrif6n4-P?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/MjrPKyL_YPVNO-aMvON-1IlnnEvnXIWFvso7MBbAxQsrXQPBd3C4lKJoHzEDUZpqFrO6FQK8kiaSDNU2_fFvakkT2HniYX0a5azzqN897wEMwp-EWIbLghce0-TtYOhAMZOggCrf53bvHhwPUltnjsxvErjDLvwyRMx8AxNTFDeirXzgK1r-Nn2Jw6eqChiX?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/0kqYnQ-u-9SyVyKFMKyX_9TvUBo2NKviGzr-oTUAQGYUVy3ITFdEVSTk2D177RXiX-ereIYkjqBgkJefbvLt0Ar8Io0RZhGgmv3Kn1Yaqp6uMWRR9iQa6Z5dLflH-y1deYPQ0568yJaB-s9yNlF_1y2BppY8Coq4Utb1ai9PaKbH8sizq8UraGNHKszGwTQj?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/K2MAAqxgC-i7962MU6Kyxkf9A38mJ_a_NE_IIrVdGiuNLPFnoSZYU8Dy1N5e-I2aXtTlJIXb-PIYe-LWpjGefBILCVR8r_wnTheQptgrFy1uoIfFC9JFhNzacuUbC0M3l3foY3VySm3UERaVAN1yswSNG0N-otiFLy9syI12a0uxGccvRgXunFOdVDx6_EMK?purpose=fullsize)
+
+When a miner creates a block, they include a special transaction:
+
+* the **coinbase transaction** (their reward)
+
+So the student is asking:
+
+> What stops a miner from just increasing that reward arbitrarily?
+
+---
+
+#### ✅ The real answer (core idea)
+
+👉 **All other nodes independently verify the block.**
+
+If a miner cheats:
+
+* The block violates the protocol rules
+* Other nodes detect it instantly
+* The block is **rejected**
+
+---
+
+#### 🔒 What exactly is checked?
+
+Every full node checks things like:
+
+* Is the block reward correct?
+
+  * (fixed subsidy + transaction fees)
+* Are all transactions valid?
+* No coins are created out of thin air?
+
+👉 If the miner gives themselves even 1 extra bitcoin:
+
+* The block is **invalid**
+
+---
+
+#### 🚫 What happens to a cheating miner?
+
+* Their block is **ignored** (not added to the blockchain)
+* They **waste all their computational work**
+* They get **zero reward**
+
+👉 That’s the real punishment—not “being blacklisted.”
+
+---
+
+#### ⚠️ About the professor’s “blacklist” comment
+
+That part is a bit misleading or simplified.
+
+##### In reality:
+
+* Bitcoin has **no global blacklist mechanism**
+* Nodes don’t permanently ban miners for one bad block
+* There’s no identity system like “this miner is banned forever”
+
+What *can* happen:
+
+* A node may temporarily disconnect misbehaving peers
+* But the main consequence is economic: **you lose money**
+
+---
+
+#### 🧠 Why the system is secure
+
+This works because of **incentives + verification**:
+
+##### ✔️ Verification
+
+Every node enforces the same rules independently
+→ no trust in miners required
+
+##### ✔️ Incentives
+
+* Honest mining → reward
+* Cheating → guaranteed loss
+
+---
+
+#### 🎲 Simple analogy
+
+Imagine submitting a winning lottery ticket:
+
+* If you try to **forge the numbers**,
+* The lottery system checks and says: ❌ invalid
+
+👉 You don’t get paid—you just wasted your effort.
+
+---
+
+#### 🧩 Bottom line
+
+The key idea behind the dialogue is:
+
+> Miners can propose blocks,
+> but the network decides if they are valid.
+
+So:
+
+* You *can* try to cheat
+* But the system makes cheating **pointless and costly**
+
+---
+
+If you want, I can break down **exactly how the block reward is calculated (including halving and fees)**—that’s the precise rule miners must follow.
+
+---
+
+## Summary
+
 So I think what we learned now is how this is all being organized.
 So we have these kind of blocks.
 We learned why we do that.
 The incentive for doing that, to invest money and computing power into that:
-because you get a block rewards - beyond probably just the idea of I would like to be part of the community because I believe in Bitcoin and cryptocurrencies also.
+because you get a block reward - beyond probably just the idea of I would like to be part of the community because I believe in Bitcoin and cryptocurrencies also.
 
 ## org
 
