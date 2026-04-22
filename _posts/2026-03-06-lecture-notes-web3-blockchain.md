@@ -1904,6 +1904,8 @@ They just contain that.
 
 **🪶 Light node (SPV)**
 
+SPV node = Simplified Payment Verification node
+
 * Runs on phones or lightweight apps
 * Doesn’t store full data
 * Asks "full nodes" for information
