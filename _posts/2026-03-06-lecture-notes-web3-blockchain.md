@@ -1866,21 +1866,24 @@ But this would open up now too much.
 
 ## slide: "Hash-Funktionen and Merkle Tree"
 
-Merkle tree. Do you know Merkle trees?
+**Merkle tree**. Do you know Merkle trees?
 I mean it has nothing to do with our old chancellor.
 Same name but it's not named after her.
-The Merkle tree is the way we organize the transactions in a block.
+
+The **Merkle tree is the way we organize the transactions in a block**.
 So I was actually cheating here.
 I said, well we have a **header**.
 And below that we have a **list of all the transactions**.
 This is **not what we do**.
 We do it in a different way.
-So what we actually do here is that we have this kind of organization of each block.
-So each block has the previous hash.
-That's what we have.
-We have timestamp, also cool.
-We have the nonce.
-And we have the root of the Merkle tree.
+So **what we actually do** here is that we have this kind of **(Merkle tree) organization of each block**.
+So each block has
+
+- the **previous hash**. That's what we have.
+- We have **timestamp**, also cool.
+- We have the **nonce**.
+- And we have the root of the Merkle tree (**Merkle root**).
+
 And you see we are not listing our transactions just in a list.
 And we hash that.
 What we do is we take transaction number zero.
@@ -1890,32 +1893,63 @@ And then we take the hash of transaction number zero and the hash of number one.
 We have two hashes.
 We combine that into a hash.
 And do the same here in our tree.
-And then actually we hash these pairs against each other.
-And that gives the root.
+And then actually we **hash these pairs against each other**.
+And **that gives the Merkle root**.
+
 So actually some miners which are called the **light nodes**,
 these light nodes, they don't contain all the information here.
 They just contain that.
+
+---
+
+**🪶 Light node (SPV)**
+
+* Runs on phones or lightweight apps
+* Doesn’t store full data
+* Asks "full nodes" for information
+
+**🪶 Lightweight verification (SPV nodes)**
+
+“Light nodes” don’t store the full blockchain.
+
+They can:
+
+* Verify their transaction is included
+* Without downloading everything
+
+👉 This is crucial for scalability.
+
+**🪶 Light nodes (SPV)**
+
+* Do **not store block bodies**
+* Only store headers
+* Request data when needed
+
+---
+
 So they just work in the network.
 And they just work in the network.
-And they do some kind of proof that the new node is correct or things like that.
-But they don't contain all the information because that information is quite large.
+And they do some kind of **proof that the new node is correct** or things like that.
+But **they don't contain all the information** because that information is quite large.
 Downloading the whole Bitcoin blockchain, so really the data, is gigabytes.
 I'm not sure, 900 gigabytes or so.
 
-student: 800 gigabytes.
+student: **800 gigabytes**.
 
 prof: 800 gigabytes.
 That means that if you want to now become a miner to download the software,
 it takes a minute.
 Installing it, probably just a minute.
 Downloading 900 gigabytes takes days.
-So although, but you could then run something like a light node,
-or the lighting network or things like that,
-that could be run even on a Raspberry Pi.
+
+So although, but you could then run something like a **light node**,
+or the lightning network or things like that,
+that **could be run even on a Raspberry Pi**.
 But that's something we will probably discuss later on.
 
 So how we actually organize this is that within the core data we just have one hash.
 And that's the hash of all the transactions that is combined as this Merkle tree.
+
 And when I saw this first, I thought why?
 I mean, why do we hash all these pairs and then we hash the pairs
 and put it there.
@@ -1955,17 +1989,19 @@ I'm not sure that's the answer you're looking for.
 prof: No, I didn't get this.
 I'm looking for another solution.
 
-The point is that what happens if you want to check if a certain transaction is actually within, this example here,
+The point is that what happens **if you want to check if a certain transaction is actually within**..., this example here,
 so we store all the transactions and we just hash everything and put this into our, this is `Tx_Root` (see figure on slide).
 So we have all the transactions and we hash it and we get it into `Tx_Root`.
 And we have that one.
-If I give you now a transaction, I give you transaction number one, which is this one.
+
+**If I give you now a transaction**, I give you transaction number one, which is this one.
 This is `Tx0` and this is `Tx1` (see figure on slide).
 I give you transaction number one.
-What do you need to know if this transaction is in this particular block, if I give you also the, if you know the `Tx_Root`?
+**What do you need to know if this transaction is in this particular block, if I give you also the, if you know the `Tx_Root`?**
+
 So the question is the following:
 I give you a transaction and I claim that this transaction is actually being in block number 11.
-Which kind of information do you need to know to check if transaction number one is in block number 11?
+**Which kind of information do you need to know to check if transaction number one is in block number 11?**
 In this example.
 Let's take this example first.
 
@@ -1980,12 +2016,12 @@ They are just hashed and hashed and hashed.
 
 student: All the transactions.
 
-prof: All the transactions. Yeah, in this case here, I need all the transactions to check if transaction number one is here.
-So I need 1000 transactions or in this case, let's say, I need 4 transactions.
+prof: **All the transactions**. Yeah, in this case here, I need all the transactions to check if transaction number one is here.
+So I need 1000 transactions or **in this case, let's say, I need 4 transactions**.
 Let's say, just a 4.
 I need 4 transactions to check if transaction number one is in this block.
 
-How many other transactions' information do I need to know if transaction number one is in this block using a Merkle tree?
+How many other transactions' information do I need to know if transaction number one is in this block **using a Merkle tree?**
 
 student: ... subtree ...
 
@@ -1993,12 +2029,13 @@ prof: Subtree, which is I need transaction number 0 and
 I compute this, I compute that and I need the hash...
 I don't need this and this, so I need 1, 2, 3.
 
-student: The hash 0 would be already enough right?
+student: The **hash of 0 would be already enough right?**
 The transaction 0 could be anonymous?
 
-prof: Yeah, but this is not stored.
-The only thing that is actually stored in the node is this.
-That's the interesting thing and that also gives these light nodes some kind of sense.
+prof: Yeah, **but this is not stored**.
+The only thing that is actually stored in the node is this (the 4 transactions).
+That's the interesting thing and that also gives these **"light nodes"** some kind of sense.
+
 If I claim that my transaction is in block number 12 and this node doesn't know all the other hashes,
 I just need to provide my transaction, transaction number 0 and that can be computed if this is the same as this one.
 So, normally I would need to provide all the four transactions.
