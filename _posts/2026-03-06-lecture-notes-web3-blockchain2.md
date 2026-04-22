@@ -268,11 +268,11 @@ Here is a detailed breakdown of what this means:
 
 ##### 1. The "Cash" Analogy
 
-Imagine you have a &#36;50 bill (a 50 BTC UTXO) but only want to buy a coffee for &#36;5 (0.5 BTC). You cannot tear off 1/10th of the bill. You must give the cashier the entire &#36;50 bill. The cashier then returns &#36;45 in change.
+Imagine you have a <span>$</span>50 bill (a 50 BTC UTXO) but only want to buy a coffee for <span>$</span>5 (0.5 BTC). You cannot tear off 1/10th of the bill. You must give the cashier the entire <span>$</span>50 bill. The cashier then returns <span>$</span>45 in change.
 
-- **The Input**: The &#36;50 bill (the entire 50 BTC).
-- **The Output 1 (Recipient)**: &#36;5 (0.5 BTC) to the coffee shop.
-- **The Output 2 (Change)**: &#36;45 (49.5 BTC) "remitted" back to you.
+- **The Input**: The <span>$</span>50 bill (the entire 50 BTC).
+- **The Output 1 (Recipient)**: <span>$</span>5 (0.5 BTC) to the coffee shop.
+- **The Output 2 (Change)**: <span>$</span>45 (49.5 BTC) "remitted" back to you.
 
 ##### 2. What "Remitted" Means in This Context
 
