@@ -41,16 +41,16 @@ So we save one.
 It's not that much here, but if we
 take the tree much further,
 then it makes sense.
-So we just need to give out less information
-to prove that a particular transaction is within this particular block.
+So **we just need to give out less information to prove that a particular transaction is within this particular block**.
 So we have less operations to do.
 We need to provide less information.
+
 And actually, I think I mentioned it last time,
 it comes from communication technology.
 So it also has been used to prove
 that the transmission of something between two endpoints
 is correct.
-So it just saves information that we need to transmit.
+So **it just saves information that we need to transmit**.
 Yeah.
 OK.
 
@@ -255,31 +255,32 @@ And then we have local caches and unspent transaction output, UTXO...
 
 student: UTXO.
 
-prof: where we store all the problems.
+prof: where we store all the balances.
 
 ---
 
-Gemini: "bitcoin The remaining sum is 'remitted' as a new transaction meaning"
+#### Gemini: "bitcoin The remaining sum is 'remitted' as a new transaction meaning"
 
 In Bitcoin, the phrase "the remaining sum is remitted as a new transaction" refers to the **change mechanism** in the Unspent Transaction Output (UTXO) model. Because Bitcoin UTXOs (analogous to physical coins or cash) must be spent in their entirety, any amount not sent to the recipient must be "remitted" (sent back) to a new address controlled by the sender as change.
 
 Here is a detailed breakdown of what this means:
 
-1. The "Cash" Analogy
+##### 1. The "Cash" Analogy
 
-Imagine you have a $50 bill (a 50 BTC UTXO) but only want to buy a coffee for $5 (0.5 BTC). You cannot tear off 1/10th of the bill. You must give the cashier the entire $50 bill. The cashier then returns $45 in change.
+Imagine you have a &#36;50 bill (a 50 BTC UTXO) but only want to buy a coffee for &#36;5 (0.5 BTC). You cannot tear off 1/10th of the bill. You must give the cashier the entire &#36;50 bill. The cashier then returns &#36;45 in change.
 
-- **The Input**: The $50 bill (the entire 50 BTC).
-- **The Output 1 (Recipient)**: $5 (0.5 BTC) to the coffee shop.
-- **The Output 2 (Change)**: $45 (49.5 BTC) "remitted" back to you.
+- **The Input**: The &#36;50 bill (the entire 50 BTC).
+- **The Output 1 (Recipient)**: &#36;5 (0.5 BTC) to the coffee shop.
+- **The Output 2 (Change)**: &#36;45 (49.5 BTC) "remitted" back to you.
 
-2. What "Remitted" Means in This Context
+##### 2. What "Remitted" Means in This Context
 
 - **Automatic Return**: Your wallet software automatically generates a new, hidden address (a "change address") to receive the leftover funds from your own transaction.
 - **New UTXO**: The leftover amount becomes a new, separate "coin" (UTXO) in your wallet that you can spend in the future.
 - **Complete Consumption**: The original input (e.g., 50 BTC) is considered "spent" and destroyed on the blockchain, and replaced by two new outputs (the 0.5 BTC payment + 49.5 BTC change).
 
-3. Why it is Called a "New Transaction"
+##### 3. Why it is Called a "New Transaction"
+
 The change is returned as a "new transaction" because it is a new UTXO that must be recorded on the ledger. It serves two main purposes:
 
 - **Privacy**: It helps break the link between your original address and your remaining balance.
