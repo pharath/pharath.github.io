@@ -657,6 +657,21 @@ The locked in **mining demo**, yeah.
 So I just have this small demo here.
 So we see here we have the block zero.
 That's our **Genesis block**.
+
+---
+
+The Bitcoin **Genesis Block** (Block 0) was mined by Satoshi Nakamoto on January 3, 2009, containing a single **"coinbase" transaction** that created 50 BTC. This reward is technically unspendable because it was omitted from the transaction database, serving as a permanent, immoveable artifact. It contained a headline message referencing the banking crisis, symbolizing its purpose as a decentralized alternative.
+
+- **Date/Time**: January 3, 2009, 18:15:05 UTC.
+- **Transactions**: Only one, the coinbase transaction.
+- **Reward**: 50 BTC (unspendable).
+- **Hash**: `000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f`.
+- **Embedded Message**: "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks".
+- **Unspendable Nature**: The address `1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa` received the 50 BTC, but the transaction was not added to the global UTXO set (Unspent Transaction Output).
+- **Delayed Block 1**: The second block was not mined for another six days, emphasizing its role as the unique starting point.
+
+---
+
 We currently have a difficulty of three.
 And what we can do now, I think, now I have to shorten it a bit.
 Okay, so we just now get another block.
