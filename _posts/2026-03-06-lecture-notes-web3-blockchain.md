@@ -2919,6 +2919,121 @@ If you want, I can explain a subtle follow-up:
 
 ---
 
+### ChatGPT: "difference between light node and pruned node"
+
+Good question—these two are often confused because both use less storage, but they’re fundamentally different in **what they trust and verify**.
+
+---
+
+#### 🧱 Pruned node vs 🪶 light node in Bitcoin
+
+![Image](https://images.openai.com/static-rsc-4/OpyZ0YrF6_HIQCMmUj_DJIZuzbrWCQX9mEAN_UGunFHZREFOz90wWcCw3w7AtfN0hgdpAz6r2bUCpTWofsvb07w1dd_gJ005y6SA7ykgymanFEEgATzennD2gGuRqHeYApBt4tlLzXcpYf-rZffugZe2joqk4iOEJkaQLw3JzGdQ1BLJwLSrDI3nBn2LauhS?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/IwlLLtVe9lPB7xDUMouLHqe22HI_pWV1yoaixMpb5vY_AGhF7XwjD4scrlpsvHBg6IzAKkiwF8JVxDU2W6geJzfo7Uq0brPx_VFNZO2deJR2tfLYd573B2exsjN_FUS336tHS0OfKRTRqMt8Q3TdJ1GuaTPltY_eR7hAKuAGu7sxF9jMRzJvKP_JWOKwJdXe?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/vdAFw5C_2ZRaiz2VH0Y7KP1b47PcIouPC6WYafXp0Z0GT7pQ9lSOrXfxlyMa5Ml5FlGT-4XkeCG_7DpY2D4dtOGXZJBCbqQNaEIw1bzLFpseBHRCCa1OsHLmW3adP0xIuYCl05m0LIEUSqO-pcbjmC6s7ohmOphvRDQK3mi9dCDAAg7dxZIbiOJDVtFCFjdH?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/gWtZfiO6u9IV5dChXeV4EpE8RwkvGupziPmQjrab5DjrSM3VgTcXgS5HB6AH9nSL9yam7_NFLMR-VLD3vIuq9am3lwJQ4ezOZ7mjZatrCPhSyQkjFKhHvycsAj5CVHenEzmflRhbQj3c6xq9ixGz98SteaBfHLvUMgov088OIMEsXb-eaSSfVhKBwhZg4Kmi?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/CxLQlHRNbxR65NYtZiyrNvvxSPuB9RDIxD6mnLRIvNMrj-VyOBciYaMrViqe8HOarz6LzQir3Kv9NlrLTCsHmf6hxiIpH4vaZi-W0sm4xjv-FO7PcFdtaUlSVY9R0YkVx_1BJicWFSeB4fMyEO91-xFqPJ9L5VrJWDI_YFlX1ma6lPYOrvXkUa641LHK7zCf?purpose=fullsize)
+
+---
+
+#### 🧱 Pruned node (still a full node)
+
+👉 A pruned node is a **full node that deletes old data after verifying it**
+
+##### ✔️ What it does
+
+* Downloads **all blocks from genesis**
+* Verifies **every transaction and rule**
+* Builds the **UTXO set**
+
+##### ✂️ Then
+
+* Deletes old block data to save space
+
+##### 🔒 Trust model
+
+* **Trusts no one**
+* Fully independent verification
+
+##### ⚠️ Limitation
+
+* Cannot re-check old transactions later (data deleted)
+
+---
+
+#### 🪶 Light node (SPV node)
+
+👉 A light node is a **simplified client that does NOT fully verify the blockchain**
+
+##### ✔️ What it does
+
+* Downloads only **block headers** (very small)
+* Requests data (e.g. transactions, proofs) from full nodes
+
+##### 🔍 Verification method
+
+* Uses **Merkle proofs** to check inclusion of transactions
+
+##### 🔒 Trust model
+
+* **Partially trusts full nodes**
+* Assumes the longest chain is valid
+
+---
+
+#### ⚖️ Key differences (the essence)
+
+##### 🧠 Verification
+
+* Pruned node → **full verification**
+* Light node → **partial verification**
+
+---
+
+##### 💾 Data storage
+
+* Pruned node → small (but once had full data)
+* Light node → very small (never had full data)
+
+---
+
+##### 🤝 Trust
+
+* Pruned node → **trustless**
+* Light node → **trust-minimized, but not trustless**
+
+---
+
+##### ⚡ Resource usage
+
+* Pruned node → moderate (CPU + initial sync heavy)
+* Light node → very low (good for phones)
+
+---
+
+#### 🧩 Simple analogy
+
+* **Pruned node** =
+  “I read the entire book, verified it, then kept only the summary.”
+
+* **Light node** =
+  “I didn’t read the book—I ask others and check short proofs.”
+
+---
+
+#### 🏁 One-line takeaway
+
+👉 A **pruned node is still a fully validating node**, while a **light node relies on others and only verifies partially**.
+
+---
+
+If you want, I can explain **exactly how a light node can still be reasonably secure despite not verifying everything**—that’s where Merkle proofs really shine.
+
+---
+
 ## org
 
 Okay, good.
