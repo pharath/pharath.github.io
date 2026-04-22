@@ -90,7 +90,10 @@ bundle exec jekyll -v
 | command | description |
 | :--- | :--- |
 `bundle exec jekyll serve` or `jekyll s` | Serve Locally. Warten bis "Server running... press ctrl-c to stop." message und dann <kbd>ctrl</kbd> gedrückt halten und auf server address clicken (oder in Browser `http://localhost:4000` aufrufen)
+`bundle exec jekyll serve --livereload` | auto-reload the page continuously (not only on change!), the page is still shown on `http://localhost:4000` (not on LiveReload address `http://127.0.0.1:35729`)
+`bundle exec jekyll serve --livereload -I` | auto-reload and incrementally rebuild the page continuously (not only on change!)
 `bundle exec jekyll build` or `jekyll b` | Performs a one off build your site to `./_site` (by default).
+`bundle exec jekyll build --profile` | profiler, check build times
 `bundle exec jekyll clean` | Removes all generated files: destination folder, metadata file, Sass and Jekyll caches.
 `bundle exec jekyll new PATH` | Creates a new Jekyll site with default gem-based theme at specified path. The directories will be created as necessary.
 `bundle exec jekyll new PATH --blank` | Creates a new blank Jekyll site scaffold at specified path.
