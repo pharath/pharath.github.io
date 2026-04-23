@@ -293,6 +293,9 @@ If you send 1 BTC from a 2 BTC input, and the fee is 0.001, your wallet will cre
 
 ### "Why is there a recommendation that you should wait 6 transactions, i.e. ~ 1 hour, to be sure that the transaction is valid?"
 
+- [learnmeabitcoin.com: Chain Reorganization](https://learnmeabitcoin.com/technical/blockchain/chain-reorganization/) (see PDF in `Web3Blockchain/`)
+- [learnmeabitcoin.com: Longest Chain](https://learnmeabitcoin.com/technical/blockchain/longest-chain/) (see PDF in `Web3Blockchain/`)
+
 OK, so some other things that we have.
 OK.
 
@@ -304,17 +307,17 @@ And we have just submitted our transaction.
 And this transaction has been recorded here A to B to 10.
 And we got from the system back, we saw - later on we will see this, there's a nice user interface - this block is now in the blockchain.
 Why should we still wait six more transactions before we really are sure that this is done?
-And my example is that I would like to sell you my, I don't have a Porsche, imagine that I have a Porsche,
-I want to sell it to him for a Bitcoin.
-And so he provides me the Bitcoin.
+
+And my **example** is that I would like to sell you my, I don't have a Porsche, imagine that **I have a Porsche, I want to sell it to him for a Bitcoin**.
+And so **he provides me the Bitcoin**.
 And I give him the key as soon as I see, ah, it's there,
 it's in the block.
-He gets the key and drives away.
+He **gets the key and drives away**.
 What could happen?
 Yeah.
 
-student: Like I could spend in two very different places at the same time.
-And due to the physical distance, they couldn't communicate in time that was spent twice.
+student: Like I could **spend in two very different places at the same time ("Parallel transaction")**.
+And **due to the physical distance, they couldn't communicate in time that was spent twice**.
 Like I could buy both types of the car at the same time.
 
 prof: Did I mention that example already last time?
@@ -324,7 +327,7 @@ That's something I can do.
 Another thing?
 
 student: I believe there is some consensus on what blocks is currently in use.
-So that longest one is chosen all the time.
+So that **longest one is chosen** all the time.
 
 prof: Yeah.
 And this builds on that one.
@@ -335,21 +338,190 @@ And some others are...
 
 prof: Yeah, you all are operating on the same one.
 
-student: Yeah, but after some time there is a consensus again.
+student: Yeah, but **after some time there is a consensus again**.
 Or some...
+
+---
+
+#### ChatGPT: "how can you spend the same bitcoin? a bitcoin is not identifiable."
+
+Excellent question. You’re touching the key distinction: in Bitcoin, there is no single labeled “coin” like a serial-numbered banknote.
+
+##### Bitcoin does **not** track coins as objects
+
+Bitcoin tracks **UTXOs** — *Unspent Transaction Outputs*.
+
+That means the system tracks:
+
+* who currently has spendable outputs,
+* how much each output is worth,
+* and whether that output has already been spent.
+
+So instead of:
+
+> “This specific bitcoin #123 belongs to Alice”
+
+it works more like:
+
+> “Output from Transaction X, index 0, worth 1 BTC, can be spent by Alice’s key.”
+
+##### So what does “spend the same bitcoin twice” mean?
+
+It really means:
+
+> trying to spend the **same UTXO** in two conflicting transactions.
+
+Example:
+
+You own one output worth 1 BTC.
+
+You create:
+
+###### Transaction A
+
+* sends 1 BTC to car seller
+
+###### Transaction B
+
+* sends that same 1 BTC back to yourself (or another merchant)
+
+Both transactions reference the **same previous output** as input.
+
+That is impossible for both to be valid simultaneously.
+
+##### Why can both appear temporarily?
+
+Because networks are distributed.
+
+- Some nodes/miners may see Transaction A first.
+- Others may see Transaction B first.
+
+If miners include different versions in competing blocks, there can be a temporary fork.
+
+Eventually only one chain wins, and one transaction survives.
+
+##### Analogy
+
+Think of a gift card with €100 balance.
+
+You try to swipe it in two stores at nearly the same time before systems synchronize.
+
+Only one purchase should ultimately clear.
+
+##### So you are right:
+
+There is no physical identifiable bitcoin being duplicated.
+
+“Double spending a bitcoin” is shorthand for:
+
+> spending the same **spendable balance entry (UTXO)** twice.
+
+##### Why this matters
+
+This is why confirmations exist: until consensus settles, a conflicting spend might still replace the first one.
+
+##### One-sentence version
+
+Bitcoin doesn’t prevent copying coins—it prevents **reusing the same transaction output more than once**.
+
+---
+
+#### ChatGPT: "meaning"
+
+The discussion is about **why Bitcoin users traditionally wait for ~6 confirmations** (six blocks added after the block containing your transaction) before treating a payment as final.
+
+##### Core idea: a block is not instantly irreversible
+
+When your transaction first appears in a block, that block may **not remain part of the winning chain** forever. Bitcoin nodes follow the chain with the **most accumulated proof-of-work** (often simplified as the “longest chain”).
+
+So even if you see:
+
+* Transaction: A pays B 10 BTC
+* Included in Block N
+
+…it is only **provisionally confirmed**.
+
+Another competing chain could replace it.
+
+##### What could happen in the Porsche example?
+
+You sell your Porsche as soon as you see the first confirmation.
+
+The buyer could try a **double-spend**:
+
+1. Broadcast one transaction paying you 1 BTC.
+2. Secretly create another conflicting transaction paying themselves or another address.
+3. If an alternative chain containing the conflicting transaction becomes longer, the network may accept that chain instead.
+
+Then:
+
+* You already handed over the Porsche key.
+* The payment to you disappears from the accepted chain.
+
+##### Why do forks happen naturally?
+
+Even without fraud, miners can find blocks almost simultaneously.
+
+Example:
+
+* Miner X finds Block N
+* Miner Y also finds a different Block N
+
+Now part of the network builds on one version, part on the other. This temporary split is called a **fork**.
+
+Eventually one branch gets another block first and becomes heavier/longer. The other branch is abandoned.
+
+Transactions in the abandoned block may be reversed or delayed.
+
+##### Why six confirmations?
+
+Each additional block on top of your transaction means an attacker would need to redo **more proof-of-work** to replace it.
+
+After:
+
+* **1 confirmation:** somewhat safe for small amounts
+* **3 confirmations:** stronger confidence
+* **6 confirmations:** historically considered very safe for high-value transfers
+
+The “6” is not magical—it’s a convention from early Bitcoin usage balancing speed and security.
+
+##### In the professor’s wording
+
+The students were saying:
+
+* Someone can spend the same coins in two places (**double-spend**)
+* Different miners may temporarily build on different blocks
+* Later the network reaches consensus again
+
+That is exactly correct.
+
+##### Modern note
+
+Today, many merchants choose confirmations based on value:
+
+* Coffee purchase: maybe 0–1 confirmations
+* Expensive electronics: 1–3
+* Porsche-level sale: likely 6+ confirmations
+
+##### One-line summary
+
+You wait six confirmations because the first block only says **“currently accepted”**; six confirmations means **“extremely hard to reverse.”**
+
+---
 
 prof: Let's try to construct something.
 And so I'm selling him...
 He seems to be experienced.
 So I'm very unexperienced.
-So I sell him my car for a bitcoin.
-What he does, what he can do is the following:
+So **I sell him my car for a bitcoin**.
+
+What he does, **what he can do** is the following:
 He, since you are friends, yeah,
-so what you do is that he gives you access to his wallet.
-And he submits his transaction down here.
-You connect to another miner somewhere in China
+so what you do is that **he gives you access to his wallet**.
+And **he** submits his transaction down here (**in Germany**).
+**You** connect to another miner somewhere **in China**
 at the other end of the world.
-You both submit the transaction almost at the same time.
+You **both submit** the transaction almost **at the same time**.
 And then you just hope.
 You hope that this transaction is in one block.
 Let's imagine.
@@ -359,56 +531,55 @@ This is German Telekom.
 Let's assume that Bitcoin mining is German Telekom.
 You connect to a miner somewhere
 or to the network in Asia, somewhere else.
-So A to B. You just hope that there is some way, not
-a fast connection between these.
+So A to B. You just hope that **there is not a fast connection between these**.
 But you don't do A to B or you do A to C,
 you're transferring somewhere else.
-Maybe you're transferring to yourself.
+Maybe **you're transferring to yourself**.
 So what you hope is that this is not being recognized.
 Because each miner, this one here in Europe,
 or this one in Europe, this one is in Asia,
 maybe because of some communication problems or so
 they don't recognize that both transactions are being sent.
 If we would send both transactions to that miner here,
-he would immediately see that we
-try to use the same bitcoins for two different transactions.
-It would be rejected immediately.
-You just hope they don't talk to each other fast enough.
+he would immediately see that **we try to use the same bitcoins for two different transactions**.
+It **would be rejected immediately**.
+**You just hope they don't talk to each other fast enough**.
 So both take this transaction into their new block.
 And then we hope that both find the new block
 within the next period.
 So already two assumptions, which are very strange,
 but they could happen.
+
 So what happens now is that both find the nonce,
 they provide the header information, and they both submit it,
 both into the network.
-Which means we have two different blocks now.
-This one has been mined, and this one has been mined.
+Which means **we have two different blocks now**.
+**This one has been mined, and this one has been mined**.
 Both found the right nonce.
 Both submitted it to the network.
 We submit it to all the miners.
-All miners receive two new blocks.
+**All miners receive two new blocks**.
 What do they do?
 They just put it into their chain.
 So connect it to the chain.
 So now we have somehow a state where we have a blockchain
-that becomes, at the end, a tree.
+that becomes, at the end, a tree (a fork).
 But only for the next period.
+
 What happens now?
 Now, so this happened in Europe.
 This happened in Asia.
 Let's see.
-We do it in the US.
+We do it **in the US**.
 USA.
 That's the USA.
 That's Asia.
 We are in Europe.
 So now we get new transactions.
-And now we start building a new block.
-And for this new block, we need to decide
-to which previous block do we connect.
+And now **we start building a new block**.
+And for this new block, **we need to decide to which previous block do we connect**.
 Do we connect to that block or to that block?
-What could be a good rule to decide to which block we connect?
+What could be a good **rule to decide to which block we connect?**
 
 student: Where we have more money.
 
@@ -434,33 +605,213 @@ prof: We don't know which majority connects to at this point
 directly.
 But we know something else.
 We know how big the block is.
-So the size of the block, the length of this particular block.
-So we want to continue the chain actually
-at a point where most transactions have
-already been somehow included.
-So if this, for example, has 6,000 transactions
-and that has 4,000 transactions, we
-will choose that one.
+So the **size of the block**, the length of this particular block.
+So **we want to continue the chain actually at a point where most transactions have already been somehow included**.
+So **if this, for example, has 6,000 transactions and that has 4,000 transactions, we will choose that one (with 6,000 transactions)**.
 Because here are more transaction inside.
-It's more valuable.
+**It's more valuable**.
 It has a little bit to do with the value of the money that's in there.
 And if the length is the same, then the next decision point
 is that we say, we look at the nonce,
 and then we say, the better the nonce is, we choose that one.
-Let's imagine we need four zeros, 0, 0, 0, 9, something.
-And this one has 0, 0, 0, 5.
+Let's imagine we need four zeros, `0009`, something.
+And this one has `0005`.
 This is better because it's smaller.
 It was more difficult to find.
-Or even this has another 0 here.
+Or even this has another `0` here.
 Then it's even much better.
 So then we would say, we connect to that one.
-So the longest chain survives.
+So **the longest chain survives**.
+
+---
+
+#### ChatGPT: "meaning"
+
+This explanation mixes a **correct high-level intuition** with some **technical inaccuracies**. Let me translate what the professor *means* and then correct the details.
+
+---
+
+##### What he is describing
+
+He is describing a **double-spend attempt combined with a temporary fork** in Bitcoin.
+
+A malicious user creates two conflicting transactions using the same UTXO:
+
+* **Tx1:** A → B (pay seller in Europe)
+* **Tx2:** A → C (pay self or accomplice elsewhere)
+
+They propagate them to different parts of the network quickly, hoping miners in different regions see different versions first.
+
+That part is conceptually correct.
+
+---
+
+##### Then two miners may mine different blocks
+
+Example:
+
+* Miner in Europe mines Block X containing Tx1
+* Miner in Asia mines Block Y containing Tx2
+
+Now two valid candidate tips exist.
+
+That creates a temporary **fork**.
+
+Also correct.
+
+---
+
+##### Where the explanation becomes inaccurate
+
+###### ❌ “Nodes choose the block with more transactions”
+
+That is **not** Bitcoin’s rule.
+
+Bitcoin nodes do **not** compare:
+
+* number of transactions
+* block size
+* value of coins inside
+* “how useful” the block is
+
+Those things are irrelevant for chain selection.
+
+---
+
+###### ❌ “Choose the better nonce”
+
+Also incorrect.
+
+Once a block meets the required difficulty target, the nonce itself has no special status.
+
+A nonce of:
+
+* 0005
+  vs
+* 0009
+
+does not matter.
+
+The nonce is just one field used during mining. It is **not ranked later**.
+
+---
+
+##### The real rule: most accumulated proof-of-work
+
+Bitcoin nodes follow the chain with the **greatest cumulative work** (commonly simplified as “longest chain,” though technically it means most total difficulty-adjusted work).
+
+So if:
+
+* Chain A has 101 blocks
+* Chain B has 100 blocks
+
+and comparable difficulty, Chain A wins.
+
+If one chain has harder blocks, total work matters more than raw count.
+
+---
+
+##### What miners do after a fork
+
+When two competing blocks appear:
+
+- Some miners mine on Block X.
+- Some mine on Block Y.
+
+Whichever side finds the **next block first** gains more cumulative work.
+
+Then the network switches to that chain.
+
+The losing block becomes a **stale/orphaned block**.
+
+---
+
+##### Why confirmations matter
+
+If your payment is only in one fresh block, it can disappear if that block loses the fork race.
+
+After 6 confirmations, replacing it becomes far harder.
+
+---
+
+##### Corrected version of the professor’s ending
+
+Instead of:
+
+> longest chain by most transactions / better nonce survives
+
+It should be:
+
+> the chain with the greatest accumulated proof-of-work survives.
+
+---
+
+##### One-line summary
+
+He correctly explains **forks and race conditions**, but the decision criteria he gives (**more transactions, better nonce**) are not how Bitcoin actually resolves forks.
+
+#### ChatGPT: "what if two blocks have the same number of transactions? which one survives?"
+
+The number of transactions does **not** determine which block survives in Bitcoin.
+
+So if two competing blocks each have:
+
+* same number of transactions, or
+* different number of transactions,
+
+it still doesn’t matter.
+
+##### What actually decides?
+
+When two blocks are mined at the same height:
+
+* Block A and Block B both reference the same previous block.
+* Both are valid.
+* Different nodes may temporarily accept different ones first.
+
+Then miners start mining the **next block** on whichever tip they saw first.
+
+##### Which one survives?
+
+The one that gets the **next valid block added first** (and then accumulates more proof-of-work).
+
+Example:
+
+* Chain A: ... → Block A → New Block
+* Chain B: ... → Block B
+
+Now Chain A has more cumulative work, so nodes switch to Chain A.
+
+Block B becomes stale/orphaned.
+
+##### If they remain tied for a while?
+
+Then the network stays temporarily split until one side gets ahead.
+
+##### Important point
+
+Nodes do **not** compare:
+
+* transaction count
+* block size
+* transaction value
+* nonce “quality”
+
+Only **validity + cumulative proof-of-work** matter.
+
+##### One-line answer
+
+If two blocks have the same number of transactions, that fact is irrelevant—the surviving block is the one whose branch gets extended first by additional proof-of-work.
+
+---
+
 So what we do now is that we say, OK,
-both have the same number of transactions.
+**both have the same number of transactions**.
 So let's keep the game.
 That's the transaction to me.
 I've sold my car for that one.
 And that is you're trying to cheat me.
+
 So what we do now is we connect to that block.
 What happens now?
 Next time, we would like to try the next block.
@@ -468,17 +819,15 @@ But we would like to connect to this one now.
 But now what happens is that we get that block here.
 So we need to find the difference between that block
 and that block, because these transactions are already done.
-These transactions, there may be a few transactions in that block
-that are not in this one.
-Maybe that 90% is the same.
-But obviously, that particular transaction here
-is only in this one.
+These transactions, **there may be a few transactions in that block that are not in this one**.
+Maybe that **90% is the same**.
+But obviously, that particular transaction here is only in this one.
 And that particular transaction here,
 together with some others, were only in that block.
 So they become again free.
-They come back to the mempool, to this pool of transactions
-that still have to be worked upon.
+**They come back to the mempool**, to this pool of transactions that still have to be worked upon.
 And they are free.
+
 Now what you do now is that we take these transactions and we include them in here.
 And then we see, hold on, A spent already 10 bitcoins here.
 So that transaction is no longer valid.
@@ -487,49 +836,172 @@ And then, although I got the information
 that it has already been consumed in a block,
 suddenly I get the transaction, sorry.
 It's not.
-It has been rejected, because it has been spent already
-over here.
+It has been rejected, because it has been spent already over here.
 But he is away with my car.
 And then I'm in trouble.
-And that's the reason why you should wait six transactions
-which is approximately 10 minutes each.
+
+And that's the reason **why you should wait six transactions** which is approximately 10 minutes each.
 So we always get a block after 10 minutes
 before you really sell something valuable.
 Selling a pizza or so, then it doesn't matter.
 But we wouldn't make such a big deal about it.
 Some questions?
 
-student: I did not understand why I would
-with the same amount of transactions choose the one
-with the lower nonce.
+---
+
+#### ChatGPT: "meaning"
+
+Yes — this part of the lecture is **mostly correct**, and it explains the core reason confirmations matter in Bitcoin.
+
+Let me translate it cleanly.
+
+---
+
+##### What is happening?
+
+There are two competing blocks after a fork:
+
+###### Block A
+
+Contains payment to you:
+
+* A → You (for the car)
+
+###### Block B
+
+Contains conflicting payment:
+
+* A → Self / accomplice
+
+Both cannot be valid long-term because they spend the same input.
+
+---
+
+##### Then one branch wins
+
+Suppose miners build the next block on **Block B**.
+
+Now chain B becomes longer / has more cumulative proof-of-work.
+
+So the network accepts chain B.
+
+Block A loses.
+
+---
+
+##### What happens to transactions in losing Block A?
+
+Transactions from the losing block are reconsidered.
+
+If still valid, they go back to the **mempool**.
+
+That includes ordinary transactions that were only in Block A.
+
+###### But your payment is different
+
+Your transaction conflicts with the already-confirmed spend in Block B.
+
+So when nodes reconsider it:
+
+* Input already spent
+* Therefore invalid
+* It is rejected, not re-added
+
+That means your payment disappears.
+
+---
+
+##### Result in the car example
+
+You already handed over the Porsche.
+
+But after the reorganization:
+
+* buyer keeps the car
+* payment no longer exists on accepted chain
+
+That is the double-spend risk.
+
+---
+
+##### Why six confirmations?
+
+Each extra block after your payment means an attacker must replace:
+
+* your block
+* plus every block after it
+
+That becomes exponentially harder (assuming attacker lacks majority hash power).
+
+So:
+
+* 1 confirmation = some risk
+* 2–3 = better
+* 6 = historically strong security for large payments
+
+---
+
+##### Small correction to the professor
+
+He says:
+
+> six transactions
+
+He means **six confirmations / six blocks**, not six transactions.
+
+Because a block contains many transactions.
+
+---
+
+##### Also correction: “10 minutes each”
+
+Bitcoin targets **10 minutes average per block**, not guaranteed exactly every 10 minutes.
+
+Sometimes:
+
+* 2 minutes
+* 17 minutes
+* 35 minutes
+
+Average trends toward 10.
+
+---
+
+##### One-line summary
+
+He’s explaining that your payment can vanish if its block loses a fork, which is why high-value sales wait for multiple block confirmations before treating payment as final.
+
+---
+
+student: I did not understand **why I would with the same amount of transactions choose the one with the lower nonce**.
 
 prof: Decision.
-Because the lower nonce is more difficult to find
-than a higher nonce.
+**Because the lower nonce is more difficult to find than a higher nonce**.
 
 student: How does it affect me?
 
 prof: It doesn't affect you.
-That's the miners' decision.
-It's just a rule that's being implemented in the protocol.
+That's the **miners' decision**.
+It's **just a rule that's being implemented in the protocol**.
 
-student: And the second one would be why would I
+student: And the second question would be, why would I
 wait six transactions if there is no reason to make a mistake?
 
-prof: It's just a recommendation.
+prof: It's **just a recommendation**.
 It could be that again, we have this.
 It's just a matter that we say, OK, after six transactions,
 the whole chain is unstable.
 And on the other hand, after six transactions,
-even with something like a 51% attack,
-it's somehow, with a 51% attack, it's somehow very difficult
-really to modify six blocks back.
+**even with something like a 51% attack**,
+it's somehow, with a 51% attack, **it's somehow very difficult really to modify six blocks back**.
 Yeah.
 That's the point.
 
 ### 51% attack
 
-**51% attack** is that we have 51% of the mining pool
+- [learnmeabitcoin.com: 51% Attack](https://learnmeabitcoin.com/technical/blockchain/51-attack/)
+
+**51% attack** is that we have 51% of the mining power
 available to you so that you somehow can do something
 that you somehow manipulate the previous block.
 And you have so much computing power
@@ -539,41 +1011,161 @@ And you find much faster these blocks than the others
 find the next one.
 So you have so much computing power
 that you can do some recomputation of previous blocks.
-And suddenly, you send it to the whole network,
-hey, this is now the longest chain.
+And suddenly, **you send it to the whole network**,
+hey, this is now the **longest chain**.
+
 So imagine that we have something like this here.
 (drawing)
-So we now, that's the normal chain that's going on.
-And they are computing every 10 minutes, 10 minutes, 10
-minutes.
-And we are now, we just bought so much hardware
-that we become much faster.
+So we now, that's the **normal chain that's going on**.
+And they are computing every 10 minutes, 10 minutes, 10 minutes.
+And we are now, we just bought so much hardware that we become much faster.
 So what we do now is that we reinsert transactions over here.
-We modify transactions over here.
+**We modify transactions** over here.
 And what we do now is, what we have to do
-is that we have to recompute the hash of that one
-because it changed.
+is that **we have to recompute the hash of that one because it changed**.
 So we recompute that one.
 Then we do very quickly that one, that one, and that one.
 And define that, maybe, for example, within five, five,
 five minutes.
 So let's say, you know that's already 50 minutes.
 So this is 20 minutes.
-And then we submit that chain into the network.
-And suddenly, this chain becomes longer than that chain.
+And then **we submit that chain into the network**.
+And suddenly, **this chain becomes longer than that chain**.
 So this means the next block of all the other miners
 who are in good assumption that everything is fine
 connect their blocks to this one.
 And this means that we did some kind of modifications over here.
 And that's this 51% attack.
 
+---
+
+#### ChatGPT: "meaning"
+
+Yes — this is the professor explaining the **basic intuition** behind a Bitcoin **51% attack**. The broad idea is right, but it needs some technical refinement.
+
+---
+
+##### Core meaning of a 51% attack
+
+A 51% attack means one miner or coordinated group controls **more than half of the network’s total hash power**.
+
+That gives them the ability to produce blocks **faster on average than the rest of the network combined**.
+
+If honest miners have 49% and attacker has 51%:
+
+* honest side finds blocks slower
+* attacker’s private chain grows faster on average
+
+---
+
+##### What the attacker can do
+
+They can privately mine an alternative chain and later publish it.
+
+If their chain has **more cumulative proof-of-work**, nodes accept it.
+
+That can allow:
+
+###### Double-spending
+
+Example:
+
+1. Attacker pays merchant on public chain.
+2. Merchant delivers goods.
+3. Attacker secretly mines alternate chain without that payment.
+4. Attacker’s longer chain overtakes public chain.
+5. Payment disappears.
+
+---
+
+##### Why changing an old block is hard
+
+The professor correctly says:
+
+> If you modify a past block, you must recompute that block and all blocks after it.
+
+Because each block references the previous block hash.
+
+So changing block N invalidates:
+
+* N
+* N+1
+* N+2
+* etc.
+
+You must re-mine from that point onward.
+
+---
+
+##### Important correction: not “instantly manipulate”
+
+Even with 51%, the attacker cannot simply press a button and rewrite history.
+
+They still must perform real mining work.
+
+It just becomes statistically likely that they can catch up and overtake eventually.
+
+---
+
+##### Important correction: “longest chain”
+
+More precisely:
+
+> chain with the **most accumulated proof-of-work**
+
+Not merely most blocks.
+
+---
+
+##### What attackers generally cannot do
+
+Even with 51%, they usually cannot:
+
+* steal coins from others without keys
+* forge signatures
+* create coins from nowhere beyond protocol rules
+* arbitrarily rewrite everything forever instantly
+
+They mainly gain **reorg / censorship / double-spend power**.
+
+---
+
+##### Example timeline
+
+Public chain:
+
+A — B — C — D
+
+Attacker secretly mines from B:
+
+A — B — X — Y — Z
+
+If X-Y-Z has more cumulative work than C-D, network switches.
+
+Blocks C and D are discarded.
+
+---
+
+##### Why decentralization matters
+
+The more distributed mining is, the harder it is for anyone to reach majority hash power.
+
+That is why concentration of mining pools is a major concern for Bitcoin.
+
+---
+
+##### One-line summary
+
+A 51% attack means controlling majority mining power so you can outmine the honest network, publish a heavier alternate chain, and potentially reverse recent transactions or double-spend.
+
+---
+
 Could also be, and that's a similar attack,
-that we somehow try to do somehow
-disconnecting them off by doing some kind of, how do you call it,
-where you send too many requests to a WebServer, Denial of Service attack.
+that **we somehow try to** do somehow **disconnecting them off** by doing some kind of, how do you call it,
+where you send too many requests to a web server, **Denial of Service attack**.
 Yeah, you do some kind of Denial of Service attacks to them.
 So that they are just being cut off from the network for some time.
-In the meantime, you do some kind of re-chaining the whole thing.
+**In the meantime, you do some kind of re-chaining** the whole thing.
 And suddenly, they come back and then they see,
 oh, that's now the current state.
 So we have to connect to that one.
@@ -581,9 +1173,17 @@ And here you did some tricks.
 
 The point is the 51% attack is real.
 It can happen.
-But if this happens, what would happen at the same time,
-everybody would lose trust in Bitcoin.
-So you earn a lot of money but it is worthless.
+**But if this happens**, what would happen at the same time, **everybody would lose trust in Bitcoin**.
+So **you earn a lot of money but it is worthless**.
+
+---
+
+[learnmeabitcoin.com](https://learnmeabitcoin.com/technical/blockchain/51-attack/):
+
+If anything, if you've got that much power, it's probably more lucrative to keep mining blocks and collecting block rewards than it would be to reverse a single transaction (and sink the value of bitcoin because of your attack).
+
+---
+
 So there was one question over there.
 
 student: I was going to ask more that, OK,
@@ -592,11 +1192,11 @@ And then you have to do it subsequently, like three times,
 for you to beat the other person that did like one time,
 and didn't wait 10 minutes, for example.
 How doable is this?
-How much computing power is it? Is it even possible?
+**How much computing power is it? Is it even possible?**
 I mean, one computer won't do it.
 
-prof: No, no, you would need a whole computing center to do that.
-And we will have a look at Mempool.
+prof: No, no, **you would need a whole computing center to do that**.
+And we will have a look at [Mempool](https://mempool.space/).
 There we see who is currently mining.
 And then... let's move a little bit.
 Let's wait a little bit.
@@ -610,10 +1210,9 @@ I can get all the data and I can get the correct one.
 
 prof: You don't claim it's the correct one.
 You just submit the whole blocks.
-And the blocks are correct in themselves.
-You just manipulated it one transaction in there.
-So what you did is that I transferred one Bitcoin
-to you.
+And **the blocks are correct in themselves**.
+**You just manipulated one transaction in there**.
+So what you did is that I transferred one Bitcoin to you.
 And you just insert here not one Bitcoin,
 but maybe 10 or whatever.
 Maybe even I have 10.
@@ -622,20 +1221,140 @@ Everything is correct.
 I had 10 and you're just stealing the 10 Bitcoin instead of one.
 And then you're just computing all the different blocks.
 So the blocks in themselves are correct.
-They have the right nonce, they are chained to each other.
+**They have the right nonce**, they are chained to each other.
 You just manipulated one transaction
 by stealing really money.
-And if this is then longer than the other ones,
-then it's being accepted.
+And **if this is then longer than the other ones, then it's being accepted**.
 You don't pretend it's correct.
 It is correct.
 It's a correct chain.
 But you just manipulated one of the transactions.
 
-student: But they will be able to steal Bitcoin that hasn't been spent.
-What they could do is they could rearrange transactions
-that have already occurred.
-Because it would require validating signatures and stuff like that.
+student3: But **they will be able to steal Bitcoin that hasn't been spent**.
+
+prof: Yeah.
+
+student3: What they could do is **they could rearrange transactions that have already occurred**.
+
+prof: Yeah.
+
+student3: Because it **would require validating signatures** and stuff like that.
+
+---
+
+#### ChatGPT: "meaning"
+
+The student is **correct**, and the professor is mixing up what a Bitcoin 51% attacker can and cannot do.
+
+##### Key correction: You cannot just edit transactions arbitrarily
+
+The professor says:
+
+> change “1 BTC to you” into “10 BTC to me”
+
+That is **not possible** unless you possess the required private keys.
+
+Why?
+
+Bitcoin transactions contain **digital signatures** authorizing spends from specific UTXOs.
+
+If someone changes:
+
+* recipient
+* amount
+* inputs
+* outputs
+
+the signature becomes invalid.
+
+Nodes would reject that transaction immediately.
+
+So a 51% attacker cannot simply rewrite your payment to steal coins from your wallet.
+
+---
+
+##### What a 51% attacker actually can do
+
+They can create a valid alternative chain containing only **validly signed transactions**.
+
+That means they can:
+
+###### 1. Reverse their own recent payments (double-spend)
+
+Example:
+
+* attacker pays merchant
+* receives goods
+* privately mines alternate chain excluding that payment
+* publishes longer chain
+* payment disappears
+
+###### 2. Reorder or exclude transactions
+
+They may censor certain payments or delay confirmations.
+
+###### 3. Reorganize recent blocks
+
+Replace several recent blocks with another valid chain.
+
+---
+
+##### What they generally cannot do
+
+###### ❌ Steal coins from arbitrary addresses
+
+They do not gain your private key.
+
+###### ❌ Create fake spends from others
+
+No valid signature = rejected.
+
+###### ❌ Change “1 BTC” to “10 BTC” in someone else’s tx
+
+That invalidates the signature.
+
+###### ❌ Mint unlimited coins outside consensus rules
+
+Nodes verify block subsidy and protocol rules.
+
+---
+
+##### Why the student’s statement is strong
+
+The student says:
+
+> they could rearrange transactions that already occurred
+
+Exactly right.
+
+That is the real danger:
+
+* transaction ordering
+* transaction omission
+* replacing recent history
+
+not arbitrary theft.
+
+---
+
+##### Why “the blocks are correct” needs nuance
+
+A block can only be accepted if it contains:
+
+* valid PoW
+* valid linkage
+* valid transaction signatures
+* valid consensus rules
+
+So a block with stolen edited transactions would **not** be correct.
+
+---
+
+##### One-line summary
+
+A 51% attacker can rewrite **history of valid transactions**, but cannot rewrite **ownership rules** or spend coins without signatures.
+
+---
 
 prof: So it's not easy to do.
 But it's just something that could happen.
@@ -664,24 +1383,27 @@ is that some numbers,
 
 And something interesting that I also just learned last week is the following
 which means that we had one period in time
-where we got 50 Bitcoins as an incentive for our mining fees.
-That was just at the beginning, the first years.
-So it took about four years.
+where we got **50 Bitcoins** as an **incentive** for our **mining fees**.
+That was just at the beginning, **the first years**.
+So it took about **four years**.
 Then it was decreased to a period where we got 25.
 Then it was decreased to a period of 12.5, 6.5, and the rest.
+
 And just a very interesting thing is the following.
-That in this time, 50% of all Bitcoins had been produced.
-So during the time that we got 50 Bitcoins per block
+That **in this time, 50% of all Bitcoins had been produced**.
+So **during the time that we got 50 Bitcoins per block**
 as an incentive, we produced 10,500,000 Bitcoins.
 50%.
-Then in the next time, when we got 25 Bitcoins as an incentive,
-we produced 25% of the total number.
+Then in the next time, **when we got 25 Bitcoins** as an incentive,
+**we produced 25%** of the total number.
+
 So it's some kind of, what you call it, anecdotal knowledge,
 somehow, which is quite funny, which you can tell everybody in the pub.
 And that's how it works.
-So at the moment, the current period of five years,
-we actually produced only 3.1% of the whole sum of Bitcoins,
-which means that most of the Bitcoins have already been produced.
+
+So at the moment, the **current period** of four years,
+**we actually produced only 3.1%** of the whole sum of Bitcoins,
+which means that **most of the Bitcoins have already been produced**.
 There will not be that much coming in the end.
 
 ## Mempool
