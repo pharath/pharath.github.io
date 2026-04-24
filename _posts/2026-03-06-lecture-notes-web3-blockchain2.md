@@ -2255,7 +2255,7 @@ So it's JavaScript with some extensions.
 You need some extensions.
 We will see about that in a little bit.
 
-## slide: "Smart Contracts Ecosystem - from ledgers to globally distributed computing"
+## slide: "Smart Contracts Ecosystem - from ledgers to globally distributed computing" (Part 1)
 
 So, from an abstract level, we **store program code as executable scripts in a transaction** and they **execute it within the blockchain network**.
 But that can be **a new ecosystem**.
@@ -2269,6 +2269,10 @@ Or you can say whenever the temperature is above 10 degrees I would like to get 
 Where we get into the area of insurances.
 Whenever the temperature is for 10 days more than 30 degrees I would like to get an insurance back.
 So you can develop suddenly some kind of **automatic insurances**.
+
+---
+
+### Smart Contracts: Transaction fees vs. Gas fees
 
 student1: You mentioned the gas fee.
 What is the **difference between transaction fees and gas fees?**
@@ -2287,10 +2291,14 @@ So the longer the contract takes the more...
 
 prof: Yeah. It is just comparable. A fire engine.
 
+### Smart Contracts: Code Size Limit for Smart Contracts
+
 student3: How long is, what's the limit in code that I could upload? Could I upload 1000 ...
 
 prof: We discuss it with Ivan.
 I mean, **normally smart contracts are small**.
+
+### Smart Contracts: Evaluation of Code/a Questionaire via Smart Contracts?
 
 student3: Like could I say that you get one Bitcoin if you provide a program that meets all the test cases that I provided.
 
@@ -2301,13 +2309,18 @@ I mean this is not Amazon Web Services, or a Google Cloud.
 So it's **not being meant to do computation intensive things**.
 This is what you always do outside.
 
+---
+
+## slide: "Smart Contracts Ecosystem - from ledgers to globally distributed computing" (Part 2)
+
 Okay so, but you really get **a new ecosystem with autonomous transactions**.
 And that is really the **basis for IoT solutions**.
-You have internet things. You have things that do something.
+You have internet of things. You have things that do something.
 And then they execute something.
 Just as a hint, you can exercise some of these kind of use cases.
-But let's say we have an automatic vacuum cleaner.
-The automatic vacuum cleaner could somehow charge you for cleaning your floor.
+
+But let's say we have an **automatic vacuum cleaner**.
+The automatic vacuum cleaner could somehow **charge you for cleaning** your floor.
 It's cleaning the floor.
 And then it's reporting to the blockchain.
 Hey I cleaned 21 square meters.
@@ -2316,36 +2329,41 @@ Or, you charge, you somehow provide this vacuum cleaner some money.
 And then it's just cleaning your house.
 And if it's empty, it stops.
 So that's possible.
+
 But you have to be careful.
-It's irreversible.
+**It's irreversible**.
 Once you implemented it on the blockchain, it's running.
 Always. Endless. Ever.
 Whenever you initiate it, it will move on.
-And if you made an error, that you submitted a smart contract for your vacuum cleaner and you mistyped the address to where the money should go, then it's gone. You can't change it.
+And **if you made an error**, that you submitted a smart contract for your vacuum cleaner and you **mistyped the address to where the money should go**, then it's gone. **You can't change it (the smart contract)**.
+
+### "Modifying" Smart Contracts possible?
+
 Therefore, but this will also be discussed with Ivan,
-you can include not really backdoors, but you can pause the smart contract or something similar.
-So that you say, well, it should only be running if it's being activated.
+you can include **not really "backdoors"**, but you **can "pause" the smart contract** or something similar.
+So that you say, well, it **should only be running if it's being activated**.
 And only you can activate it because you have the access rights.
 
 student: So how do people edit smart contracts?
 Or if they can't, do they just have to put a new version out?
 
-prof: Yes, you have to put a new version.
+prof: Yes, you have to **put a new version**.
 Every smart contract, when you deploy it, so when you install it on the blockchain,
 gets a smart contract address.
-And if we deploy our "betting" smart contract, it becomes an address.
-And the oracle needs to send the result to that particular address.
+And **if we deploy our "betting" smart contract, it becomes an address**.
+And the **oracle needs to send the result to that particular address**.
 If we agree that we made a mistake, and we say, OK, let's forget about that smart contract.
-Let's deploy the new one that's corrected.
-Then we need to tell the oracle to submit the results to that smart contract, to the new one.
-That's the only way. We can't modify the old one.
+Let's **deploy the new one** that's corrected.
+Then we need to **tell the oracle to submit the results to that smart contract, to the new one**.
+That's the only way. We **can't modify the old one**.
 It's impossible.
-Therefore, there are some tricks, but that's coming up that you somehow do some kind of an interface smart contract.
-So you have an interface smart contract that provides the function calls.
+
+Therefore, there are some tricks, but that's coming up that you somehow do some kind of an **interface smart contract**.
+So you have an interface smart contract that **provides the function calls**.
 And that smart contract is then calling another one.
 And you always can change the address that it's calling.
 So when we see, ah, there is a mistake in our smart contract.
-So we just change the address in the smart contract, so it's no longer calling the wrong one, but the right one.
+So **we just change the address in the smart contract**, so it's no longer calling the wrong one, but the right one.
 And only one person can change the address that it's calling.
 Because we only have the right to do that.
 
@@ -2357,6 +2375,7 @@ student: But how can you alternate one?
 
 prof: We don't alternate it.
 We are jumping a bit back and forth, but that's okay.
+
 What I do is I somewhere on the blockchain, I have a smart contract.
 Let's say this is a smart contract and this has a message read and a message write and a message check.
 And we also have set SC (= smart contract) address.
@@ -2366,7 +2385,7 @@ So now we have another smart contract and that's now the address smart contract 
 And we have smart contract number zero. That was the first one.
 And that had some trouble.
 At the beginning, we said call smart contract number zero.
-And now we see, and this implements write and check and read.
+And now we see, and this implements `write()` and `check()` and `read()`.
 And if we get a function call here, we just forward it to that particular smart contract because of that address.
 Then we see that this smart contract is buggy.
 Then we say, okay, set smart contract address one.
@@ -2375,32 +2394,32 @@ That's the one to call and then it's forwarding everything to this one.
 And if you want to do some kind of improvement, we develop smart contract number two.
 And then we just replace that one and say to smart contract number two.
 
-student1: So this method can be called with arguments.
+student1: So this **method** can be **called with arguments**.
 
 prof: Yes, yes, yes.
 
-student1: And the arguments can then be provided from outside.
+student1: And the **arguments** can then be **provided from outside**.
 
 prof: Somehow you can consider this as a class that provides methods with arguments.
 Yeah.
 
-student2: Is it possible to let a contract expire?
+student2: Is it possible to **let a contract expire?**
 
 prof: Yes, you could expire it.
 I'm not sure. Well, that's interesting.
 It would be interesting to check this.
-I think it should have access to a date.
-Yeah, and then you could say, execute only if the current date is below another date.
+I think **it should have access to a date**.
+Yeah, and then you could say, **execute only if the current date is below another date**.
 Let's check this.
 
 student: ...
 
 prof: There is, when you call that particular method here, you need, it can require that this can only be done by the owner.
-Yeah. So you can set owner as a requirement.
+Yeah. So **you can set owner as a requirement**.
 So you say owner and you say new smart contract number.
 Yeah.
-This means that only the owner can execute that particular method.
-And the owner is the one who deployed it.
+This **means that only the owner can execute that particular method**.
+And **the owner is the one who deployed it**.
 So if you deployed it, you deploy it with your, when you deploy it, you somehow log into the blockchain and you do that by using your wallet.
 We come to that just in a second.
 So you do it with your wallet by providing your identity.
@@ -2409,24 +2428,24 @@ And when you can't do that, the function will not execute.
 
 student: ...
 
-prof: Right. And therefore it's always a good thing if somebody is selling you something based on a smart contract, check the code.
-If there isn't any backdoor in the code that allows them to change the code.
+prof: Right. And therefore it's always a good thing **if somebody is selling you something based on a smart contract, check the code**.
+If there isn't any **"backdoor" in the code** that allows them to change the code.
 Yeah.
 Maybe, yeah, we probably won't reach that.
 We will see, we will jump to a smart contract later on maybe and then you see it's actually working like that.
 Yeah.
 
-student: ...
+student: ... (can we deploy another contract instead?)
 
 prof: We can deploy another contract.
 You can deploy another contract.
-Yeah. But then you would need to tell all the users of that smart contract that you have deployed a new smart contract that they have to change the address.
+Yeah. **But then you would need to tell all the users of that smart contract** that you have deployed a new smart contract that **they have to change the address**.
 It's like, don't go to this door, go to that door.
 If someone is still going to this door.
-Yeah. So it's something, it's, I mean, blockchain is... and that's maybe the reason why a lot of people are saying, well, what's going on there?
+Yeah. So it's something, it's, I mean, blockchain is (not transparent)... and that's maybe the reason why a lot of people are saying, well, what's going on there?
 Yeah. But on the other hand, do you ever know if Google or Amazon is changing something in the background?
 You will never know.
-There's no transparency at all.
+There's **no transparency** at all.
 
 ## slide: "Blockchain Building Blocks – Unchaining the Blockchain"
 
@@ -2442,11 +2461,11 @@ So we have
 - We have proof of work and
 - we have smart contracts.
 
-All was existing before.
+**All was existing before**.
 That's coming from agent-based systems.
 We are now all talking about AI agents, but agents have already been done 10 years ago or even more than 10 years ago.
 So we use smart contracts.
-We use the proof...
+We use the proof of work.
 We use this as the consensus.
 We use a lot of hashing.
 We use peer-to-peer network to interconnect the different mining nodes.
@@ -2466,15 +2485,14 @@ Oh, sorry.
 ## slide: "Authentisierung und Autorisierung in einer Blockchain - Eine Blockchain kennt kein Login!"
 
 A **blockchain doesn't have any log-in**.
-There is no log-in to a blockchain.
-You can't go to bitcoin.com and revise your password.
+There is **no log-in** to a blockchain.
+You can't go to "bitcoin.com" and revise your password.
 That's not possible.
-There is no password in a blockchain.
-Because a blockchain is only storing in a block addresses.
-So, address number one is, let's say we use Ethereum, they have some kind of smart contract, and in a smart contract, you say address number one is owning one token.
+There is **no password** in a blockchain.
+Because a blockchain is only storing in a block some addresses.
+So, address number one is, let's say we use Ethereum, they have some kind of smart contract, and in a smart contract, you say "address number one is owning one token".
 Which can be ETH or whatever.
-We do not store this is user number one or whatever.
-This is address number one.
+We do not store "this is *user* number one" or whatever, instead we store "this is *address* number one".
 
 ## slide: "Public / Private Keys"
 
@@ -2486,7 +2504,7 @@ and we encrypt it **with Alice' public key**.
 So this becomes encrypted,
 That's the encrypted thing.
 So a lot of mixed numbers.
-And when Alice wants to read this "Hello Alice", it must be **decrypted** with a private key.
+And when Alice wants to read this "Hello Alice", it must be **decrypted** with a **private key**.
 And then she can read it.
 So "Hello Alice",
 where using Alice' public key becomes that and then Alice is using a private key and it becomes that.
@@ -2513,10 +2531,10 @@ So she's signing that for example with her private key.
 **He's just** decrypting it or **decrypting with Alice' public key** and then it says again "Hello Bob".
 But that's just an affection to that.
 
-And that's the way how a blockchain somehow authenticates you.
+And that's the way **how a blockchain somehow authenticates you**.
 When you want to access this particular token here, then you must prove that you have the private key that matches that public key.
 
-Just side step: It's no longer really the public key. It's the hash of the public key, but it doesn't matter.
+Just side step: It's no longer really the public key. It's the **hash of the public key**, but it doesn't matter.
 Let's assume it's just the public key that is here.
 
 So this is your public key, `pub key`.
@@ -2525,13 +2543,12 @@ So whether that you transmitted a Bitcoin, whether you own a token on the Ethere
 It's the public key.
 
 And now you want to transmit that you want to get access to that one.
-Then, the miner that you access requires you to authenticate yourself to prove that this is your public key.
-Or that you have the private key that matches this public key.
-And you can do that for example just by sending you a message, a challenge, can send you a challenge, `5 + 5`, then encrypts it with your public key that only *you* can decrypt it to `5 + 5`, you send it back the result `10`, sign it with your private key and then the server can use the public key to check the signature and check your result.
+Then, the **miner that you access requires you to authenticate** yourself to **prove that this is your public key**. Or **that you have the private key that matches this public key** (even if this private key is not yours, but you somehow got access to it).
+And you can do that for example just by sending you a message, **a challenge**, can send you a challenge, `5 + 5`, then encrypts it with your public key that only *you* can decrypt it to `5 + 5`, you send it back the result `10`, sign it with your private key and then the server can use the public key to check the signature and check your result.
 And when it's coming back with `10`, it knows that it was you who encrypted it.
 So it's a challenge.
-So the server is sending you a challenge based on your public key and only you can answer the challenge.
-It's asking you a question only you can answer because of your public key.
+So the server is sending you a challenge based on your public key and **only you can answer the challenge**.
+It's asking you **a question only you can answer because of your public key**.
 
 ~~student: But wouldn't either the signature result on the bottom because already the challenge is having a critical layout. Good one.~~
 
@@ -2564,14 +2581,15 @@ So good.
 So what we do now is that we use wallets. And a wallet is **just the storage of your keys**.
 Nothing else.
 Very often people say "I have five bitcoins in my wallet".
-No. There are five bitcoins on the blockchain and in the wallet are the keys to authenticate yourself as the owner of these five bitcoins.
+No. There are **five bitcoins on the blockchain** and **in the wallet are the keys** to authenticate yourself as the owner of these five bitcoins.
 
-You don't have any NFTs, you don't have any tokens, you don't have any Ethereum in your wallet.
-You just have private and public keys there.
+You don't have any NFTs, you don't have any tokens, you don't have any Ethereum **in your wallet**.
+You **just** have **private and public keys** there.
 Nothing else.
+
 So that makes it very valuable.
 So, therefore, you need to really make sure that you don't lose your wallet and that nobody else can access it.
-So therefore there are tools like MetaMask or even hardware like this kind of memory stick, it looks like a memory stick, but it's a USB stick that you plug into your computer and this particular stick that stores a public and a private key.
+So therefore there are tools like **MetaMask** or even **hardware** like this kind of **memory stick**, it looks like a memory stick, but it's a USB stick that you plug into your computer and this particular stick that **stores a public and a private key**.
 
 ## slide: "How is a wallet protected?"
 
@@ -2624,7 +2642,7 @@ It also means that if you lose your user ID and password, I could log in and the
 Not because the blockchain is insecure.
 Because **people hacked into these kind of platforms** that do the rest.
 
-Or even **there were some people who set up a big platform** and they had so much transactions, they just took the money and ran away.
+Or even **there were some people who set up a big platform** and they had so much transactions, **they just took the money and ran away**.
 Let's see, this way.
 Build up your own new crypto platform in Aachen.
 The new Aachen crypto platform. Here I am.
@@ -2637,11 +2655,11 @@ But that's how it's achieved.
 
 Or **somebody is hacking their servers**.
 Because they are storing a lot of public and private keys.
-And if we hack Bitpanda, you become very rich.
+And if we **hack Bitpanda**, you become very rich.
 Because there are so many people using it.
 
-Therefore, the big recommendation is, you can use that (custodial wallet), for example, to get your crypto.
-But once you get it there, transfer it from there to your wallet.
+Therefore, the big **recommendation** is, you can use that (**custodial wallet**), for example, **to get your crypto**.
+But once you get it there, **transfer it** from there to your wallet.
 To your own wallet.
 And that's then the **non-custodial wallet**, Metamask or a stick (= cold wallet) or whatever.
 
@@ -2654,44 +2672,49 @@ It's being owned by a platform like Bitpanda.
 It's not you who's owning it.
 They are just the gatekeepers to that.
 
-student: But isn't there then a natural decline in the amount of Bitcoin?
+## Decline in the Amount of Bitcoin vs. Ether
+
+student: But isn't there then a **natural decline in the amount of Bitcoin**?
 Because some people will lose their keys.
 
 prof: Yeah. Yeah. I'm not sure.
 Maybe there are some statistics.
-But there will be a lot of Bitcoins who are not on the market.
-Like, for example, the 50 Bitcoins from Satoshi Nakamoto.
-There are a lot of Bitcoins who are no longer accessible.
-Which means that we reduce the number of Bitcoins.
-But Bitcoin is the only blockchain following this principle.
-With Ethereum you are constantly producing new blocks.
-There is no limit.
+But there will be a lot of Bitcoins who are **not on the market**.
+Like, **for example, the 50 Bitcoins from Satoshi Nakamoto**.
+There are a lot of Bitcoins who are **no longer accessible**.
+Which means that **we reduce the number of Bitcoins**.
+
+But **Bitcoin is the only blockchain following this principle**.
+With **Ethereum** you are **constantly producing new blocks**.
+There is **no limit**.
 And all the other Bitcoins that produce constant new money.
-But they also burn money because you have to pay for running smart contracts.
-So we somehow also kill money, or, do some kind of defl-, it's not really a deflation.
-It's just, you keep them out of the market.
+**But they also burn money** because you have to pay **for running smart contracts**.
+So we somehow also kill money, or, do some kind of defl-, it's **not really a deflation**.
+It's just, you **keep them out of the market**.
+
+## Burn Bitcoin
 
 So what's the easiest way, and then something else, that's the last thing.
 
 Sometimes you hear that "money is being burned".
 I burned a Bitcoin.
 Nobody will do that.
-But you can burn a Bitcoin.
+But you can **burn a Bitcoin**.
 Or you can burn an Ether.
 Or just a Matic.
 A Matic is worth a cent.
 You can burn a Matic.
 How do you burn something?
 
-student: Send it to an address that nobody owns.
+student: Send it **to an address that nobody owns**.
 
-prof: Yes, you send it to the address of zero.
+prof: Yes, you **send it to the address of zero**.
 The recipient of your Bitcoin is zero.
-Which means nobody has the private key that matches the public key zero.
+Which means **nobody has the private key** that matches the public key zero.
 Complete zero.
 If someone finds it, then he becomes rich.
 Because suddenly he owns all the things that have been burned.
-Burning or deleting crypto means you transmit it to an address that nobody can use as a real address.
+**"Burning" or "deleting" crypto** means you transmit it to **an address that nobody can use as a real address**.
 Sometimes you can also use `"burn"` as the address.
 The address is very long.
 So a lot of numbers.
