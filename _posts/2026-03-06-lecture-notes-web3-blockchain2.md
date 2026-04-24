@@ -1383,7 +1383,7 @@ is that some numbers,
 
 And something interesting that I also just learned last week is the following
 which means that we had one period in time
-where we got **50 Bitcoins** as an **incentive** for our **mining fees**.
+where we got **50 Bitcoins** as an **incentive** for our **mining fees** (not transaction fees!).
 That was just at the beginning, **the first years**.
 So it took about **four years**.
 Then it was decreased to a period where we got 25.
@@ -1408,31 +1408,38 @@ There will not be that much coming in the end.
 
 ## Mempool
 
+- [Youtube: Mempool.Space Tutorial](https://www.youtube.com/watch?v=SoMtMc0DqsY)
+- [Nonce, Difficulty, Coinbase Transaction, etc.](https://www.youtube.com/watch?v=17jbwYHPT0A)
+
 So that's now the time that we go to this web page here.
 Let's see.
 That's **Mempool**, [https://mempool.space/](https://mempool.space/).
 Mempool is a web page.
 It's currently live.
 
-And what we see here are the Bitcoin blocks that have been mined.
-On the right-hand side, we have those that have been mined.
+### Homepage
 
-And you see the amount of time that has passed since this time.
+And what we see here on the homepage are the **Bitcoin blocks that have been mined**.
+On the **right-hand side** (of the white vertical dashed line), we have those blocks that have been mined.
+
+And you see the **amount of time that has passed since this time (when the block was mined)**.
 So 50 minutes ago, 46 minutes ago, 42, 30, 60, 7 minutes ago.
-So you see, it's not always 10 minutes.
+So you see, it's **not always 10 minutes**.
 It can be a little bit more.
 It can be a little bit less, but on average we get it.
-So here we see the average block time, 10.2 minutes.
+So here we see the **average block time, 10.2 minutes**.
 
 So what else do we see?
-So what we can do is, we see the miner.
+So what we can do is, we see **the miner**.
 That's also interesting.
-So we see that there are mining pools here.
+So we see that there are **mining pools** here.
 F2P pool got this block... mined this block.
 F2P pool mined that block.
 So you see, we have some pools who are really powerful.
-It's not that it's a completely equal distribution who's getting the mining fees.
-And who's moving the block.
+**It's not that it's a completely equal distribution who's getting the mining fees**.
+And who's mining the block.
+
+### Blocks
 
 We also see the **number of transactions in the block**.
 Let's see.
@@ -1440,7 +1447,7 @@ We just take this block here.
 And we click on this.
 We should see some more information about that.
 We should see... yeah, here we go.
-So that's this block number.
+So that's this **block number**.
 And then we see some additional information about it.
 So we see...
 Okay.
@@ -1448,31 +1455,30 @@ Okay.
 student: Yeah, that's just like to scroll down for a second.
 
 prof: Yeah.
-Now we see the different transactions in there.
+Now we see **the different transactions in there (in the block)**.
 But I was looking for the summary of that.
 Ah yeah, that's what we got here.
-You see, we got 3,360 transactions in there.
-We got the total fees that we earned, 0.027 that were in this particular block.
+You see, we got **3,360 transactions in there**.
+We got the **total fees that we earned**, 0.027 that were in this particular block.
 And here you see all the transactions that have been spent in there.
 
 Yeah.
 What else can we see?
 
 student: The first transaction is the **coinbase transaction**.
-So that's the block reward.
+So that's the **block reward**.
 
 ---
 
-Gemini: "coinbase transaction in bitcoin"
+#### Gemini: "coinbase transaction in bitcoin"
 
-A Bitcoin coinbase transaction is the very first transaction in a new block, created by miners to claim the block reward (newly minted BTC + fees)
-. Unlike regular peer-to-peer transactions, these have no inputs, meaning they do not consume previous transaction outputs, effectively creating new bitcoin from nothing.
+A Bitcoin coinbase transaction is **the very first transaction in a new block**, created by miners to claim the **block reward (newly minted BTC + fees)**. Unlike regular peer-to-peer transactions, these have **no inputs**, meaning they do not consume previous transaction outputs, effectively **creating new bitcoin from nothing**.
 
 **Key Aspects of a Bitcoin Coinbase Transaction:**
 
 - **Purpose**: Incentivizes miners to secure the network and introduces new supply.
-- **Structure**: It is the only transaction in a block without inputs; it has a single output (the reward).
-- **Reward Components**: Includes the block subsidy (currently 3.125 BTC) plus all transaction fees from that block.
+- **Structure**: It is the only transaction in a block without inputs; it **has a single output (the reward)**.
+- **Reward Components**: Includes the **block subsidy** (currently 3.125 BTC) **plus all transaction fees from that block**.
 - **Security**: Miners must wait for 100 block confirmations before they can spend the rewards.
 - **Location**: It is always the first transaction in a new block, acting as the foundation of the blockchain, as described by River and Learn Me A Bitcoin.
 
@@ -1480,23 +1486,122 @@ Note: This is distinct from a transaction made using the Coinbase exchange platf
 
 ---
 
-prof: That's the block reward.
-3.25.
+prof: That's the **block reward, 3.125 Bitcoin**.
 
-student: Also all the fees.
+student: Also all **the fees**.
 
 prof: Yeah.
-So there you see what they earned.
-And this is how we check all the different transactions that have been done.
+So there you see **what they (the miners) earned**.
+And this is how we check all the different transactions that have been done (in the block).
 
-student: And in the bottom left of every transaction, you can see the fee rate that they're paying, so in Satoshis per virtual bytes.
-So then you can see the total fee and then the fee rate.
+### Transactions
+
+student: And in the bottom left of every transaction, you can see the **fee rate** that they're paying, so **in Satoshis per virtual bytes**.
+So then you can see the **total fee** and then the **fee rate**.
+
+---
+
+#### ChatGPT: "fee rate meaning"
+
+In Bitcoin, **fee rate** means:
+
+> how much transaction fee you pay **per unit of transaction size**.
+
+It is **not** the percentage of money sent.
+
+---
+
+##### Why fee rate exists
+
+Miners choose transactions partly based on how profitable they are to include in a block.
+
+Block space is limited, so miners prefer transactions paying higher fee **relative to size**.
+
+---
+
+##### Bitcoin units
+
+Fee rate is usually measured in:
+
+**satoshis per virtual byte** (**sat/vB**)
+
+* 1 bitcoin = 100,000,000 satoshis
+* vB = virtual byte (a size metric for transactions)
+
+---
+
+##### Example
+
+Suppose your transaction size is:
+
+* 200 vB
+
+And you choose:
+
+* 15 sat/vB
+
+Then fee =
+
+200 × 15 = 3000 satoshis
+
+---
+
+##### Important distinction
+
+Sending:
+
+* 0.01 BTC
+  or
+* 10 BTC
+
+can have similar fees if transaction size is similar.
+
+Because fee depends on **data size**, not payment amount.
+
+---
+
+##### What affects transaction size?
+
+Mostly:
+
+* number of inputs used
+* number of outputs created
+* script type (legacy, SegWit, Taproot)
+
+A wallet consolidating many small UTXOs can be larger and need more fee.
+
+---
+
+##### Higher vs lower fee rate
+
+###### High fee rate
+
+* faster confirmation likely
+
+###### Low fee rate
+
+* slower confirmation possible
+* may wait in mempool
+
+---
+
+##### Ethereum note
+
+In Ethereum, people often talk about **gas price** instead of fee rate, which is similar in concept but different mechanics.
+
+---
+
+##### One-line summary
+
+Fee rate = how much you pay **per byte of block space**, not how much you transfer.
+
+---
 
 prof: Yeah.
 That was five dollars fee.
 And what they transferred was actually 0.0... Oh, they earned 1.5 bitcoins. Yeah. That's the fees, isn't it? No.
 
-student: So it consumed one previous output and produced two new outputs.
+student: So it **consumed one previous output** and **produced two new outputs**.
 
 prof: So what did they pay?
 They paid five dollars for a transaction of one bitcoin.
@@ -1510,13 +1615,13 @@ What are the little ones on the right hand inside?
 
 student1: Only the top one is what's actually sent, right? Because more probably goes back to your own wallet.
 
-student2: The left is what is being spent.
-And then on the right are the new outputs that they're producing.
+student2: The **left is what is being spent**.
+And then on the **right are the new outputs that they're producing**.
 
 prof: So that's the fee and that's the...
 
 student2: No, those are two outputs.
-Then the fee is the difference between what...
+Then the **fee is the difference** between what...
 
 student1: 100 could go to you and the bottom one could go back to me, then I can use it again in another transaction.
 
@@ -1524,9 +1629,28 @@ prof: Yes.
 Then I see...
 What do you see? 1, 2, ...
 
-student2: What you can see is usually, what wallets do is they produce a new address for your change to go to.
-To increase your privacy.
-That way if someone is looking at the blockchain, they don't know which is your change and which is the actual payment that you wanted to do.
+### Transactions: Change goes to a New Address, Not to the Sender's Address
+
+student2: What you can see is usually, **what (modern) wallets do is they produce a new address for your change to go to**.
+To increase your **privacy**.
+That way **if someone is looking at the blockchain, they don't know which is your change and which is the actual payment that you wanted to do**.
+
+---
+
+**Are there exceptions?**
+
+Yes.
+
+Some wallets may:
+
+- reuse an old change address
+- allow manual coin control
+- send all funds (no change)
+- use special privacy schemes like CoinJoin
+
+---
+
+- example where change goes to the same address: [watch: 4:50](https://www.youtube.com/watch?v=17jbwYHPT0A&t=290s)
 
 prof: Yeah, so what you could guess is somehow,
 he provided a transaction of one Bitcoin, that's what he got some time ago.
@@ -1537,20 +1661,22 @@ Just to somehow say, just to avoid that, if I know your wallet address, I can id
 And if you are very rich, I can try somehow to cheat you, to knock you down, to make you drunk, whatever, in order to get your Bitcoins.
 Yeah, that's the reason.
 **Bitcoin is transparent**.
-You can see what people have on the ledger.
+**You can see what people have** on the ledger.
 To avoid that, you somehow do some kind of mixing and using a lot of different addresses, a lot of different account numbers, like in a bank.
 
-student3: Yeah, what I wanted to ask was, I could track, if I really wanted to?
+student3: Yeah, what I wanted to ask was, **I could track, if I really wanted to?**
+
+### Transactions: Red vs. Green
 
 student2: Can I point at something?
 
 prof: Yeah, yeah, yeah, yeah.
 Oh, of course.
 
-student2: Yeah, so here the red means it's been consumed.
+student2: Yeah, so here the **red means it's been consumed.**
 So because this is the one that's going into the transaction.
-And then here, when you see green, it means that that transaction hasn't been spent yet.
-And then if it's red, it means that this output has actually been already spent in another transaction.
+And then here, when you see **green, it means that that transaction hasn't been spent yet.**
+And then if it's **red, it means that this output has actually been already spent in another transaction.**
 Yeah.
 
 prof: Hasn't been spent means that this is not yet mined somewhere, or?
@@ -1566,28 +1692,35 @@ So when they want to spend this Bitcoin, you will see this one on the left side.
 prof: I think this should sum up to that one.
 
 student2: Yes.
-And the difference between, so what you see here, the fee, the fee is literally just the difference between the inputs and the outputs.
+
+### Transactions: Fee
+
+student2: And the difference between, so what you see here, the fee, the **fee is literally just the difference between the inputs and the outputs**.
 That's all the fee is.
-So if you make a mistake and you forget to add an output, then that will just end up as a fee and the miner will get it.
+So **if you make a mistake and you forget to add an output, then that will just end up as a fee and the miner will get it**.
 And I think the highest was at 86 Bitcoin fee.
 Someone made a mistake a long time ago and 86 Bitcoin went to the miner.
 Just because they made a mistake.
 
-student4: So the information for one transaction, it's really just three addresses and three values for Bitcoin.
+### Transactions: How many inputs/outputs are possible?
 
-student2: Well, as many as you want.
-So if you scroll down there, you can find another one with, usually you can, okay, like here for example, you can have as many inputs as you want.
-So all you have to do is when you make a Bitcoin transaction, you reference UTXOs, which are unspent transaction outputs, as inputs.
-And then you can generate as many outputs as you want.
+student4: So the **information for one transaction**, it's really just three addresses and three values for Bitcoin.
 
-student5: So this means the closer the transactions you used to prove you have that amount of Bitcoin are to what are you spending the lower your fee is, right?
+student2: Well, **as many as you want**.
+So if you scroll down there, you can find another one with, usually you can, okay, like here for example, **you can have as many inputs as you want**.
+So all you have to do is **when you make a Bitcoin transaction, you reference UTXOs, which are unspent transaction outputs, as inputs**.
+And **then you can generate as many outputs as you want**.
 
-student2: The fee only depends on, one, how much you choose to pay, but also the size of the bytes of the transaction.
-So like here for example, you can see the fee rate, which is supposedly for virtual bytes, the byte basically.
-And then that's the total fee.
-And that only depends on the size of your transaction.
-And the size of the transaction is just how many inputs you're referencing and then how many outputs you'll produce.
-Like if you just have one input and one output, but you're transferring 50 Bitcoin, you still only need to pay a tiny fee.
+### Transactions: Fee depends on...
+
+student5: So this means the closer the transactions you used to prove you have that amount of Bitcoin are to what are you spending **the lower your fee is**, right?
+
+student2: The **fee only depends on, one, how much you choose to pay, but also the size of the bytes of the transaction**.
+So like here for example, you can see the **fee rate**, which is supposedly for virtual bytes, the byte basically.
+And then that's the **total fee**.
+And **that only depends on the size of your transaction**.
+And the **size of the transaction is just how many inputs you're referencing and then how many outputs you'll produce**.
+Like **if you just have one input and one output, but you're transferring 50 Bitcoin, you still only need to pay a tiny fee**.
 
 student5: And then the expense in this block, you just reference the expense, the ~~quantity~~ with the red arrow to someone else and this with the green arrow, the credit and fee.
 
@@ -1604,8 +1737,10 @@ And here he is sending something.
 He got a 0.03 and he's sending 0.02 to someone and he's getting that back.
 So he still owns that one.
 
-student2: And because it's pseudonymous, we don't know actually which is this person's address.
-Either one could be the change.
+### Transactions: We don't know which is the Change Address
+
+student2: And because **it's pseudonymous, we don't know actually which is this person's address**.
+**Either one could be the change**.
 
 prof: I just clicked on this one.
 Yeah, so let me see.
@@ -1615,13 +1750,17 @@ student2: So it's not an address.
 prof: He got that one.
 So this particular is now lucky he got...
 
-student2: So then you can see the balance is the sum of all transaction outputs.
-If you go to the address with a lot of outputs, the balance you see is just the sum of all the unspent outputs that they have.
+### Address: Balance
+
+student2: So then you can see **the balance is the sum of all transaction outputs**.
+**If you go to the address with a lot of outputs, the balance you see is just the sum of all the unspent outputs that they have.**
+
+### Transactions: Highest Paying and Lowest Paying Transactions
 
 prof: So, and this hash tree here...
 These big transactions are?
 
-student2: Yeah, that's the highest paying and then lowest paying transactions.
+student2: Yeah, that's the **highest paying and then lowest paying transactions**.
 And for transactions to get accepted currently you need to pay about one Satoshi per byte.
 If not, miners will choose not to relay your transaction because you don't pay enough.
 
@@ -1646,33 +1785,40 @@ It acts as a spam filter, preventing the network from being overloaded with thou
 
 ---
 
-prof: You know the difference between the "expected block" and "actual block"?
+### "expected block" vs. "actual block"
 
-student2: The expected block is, so, a miner just running some default Bitcoin Core policy accepting transactions.
-This is what you would expect and then the actual block to get is what the miner has actually chosen to do.
-Because a miner can choose any transactions they want in the block.
+prof: You know the **difference between the "expected block" and "actual block"?** (is shown when you click on the "Audit" button on the page of a mined block)
+
+student2: The **"expected block"** is, so, a miner just running some default Bitcoin Core policy accepting transactions.
+This is what you would expect and then the **"actual block"** to get is what the miner has actually chosen to do.
+Because **a miner can choose any transactions they want in the block**.
 But what happens is they obviously pick the ones that pay the highest fees because then they get the biggest block reward.
 
-student6: So if I have a miner I can mine my own transactions for free?
+### Zero Fee Transactions
 
-student2: Yeah, yeah.
+student6: So **if I have a miner I can mine my own transactions for free?**
+
+student2: **Yeah**, yeah.
 Yeah, and actually there are still transactions that get sent that pay zero transaction fees,
-but that's usually someone who's literally a friend with a mining pool.
+but that's usually someone who's literally **a friend with a mining pool**.
 Because if you just submit the transaction, paying zero fees to the network, they won't agree with it.
 In the early days that was the norm but now that mining is becoming economic you need to pay a certain amount of fee.
+
+### Genesis block
+
 And actually if you want one can go to the very first block and you can see, if you go to the top right, you can put "0".
 If you search for "0" and you click on, yep.
-So here you can see, this is literally the very first Bitcoin block with Satoshi paying himself the first block reward.
+So here you can see, this is literally **the very first Bitcoin block** with Satoshi paying himself the first block reward.
 And then as you go on you can see that there's just one transaction per block because no one was using Bitcoin back then.
-And then these are all Satoshi's wallets which he still hasn't... that Bitcoin hasn't been spent yet.
-So there's about a million Bitcoin just locked away in all his wallets.
+And then these are all **Satoshi's wallets** which he still hasn't... that Bitcoin hasn't been spent yet.
+So there's **about a million Bitcoin just locked away in all his wallets**.
 So if you go down here, you see it's not spent yet, it's still green.
 So those 50 Bitcoin have not been spent yet.
 
 prof: So you can imagine that there are some people now just watching this particular address.
-And if suddenly this address is being used for a transaction everybody will say "hey Satoshi woke up".
+And if suddenly this address is being used for a transaction everybody will say **"hey Satoshi woke up"**.
 
-student2: Or quantum computers have become reality.
+student2: Or **quantum computers** have become reality.
 
 student7: Like realistically can he even spend it?
 Like if he goes to a Pizzaria and buys Pizza with it, it literally would be...
@@ -1680,18 +1826,18 @@ Like if he goes to a Pizzaria and buys Pizza with it, it literally would be...
 student2: I mean it's valid Bitcoin.
 It's just, people say either he's dead or he has chosen not to spend all of this to show restraint or trust in the system.
 And if you do see the coins moving one day either he's woken up or quantum computers have become reality.
-Because here these were the earliest type of addresses and they're just the raw public key on the chain, whereas recently the addresses are actually hashes of the public key.
+Because here these were the **earliest type of addresses** and they're just the **raw public key** on the chain, whereas recently the addresses are actually **hashes of the public key**.
 So the public key is not revealed until you spend, whereas here the address is the public key.
 So the future quantum computers would be able to steal this Bitcoin.
 But that's probably still a long way out.
 But it is valid Bitcoin.
 So he could spend it if he wanted to.
 
-prof: How could we find that? I mean what we need to do is, you can start working on that, you need to use the algorithm that produces public and private keys.
-And you need to produce as many key pairs as possible until you got a public key that is equivalent to that one.
+prof: **How could we find that?** I mean what we need to do is, you can start working on that, you need to use the algorithm that produces public and private keys.
+And **you need to produce as many key pairs as possible until you got a public key that is equivalent to that one**.
 And then he gets a profit.
 
-student2: Yeah, and that would take longer than the age of the universe.
+student2: Yeah, and **that would take longer than the age of the universe**.
 
 prof: Or just good luck.
 
@@ -1703,8 +1849,10 @@ No.
 
 prof: That's a very nice tool to play around with.
 
-student2: And you can also see that the hash of the block is much, much larger than nowadays because back then it was extremely easy to mine Bitcoin.
-There were like 10 or 8 leading zeros, whereas...
+### Block Hashes
+
+student2: And you can also see that the **hash of the block is much, much larger than nowadays** because **back then it was extremely easy to mine Bitcoin**.
+There were like **10 or 8 leading zeros**, whereas...
 
 prof: There was some, this is the hash of the block.
 There were also sometimes, one could see the nonce.
@@ -1713,20 +1861,20 @@ That's not the nonce.
 
 student2: I don't think you can see the nonce.
 No, this was the site.
-So in the URL is the hash of the block.
+So **in the URL is the hash of the block**.
 Yeah, when you go to a block.
-So you can see all the leading zeros currently being used by the block.
-But also what they vary is, they vary the extra nonce, which is actually inside the coinbase transaction.
+So you can see all the **leading zeros** currently being used by the block.
+But also what they vary is, they vary the **extra nonce**, which is actually inside the coinbase transaction.
 Because the nonce is four bytes, so it only allows about 4 billion different values.
 So in order to get more nonces, they started inserting a nonce into this data bit of the coinbase transaction.
 And then that provided a different block hash every time you vary this extra nonce in here.
 So then that's how they managed to get these little hashes.
 Because if you could just vary the nonce, then you would just be able to get 4 billion different hashes which would not be enough to get this huge amount of leading zeros.
 
-prof: So they are somehow extending the solution space for the nonce.
+prof: So they are somehow **extending the solution space** for the nonce.
 
 student2: Exactly.
-They made the hash space bigger.
+**They made the hash space bigger**.
 And then these outputs are outputs that you can produce that spend... create zero Bitcoin outputs.
 And you use them to just add data to the blockchain.
 Yeah.
@@ -1735,15 +1883,36 @@ prof: So on a Friday evening when you don't know what to do, just browse the Bit
 It's a very cool website.
 Yeah, thank you very much.
 
-student8: So with the information, if I spend enough gas fee, I could write information on the blockchain.
+### `OP_RETURN` statements
 
-student2: Yeah, you can, the more data you put into those OP return statements, the bigger your transaction is going to be and the higher fee you'll have to pay.
-But there's actually, there was a recent war in Bitcoin about whether to increase the limit of this OP return.
+student8: So with the information, if I spend enough gas fee, **I could write information on the blockchain.**
+
+student2: Yeah, **you can, the more data you put into those `OP_RETURN` statements, the bigger your transaction is going to be and the higher fee you'll have to pay**. But there's actually, there was a recent war in Bitcoin about whether to increase the limit of this `OP_RETURN`.
 Because if you make the limit, if you remove the limit, then you could just put arbitrary data on the blockchain.
 Which most people don't want because then you could have terabytes of blockchain size where people are just putting images and anything onto the blockchain.
 But you could.
 Like it's consensus valid.
 Yeah.
+
+---
+
+**Gemini: "OP return statements bitcoin"**
+
+`OP_RETURN` is a Bitcoin scripting opcode that allows users to store up to 80 bytes of arbitrary, non-monetary data directly on the blockchain. These outputs are "provably unspendable," meaning they cannot be spent, thus reducing clutter in the UTXO (Unspent Transaction Output) set, though they are stored in full nodes.
+
+**Key Details About `OP_RETURN`**
+
+- **Function**: It marks a transaction output as invalid, allowing for the attachment of data (metadata, hash proof, or protocol messages) without creating a UTXO entry.
+- **Data Limit**: Standardly limited to 80 bytes, though proposals and future updates (e.g., Bitcoin Core v30) aim to modify or remove this limit.
+- **Use Cases**:
+  - **Data Storage**: Embedding messages, document hashes, or proofs of existence.
+  - **Tokenization**: Used by protocols like Runes to record token issuance and transfer data.
+- **Pruning**: Since these outputs cannot be spent, nodes can prune (discard) them to save space, reducing the long-term resource burden on the network.
+- **Alternatives**: Prior to `OP_RETURN`, users used provably unspendable outputs (like 0 satoshis or complex scripts) that bloated the UTXO set. 
+
+`OP_RETURN` provides a cleaner way to store data on the blockchain compared to older methods, as it ensures the data is easily ignored by miners and nodes during transaction verification.
+
+---
 
 prof: That's actually the point.
 I mean, we come to a tutorial and when you learn about writing smart contracts on Ethereum, this is where you can put a lot of information, more information on the blockchain.
@@ -1829,14 +1998,14 @@ And if you want to store a picture, it becomes even more expensive, so it's not 
 But then there was someone else coming around, **Vitalik Buterin**.
 And Vitalik Buterin, he said, well, there should be no difference.
 There is probably no difference between storing a transaction on the blockchain and a program.
-So the idea was just, can we store in addition some kind of programs on the blockchain?
+So the idea was just, **can we store in addition some kind of programs** on the blockchain?
 Which means that not only the transaction becomes immutable, also the program becomes immutable.
-So it means we can write immutable programs on the blockchain.
+So it means we can write **immutable programs** on the blockchain.
 In the first instance, OK, we can't change the program anymore.
 Good.
-But this also means we can make a contract, so we can make a deal contract.
+But this also means we can make a contract, so we can make a **deal contract**.
 And then we codify this contract and we put it on the blockchain.
-And that means that from then on, nobody can change the contract anymore.
+And that means that from then on, **nobody can change the contract** anymore.
 But we do the same.
 When you get a contract sometimes, but sometimes on paper, what they do is they just take the paper
 and they turn the top of the paper and then they do some kind of stamp out of there.
@@ -1844,7 +2013,8 @@ So that you see when you somehow take pages out, you immediately see that someth
 And this is now with these kind of smart contracts.
 So the idea is we store programs on the blockchain.
 One thing.
-So we need more data space, obviously.
+
+So we **need more data space**, obviously.
 
 The second thing is we need somehow an ability that the nodes can understand the code that we put into these smart contracts.
 So the nodes are not just storing transactions.
@@ -1863,7 +2033,7 @@ They are extremely simple.
 The second thing is **they are not contracts** at all.
 Contracts we do among humans out of the blockchain.
 So we make a contract and then we put it into code and then we put it on the blockchain.
-So the very simple thing is that we say, okay, whenever we have a **condition** that the **temperature** of our meat in a particular container is **above 80 degrees**, then we just raise the temperature alert.
+So the very simple thing is that we say, okay, whenever we have a **condition** that the **temperature of our meat** in a particular container is **above 80 degrees**, then we just raise the temperature alert.
 That's a condition that we agree upon.
 Or when you buy a ticket with the Bundesbahn, then **if the train is late more than 60 minutes**, you get 25% discount.
 I'm not sure, is it possible to do it in the app in the meantime?
@@ -1886,14 +2056,17 @@ And as soon as the parcel with the GPS receiver detects that it's in Cologne, I 
 So delivery payment.
 Or, the **machine is producing something**, the machine is saying, well, **I produced that, then payment immediately**.
 All that can be done.
+
 And that's the very simple idea of smart contracts.
-There will be a colleague of mine who will tell you how to program smart contracts.
+There will be a colleague of mine who will tell you **how to program smart contracts**.
 So I will announce that.
 So then you could also bring your laptop and then you can do somehow in a sandbox, you can play around with some kind of smart contracts and there will also be an exercise then.
 
+### Oracles
+
 student: I was thinking about this, like, okay, delay of 60 minutes, but then DB (Deutsche Bahn) puts the delay, not you, yourself.
 But let's say there's something that depends on objectives, you know?
-You can, if you know the person who's putting in that the objectives were checked out, you can still receive the money even though you didn't do anything.
+You can, **if you know the person who's putting in that the objectives were checked out, you can still receive the money even though you didn't do anything**.
 
 prof: Right. Exactly.
 And this gives us brings us to the next term, which is the **oracle**.
@@ -1921,6 +2094,8 @@ UMA acts as a secure, decentralized bridge for off-chain information to be used 
 
 ---
 
+### Polymarket
+
 And then you can say, well, I need an oracle that tells me if today in Aachen the temperature goes above 10 degrees,
 because you need it for some kind of **betting**.
 Yeah, and then somebody can say, well, today is below 10 degrees.
@@ -1935,10 +2110,13 @@ No? Even not you?
 No.
 Okay, then you learn something new about Polymarket.
 
+### Oracles: Central Authorities?
+
 student: I was just wondering what are these oracles? They are not some central authority?
 
 prof: Could be also **central authorities**.
 The **oracle** is it... let me say, I'll give you an **example**.
+
 Normally, I explain this kind of smart contracts in a way that I use **football**.
 So I'm a supporter of Cologne.
 Somebody supporting Bayern München or...
@@ -1959,6 +2137,7 @@ So he must be trusted.
 He is now the new **intermediary**. He is now our new **notary**.
 Obviously what he takes is, he takes the 20 euros and if I win, he pays back only 18.
 He said, "Well, two euros for me. I'm the betting pool. I'm your trust provider. Yeah, therefore I need two euros as a fee."
+
 Now we are clever. We make a **smart contract**.
 We both transmit 10 euros into the smart contract and then we program the smart contract in a way that we say, okay,
 on the evening of the game, watch the kicker website and when the kicker website reports the result,
@@ -1972,6 +2151,9 @@ Problematic.
 So maybe you become rich because in the end Leverkusen's smaller than Cologne.
 On the other hand, maybe you have to fill in the 10 something before.
 Otherwise you can't do a transaction.
+
+### Oracles: How to cheat an Oracle?
+
 But how would we somehow, if we say we can't modify the smart contract, what's his **idea to cheat** me, if Cologne wins?
 What would you do?
 Cologne is winning.
@@ -1986,41 +2168,47 @@ He can't program it this way.
 
 student2: He goes to the trust provider, gives them some extra money and tells them to pay him out.
 
-prof: Yeah, so he tries to convince kicker.
+prof: Yeah, so he **tries to convince kicker**.
 Yeah, because we said, well, have a look at the kicker website and check the result from there.
 So he's just trying to negotiate with the kicker website or with the `bundesliga.de` website,
 that they put in the result at 12 o'clock at night because our smart contract looks at 12 o'clock about the result.
 Could be done.
 Much easier.
-He just hacks the kicker website.
+He just **hacks the kicker website**.
+
 Yeah, therefore, and this gives us a lot of indications.
 When you think about a blockchain use case, think about it from the beginning to the end.
-Just by making a smart contract that's not secure.
+**Just by making a smart contract that's not secure**.
 **When we involve an oracle, you have to make sure that the trust provider is trusted.**
+
 Or we do something like, with this **UMA network** that we say we need some kind of **decentralized trust provider who's providing the result** and if this trust provider is **providing the wrong result, he's punished in a way that is not worth doing it**.
 So maybe you have to put in 100 bitcoins or whatever.
 Let's say 100 euros to provide the result about it.
 And this must be much higher than the bet itself.
-So it's not worth doing it because you will lose it, if you provide the wrong result, it will be seen the day after it will be seen and then you are punished.
+So it's not worth doing it because you will lose it, if you provide the wrong result, it will be seen, the day after it will be seen and then you are punished.
+
+### Oracles: The smart contract keeps the money
 
 student: So the smart contract keeps our 10 euros we will have in the smart contract, or?
 
 prof: Yeah, yeah, yeah.
 It's not that complicated. You will learn how to program **Solidity**.
 Solidity is the programming language to write contracts on Ethereum.
-And Ethereum is the blockchain that introduced smart contracts.
-Vitalik Buterin invented Ethereum and that's Solidity.
+And **Ethereum** is the blockchain that introduced smart contracts.
+**Vitalik Buterin** invented Ethereum and that's Solidity.
 It's a little bit like JavaScript.
 Similar to JavaScript.
 You will also see then how to do that by, if you like, you can have a look already at **OpenZepelin**.
 OpenZepelin like the flight ship.
-OpenZepelin, there are a lot of smart contracts that you can use as **templates**.
+OpenZepelin, there are a lot of **smart contracts** that you can use as **templates**.
 So **it's a library**, like Stackoverflow.
 No, Stackoverflow is not a library, but GitHub.
 It's a GitHub for smart contracts.
 Okay, so yeah.
 
-student: But, like, then the runtime, the cost for the runtime, is somehow in the gas fee?
+### Does it cost anything to run smart contracts?
+
+student: But, like, then the runtime, the **cost for the runtime (EVM)**, is somehow in the gas fee?
 
 prof: That's in the gas fee.
 Yeah.
@@ -2030,18 +2218,19 @@ student: Because otherwise I can write a smart contract...
 prof: You could write a smart contract that runs endlessly.
 And then you block the blockchain.
 Then you kill Ethereum.
-It's a **denial of service attack on Ethereum**.
+It's a **denial-of-service attack on Ethereum**.
 It's not possible because for the execution of the smart contract, **you would need to provide a gas fee**.
 Yeah.
 Either you somehow upload some money to the smart contract so that it can run
-or with sending the result you provide some kind of gas fee such that the smart contract can execute the code internally,
+or with sending the result you provide some kind of **gas fee** such that the smart contract can execute the code internally,
 which is if the result is larger or equal than this, do that transaction, else do that transaction.
 It's not much.
-It's an if-condition.
+It's an `if`-condition.
 How much that is going to be, the smart contract will somehow tell you.
-You can ask the smart contract, you can ask the blockchain, like you ask a miner, how much it will be.
+You can ask the smart contract, **you can ask the blockchain**, like you ask a miner, **how much it (gas fee) will be**.
 And then you need to provide the gas fee.
-And if you are not providing enough gas fee, the smart contract will not be executed.
+And **if you are not providing enough gas fee, the smart contract will not be executed**.
+
 We just had it.
 We had a big event tomorrow and we are showing something there.
 And this morning I was testing around and suddenly nothing works.
@@ -2051,12 +2240,13 @@ That's just the whole trick.
 That's the **trick to avoid that someone is just doing the denial-of-service in the blockchain**. It will cost you endless money to do that,
 to program it infinitely.
 
+### Solidity: Why JavaScript?
+
 student: ... (why JavaScript?)
 
 prof: Ask Vitalik Buterin. A lot of people criticized him for doing **JavaScript**.
 He should have used something else.
-He should have used something else.
-I know there are some other programming, other blockchains that use Rust.
+I know **there are some other blockchains that use Rust**.
 They use Rust or something else.
 I don't know why he used JavaScript.
 Because he thought, well, JavaScript is well known.
