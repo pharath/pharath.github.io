@@ -1293,80 +1293,129 @@ I'm not sure.
 I would like to see now a chart comparing this with ChatGPT,
 which is similar, but that was the big issue.
 
-And four to five years ago, everybody was talking about that.
-Why is this so energy-intensive?
-we need to find another solution.
+And **four to five years ago**, everybody was talking about that.
+Why is this so **energy-intensive**? we **need to find another solution**.
 
 ## slide: "Validation of Transactions in a Community - Consensus building"
 
 But then the other **solution** is really then to **think about other consensus-building methods**.
-So this is **proof of work**.
-So it's solving a crypto-puzzle, and it requires energy, computing, performance and time.
 
-What we could do is, we can run a blockchain,
-everybody of us is running a node, and we just have one very **explicit validation node**.
-BigchainDB, in the areas in the **old blockchains, in particular, did this**.
-We can just tell you, you are the one who's always validating the blocks.
-We trust you, and then you distribute the blocks to all of us.
-So we all have the status of our transactions, but he is our trust provider.
-We could do that.
-It's still a blockchain.
-Some people would argue, no, it's not a real blockchain because it's not proof of work and so on,
-but it still follows the rules.
+- So this is **proof of work**.
+  - So it's solving a crypto-puzzle, and
+  - it requires energy, computing, performance and time.
+- What we could do is, we can run a blockchain, everybody of us is running a node, and we just have **one** very **explicit validation node**.
+  - BigchainDB, in the areas in the **old blockchains, in particular, did this**.
+  - We can **just tell** you, **you are the one who's always validating the blocks**. We trust you, and then you distribute the blocks to all of us. So we all have the status of our transactions, but he is our **trust provider**. We could do that. It's still a blockchain.
+  - Some people would argue, no, it's not a real blockchain because it's not proof of work and so on, but it still follows the rules.
+- We could choose some kind of **lottery protocol** by **randomly selecting (validation) nodes**.
+  - So we could do some kind of random algorithm.
+  - **Intel did this** with a blockchain, and what they did is, they had a chip, and that was a **trusted chip that needed to run on the miners**, and this chip was computing very good random numbers. And then it was something like, the **next miner will be a miner who is following the random number** or so, and that was trusted then just by the hardware, by the chip, itself.
+- The big thing that **everybody is now using** almost is this one here, **proof of stake**.
+  - And proof of stake is somehow, it **moves trust** from algorithms **somehow to the institutions, but also into an economic game**.
+  - So we are no longer just computing in order to find a random number that satisfies a particular condition.
+  - What we say is, okay, if we want to run a blockchain (mining node), **everybody of us** should **put 500 euros into the pot** for it. And 500, let's say 1000 euros. That's quite a lot of money for us to use. Also for me. And from then on, **as soon as we detect somebody cheating, we take the money**. So your **stake** is actually a **1000 euros to run a miner**, and if we detect that you are somehow trying to cheat us, we take your 1000 euros. And by that, we somehow **secure the whole thing by an economic game**, more or less.
+  - In total, with Ethereum, we see it later on, it's **32 ETH times 3000**. So it's approximately 100,000 euros that you put as a **stake** into the system, and this stake will be taken away if the community detects that your miner is cheating.
 
-We could choose some kind of **lottery protocol** by randomly selecting nodes.
-So we could do some kind of random algorithm.
-**Intel did this** with a blockchain, and what they did is, they had a chip,
-and that was a **trusted chip** that needed to run on the miners,
-and this chip was computing very good random numbers.
-And then it was something like, the next miner will be a miner who is following the random number or so,
-and that was trusted then just by the hardware, by the chip, itself.
+## slide: "Grundprinzip von Proof of Stake"
 
-The big thing that everybody is now using almost is this one here, **proof of stake**.
-And proof of stake is somehow, it **moves trust** from algorithms **somehow to the institutions, but also into an economic game**.
-So we are no longer just computing in order to find a random number that satisfies a particular condition.
-What we say is, okay, if we want to run a blockchain, everybody of us should put 500 euros into the pot for it.
-And 500, let's say 1000 euros.
-That's quite a lot of money for us to use. Also for me.
-And from then on, as soon as we detect somebody cheating, we take the money.
-So your stake is actually a 1000 euros to run a miner,
-and if we detect that you are somehow trying to cheat us, we take your 1000 euros.
-And by that, we somehow secure the whole thing by an economic game, more or less.
-In total, with Ethereum, we see it later on, it's 23 ETH times 3000.
-So it's approximately 100,000 euros that you put as a stake into the system,
-and this stake will be taken away if the community detects that your miner is cheating.
+student1: But for mining, I don't know how it works with Ethereum, but for mining one block, **you still have to solve the crypto puzzle, right?**
 
-student1: But for mining, I don't know how it works with Ethereum, but for mining one block, you still have to solve the crypto puzzle, right?
-
-prof: No.
-You're just being assigned to collect the transactions and create the new block.
-You don't have to solve the crypto puzzle.
+prof: **No. You're just being assigned to collect the transactions and create the new block. You don't have to solve the crypto puzzle.**
 You are just authorized to do it next time.
 And therefore, we don't need to solve any crypto puzzle,
-and therefore we don't need to provide energy for transportation.
-And therefore, the shift from Ethereum, the proof of work, to proof of stake,
-saved, as estimates say, 99% of the energy.
+and **therefore we don't need to provide energy** for transportation.
+And therefore, the **shift** from Ethereum, the proof of work, to proof of stake, **saved, as estimates say, 99% of the energy**.
 
 student2: So you mentioned that each of us is like 1000 euros.
 Are we a single node or is each person a single node?
 
 prof: Each person is a single node.
 
-student2: Okay, so if a node tries to cheat the other nodes, they take all the money?
+---
+
+### ChatGPT: "in proof of stake how is the validator selected"
+
+In **Proof of Stake (PoS)**, the validator is selected **algorithmically**, usually with a mix of **how much stake they have locked** and some form of **randomization**. Instead of miners racing with electricity like in Proof of Work, the network chooses who gets to propose or validate the next block.
+
+#### Core Idea
+
+If you lock coins as stake, you become eligible to validate blocks.
+The more stake you lock, the **higher your probability** of being chosen — but it’s usually not a simple guaranteed turn.
+
+Think of it like a weighted lottery:
+
+* 1 coin staked = 1 ticket
+* 100 coins staked = 100 tickets
+
+More tickets = better odds.
+
+#### Typical Selection Methods
+
+Different blockchains use different methods:
+
+##### 1. Weighted Random Selection
+
+Most common approach.
+
+The protocol uses randomness and gives larger stakers better chances.
+
+##### 2. Round-Robin / Committee Selection
+
+Used in some systems.
+
+A group of validators is chosen for a time slot or epoch, and turns are assigned.
+
+##### 3. Reputation / Performance Factors
+
+Some networks also consider:
+
+* uptime
+* past honest behavior
+* response speed
+* missed blocks
+
+#### Example: Ethereum
+
+Ethereum PoS uses:
+
+* validators who stake 32 ETH (or via pools)
+* random selection for committees
+* one validator proposes a block each slot
+* others attest (vote) on it
+
+So it’s not just “largest wallet always wins.”
+
+#### Why Randomness Matters
+
+Without randomness:
+
+* biggest staker could dominate predictably
+* easier attacks
+* centralization risk
+
+So protocols use cryptographic randomness to keep selection fair.
+
+#### Short Version
+
+In PoS, validators are selected by the protocol using a **stake-weighted random process**, often with extra rules for fairness and reliability. More stake improves odds, but does not guarantee every block.
 
 ---
 
-## ChatGPT: "In Ethereum proof of stake, if a node tries to cheat the other nodes, what happens? Who takes all the money?"
+student2: Okay, so **if a node tries to cheat** the other nodes, they take all the money?
+
+---
+
+### ChatGPT: "In Ethereum proof of stake, if a node tries to cheat the other nodes, what happens? Who takes all the money?"
 
 In **Ethereum’s Proof-of-Stake (PoS)** system, cheating doesn’t pay—because the protocol **automatically punishes the validator by destroying part of its stake.** This mechanism is called **slashing**.
 
 Here’s the simple flow:
 
-### 1. Validator deposits stake
+#### 1. Validator deposits stake
 
 To become a validator, someone must lock **32 ETH** in a staking contract.
 
-### 2. If a validator cheats
+#### 2. If a validator cheats
 
 Examples of cheating include:
 
@@ -1376,7 +1425,7 @@ Examples of cheating include:
 
 These are detectable by other validators.
 
-### 3. The network slashes the validator
+#### 3. The network slashes the validator
 
 When the violation is proven:
 
@@ -1384,7 +1433,7 @@ When the violation is proven:
 * The validator is **removed from the validator set**
 * They must **exit the network**
 
-### 4. Who gets the money?
+#### 4. Who gets the money?
 
 Important point: **Usually nobody gets it.**
 
@@ -1395,7 +1444,7 @@ However:
 * The validator who **submits proof of the violation** (a *whistleblower*) may receive a **small reward**.
 * The rest is **permanently destroyed**.
 
-### 5. Why this works
+#### 5. Why this works
 
 Because validators have **real money locked up**, cheating becomes extremely expensive. If they try to attack the network, they risk losing their stake.
 
@@ -1414,11 +1463,11 @@ If you want, I can also explain **why Ethereum burns most of the slashed ETH ins
 
 ---
 
-## ChatGPT: Follow-up: "Yes"
+### ChatGPT: Follow-up: "Yes"
 
 Good question—this is where the **game theory** behind **Ethereum Proof-of-Stake gets interesting.
 
-### Why Ethereum doesn’t give the slashed ETH to other validators
+#### Why Ethereum doesn’t give the slashed ETH to other validators
 
 At first glance you might think:
 “Why not reward the other validators with the attacker’s stake?”
@@ -1427,7 +1476,7 @@ Because that would create **dangerous incentives**.
 
 ---
 
-### 1. Prevents validators from trying to trap each other
+#### 1. Prevents validators from trying to trap each other
 
 If slashed ETH went entirely to other validators, they might try to **trick competitors into making mistakes**.
 
@@ -1440,7 +1489,7 @@ By **burning most of the stake**, nobody can make big money from someone else’
 
 ---
 
-### 2. Removes profit from attacking the system
+#### 2. Removes profit from attacking the system
 
 If attackers knew someone else would profit from slashing them, it could lead to **collusion attacks**.
 
@@ -1455,7 +1504,7 @@ Burning the funds **eliminates this possibility**.
 
 ---
 
-### 3. Keeps the focus on network security
+#### 3. Keeps the focus on network security
 
 The goal is:
 
@@ -1534,15 +1583,16 @@ So this is very much **for not open networks**.
 It's for a network that we operate as a test for our supply chain or something else.
 **The more we come down here, the more open we can be.**
 Here the miners can really come from, North Korea or Russia or whatever.
-Even with proof of work it works.
+With **proof of work** it works.
 But further we come down here, it's not working.
 
 On the other hand, here we have **good performance**.
 It's just he is doing the mining and running like hell.
 Here we have proof of work, which takes time.
+
 That's what it's really, kind of, **a design decision** that we need to make.
 
-## slide: "CLASSIFICATION OF BLOCKCHAINS - DEGREE OF PUBLICITY AND ACCESS RESTRICTION"
+## slide: "Classification of Blockchains - Degree of Publicity and Access Restriction"
 
 Actually the point is then, is how we actually run our particular blockchain.
 So we can run a blockchain, as a **public blockchain network with permissionless access**, which means that it's completely public and **everybody can access**.
@@ -1556,8 +1606,7 @@ This would mean, that we run miners here, but only those who run a miner can sto
 Only those are allowed to deploy a smart contract or execute a transaction.
 So the access control is somehow, for example, only with those people who run the miner.
 And who is not running a miner is not allowed to do that.
-Or we give him a particular access, we allow it to him.
-But we organize that as a community. It's not just for free.
+Or **we give him a particular access, we allow it to him**. But **we organize that as a community. It's not just for free**.
 So what you can do with Ethereum and with some other permissioned public blockchains, everybody can store data.
 You just have to pay for it.
 
@@ -1576,14 +1625,82 @@ This has been done by IBM for particular use cases.
 
 ---
 
-Hyperledger Fabric, an open source project from the Linux® Foundation, is the modular blockchain framework and has become the unofficial standard for enterprise blockchain platforms.
+**Hyperledger Fabric**, an open source project from the Linux® Foundation, is the modular blockchain framework and has become the unofficial standard for enterprise blockchain platforms.
+
+---
+
+### ChatGPT: difference between "Private blockchain network with permissionless access" and "Private blockchain network with permissioned access"
+
+The difference is about **who can participate** in the blockchain network.
+
+A **private blockchain** means the network itself is controlled by a specific organization or consortium rather than being open like Bitcoin or Ethereum.
+Within that private setting, access can still be **permissionless** or **permissioned**.
+
+---
+
+#### 1. Private blockchain network with permissionless access
+
+* The **infrastructure is privately operated**.
+* But **anyone can join and interact** without needing approval.
+* Users may be free to read data, submit transactions, or run nodes depending on design.
+* Governance/control remains with the owner(s), even though participation is open.
+
+##### Example idea:
+
+A company runs a blockchain for digital collectibles. Anyone can create a wallet and use it, but the company controls upgrades and validator rules.
+
+##### Meaning:
+
+Private ownership + open participation.
+
+---
+
+#### 2. Private blockchain network with permissioned access
+
+* The **infrastructure is privately operated**.
+* **Only approved participants** can access the network.
+* Joining requires invitation, KYC, business relationship, or admin approval.
+* Often used by enterprises, banks, supply chains, healthcare.
+
+##### Example idea:
+
+Several banks share a blockchain where only member banks can run nodes and submit transactions.
+
+##### Meaning:
+
+Private ownership + restricted participation.
+
+---
+
+#### Simple Comparison
+
+| Feature               | Private + Permissionless | Private + Permissioned   |
+| --------------------- | ------------------------ | ------------------------ |
+| Who controls network? | Private entity/group     | Private entity/group     |
+| Who can join?         | Anyone                   | Approved members only    |
+| Typical use           | Consumer platforms       | Enterprise collaboration |
+| Openness              | Higher                   | Lower                    |
+
+---
+
+#### Important Note
+
+Many people assume **private = permissioned**, because that is the most common combination.
+A **private + permissionless** system is possible, but less common.
+
+---
+
+#### One-line summary
+
+* **Private + permissionless** = controlled by few, usable by many.
+* **Private + permissioned** = controlled by few, usable only by approved participants.
 
 ---
 
 So **you can really operate your network in really different modes**.
 So far we were talking about Ethereum, about Bitcoin, etc.
-But you can also run something in a very private way.
-You can actually download Hyperledger Fabric and start it on your PC and then you run the blockchain node on your PC.
+But you can also run something in a very **private** way.
+You can actually download **Hyperledger Fabric** and start it on your PC and then you **run the blockchain node on your PC**.
 Whether that makes sense or not, I don't know.
 But you could do it.
 
@@ -1591,7 +1708,7 @@ student: Where would you put **Monero** on that list?
 Because it's a public blockchain that is encrypted and only readable by your ~~bands~~.
 It's only readable by your ~~bands~~.
 
-prof: So it's somehow a public blockchain with permissioned access.
+prof: So it's somehow a **public blockchain with permissioned access**.
 So you have some kind of a permissioned access.
 You need permission to access it. You need to know the keys.
 I think Monero would be there.
@@ -1636,13 +1753,113 @@ It could be that on a Saturday evening,
 we all decide to do some kind of modifications to the blockchain.
 To manipulate some data.
 And in order to avoid that, we do some kind of anchoring our blockchain.
-Let's say every day at 12 o'clock, we keep the hash of our blockchain
-and store that particular hash in Ethereum.
+Let's say **every day at 12 o'clock**, we keep the **hash of our blockchain** and **store that particular hash in Ethereum**.
 And by doing that, we somehow anchor our blockchain in Ethereum in such a way
 that **if we would modify our blockchain, everybody could prove that**.
 Because we hashed the status of our blockchain today at 2 o'clock in Ethereum.
 And if you would now make some modifications to a transaction that happened at 10 o'clock in the morning,
 everybody could check it because then the hash is no longer the same.
+
+---
+
+### ChatGPT: "meaning"
+
+This passage is explaining **why some organizations use a private or faster blockchain that periodically commits proof to a public blockchain** like Ethereum or Bitcoin.
+
+It mixes concepts a bit, so here’s the clean meaning.
+
+---
+
+#### Core Idea
+
+A **public Layer 1 blockchain** (like Ethereum or Bitcoin):
+
+* highly decentralized
+* hard to tamper with
+* transparent
+* secure
+* but can be slower or more expensive
+
+So instead of putting every transaction directly on Layer 1, a company or consortium may run a **separate chain/system** that is:
+
+* faster
+* cheaper
+* more private
+* controlled by known participants
+
+Then they periodically **anchor** it to Layer 1.
+
+---
+
+#### What “Anchoring” Means
+
+They take a snapshot of the private chain’s current state and create a **cryptographic hash** of it.
+
+That hash is then written onto Ethereum.
+
+Example:
+
+* At 12:00 every day
+* hash of internal blockchain state = `0xABC123...`
+* store that hash in Ethereum
+
+Now Ethereum acts like a **public timestamped notary**.
+
+---
+
+#### Why This Helps
+
+Later, if someone changes past records on the private chain:
+
+* the new blockchain state produces a different hash
+* it no longer matches the hash stored on Ethereum
+* everyone can detect tampering
+
+So even if insiders collude later, they cannot secretly rewrite history **without being exposed**.
+
+---
+
+#### The Saturday Evening Example
+
+The speaker says:
+
+> everyone trusts each other, but not completely
+
+Meaning:
+
+A consortium may behave honestly most of the time, but members could later try to:
+
+* edit transactions
+* remove evidence
+* falsify records
+* backdate changes
+
+Because a trusted public chain already stored yesterday’s hash, those edits become detectable.
+
+---
+
+#### Is This Really “Layer 2”?
+
+Not always in the strict technical sense.
+
+True Layer 2s on Ethereum usually inherit security more directly (rollups, state channels, etc.).
+
+What the speaker describes is often closer to:
+
+* sidechain
+* consortium chain
+* permissioned chain with checkpointing
+* anchored private ledger
+
+Not every anchored chain is a formal Layer 2.
+
+---
+
+#### One-Line Summary
+
+They use a fast/private blockchain for daily operations, then periodically store its hash on a public blockchain so nobody can secretly rewrite the past later.
+
+---
 
 student1: Couldn't you also have a similar effect if you take a level one chain
 and first select one random block and then say, okay, this is my genesis block
@@ -1673,29 +1890,213 @@ And then after some time, they **submit a checkpoint**, again, it's a **Merkle t
 which is the checkpoint smart contract that is running on Ethereum.
 And then everybody somehow can use this one to **verify the state**.
 
+---
+
+### ChatGPT: "meaning"
+
+This passage explains **why large data usually stays off-chain** and how a network like Polygon uses Ethereum for additional security by posting summaries/checkpoints.
+
+---
+
+#### 1. Large Files Are Usually Not Stored Directly on Blockchain
+
+The speaker says lecture slides would not be put directly into a blockchain.
+
+Why?
+
+Because blockchains are expensive and inefficient for large files:
+
+* every node would need to store the data
+* storing many MB/GB costs a lot
+* slower synchronization
+* unnecessary for most use cases
+
+So instead:
+
+* keep the real file elsewhere (server, cloud, IPFS, database, etc.)
+* compute a **hash** of the file
+* store only the hash on-chain
+
+That way you can later prove the file was unchanged.
+
+If one letter changes, the hash changes.
+
+---
+
+#### 2. What Polygon Is Doing Here
+
+The speaker describes a chain like Polygon processing transactions first.
+
+Flow:
+
+1. User sends transaction to Polygon
+2. Polygon validators process transactions
+3. Polygon creates/finalizes blocks on its own chain
+4. Periodically Polygon sends a **checkpoint** to Ethereum
+
+So users don’t need every transaction to happen directly on Ethereum.
+
+---
+
+#### 3. What Is the Checkpoint?
+
+The checkpoint is a compressed proof / summary of Polygon’s state, often involving **Merkle roots**.
+
+A **Merkle root** is a single hash representing many transactions or balances.
+
+So instead of sending thousands of transactions to Ethereum, Polygon can send one compact commitment.
+
+---
+
+#### 4. Why Send It to Ethereum?
+
+Because Ethereum is highly decentralized and hard to tamper with.
+
+Posting checkpoints to Ethereum gives:
+
+* public timestamping
+* auditability
+* stronger security guarantees
+* reference point for dispute resolution / proofs
+
+So Ethereum becomes a trust anchor.
+
+---
+
+#### 5. “Everybody Can Verify the State” Means
+
+Anyone can compare:
+
+* Polygon data
+* Merkle proofs
+* checkpoint stored on Ethereum
+
+to verify certain transactions or states are consistent with what Polygon committed.
+
+It does **not** mean Ethereum re-executes every Polygon transaction automatically.
+
+It means Ethereum stores a trusted cryptographic commitment.
+
+---
+
+#### 6. Small Correction
+
+Calling Polygon simply “such a chain” is simplified. Polygon has had multiple products/architectures (PoS chain, zkEVM, etc.). The description sounds closest to the **Polygon PoS chain checkpointing to Ethereum**.
+
+---
+
+#### One-Line Summary
+
+Polygon handles transactions cheaply on its own chain, then periodically posts a Merkle-hash checkpoint to Ethereum so the Polygon state can be publicly verified later.
+
+---
+
 And you see there is a [link](https://etherscan.io/address/0x86E4Dc95c7FBdBf52E33D563BbDB00823894C287) (on the slide). Let's go there and let's see.
 That's the smart contract that is being used by **Polygon**, which is the **second level chain on Ethereum**.
 So we go to **Etherscan** and what we see now here is that about 23 minutes ago, they submitted a checkpoint.
-The method of this particular smart contract here is "submit checkpoint" and that was done 23 minutes ago, again, 44 minutes ago. So, about every 20 minutes, but every 20 minutes, Polygon is submitting a checkpoint to Ethereum.
+The method of this particular smart contract here is `Submit Checkpoint` and that was done 23 minutes ago, again, 44 minutes ago. So, about every 20 minutes, but **every 20 minutes, Polygon is submitting a checkpoint to Ethereum**.
 So you see, it's quite not that much distance. You only need to wait 20 minutes until you're sure that they can't change anything.
 They still can change something, but it's immediately detected.
 You still can change, obviously, but you check and you detect it.
-So if we go there, so for example, we go to the contract and then we go to the right contract.
-And then there should be something like, it's using proxies, but there must be something like "submit"... "check bucket".
-That's the method.
+So if we go there, so for example, we **go to the contract** and then we go to the right contract.
+And then there should be something like, ... it's using proxies, but ... there must be something like `Submit Checkpoint`. Yeah, that's the method.
 And this particular method is being called and this is on Ethereum.
-So on Ethereum, we have a smart contract and on Polygon, we have another one that is just every 20 minutes calculating the **checksum** of the Polygon blockchain and sending it to this particular function of that smart contract on Ethereum.
+So **on Ethereum, we have a smart contract** and **on Polygon, we have another one** that is just every 20 minutes calculating the **checksum of the Polygon blockchain** and sending it to this particular function of that smart contract on Ethereum.
 And that's how the two chains operate.
+
+---
+
+### ChatGPT: "meaning"
+
+This passage describes **how two blockchains can be linked through periodic commitments from one chain to another**.
+
+The speaker is simplifying the architecture, but the core idea is valid.
+
+---
+
+#### Plain Meaning
+
+* Polygon processes many transactions on its own chain.
+* Every ~20 minutes, a system on Polygon computes a **summary hash/checkpoint** of recent Polygon state.
+* That checkpoint is sent to a **smart contract on Ethereum**.
+* Ethereum stores that checkpoint permanently.
+
+So Ethereum becomes the public record proving what Polygon’s state looked like at that moment.
+
+---
+
+#### What “Checksum” Means Here
+
+The speaker likely means:
+
+* cryptographic hash
+* state root
+* Merkle root
+* checkpoint commitment
+
+Not a simple error-detection checksum like in files/networking.
+
+It’s a compact fingerprint of Polygon data.
+
+If Polygon history were altered later, the fingerprint would no longer match.
+
+---
+
+#### Why Use a Smart Contract on Ethereum?
+
+Instead of manually posting data, a smart contract can:
+
+* receive checkpoints
+* store them on-chain
+* verify formatting/signatures
+* track sequence/order
+* be used later for proofs or withdrawals
+
+So the relationship between chains is automated by code.
+
+---
+
+#### “On Polygon We Have Another Smart Contract”
+
+This likely means a contract/system component on Polygon that helps coordinate:
+
+* collecting validator approvals
+* packaging checkpoints
+* triggering submission to Ethereum
+
+In practice, some of this may be protocol-level infrastructure rather than literally “just one smart contract.”
+
+---
+
+#### Why Every 20 Minutes?
+
+Periodic batching means:
+
+* cheaper than posting every transaction to Ethereum
+* faster activity on Polygon
+* regular security anchoring
+
+So many Polygon transactions can be represented by one Ethereum submission.
+
+---
+
+#### One-Line Summary
+
+Polygon runs transactions cheaply on its own chain, then regularly sends a cryptographic snapshot of its state to an Ethereum smart contract so Ethereum can serve as a trusted anchor.
+
+---
+
+## Energy Consumption of Bitcoin: Does it correlate with the amount of transactions?
 
 Okay, so,...
 
-student: I was wondering about the **energy consumption of Bitcoin** because... does it correlate with the amount of transactions in the chain
+student: I was wondering about the **energy consumption of Bitcoin** because... **does it correlate with the amount of transactions** in the chain
 because, if you would simply increase the block size, you could save energy and compute more transactions.
 
-prof: We would reduce the energy consumption per transaction, but the overall energy consumption would be the same because this is not much dependent,
+prof: We would reduce the energy consumption *per transaction*, but the **overall energy consumption would be the same** because this is not much dependent,
 whether you hash 10,000 or 1 million, it's not that much difference.
-Really, the computation of finding the random number, that's what is taking the energy.
-But you could reduce the energy consumption per transaction.
+Really, the **computation of finding the random number, that's what is taking the energy**.
+But you could reduce the energy consumption *per transaction*.
 
 student: So energy consumption reaches like a plateau and then it doesn't matter anymore.
 
