@@ -1953,6 +1953,80 @@ They use a fast/private blockchain for daily operations, then periodically store
 
 ---
 
+### ChatGPT: "what is quorum"
+
+Quorum is an **enterprise-focused blockchain platform** based on Ethereum technology, originally developed by JPMorgan Chase (later open-sourced and then associated with ConsenSys).
+
+It was designed for **private / permissioned blockchain networks** where known organizations transact with each other.
+
+---
+
+#### What Quorum Is
+
+Quorum modifies Ethereum so companies can run a blockchain with features businesses often want:
+
+* only approved participants can join
+* faster transactions / quicker finality
+* private transactions between selected parties
+* controlled governance
+* no need for public anonymous miners
+
+So instead of anyone joining like on Ethereum mainnet, Quorum networks usually consist of banks, companies, or institutions.
+
+---
+
+#### Why It Was Popular
+
+Use cases included:
+
+* interbank settlement
+* supply chain coordination
+* shared records among companies
+* tokenized assets in closed ecosystems
+* consortium blockchains
+
+---
+
+#### How It Relates to Ethereum
+
+Quorum uses Ethereum-style components such as:
+
+* smart contracts
+* EVM compatibility
+* accounts / transactions
+
+But it swaps the open public model for a permissioned one.
+
+---
+
+#### Is Quorum a Layer 2?
+
+Usually **no**, not in the strict modern sense.
+
+Quorum is more accurately:
+
+* a private Ethereum-based blockchain
+* a permissioned consortium chain
+* an enterprise ledger platform
+
+It can be **anchored** to a public chain, but that does not automatically make it a true Layer 2 like rollups.
+
+Your professor is using “layer two” in a broader architectural sense.
+
+---
+
+#### Why the Name “Quorum”
+
+A quorum means the minimum number of participants needed to approve decisions. That fits blockchains where a set of known validators reach agreement.
+
+---
+
+#### One-Line Summary
+
+Quorum is a permissioned Ethereum-based blockchain platform for enterprises that want smart contracts and shared ledgers without using the public Ethereum network.
+
+---
+
 student1: Couldn't you also have a similar effect if you take a level one chain
 and first select one random block and then say, okay, this is my genesis block
 and then from there, starting your own chain?
@@ -1969,6 +2043,135 @@ student1: But then for a really significant action, I would need till the next 1
 prof: Somehow you would need to do that. Really to be sure that nobody has been changed in the tree.
 
 ## slide: "Polygon Anchor in Ethereum"
+
+---
+
+### ChatGPT: "explain this picture"
+
+This diagram is a **sequence diagram** showing how Polygon uses Ethereum as a security anchor.
+
+Read it **top to bottom** (time flows downward).
+
+---
+
+#### The Columns
+
+Each vertical lane is one participant:
+
+1. **User** – person/app sending a transaction
+2. **Polygon_Validator** – validator that helps confirm Polygon blocks
+3. **Polygon_Chain** – the Polygon blockchain itself
+4. **Ethereum_L1** – Ethereum Layer 1 mainnet
+
+The dashed vertical lines mean each participant continues existing over time.
+
+---
+
+#### Step-by-Step Flow
+
+##### 1. User sends transaction to Polygon
+
+Arrow:
+
+**User → Polygon_Chain**
+
+This means the user submits a transaction (send tokens, use dApp, etc.) to Polygon instead of directly to Ethereum.
+
+Why? Usually cheaper and faster.
+
+---
+
+##### 2. Polygon validator validates and finalizes block
+
+Arrow between validator and Polygon chain:
+
+**Polygon_Validator ↔ Polygon_Chain**
+
+Validators process pending transactions, create blocks, and finalize them on Polygon.
+
+So the user’s transaction gets included in a Polygon block.
+
+---
+
+##### 3. Submit checkpoint (Merkle Root)
+
+Arrow:
+
+**Polygon side → Ethereum_L1**
+
+After some time, Polygon sends a **checkpoint** to Ethereum.
+
+That checkpoint is usually a **Merkle root** or state commitment:
+
+* one compact hash
+* summarizes many Polygon blocks / transactions
+
+Instead of posting every transaction, only the summary is posted.
+
+---
+
+#### What Is a Merkle Root?
+
+A Merkle root is a single hash representing many pieces of data.
+
+If any Polygon transaction changed, the Merkle root would change too.
+
+So it acts like a tamper-evident fingerprint.
+
+---
+
+#### 4. Ethereum stores checkpoint in smart contract
+
+Text on right:
+
+**store Checkpoint in Smart Contract**
+
+Ethereum receives the checkpoint and stores it in a smart contract.
+
+That means the checkpoint becomes:
+
+* publicly visible
+* timestamped
+* hard to alter
+* permanently recorded on Ethereum
+
+The green text references an address page on Etherscan where such a contract can be viewed.
+
+---
+
+#### 5. Security anchor (can verify state)
+
+Dashed arrow back toward user:
+
+**security anchor (can verify state)**
+
+Meaning:
+
+Later, anyone can compare Polygon data against the checkpoint stored on Ethereum.
+
+If Polygon history were secretly changed afterward, it would no longer match the Ethereum checkpoint.
+
+So Ethereum acts like a trusted notary.
+
+---
+
+#### Big Picture
+
+Polygon does the fast/cheap transaction processing.
+Ethereum stores periodic cryptographic proofs of Polygon’s state.
+
+That gives:
+
+* speed from Polygon
+* stronger trust anchor from Ethereum
+
+---
+
+#### One-Line Summary
+
+The user transacts on Polygon, Polygon validators finalize blocks, then Polygon periodically posts a Merkle-root checkpoint to Ethereum so Ethereum can serve as a public proof of Polygon’s history.
+
+---
 
 The next point is that if we have **large amounts of data**, let's say we have a large database.
 So for example, the slides of this particular lecture,
@@ -2175,6 +2378,194 @@ So many Polygon transactions can be represented by one Ethereum submission.
 #### One-Line Summary
 
 Polygon runs transactions cheaply on its own chain, then regularly sends a cryptographic snapshot of its state to an Ethereum smart contract so Ethereum can serve as a trusted anchor.
+
+---
+
+## slide: Ethereum and L2s (Architecture)
+
+### ChatGPT: "meaning of slide text"
+
+This describes the **basic architecture of a rollup** (a Layer 2 scaling system on top of a Layer 1 like Ethereum).
+
+The key actor here is the **sequencer**.
+
+---
+
+#### What Is a Sequencer?
+
+A sequencer is the component/operator that:
+
+* receives users’ Layer 2 transactions
+* orders them into a sequence
+* bundles them into batches
+* later submits that batch to Layer 1
+
+Think of it as the temporary traffic controller for the rollup.
+
+---
+
+#### Line-by-Line Meaning
+
+##### “A sequencer receives rollup transactions”
+
+Users send transactions to the rollup instead of directly to Ethereum.
+
+Example:
+
+* token transfer
+* swap
+* game move
+* DeFi action
+
+The sequencer collects these transactions.
+
+---
+
+##### “Determines the order of transactions”
+
+The sequencer decides:
+
+* which transaction comes first
+* which comes second
+* which go into the next batch
+
+Ordering matters because it affects balances, swaps, liquidations, etc.
+
+---
+
+##### “Gives a pre-confirmation that the transaction will later be contained in an L1 block”
+
+This means the sequencer quickly tells the user:
+
+> Your transaction has been accepted and will be included.
+
+This is **not yet final Ethereum settlement**.
+
+It is an early confirmation so users don’t need to wait for Layer 1 block times.
+
+Later, the batch is actually posted to Ethereum.
+
+---
+
+##### “As a result: lower fees and faster confirmations for users”
+
+Because many transactions are bundled together:
+
+* Layer 1 gas cost is shared across many users
+* confirmations feel near-instant
+* cheaper than transacting directly on Ethereum
+
+---
+
+#### Example Flow
+
+1. You submit a swap on a rollup
+2. Sequencer accepts it in seconds
+3. UI shows confirmed/pending success
+4. Later sequencer posts batch to Ethereum
+5. Final settlement secured by Ethereum
+
+---
+
+#### Important Caveat
+
+The sequencer can improve UX, but it may introduce temporary centralization if only one sequencer exists.
+
+Many rollups aim to decentralize sequencers over time.
+
+---
+
+#### One-Line Summary
+
+A sequencer is the rollup’s transaction organizer: it quickly accepts and orders Layer 2 transactions, then later batches them onto Layer 1, giving users faster and cheaper transactions.
+
+---
+
+### ChatGPT: "what is a rollup"
+
+A **rollup** is a **Layer 2 blockchain scaling system** that executes transactions **outside the main Layer 1 chain** (usually Ethereum), then **bundles (“rolls up”) many transactions into compressed data** and posts that data back to Layer 1.
+
+It is designed to make transactions:
+
+* cheaper
+* faster
+* more scalable
+
+while still inheriting much of Layer 1’s security.
+
+---
+
+#### Core Idea
+
+Instead of Ethereum processing every single transaction individually:
+
+* 10,000 users transact on the rollup
+* the rollup processes them off-chain / on Layer 2
+* results are compressed into a batch
+* batch data/proofs are sent to Ethereum
+
+So Ethereum secures summaries, not every computation directly.
+
+---
+
+#### Why It’s Called “Rollup”
+
+Because many transactions are **rolled up into one batch** before posting to Layer 1.
+
+Think:
+
+1000 transactions → 1 submission to Ethereum.
+
+---
+
+#### How It Works (Simple Flow)
+
+1. Users send transactions to rollup
+2. Sequencer orders and executes them
+3. New balances/state are computed
+4. Batch is posted to Ethereum
+5. Ethereum stores data / verifies proofs
+
+---
+
+#### Main Types of Rollups
+
+##### 1. Optimistic Rollups
+
+Assume transactions are valid unless challenged.
+
+Examples:
+
+* Optimism
+* Arbitrum
+
+##### 2. ZK Rollups
+
+Use zero-knowledge proofs to mathematically prove correctness.
+
+Examples:
+
+* zkSync
+* Starknet
+
+---
+
+#### Why Rollups Matter
+
+They help Ethereum scale without sacrificing decentralization as much as putting everything on one faster centralized chain.
+
+---
+
+#### Rollup vs Sidechain
+
+* **Rollup** = relies heavily on Ethereum for security/data availability
+* **Sidechain** = separate blockchain with its own security model
+
+---
+
+#### One-Line Summary
+
+A rollup is a Layer 2 system that processes many transactions cheaply off the main chain, then posts compressed results to Ethereum for security.
 
 ---
 
