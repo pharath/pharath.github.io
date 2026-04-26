@@ -976,6 +976,428 @@ in case there is a conflict, you don't get the action problem.
 
 ## Quiz
 
+---
+
+### ChatGPT: "what questions were asked during the quiz?"
+
+Based on the transcript, the professor’s quiz was about **blockchain / crypto fundamentals**. The OCR/transcript is messy, but we can reconstruct many of the questions that were asked.
+
+### Questions clearly mentioned or inferable from the transcript
+
+### Intro / Test Question
+
+1. **What did we get for breakfast today?**
+   (Just a warm-up, no points.)
+
+---
+
+### Blockchain / Crypto Questions
+
+#### History / Concepts
+
+2. **What was the “second economy”?**
+   (Professor says correct answer was “document economy,” likely from lecture context.)
+
+3. **Which of the following were early forms of money / currency?**
+   (References to red stones / Yap stones, DigiCash, Hashcash.)
+
+4. **When was Bitcoin introduced?**
+
+* Correct answer mentioned: **2008** (whitepaper), blockchain live in **January 2009**.
+
+---
+
+#### Bitcoin Mining / Proof of Work
+
+5. **Puzzle Question: Put Bitcoin mining steps in the correct order**
+   Likely:
+
+* Compute hash
+* Check if lower than difficulty target
+* If false → increment nonce and retry
+* If true → block accepted
+
+6. **How are blocks connected in Bitcoin?**
+
+* Correct idea: **by hash links**, not by block number.
+
+7. **Which statements about cryptographic hash functions are correct?**
+   Likely options:
+
+* Output has fixed length ✅
+* Input cannot be derived from output easily ✅
+* Small input changes create large output changes ✅
+* Collision free / collision resistant ✅
+
+8. **What is a Merkle Tree used for?**
+   Professor says:
+
+* Not only blockchain
+* Used for data integrity
+* Pairwise hashing of end nodes
+
+9. **How does Bitcoin maintain ~10 minute block time?**
+   Correct answer:
+
+* Adjust **difficulty**, not network speed / hash function.
+
+---
+
+#### Blockchain vs Database
+
+10. **Difference between blockchain systems and databases?**
+    Correct idea:
+
+* In blockchains, nodes **do not trust each other**.
+* In databases, nodes usually operate in a trusted environment.
+
+---
+
+#### Wallets / Keys
+
+11. **Which of the following are wallet types?**
+    Mentions:
+
+* Browser wallet
+* Hardware wallet
+* Paper wallet
+
+12. **What does a wallet store?**
+    Correct answer:
+
+* Wallets do **not** store coins/tokens directly.
+* They store **keys / addresses / access credentials**.
+
+---
+
+#### Authentication / Cryptography
+
+13. **Put public-key authentication steps in correct order**
+    Likely:
+
+* Wallet/user sends request
+* Server sends challenge
+* User signs challenge
+* Server verifies with public key
+
+---
+
+#### Self-Sovereign Identity / Verifiable Credentials
+
+14. **What is self-sovereign identity (SSI)?**
+    Correct points:
+
+* Not centrally controlled
+* User controls own data
+* Consent-based identity sharing
+
+15. **What are verifiable credentials?**
+    Correct idea:
+
+* Cryptographically verified claims (e.g., proving age >18 without revealing birthdate)
+
+---
+
+#### Ethereum / Proof of Stake
+
+16. **What happens when validators misbehave?**
+
+* They can be **slashed**.
+
+17. **If you stake 64 ETH instead of 32 ETH, what happens?**
+    Correct answer:
+
+* You run **two validators**, not one stronger validator.
+
+---
+
+#### Smart Contracts
+
+18. **Can smart contract owners modify deployed smart contracts?**
+    Correct answer:
+
+* Normally **no**, unless they built in an upgrade/backdoor mechanism.
+
+19. **When do we not need public verifiability?**
+    Likely question about when blockchain is unnecessary.
+
+---
+
+#### Market / Prices
+
+20. **What is the current Bitcoin price / crypto price in Europe?**
+    (Last question referenced checking current price; double points.)
+
+---
+
+### Likely Total Topics Covered
+
+The quiz covered:
+
+* Bitcoin history
+* Mining / Proof of Work
+* Hashes & Merkle Trees
+* Difficulty adjustment
+* Blockchain vs databases
+* Wallets & keys
+* Public-key authentication
+* SSI / credentials
+* Ethereum staking & slashing
+* Smart contracts
+* Crypto prices
+
+---
+
+If you'd like, I can also turn this into a **clean 20-question practice quiz with answers**, because these look very similar to possible exam questions.
+
+---
+
+### ChatGPT: "yes"
+
+### Blockchain Quiz – Reconstructed Practice Version (with Answers)
+
+Based on your professor’s live quiz, here is a clean study version that looks very close to what could appear in class or an exam.
+
+---
+
+### 1. In which year was Bitcoin introduced?
+
+A) 2005
+B) 2008
+C) 2009
+D) 2011
+
+✅ **Answer: B**
+Bitcoin whitepaper was published in **2008**. The network launched in **January 2009**.
+
+---
+
+### 2. How are Bitcoin blocks connected?
+
+A) By block number
+B) By miner name
+C) By previous block hash
+D) By timestamp only
+
+✅ **Answer: C**
+
+---
+
+### 3. Which statements about hash functions are correct? (Multiple answers)
+
+A) Output has fixed length
+B) Input can easily be reconstructed from output
+C) Small input changes create very different outputs
+D) They should be collision resistant
+
+✅ **Answers: A, C, D**
+
+---
+
+### 4. What does Bitcoin mining do?
+
+A) Prints money manually
+B) Solves hash puzzles to add new blocks
+C) Deletes transactions
+D) Encrypts the internet
+
+✅ **Answer: B**
+
+---
+
+### 5. What is adjusted in Bitcoin to keep ~10 minute block times?
+
+A) Internet speed
+B) Block size
+C) Difficulty
+D) Hash function
+
+✅ **Answer: C**
+
+---
+
+### 6. Correct mining order (Puzzle)
+
+1. Compute hash
+2. Compare with difficulty target
+3. If invalid → change nonce
+4. Retry until valid
+
+✅ **Correct Order:** 1 → 2 → 3 → 4
+
+---
+
+### 7. What is a Merkle Tree used for?
+
+A) Storing passwords
+B) Efficient verification of transaction integrity
+C) Compressing videos
+D) Sending emails
+
+✅ **Answer: B**
+
+---
+
+### 8. Main difference: Blockchain vs Database
+
+A) Blockchain has no data
+B) Blockchain nodes do not need to trust each other
+C) Databases are slower
+D) Databases use no computers
+
+✅ **Answer: B**
+
+---
+
+### 9. Which are wallet types? (Multiple answers)
+
+A) Hardware wallet
+B) Browser wallet
+C) Paper wallet
+D) Keyboard wallet
+
+✅ **Answers: A, B, C**
+
+---
+
+### 10. What does a wallet actually store?
+
+A) Coins directly
+B) Private/public keys
+C) Gold reserves
+D) Tokens physically
+
+✅ **Answer: B**
+
+---
+
+### 11. “Not your keys, not your crypto” means:
+
+A) Use bigger passwords
+B) Whoever controls the private keys controls the assets
+C) Wallets are illegal
+D) Exchanges are faster
+
+✅ **Answer: B**
+
+---
+
+### 12. What is slashing in Proof of Stake?
+
+A) Fast rewards
+B) Punishment for malicious validator behavior
+C) Free tokens
+D) Lower gas fees
+
+✅ **Answer: B**
+
+---
+
+### 13. How much ETH is required for one Ethereum validator?
+
+A) 1 ETH
+B) 16 ETH
+C) 32 ETH
+D) 64 ETH
+
+✅ **Answer: C**
+
+---
+
+### 14. If someone has 64 ETH to stake:
+
+A) One stronger validator
+B) Two validators
+C) Unlimited voting power
+D) No difference
+
+✅ **Answer: B**
+
+---
+
+### 15. Can deployed smart contracts always be changed later?
+
+A) Yes, anytime
+B) No, unless upgrade/admin logic was built in
+C) Only by miners
+D) Only on weekends
+
+✅ **Answer: B**
+
+---
+
+### 16. What is Self-Sovereign Identity (SSI)?
+
+A) Government owns your identity
+B) User controls own identity data
+C) Identity on paper only
+D) No passwords ever again
+
+✅ **Answer: B**
+
+---
+
+### 17. What are Verifiable Credentials?
+
+A) Fake certificates
+B) Cryptographically provable claims
+C) Password managers
+D) NFTs only
+
+✅ **Answer: B**
+
+---
+
+### 18. Example of privacy-preserving proof:
+
+A) Reveal passport number
+B) Reveal exact birthdate
+C) Prove you are over 18 without revealing birthdate
+D) Share all bank data
+
+✅ **Answer: C**
+
+---
+
+### 19. Hashcash was originally designed for:
+
+A) Ethereum staking
+B) Spam prevention / anti-email spam
+C) NFTs
+D) Video games
+
+✅ **Answer: B**
+
+---
+
+### 20. DigiCash is known for:
+
+A) Early digital cash using blind signatures
+B) First blockchain
+C) First NFT marketplace
+D) Mining pools
+
+✅ **Answer: A**
+
+---
+
+### Exam Tip – What Professor Likely Cares About
+
+He seems to focus on understanding:
+
+* Why hashes matter
+* Why trustlessness matters
+* Wallets = keys, not coins
+* Bitcoin mining logic
+* Ethereum validator mechanics
+* SSI / privacy identity systems
+
+---
+
+If you'd like, I can also create the **10 hardest trick questions your professor could ask in the oral exam** based on this quiz style.
+
+---
+
 Okay, so as I said, what we wanted to do today is also to have some kind of a quiz.
 And that's what I prepared.
 So it's based on the idea now that you, what you need to do is to scan the QR code.
