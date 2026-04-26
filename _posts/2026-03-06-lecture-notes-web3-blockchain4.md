@@ -1021,7 +1021,7 @@ some slides in between here discussed in Blockchain Basics Part 3
 
 ### ChatGPT: "What do W. Mougayar and F. Bolten say about blockchain application areas and ATOMIC (abbreviation for assets, trust, ownership, money, identity, contracts) in 'The business Blockchain' ?"
 
-In ***The Business Blockchain* (2016)**, **William Mougayar** and **Florian Bolten** discuss blockchain not only as a technology but as a **platform for programmable economic functions**. They describe its **main application areas** using the mnemonic **ATOMIC**, which summarizes the fundamental elements that blockchain can “program” or manage digitally. ([Vishnu Nanduri, PHD][1])
+In ***The Business Blockchain* (2016)**, **William Mougayar** and **Florian Bolten** discuss blockchain not only as a technology but as a **platform for programmable economic functions**. They describe its **main application areas** using the mnemonic **ATOMIC**, which summarizes the fundamental elements that blockchain can “program” or manage digitally. ((Vishnu Nanduri, PHD)(1))
 
 ---
 
@@ -1044,7 +1044,7 @@ The main idea is that blockchain can **replace or reduce intermediaries** that t
 
 #### 2. The ATOMIC framework
 
-To summarize what blockchain enables, Mougayar and Bolten introduce the acronym **ATOMIC**, describing six core categories of programmable functionality enabled by blockchain. ([Vishnu Nanduri, PHD][1])
+To summarize what blockchain enables, Mougayar and Bolten introduce the acronym **ATOMIC**, describing six core categories of programmable functionality enabled by blockchain. ((Vishnu Nanduri, PHD)(1))
 
 ###### A — Programmable Assets
 
@@ -1153,4 +1153,4 @@ Mougayar and Bolten argue that blockchain applications span many industries and 
 
 If you want, I can also explain **how ATOMIC connects to decentralized applications (dApps)** or how it relates to **DIDs and Web3 architecture** (which seems close to what you're studying).
 
-(1): https://vishnunanduri.com/2017/05/23/review-of-the-business-blockchain-by-william-mougayar/?utm_source=chatgpt.com "Review of “The Business Blockchain” by William Mougayar"
+(1): ["Review of 'The Business Blockchain' by William Mougayar"](https://vishnunanduri.com/2017/05/23/review-of-the-business-blockchain-by-william-mougayar/?utm_source=chatgpt.com)
