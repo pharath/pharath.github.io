@@ -5,6 +5,7 @@ excerpt: "For studying \"Web3 and Distributed Ledger Technology\"; content mostl
 toc: true
 toc_label: "Contents"
 toc_sticky: true
+toc_h_max: 3
 author_profile: false
 categories:
   - Notes
@@ -17,55 +18,485 @@ tags:
 
 # SSI
 
+## slide: "Basics - Digital Identity"
+
+### ChatGPT: "meaning"
+
+The slide explains that **digital identity** is the collection of data used to **recognize, authenticate, and describe a person or entity online** when using internet services.
+
+#### Meaning of each point
+
+##### 1. Login (username, password, PIN)
+
+These are **credentials** used to prove that you are the authorized user.
+
+Examples:
+
+* Username + password for email
+* PIN for banking app
+* Fingerprint or face ID (sometimes replaces PIN/password)
+
+➡️ Purpose: **Authentication** (proving who you are)
+
+---
+
+##### 2. Profile data (name, email, address, date of birth, etc.)
+
+This is personal information linked to your account.
+
+Examples:
+
+* Full name
+* Email address
+* Shipping address
+* Birthday
+
+➡️ Purpose: **Identification and personalization**
+
+Used by companies to know who you are, contact you, or tailor services.
+
+---
+
+##### 3. Device or system data (IP address, device ID, certificates)
+
+Technical data from the device or network you use.
+
+Examples:
+
+* IP address (internet connection identifier)
+* Device ID (phone/computer identifier)
+* Browser fingerprint
+* Security certificate
+
+➡️ Purpose:
+
+* Security (fraud detection, suspicious login alerts)
+* Access control
+* Device recognition
+
+---
+
+##### 4. Usage behaviour data (tracking)
+
+Data about how you use a service.
+
+Examples:
+
+* Pages visited
+* Time spent on app
+* Clicks
+* Purchases
+* Search history
+
+➡️ Purpose:
+
+* Analytics
+* Recommendations
+* Advertising
+* Improving services
+
+---
+
+#### Overall Meaning
+
+Your **digital identity** is not just your username or name. It is a combination of:
+
+1. **What you know** (password, PIN)
+2. **Who you are** (profile data)
+3. **What you use** (device/system data)
+4. **How you behave** (usage data)
+
+Together, these allow companies, platforms, and systems to identify or profile you online.
+
+---
+
+#### Why it matters in Web3 / SSI
+
+Traditional Web2 companies store and control this identity data centrally.
+In **Web3 / Self-Sovereign Identity (SSI)**, the goal is for users to control their own identity data using tools like **DIDs** and **Verifiable Credentials**.
+
+---
+
+#### One-line summary
+
+**Digital identity = all data that represents and distinguishes you in the digital world.**
+
+## slide: "Stages of Identity Management (IDM) - Digital Identity"
+
+### ChatGPT: "meaning"
+
+This table explains the **evolution of Identity Management (IDM)** for **digital identity** — from systems controlled by central institutions to models where the user controls identity themselves.
+
+#### What is Identity Management (IDM)?
+
+Identity Management means:
+
+* creating digital identities
+* logging in users
+* verifying who someone is
+* managing access rights
+* storing identity data
+
+---
+
+#### 1. Centralized Identity Management
+
+**Meaning:**
+A single central authority manages identities or core internet identifiers.
+
+Examples:
+
+* ICANN → manages domain name system coordination
+* IANA → coordinates IP address allocations
+* Certification Authorities → issue SSL/TLS certificates
+
+##### Characteristics:
+
+* Strong dependence on one trusted institution
+* Single point of failure
+* Users have little or no control
+
+##### Example:
+
+If a certificate authority is compromised, many websites can be affected.
+
+---
+
+#### 2. Service-Based Identity Management
+
+**Meaning:**
+Each website or service creates and manages its own user accounts.
+
+Examples:
+
+* Online shops
+* Email providers
+* Forums
+* Streaming platforms
+
+##### Characteristics:
+
+* Separate login for every service
+* User manages many passwords
+
+##### Problems:
+
+* Password reuse
+* Forgotten passwords
+* Account chaos
+
+##### Example:
+
+Different passwords for Amazon, Netflix, university portal, bank, etc.
+
+---
+
+#### 3. Identity Provider (IdP) Model
+
+**Meaning:**
+A third-party provider handles authentication for many services.
+
+Examples:
+
+* Google Sign-In
+* Facebook Login
+* Apple Sign in with Apple
+
+##### Characteristics:
+
+* Convenient single sign-on (SSO)
+* One account for many websites
+
+##### Problems:
+
+* Large concentration of user data
+* Tracking across services
+* Privacy loss
+
+##### Example:
+
+Using Google login on many websites lets Google know where you log in.
+
+---
+
+#### 4. Self-Sovereign Identity (SSI)
+
+**Meaning:**
+Users own and control their identities and credentials directly.
+
+Examples:
+
+* Digital credentials in wallet apps
+* Decentralized Identifiers (DIDs)
+* Verifiable Credentials
+
+##### Characteristics:
+
+* No central provider required
+* User stores credentials in wallet
+* Selective disclosure possible
+
+##### Advantages:
+
+* Better privacy
+* More security
+* User control
+
+##### Challenges:
+
+* Users must protect wallet/keys
+* Adoption still growing
+
+---
+
+#### Overall Meaning of the Table
+
+It shows a shift:
+
+**Centralized control → Many separate accounts → Big login providers → User-controlled identity**
+
+So digital identity systems are moving from **institution-owned identity** toward **user-owned identity**.
+
+---
+
+#### One-Line Summary
+
+**SSI is the newest IDM stage where the user, not a platform, controls digital identity and credentials.**
+
 ## slide: "Principles - Self-Sovereign Identity"
 
+### ChatGPT: "meaning"
+
+This table explains the **core principles of Self-Sovereign Identity (SSI)** — a model where people **own, control, and manage their digital identity themselves**, instead of relying on governments, platforms, or big tech providers.
+
+Each principle describes what a fair digital identity system should provide.
+
+---
+
+#### Meaning of Each Principle
+
+##### 1. Existence
+
+**Users must have an independent existence.**
+
+Meaning:
+Your identity should exist independently of any company or platform.
+
+###### Benefit:
+
+* Not dependent on central control
+* Your identity does not disappear if a company shuts down your account
+
+**Example:** Your identity should not only exist because Google or Facebook says so.
+
+---
+
+##### 2. Control
+
+**Users must control their own identity.**
+
+Meaning:
+You decide who can use your identity data.
+
+###### Benefit:
+
+* Prevents unauthorized tracking
+* Reduces identity theft
+
+**Example:** You choose when to share your email or address.
+
+---
+
+##### 3. Access
+
+**Users must have access to their own data.**
+
+Meaning:
+You should always be able to view and use your identity data.
+
+###### Benefit:
+
+* No lockout by third parties
+* No loss of access due to bans or platform restrictions
+
+**Example:** If a platform blocks you, your credentials still remain yours.
+
+---
+
+##### 4. Transparency
+
+**Governance and algorithms must be transparent.**
+
+Meaning:
+The rules of the identity system should be open and understandable.
+
+###### Benefit:
+
+* No hidden data collection
+* No secret decisions
+
+**Example:** Clear rules about how credentials are verified.
+
+---
+
+##### 5. Persistence
+
+**Identities must be valid for life.**
+
+Meaning:
+Your identity should be durable and not constantly reset.
+
+###### Benefit:
+
+* Protects against account loss
+* Long-term continuity
+
+**Example:** Your DID can remain yours long-term.
+
+---
+
+##### 6. Portability
+
+**Identity data and services must be transferable.**
+
+Meaning:
+You should be able to move identity data between services.
+
+###### Benefit:
+
+* Use identity across platforms
+* No vendor lock-in
+
+**Example:** Use one credential in many apps.
+
+---
+
+##### 7. Interoperability
+
+**Identities should be widely usable and license-free.**
+
+Meaning:
+Different systems should work together using open standards.
+
+###### Benefit:
+
+* No fragmentation
+* No monopoly control
+
+**Example:** A verifiable credential should work in many wallets.
+
+---
+
+##### 8. Consent
+
+**Users must consent to the use of their identity.**
+
+Meaning:
+Nothing should be shared without your permission.
+
+###### Benefit:
+
+* Prevents unauthorized data collection
+* Stops exploitation
+
+**Example:** You approve every data-sharing request.
+
+---
+
+##### 9. Minimization
+
+**Only minimum necessary data should be disclosed.**
+
+Meaning:
+Share only what is required, not everything.
+
+###### Benefit:
+
+* Better privacy
+* Purpose-specific data use
+
+**Example:** Prove you are over 18 without revealing birthdate.
+
+---
+
+##### 10. Protection
+
+**Users’ rights must be respected.**
+
+Meaning:
+Identity systems should protect users from misuse.
+
+###### Benefit:
+
+* Prevents identity fraud
+* Prevents identity abuse and discrimination
+
+---
+
+#### Overall Meaning
+
+These principles define what **user-centered digital identity** should look like:
+
+**From platform-controlled identity → to user-owned identity**
+
+Instead of companies controlling your identity, SSI gives power back to the individual.
+
+---
+
+#### One-Line Summary
+
+**SSI principles ensure that digital identity is private, portable, secure, transparent, and controlled by the user.**
+
+---
+
 - nice to make sure that all the really necessary information is used after the right of the need is not too perfect. Yeah.
-- student: So SSI is a surely backend identity, right? So like in the front end you might see username and then at some point you add more users
+- student: So **SSI is** a surely backend identity, right? So like in the front end you might see username and then at some point you add more users
 and then you pick up the same name and then you say, hey, can all of my users to identify with who I might need to add state of birth. So you expand your definition in your use case of identity to maybe name and date of birth. But the SSI is like a purely backend identity that implements some kind of string to lock in your account or something, right? So it is nothing that someone who doesn't study computer science would ever see?
-  - No, I literally just said that the wallet is loading and hopefully in a couple of months. So I mean what user is going to see is of course not the details as I'm going to explain here, but there is a user touching component to it. It's simply an identity management approach with an state of birth. So I think that they're very abstract place and you're going to see how it's technically also work for the feasible. But yeah, I don't know if I have to.
-- student: So like if I log in with my crypto SSI or with my Google account or the user is kind of the same experience, it's just that the one that has no central institution and the other one does.
-  - Yeah, the object is the same thing to prove who I am and all of that is the same.
+  - **No**, I literally just said that the wallet is loading and hopefully in a couple of months. So I mean what user is going to see is of course not the details as I'm going to explain here, but there is a user touching component to it. It's simply an identity management approach with an state of birth. So I think that they're very abstract place and you're going to see how it's technically also work for the feasible. But yeah, I don't know if I have to.
+- student: So like **if I log in with my crypto SSI or with my Google account or the user is kind of the same experience**, it's just that the one that has no central institution and the other one does.
+  - **Yeah, the objective is the same thing, to prove who I am and all of that is the same**.
 - student: So it's like as a technical identity that is unique for each person.
-  - Yeah. But the user experience is also different. I'm going to come to that.
-- So these **principles** that were suggested by them are not meant to be hard to move. We also often see that there are quite a lot of discussions that are going on around these, but this kind of becomes a kind of reference point within the SSI community in general. That's stuff that is referenced quite a lot in this organization work.
+  - Yeah. But **the user experience is also different**. I'm going to come to that.
+- So these **principles** that were suggested by them are **not meant to be hard to move**. We also often see that **there are quite a lot of discussions** that are going on around these, but this kind of becomes a kind of reference point within the SSI community in general. That's stuff that is **referenced quite a lot in this organization's work**.
 - Maybe something I should have said also earlier when we were talking about identities, we are often talking about **standards**. So that's something always to keep in mind. Without standards, you don't get **interoperability**. So we are going to always talk about standards as much as it makes sense and it's relevant and not too much in detail.
-- Yeah. So the whole idea is that, as you can also kind of see, should be the ultimate point of control over their own identity data, and they should decide what kind of information should be shared between them, what should stay private and so on.
-- That was the motivation behind SSI
+- Yeah. So the whole **idea** is that, as you can also kind of see, **each person should be the ultimate point of control over their own identity data**, and **they should decide what kind of information should be shared** between them, what should stay private and so on.
+- That was the **motivation behind SSI**
 
 ## slide: "Decentralized Identifier (DID)"
 
-- so let's have a look at the first technical building block.
+- so let's have a look at the **first technical building block**.
 - The **decentralized identifier** or **DID** as we use it.
 - It's basically a new kind of a digital identifier that is designed to be only controlled by the subject itself, rather than issued by some kind of centralized provider.
-- And at its core for the ID system to work, there are some requirements that must be met. So how do I basically identify anyone in this whole system? That's what we're going to look at.
 
 ## slide: "Requirements - Decentralized Identifier"
 
+- And at its core **for the DID system to work**, there are some **requirements** that must be met. So how do I basically identify anyone in this whole system? That's what we're going to look at.
 - So we need something that is **unique**, first of all, so I can really differentiate you from him and from her.
 - And it should be **persistent**. So that's actually, again, the first back to the principles that I have talked before. So that I should make sure that my identity is pretty much there within my control.
 - It should be **cryptographically verifiable**. So the ownership of the ID is proven by the use of a private key.
-- It should be **resolvable**. So the information related to my identity, this might be a set of public keys or some sort of metadata. They should be accessible at all times.
+- It should be **resolvable**.
+  - So the **information related to my identity**, this might be a set of public keys or some sort of metadata. They should be **accessible at all times**.
 - **decentralized**:
-  - And DIDs can be generated and verified across various systems without relying on a single registry or organization.
-  - I would be a little careful with the **decentralized key** right there. It does not necessarily mean that it has to be in a decentralized data structure like a BLT, but the whole structure of the DID standards kind of imply that they should be decentralized so that we don't rely on a single entity.
-    - student: I still need some kind of authority that gives me my identity, right? In case of your, like, I have a passport that's worth something because the government gave it to me and basically it says, okay, this is actually him, not someone else.
-      - answer: We can have various issuers for that. And the idea is that they should comply with a certain way of doing it, which is pretty much "the standard" then, but it doesn't really care if it's coming from, I don't know, from Bonn municipality or Cologne municipality. So that level of decentralization you can think of, or you can think of it as Germany versus other countries.
+  - And **DIDs can be generated and verified** across various systems **without relying on a single registry or organization**.
+  - I would be a little careful with the **decentralized key** right there. It does **not** necessarily mean that it has to be in a **decentralized data structure like a BLT**, but the whole **structure of the DID standards** kind of **imply that** they should be decentralized so that we **don't rely on a single entity**.
+  - student: I **still need some kind of authority that gives me my identity**, right? In case of your, like, I have a passport that's worth something because the government gave it to me and basically it says, okay, this is actually him, not someone else.
+    - answer: **We can have various issuers for that**. And the **idea** is that **they should comply with a certain way of doing it**, which is pretty much **"the standard"** then, but it doesn't really care if it's coming from, I don't know, from Bonn municipality or Cologne municipality. So that level of decentralization you can think of, or you can think of it as Germany versus other countries.
 - Yeah, so these are the **requirements** that we start with when we're looking at the DIDs.
 
 ## slide: "DID and DID Method"
 
 - And what came out of it is actually something almost disappointingly simple.
 - it's a simple **URI**.
-- When we talk about the DID, it's a URI.
+  - When we talk about the **DID, it's a URI**.
 - It's a structure that
   - always starts with `did` and then
   - **colon** and then we have
   - a **DID method**, which is basically connection of the identity and what kind of infrastructure I'm using and then
-  - something that is the DID method's specific identifier, so a way to differentiate me within that infrastructure.
-- So in the case of, for example, EBSI (Copilot: which is the European Blockchain Services Infrastructure, the DID method is `ebsi` and then we have a specific identifier that is related to me. So that's the structure of the DID.) we know that my DID can be resolved using the blockchain infrastructure of the European Union.
-- I might also have a `did:web`, for example, which means that my information is posted on some kind of a web server. So that's also possible. It's actually unbelievably common.
+  - something that is the **DID method's specific identifier**, so a way to differentiate me within that infrastructure.
+- So in the case of, for example, EBSI (Copilot: which is the European Blockchain Services Infrastructure, the DID method is `ebsi` and then we have a specific identifier that is related to me. So that's the structure of the DID.) we know that my DID can be resolved using the **blockchain infrastructure of the European Union**.
+- I might also have a `did:web`, for example, which means that my information is posted on some kind of a **web server**. So that's also possible. It's actually unbelievably common.
 - Or it can be laying on **Ethereum**. So we can check smart contracts to actually access my data.
-- So basically the second part: the DID method is the connection between identity and infrastructure, how my DID was created and managed. It just tells me information about it or not really to me, but to a resolver it tells the information where it should look for.
+- So basically the second part: the **DID method** is the **connection between identity and infrastructure, how my DID was created and managed**. It just tells me information about it or not really to me, but **to a resolver it tells the information where it should look for**.
   - There are certain technical regulations, so there should be
     - a `Create` operation, regardless of the ID, possible.
     - **Resolving** should be possible,
@@ -76,20 +507,412 @@ and then you pick up the same name and then you say, hey, can all of my users to
 ## slide: "W3C Open Standard Decentralized Identifiers (DIDs)"
 
 - So, if you look at the W3C Open Standard, ~~and I think I put it so far wrong if I claimed, that this standard adopted in comparison to other standards are better.~~ So you might see that there are some systems that claim that they are W3C compatible. They are often referring to this, that they only have a DID method that allows you to do that.
-- So what does the whole standard exactly tell me?
-  - So I have a DID. That comes from a DID as I just showed in the previous slide. And this DID is often resolving to a **DID document**, which has information in it that tells, okay, what is the idea of this thing, what type of different methods that I can use to access, what are different methods that I can use to authorize this person, and so on.
-  - And this DID is at the end referring to a **DID subject** about which we are making some statements. So it might be *my* DID, for example, and anywhere where I use this, the ID is basically signaling that I am pulling something about myself, but it might also be about a machine, or it might be about my child, for example, and I might be still controlling it myself, that's also possible, which brings me to the **DID controller** itself. So every DID has a **DID controller** at the same time that is taking care of this DID document, and the information that is inside it. My organization might be the controller of my DID document, and they might **issue** me an organizational DID, for example, that I can only use within the work context.
-- I just want to show you shortly. There is a **universal resolver** from Decentralized Identity Foundation. Just to give you an idea what so many different **DID methods** have already been created, and this is not even... I'm not so sure how complete things I don't see, for example, some of the things that I have myself used in different projects already.
-- So decentralization is whether we met in this way, I can go to various places to generate my DID, and once I have a DID URL, for example, here, it means that this DID was posted in an **Ethereum network**. Have you guys learned about Ethereum already last week? It's a very known blockchain. That's the only thing I think you need to know about it. That's on the main blockchain network, and this is my **identifier** on that network to find the related information.
-- And if you and I, for example, if you have a look at the document how it is looking like you can see the **verification methods**, so what kind of **key recovery method** is used for this, who is the **controller of this identity**, it's a little bit method-specific, but for blockchain you need an account ID, for example, and ~~it's an identity device~~. What is there? And which **standard** it is corresponding to.
-  - student: The controller is the authority that generated this for you, right? Like in this case, that would be the German government, but it's obviously on the Ethereum chain.
-    - answer: Yeah, so that's it. I mean, of course, the German government needs to say somewhere that, hey, this is me, you can find me there, but can be the German government, or can be me basically.
-- Okay, thank you for the invitation.
+- So **what does the** whole **standard** exactly **tell me?**
+  - So I have a **DID**. That comes from a DID as I just showed in the previous slide.
+  - And this DID is often resolving to a **DID document**, which has information in it that tells, okay,
+    - what is the DID of this thing,
+    - what type of different methods that I can use to access,
+    - what are different methods that I can use to authorize this person, and so on.
+  - And this DID is at the end referring to a **DID subject** about which we are making some statements.
+    - So it might be **my DID**, for example, and anywhere where I use this, the DID is basically signaling that I am pulling something **about myself**,
+    - but it might also be **about a machine**,
+    - or it might be **about my child**, for example, and I might be still controlling it myself, that's also possible, which brings me to the **DID controller** itself.
+  - So every DID has a **DID controller** at the same time that is taking care of this DID document, and the information that is inside it.
+    - **My organization** might be the controller of my DID document, and they might **issue** me an **organizational DID**, for example, that I can only use within the work context.
+- I just want to show you shortly. There is a [**universal resolver**](https://dev.uniresolver.io/) ([github](https://github.com/decentralized-identity/universal-resolver/)) from Decentralized Identity Foundation (DIF). Just to give you an idea what so **many different DID methods have already been created**, and this is not even... I'm not so sure how complete things I don't see, for example, some of the things that I have myself used in different projects already.
+
+---
+
+![DIF Logo](https://raw.githubusercontent.com/decentralized-identity/universal-resolver/master/docs/logo-dif.png)
+
+### Universal Resolver
+
+The Universal Resolver resolves Decentralized Identifiers (DIDs) across many different DID methods, based on the [W3C DID Core 1.0](https://www.w3.org/TR/did-core/) and [DID Resolution](https://w3c-ccg.github.io/did-resolution/) specifications. It is a work item of the [DIF Identifiers&Discovery Working Group](https://github.com/decentralized-identity/identifiers-discovery/).
+
+See this [blog post](https://medium.com/decentralized-identity/a-universal-resolver-for-self-sovereign-identifiers-48e6b4a5cc3c) and this [webinar](https://ssimeetup.org/did-resolution-given-did-how-do-retrieve-document-markus-sabadello-webinar-13/) for an introduction.
+
+See [https://dev.uniresolver.io/](https://dev.uniresolver.io/) for a DIF-hosted instance of the Universal Resolver that can be used for testing purposes. See [Docker Hub](https://hub.docker.com/u/universalresolver) for images.
+
+---
+
+### Gemini: "Decentralized Identity Foundation did methods examples"
+
+The Decentralized Identity Foundation (DIF) and related W3C standards support various DID methods tailored for specific blockchains, ledgers, or use cases, including `did:key` for ephemeral identity, `did:peer` for pairwise interactions, and `did:web` for DNS-based identifiers. These methods facilitate decentralized, secure, and verifiable digital identities across different, often, non-interoperable systems. 
+
+#### Examples of DID Methods
+
+DIF discusses or lists several prominent DID methods that define how identities are created, resolved, and managed: 
+
+- `did:key`: Typically used for self-contained, cryptographically verifiable identifiers that don't need a central registry.
+- `did:peer`: Designed for private, pairwise interactions between two parties (e.g., Alice and Bob) without needing a public blockchain.
+- `did:web`: Leverages existing domain name system (DNS) infrastructure to create DIDs.
+- `did:ethr`: Based on the Ethereum blockchain.
+- `did:btcr`: Based on the Bitcoin blockchain.
+- `did:cheqd`: Uses the cheqd network.
+- `did:dht`: Utilizes Mainline DHT for decentralized lookup.
+- `did:jwk`: JSON Web Key method for cryptographic identity.
+- `did:oyd`: "Own Your Data" method.
+- `did:pkh`: Public Key Hash method for multi-chain identity. 
+
+#### Context of DID Methods
+
+- **Functionality**: DID methods are used to define the rules for creating, resolving, updating, and deactivating DIDs.
+- **Registry/Storage**: Methods can be anchored to different systems, such as blockchains (e.g., Ethereum, Bitcoin, Sovrin), peer-to-peer networks, or other distributed ledgers.
+- **Use Cases**: These methods allow for various use cases like verifiable credentials (e.g., digital diplomas, driver's licenses) and secure, decentralized authentication.
+- **Development**: The DIF Identifiers & Discovery Working Group discusses and explores new and existing DID methods.
+
+---
+
+- So **decentralization** is whether we get in this way, **I can go to various places to generate my DID**,
+- and **once I have a DID URL**, for example, here (on the page [https://dev.uniresolver.io/](https://dev.uniresolver.io/)) the DID URL `did:ethr:mainnet:0x3b0bc51ab9de1e5b7b6e34e5b960285805c41736`, **it means** that this **DID was posted in an Ethereum network**.
+  - Have you guys learned about Ethereum already last week? It's a very known blockchain. That's the only thing I think you need to know about it. That's on the main blockchain network, and this is **my identifier on that network** to find the related information.
+- And if you and I, for example, if you have a look at the **DID document** how it is looking like you can see (on [https://dev.uniresolver.io/](https://dev.uniresolver.io/) enter a DID URL in the field "did-url" (eg. `did:ethr:mainnet:0x3b0bc51ab9de1e5b7b6e34e5b960285805c41736`), then click on "Resolve" &rarr; "DID Document")
+  - the **verification methods** (possibly multiple methods!) (`"verificationMethod"`, a list of items),
+    - the **ID of each verification method** (`"id": "did:ethr:mainnet:0x3b0bc51ab9de1e5b7b6e34e5b960285805c41736#controller"`),
+    - so what kind of **key recovery method** (`"type": "EcdsaSecp256k1RecoveryMethod2020"`) is used for this,
+    - who is the **controller of this identity** (`"controller": "did:ethr:mainnet:0x3b0bc51ab9de1e5b7b6e34e5b960285805c41736"`),
+    - it's a little bit **method-specific**, but **for blockchain** you **need an account ID** (`"blockchainAccountId"`), for example, and ~~it's an identity device~~. What is there? And **which standard** it is corresponding to.
+
+---
+
+### DID Document (DID URL: `did:ethr:mainnet:0x3b0bc51ab9de1e5b7b6e34e5b960285805c41736`)
+
+```json
+{
+  "id": "did:ethr:mainnet:0x3b0bc51ab9de1e5b7b6e34e5b960285805c41736",
+  "verificationMethod": [
+    {
+      "id": "did:ethr:mainnet:0x3b0bc51ab9de1e5b7b6e34e5b960285805c41736#controller",
+      "type": "EcdsaSecp256k1RecoveryMethod2020",
+      "controller": "did:ethr:mainnet:0x3b0bc51ab9de1e5b7b6e34e5b960285805c41736",
+      "blockchainAccountId": "eip155:1:0x3b0BC51Ab9De1e5B7B6E34E5b960285805C41736"
+    }
+  ],
+  "authentication": [
+    "did:ethr:mainnet:0x3b0bc51ab9de1e5b7b6e34e5b960285805c41736#controller"
+  ],
+  "assertionMethod": [
+    "did:ethr:mainnet:0x3b0bc51ab9de1e5b7b6e34e5b960285805c41736#controller"
+  ],
+  "@context": [
+    "https://www.w3.org/ns/did/v1",
+    "https://w3id.org/security/suites/secp256k1recovery-2020/v2",
+    "https://w3id.org/security/v3-unstable"
+  ]
+}
+```
+
+---
+
+- student: The controller is the authority that generated this for you, right? Like in this case, that would be the German government, but it's obviously on the Ethereum chain.
+  - answer: Yeah, so that's it. I mean, of course, the German government needs to say somewhere that, hey, this is me, you can find me there, but can be the German government, or can be me basically.
+- student: Okay, thank you for the answer.
+
+## slide: "DID Document - Decentralized Identifier"
+
 - I already kind of showed this, so the **DID document** shows various information. It's quite a long list, and
-  - the only actually mandatory parts are **context** and **ID**, it just says, what is this document supposed to look like, and the ID itself,
-  - but very often you also see the **authentication methods** I would say,
+  - the **only actually mandatory parts** are **context** and **ID**, it just says, what is this document supposed to look like, and the ID itself,
+  - but very often you also see the **authentication methods** (= "Verification methods that can be used to authenticate the DID subject" (see slide), thus, authentication methods **ARE** verification methods: authentication methods **reference** verification methods) I would say,
   - you can see various lists of **public keys** that you can use for the verification later on.
-  - There are certain **services**: the DID might also tell you, okay, for example, for **credential issuance**, contact me at this address, and for the **credential verification** operation, contact me at another address. (see ChatGPT prompt "DID Documents tell information associated with a DID: what kind of services can be defined in the DID document" under "2. Credential Issuance / Verification Services") So, such services you can also define under the document.
+  - There are certain **services**: the DID might also tell you, okay, for example,
+    - for **credential issuance**, contact me at this address, and
+    - for the **credential verification** operation, contact me at another address.
+    - So, such services you can also define under the DID document (see [below](#chatgpt-did-documents-tell-information-associated-with-a-did-what-kind-of-services-can-be-defined-in-the-did-document)).
+
+---
+
+### ChatGPT: "what does the `@context` field in a DID document tell"
+
+The **`@context`** field in a **DID Document** tells systems **how to interpret the terms and structure used in the document**.
+
+It comes from **JSON-LD (JSON for Linked Data)** and provides semantic meaning for fields like:
+
+* `id`
+* `verificationMethod`
+* `authentication`
+* `service`
+
+---
+
+#### Simple Meaning
+
+Without `@context`, a computer only sees labels like `"id"` or `"service"`.
+
+With `@context`, the computer knows:
+
+* what those terms mean
+* which vocabulary/standard they belong to
+* how to process them consistently across systems
+
+So it acts like a **dictionary + schema reference**.
+
+---
+
+#### Example DID Document
+
+```json
+{
+  "@context": [
+    "https://www.w3.org/ns/did/v1"
+  ],
+  "id": "did:example:123",
+  "authentication": [...],
+  "service": [...]
+}
+```
+
+###### Meaning here:
+
+The context URL points to the World Wide Web Consortium DID standard vocabulary.
+
+That tells software:
+
+* `id` = decentralized identifier
+* `authentication` = keys/methods used for login/auth
+* `service` = endpoints related to the DID subject
+
+---
+
+#### Why It Matters
+
+##### 1. Interoperability
+
+Different wallets, apps, and verifiers interpret the DID document the same way.
+
+##### 2. Machine Readability
+
+Software can automatically understand relationships and terms.
+
+##### 3. Extensibility
+
+Additional contexts can be added for custom features.
+
+Example:
+
+```json
+"@context": [
+  "https://www.w3.org/ns/did/v1",
+  "https://w3id.org/security/suites/ed25519-2020/v1"
+]
+```
+
+This adds meaning for a specific cryptographic key type.
+
+---
+
+#### In One Sentence
+
+**`@context` tells machines which vocabulary and semantics to use when reading a DID document.**
+
+---
+
+#### Easy Analogy
+
+Think of `@context` like the **legend on a map**:
+
+Without the legend, symbols are unclear.
+With the legend, every symbol has meaning.
+
+---
+
+#### In DID Exams / Lectures
+
+If asked: **What does `@context` in a DID document tell?**
+
+Answer:
+
+> It specifies the semantic context / vocabulary used so that document fields are interpreted according to the DID standard and related schemas.
+
+---
+
+### ChatGPT: "DID Documents tell information associated with a DID: what kind of services can be defined in the DID document"
+
+A **DID Document** (from the World Wide Web Consortium **DID specification**) describes how to interact with a **Decentralized Identifier (DID)**. It typically contains:
+
+* Public keys / verification methods
+* Authentication methods
+* Service endpoints
+
+The **`service`** section is especially important because it tells others **how to communicate or interact with the DID subject**. Each service entry usually has:
+
+* `id`
+* `type`
+* `serviceEndpoint`
+
+Below are the main **kinds of services commonly defined in DID documents**.
+
+---
+
+#### 1. DID Communication (DIDComm)
+
+Used for **secure messaging between decentralized identities**.
+
+* Enables encrypted peer-to-peer communication
+* Used in many SSI frameworks
+
+**Example service type**
+
+```
+type: DIDCommMessaging
+```
+
+Typical endpoint:
+
+```
+https://example.com/endpoint
+```
+
+Used for:
+
+* sending verifiable credentials
+* requesting proofs
+* secure identity messaging
+
+---
+
+#### 2. Credential Issuance / Verification Services
+
+Services for issuing or verifying **Verifiable Credentials** defined in the World Wide Web Consortium standard.
+
+Examples:
+
+```
+type: CredentialService
+type: VerifiableCredentialService
+```
+
+Used for:
+
+* issuing credentials
+* verifying credentials
+* credential status checks
+
+---
+
+#### 3. Identity Hub / Data Storage
+
+A service that provides **personal data storage controlled by the DID owner**.
+
+Example:
+
+```
+type: IdentityHub
+```
+
+Often used to store:
+
+* credentials
+* profile information
+* encrypted user data
+
+Some implementations call this a **personal data vault**.
+
+---
+
+#### 4. Key Management or Cryptographic Services
+
+Services related to **key operations or signing infrastructure**.
+
+Example:
+
+```
+type: KeyManagementService
+```
+
+Used for:
+
+* key rotation
+* cryptographic operations
+* hardware security modules
+
+---
+
+#### 5. Agent Services
+
+Used in **SSI agents** that act on behalf of a DID.
+
+Example:
+
+```
+type: AgentService
+```
+
+Agents may:
+
+* negotiate credentials
+* respond to authentication requests
+* manage identity workflows
+
+---
+
+#### 6. Social / Profile Services
+
+Optional services that link the DID to **public profile information**.
+
+Example:
+
+```
+type: ProfileService
+```
+
+Endpoint may point to:
+
+* profile metadata
+* social links
+* decentralized profile storage
+
+---
+
+#### 7. Payment or Financial Services
+
+Some DID methods support **payment endpoints**.
+
+Example:
+
+```
+type: PaymentService
+```
+
+Used for:
+
+* cryptocurrency payments
+* settlement endpoints
+* digital wallet interaction
+
+---
+
+#### Example DID Document Service Entry
+
+```json
+{
+  "service": [{
+      "id": "#messaging",
+      "type": "DIDCommMessaging",
+      "serviceEndpoint": "https://example.com/didcomm"
+    },
+    {
+      "id": "#hub",
+      "type": "IdentityHub",
+      "serviceEndpoint": "https://hub.example.com"
+    }
+  ]
+}
+```
+
+---
+
+✅ **Key idea:**
+The DID document does **not contain the services themselves** — it only provides **discoverable endpoints and types** so other parties know **how to interact with the DID subject**.
+
+---
+
+💡 If you want, I can also explain:
+
+* the **exact structure of a DID Document (all fields)**
+* the **difference between verification methods and services**
+* or **real DID document examples (did:ethr, did:key, did:web)** used in Web3 and SSI.
+
+---
 
 ## slide: "Verifiable Credential (VC)"
 
