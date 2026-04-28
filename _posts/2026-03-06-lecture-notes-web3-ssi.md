@@ -725,6 +725,190 @@ Answer:
 
 ---
 
+### ChatGPT: "that means the context field specifies the JSON schema, right?"
+
+Not exactly. **`@context` is not the same thing as a JSON Schema**, although both help software understand JSON documents.
+
+#### Short answer
+
+* **`@context` (JSON-LD)** specifies the **meaning/semantics of terms** in the document.
+* **JSON Schema** specifies the **allowed structure and validation rules** of the document.
+
+So `@context` tells you **what fields mean**, while schema tells you **what fields are permitted and what format they must follow**.
+
+---
+
+#### In a DID Document
+
+Example:
+
+```json id="2g39n9"
+{
+  "@context": "https://www.w3.org/ns/did/v1",
+  "id": "did:example:123",
+  "service": []
+}
+```
+
+##### What `@context` does:
+
+It says:
+
+* `id` refers to the DID subject identifier
+* `service` refers to service endpoints in DID vocabulary
+* terms are interpreted according to the World Wide Web Consortium DID model
+
+##### What it does **not** do:
+
+It does **not** enforce:
+
+* whether `service` must be an array
+* whether `id` must match DID syntax
+* whether a field is required
+* max/min lengths
+* data types in the schema-validation sense
+
+Those are schema/validation concerns.
+
+---
+
+#### Analogy
+
+Think of a form:
+
+* **`@context`** = glossary explaining what each label means
+* **JSON Schema** = rules saying which boxes are required and how to fill them in
+
+---
+
+#### Why People Confuse Them
+
+Because both are metadata and both help machines process JSON. But they solve different problems:
+
+| Feature                     | `@context` | JSON Schema |
+| --------------------------- | ---------- | ----------- |
+| Semantic meaning            | ✅          | ❌           |
+| Validation rules            | ❌          | ✅           |
+| Interoperability vocabulary | ✅          | ❌           |
+| Required fields/types       | ❌          | ✅           |
+
+---
+
+#### Best precise statement
+
+Instead of saying “`@context` specifies the JSON schema,” say:
+
+> **`@context` specifies the vocabulary and semantic interpretation of the JSON terms, not the validation schema.**
+
+---
+
+### ChatGPT: "is the same true for the context fields of verifiable credentials"
+
+Yes — **the same core idea applies to Verifiable Credentials (VCs)**.
+
+In a **Verifiable Credential**, the **`@context`** field also comes from **JSON-LD** and is used to define the **semantic meaning of terms**, **not** to act as a JSON Schema.
+
+---
+
+#### Short Answer
+
+For VCs, `@context` tells software:
+
+* what terms like `credentialSubject`, `issuer`, `type`, or custom claims mean
+* which vocabularies/standards those terms come from
+* how to interpret the credential consistently across systems
+
+It does **not** by itself validate structure like a schema would.
+
+---
+
+#### Example Verifiable Credential
+
+```json id="53d0y6"
+{
+  "@context": [
+    "https://www.w3.org/2018/credentials/v1"
+  ],
+  "type": ["VerifiableCredential"],
+  "issuer": "did:example:issuer123",
+  "credentialSubject": {
+    "id": "did:example:user456"
+  }
+}
+```
+
+###### Meaning of `@context`
+
+This tells software to use the World Wide Web Consortium Verifiable Credentials vocabulary.
+
+So terms like:
+
+* `issuer`
+* `credentialSubject`
+* `proof`
+* `type`
+
+have standardized meanings.
+
+---
+
+#### Custom Claims Example
+
+Suppose a university issues a diploma:
+
+```json id="t59wq1"
+"@context": [
+  "https://www.w3.org/2018/credentials/v1",
+  "https://example.edu/credentials/diploma/v1"
+]
+```
+
+Now terms like:
+
+* `degree`
+* `graduationDate`
+* `studentId`
+
+can be semantically defined by the university context.
+
+---
+
+#### What It Does NOT Do
+
+`@context` does **not** guarantee:
+
+* required fields exist
+* correct data types
+* string length rules
+* date formatting
+* credential business logic
+
+Those need:
+
+* JSON Schema
+* VC Data Model rules
+* application validation
+* cryptographic proof verification
+
+---
+
+#### DID vs VC Context
+
+| Document Type         | Purpose of `@context`                                        |
+| --------------------- | ------------------------------------------------------------ |
+| DID Document          | Meaning of DID terms (`service`, `authentication`, etc.)     |
+| Verifiable Credential | Meaning of credential terms (`issuer`, claims, proofs, etc.) |
+
+Same mechanism, different vocabulary.
+
+---
+
+#### One-Line Summary
+
+**Yes — in Verifiable Credentials, `@context` also defines semantics/vocabulary, not the validation schema.**
+
+---
+
 ### ChatGPT: "DID Documents tell information associated with a DID: what kind of services can be defined in the DID document"
 
 A **DID Document** (from the World Wide Web Consortium **DID specification**) describes how to interact with a **Decentralized Identifier (DID)**. It typically contains:
@@ -916,29 +1100,42 @@ The DID document does **not contain the services themselves** — it only provid
 
 ## slide: "Verifiable Credential (VC)"
 
-- So, the second building block of SSI is "Verifiable Credentials", or often called "VC". So, the **DIDs** are basically about **who you are**, and the **VCs** are more about **what you can prove about yourself**, so **what kind of claims I have**.
-  - So, if the ID is pretty much my name, then I would say that the ID card is a verifiable credential.
-- So, it's a digitally signed statement made by an **issuer** about a subject.
-  - So, for example, that someone holds a university degree, or a driver's license, or some kind of a certification, and just like a physical credential, it actually names the holder and states what is exactly being attested for. So, in an ID document, for example, my address is something that the government is attesting that they know about me, or that it's true, and it includes a signature that guarantees the authenticity. And, of course, the **difference to a physical credential** is that they are not checking out the issuer's database, but all of these information is **cryptographically verifiable**. So, we are trying to do this digitally.
+- So, the **second building block of SSI** is **"Verifiable Credentials"**, or **often called "VC"**.
+- So, the **DIDs** are basically about **who you are**, and the **VCs** are more about **what you can prove about yourself**, so **what kind of claims I have**.
+  - So, if the **DID** is pretty much **my name**, then I would say that the **ID card** is a **verifiable credential**.
+- So, it's **a digitally signed statement** made **by an issuer** about a subject.
+  - So, for example, that someone holds a university degree, or a driver's license, or some kind of a certification,
+- and just like a physical credential, it actually **names the holder** and **states what is exactly being attested for**.
+  - So, in an **ID document**, for example, **my address** is something that the **government is attesting** that they know about me, or that it's true,
+- and **it includes a signature** that guarantees the authenticity.
+- And, of course, the **difference to a physical credential** is that
+  - they are **not checking out the issuer's database**,
+  - but all of these **information is cryptographically verifiable**. So, we are trying to do this digitally.
 - So, formally, we have **three identities**, and when we're talking about an SSI system, it's often these three identities that I talked about:
   - We have an **issuer** who creates and signs this credential, eg. the government.
   - We have a **holder** who stores these credentials in their wallet, eg. me.
   - The **verifier** who checks the credential when the holder actually presents it, eg. supermarket.
     - And the difference is that the **verification can happen instantly**, so I don't need to contact any people to make sure that this is really true. Eg. an employer doesn't need to contact the university to make sure that my credential is valid. They can just check the signature on that.
-- And various claims inside a credential can basically express different things. So, I can have attributes about the object of the verifiable credential, eg. age, qualification, or health status. It might symbolize relationships, eg. I am an employee of Fraunhofer FIT, so that I'm allowed to prove this relationship. Or it might also express certain permissions, so I am allowed to, for example, log into some webpage with the admin role. So, role membership and access rights can also be expressed in a verifiable credential format.
+- And various **claims inside a credential** can basically express different things.
+  - So, I can have **attributes** about the object of the verifiable credential, eg. age, qualification, or health status.
+  - It might symbolize **relationships**, eg. I am an employee of Fraunhofer FIT, so that I'm allowed to prove this relationship.
+  - Or it might also express certain **permissions**, so I am allowed to, for example, log into some webpage with the admin role. So, **role membership** (a CS term) and **access rights** can also be expressed in a verifiable credential format.
 
 ## slide: "Examples - Verifiable Credential"
 
 - That's what we already talked about what's with driver's licenses, and educational certificates, but
-- this (on the right side of the slide) is an example of what the verifiable credential is looking like. It's basically a JSON, like this version of JSON, if you look at W3C, that's at least the case. If you look at different standards, you might find different things, but the gist of it is at least the same.
+- this (on the right side of the slide) is an example of what the verifiable credential is looking like. **A VC is basically a JSON**, like this version (format) of JSON, if you look at **W3C's standard**, that's at least the case. If you look at **different standards**, you might find different things, but the gist of it is at least the same.
 - It has some kind of **context information** (`@context`), so how this document is supposed to look like, like what are the mandatory fields and so on, so that I don't get something that's looking completely differently and claims to be a verifiable credential.
 - I have an **ID** (`id`) for this specific credential.
 - I might have a **type** (`type`).
-- I definitely have an **issuer** (`issuer`), which is also described with the ID.
+- I definitely have an **issuer** (`issuer`), which is also described with the **DID (of the issuer)**.
 - The **issuance date** (`issuanceDate`).
 - We have an **expiry date** (`expiryDate`). It's not necessarily mandatory, but we can have it.
-- And we have **credential subject** (`credentialSubject`), so this is basically a subject about which we are making claims about, and that we are also using the DID of that subject,
-  - so if it's about me, then you might have my DID, but you might also assign the DIDs to different machines and issue credentials to those. So as long as I mention what the credential subject is, it's fine, and then we have a cryptographic proof basically about the whole thing.
+- And we have **credential subject** (`credentialSubject`), so this is basically a **subject about which we are making claims** about, and that we are also using the **DID of that subject** (on the slide: the DID of the student),
+  - so **if it's about me**, then you might have **my DID**,
+  - but you might also **assign the DIDs to different machines** and **issue credentials to those**.
+  - So as long as I mention what the credential subject is, it's fine.
+- And then we have a **cryptographic proof** (`proof`) basically about the whole thing.
 
 ## slide: "Requirements - Verifiable Credential"
 
@@ -947,29 +1144,149 @@ The DID document does **not contain the services themselves** — it only provid
   - It needs to be **decentrally verifiable**, so the authenticity and origin can be checked by looking at the issuer's public key.
   - And it must be of course **interoperable** so that I pretty much need the ecosystem that this thing is working, so it needs to be accepted everywhere so that I actually use this.
   - And it needs to be of course **machine readable**.
+
+## slide: "Issuing a Verifiable Credential"
+
+---
+
+### ChatGPT: "meaning"
+
+This describes the **issuance process of a Verifiable Credential (VC)** in a **Self-Sovereign Identity (SSI)** system.
+
+A **Verifiable Credential** is a **digitally signed credential** (like a digital ID card, diploma, driver’s license, membership card, etc.) that can be stored by the user and later presented to others.
+
+---
+
+#### Meaning of Each Step
+
+##### 1. The Holder sends a request to the issuer
+
+The **Holder** is the person or organization that wants the credential.
+
+They ask an **Issuer** to receive a credential.
+
+###### Example:
+
+* A student requests a digital diploma from a university
+* A citizen requests a digital ID credential
+* An employee requests a work credential
+
+➡️ Similar to applying for a physical certificate.
+
+---
+
+##### 2. The Issuer verifies eligibility
+
+The **Issuer** checks whether the applicant qualifies.
+
+This may involve checking records or documents.
+
+###### Example:
+
+* University confirms graduation
+* Government verifies identity
+* Employer verifies employment status
+
+➡️ Only authorized people receive valid credentials.
+
+---
+
+##### 3. The Issuer creates and signs the VC
+
+After approval, the issuer creates the credential containing statements (claims) such as:
+
+* Name
+* Degree earned
+* Age over 18
+* Employment status
+
+Then the issuer **digitally signs** it using its **private key**.
+
+###### Why sign it?
+
+The signature proves:
+
+* who issued it
+* that it has not been altered
+* that it is authentic
+
+➡️ Like an official stamp, but cryptographic.
+
+---
+
+##### 4. The VC is sent to the Holder and stored in wallet
+
+The credential is securely transferred to the holder.
+
+The holder stores it in an **SSI wallet app**.
+
+Examples:
+
+* Mobile identity wallet
+* Browser wallet
+* Enterprise credential wallet
+
+➡️ The user now controls the credential.
+
+---
+
+#### Overall Meaning
+
+Instead of a company storing all your identity data centrally, the issuer gives **you** a signed credential that **you keep** and can later share when needed.
+
+This is the core SSI idea:
+
+**Issuer issues → Holder stores → Verifier checks**
+
+---
+
+#### Real Example
+
+###### Digital University Diploma
+
+1. Student requests diploma VC
+2. University checks graduation records
+3. University signs diploma VC
+4. Student stores it in wallet
+
+Later:
+
+* Employer asks for proof of degree
+* Student presents VC
+* Employer verifies signature
+
+---
+
+#### One-Line Summary
+
+**A Verifiable Credential is issued after eligibility checks, digitally signed by the issuer, and stored by the user in their wallet for future proof.**
+
+---
+
 - student: Sorry, would it be something like the government issues me credentials, signs it with their private key, so anybody can verify that it came from the government, and then I have a private key and I also sign over my own credentials, which means I can authenticate myself to a supermarket, a bank, a university, etc. So would it be something like that?
-  - answer: Yeah. At least the first part is, how do I issue a verifiable credential? So the holder basically sends a request to the issuer says, okay, I need something from you, I need you to make an attestation about myself. The issuer of course needs to check within their own system, is this person really a warranty of this credential, let's say. And then the issuer creates a VC that doesn't say when that's signed, that's at the private key, like you said. And then the VC is securely sent to the holder and stored in their SSI holder. So this part is actually quite interesting and annoyingly complicated. Just a question, just to brainstorm a little bit. How do you think a credential can be sent securely to someone in a digital setting?
+  - answer: Yeah. **At least the first part is correct**. How do I **issue a verifiable credential?** So the holder basically sends a request to the issuer says, okay, I need something from you, I need you to make an attestation about myself. The issuer of course needs to check within their own system, is this person really a warranty of this credential, let's say. And then the issuer creates a VC that doesn't say when that's signed, that's at the private key, like you said. And then the VC is securely sent to the holder and stored in their SSI holder. So this part is actually quite interesting and annoyingly complicated. Just a question, just to brainstorm a little bit. **How do you think a credential can be sent securely to someone** in a digital setting?
     - student: Sorry, usually you have a third party involved, right?
       - prof: What do you mean "third party"?
     - student: So like, apart from RSA, for example, which just hopes that logarithms solving is hard, is that usually you have like, when you're talking about certificates, which you use for signing, you have a institution which issues the certificate, and then you have the person giving another person the credential, and then this person has to contact the issuer to check whether the certificate is right, and then you have the third party coming in. No?
       - prof: Well, we are trying to run without third parties.
     - student: Yeah, this is also like, my question here, this is how I learned signing usually works. And this needs a third party, so...
-      - prof: We have a signature already, and we already... So let's say that you are in contact with Fraunhofer FIT. And you're going to receive a verifiable credential so that you can prove that you are an employee to FIT. We already talked among each other, there is a communication channel that we trust, let's say email. That's a separate discussion, but let's say email. You are receiving a signed and encrypted emails from me, that's definitely FIT. And I have created this already, so I am telling you that I have your VC, I just need to somehow transport this JSON (that I have shown) to you, so that you can save it somewhere. And on the way you need to make sure that it's a securely saved, and that I am still the person that I'm claiming I am, and so on.
+      - prof: We have a signature already, and we already... So let's say that you are in contact with Fraunhofer FIT. And you're going to receive a **verifiable credential** so that you can **prove that you are an employee to FIT**. We already talked among each other, there is a communication channel that we trust, let's say email. That's a separate discussion, but let's say email. You are receiving a signed and encrypted emails from me, that's definitely FIT. And I have created this already, so I am telling you that I have your VC, I just need to **somehow transport this JSON (that I have shown) to you**, so that you can save it somewhere. And on the way you need to make sure that it's a securely saved, and that I am still the person that I'm claiming I am, and so on.
     - student: I think it was man of exchange or something, like I write prime numbers once and one time, but I forgot how it works. 
       - prof: You need to put it in your place. 
     - student: I don't know what you want to hear, but I think that the VC is going to be my part, or I can be my public key, and you can put your data in your place.
-      - prof: I mean, there is definitely some cryptographic stuff involved in it, but I guess I am asking more on the what is the user's experience in that. But no need to actually make that longer, I just want to point out that this is actually an interesting problem. Surprise, surprise, there are **standards** for that. So if you comply with the standard, you are getting in securely, and at the moment there are different standards that are competing against each other. But there is one that seems to be the winning one, or the more commonly accepted one. This is a little problematic to explain, because the whole stuff that I am explaining on SSI is still evolving at the moment. It is quite a recent thing that we are talking about. ~~That is definitely something that I have been asking for years.~~
+      - prof: I mean, there is definitely some cryptographic stuff involved in it,
+  - prof: but I guess I am asking more on the **what is the user's experience** in that. But no need to actually make that longer, I just want to point out that this is actually an interesting problem. Surprise, surprise, **there are standards for that (for sending a credential securely to someone)**. So if you comply with the standard, you are getting in securely, and at the moment there are different standards that are competing against each other. But there is one that seems to be the winning one, or the more commonly accepted one. This is a little problematic to explain, because the whole stuff that I am explaining on SSI is still evolving at the moment. It is quite a recent thing that we are talking about. ~~That is definitely something that I have been asking for years.~~
 - I am just going to show you a link here now. It is from a project that we implemented. It finished recently. And there we got some nice amount of funding from a blockchain infrastructure for wider hashgraph association, that we investigate different use cases for their infrastructure.
   - student: And that is the moment I wanted to say, that we must consider the last mention.
     - prof: Sure. I am actually not really going to go too much into details. To be honest, I also know the details quite roughly, the parts that I implemented most.
 - So, what was I saying? The project. So we got a little bit of a chance to basically use this as a playground for ourselves, and have a look at the interesting to implement the SSI stuff inside our own organization. So what can we do with the SSI in general?
   - We can issue, for example, employee credentials, and I already gave this as an example away.
-  - But then I can get two of all the keys that we are using inside our institute that are extremely annoying for us. And instead we can use credentials to actually access our own rooms. But not only that, we can also say that someone is allowed to enter a room, only if they prove that they have taken certain education, so certain training, and they are capable of using the device in that room. So, not only authorization based approach, but also checking the capability if this person is really capable or secure enough to use this device in that room. And meanwhile, we don't have to create any databases about the users. It's only enough that they show us the credentials that were issued by us.
+  - But then I can get two of all the keys that we are using inside our institute that are extremely annoying for us. And instead we can use **credentials to actually access our own rooms**. But not only that, we can also say that someone is allowed to enter a room, only if they prove that they have taken certain education, so certain training, and they are capable of using the device in that room. So, not only authorization based approach, but also checking the capability if this person is really capable or secure enough to use this device in that room. And meanwhile, we don't have to create any databases about the users. It's only enough that they show us the credentials that were issued by us.
   - So one of the use cases was basically **onboarding** a user. So when they first come, how do we exactly issue these credentials online? We need for the demonstration this video, so I'm going to show you that. And in our use case, it basically starts with a secretary that is also using our system by logging in to it using our own credentials. So we do not know who this person is specifically, but we know that they have a secretary role because we got it from their credential. So we don't have to check specifically that Maria is employed as a secretary, but we can check already in the credentials. And this person has access to various onboarding services inside our organization. That's a proof of work. So, ignore the UI part. So the only point is to just show that it is working. We had a huge ecosystem that wasn't just about SSI. But the first basically point starts with "secretary registering user". So the organization first needs to make sure that this person is really in some way a employee. So this is a pre-filled form. We call it visa employee and it has a certain contract date, certain roles and we can define certain training that this person needs to provide. And then register the employee. And that this employee gets, or the secretary gets a link that they need to share with the employee. So in our case we set that we are already in contact with this person. We need to add up everything also to existing workflows a little bit, which is sometimes far away from the optimal way of doing it. So we said that this would be shared with an email. So as soon as the person gets the email, they need to enter a personal code, which consists of their name and surname, and lastly the birth date. And afterwards what's happening is that they are basically seeing their user profile and meanwhile in the background we are generating a DID specifically for this user. An **organizational DID** we call it, because one can also theoretically have their own private one. And once we are talking about a wallet, you will have a private DID, but we want to specifically extract the organizational one, so we are assigning ourselves. That's hosted in Hedera, this is all the IDs groups that I showed you. But the point of showing this here is basically the person can double check this information before it gets a credential. And then the **QR code** is shown. So this is the part I was actually asking about in the "securely sending" thing. The standard **"OpenID"** for VC is basically starting with a QR code, where the issuer says, connect me at this address with some kind of a pre-authorization code that's generated for that user. So that code is interpreted by the wallet, and there's an exchange that's going on with the issuer on the back end, so if you don't know anything about it, this is the wallet by the way. And as soon as the issuer can track exactly who I am, then the connection is signed and then sent. But from the user's perspective, what it's only seeing is that it's **scanning a QR code**. It might potentially fill in required details, that's not a must, in our case that's the requirement from Hedera, we have to go around it. And then we see various issuers of what's happening in between, at least in the related parts, and actually there's issues that take some time, because we don't have time until the wallet really decays it. But there's a secure connection going on, and you can see your interaction here, between the issuer and the holder, and it's asking, this has been issued for you, would you like to really save it in your wallet? And as soon as the person actually gets that, this information is shown again, and can be accessed at any time. So at this point on, as the user, I am responsible for this data. And I'm responsible for also sharing, partly or fully all the details with other people, but the issuer is not really involved anymore with the details of this data. Yeah.
     - student: How is this different than the idea of having **digital signatures**, for example, there's like PGP for e-mails, right? I go somewhere, it issues me a private key, I put it on everything, so for example, if I want to get confirmed that I have a master's here, right? Honor, I don't know, diploma, how would put their private signature, and then they send it to me, and then whoever wants to see, you know, was I really a student here, they just use it. I feel the idea is still somehow the same.
       - prof: It is. It's actually nothing so different because you just put a cover on it. But what we have here is pretty much someone that I trust, and hopefully the verifier also trusts, basically, **digitally signing** some information. I think it becomes a little bit more clear when you want to verify this information, maybe there comes some sort of factors. But at this point, this is nothing more than some fancy JSON that is signed. And of course, a little bit more sophisticated is just identifying people. So I can actually check various systems, I can find their public key, and then come back here and look, is this really the issuer? Is everything out there fitting? Yeah.
   - So this is where we get the credential.
-  - Yeah. And when we want to actually use this credential to start an application, then the process is pretty similar. Another standard for it is **OpenID for VP**. And it's, again, simply scanning a QR code from a user's perspective. On the backgrounds, there are a lot happening, but I will explain it in a minute. But here you see that before any kind of information is shared with the verifier, it's showing you exactly what this one person wants. It wants a credential of type ID card. Here, there are various votes because they make it more fancy and more visible, I also haven't got it, yeah. So but the idea is that the concept of user is taken, they're showing them the information that are asked from them, yeah.
+  - Yeah. And when we want to actually use this credential to start an application, then the process is pretty similar. Another **standard** for it is **OpenID for VP**. And it's, again, **simply scanning a QR code from a user's perspective**. On the backgrounds, there are a lot happening, but I will explain it in a minute. But here you see that before any kind of information is shared with the verifier, it's showing you exactly what this one person wants. It wants a credential of type ID card. Here, there are various votes because they make it more fancy and more visible, I also haven't got it, yeah. So but the idea is that the concept of user is taken, they're showing them the information that are asked from them, yeah.
     - student1: Before, why did we need to have the DID of the organization? I thought it would be like, you're just adding one more DID, right? Because you have, let's say you have your own DID, and then you provide that to verify that's you when you're making a verifiable credential. But why would they generate a new DID?
       - prof: In this project?
     - student1: Yeah, sure. In general, I mean.
@@ -979,11 +1296,11 @@ The DID document does **not contain the services themselves** — it only provid
     - student2: Okay. So the government could issue my name and something and the university could also issue my degree.
       - prof: Exactly.
     - student2: Okay.
-- So and wallet, and what you are going to be managing is information that you get. Sorry, I actually jumped. Yeah, so I will show you in a minute. Here, just to wrap it up, here I can select from also a bid. In our case, the only one connection is the instance of obvious. But if I had multiple connections, then I can also see that it's from which and what kind of information is going out. So the constant is there as much as the designers all know it.
+- So and **wallet**, and what you are **going to be managing is information that you get**. Sorry, I actually jumped. Yeah, so I will show you in a minute. Here, just to wrap it up, here I can select from also a bid. In our case, the only one connection is the instance of obvious. But if I had multiple connections, then **I can also see from which and what kind of information is going out**. So the constant is there as much as the designers all know it.
   - student: Wouldn't it be very important in such a system that people keep their private keys offline and very safe, sort of like a quite hardware wallet, because anyone who can get their private key could then impersonate them.
-    - prof: Yeah, that's an important point. I mean, wallet's main responsibility is pretty much keeping it safe. So we didn't really deal with it because the wallet wasn't implemented by us. Very often it's... We don't really want to implement the wallet. I can promise you that it's going to be complicated. But you can see at least what kind of mechanisms that they are using in their wallet. It's often Open Source information somewhere.
-  - student: One thing to know, the thing about it's, for example, one of the bad things personally for me with this multiple identity providers is that, for example, Facebook has access to my data and they have a lot of data that they can do whatever and sell it. And I don't exactly precisely understand how, for example, with this we're preventing them to do... They ask for some data, we do this identification process and they get our data. How can we, like, with this method, make sure that they are not going to do anything else with our data? Like, how does this prevent it?
-    - prof: That's another point. That's actually one of the criticisms that I find very valid. That you don't have any control over what the verifier might do with the data that you share. But you are in control of... Or you are the one that decides what information you are sharing. One suggestion often is that you can theoretically use a separate DID for interacting with different parties to avoid profiling. Might help, I don't know how realistic that is to be honest, that I would expect that the wallet might have something like this and that is the user doesn't know about it at all, then maybe. But still, if you have a verifier that is really asking a lot of information from you and if you don't care about giving it, there's nothing that you can do, at least not with this application
+    - prof: Yeah, that's an important point. I mean, **wallet's main responsibility is pretty much keeping it safe**. So we didn't really deal with it because the wallet wasn't implemented by us. Very often it's... **We don't really want to implement the wallet**. I can promise you that it's going to be complicated. But you can see at least what kind of mechanisms that they are using in their wallet. It's often Open Source information somewhere.
+  - student: One thing to know, the thing about it's, for example, one of the bad things personally for me with this multiple **identity providers** is that, for example, Facebook has access to my data and they have a lot of data that they can do whatever and sell it. And I don't exactly precisely understand how, for example, with this we're preventing them to do... They ask for some data, we do this identification process and they get our data. **How can we, like, with this method, make sure that they are not going to do anything else with our data? Like, how does this prevent it?**
+    - prof: That's another point. That's actually **one of the criticisms that I find very valid**. That you **don't have any control over what the verifier might do with the data that you share**. But you are in control of... Or **you are the one that decides what information you are sharing**. One suggestion often is that you can theoretically use a separate DID for interacting with different parties to avoid profiling. Might help, I don't know how realistic that is to be honest, that I would expect that the wallet might have something like this and that is the user doesn't know about it at all, then maybe. But still, if you have a verifier that is really asking a lot of information from you and if you don't care about giving it, there's nothing that you can do, at least not with this application
   - student: Like, the issuer doesn't know how often and to whom I use my credentials.
     - prof: No.
   - student: So, if Facebook gives me credentials that I have an account...
@@ -992,23 +1309,23 @@ The DID document does **not contain the services themselves** — it only provid
     - prof: Exactly.
   - student: And that's the criticism of the current state and this is solved by the system, right?
     - prof: This is tried to be solved with the system, but it heavily depends also on how you really build these features into your system. Because theoretically, you can implement a system for **revocation checks** for credentials, because that's something I need to check as well for this credential involved. Let's say there's a web server, then there's absolutely nothing hindering me from checking out which information was checked for revocation. There are also various approaches for that, like there are **privacy preserving approaches**, but every small part of this whole puzzle is by itself a big problem actually, that the whole problem is trying to solve, but that does not necessarily mean that every single SSI approach is perfectly adhering to all these principles. It's just the guiding principles, what I showed at the beginning.
-- Yeah, so sharing with it, and that's pretty much it. The user's experience is scanning QR codes, selecting something and sending it.
-- In our onboarding application, that's what we called it, we had also various things that we needed to do.
-- In today's world at Fraunhofer FIT, there's a non-research institute, let's say it, when new employees onboard, we give them a paper, which has basically the contact person that they need to go and for what exactly, like to pick up your laptop or to do some trainings and get information about some trainings, and you need to find these people in their offices. Before Corona, that was a bit more easier. Now after Corona, it's people doing hardly home offices, it's even a bigger problem. So let's say you find this person in place and got it, and then you need to get a signature, and at the end you're recommended to make a copy of the document for yourself. So you can see it's not really a very advanced digital way of doing it, so our approach was more trying to do it a little more digital.
-- For me, when I did it as a student, it took me about two days, I think, to get all the signatures. And from this perspective, our biggest argument was that theoretically one can do this before actually coming to their first working day. So you're not going to be using two working days. From an employee's perspective, I don't know, it's really a loss, and I'm not spending two days doing nothing, but yeah.
+- Yeah, so sharing with it, and that's pretty much it. **The user's experience is scanning QR codes, selecting something and sending it**.
+- In **our onboarding application**, that's what we called it, we had also various things that we needed to do.
+- In today's world **at Fraunhofer FIT**, there's a non-research institute, let's say it, when new employees onboard, we give them a paper, which has basically the contact person that they need to go and for what exactly, like to pick up your laptop or to do some trainings and get information about some trainings, and you need to find these people in their offices. Before Corona, that was a bit more easier. Now after Corona, it's people doing hardly home offices, it's even a bigger problem. So let's say you find this person in place and got it, and then you need to get a signature, and at the end you're recommended to make a copy of the document for yourself. So you can see it's not really a very advanced digital way of doing it, so our approach was more trying to do it a little more digital.
+- For me, **when I did it as a student, it took me about two days**, I think, to get all the signatures. And from this perspective, our biggest argument was that theoretically one can do this before actually coming to their first working day. So you're not going to be using two working days. From an employee's perspective, I don't know, it's really a loss, and I'm not spending two days doing nothing, but yeah.
 - student: Is the DID encoded in the secret, some of the government gives me credentials, could I use the same secret in another DID?
   - prof: What do you mean "secret"?
 - student: I use my credentials with my DID, so I want to log in somewhere, and so the where I log in knows my DID, and if I log in somewhere else with the same DID, that could be linked. If I want to use my credentials with a new identity, could I use the same credentials that I had before, or...
-  - prof: The credentials tied to the DID itself.
-- student: I would need to get new credentials issued for a new identity.
-  - prof: If you want multiple copies of it, yeah, you would need to. But very often, we are not really specifically checking for the DID values, but for profiling you can do that. But what's more important is that it's coming from a trusted issuer.
+  - prof: **The credentials are tied to the DID itself**.
+- student: I would **need to get new credentials issued for a new identity?**
+  - prof: **If you want multiple copies of it, yeah**, you would need to. But very often, we are not really specifically checking for the DID values, but for profiling you can do that. But what's more important is that it's coming from a trusted issuer.
 - student: Let's say I want to have five Google accounts and use a five-time something, but Google wants me to use credentials that I live in Germany and I have a name and something. Could I use my credentials from the government that I have a name, five times with new identities toward Google. Tied to the DID that I used to get this from the government?
   - prof: I mean, if you are being issued a credentials, I guess it would be tied to a single DID. I'm not sure if you have any questions or anything, but...
 - student: I want to create an account for Google. Google says you need to be a real person. So it gives me credentials, you're a real person. I give them my credentials from the government. I'm a real person. Could I use the same credentials with another DID and say I'm a new person? And then just telling you I have a real name.
   - prof: It depends on how these credentials structures are generated. So option here, I think this ID is mandatory, if I'm not entirely wrong.
 - student: But if I replaced the ID, would the proof still work.
   - prof: You can't just by yourself issue, because you're not doing time-tied issuer. So, you need to go to the issuer and tell them, hey, I have a new DID, so issue my credential for this DID, and make the old one invalid. Yeah. So with the signatures, it's actually... You probably can't just change the value there. But you can create a different DID for the interaction only. But to be honest, I don't really know the details of it, I never had any working example.
-- student: I was wondering, could we have this problem of being tracked, because we only have one DID, we solve by having one central, one authority. The government gives you a DID, and then you have another issuer who, given you have this DID from the government, gives you a new DID, which is also trusted, because they only give it to you if you have the proven one. And then this issuer gives you a DID for every single service you use, basically. So you cannot be tracked across several services. 
+- student: I was wondering, could we have this **problem of being tracked**, because we only have one DID, we solve by having one central, one authority. The government gives you a DID, and then you have another issuer who, given you have this DID from the government, gives you a new DID, which is also trusted, because they only give it to you if you have the proven one. And then this issuer gives you a DID for every single service you use, basically. So you cannot be tracked across several services. 
   - prof: You can implement a service that utilizes an ID card credential to get the information, and then issue your automatic ID information. There's nothing hindering that, but it's not enforced that there is really this one authority, that you might be trusting your government, but that might not be the case for everyone. 
 - So I just think a new employee, yeah,
 - in this video, I just want to show further, that we also just said, okay, theoretically from training, so you can also get credentials. I'm not just jumping because it's pretty much the same thing, you're a scanning a QR code, and so on. We issue do process, we issue training certificates. I mean, that's some of the stuff that's something that we can test as well.
