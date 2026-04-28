@@ -1332,52 +1332,117 @@ Later:
 
 ## slide: "Verifiable Presentation (VP)"
 
-- So now the question comes to what we have, kind of actually already spoiled. We also have **verifiable presentations**. So I have this credential that I'm holding, and the next question is that, okay, but how do I present them safely? And this is where we have the concept, it's basically the bridge between the user and the verifier, and the way that the holder can basically selectively share information while also keeping control.
-- Now, a little more precisely, **verifiable presentation**, can be generated out of one or more credentials.
-  - So I got a credential from the government and from my university, theoretically I can pack them together in one presentation, so I don't have to do it multiple times.
-  - But I can also say that out of this credential I only want to share the information that I'm over 18. That's also possible. So that's where the verifiable presentation is **different from** the **verifiable credential**. I'm not sharing the whole information. I don't have to share the whole information. I can decide. And the holder basically creates it based on the verifier's request on what kind of information they need from you, if you agree with it, and then sign it with their private key. So it's, again, pretty much signature, but of course you need to make sure that the signature of the issuer is still trackable, combining signatures from different JSONs and then putting it in a more trusted packet is also another technical challenge, but there are some approaches for that.
+- So now the question comes to what we have, kind of actually already spoiled. We also have **verifiable presentations**. So I have this credential that I'm holding, and the next question is that, okay, but **how do I present the VCs safely?** And this is where we have the concept, it's basically **the bridge between the user and the verifier**, and the way that the holder can basically **selectively share information while also keeping control**.
+- Now, a little more precisely, **verifiable presentation**,
+  - **"compilation of one or more Verifiable Credentials"**:
+    - **A VP can be generated out of one or more credentials**. So, I got a credential from the government and from my university, theoretically I **can pack the VCs together in one presentation**, so I don't have to do it multiple times.
+  - **"selectively share information"**:
+    - But I **can also say that out of this credential I only want to share the information that I'm over 18**. That's also possible. So that's where the **verifiable presentation** is **different from** the **verifiable credential**. I'm not sharing the whole information. I don't have to share the whole information. I can decide. And the holder basically creates it **based on the verifier's request on what kind of information they need** from you, **if you agree** with it, and then **(the holder) sign it with their private key**.
+      - So it's, again, pretty much signature, but of course you need to make sure that the signature of the issuer is still trackable, combining signatures from different JSONs and then putting it in a more trusted packet is also another **technical challenge**, but there are some approaches for that.
 - But two things about the verifiable presentation that are important is that
   - it should be possible to **selectively disclose information**. So I need to be able to decide what I'm sharing.
-  - And the second thing which is very interesting is that there can be also **zero-knowledge proofs for yes-or-no responses**. So in order to share that I am over 18 I don't have to necessarily give out my date of birth. So there are some models that might also enable this.
+  - And the second thing which is very interesting is that there can be also **zero-knowledge proofs for yes-or-no responses**.
+    - So in order to share that I am over 18 I don't have to necessarily give out my date of birth. So there are some models that might also enable this.
     - Technically, I know some ~~roles~~ that directly support it, but they are not compatible with W3C standards as they are completely different. So according to my knowledge, W3C compatible zero-knowledge proofs in practice, I don't know anything like that yet. I know that there's work on it that is being done.
   - Yeah, but that's pretty much the two important things about the verifiable presentation signatures
 
 ## slide: "Verifying a Verifiable Presentation"
 
-- the verifier sends a request to the holder and
-- the holder receives this request and checks if they have those credentials or that information and
-- agrees to provide the data and sends it back to the verifier as a verifiable presentation.
-- A thing that made it a lot more clear for me when I was actually learning the concept myself was that what does verifier exactly check?
-  - So first of all, we are having a look at signatures. The authenticity of the data is still there because it's not manipulated at all that we can do by looking at these DIDs, resolve these DIDs, get the document, look at the public keys, check the signatures, do they fit? Do they not fit? Then, I have to check the identity of the issuer. I think one of the biggest things about this whole SSI thing is for me at least that the whole concept holds as long as verifier has trust on some issuer. So if I'm not trusting the issuer at the beginning, this whole thing doesn't mean anything at all. I need to know for sure that, first of all, the government is an entity, for example, that I trust. And the second is that they indeed publish these DIDs somewhere, so that really belongs to them, I know it. Only then, the whole thing makes sense. However, if I'm not already trusting University X from another country, then this whole thing doesn't make any sense. All of this also came with the different approaches, like can we create certain registries where there are trusted data issuers, various approaches exist for that too. If I'm not terribly wrong, I think, within the European Digital Identity Infrastructure, there is a similar approach as well to identify these from different countries, which issuers are really trusted, ie. to see whether this DID is really someone that I can trust.
-- Yeah, the identity of the issuer, and that we also check the holder was indeed the person, or the signature of the holder match the DID, the DID's very important public key, and then checking the signature, and that the credential has been valid and not revoked yet by the issuer. It is possible to revoke a credential from the issuer's side, that's why I said that it's possible to also conduct a revocation registry, where you can also theoretically track whether this credential has been accessed, because at this point the verifier needs to check if it has been revoked. So with that, theoretically the issuer can get that information, but as I said, there are some types of various approaches for that, that doesn't say anything about what kind of credential is really being checked, but the results are valid results.
-- And also very nice is that I can issue a credential, for example, in our project. We can issue an employment credential, and already put the end of the contract date, and afterwards I don't have to worry about it, because the information is already there, it's invalid, and then it will always return negative results when the verifier wants to verify it, so I don't have to actually deal with off-boarding of my employee. If their contract is extended, that's a whole other story, then you need to maybe issue another credential, or extend it manually, but it allows to actually already restrict certain allowances by a certain time period.
-- And of course, what's not here is that, as a verifier, I also need to check whether it conforms to my requirements. Like, you are supposed to be over 18, is a better example, but like, for FIT my requirements are that they allow access to some kind of service.
+- (1) the **verifier sends a request** to the holder and
+- (2) the **holder receives this request** and checks if they have those credentials or that information and
+- (3) the **holder agrees** to provide the data and **sends it back** to the verifier as a **verifiable presentation**.
+- (4) A thing that made it a lot more clear for me when I was actually learning the concept myself was that **what does the verifier exactly check?**
+  - (a) So first of all, we are having a look at **signatures**, if the **authenticity of the data** is still there, ie. it's not manipulated at all.
+    - That we can do by looking at these DIDs, resolve these DIDs, get the document, look at the public keys, check the **signatures**, do they fit? Do they not fit?
+  - (b) Then, I have to **check the identity of the issuer**.
+    - I think one of the biggest things about **this whole SSI thing** is for me at least that the whole concept **holds as long as the verifier has trust on some issuer**. So **if I'm not trusting the issuer** at the beginning, this **whole (SSI) thing doesn't mean anything** at all.
+      - I need to know for sure that,
+        - first of all, the government is an entity, for example, that I trust.
+        - And the second is that they indeed publish these DIDs somewhere, so that really belongs to them, I know it. Only then, the whole thing makes sense.
+      - However, if I'm not already trusting University X from another country, then this whole thing doesn't make any sense.
+    - All of this also came with the different approaches, like can we create certain **registries** where there are **trusted data issuers**.
+      - Various approaches exist for that too.
+      - If I'm not terribly wrong, I think, within the **European Digital Identity Infrastructure**, there is a similar approach as well to identify these (trusted data issuers) from different countries, which issuers are really trusted, ie. to see whether this DID is really someone that I can trust.
+  - (c) Yeah, the identity of the issuer, and that we also **check the holder was indeed the person**,
+    - or that the **signature of the holder matches the DID's very important public key**, and then checking the signature,
+  - (d) and **checking that the credential has been valid** and **not revoked** yet by the issuer.
+    - It is possible to revoke a credential from the issuer's side, that's why I said that it's possible to also construct a **revocation registry**, where you can also theoretically track whether this credential has been accessed, because at this point the verifier needs to check if it has been revoked. So **with that, theoretically the issuer can get that information (about revoked or not revoked)**, but as I said, there are some types of various approaches for that, that doesn't say anything about what kind of credential is really being checked, but the results are valid results.
+- And also very nice is that I can issue a credential, for example, in our project. We can issue an **employment credential**, and already **put the end of the contract date**, and afterwards I don't have to worry about it, because the information is already there, **(after the end of the contract) it (the employment credential, the VC) is invalid, and then it will always return negative results when the verifier wants to verify it**, so I don't have to actually deal with off-boarding of my employee.
+  - If their contract is extended, that's a whole other story, then you need to maybe issue another credential, or extend it manually,
+  - but it (the VC) allows to actually already restrict certain allowances by a certain time period.
+- And of course, what's not here is that, **as a verifier**, I also **need to check whether it conforms to my requirements**.
+  - Like, you are supposed to be over 18, is a better example,
+  - but like, for FIT my requirements are that they allow access to some kind of service.
 
 ## slide: "SSI Wallet"
 
-- Now the part **wallet**. It's for me a little bit like a damned topic, which I got to know when I actually first started implementing something on this point, because without a proper wallet, whatever you do means absolutely nothing, because if the user is confused, if the user finds it unattractive, then anything fancy that you do on the background doesn't mean anything, and if the wallet is not functioning well enough, you can't ~~press~~ anything at all. So that's also quite annoying, but the wallet is pretty much the part that is facing the user.
+- Now the part **wallet**. It's for me a little bit like a damned topic, which I got to know when I actually first started implementing something on this point, because **without a proper wallet, whatever you do means absolutely nothing**,
+  - because if the user is confused, if the user finds it unattractive, then anything fancy that you do on the background doesn't mean anything,
+  - and if the wallet is not functioning well enough, you can't prove anything at all. So that's also quite annoying,
+- but the wallet is pretty much **the part that is facing the user**.
 
 ## slide: "SSI Wallet und Digital Agent"
 
-- And this is pretty much the digital equivalent of your wallet, physical wallet. I have my cards, I have my identity cards, I have my university cards, the same thing, that I already kind of showed. It manages pictographic material, my keys, and it also ensures that the interactions with the others are staying secure and privacy-preserving.
+- And this is pretty much the digital equivalent of your wallet, physical wallet. I have my cards, I have my identity cards, I have my university cards, the same thing, that I already kind of showed.
+- It manages cryptographic material, my keys, and it also ensures that the interactions with the others are staying secure and privacy-preserving.
 - So it's, on the one hand, has a **user interface** and **data storage** facilities.
   - It should be able to, of course, create a **verifiable presentation** using selective disclosure of attributes.
-  - It needs to **check for the expiration** of the credentials and for the user, for the user finance perspective,
-  - **Backup and Recovery** is a whole another topic, that's also open for discussion, but in an optimal way, it should be possible. But as long as you start thinking about backup and recovery, there come some, again, centralized entities that manage it for you so that you can easily recover them. So again, it comes to the usability vs. security issue. On the other hand, if you don't have any of those centralized approaches, then you might... if you lose your keys and you're fine with it.
+  - It needs to **check for the expiration of the credentials** and for the user, for the user finance perspective,
+  - **Backup and Recovery** is a whole another topic, that's also open for discussion, but in an optimal way, it should be possible.
+    - But as long as you start thinking about backup and recovery, there come some, again, **centralized entities that manage it for you** so that you can easily recover them. So again, it comes to the **usability vs. security issue**.
+    - On the other hand, if you don't have any of those centralized approaches, then you might... if you lose your keys and you're fine with it.
 - Yeah, and all of these wallets or entities, actually including issuer and verifier, is basically wrapped around the concept of **digital agents**, at least that's how we're calling them, and
   - that's a side ecosystem that's responsible for **receiving requests and exchanging credentials** for all these standards that I mentioned like OpenID, for VC and VP, they need to support these standards,
   - and it's often a **secure, asynchronous communication** which is also a complicated topic to handle.
-  - And you need to be able to also do **connections management**. But often wallets ask if I trust this person with this DID and so that once you say, yeah, I know this person, but I don't have to answer this question all the time. So I can just add certain people to "Trusted DIDs" for issuance or for verification. Some wallets support this, some wallets don't. It depends.
+  - And you need to be able to also do **connections management**.
+    - **"Trusted DIDs" list**: But often wallets ask if I trust this person with this DID and so that once you say, yeah, I know this person, but I don't have to answer this question all the time. So I can just **add certain people to "Trusted DIDs"** for issuance or for verification. Some wallets support this, some wallets don't. It depends.
+
+---
+
+### Gemini: "ssi wallet vs digital agent"
+
+An SSI wallet and a digital agent are complementary components of a self-sovereign identity system: **the wallet is the user-facing application that securely stores and manages credentials (driver’s license, diplomas), while the digital agent is the software module/service that performs the technical actions—communicating, signing, and sharing data with other agents or verifiers on behalf of the user.**
+
+#### Key Differences and Relationship:
+
+- **SSI Wallet (Holder/Storage)**: Focuses on the user interface and secure storage, acting as the "container" for credentials. It keeps private keys on the user’s device, ensuring sole ownership of identity.
+- **Digital Agent (Operational Logic)**: The active software component that handles the cryptographic processes, connects to blockchains to verify credentials, and manages interactions with verifiers.
+- **Relationship**: Often, they are combined, where the wallet app acts as the user agent to manage the credentials directly.
+
+#### Key Takeaways:
+
+- **SSI Wallet**: Securely manages/stores credentials, often seen as the app on a phone.
+- **Digital Agent**: Executes transactions and communications based on wallet data.
+- **User Control**: Both empower users by allowing selective disclosure, enabling users to prove attributes (e.g., being over 18) without revealing unnecessary personal details.
+
+#### Why They Work Together:
+
+- **Interoperability**: They act as a bridge between users and services (banks, government, travel) by using shared technical standards, allowing your credentials to work anywhere.
+- **No Central Intermediary**: The agent and wallet combination means there is no "phone home" to an issuer, allowing you to share data directly with verifiers.
+- **Security**: By using blockchain and cryptography, these systems protect against tampering.
+- **Efficiency**: They improve usability by providing a single point of interaction for all personal data.
+
+---
 
 ## slide: "Verifiable Data Registry"
 
 - And all of these things that I have already explained depends on a **shared trust layer** which we call **"Verifiable Data Registry"**.
-- So it's not really a database where you are saving all the identity information, but it's rather, we need somewhere to store the ID documents.
-- Credentials, they sometimes follow schemas so that every university indeed issue the same format of credential or follow certain schemas. These need to be stored somewhere and of course this needs to be secure as well.
-- **Presentation requests** also have something like a **schema**, let's say, that we can define how a presentation should look like already or **revocation registries**, for example. So such stuff still need some kind of a **data registry** that is reliable, but also preferably decentralized or distributed in some manner. It should be available all the time so that I can continue to operate within this ecosystem and the integrity of this should be really made sure and this is actually where the **blockchain** comes in.
-- So the invention or the rise of **blockchain** kind of kicked this whole thing a little bit forward because there were some people that said, okay, this is actually an awesome place where we can save all this information, at least for the public ones, that we really want to save. And this is how I also a little bit triggered the whole developments in the SSI.
-- On the other hand, today, you don't have to necessarily have blockchain to have any of these SSI concepts.
-  - You can say that I'm running a web server and hashing it every day and then checking if the hash is still fitting for the integrity. Whatever, like, such things also exists. It doesn't have to be a DLT, but a DLT is indeed very suitable, especially for the issuers, like for the governments and so on, to actually say "this is me", it is a very good infrastructure because I hope you know that too, from the last week, that the data that goes in blockchain is **immutable** and cannot be changed. That's why it's actually a good platform for it.
+  - So it's not really a database where you are saving all the identity information,
+  - but it's rather, we need somewhere to **store the DID documents**.
+  - Credentials, they sometimes follow **VC schemas** so that every university indeed issue the same format of credential or follow certain schemas. These need to be **stored** somewhere and of course this needs to be secure as well.
+  - **Verifiable Presentation requests** also have something like a **schema**, let's say, that we can define how a presentation should look like already
+  - or **revocation registries**, for example.
+- So such stuff still need some kind of a **data registry** that is
+  - **reliable**,
+  - but also preferably **decentralized** or distributed in some manner.
+  - It should be **available all the time** so that I can continue to operate within this ecosystem
+  - and the **integrity** of this should be really made sure
+- and this is actually where the **blockchain** comes in.
+  - So the invention or the rise of **blockchain** kind of kicked this whole thing a little bit forward because there were some people that said, okay, this is actually an awesome place where we can save all this information, at least for the public ones, that we really want to save. And this is how I also a little bit triggered the whole developments in the SSI.
+- On the other hand, **today, you don't have to necessarily have blockchain to have any of these SSI concepts**.
+  - You can say that I'm running a web server and hashing it every day and then checking if the hash is still fitting for the integrity. Whatever, like, such things also exists.
+  - **It doesn't have to be a DLT**,
+  - **but a DLT is indeed very suitable, especially for the issuers**, like for the governments and so on, to actually say "this is me", it is a very good infrastructure **because**, I hope you know that too, from the last week, that the data that goes in blockchain is **immutable** and cannot be changed. That's why it's actually a good platform for it.
 
 ## slide: "SSI Frameworks"
 
@@ -1388,18 +1453,29 @@ Later:
 ## slide: "PKI versus SSI"
 
 - The question that comes often is basically the difference between **public key infrastructure and SSI**.
-- Basically, the **trust model** is quite different. So we have certificate authorities with public key infrastructure. On the other hand, in a decentralized, especially decentralized SSI network trust is created by the properties of the ledger and also the cryptographic proofs that we've been talking about.
-- There are very strict **certificate formats** for PKI and the VC parts schemes can be quite flexible. It depends on the use case.
-- PKI has a strict **hierarchy**, top-down control. On the other hand, if you look at SSI, anyone can be an issuer and verifier. There is no real separation for different identities.
-- **Distribution and use** for the PKI is quite accepted. At the moment when we talk about SSI to people that do not really know much about it, it's not perceived as secure as PKI, although there's actually quite strong background to it.
+- Basically, the **trust model** is quite different.
+  - So we have **(central) certificate authorities (CAs)** with **public key infrastructure**.
+  - On the other hand, in a decentralized, especially decentralized **SSI** network **trust** is created **by the properties of the ledger** and also the **cryptographic proofs** that we've been talking about.
+- There are **very strict certificate formats** for **PKI**, whereas the **VC schemes** can be quite **flexible**. They are definable depending on the use case.
+- **PKI** has a **strict hierarchy**, top-down control. On the other hand, if you look at **SSI**, there **anyone can be an issuer and verifier**. There is no real separation for different identities.
+- **Distribution and use** for the **PKI** is quite **accepted**. At the moment when we talk about **SSI** to people that do not really know much about it, it's **not perceived as secure as PKI**, although there's actually quite strong background to it.
 
 ## slide: "Challenges"
 
-- So, let's wrap it up a little bit. I have already kind of seen all this.
-- **Interoperability** is quite a big problem. There are various standards that are racing with each other. There are various frameworks. I can promise you, if you really want to start implementing something like that, this thing is extremely complicated when you don't know exactly what standard you are adhering to and finding this information itself is also quite annoyingly hard. It's getting better though.
-- **Wallets** itself is causing a problem, as I said. It's availability, security and especially the usability of the wallets definitely require some further work. If you're interested in better usability directions, you can have a look at it, I think there's really missing informing literature. It's not really tested though, as far as I understand.
-- **Building trust and acceptance** by authorities, companies and users is of course a hard thing. How are you going to exactly convince? We tried it within Fraunhofer FIT, we demonstrated our own product. We had some stakeholders and they were just constantly talking about PKI infrastructure and how trusted it was because it was vetted by some German security ministry, I don't remember what kind of organization it was. So, this whole thing needs to be adopted. And on the direction to the adoption, business models are a little bit problematic. So, it wasn't exactly tempting to be an issuer. Who are the drivers of this whole concept? How do you exactly start using these? On the other hand, with the early wallet, there's a little bit of a promise. Who knows if the government says, okay, I'll use this structures from now on, maybe the companies also adhere with it.
-- Compliance with various... I think it's a relatively positive step in the direction of compliance with privacy rules. But as I explained, it doesn't mean necessarily that a SSI system is really fully adhering to all of these principles. A standardization is needed at the national and international level so that I know an education credential that is issued by Germany is really accepted.
+- So, let's wrap it up a little bit. We have already kind of seen all this.
+- **Interoperability** is quite a big problem.
+  - There are **various standards** that are racing with each other. There are various frameworks. I can promise you, if you really want to start implementing something like that, this thing is extremely **complicated** when you don't know exactly **what standard** you are adhering to and **finding this information itself is also quite annoyingly hard**. It's getting better though.
+- **Wallets** itself is causing a problem, as I said.
+  - It's **availability**, **security** and especially the **usability** of the wallets definitely require some further work. If you're interested in better usability directions, you can have a look at it, I think there's really missing informing literature. It's not really tested though, as far as I understand.
+- **Building trust and acceptance by authorities, companies and users** is of course a hard thing.
+  - How are you going to exactly convince? We tried it within **Fraunhofer FIT**, we demonstrated our own product. We had some **stakeholders** and they were **just constantly talking** about **PKI infrastructure** and how trusted it was because it was vetted by some German security ministry, I don't remember what kind of organization it was.
+  - So, this whole thing **needs to be adopted**.
+- And on the direction to the adoption, **business models** are a little bit problematic.
+  - So, **it wasn't exactly tempting to be an issuer**. Who are the drivers of this whole concept? How do you exactly start using these? On the other hand, with the early wallet, there's a little bit of a promise. Who knows if the government says, okay, I'll use this structures from now on, maybe the companies also adhere with it.
+- **Compliance** with various...
+  - I think it's a relatively **positive step** in the direction of compliance **with privacy rules**.
+- **standardization**: But as I explained, it **doesn't mean necessarily that a SSI system is really fully adhering** to all of these principles.
+  - **A standardization is needed** at the national and international level so that I know an education credential that is issued by Germany is really accepted.
 
 # After Lecture
 
