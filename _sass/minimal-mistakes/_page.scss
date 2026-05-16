@@ -72,6 +72,9 @@ body {
 .page__title {
   margin-top: 0;
   line-height: 1;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  letter-spacing: var(--tracking-tight);
+  font-weight: 800;
 
   a {
     color: $text-color;
