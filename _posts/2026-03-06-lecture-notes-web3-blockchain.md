@@ -16,8 +16,6 @@ tags:
 
 ---
 
-# Blockchain Basics
-
 We didn't give a presentation because we were on an external event at a bank in Frankfurt.
 So we gave a complete day on blockchain at a bank.
 And this is quite a nice reason because in Germany we have the BAFIN.

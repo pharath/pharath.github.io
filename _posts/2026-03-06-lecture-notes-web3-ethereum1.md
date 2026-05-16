@@ -15,8 +15,6 @@ tags:
 
 ---
 
-# Ethereum and Smart Contracts (Part 1)
-
 ## Bitcoin Lightning Network
 
 First we want to have a look at **lightning**.

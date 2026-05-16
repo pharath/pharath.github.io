@@ -16,8 +16,6 @@ tags:
 
 ---
 
-# Blockchain Basics (Part 4)
-
 ## slide: "Ethereum base architecture after The Merge"
 
 ### ChatGPT: "meaning (of slide text)"

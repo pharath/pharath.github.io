@@ -15,8 +15,6 @@ tags:
 
 ---
 
-# Ethereum and Smart Contracts (Part 2)
-
 So, the thing, last time I reached this slide here, about the **Ethereum account**.
 
 The idea of lecture today is basically I will finish this presentation, I will try to explain how the accounts work, how the smart contracts work,

@@ -16,8 +16,6 @@ tags:
 
 ---
 
-# Blockchain Basics (Part 2)
-
 ## Recap: Merkle Tree
 
 The hash is somehow, again, double-hashing ~~more~~.

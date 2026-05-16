@@ -15,8 +15,6 @@ tags:
 
 ---
 
-# Blockchain Basics (Part 5)
-
 ## Business Models: "Beer of Satoshi"
 
 And among others, this guy was also in Cologne,

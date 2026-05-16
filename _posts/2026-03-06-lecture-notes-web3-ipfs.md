@@ -15,8 +15,6 @@ tags:
 
 ---
 
-# IPFS
-
 Content identifier and this is how it looks like and that's how it's being constructed.
 Knowing that you don't start programming on the IP and as I've just done programming to develop your own content identifier,
 you don't really need to deal with that.

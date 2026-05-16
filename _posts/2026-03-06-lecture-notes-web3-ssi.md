@@ -16,8 +16,6 @@ tags:
 
 ---
 
-# SSI
-
 ## slide: "Basics - Digital Identity"
 
 ### ChatGPT: "meaning"

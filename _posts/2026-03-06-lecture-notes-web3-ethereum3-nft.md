@@ -15,8 +15,6 @@ tags:
 
 ---
 
-# Ethereum and Smart Contracts (Part 3) and NFTs
-
 ## org
 
 prof: Before we start that organizational issue, next Wednesday, I need to participate in a

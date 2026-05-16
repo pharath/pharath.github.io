@@ -15,8 +15,6 @@ tags:
 
 ---
 
-# Introduction
-
 ## Fiat vs. Crypto
 
 - digital vs. non-digital

@@ -16,8 +16,6 @@ tags:
 
 ---
 
-# Blockchain Basics (Part 3)
-
 I think we actually stopped last time.
 
 ## Meetup by Aachen Blockchain Club

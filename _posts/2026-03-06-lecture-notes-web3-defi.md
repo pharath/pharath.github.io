@@ -15,8 +15,6 @@ tags:
 
 ---
 
-# DeFi
-
 And as usual, just try to raise your hands or just try to interrupt me.
 So then, organize the key on the screen so I'll see those of you.
 But sometimes maybe I forgot that I'm here in the lecture and alone I need to do recording.
