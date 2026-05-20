@@ -1143,65 +1143,74 @@ So you somehow own a particular kind of piece of the cathedral of Cologne as a d
 
 So the next thing is now, let's see,... it also came down from IPFS...
 
-So that is the somehow the metadata, that's how we can describe it.
-We can put this in JSON and then we can somehow store it on the blockchain.
+So that is the somehow the **metadata**, that's how we can describe it.
+We can put this **in JSON** and then we can **somehow store it on the blockchain**.
+
 So the next thing is now that we need to put this into somehow on the blockchain.
-And now we get into some design decision.
-Do we put all the metadata here on the blockchain?
-Costs us some money.
+And now we get into some **design decision**:
+Do we **put all the metadata** here on the blockchain?
+**Costs us some money**.
 Representing all that metadata here, so probably you need 200 bytes or so.
 If we store that on Ethereum, it costs us some money.
-Or shall we just put a small amount of that on the blockchain?
-We could also put just the link on the blockchain itself.
-That's a design decision that people can make when they create such an NFT.
+**Or shall we just put a small amount of that** on the blockchain?
+We could also **put just the link** on the blockchain itself.
+That's **a design decision that people can make** when they create such an NFT.
 
 ### slide: Can I find the NFT in the blockchain?
 
 So the question is now, if we put this on the blockchain, **can I find the NFT on the blockchain?**
-And one thing is that here we have the link on the standard website of the auction, auction Van Ham in Cologne is it, and that's what we can find there.
-And the auctioneer he says, we have this NFT on sale and the token type is ERC721.
-It's the token number five in this smart contract.
-So that's the smart contract number and token number five is this particular image.
-So there may be other images in this particular smart contract, four, three, one, seven, eight, which are representing other images.
-So the image itself is uniquely identified by that smart contract number and the token number.
 
-student3: Wasn't there another kind of smart contract like ERC1155 or something that is just for one NFT, whereas ERC721...?
+And one thing is that here we have the link on the standard website of the auction, auction Van Ham in Cologne is it, and that's what we can find there:
+- And the auctioneer he says, we have this NFT on sale and the **"token type"** is **ERC721** (see **"Token Type: NFT ERC-721"**).
+- It's the **token number** five in this smart contract (see **"Token ID: 5"**).
+- So that's the **smart contract number** (see **"SmartContactAdr.: 0x7d9179808e3841c6c00c2351fca35a00ed86c275"**) and token number five is this particular image.
+  - So there may be other images in this particular smart contract, four, three, one, seven, eight, which are representing other images.
 
-prof: I think 1155 is for even more NFTs, so it's more for collections.
+So **the image itself is uniquely identified by** that **smart contract number** and the **token number**.
+
+student3: Wasn't there another kind of smart contract like **ERC1155** or something that is just for one NFT, whereas ERC721...?
+
+prof: I think **ERC1155** is for even more NFTs, so it's more **for collections**.
 And I think this is the one for really unique NFTs.
 Okay, it was the other way around.
-So the 721 was the first one and that's the one really for unique NFTs.
-And you really describe the unique NFTs with the smart contract address and the token number five and this represents the NFT.
+So the **ERC721** was the first one and that's the one really **for unique NFTs**.
 
-student: What exactly do they hash, like the JPEG file?
+And you really describe the unique NFTs with the **smart contract address** and the **token number** five and this **represents the NFT**.
 
-prof: The JPEG. The JPEG is being hashed.
+student: **What exactly do they hash**, like the JPEG file?
+
+prof: **The JPEG**. The JPEG is being hashed.
 
 Okay, so what we see now is this.
 This is what we see on the website of the auctioneer.
-And what we do now is that we go to this particular smart contract.
-So we see here it was 275.
-This is the 275 and let's say you go to this smart contract.
-Let's go there.
 
 ### slide: A quick research on the Ethereum blockchain
 
-So here we have the smart contract.
-And there we have all the different methods of the smart contract.
+And what we do now is that we go to [this particular smart contract](https://etherscan.io/address/0x7d9179808e3841c6c00c2351fca35a00ed86c275#readContract).
+
+So we see here it was 275 (ie. the ending of the contract address, see top of the etherscan.io page: "Contract: `0x7D9179808E3841c6c00c2351FCa35a00Ed86c275`").
+This is the 275 and let's say you go to this smart contract.
+Let's go there.
+
+So here we have the **smart contract (code)**.
+And there we have all the different **methods of the smart contract**.
+
 And what we can do now is that we go to...
 I will just do this way around and you can see...
 Okay, so there we go.
+
 So we go here to the smart contract and then we go to the **token URI**.
 So here are the different **methods** that this smart contract supports.
-So we go to token URI.
-And then we **type in five** and then we say **"query"**.
-And then we get this particular kind of **string**, which is **base65 encoded**.
+So we go to **`tokenURI`** (one of the methods).
+And then we **type in `5`** and then we click **"Query"**.
+
+And then we get this particular kind of **string**, which is **base64 encoded**.
 So we would need somehow to get this decoded.
-And if we decode it, we go back to the image where I did it.
-It represents it.
-So this here is actually the encoding of that.
-Because you can't put any kind of special characters on the blockchain.
-Therefore, you encode it by base65.
+And if we **decode it** (eg. with an online base64 decoder), we go back to the image (or rather its metadata, including the image URL) where I did it.
+It represents it (the image metadata).
+So **this (base64 string) here is actually the encoding of that (image)**.
+
+Because **you can't put any kind of special characters on the blockchain. Therefore, you encode it by base64.**
 That's just the whole magic there.
 And this is what we see here.
 
@@ -1210,174 +1219,184 @@ And this is what we see here.
 And what we see here is actually what I've shown before.
 And this tells us that for this particular implementation of the smart contract,
 what they did here is that they said, okay, we take the **whole metadata** for this image,
-we encode it base65 and then you **put it completely on the blockchain**.
-And if you decode it there, so what we have here, then you see also here the link.
+we **encode it base64** and then you **put it completely on the blockchain**.
+
+And if you decode it there, so what we have here (the base64 string), then you see also here **the link**.
 And when we click on that, we get back to the image.
-So this is what they actually put on the blockchain.
+So this is **what they actually put on the blockchain**.
+
 And the digital **image itself is not stored on the blockchain**
-because this 21 megabytes image would cost too much.
+because this 21 megabytes image would **cost too much**.
 And we can't afford that.
 That's not possible.
+
 So actually what they **put on the blockchain** is **just the metadata**.
+
 And **the rest** is then in the **IPFS** - what we may start with this today, but also then in the next lecture.
-Or we put it on **Arweave**.
-These are two different implementations of the same concept. This is the IPFS. It's more a community driven storage.
-And this is something where you have to pay for.
+**Or** we put it on **Arweave**.
+These are **two different implementations of the same concept**.
 
-student3: Sorry, did you say then that the metadata on the blockchain actually includes a link to the image?
+This is the **IPFS**. It's more a **community driven storage**.
+And this (**Arweave**) is something where **you have to pay for**.
 
-prof: Yes.
+student3: Sorry, did you say then that the **metadata** on the blockchain actually **includes a link to the image?**
 
-student3: So you have to ensure that that link always remains valid.
+prof: **Yes**.
 
-prof: And that's why we use the IPFS and not just a link to a web page.
+student3: So you **have to ensure** that that **link always remains valid**.
 
-student: But when you buy this NFT, do you also receive the first JPEG or no?
+prof: And **that's why we use the IPFS** and not just a link to a web page.
 
-prof: You just receive a token.
-And this token is being transferred to your wallet.
-That means it's being registered in the smart contract that your wallet address owns that particular token.
+student: But **when you buy this NFT, do you also receive the first JPEG or no?**
+
+prof: **You just receive a token**.
+And this **token** is being **transferred to your wallet**.
+That means it's being **registered in the smart contract** that **your wallet address owns that particular token**.
+
 So you can imagine that this particular smart contract,
 it has a,...
 so this particular smart contract that we have here.
-So let's say it's the Daniel Craig smart contract.
-It has some kind of information.
-It has an owner, which is 4711.
-The wallet address of the smart contract itself.
-So it's the smart contract owner.
-And this is actually Gavin Evans.
-The artist himself, he deployed it.
-Even deployed some smart contracts.
-In this case, Gavin Evans, he deployed it.
-So we had a discussion with him and I think he confirmed it for that.
-Therefore, we know.
-And the next thing is that they have the NFTs.
-So they have the tokens.
-And then they have token number one, token number two,
-token number three, token number four, token number five.
-And token number five is this particular,
-and there we have then the particular address `0x12567` something.
-And this is your wallet address because you bought it.
-And that's how it's being stored on the blockchain.
-So that's the owner of that one.
-And they also have this kind of the token URI for Universal Resource Identifier.
-And there we have this kind of `0ab` something which then resolves into the metadata.
-So when we create this particular NFT, we create it with our own wallet, which is let's say `4711`, at the beginning it has no tokens at all.
-We just deployed the smart contract.
-And then we start uploading or storing the first tokens.
-And then we can say, okay, let's create a first token.
-And then we upload a token.
-And normally either sometimes you can determine which token number it got. Very often you just say "create a new NFT" and then it just enumerates them along.
-So it always keeps track of the number of tokens.
-And then you just provide this kind of string.
-And then this is being stored in slot number five.
-So we have somehow two arrays.
-So we have the token URI array and the NFT owner array and these two arrays.
+
+So let's say it's **"the Daniel Craig smart contract"**.
+It has some kind of **information**:
+
+- It has an **owner**, which is `4711` (see smart contract method: `owner (0x8da5cb5b)`).
+  - The **wallet address of the smart contract itself**. So it's the **smart contract owner**.
+  - And this is actually **Gavin Evans**. The artist himself, he deployed it. Even deployed some smart contracts. In this case, Gavin Evans, he deployed it. So we had a discussion with him and I think he confirmed it for that. Therefore, we know.
+- And the next thing is that they (the smart contracts) have **the NFTs** (non-fungible tokens). So they have **the tokens**.
+  - And then they have token number one, token number two, token number three, token number four, token number five (query how many tokens the smart contract currently has by using method `totalSupply (0x18160ddd)`).
+  - And token number `5` is this particular (each token has an ID and an index, method `tokenByIndex (0x4f6ccce7)` converts token index to token ID),
+- and there we have then **the particular address `0xdc4F17AFD8E25Eb8a570b4C17165dc0462045AfB`** something (see smart contract method: `ownerOf (0x6352211e)`). And this is **your wallet address** because **you bought it** (the token).
+  - And that's how it's being **stored on the blockchain**. So that (`0xdc4F17AFD8E25Eb8a570b4C17165dc0462045AfB`) is the owner of that one (token number `5`).
+- And they also have this kind of the **"tokenURI"** for Universal Resource Identifier (see smart contract method: `tokenURI (0xc87b56dd)`).
+  - And there (by running the method `tokenURI (0xc87b56dd)`) we have this kind of `ewog...` something (**base64 string**) which then resolves into the metadata.
+
+So **when we create this particular NFT**,
+
+- we create it with our own wallet, which is let's say `4711`,
+- **at the beginning it has no tokens at all**. We just deployed the smart contract.
+- And then we start uploading or storing the first tokens.
+  - And then we can say, okay, let's **create a first token**. And then we upload a token.
+    - **token number**: And normally either sometimes you can determine **which token number** it got. Very often you just say "create a new NFT" and then it just enumerates them along. So **it (the smart contract) always keeps track of the number of tokens** (see smart contract method: `totalSupply (0x18160ddd)`).
+    - **base64 string**: And then you just provide this kind of (base64) string. And then this (base64 string) is being stored in slot number five (if we selected token number `5`).
+
+So we have somehow **two arrays** (on the blockchain):
+So we have the **tokenURI array** (the base64 strings) and the **NFT owner array** () and these two arrays.
 This one can be extended because if you sell it, it's being replaced by another number.
 
-student: And how does this work if you transfer such a token to someone else?
-Like in auction for example?
+student: And **how does this work** if you transfer such a token to someone else?
+Like in **auction** for example?
 
-prof: And that is interesting. The auction itself is something that completely happens in the real world.
+prof: And that is interesting. The **auction** itself is something that **completely happens in the real world**.
+
 Let's imagine I own this NFT.
 I sell it to someone and the one with the biggest price will get it.
 Afterwards I just say, okay, now I would like to get your address.
 And then I transfer it.
-And then the point is, he doesn't need to pay with crypto.
-He can pay with Euro.
+And then the point is, **he doesn't need to pay with crypto**.
+**He can pay with Euro**.
 That's completely independent.
 You don't need to pay NFTs with crypto.
-You can just pay them with any kind of currency.
-You can connect it to some kind of crypto payment.
-When we look at **Opensea** (one of the largest NFT marketplaces), there is where this happens.
-But I can just sell you an NFT without any crypto.
+You can just pay them with **any kind of currency**.
+
+You **can connect it to some kind of crypto payment**.
+When we look at **Opensea** (one of the largest NFT marketplaces), there is where this (crypto payment) happens.
+
+But **I can just sell you an NFT without any crypto**.
 So this is completely independent.
 
 ### slide: alternatives
 
 So, and that is what the different **alternatives** are.
-You see it here from the size of the different images.
+
+You see it here from the **size of the different images**.
+
 So what they did is, Gavin Evans, he also took a picture of **David Bowie**.
 And this particular image was just a 128 times 128 pixels.
 So it's a very rough image that he uploaded there.
 And that was done when Ethereum was just in the beginning
 and when Ethereum was still cheap.
 And Ether was still cheap.
-So they were very proud that they are one of the only NFTs
-that are completely stored on the blockchain.
+So they were very proud that they are **one of the only NFTs**
+that are **completely stored on the blockchain**.
 Not just the metadata, the whole image.
-With this little thing, they put the metadata on the blockchain
-and they put the image on the IPFS, so an external cloud storage.
+
+With this little thing, they put the **metadata on the blockchain**
+and they put the **image on the IPFS**, so an external cloud storage.
+
 That's the image of **Beeple** that someone bought for $69 million
 that was sold in an auction for $69 million.
-They put the metadata, only a small part of the metadata on the blockchain
-and they put everything else here.
+They put the metadata, **only a small part of the metadata on the blockchain**
+and they put **everything else here (on the IPFS)**.
+
 So on the blockchain, you just have the URL,
 the URL which points to the IPFS.
-And in this you find more information which actually points to the image.
+And in this (URL) you find more information which actually points to the image.
+
 So these are different ways how to implement that.
 Either you store a lot of information on the blockchain
 or less information on the blockchain.
-But the most important thing actually is that
-you have on the blockchain a unique anchor
-that leads to something that is not changeable.
-And that's the big challenge.
+
+But the **most important thing actually is that you have on the blockchain a unique anchor that leads to something that is not changeable**.
+And that ("not changeable") is the **big challenge**.
 You imagine that I sell you an NFT
 and this NFT links to...
-let's say we are www.fit.fraunhofer.de. slash Prinz slash the unique NFT.jpeg.
+let's say we are `www.fit.fraunhofer.de/Prinz/the_unique_NFT.jpeg`.
 So I create a smart contract.
-I do on the fly.
+I do it on the fly.
 I become the owner of that one.
 I just say, create an NFT.
 I put this here as the URL into this particular slot here.
 And then I sell it to you for a thousand euros.
 And then you say, well, look, I got this very beautiful picture
-which is located here.
-What's the danger?
-Then I just could change it.
+which is located here (at `www.fit.fraunhofer.de/Prinz/the_unique_NFT.jpeg`).
+**What's the danger?**
+
+Then **I just could change it**.
 I just change it.
-This is just a location.
-It's just a pointer into the world wide wide.
-And I can change this immediately
-after I have sold the NFT to you.
-The big thing is that when you look here at the links
-is that these links here are not just simple addresses
-and there is not something like `.jpg`.
+**This (URL) is just a location.**
+It's **just a pointer into the world wide web**.
+And I can change this immediately after I have sold the NFT to you.
+
+**The big thing is that when you look here at the links is that these links here are not just simple addresses and there is not something like `.jpg`.**
 This **link here is actually a hash**.
 Which means that you always **store these kind of assets**
-not just as a pointer, it's **not location based**,
+not just as a pointer, it (the IPFS link) is **not location based**,
 but it is **content based**.
-So we link it to the content of the asset
-not to the location of the content.
-And the content is then represented by that.
-Which is something, it's not the real hash.
+So **we link it to the content of the asset not to the location of the content**.
+And the content is then represented by that (hash link).
+Which is something, **it's not the real hash**.
 We'll see that later on.
-But this is then something like a content based addressing
+But this is then something like a **"content based addressing"**
 of this particular image.
 
 student: And then IPFS or Arweave or whatever
 takes this hash and displays the information
-based on that, so the picture itself is not stored on their servers.
+based on that, **so the picture itself is not stored on their servers?**
 
 prof: And the IPFS, we'll talk about this later on,
-but in general, the IPFS is a distributed file system,
+but in general, **the IPFS is a distributed file system**,
 where the address of an object is not
 like in SQL table number five addresses
 and then "Wolfgang Prinz" as the key to that one.
 But the challenge here is that we have a distributed file system
-where we address the content of this distributed file systems
+where **we address the content** of this distributed file systems
 by these kind of things.
-And it always guarantees that when I retrieve that
-I always get this particular,... I always get an image
-that corresponds to that particular hash.
+And **it always guarantees that** when I retrieve that
+I always get this particular..., **I always get an image that corresponds to that particular hash**.
 That's the big advantage.
 
 ### slide: What does an NFT mean for art?
 
 So what does it now mean **for art**?
-It's something where image becomes **origin**.
-It becomes **originality** and becomes **possession**.
-And it's **irreversible** and **transparently traceable**.
+It's something where an image's
+
+- **origin**.
+- **originality** and
+- **possession**
+
+is **irreversible** and **transparently traceable**.
+
 So what does that mean?
 
 We have the **origin** of this particular NFT
