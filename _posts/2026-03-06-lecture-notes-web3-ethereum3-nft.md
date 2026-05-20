@@ -1397,31 +1397,123 @@ It's something where an image's
 
 is **irreversible** and **transparently traceable**.
 
+---
+
+#### ChatGPT: "meaning"
+
+This statement describes what a **Non-Fungible Token (NFT)** does in the context of digital art and collectibles.
+
+---
+
+##### What the Statement Means
+
+An NFT acts like a **digital certificate of authenticity and ownership** stored on a blockchain.
+
+It makes three things permanently and publicly verifiable:
+
+###### 1. Origin
+
+The blockchain records **who created the NFT first**.
+
+* The creator’s wallet address is visible.
+* The minting transaction shows exactly when the NFT was created.
+* Anyone can verify the original source.
+
+**Example:** If Beeple mints an artwork, the blockchain proves that the NFT originated from Beeple’s wallet.
+
+---
+
+###### 2. Originality
+
+The NFT proves which token is the **original unique asset**.
+
+* The token has a unique ID.
+* It cannot be duplicated in the same way.
+* Copies of the image may exist, but only one token (or a limited edition set) is recognized as authentic.
+
+**Important:** The NFT does **not** prevent others from copying the image file. It proves which version is the authentic one.
+
+---
+
+###### 3. Possession (Ownership Chain)
+
+The blockchain records every transfer of ownership.
+
+* Creator → first buyer → second buyer → current owner.
+* This forms a complete provenance chain.
+
+This is similar to how museums track ownership history for famous paintings.
+
+---
+
+##### Irreversible and Transparently Traceable
+
+###### Irreversible
+
+Once transactions are confirmed on the blockchain, they are effectively permanent and cannot be altered.
+
+###### Transparently Traceable
+
+Anyone can inspect the transaction history using blockchain explorers such as [Etherscan](https://etherscan.io?utm_source=chatgpt.com).
+
+---
+
+##### Example
+
+Suppose an artist mints an NFT of a digital painting:
+
+1. The minting transaction shows the creator and timestamp.
+2. The token ID establishes the original NFT.
+3. Each sale is recorded permanently.
+4. The current owner can be verified at any time.
+
+Even if thousands save the image, the blockchain identifies the authentic NFT and its ownership history.
+
+---
+
+##### Real-World Analogy
+
+Think of an NFT as the digital equivalent of:
+
+* A signed certificate of authenticity,
+* A serial number,
+* And a complete ownership record.
+
+The image itself is like a poster print; the NFT is the legally recognized certificate proving authenticity and provenance.
+
+---
+
+##### In One Sentence
+
+An NFT allows anyone to verify **who created a digital artwork, which token is the authentic original, and the complete history of ownership**, with records that are public and effectively permanent.
+
+---
+
 So what does that mean?
 
 We have the **origin** of this particular NFT
 and the origin is somehow being expressed
-by the owner of this smart contract.
-We can check if the JPEG has been manipulated or not.
+by the **owner of this smart contract** (Gavin Evans).
+
+**We can check if the JPEG has been manipulated or not.**
 So if someone manipulates the JPEG,
 if someone tells you that's the image of Daniel Craig,
-you just compare it to the hash that's being stored in the NFT.
+you **just compare it to the hash that's being stored in the NFT**.
 And then you see, no, it's not the original image,
 so you always can check that.
-And you can somehow own it suddenly
-and you have some kind of possession and a chain
-because if you sell it, then someone else... this address is replaced.
+
+And you can somehow **own** (possess) it suddenly and you have some kind of **possession and a chain**
+because **if you sell it**, then someone else... this **address is replaced**.
 But it's still on the blockchain
-because we never delete something.
-We just put another entry behind that
-so that the next one is then `0x471112`, or whatever, who owns the NFT.
+because **we never delete something**.
+We **just put another entry behind that** so that the next one is then `0x471112`, or whatever, who owns the NFT.
 
 So it's also **not a copy protection**.
 When we discussed it with the auction,
 then the owner of the auction house,
 he said, well, it is a copy protection. No, it's not.
 It doesn't hinder you to copy the images.
-**It just makes it unique, identifiable, and collectable.**
+**It just makes it unique, identifiable, and collectible.**
 That is the whole issue or the whole promise of that.
 It's easy to copy, it's absolutely easy to copy it.
 What I can do, for example, is that I just go here to a website,
@@ -1430,31 +1522,31 @@ so I just download it...
 Do we have to download?... No, no...
 but I can just save it.
 So I can just save it, and then I have the jpeg.
-And now I create an NFT with that image.
-And I also create it as the fifth entry of this NFT,
-of this smart contract.
+And now I create an NFT with that image (ie. a new NFT like the original NFT).
+And I also create it as the fifth entry ~~of this NFT,~~ of this smart contract (like in the original NFT's smart contract).
 And then I sell it to you.
-How would you identify that it's not the original one?
+
+**How would you identify that it's not the original one?**
 Yeah?
 
-student: So you would probably need to use this different smart contract,
-because the original smart contract has token already blocked.
+student: So you would probably need to use a **different smart contract**,
+because the original smart contract has token `5` already blocked.
 
 prof: Yes.
 So how would you identify that I sold you a fake or a copy?
 
 student: By checking the smart contract.
 
-prof: By checking the smart contract, yeah.
+prof: **By checking the smart contract, yeah**.
 And that's why,... and we often discuss this whole thing of
 blockchain, distributed, decentralized,
 on the other hand we have centralized things.
 Therefore, it's very important that this...
-That this entry here remains.
+That this entry here remains (ie. the fifth entry of the original smart contract).
 That's somehow the root.
 Because on the website of the auction house,
-we see smart contract address is the **original address of this particular NFT**.
-If someone will take this particular webpage here,
+we see **the smart contract address is the original address of this particular NFT**.
+If someone would take this particular webpage here,
 and would replace that with another smart contract address,
 **I could somehow sell you a fake image of that**.
 
@@ -1477,10 +1569,12 @@ the easiest would be to **put it in stone on the outside walls of your building*
 So that everybody can see, that's the smart contract
 where the NFTs for this particular painter are being stored.
 Not that someone else can do that.
+
+### Bored Apes
+
 And that's what a lot of people did.
-I mean, a lot of people tried to cheat you by selling you
-one of these apes, but it was just a copy.
-You always have to check, is this really from the smart contract,
+I mean, **a lot of people tried to cheat you by selling you one of these apes, but it was just a copy**.
+You **always have to check, is this really from the smart contract**,
 from Yuga Labs, from the originators?
 
 I'm not sure we can check, I think there's also being listed
@@ -1510,90 +1604,108 @@ So is this all magic? No, it's not.
 What you can easily do is the following.
 I'll just put it back here so that I can see something.
 So, this is for example now...
+
 So, this is now **a simple program that allows you to create NFTs**, to be programmed.
 So, Ivan said that you can like normally you can either have your smart contracts
-and what you normally have then is a frontend for your smart contracts,
-somehow a webpage or application that provides that, that provides access to that.
+and what you normally have then is a **frontend for your smart contracts**,
+somehow a **webpage or application that provides access to that (smart contract)**.
+
 So, this allows you now... with the simple **NFT generator**,
-so you can create any kind of thing here, let's say a certificate.
-You can give it a name, so it's lecture...
+so you **can create any kind of thing here, let's say a certificate.**
+You can give it a **name**, so it's "lecture"...
 ...NFT...
 ...example...
 ...lecture...
-...who is the recipient, so it's me.
-We could also, if someone of you has an address,
+...who is the **recipient**, so it's "me".
+We could also, if someone of you has an **address**,
 we could also type in the address.
 We can select here from an image, let's say...
 ...take the test build, yeah.
-And then we can add some traits (= metadata).
-Let's say we do the first trait is lecture.
-And today is the...
-...21st...
-...20...
-...ok, another trait is topic...
-...NFT.
-Okay, and now we can also see here the JSON, yeah.
-So what we do now is that we create these kind of JSON here.
+And then we can add some **traits (= metadata)**.
+Let's say we do the first trait is "lecture".
+And "date", today is the... 21st... 20...
+...ok, another trait is "topic"... "NFT".
+
+Okay, and now we can also see here the **JSON**, yeah.
+So what we do now is that we create this kind of JSON here.
+
 And now we **mint the NFT**.
 Oh yeah, so it's not there.
-So it's being minted, what means that we now...
-...address this particular smart contract that actually has been written by Ivan, and I'm just using it.
+So it's being minted, what means that we now address (run) this particular smart contract that actually has been written by Ivan, and I'm just using it.
 And this particular smart contract is now being addressed.
-I'm sending this kind of JSON to this smart contract and it tells me...
-...okay, the transaction hash, we can check.
-It's the token number 982, which means that we created already 982 NFTs with this particular smart contract for a lot of different purposes.
-And now we can see the transaction on [Polygon Scan](https://polygonscan.com/).
+I'm **sending this kind of JSON to this smart contract** and **it (the smart contract) tells me the transaction hash, we can check**.
+It's the token number `982` (= the `tokenId` like the one we typed in when we used method `tokenURI (0xc87b56dd)` of the Gavin Evans smart contract above), which means that we created already 982 NFTs with this particular smart contract for a lot of different purposes.
+
+### Polygon
+
+And now we **can see the transaction on [Polygon Scan](https://polygonscan.com/)**.
 And that's here the transaction, yeah.
-So it's now in block, we put it on Polygon, not on Ethereum, but on the second layer chain.
+So it's now in block, we put it on **Polygon** (formerly Matic Network), not on Ethereum, but on the second layer chain.
 And there we see the information.
 So it **costs us 0.02 Polygon**.
 So all together 0.03 dollars to do this.
+
+---
+
+Wikipedia: "Polygon (blockchain)"
+
+**Polygon** (formerly **Matic Network**) is a blockchain platform which aims to create a multi-chain blockchain system compatible with Ethereum. As with Ethereum, it uses a proof-of-stake consensus mechanism for processing transactions on-chain. Polygon's native token is **POL**, an ERC-20 token which allows for compatibility with other Ethereum cryptocurrencies. It is operated by **Polygon Labs**.
+
+Polygon is a natively Layer-2 network that uses Ethereum as a base network. In particular, transactions are first validated inside Polygon and then periodically committed in a "checkpoint": a **Merkle root** of transaction hashes is committed to Ethereum's mainnet by using "Core contracts".
+
+Polygon runs various decentralized applications (dApps) such as Defi, DAOs, and NFTs.
+
+---
 
 ### OpenSea
 
 And we can also check it on **OpenSea**.
 So, here it is.
 So, that's it.
-So OpenSea is a platform where you can exchange and sell NFTs.
+
+So OpenSea is a platform where you can **exchange and sell NFTs**.
 And I didn't register at this particular platform.
 I didn't do anything with this particular platform.
-I just created an NFT according to the appropriate standard, ERC721.
-And since OpenSea is scanning **Polygon** chain for all smart contracts that belong to this particular standard, they somehow scan the whole blockchain and they show everything automatically that belongs to this particular smart contract.
+**I just created an NFT according to** the appropriate **standard**, **ERC721**.
+And since **OpenSea is scanning Polygon chain for all smart contracts that belong to this particular standard**, they somehow scan the whole blockchain and they show everything automatically that belongs to this particular smart contract.
 And now it's there.
-And there you can see that it's BCRL, so Blockchain Reallabor, that's our address.
-NFT, this is something that Ivan mentioned in the smart contract when he created it.
-He said that belongs to this particular collection.
-And we see here the different Merkmale, let's see, that's something else.
-But we also see the...
-Can I see the times?
-Normally I should also see the different traits (= metadata) that I created for this particular NFT.
-Here it is, yeah, obviously. Created by, Lecture, 21st on January, NFT type, certificate and topic NFT.
-And this is also now, if you would like to create NFTs for example, for your club for everything, you can create all these NFTs automatically.
-And then they are automatically listed here.
 
-And in the next step, what you can do then, is that you can also, if I would connect my wallet to this one, **I can transfer it**.
-What happens now is that some people send you offers for that.
+And there (on [opensea.io](opensea.io)) you can see that
+
+- it's "BCRL", so Blockchain Reallabor, that's **our address**.
+- "NFT", this is something that Ivan mentioned in the smart contract when he created it. He said that **belongs to** this particular **collection**.
+- And we see here the different Merkmale (**traits**), let's see, that's something else. But we also see the... Can I see the **times**? Normally I should also see the different **traits (= metadata)** that I created for this particular NFT.
+  - Here it is, yeah, obviously. "Created by", "Lecture", "21st of January", "NFT type", "certificate" and "topic: NFT".
+
+And this is also now,... if you would like to create NFTs for example, for your club, for everything, you can create all these NFTs automatically.
+And then they are automatically listed here (on [opensea.io](opensea.io)).
+
+And in the next step, what you can do then, is that you can also, if I would **connect my wallet to this one (the "BCRL" NFT)**, **I can transfer it (the "BCRL" NFT)**.
+
+What happens now is that some **people send you offers** for that.
 So it happens from time to time that people send you an offer to **buy this particular NFT**.
-Very often it's fake and you have to be careful because it's fake, because nobody should be interested in this particular thing.
-But it means actually, this is not an NFT that we created here for any value, it's more NFT that we create for a particular kind of purpose.
+Very **often it's fake** and you have to be careful because it's fake, because nobody should be interested in this particular thing.
+But it means actually, this is **not an NFT** that we created here **for any value**, it's more **NFT** that we create **for a particular kind of purpose**.
 
 ### Token-gated access
 
 So what I can do now is that if I distribute this NFT to all of you, next time when you would like to enter the room, I ask you, show me that you own this NFT.
 Or we have some kind of **token-gated access**, so that means that you would like to access a web page where I put the answers of the exam questions.
-And you can only access that if you own this particular NFT.
-Which would mean that then the web page asks you, please open your wallet and then the wallet needs to provide its address and then you check if your address appears here in the NFT.
+And you **can only access that if you own this particular NFT**.
+Which would mean that then the **web page asks you**, please open your wallet and then the **wallet needs to provide its address** and then you **check if your address appears here in the NFT**.
 And that is then so-called token-gated access.
-So it's no longer an **access that depends on user ID and password**, it's an **access that depends on the ownership** of such a token.
-And that is where all these different things now become really interesting also in business applications and in other kind of applications.
-Because this provides you very nicely individual access to something.
-Because you don't need to have user ID and password that you give away, if you want to share this with someone else, you only can do it by transferring the NFT.
+So it's no longer an **access that depends on user ID and password**, it's an **access that depends on the ownership of such a token**.
+
+And that is where all these different things now become really interesting also in **business applications** and in other kind of applications.
+Because this **provides** you very nicely **individual access to something**.
+Because you don't need to have user ID and password that you give away. If you want to **share** this with someone else, you **only** can do it **by transferring the NFT**.
 And that's the way to do that.
 Yeah, that's how you can do this in a very easy way.
 
 ### Streamlit: NFT JSON builder
 
 And this is all done here with this **"NFT JSON builder"**.
+
 And all in all, this is, I'm not sure,
 did you come across **streamlit** already in other kind of applications?
 If you want to do Python, I am now a fan in the meantime.
@@ -1602,13 +1714,14 @@ But then I do it in streamlit.
 And streamlit allows you in a very nice way to realize very easily and very nicely any kind of Python application together with a very nice user interface.
 So it's very often used in data science and AI applications for accessing large language models and so on.
 
-And you see here are just the different Python statements to access here some kind of information.
-So for example, this is here now to get the contract details,...
-of addressing here the Polyscan web page.
-And for example, if you just would like to get now the total supply, you address this by addressing the `contract.functions.total_supply()` and `total_supply()` is actually a method that is being offered by this particular smart contract.
-So this is somehow the interface here.
+And you see here are just the different Python statements **to access here some kind of information**.
+So for example, this is here now **to get the contract details**,...
+of addressing here the **Polygonscan** web page.
+And for example, if you just would like **to get now the total supply**, you address this by addressing the `contract.functions.total_supply()` and `total_supply()` is actually a **method** that is being offered **by this particular smart contract**.
+So this is somehow the **interface** here.
 You have smart contracts that have different kind of methods that you can also see on the web page.
-And then you have, here in Python, public libraries where you can access the different functions by their name.
+
+And then you have, here in Python, **public libraries** (like [web3](https://web3py.readthedocs.io/en/stable/quickstart.html)) where you can access the different functions by their name.
 
 student3: What library are you using?
 
@@ -1616,17 +1729,17 @@ prof: This is the `web3` library.
 Let's see what I'm importing here.
 `web3`, yeah.
 
-student3: So using that library you can interact directly with your smart contract?
+student3: So using that **library** you can **interact directly with your smart contract?**
 
-prof: Yeah. You do that, you do that and you have to provide the,... you have to provide the **ABI**, which is somehow describing the interface to the smart contract.
-So it's a meta description of the smart contract.
+prof: Yeah. You do that, you do that and you have to provide the,... you have to provide the **ABI**, which is somehow describing the **interface** to the smart contract.
+So it's a **meta description of the smart contract**.
 ABI stands for...?
 Ivan, you know that?
 
 Ivan: No idea.
 So, last time I showed this JSON file which you see when you deploy the contract in Remix, there is ABI.
 Basically, you see this **JSON representation of the smart contract**.
-I mean, JSON representation, it basically means the function names inside the file.
+I mean, JSON representation, it **basically** means **the function names inside the (smart contract) file**.
 So you know, when you call this function you need to call the smart contract exactly at that place where the function is.
 When you click on the smart contract...
 
@@ -1646,11 +1759,12 @@ Yeah, and here you see the ABI.
 Ivan: So the contract...
 
 Prof: That's the contract ABI.
-So this is what I just took, I copied it into my Python environment and from that on, Python knows how the smart contract can be addressed/accessed.
-So the blockchain itself has no API where you can say, well, what's the API of this particular smart contract?
+So **this (ABI) is what I just took, I copied it into my Python environment** and from that on, Python knows how the smart contract can be addressed/accessed.
+So the **blockchain itself has no API** where you can say, well, what's the API of this particular smart contract?
 But this is being stored here.
-Yeah, and this now tells the Python program how to actually interact with the smart contract.
-And so if you want to interact with the smart contract, go here to Polygon Scan or to any kind of other scanner, check if they publish the ABI.
+Yeah, and **this now tells the Python program how to actually interact with the smart contract**.
+
+And so if you want to interact with the smart contract, go here to Polygonscan or to any kind of other scanner, check if they publish the ABI.
 Not everybody does it.
 Some people don't do it.
 They just want to hide it. And then you copy it into your Python program and then you can start programming again.
@@ -1679,14 +1793,14 @@ So the NFT is somehow being stored somewhere and you get the NFT handed over and
 You can have **machines** (as NFTs).
 Everything can **become an NFT**.
 And then, what we did in our lab is that we had a Master's thesis on that, Bachelor or Master's thesis, to have an inventory where every object that we have, like a **laptop or projector**, **becomes an NFT**.
-And then, if you want to borrow something, you just borrow the NFT.
+And then, **if you want to borrow** something, you just **borrow the NFT**.
 So and then you can check who currently has borrowed what. You just look into the wallet and then you see, ah, this is what Ivan currently has been borrowing.
 And if he returns it, he just makes a return transaction, a transaction back into a wallet that represents the storage or whatever.
 
 A lot of people do this with **commodities** like for example, resources like CO2, oil or gold or whatever.
 So for example, one of the biggest examples is **Everledger**.
-Everledger is a diamond.
-**Diamonds** are being represented as NFTs.
+Everledger is a diamond...
+**Diamonds** are being **represented as NFTs**.
 And then you may argue **how can I actually map a real world object like a diamond to an NFT?**
 And then we often get into trouble.
 Yeah, so for example, how would we map this particular laptop here to a NFT?
@@ -1699,21 +1813,37 @@ And that is being used to track diamonds individually.
 And the idea was to identify blood diamonds.
 So blood diamonds that have not been digged in a normal mine, but under other circumstances.
 
+---
+
+A **blood diamond** (also called a conflict diamond) is a diamond mined in a war zone and sold by rebel groups or insurgents to finance armed conflicts, military action, or terrorism against legitimate governments.
+
+The term highlights the devastating toll of the diamond trade, particularly during the brutal civil wars in Angola, Sierra Leone, and Liberia in the 1990s, where gemstones were used to purchase weapons and fund violent campaigns.
+
+**Key Characteristics**
+
+- **Illicit Funding**: The primary defining factor is that the proceeds from the diamond sales directly sustain war, insurgencies, or human rights abuses.
+- **Unethical Extraction**: These diamonds are often mined using forced or slave labor, including the exploitation of women and children.
+- **Smuggling**: They are frequently smuggled into neighboring countries to be mixed with legitimately mined stones and sold on the open, global market.
+
+---
+
 But the big trouble here is always, if you have now, let's say you have a **piece of land** from where you produce chocolate, cacao, or bananas or whatever.
 Like you say, this is being **produced without any child labour**.
 Yeah, so this can be approved.
 That means when this piece of chocolate comes from this particular piece of land,
 then it's being approved as being not associated with child labour or whatever.
+
 And the **problem** really is that **who guarantees that there are not two smart contracts in the world that both guarantee that for the same piece of land?**
 That's also always this kind of problem that people have there.
-It's really, on the one hand, blockchain is unique,
+It's really,... on the one hand, blockchain is unique,
 but **it doesn't hinder you to have two times the same truth on the blockchain**.
 And both refer to the same truth.
 So it would be something like one global smart contract,
-unique representation of each farmland and from there on you have the **traceability**.
-So that makes it,... at the beginning a lot of people oversold the whole idea
+**unique representation of each farmland** and from there on you have the **traceability**.
+
+So that makes it,... at the beginning a lot of **people oversold the whole idea**
 and there was a lot of mistakes also with this NFTs.
-So people said, well, we can now make all this whole chain, the supply chain trustful.
+So people said, well, we **"can now make all ~~this whole chain,~~ the supply chain trustful"**.
 On the other hand, **people cheated** with **double entries** and things like that.
 So we always have to keep that in mind.
 
