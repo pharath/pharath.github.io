@@ -15,6 +15,26 @@ tags:
 
 ---
 
+## Is Blockchain a Protocol?
+
+Yes, a blockchain is fundamentally a **protocol** (or a set of protocols). It functions as a foundational set of rules that dictate how decentralized computers (nodes) must communicate, verify transactions, achieve consensus, and securely record data on a distributed ledger.
+
+### Why is it a protocol?
+
+Just as HTTP tells web servers and browsers how to communicate across the internet, a blockchain protocol dictates the exact rules of a decentralized network. A blockchain protocol establishes:
+
+* **Data Structure**: Defines how transaction data is packaged into "blocks" and securely chained together.
+* **Consensus Mechanisms**: Dictates the rules for how nodes agree on the validity of transactions without needing a central authority (e.g., Proof of Work or Proof of Stake).
+* **Network Communication**: Standardizes how computers discover each other, share data, and maintain identical copies of the ledger.
+
+### Examples of Blockchain Protocols
+
+While "blockchain" is the underlying concept, specific networks use their own unique protocols. Some of the most widely known include:
+
+* **Bitcoin**: A protocol designed specifically for peer-to-peer electronic cash transfers using a Proof-of-Work (PoW) consensus model.
+* **Ethereum**: A programmable protocol that allows developers to build decentralized applications (dApps) and automated Smart Contracts.
+* **Hyperledger Fabric**: An enterprise-focused protocol designed for private, permissioned business networks rather than public cryptocurrency trading.
+
 ## Fiat vs. Crypto
 
 - digital vs. non-digital
