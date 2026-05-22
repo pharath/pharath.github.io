@@ -5,6 +5,7 @@ excerpt: "For studying \"Web3 and Distributed Ledger Technology\"; content mostl
 toc: true
 toc_label: "Contents"
 toc_sticky: true
+toc_h_max: 3
 author_profile: false
 categories:
   - Notes
