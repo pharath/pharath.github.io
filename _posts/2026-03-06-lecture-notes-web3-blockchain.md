@@ -475,7 +475,7 @@ that there was a lot heard about this kind of energy consumption and the whole p
 So it always had some kind of **negative connotation**.
 This has changed recently.
 So there is some kind of change in how people understand blockchain or Bitcoin in general.
-And there is more openness now recently.
+And there is **more openness now recently**.
 Obviously in other countries, there's even more openness than in Germany.
 And this is probably because I think that at the beginning, the whole blockchain and Bitcoin discussion was very much overhyped, completely overhyped.
 So there have been conferences where people said we would get rid of all notaries, you get rid of all banks and all the rest.
@@ -488,18 +488,18 @@ And therefore, blockchains can have a big role in them.
 
 One thing now is really to understand how digitization in the recent years worked and how people now become more open to blockchain based solutions.
 And I often use this kind of picture here to jump into this overall topic.
-So that's a picture of an old bookkeeping office around the turn of the century, the 1900s century.
+So that's a picture of an **old bookkeeping office** around the turn of the century, the 1900s century.
 So what you see here is a lot of documents.
-You see some people working on the documents.
+You see **some people working** on the documents.
 They do some sort of sorting.
-And if you go for digitization of that, how do you digitize that?
+And if you go for digitization of that, **how do you digitize that?**
 What's your first... ?
 
 student: database?
 
-prof: This becomes a **database**.
-This becomes MySQL or my MariaDB or whatever you use or CouchDB.
-And this becomes your application.
+prof: This (bookkeeping office) becomes a **database**.
+This becomes **MySQL** or my **MariaDB** or whatever you use or **CouchDB**.
+And this (the people) becomes your **application**.
 So this becomes your application on top of the database.
 And this is how you digitize a lot of documents.
 And that's straightforward and that works.
@@ -510,19 +510,19 @@ On the other hand, you have the problem that there are a lot of companies around
 So we see they all, I mean, this is probably not bookkeeping, some kind of bookkeeping stuff.
 But they all have to exchange information.
 So what we need are some kind of **interfaces**.
-We need some kind of **standards** to do that.
+We need some kind of <span style="color:red">**standards**</span> to do that.
 And the big trouble is that very often they thought that they have sent some kind of information to them and they forwarded it here.
 But what they received is completely different to what they actually sent.
-So the big trouble is that very often we don't have any global understanding or any global consensus or any global status of what we actually did.
+So the big trouble is that very often we don't have any global understanding or any <span style="color:red">**global consensus**</span> or any <span style="color:red">**global status**</span> of what we actually did.
 And that's the problem.
 So very often we have some kind of digitization processes where people need to negotiate what's actually the status of our shared process.
 Do we all have the information that are sent to 10 containers or 9 containers?
-Some kind of standardization problem in the exchange.
+Some kind of <span style="color:red">**standardization problem**</span> in the exchange.
 
-And then there is now the big solution to that, which is in the first step, not blockchain, but the **cloud**.
+And then there is now the big **solution** to that, which is in the first step, not blockchain, but the <span style="color:red">**cloud**</span>.
 So now the cloud comes along and they say, okay, come on, give me all your data, put it into the cloud.
 And I solve all the problems with the interoperability.
-So if we all use SAP or we all use Oracle or a Dexfair or whatever.
+So if we all use **SAP** or we all use **Oracle** or a Dexfair or whatever.
 We don't have any trouble because we all interact within the cloud and it's their problem to do that.
 On the other hand, then we have all the trouble with this kind of locking in to this particular cloud if you just once narrow yourself with SAP or whatever you never get out.
 
@@ -557,32 +557,34 @@ So what we do now is that we develop a **digital tally stick**.
 
 ## slide: "Network replaces platform"
 
-And this tally stick is now at the beginning that we say, okay, we remove the big central agent in the middle and we replace it with a **network**.
+And this tally stick is now at the beginning that we say, okay, we **remove the big central agent** in the middle and we **replace it with** a <span style="color:red">**network**</span>.
 That's the first approach.
 And that's really the idea to say the network replaces the overall platform.
 
 ## slide: "Database is distributed"
 
 The second thing is if we have a network, what we need to do is now we need to also **distribute our data**.
-So we distribute also the data across the whole network.
-So this pretty much looks like a distributed database.
+So we distribute also the data **across the whole network**.
+So this pretty much looks like a <span style="color:red">**distributed database**</span>.
 Now I'm not sure if you have visited the database lecture already, but there you also talk about distributed databases, federated databases and things like that.
-The point is now that we don't really use some kind of relational database or CouchDB or something like that here at these different nodes, which are all computer nodes, but we use a different kind of data structure to do that.
 
 ## slide: "Linked blocks instead of list/table"
 
-And this data structure is a **list of blocks** instead of just a table that we have in a relational database.
-So we substitute actually the standard databases that you all know, like SQL database or something like that, and we substitute it by this kind of **linked tables**.
-And we do that for a very particular reason.
+The point is now that we **don't really use** some kind of **relational database** or CouchDB or something like that here at these different nodes, which are all computer nodes, but we use a different kind of data structure to do that.
+
+And this data structure is a <span style="color:red">**list of blocks**</span> instead of just a table that we have in a relational database.
+So we substitute actually the standard databases that you all know, like SQL database or something like that, and we substitute it by this kind of <span style="color:red">**linked tables**</span>. And we do that for a very particular reason.
+
 The reason for that is the following:
-What we want to achieve is actually to **pack transactions** that we receive into **smaller formats**.
+
+What we want to achieve is actually <span style="color:red">to **pack transactions** that we receive into **smaller formats**</span>.
 Let's go to the next slide and then we go into the different blocks.
 
 ## slide: "Transactions are distributed"
 
-The idea is actually or the need for that is actually that we send transactions now into this network and each transaction is something like A is transferring to B 10 tokens or 10 euros (see figure on slide), bitcoins or whatever you want.
-And this information is then being received by the different nodes,
-but **it's not received by everybody** because
+The idea is actually or the need for that is actually that **we send transactions now into this network** and each transaction is something like *"A is transferring to B 10 tokens"* or 10 euros (see figure on slide), bitcoins or whatever you want.
+
+And this **information is then being received by the different nodes**, but **it's not received by everybody** because
 
 - we have some kind of network disconnections,
 - some nodes are probably down for some time,
@@ -591,26 +593,29 @@ but **it's not received by everybody** because
 
 ## slide: "Transactions distributed – but not evenly"
 
-And the other thing is that this can go further that we have another transaction like D is transferring to E 20 (see figure on slide)
-which is **only received by** this node and by that node.
+And the other thing is that this can go further that we have another transaction like *"D is transferring to E 20"* (see figure on slide)
+which is **only received by this node and by that node**.
 
 So we have some kind of problems that we need to solve here.
 
-You have the problem.
+You have the problem:
+
 How do we achieve in this **decentralized approach** where **every node is completely independent**, but just exchanging information about possible transactions
-among each other, how can we actually achieve in the end a **status that is shared** among all the different nodes?
+among each other, <span style="color:red">how can we actually achieve in the end a **status that is shared** among all the different nodes?</span>
+
 If everybody would just put in his database the information that they get, after five minutes, we would have already a complete **inconsistent state**.
 Here, if you ask that node what's the account of B, they would say 10 and the account of B is 20.
 And if you ask that node, they would say well B and E, they don't have any money. We haven't seen anything about it.
-So we need to find a way that we find some **consensus about the transactions** that we have received and that we **all have the same state**.
+
+So we <span style="color:red">need to find a way that we find some **consensus about the transactions** that we have received</span> and that we **all have the same state**.
 And that's the magic what blockchain solves, or Bitcoin and also the other blockchains actually solve.
 
-So the first thing is that we have to find **consensus** about it.
+So the first thing is that we have to find <span style="color:red">**consensus**</span> about it.
 
-And the second thing is also that we have to make sure that the **data that is being stored** here at the different nodes is **not being manipulated**.
+And the **second thing** is also that <span style="color:red">we have to make sure that the **data that is being stored** here at the different nodes is **not being manipulated**</span>.
 
-And if we go back to that slide, let's say here at this particular state, we all know that X transferred to Y 100.
-And that's something that is being stored here in these nodes in this data.
+And if we go back to that slide, let's say here at this particular state, we all know that *"X transferred to Y 100"*.
+And that's something that is being <span style="color:red">**stored here in these nodes**</span> in this data.
 You have to make sure that that **cannot be manipulated**, that any manipulation, for example, by just removing one "0" from that **would be immediately detected**.
 
 And that is something we need to solve.
