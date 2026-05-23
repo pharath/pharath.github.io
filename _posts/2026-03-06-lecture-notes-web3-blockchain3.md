@@ -2622,9 +2622,9 @@ And they made this **decision diagram** that allows you to **check if your appli
       - **Yes**, no blockchain. If we trust each other, we don't need a blockchain. Because blockchain is for providing trust in an environment where you don't trust everybody.
       - Obviously, **we don't trust each other**.
         - Therefore, **is public verifiability required? Do we need someone else to verify what we put on a blockchain?**
-          - **No**, then we make it a private permissioned blockchain.
+          - **No**, then we make it a **private** permissioned blockchain.
             - So we just run a blockchain among ourselves, nobody is allowed to look into it. We don't even tell anybody that we have a blockchain running, we just use it for our own purposes in order to secure the state that we have among ourselves. Imagine that we just run this blockchain, for example, for a Christmas party where we have our own token to buy the food. We just create this blockchain among ourselves, everybody is running a node on your mobile and that is what we use to create the currency for our Christmas party. It wouldn't make much sense, but that would be this way.
-          - Or **if public verifiability is required, yes**, so for example, if we need the ZPA to look into our blockchain because I gave tokens for good questions and good answers, I give tokens away and we run this on our particular blockchain, but the ZPA needs to look into that to check the grades that I give in the end, then we use a public permissioned blockchain. It's public, but permissioned, ie. the ZPA can look into it.
+          - Or **if public verifiability is required, yes**, so for example, if we need the ZPA to look into our blockchain because I gave tokens for good questions and good answers, I give tokens away and we run this on our particular blockchain, but the ZPA needs to look into that to check the grades that I give in the end, then we use a **public** permissioned blockchain. It's public, but permissioned, ie. the ZPA can look into it.
 
 So that's their **decision tree** and you will find that in a lot of blockchain papers.
 So it's very often it's being checked whether an application is being a good blockchain application or not.
