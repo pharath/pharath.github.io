@@ -194,10 +194,12 @@ about blockchain and bitcoin in general.
 
 ## slide: "Web developments with an impact on digitization" (Seite 19)
 
-- So we had the World Wide Web. And at the beginning, there was also big misunderstanding whether the World Wide Web really will have a success. For many people it was **just a digital version of a newspaper**. What people at the beginning first understood was that you need to have some kind of **reach** and **digitalization**. So some of the programmers, what they did is they put their newspapers then on the World Wide Web to make it accessible there. But what was the **major goal** there? The major **fight was for a URL**. So you could become, you still can do it, but you could become rich by being so early of registering, eg. "spiegel.de" under your name. And then you are before the magazine of Spiegel. And then they want to have the URL and the domain name. And then they pay you a lot of money to get you the domain name. And this is still the case. If you have some cool idea that the new technology is really coming up, reserve the domain name. And then you may become rich by that. Okay, so that was really a **reach and digitalization**. And it was **reading**, you said it already. I mean, it was what we could do was reading. Read. As the users of the internet **we could just read**.
-- And the first things that people just could do was that we set up a homepage. But for that, you needed to be knowledgeable of HTML. And then in the first computer newspapers, you got your first HTML editor. Yeah, that was a cool thing. Because HTML, you could develop your own first **homepage**, homepage toolkits and things like that came up. And that allowed us really to have this kind of thing. And that was the **Web1**. And the term we coined for the Web1 is **"information economy"**. Information was the main thing. And we were getting trying to **get money out of information**.
+- So we had the World Wide Web. And at the beginning, there was also big misunderstanding whether the World Wide Web really will have a success. For many people it was **just a digital version of a newspaper**. What people at the beginning first understood was that you need to have some kind of <span style="color:red">**reach** and **digitalization**</span>. So some of the programmers, what they did is they put their newspapers then on the World Wide Web to make it accessible there. But what was the **major goal** there? The major **fight was for a URL**. So you could become, you still can do it, but you could become rich by being so early of registering, eg. "spiegel.de" under your name. And then you are before the magazine of Spiegel. And then they want to have the URL and the domain name. And then they pay you a lot of money to get you the domain name. And this is still the case. If you have some cool idea that the new technology is really coming up, reserve the domain name. And then you may become rich by that. Okay, so that was really a **reach and digitalization**.
+- And it was <span style="color:red">**reading**</span>, you said it already. I mean, it was what we could do was reading. Read. As the users of the internet **we could just read**.
+- And the first things that people just could do was that we set up a homepage. But for that, you needed to be knowledgeable of HTML. And then in the first computer newspapers, you got your first HTML editor. Yeah, that was a cool thing. Because HTML, you could develop your own first **homepage**, homepage toolkits and things like that came up. And that allowed us really to have this kind of thing. And that was the <span style="color:red">**Web1**</span>.
+- And the term we coined for the Web1 is <span style="color:red">**"information economy"**</span>. Information was the main thing. And we were getting trying to **get money out of information**.
 - And that was also the discussion when people said, well, how can we **earn money** with that? Because **everything is free**. At the beginning, they put all the articles for free because they didn't want to have distribution. Nowadays everything is behind a paywall and needs to be paid. But that was the first thing.
-- But we were still **consumers**. We just consumed things on the internet.
+- But we were still <span style="color:red">**consumers**</span>. We just consumed things on the internet.
 - And then something happened. There were **big companies** that just **earned money** with **making web pages**.
   - It was a **pixel park**. Pixel park was a famous German company. And they said, our orders, they just came out of the fax machine. Yeah, still. I mean, we have the world wide web, but communication, business communication was still fax. So the orders were just coming out of the fax machine. They earned millions by that. By just producing web pages.
 
@@ -210,9 +212,11 @@ about blockchain and bitcoin in general.
 
 ## slide: "Platform Economy" (Seite 21, 22)
 
-- And then we get from there to **platforms**. Because suddenly these platforms have been established. So we could now **write** and now we could write and now the platforms came up, eg. Amazon, Ebay, Facebook, Google, and so on. And interestingly enough, most of these platforms had also had their counterpart in Germany. In Germany, we had studiVZ. studiVZ was the Facebook of Germany where students interact. We had SchülerVZ, where the school guys interacted. All that was
-available, but it was completely bought over then by Facebook. Wikipedia, Amazon, Ebay, it allowed us to contribute. And that was also the time when YouTube came out. Or Flickr. Flickr was the Instagram of the web1 or web2. Flickr was something where you could upload images.
-- And that's the foundation now. That's actually the foundation for AI nowadays. Because we contributed a lot of content that is now being used for AI to train the LLMs. We told the LLMs that a cat image looks like a cat because we uploaded pictures and so that it's just detecting that that's a cat. And that's the reason why AI is so powerful at the moment.
+- And then we get from there to <span style="color:red">**platforms**</span>. Because suddenly these platforms have been established.
+- So we could now <span style="color:red">**write**</span> and now we could write and now the platforms came up, **eg. Amazon, Ebay, Facebook, Google**, and so on.
+  - And interestingly enough, most of these platforms had also had their **counterpart in Germany**. In Germany, we had studiVZ. studiVZ was the Facebook of Germany where students interact. We had SchülerVZ, where the school guys interacted. All that was available, but it was completely bought over then by Facebook.
+- Wikipedia, Amazon, Ebay, it allowed us to **contribute**. And that was also the time when **YouTube** came out. Or **Flickr**. Flickr was the Instagram of the web1 or web2. Flickr was something where you could upload images.
+- And that's the foundation now. That's actually the **foundation for AI** nowadays. Because we contributed a lot of content that is now being used for AI to train the LLMs. We told the LLMs that a cat image looks like a cat because we uploaded pictures and so that it's just detecting that that's a cat. And that's the reason why AI is so powerful at the moment.
 
 ## slide: "Web developments with an impact on digitization" (Seite 23)
 
@@ -220,44 +224,45 @@ available, but it was completely bought over then by Facebook. Wikipedia, Amazon
 
 ## slide: "Establishing Web3" (Seite 24, 25)
 
-- And then the **global financial crisis**. So the three turning points, at least what we found out was, first one **cold war**, data communications. Then, **dot com crash**, we need something new on the internet. And then we go with **financial crisis** where people suddenly never trusted in banks.
+- And then the <span style="color:red">**global financial crisis**</span>. So the three turning points, at least what we found out was, first one **cold war**, data communications. Then, **dot com crash**, we need something new on the internet. And then we go with **financial crisis** where people suddenly never trusted in banks.
   - Suddenly people said well, the whole bank system is completely corrupt. They cheated us. So we have to find something else and just exaggerating that. So it's not that I'm in the case of banks or so. That's actually what happened.
-- And then there was the case that people thought about something that can overrule the banks. And that was then the **Web3**. It was cryptos, it was smart contracts, NFTs, decentralized applications, DAOs and so on. And that was then a raising of **awareness of decentralization**. And as I said, that was 2008, 2007, 2008. And there it happened really on the **banking sector**.
-- And what we experience now is that somehow also now happening really on a **data sector**. I mean, people become more and more aware that we are completely locked into Microsoft, Google, Apple and all of them. We are completely locked into the system. They're so convenient at the moment they're still cheap to use. We are also locked into ChatGPT. We need a more decentralized approach to that, which is not that easy. I mean, there have been a lot of approaches.
+- And then there was the case that people thought about something that can **overrule the banks**. And that was then the <span style="color:red">**Web3**</span>. It was cryptos, it was smart contracts, NFTs, decentralized applications, DAOs and so on.
+- And that was then a <span style="color:red">**raising awareness of decentralization**</span>. And as I said, that was 2008, 2007, 2008. And there it happened really on the **banking sector**.
+- And what we experience now is that somehow also now happening really on a **data sector**. I mean, people become more and more aware that we are completely **locked into Microsoft, Google, Apple** and all of them. We are completely locked into the system. They're so convenient at the moment they're still cheap to use. We are also **locked into ChatGPT**. We **need a more decentralized approach** to that, which is not that easy. I mean, there have been a lot of approaches.
   - Munich, 20 or 30 years ago, they wanted to get rid of Microsoft and they used Linux.
   - I think now it's Schleswig-Holstein who tries to get rid of Microsoft to put everything on Linux and open source software. It's not that easy in the end.
   - in the Fraunhofer Gesellschaft there was a big discussion whether we go on Teams or not. Then we had Corona and we got on Teams. So it's often these kind of effects. But this is not a big discussion.
 
 ## slide: "Web developments with an impact on digitization" (Seite 26)
 
-- So if we follow this up, **information economy**, **platform economy**, and now we call it **token economy**.
-  - Token economy is because tokens are things that we can register on the blockchain and they allow us to associate a value with a token, put it on a blockchain, make it irreversible, transparent, unchangeable, immutable, whatever you like, and that means we can **own** something.
-  - And the technology is the **blockchain**. Here it was the **world wide web**. Here it was suddenly **active server pages** or **CGI scripts**. Now it's the **blockchain** that brings the new technology behind to **own** something. We're really **writing and owning** something and that makes us from **prosumer** to **prownsumer**.
+- So if we follow this up, **information economy**, **platform economy**, and now we call it <span style="color:red">**token economy**</span>.
+  - Token economy is because tokens are things that we can register on the blockchain and they allow us to associate a value with a token, put it on a blockchain, make it irreversible, transparent, unchangeable, immutable, whatever you like, and that means we can <span style="color:red">**own**</span> something.
+  - And the technology is the <span style="color:red">**blockchain**</span>. Here it was the **world wide web**. Here it was suddenly **active server pages** or **CGI scripts**. Now it's the **blockchain** that brings the new technology behind to **own** something. We're really **writing and owning** something and that makes us from **prosumer** to <span style="color:red">**prownsumer**</span>.
 - And there's new people coming up on the sky, which is then suddenly
   - **IPFS**,
   - we have this fox (image) which is **Metamask**, the wallet owner,
-  - **OpenSea**, it's a big, big marketplace where you can own, where you can trade assets, NFTs, pictures and the rest.
-- And now we talk about **provenance and sustainability**, **authentication**, **automation** and all the rest. So these are the topics we talk about now at the moment.
+  - **OpenSea**, it's a big, big marketplace where you can **own**, where you can trade assets, **NFTs**, pictures and the rest.
+- And now we talk about <span style="color:red">**provenance and sustainability**, **authentication**, **automation**</span> and all the rest. So these are the topics we talk about now at the moment.
 
 ## slide: "Essential components of Web3"
 
 - So actually, and there are a lot of things now on this particular slide
-- the essential component of this Web3 is **decentralization**. We aim for decentralization. Make it as decentralized as possible. And I mean, we had already, when we look at **peer to peer networks**, a lot of this is based on peer to peer networks. Does someone know when peer to peer networks became really famous, before blockchain? That was the last big hype of peer to peer networks. I could imagine that everybody of you at this time participated in a peer to peer network when you were still at the age at that time.
+- the essential component of this Web3 is <span style="color:red">**decentralization**</span>. We aim for decentralization. Make it as decentralized as possible. And I mean, we had already, when we look at <span style="color:red">**peer to peer networks**</span>, a lot of this is based on peer to peer networks. Does someone know when peer to peer networks became really famous, before blockchain? That was the last big hype of peer to peer networks. I could imagine that everybody of you at this time participated in a peer to peer network when you were still at the age at that time.
   - student: I don't know, sharing music.
-    - prof: Yeah, sharing music, music sharing, Napster and all the music sharing. That was completely peer to peer based. Everybody was running a computer. You had a small server on that one that allowed you to get music stuff from somewhere else.
-  - student: Torrent?
-    - prof: Torrent is peer to peer, yeah. That was the origin. And a lot of that is a foundation for blockchain. So peer to peer networks, data sharing directly between users **without central servers**. ... Napster was illegal.
-- **Smart contracts**.
+    - prof: Yeah, sharing music, music sharing, **Napster** and all the music sharing. That was completely peer to peer based. Everybody was running a computer. You had a small server on that one that allowed you to get music stuff from somewhere else.
+  - student: **Torrent**?
+    - prof: **Torrent is peer to peer**, yeah. That was the origin. And a lot of that is a foundation for blockchain. So peer to peer networks, data sharing directly between users **without central servers**. ... Napster was illegal.
+- <span style="color:red">**Smart contracts**</span>.
   - Yeah, we can have code that does some kind of **automation**. We learn that smart contracts have nothing to do with legal stuff and that they're not smart, not clever, whatever, **just some lines of code**, nothing more.
-- **tokens and cryptocurrencies**,
+- <span style="color:red">**tokens and cryptocurrencies**</span>,
   - which means suddenly we now have some kind of **representation of assets**, whether it's
     - a **digital asset**, like an image or a kind of a coin, or
     - some kind of **real assets** like saying, well, this particular chair is currently being owned by the university by just mapping that onto the token.
-- We can **build ecosystems** now.
+- We can <span style="color:red">**build ecosystems**</span> now.
   - We can have real **chains of things**. So I can now have a **supply chain**. I can say, look, I have a token about the origin of this particular piece of wood. And this is coming from a forest that is not being cut in a rainforest and so on. And that carries along the whole ecosystem.
-- **Decentralized apps**
+- <span style="color:red">**Decentralized apps**</span>
   - are really **based on smart contracts**. They have **no server**. They **run completely on the blockchain**. So it's not this kind of Django (back-end server side web framework) stuff, server-client or so. It's completely based on the blockchain.
-- And we discuss about **governance**.
+- And we discuss about <span style="color:red">**governance**</span>.
   - How do we govern such a blockchain?
   - The question that you often ask is "who determines what's happening on the blockchain?". Is it the user? Is it the community? And that's also something that we are going to discuss.
 - So these are things that are relevant for the Web3.
