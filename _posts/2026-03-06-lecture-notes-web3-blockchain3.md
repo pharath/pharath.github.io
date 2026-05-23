@@ -2612,7 +2612,7 @@ And they made this **decision diagram** that allows you to **check if your appli
   - If you have something like that, like a trusted transaction provider, don't use a blockchain.
   - That is something that has been criticized, this particular decision. Because somehow what we do is with a blockchain, we replace this particular trusted transaction provider. So that is something that I don't,... I somehow disagree with them.
 - The next question is, we need to store a state, we have multiple writers, we don't have an always online TTP, **are all the writers known?**
-  - No. Then we need a permissionless blockchain. So we have multiple writers, we don't know who is writing, we don't have someone who is doing it for us. We need a permissionless blockchain, which is, Bitcoin, Ethereum.
+  - No. Then we need a **permissionless** blockchain. So we have multiple writers, we don't know who is writing, we don't have someone who is doing it for us. We need a permissionless blockchain, which is, Bitcoin, Ethereum.
   - **When all writers are known**, which is,... our community here, imagine we run a blockchain and **we have multiple writers**, yes.
     - We don't **have someone we trust who can do it for us.**
       - No, then we are here.
