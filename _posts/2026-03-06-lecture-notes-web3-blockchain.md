@@ -1120,10 +1120,22 @@ It's so easy.
 It's **just a loop** that we do, we
 
 - **hash the block header plus the nonce**,
-- and then we **hash it again**,
+- and then we **hash it again** (see ["bitcoin why double hash"](#bitcoin-why-double-hash)),
 - and then we see, **is this below the difficulty (ie. number of zeros in front)?**, so 4070 was what we discussed here.
-  - **If no (ie. not enough zeros in front)**, add one to the nonce, and
-  - **if yes (ie. enough zeros in front)**, send the block to all neighbors that you have available, and this is what's happening now, that you send all the blocks to your neighbors with the solution of the crypto puzzle, and then what they do is they just check it, and that's easy. They just need to check is this hash of the content plus the nonce in total has the certain amount of zeros. Fine, then that is being accepted.
+  - **If no (ie. not enough zeros in front)**, <span style="color:red">add one to the nonce</span>, and
+  - **if yes (ie. enough zeros in front)**, <span style="color:red">send the block to all neighbors</span> that you have available, and this is what's happening now, that you send all the blocks to your neighbors with the solution of the crypto puzzle, and then what they do is they just check it, and that's easy. They just need to check is this hash of the content plus the nonce in total has the certain amount of zeros. Fine, then that is being accepted.
+
+---
+
+### "bitcoin why double hash"
+
+Bitcoin uses a "double hash" (specifically, applying the SHA-256 algorithm twice) **as a conservative security measure**. While a single pass of SHA-256 is already considered highly secure, hashing the data twice helps protect against theoretical cryptographic vulnerabilities like "length extension attacks" and provides an extra safety buffer.
+
+**Where is it used?**
+
+The Double SHA-256 process is used heavily in Bitcoin's "Proof of Work" mining process to verify and secure blocks. It is also used to generate the transaction identifiers (TxIDs) on the network. However, for creating standard Bitcoin addresses, Bitcoin uses a combination of SHA-256 and a different algorithm called RIPEMD-160.
+
+---
 
 ## Bitcoin: Block Reward, Transaction Fees
 
@@ -1151,7 +1163,7 @@ First thing is that a transaction within these kind of blockchains,
 they don't do it just for fun.
 They want to earn money.
 It's not for free.
-A blockchain transaction is not for free.
+**A blockchain transaction is not for free**.
 If I want to send you some coins, they want to send you a token, some crypto or whatever,
 I have to add fees **like with a bank**.
 You also pay.
@@ -1159,6 +1171,7 @@ I mean, this is something where very often people think, well,
 Bitcoin transactions are for free.
 That's what differentiates it from bank transfers.
 No, they cost you money.
+
 And very often it's **calculated** in an **amount** that **depends on the current traffic in the network**.
 If the Bitcoin network or if the blockchain network is busy,
 you pay more fees than if it's not busy.
@@ -1166,6 +1179,7 @@ This is Uber.
 You all know that when you want to go on a Saturday evening out of Aachen, back home,
 Uber is expensive and on a Monday morning it is cheap.
 So the **mining fees** really depend on the traffic in the network.
+
 And what these people do here is that when they get all the transactions,
 **they select those transactions with the highest fees**,
 which means that when you submit a transaction into this network and you don't provide any fees,
@@ -1173,7 +1187,7 @@ you could do that.
 You could say, please, I would like to send you one Bitcoin, but **I don't provide any mining fees**.
 **What happens?**
 This **will not be included**.
-All the miners, they want to have transactions with high fees.
+All the **miners, they want to have transactions with high fees**.
 So they probably just put it aside.
 And only if there probably is no traffic at all,
 they probably put it into their list of transactions.
@@ -1343,29 +1357,32 @@ So what they do is...
 And that also makes **every content different**.
 Even if you all get the same 3 transactions here,
 you all have your own ID, which is being stored in the block header.
-And there is **one particular (coinbase) transaction** where you say,
+And there is <span style="color:red">**one particular (coinbase) transaction**</span> where you say,
 just one, let's say one Bitcoin, BTC, **to me**.
 So you just include one transaction.
 Then you put one Bitcoin to your own wallet.
 So you just create this kind of Bitcoin out of nothing.
 It has never been there.
 You just say, my account has now plus one Bitcoin.
+
 And at the beginning, when Bitcoin was launched **in 2009**, that was **50 Bitcoins**.
 So for every block, you got 50 Bitcoins, which would nowadays be 50 times 100,000, 5 million.
 That was 2009.
 So 50 Bitcoin, every block.
+
 That means with every block that we add to the blockchain,
 the **money** that is **available** is being **increased by 50 Bitcoins**,
-which is quite some **inflation**.
+which is quite some <span style="color:red">**inflation**</span>.
 It's like our Bundesbank or the European Bank, who is constantly printing Euros.
 **We print Bitcoins** here.
 But only **every 10 minutes** (Gemini: The network typically generates one block every 10 minutes.).
-The 10 minutes is something that comes into the game.
+
+The <span style="color:red">**10 minutes**</span> is something that comes into the game.
 That is also something.
 We don't want to have inflation too fast.
-We want to have inflation in a calculated way.
+We **want to have inflation in a calculated way**.
 So therefore we say, a block should, among all yourself, be found within 10 minutes.
-And the difficulty is therefore adapted such that the community of all miners finds a block on average every 10 minutes.
+And the <span style="color:red">**difficulty** is therefore adapted such that the community of all miners finds a block on average every 10 minutes</span>.
 
 student: But then in the case of **Bitcoin**, the **block reward gets halved every 210,000 blocks**.
 
@@ -1388,21 +1405,20 @@ And this should be done almost every 10 minutes.
 
 ## Bitcoin: Mining Difficulty Adjustment
 
-And if you all now invest in computing power, and suddenly you find the block every 5 minutes,
+1. **increase difficulty**: And if you all now invest in computing power, and suddenly you find the block every 5 minutes,
 what do we do?
-We **increase the difficulty**.
+We <span style="color:red">**increase the difficulty**</span>.
 And by that, we bring it back to 10 minutes.
 I think this is extremely elegant.
 You just increase the difficulty, you come back to 10 minutes.
 
-Suddenly, you all say, well, now I'm doing large language fine tuning.
+2. **reduce difficulty**: Suddenly, you all say, well, now I'm doing large language fine tuning.
 So I hate all this Bitcoin stuff.
 I put my computer now on fine-tuning and large language models.
 So suddenly, we find blocks only every 20 minutes.
-We **reduce the difficulty**.
+We <span style="color:red">**reduce the difficulty**</span>.
 
-So **we just adopt our difficulty to the current computing power that is available**,
-the current computing power that is available **in the network**.
+So <span style="color:red">**we just adopt our difficulty to**</span> the current computing power that is available, <span style="color:red">**the current computing power that is available in the network**</span>.
 
 student: There is certain harm in it.
 So not really like miner points and stuff, but like the step of 67 was of time factor, I think, 70.
@@ -1969,6 +1985,30 @@ And **that gives the Merkle root**.
 So actually some miners which are called the **light nodes**,
 these light nodes, they don't contain all the information here.
 They just contain that.
+
+---
+
+**"do light nodes only store the merkle root"**:
+
+Light nodes do not store the entire blockchain, but they do store more than just the Merkle root. They primarily store the chain of **block headers**.
+
+A block header is a small summary of a block (roughly 80 bytes in Bitcoin) that contains:
+
+* The previous block's hash
+* The block's timestamp
+* The <span style="color:red">**Merkle root**</span> (which summarizes all the transactions in that block)
+* The nonce and target difficulty (for Proof-of-Work)
+
+**How Light Nodes Work**:
+
+Because light nodes only have block headers and not the entire transaction history, they rely on **Simplified Payment Verification (SPV)** and <span style="color:red">**Merkle proofs**</span>:
+
+1. **Verification**: When a light node needs to check if a specific transaction is valid, <span style="color:red">it requests a Merkle proof from a full node</span>.
+2. **The Proof**: The full node provides the light node with the transaction and the specific hashes needed to trace a path up to the block's Merkle root.
+3. **The Result**: The light node recalculates the hash and compares it against the Merkle root it already has stored in its block header. If they match, the transaction is verified.
+
+By storing just the block headers, light nodes require only a tiny fraction of the storage space (e.g., just megabytes instead of hundreds of gigabytes).
+Would you like to explore how full nodes generate Merkle proofs, or should we look into the security trade-offs of using a light node?
 
 ---
 
