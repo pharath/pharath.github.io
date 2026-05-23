@@ -647,9 +647,50 @@ student: The **hash**.
 prof: So we use the hash.
 So what we store is actually the hash of block number 100.
 Why do we do that?
-It means that if we just store 100 and we have the transaction X to Y 100,
+It means that if we just store 100 and we have the transaction *"X to Y 100"*,
 this would mean, okay, we just link to that particular block,
-but this **link does not** provide any **information about the content of that block**.
+but <span style="color:red">this **link does not** provide any **information about the content of that block**</span> (because it is a hash and you cannot reverse-engineer a hash back into the original input data, see [Properties of the Hash Function](#properties-of-the-hash-function)).
+
+---
+
+### Properties of the Hash Function
+
+A hash function is **any mathematical algorithm that maps data of arbitrary size to a fixed-size output value**, often called a digest, hash code, or simply a hash. It is a foundational concept in computer science used for everything from super-fast data retrieval to securing digital communications.
+
+#### Core Properties
+
+* **Fixed Output**: No matter the size of the input (whether it is a single word or an entire 3GB file), the output always remains the same length.
+* **Deterministic**: The exact same input will always produce the exact same output.
+* **One-Way**: You cannot reverse-engineer a hash back into the original input data.
+* **The Avalanche Effect**: Even if you change a single character or a single bit in the original file, the resulting hash will look completely different.
+* **Collision Resistance**: A good hash function makes it extremely difficult for two vastly different inputs to produce the same exact output.
+
+#### Common Use Cases
+
+##### 1. Cryptography & Security
+
+Cryptographic hash functions are used to ensure data has not been tampered with.
+
+* **Password Storage**: Instead of saving passwords as plain text, systems save the hash. When you log in, the system hashes your typed password and compares it to the saved hash.
+* **Digital Signatures**: Used to verify the authenticity of files, messages, and transactions (the backbone of technologies like blockchain).
+* **Common Algorithms**: `SHA-256` (part of the `SHA-2` family), `SHA-3`, and older (now obsolete) algorithms like `MD5`.
+
+##### 2. Data Structures (Hash Tables)
+
+Outside of security, hash functions are used to organize and locate data instantly.
+
+* Databases and programming dictionaries (e.g., hash maps) use hashing algorithms to convert an identifier (like a user ID or a word) into a numerical index. This index points directly to where the data is stored in memory, allowing for constant-time $O(1)$ lookups instead of searching through a list one by one.
+
+#### How It Works (Example)
+
+If you run the string "hello world" through a `SHA-256` hashing function, it will always produce this exact 64-character hexadecimal output:
+`2a975b927a47dfab1357f3c4c927f805be4a1617ab6fbb725797f7fa2fb59f27`
+
+If you add a single period to the end of the phrase ("hello world."), the resulting hash changes drastically to:
+`f4a34b2f483cbb14798e6df5ab20d2931a742cd63b7dfba97334a17ed9d7c078`
+
+---
+
 If we store the hash of this one, then we connect actually this block to the content of this block.
 This is probably what you meant (prof to the student).
 And by doing that, we automatically detect, let's say the hash of this one is now,
@@ -696,8 +737,8 @@ They are wrong.
 And also here we see that the link is this one.
 So you see the previous hash, what we believe is `0089` and the hash is now `cd33`.
 And by that you immediately detect that something manipulated the data in our blockchain.
-And that now makes it possible that these kind of blocks or that these nodes can run everywhere.
-So we don't need to trust anymore the server itself, because the server delivers us some kind of data,
+And that now makes it possible that these kind of blocks or that these **nodes can run everywhere**.
+So we **don't need to trust anymore the server itself**, because the server delivers us some kind of data,
 and we can immediately check if the data is correct.
 So that solves the problem of manipulating the data that is being stored.
 
@@ -764,9 +805,10 @@ What we want to have is that you don't know who is going to be the next.
 Such that you can try to manipulate because then you foresee what's coming up.
 you try to somehow manipulate it.
 You want to have it completely random.
+
 Okay, so another suggestion.
-If you do it randomly, I could just think about a random number
-and then between one and a hundred and the person who is being closest to that gets it.
+If you do it randomly, I could just **think about a random number**
+and then between one and a hundred and the **person who is being closest** to that gets it.
 Why shouldn't we do that?
 
 student: You yourself are being closest if you want to.
@@ -782,11 +824,13 @@ and if you want to have some kind of trusted solution.
 Therefore, we do what you suggested.
 We use the **proof of work** that we learned from **Hashcash**.
 
-student: You may not cook a work or pay because if you pay to compute this one or two times
-it's the same as you may pay, but not for this.
-I'm like one manipulation is already enough to manipulate the network.
+---
 
-prof: Therefore, it **must be very cost intensive** to do it.
+student: You may not proof of work or pay because if you pay to compute this one or two times
+it's the same as you may pay, but not for this.
+I'm like one manipulation is already enough **to manipulate the network**.
+
+prof: Therefore, it **must be very cost intensive** to do it (manipulate the network).
 Not in a way how I did it here with just a few, let's say one million tries.
 So we need to find something where we have really hard work to do that.
 And it's the same principle.
@@ -801,22 +845,25 @@ But the point is really first to understand how Bitcoin actually works and how t
 
 student: If you were to use the Hashcash, when we're going after probability theory, right?
 Let's say in total I would need one million tries per average.
-Then wouldn't that be the risk of several parties finding the solution at roughly the same time
+Then wouldn't that be the **risk of several parties finding the solution at roughly the same time**
 and then by connections, then yes, you'll get the whole thing?
 
 prof: So let's hold this on, we discuss that.
 Yeah, good thing.
 
-But we actually do it now with **Hashcash**, what we say is, okay, now we need to find a **nonce**,
-a **number only used once**, that was the number we were computing with Hashcash,
+---
+
+But we actually do it now with **Hashcash**, what we say is, okay, now we need to find a <span style="color:red">**nonce**</span>,
+a <span style="color:red">**number only used once**</span>, that was the number we were computing with Hashcash,
 we need to find the number only used once, that **depends on the content of the block**.
 So we take our transaction, we take the time, we take the hash of the previous one
-and adding all that, so we have the hash of the content plus nonce
+and adding all that, so we have the **hash of the content plus nonce**
 and if we hash that
 this must be below a certain number, which means it **must have at the beginning** the **number of zeros**.
 That's how we interpret below.
 And that's our requirement.
-And the miner, the node or the miner, they're often called **miners** because you see later on why they're also called miners,
+
+And the miner, the **node or the miner**, they're often called <span style="color:red">**miners**</span> because you see later on why they're also called miners,
 the **node who is doing that first** is the one who is **sending this information that we found in the new block to the network** and then the **network checks it**.
 So actually he's putting a **stamp** on that, **like Hashcash**,
 and he's putting a stamp that he found a solution to the puzzle and he's sending that to all the blocks.
@@ -838,10 +885,12 @@ Okay, and now if we increase it higher,
 it takes longer.
 So, you see now we are...
 
+---
+
 And now you see, if everybody who's doing that now,
 if all of you would now start this application,
 then you would have one who's first.
-**Who would be the first** one at the moment?
+<span style="color:red">**Who would be the first**</span> one at the moment?
 
 student: The one with the **fastest CPU**.
 
@@ -1020,7 +1069,7 @@ which are not problems, but actually features.
 Okay, so let's compute.
 But there is still one way that you could do as a group to become faster.
 
-student: Like a **mining pool**, you mine together.
+student: Like a <span style="color:red">**mining pool**</span>, you mine together.
 
 prof: Yeah, you're going together.
 So what you could do is that you two say,
