@@ -213,11 +213,11 @@ So you send this back to the bank and then **the bank checks two things**:
 - Do I know this serial number?
 - Has this serial number already been provided by someone else?
 
-And if they don't know the 4711, they know there is **no double-spending** on that.
+And if they don't know the 4711, they know there is <span style="color:red">**no double-spending**</span> on that.
 
 Is the signature valid? Is that really my signature? Yes. And only then you get 10 euros.
 
-So the bank is then actually transferring the 10 euros to you and this was just something like a... in German you would say "Schuldschein" or something like that, that has been completely digitally represented and being exchanged between us.
+So the bank is then actually transferring the 10 euros to you and this was just something like a... in German you would say <span style="color:red">**"Schuldschein"**</span> or something like that, that has been completely digitally represented and being exchanged between us.
 
 So that was the first approach of doing that.
 
@@ -316,7 +316,7 @@ And one person said, well, I use cash and GNU token.
 So that was the only pub in Cologne actually who was using GNU token.
 And then I just came across that and then I saw that they also use these kind of blind signatures.
 
-So that was DigiCash. It was actually the first one.
+So that was <span style="color:red">DigiCash. It was actually the first one</span>.
 
 student: It's not necessarily a question.
 It's more of a ..., I googled it, it's called **GNU Taler**.
@@ -329,30 +329,30 @@ That's actually what they say.
 
 ## slide: "e-gold Process"
 
-Okay, so the other thing was **e-gold**.
-That was something, and that was at the end really killed by money laundering.
+Okay, so the other thing was <span style="color:red">**e-gold**</span>.
+That was something, and that was at the end really **killed by money laundering**.
 And what they did is that users transfer fiat, normal money, yeah, euros or dollars or whatever, to e-gold
 or they just provided e-gold.
 Yeah.
-And then they topped up an internal balance.
+And then they topped up an **internal balance**.
 So you say, well, I want to have 100 euros in e-gold.
-What they do is, they buy some gold with the value of 100 euros,
-they put it in a safe and then you get e-gold, digital e-gold in your wallet for 100 euros.
+What they do is, they **buy some gold** with the value of 100 euros,
+they **put it in a safe** and then **you get e-gold**, digital e-gold in your wallet for 100 euros.
 And then when you do some kind of internal transfer, yeah, so if Alice does something to Bob,
 then the e-gold reduces Alice's balance and increases Bob's balance and that's an immediate credit effect.
-So they just do this internally, I mean you can do this in a relational database that we use.
+So they just do this internally, I mean you can do this in a **relational database** that we use.
 That's not a problem at all.
 And in the end, if Bob then has 100 e-gold,
 and he wants to get it into dollars, then they pay it in 100 dollars,
 and then they remove the gold or put it somewhere away because then they have left, let's say,
 only 900 e-gold left and they put 100 e-gold or gold in the value of a 100 e-gold and they sell it.
 
-So it was actually something backing this to the gold standard.
+So it was actually something backing this to the **gold standard**.
 What we learned at the beginning, where the idea was every dollar is backed up with the appropriate amount of gold.
 And here it was just done in a similar way, but they also had this kind of e-gold and that was used because it was sometimes
 misused with money laundering, it was all closed down, so they shut it all down and there was no longer a follow-up.
-And it was a very centralized process. You had to trust them, you had to completely trust them.
-That has nothing to do with decentralization.
+And it was a **very centralized process**. You had to trust them, **you had to completely trust them**.
+That **has nothing to do with decentralization**.
 
 ## slide: Hashcash
 
