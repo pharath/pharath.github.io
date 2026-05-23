@@ -109,26 +109,26 @@ And I think something that will come up is that Bitcoin is actually a very nice 
 of a lot of very interesting technologies that have already been available before
 in different systems.
 
-So the first one is really **David Chaum**.
+So the first one is really <span style="color:red">**David Chaum**</span>.
 You may have come across David Chaum already because he's a very well-known cryptographer.
 And he did a lot, at least during my studies, he was mentioned several times.
 And what he developed in 82-83 was **blind signatures for untraceable payments**.
 So he developed already a concept where you could do some kind of anonymous digital money transfer
-and he actually brought that into a company, **DigiCash**.
+and **he actually brought that into a company**, <span style="color:red">**DigiCash**</span>.
 He founded that company, so he wrote a paper, 82-83, about this, where he published this idea and this concept.
 Then seven years later, he founded a company called DigiCash.
 And that was founded in **Amsterdam**.
 
 ## slide: "DigiCash - Deutsche Bank as a pilot partner (1996)"
 
-And there were actually two banks who offered that particular kind of digital money.
-One was the Mark Twain Bank (in the US) and the Deutsche Bank.
+And there were actually **two banks who offered that** particular kind of digital money.
+One was the **Mark Twain Bank** (in the US) and the **Deutsche Bank**.
 And we can have a look into this.
 I found some press release on that on the Wayback machine.
 Do you know the Wayback machine?
 The Wayback machine is just where you find old web pages.
-And you see here, it's the DigiCash, **eCash** issued by Deutsche Bank.
-And they said that **"eCash is digital form of cash that works on the internet where paper cash can't"**.
+And you see here, it's the DigiCash, <span style="color:red">**eCash**</span> issued **by Deutsche Bank**.
+And they said that **"eCash is a digital form of cash that works on the internet where paper cash can't"**.
 
 And they wanted to have electronic cash that
 
@@ -143,13 +143,13 @@ So this transition from Web 1 to Web 2.
 And it was the same point that people said, well, there couldn't be anything for free on the internet.
 We **need to pay for things on the internet**.
 So we need to have some kind of micro-transactions.
-So just some cent to read an article on the usenet, for example.
+So just **some "cent" to read an article on the usenet**, for example.
 And that, I think, was also a motivation for them.
 
-They went bankrupt, unfortunately, around...
+**They went bankrupt**, unfortunately, around...
 So they started in 90s, so in 96 they went bankrupt.
-The reason was actually that there was some kind of money laundering taking place there.
-But also one reason was that it wasn't being adopted.
+The reason was actually that there was some kind of **money laundering** taking place there.
+But also one reason was that **it wasn't being adopted**.
 I mean, there was Deutsche Bank, there was the Mark Twain Bank.
 They went in as a pilot partner.
 But there was not really a take-up of the whole idea, unfortunately, at this point in time.
@@ -189,7 +189,7 @@ You know this old paper where it prints through to some other paper.
 Here it's some kind of digital way to do that.
 And in the end, the bank signed this kind of money.
 So what Alice produced is some kind of value.
-She says, well, this is, let's say 10 euro, the value of 10 euro and by sending the money to the bank together with that, **she gets 10 digital coins or some kind of paper back that has been signed by the bank** through this **blind signature** and she paid the 10 euros to the bank and now she gets back this kind of paper that has been signed by the bank that this is valid 10 euros.
+She says, well, this is, let's say 10 euro, the value of 10 euro and by sending the money to the bank together with that, **she gets 10 digital coins or some kind of paper back that has been signed by the bank** through this <span style="color:red">**blind signature**</span> and she paid the 10 euros to the bank and now she gets back this kind of paper that has been signed by the bank that this is valid 10 euros.
 
 And this kind of **blind signature** is quite interesting.
 We are not going into the deep thing, how it really works.
@@ -231,6 +231,8 @@ If Alice would give this to two people, to you and to you, the first one who sen
 The second one, the bank would say, well, this is **double-spending**, I know 4711 already, it's in my database and therefore I can't pay you out and then Alice will be punished (or will face some other consequences).
 
 So this is how this whole DigiCash worked.
+
+---
 
 student1: So in how does the bank control when Alice is providing the serial number and that the serial number was not already used by accident.
 So in the "flow data line" (the figure on slide 6), it says it only checks the signature and the availability.
@@ -296,9 +298,10 @@ Yeah, that's the case.
 We will see later on how Bitcoin solves that.
 Yeah, so that's something I think we will be able to discuss today.
 
+---
+
 So that was DigiCash and the whole idea of DigiCash was this kind of **blind signatures**.
-Because the point was an **anonymity**.
-They didn't really want to **trace** what people are using the money for.
+<span style="color:red">Because the point was an **anonymity**. They didn't really want to **trace** what people are using the money for</span>.
 
 Actually, there is an approach that I just recently came across, which is called **GNU Token**.
 You probably know GNU, GNU.
