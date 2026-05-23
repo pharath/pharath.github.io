@@ -356,8 +356,8 @@ That **has nothing to do with decentralization**.
 
 ## slide: Hashcash
 
-But now we come to something that is really interesting because this is actually a foundation of the proof of work in blockchain
-and that was called **Hashcash**. You can actually say that the most prominent feature of blockchain originates in **spam email**.
+But now we come to something that is really interesting because this is actually a <span style="color:red">**foundation of the proof of work**</span> in blockchain
+and that was called <span style="color:red">**Hashcash**</span>. You can actually say that the most prominent feature of blockchain originates in **spam email**.
 Yeah, it's so strange, but that's the funny thing to remember. The **motivation** was the **reduction of spam emails**.
 So when I started working in our institute, we were working on email actually.
 We had the first email system in Europe running, distributed email system running in Europe
@@ -365,14 +365,14 @@ and so we were very early email users and at the beginning you looked up your em
 because there were not many people sending you emails. And there were still discussions at this point in time "will every person have an email address?",
 no, probably not. Maybe one for a company. You all know what's happening and that we are just flooded with email. That's the big problem.
 
-And the idea of Hashcash was to say, well, the senders must prove that they have invested computing power before sending the email.
+And the idea of Hashcash was to say, well, the **senders must prove that they have invested computing power** before sending the email.
 So the border to send email or the hurdle to send email must be very high,
 because normally when you send postal advertisements, you have to pay the post office. You have to put a stamp on it. It costs you money.
 Sending around a thousand emails costs you nothing, unless in the end you are blacklisted, but it costs you nothing.
 And the idea was we have to provide some proof that people invested something. And that was done in the following way:
 
-So the sender had to solve a puzzle before sending the email and to send the result of the puzzle as a stamp to the email.
-And the puzzle was actually in the following. They had the following format. That was the actual stamp. And the stamp had this format:
+So the **sender had to solve a puzzle** before sending the email and to **send the result** of the puzzle **as a stamp** to the email.
+And the puzzle was actually in the following. They had the following format. That was the actual stamp. And the **stamp had this format**:
 
 - There was `1` that was the version number. Hashcash version one. They didn't actually come to version two. But Hashcash version one.
 - Then the difficulty, how difficult was the puzzle to solve? That's the `20`.
@@ -455,7 +455,7 @@ prof: Yeah.
 
 student: Okay.
 
-prof: yeah, you don't need to send it because the only thing what you send is just that `1:20:251026:alice@example.com::30f64fbb:378923`.
+prof: yeah, you don't need to send it because <span style="color:red">the only thing what you send is just that</span> `1:20:251026:alice@example.com::30f64fbb:378923`.
 Yeah, I send this to you and then you just throw it into a SHA-1.
 And it is old because at this time they only had SHA-1, they did not have SHA-256 or SHA-512.
 So you send this and then I check it and if it is okay, I trust you.
