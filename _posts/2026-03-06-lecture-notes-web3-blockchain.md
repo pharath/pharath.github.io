@@ -1983,16 +1983,16 @@ And then actually we **hash these pairs against each other**.
 And **that gives the Merkle root**.
 
 So actually some miners which are called the **light nodes**,
-these light nodes, they don't contain all the information here.
-They just contain that.
+these light nodes, they don't contain all the (transaction) information here.
+They just contain that (Merkle root).
 
 ---
 
 **"do light nodes only store the merkle root"**:
 
-Light nodes do not store the entire blockchain, but they do store more than just the Merkle root. They primarily store the chain of **block headers**.
+Light nodes do not store the entire blockchain, but they do store more than just the Merkle root. They primarily store the chain of <span style="color:red">**block headers**</span>.
 
-A block header is a small summary of a block (roughly 80 bytes in Bitcoin) that contains:
+A **block header** is a small summary of a block (roughly 80 bytes in Bitcoin) that contains:
 
 * The previous block's hash
 * The block's timestamp
@@ -2008,6 +2008,7 @@ Because light nodes only have block headers and not the entire transaction histo
 3. **The Result**: The light node recalculates the hash and compares it against the Merkle root it already has stored in its block header. If they match, the transaction is verified.
 
 By storing just the block headers, light nodes require only a tiny fraction of the storage space (e.g., just megabytes instead of hundreds of gigabytes).
+
 Would you like to explore how full nodes generate Merkle proofs, or should we look into the security trade-offs of using a light node?
 
 ---
@@ -2039,10 +2040,10 @@ They can:
 
 ---
 
-So they just work in the network.
+So they (the light nodes) just work in the network.
 And they just work in the network.
 And they do some kind of **proof that the new node is correct** or things like that.
-But **they don't contain all the information** because that information is quite large.
+But **they don't contain all the (transaction) information** because that information is quite large.
 Downloading the whole Bitcoin blockchain, so really the data, is gigabytes.
 I'm not sure, 900 gigabytes or so.
 
@@ -2055,12 +2056,14 @@ Installing it, probably just a minute.
 Downloading 900 gigabytes takes days.
 
 So although, but you could then run something like a **light node**,
-or the lightning network or things like that,
+or the **lightning network** or things like that,
 that **could be run even on a Raspberry Pi**.
 But that's something we will probably discuss later on.
 
-So how we actually organize this is that within the core data we just have one hash.
+So how we actually organize this is that **within the core data we just have one hash**.
 And that's the hash of all the transactions that is combined as this Merkle tree.
+
+---
 
 And when I saw this first, I thought why?
 I mean, why do we hash all these pairs and then we hash the pairs
@@ -2071,35 +2074,35 @@ Do you have any idea why?
 I mean, computer scientists, they love trees, obviously.
 Yeah, so we do everything in trees, but the list and then hashing it?
 
-student: I was thinking maybe we can, using that somehow find out if somebody cheated where he cheated.
-
-prof: No, no.
-Any other guess?
-
-student: To avoid like going over the side of the block, having this one hash.
-
-prof: Yeah, but that's the same.
-If we, why don't we just hash this pair-wise and we put the hash in there
-or just taking that and put the hash in there.
-That's almost the same.
-
-student: That can work with subtrees.
-
-prof: Yeah, it goes into the right direction.
-
-student: If I manipulate transaction one, the hash to three would still be correct.
-I could identify which way I'm going to go.
-
-prof: Yeah, it goes also in the right direction.
-Yeah.
-
-student: It allows also miners to change the **Merkle root** slightly.
-In case, for example, they run out of **nonce space**,
-you can also change a little bit the Merkle root and then go over a new **hash space**.
-I'm not sure that's the answer you're looking for.
-
-prof: No, I didn't get this.
-I'm looking for another solution.
+> student: I was thinking maybe we can, using that somehow find out if somebody cheated where he cheated.
+>
+> prof: No, no.
+> Any other guess?
+>
+> student: To avoid like going over the side of the block, having this one hash.
+>
+> prof: Yeah, but that's the same.
+> If we, why don't we just hash this pair-wise and we put the hash in there
+> or just taking that and put the hash in there.
+> That's almost the same.
+>
+> student: That can work with subtrees.
+>
+> prof: Yeah, it goes into the right direction.
+>
+> student: If I manipulate transaction one, the hash to three would still be correct.
+> I could identify which way I'm going to go.
+>
+> prof: Yeah, it goes also in the right direction.
+> Yeah.
+>
+> student: It allows also miners to change the **Merkle root** slightly.
+> In case, for example, they run out of **nonce space**,
+> you can also change a little bit the Merkle root and then go over a new **hash space**.
+> I'm not sure that's the answer you're looking for.
+>
+> prof: No, I didn't get this.
+> I'm looking for another solution.
 
 The point is that what happens **if you want to check if a certain transaction is actually within**..., this example here,
 so we store all the transactions and we just hash everything and put this into our, this is `Tx_Root` (see figure on slide).
@@ -2144,22 +2147,23 @@ I don't need this and this, so I need 1, 2, 3.
 student: The **hash of 0 would be already enough right?**
 The transaction 0 could be anonymous?
 
-prof: Yeah, **but this is not stored**.
+prof: Yeah, **but this (hash of 0) is not stored**.
 The only thing that is actually stored in the node is this (the 4 transactions).
 That's the interesting thing and that also gives these **"light nodes"** some kind of sense.
 
 If I claim that my transaction is in block number 12 and this node doesn't know all the other hashes,
 I just need to provide my transaction, transaction number 0 and that can be computed if this is the same as this one.
-So, normally I would need to provide all the four transactions.
+So, normally I would need to provide all the 4 transactions.
 Here, I just need to provide 3.
+
 Now imagine that you don't have such a simple Merkle tree.
 We have a much larger Merkle tree where we have much more nodes.
-Then again the information I need to provide to check that a transaction is in the Merkle tree is normally only the number of levels of the tree.
-You automatically get up and you just need to provide the pairing hashes and that then reduces computing power and data that you need to provide.
+Then again <span style="color:red">**the information I need to provide to check that a transaction is in the Merkle tree is normally only the number of levels of the tree**</span>.
+You automatically get up and you <span style="color:red">**just need to provide the pairing hashes**</span> and that then <span style="color:red">**reduces computing power and data that you need to provide**</span>.
 
-student: How do I know in this case for example hash 23 is in the root stored?
+student: How do I know in this case for example `Hash23` is in the root stored?
 
-prof: This is then often stored here within the nodes themself.
+prof: This (`Hash23`) is then often stored here within the nodes themself.
 They know that.
 They need to do less comparisons.
 
@@ -2169,9 +2173,9 @@ Then the block itself really contains all the data.
 prof: For example, if one node wants to communicate that to another node,
 then it just needs to send this, this, this and that.
 
-Actually, Merkle trees they have been invented before blockchain.
-They have been invented in communication technology.
-In communication technology you want to save computing power and you want to save bandwidth.
+Actually, Merkle trees they have been **invented before blockchain**.
+They have been **invented in communication technology**.
+In communication technology you want **to save computing power** and you want **to save bandwidth**.
 If you want to communicate that to someone else,
 you just need to reduce the amount of information instead of the whole information.
 With a reduced amount of information you can check that parts of the information is contained in that information.
@@ -3141,6 +3145,155 @@ Good question—these two are often confused because both use less storage, but 
 ---
 
 If you want, I can explain **exactly how a light node can still be reasonably secure despite not verifying everything**—that’s where Merkle proofs really shine.
+
+---
+
+### ChatGPT: "how does a light node 'Uses Merkle proofs to check inclusion of transactions'"
+
+A light node (SPV node) in Bitcoin does **not** download full blocks.
+Instead, it asks a full node:
+
+> “Prove to me that transaction X is really inside block Y.”
+
+The proof it receives is called a **Merkle proof**.
+
+---
+
+#### 🌳 The basic idea
+
+![Image](https://images.openai.com/static-rsc-4/x22Wh4a7kXb7-j9RTMpH-CAUporq96wLL3v0hHso-FCI-XWvX6tRqR-7jzGxFgrOWb7lPBwWhBrqLuAkd0EsJDsG1baYXOmsh-QqyMhaCd4EHiQf7uXk6DitBhFMyHhrrE0F27wEB1ODwe9epVHT_PzReuzEQ2lVeeCTHmgC5vha-tD6pFSlFuNNqHEMYy-n?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/XsMvyXdirUyoHGiO_rcA2Nt6hnp7w2_sc3PJ3ipxKIPeSqvcWJg27rytca8xSgslwrJuKe0KufWuQqKjwod8K8yWMJ2SdADnQySHCOuQiM1Sac1ZtDA0IVwYdsQoNeEirNNvAxypv1fLypiZYSQdDv7NiguT7lxpvFOISVxPL9FjVJxdK2KbOgEBqdlB6Tos?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/0MFI51Esx1UprP0uh7oaqZTxBn7psMr5mUjMBQuCqR59GVCv_J3IhVh66NqeUuo3qjKXXx0mtR3ZS6IBIGz7XleJsYMaTjo9js88ufHX0XH2IS1zkh5YUYeMCmLRoTETa2i88KJWIBRQAP013Usji3XERh7N3FbeuS-Oha1zAkt2lRexQoTFDXmJ_GWhFwPd?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/2pu-GJ5khBD7BCDzQqzxfDoMsSCb1xhwCI9enc1gqsVIOtq5xmNS8i4h0gxgnxX5jlE8fjXcJVM6xXK2PwP09mWri-qkT1458LkeDs_KZ2vU23ZLW5PYBpp-EYOWfeNhbMbGScNUZaGryM4YW55pt8ICE5HVLk5eo-8t_8hSITIq_gmQyW1LIM3gIFrkvZ6X?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/9T-2-WyDAqWxbogkeeDtLWz9HlWqVX5n8PZ8pEtBsxf67x9RcQ_7H-yfb3Rv-_Py2ssPMLPRWU8_adS8pVA8Dhf8JzN9FHHLWWWQ_Ol_JFKWGOa9kAAoHwDFt-TdSMsCOZGYSQ6khmjeEdYHgrBNeIxKv1h_FZy51dymky0XaYxyRA83WCPap3y7bpdX3gMv?purpose=fullsize)
+
+The light node already has:
+
+* The **block header**
+* The **Merkle root** stored in that header
+
+Remember:
+
+* The Merkle root summarizes all transactions in the block
+
+---
+
+#### 🔍 Example with 4 transactions
+
+Suppose a block contains:
+
+* Tx0
+* Tx1
+* Tx2
+* Tx3
+
+Their hashes are combined into a Merkle tree.
+
+The root is stored in the block header.
+
+---
+
+#### 📩 Someone claims:
+
+> “Tx1 is inside this block.”
+
+The light node asks for a proof.
+
+---
+
+#### 📦 What proof is sent?
+
+To prove inclusion of Tx1, the full node sends:
+
+* Tx1
+* Hash(Tx0)
+* Hash(Tx2-Tx3 subtree)
+
+👉 Only the hashes needed along the path to the root.
+
+Not the entire block.
+
+---
+
+#### 🧮 What the light node does
+
+The light node computes upward:
+
+##### Step 1
+
+Hash Tx1 together with Hash(Tx0)
+
+→ gets parent hash
+
+##### Step 2
+
+Combine that with Hash(Tx2-Tx3 subtree)
+
+→ computes the Merkle root
+
+---
+
+#### ✅ Final check
+
+If the computed root equals the root in the block header:
+
+👉 Then Tx1 must be in that block.
+
+Because changing Tx1 would change the root.
+
+---
+
+#### 📉 Why this is efficient
+
+Without Merkle trees:
+
+* Need all transactions in the block
+
+With Merkle proofs:
+
+* Need only ~log₂(n) hashes
+
+Example:
+
+* 1 million transactions
+* Only ~20 hashes needed
+
+---
+
+#### ⚠️ Important limitation
+
+A light node verifies:
+
+✅ “This transaction is included in a block.”
+
+But it does **not fully verify**:
+
+* every transaction
+* every consensus rule
+
+So it still relies somewhat on honest full nodes.
+
+---
+
+#### 🧠 Simple analogy
+
+Think of the Merkle root as:
+
+* a fingerprint of the whole block
+
+A Merkle proof is:
+
+* a short path proving your transaction contributes to that fingerprint.
+
+---
+
+#### 🏁 One-line takeaway
+
+👉 A light node checks transaction inclusion by recomputing the path from the transaction to the Merkle root using a small set of sibling hashes.
 
 ---
 
