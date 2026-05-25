@@ -662,6 +662,7 @@ I have to check.
 No, imagine based on this, it wouldn't become a question in the exam.
 Okay.
 Thank you.
+
 I have another question regarding the format of the exam.
 So I would assume it's more about understanding the mechanisms.
 So open end questions or will we have multiple choice or what would be the format?
@@ -686,6 +687,7 @@ Yeah.
 And then you could answer the proof of work time consuming or you wouldn't need to say that you just say, because it's based on the solving of a crypto puzzle, which requires computing time and that cannot be algorithmically solved something like that.
 Yeah. Thank you.
 Yeah.
+
 Sorry.
 Yeah.
 I just wanted to ask I'm still not able to register for the exam.
@@ -703,6 +705,7 @@ Yeah.
 And we also had another student who is currently still in bachelor studies.
 That's the same case. I also will provide a written statement that the student can then use when he started his master studies to provide this as a statement.
 Yeah, that was me. Thank you, professors.
+
 There's another hand.
 Yes.
 Are there going to be smart smart contracts programming in the exam?
@@ -717,6 +720,7 @@ So just to check if you have understood that you are not getting what the curren
 You got what I mean.
 Yeah, thank you.
 So you're not getting 0.5 you're just getting 0.48.
+
 Okay, another question.
 Yes, so again about Ethereum and also have sovereign identity.
 Yeah, two questions.

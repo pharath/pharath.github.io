@@ -74,12 +74,12 @@ you want to transmit a bitcoin?
 Let's imagine I want to pay you a bitcoin.
 How can I show that I have a bitcoin at all?
 I mean, the blockchain, in particular, bitcoin,
-Ethereum is a bit different, I think, **bitcoin doesn't have any "account statement" from you**.
+Ethereum is a bit different, I think, <span style="color:red">**bitcoin doesn't have any "account statement" from you**</span>.
 It doesn't store "Wolfgang Prinz has one bitcoin" or "two bitcoins" like a normal bank account.
 Your bank account stores "100 euros".
 And then you can transmit 1 euro.
 In bitcoin, you don't have that.
-Bitcoin is actually, or in general, a blockchain is a **ledger of transactions**.
+Bitcoin is actually, or in general, a blockchain is a <span style="color:red">**ledger of transactions**</span>.
 So far, we just, I mean, when we look at the diagram here,
 **all we stored is just that we have a lot of different transactions**
 in our system.
@@ -90,57 +90,59 @@ And there is no account telling "B has 20".
 That's not part of the whole system.
 That's not part of the game.
 This means that if B wants to send now a bitcoin,
-**B wants to send a bitcoin to C**, 1 BTC,
-**B must prove that it owns already 10 bitcoins**.
-And B does that **by providing the information about that particular transaction**.
+<span style="color:red">**B wants to send a bitcoin to C**</span>, 1 BTC,
+<span style="color:red">**B must prove that it owns already 10 bitcoins**</span>.
+And B does that <span style="color:red">**by providing the information about that particular transaction (where B received 10 bitcoins)**</span>.
 So you send the system, hey, here is my transaction in which
 I have received 10 bitcoins.
 And now I would like to send 1 bitcoin to someone else.
 
-What happens with the remaining 9 bitcoins?
+**What happens with the remaining 9 bitcoins?**
 I mean, you must do some magic computation.
 How do we get that?
 
-student: You produce a new output that hasn't changed the address.
+student: You <span style="color:red">**(your wallet) produce a new output (UTXO)**</span> that hasn't changed the address.
 
 prof: So what we do is then actually we put 1 bitcoin there
 and we prove it by providing 10 bitcoins.
 And in return, we get 9 bitcoins back.
 
-student: And I was going to say, if you forget to do that,
-you end up paying a fee of 9 bitcoins.
+student: And I was going to say, **if you forget to do that (to produce a new output (UTXO)), you end up paying a fee of 9 bitcoins**.
 Which is a bad state.
 
 prof: That can happen.
-But this is normally done automatically by the wallet.
-And again, you also have to provide some kind of transaction
-fees.
+But this is normally **done automatically by the wallet**.
+
+And again, **you also have to provide some kind of <span style="color:red">transaction fees</span>**.
 We discussed it.
 And I think you mentioned last time the transaction fees are
-not really depending on the amount,
-but on the overall traffic.
+not really <span style="color:red">**depending on**</span> the amount,
+but on the **overall traffic** (2,000–3,000 transactions every 10 minutes, so users compete for limited block space by offering higher fees).
 
 student: The number of bytes that...
 
-prof: The number of bytes that the transaction consists of.
+prof: The <span style="color:red">**number of bytes (Virtual Bytes) that the transaction consists of**</span>. (So both, traffic and transaction data size.)
+
+---
 
 And recently we did a similar tutorial.
-And then somebody mentioned just, I think it was at a bank.
-And they mentioned that someone sent a few Satoshis, no, he wanted to send a bitcoin.
+And then somebody mentioned just, I think it was **at a bank**.
+And they mentioned that someone sent a few Satoshis, no, he **wanted to send a bitcoin**.
 It was a large transaction.
 Or 1 bitcoin is even enough.
-And he wanted to provide some fees.
-And he just mixed it up.
+And he **wanted to provide some fees**.
+And he just **mixed it up**.
 So he sent only a few Satoshis, which is the "cent" in Bitcoin.
 He sent some Satoshis.
 And he provided a transaction fee of a bitcoin.
 And that was just because he just mixed
 both of the user inputs.
+
 Or if you just do this programmatically,
 I mean, you can use an API to do that,
-when you learn about smart contracts and so on,
+when you learn about **smart contracts** and so on,
 you can do some programmatic transactions,
-if you just mix the two variables, it's done.
+if you just **mix the two variables**, it's done.
 And what happens is, every miner is happy.
 He gets a lot of transaction fees.
 
@@ -151,45 +153,47 @@ you can just find the full transaction register.
 Or a full measure and understand what is the balance.
 You might sum it up all.
 
-prof: Yeah.
-Actually, and this is proven, I mean, this is being provided by the wallet.
+prof: Yeah. And this is being **provided by the wallet**.
 On the other hand, the miner who is taking a transaction
 is also checking that this is true.
 But in this case, he doesn't need to traverse everything.
 You have to find **any** transaction where this happened.
 So that is one thing.
 
-But **what happens now if we want to send two bitcoins, but we received, one Bitcoin there and another Bitcoin over there?**
-We need to send both transactions.
-We need to send, well, we got this Bitcoin over here.
+---
+
+But **what happens now if we <span style="color:red">want to send two bitcoins, but we received, one Bitcoin there and another Bitcoin over there?</span>**
+
+We **need to send both transactions**.
+
+We need to send,... well, we got this Bitcoin over here.
 We got two Bitcoins over there.
-And now I want to transfer two and a half Bitcoins.
-So we need to send that.
-And then you get a half a Bitcoin back.
+And now I <span style="color:red">**want to transfer two and a half Bitcoins**</span>.
+So we need to send that (the 1 BTC and 2 BTC).
+And then **you get a half a Bitcoin back**.
 
 And it's all done automatically somehow.
-But it's something to remember that such a blockchain
-is not keeping an account for you.
-The blockchain is a list of transactions
-that happened in the past.
+But it's something to **remember that such a blockchain is not keeping an account for you**.
+The **blockchain is a list of transactions that happened** in the past.
 And your account is actually just
 the sum of all the transactions that
 are being stored for your particular wallet.
 
-student1: So when you do a transaction, you
-need to provide every transaction since the last transaction
+---
+
+student1: So <span style="color:red">**when you do a transaction, you need to provide**</span> every transaction since the last transaction
 because by performing the last transaction,
 you get this total amount
 and then you have to sum everything up.
 
-prof: Actually, you have to provide a transaction that
-proves that you own this particular Bitcoin
-and it hasn't been spent already.
+prof: Actually, <span style="color:red">**you have to provide a transaction that proves that you own this particular Bitcoin and it hasn't been spent already**</span>.
 
 student2: Yeah, so you don't need to provide every single transaction,
 just the ones that you need to spend the amount you want to send.
 
-student3: But what does stop me from spending it twice?
+---
+
+student3: But <span style="color:red">**what does stop me from spending it twice?**</span>
 Like, I can provide the transaction from two months ago
 where I received the Bitcoin.
 And then provide that to multiple...?
@@ -200,15 +204,14 @@ It's being part of the transaction that this has already been used.
 student4: But it's already spent.
 
 prof: Yeah, it's has been spent.
-So it's being marked as spent.
+So <span style="color:red">**it's being marked as spent**</span>.
 Not in the block where you got it,
-but in the new block where you used it.
+but **in the new block where you used it**.
 Because the old block can't be changed.
 If we got it here, and we are now doing this over here
 in a block, then we can't go back and say, well, this is done.
 We just need to do it here.
-So the miner checks if this transaction appears later again.
-And it's marked as spent.
+So <span style="color:red">**the miner checks if this transaction appears later again and if it's marked as spent**</span>.
 And that's the reason why you always go from back to front.
 I mean, you can't do it otherwise.
 You can't change from that block to that block
@@ -223,7 +226,7 @@ And then from there on, ...
 prof: not the block, just the transaction.
 
 student5: The transaction.
-And from there on, you can go through all the blocks today
+And from there on, you can go through all the blocks (that exist on the blockchain) today
 and just check if this transaction appears.
 And you don't need to check all the transactions.
 
@@ -231,14 +234,13 @@ prof: Yes.
 And it's also the case.
 I mean, I'm not sure how they really implemented that.
 Maybe interesting just as an exercise to look into the code of Bitcoin.
-I believe that all the miners, they keep local databases
-that they use as cache.
+I believe that **all the miners, they keep local databases that they use as cache**.
 Yeah.
-I think they don't traverse all the blocks.
+I think <span style="color:red">**they (the miners) don't traverse all the blocks**</span>.
 I mean, they use a database locally in which they somehow
 simulate your account.
 
-student1: Yeah, they have basically a list of all unspent transaction outputs.
+student1: Yeah, <span style="color:red">**they have basically a list of all unspent transaction outputs (UTXOs)**</span>.
 And then they can just check whether that database contains...
 
 student2: On an implementation level there is an account balance,
@@ -247,14 +249,13 @@ but on a methodology level not.
 prof: Yes.
 That's exactly it.
 That's a very nice way to phrase it.
-So if we wouldn't optimize the whole thing,
-then we would need to traverse the whole blockchain.
+So **if we wouldn't optimize the whole thing, then we would need to traverse the whole blockchain**.
 But obviously, we optimize it.
-And then we have local caches and unspent transaction output, UTXO...
+And then we have **local caches** and <span style="color:red">**unspent transaction output, UTXO**</span>...
 
 student: UTXO.
 
-prof: where we store all the balances.
+prof: where we store all the <span style="color:red">**balances**</span>.
 
 ---
 
@@ -285,7 +286,7 @@ The change is returned as a "new transaction" because it is a new UTXO that must
 - **Privacy**: It helps break the link between your original address and your remaining balance.
 - **Transaction Fee Handling**: The difference between the total input and the total output (including the change) is what miners collect as a fee.
 
-If you send 1 BTC from a 2 BTC input, and the fee is 0.001, your wallet will create a transaction sending 1 BTC to the recipient and 0.999 BTC back to you.
+If you send 1 BTC from a 2 BTC input, and the <span style="color:red">fee is 0.001, your wallet will create a transaction sending 1 BTC to the recipient and **0.999 BTC back to you**</span>.
 
 ---
 
@@ -297,7 +298,7 @@ If you send 1 BTC from a 2 BTC input, and the fee is 0.001, your wallet will cre
 OK, so some other things that we have.
 OK.
 
-Does somebody know **why we should wait six transactions before a transaction is valid?**
+Does somebody know **why we should <span style="color:red">wait six transactions</span> before a transaction is valid?**
 I mean, obviously what we do is we have our transactions here.
 So let's try to construct this.
 So let's say that is our blocks here now.
@@ -325,7 +326,7 @@ That's something I can do.
 Another thing?
 
 student: I believe there is some consensus on what blocks is currently in use.
-So that **longest one is chosen** all the time.
+So that <span style="color:red">**longest one is chosen**</span> all the time.
 
 prof: Yeah.
 And this builds on that one.
@@ -742,11 +743,11 @@ It should be:
 
 > the chain with the greatest accumulated proof-of-work survives.
 
----
-
 ##### One-line summary
 
 He correctly explains **forks and race conditions**, but the decision criteria he gives (**more transactions, better nonce**) are not how Bitcoin actually resolves forks.
+
+---
 
 #### ChatGPT: "what if two blocks have the same number of transactions? which one survives?"
 
@@ -1248,7 +1249,7 @@ The student is **correct**, and the professor is mixing up what a Bitcoin 51% at
 
 The professor says:
 
-> change “1 BTC to you” into “10 BTC to me”
+> change <span style="color:red">“1 BTC to you”</span> into <span style="color:red">“10 BTC to me”</span>
 
 That is **not possible** unless you possess the required private keys.
 
@@ -1259,7 +1260,7 @@ Bitcoin transactions contain **digital signatures** authorizing spends from spec
 If someone changes:
 
 * recipient
-* amount
+* <span style="color:red">**amount**</span>
 * inputs
 * outputs
 
@@ -2079,14 +2080,14 @@ It's an **oracle network** where you can set up particular kind of oracles.
 
 Gemini: "uma oracle wikipedia"
 
-UMA (Universal Market Access) is **a decentralized "optimistic oracle" protocol built on Ethereum that allows smart contracts to securely access real-world data**. It enables the creation of synthetic assets, financial derivatives, and prediction markets by using a dispute-driven mechanism to verify data, rather than relying on constant, costly on-chain updates.
+UMA (Universal Market Access) is **a decentralized "optimistic oracle" protocol built on Ethereum that allows smart contracts to securely access real-world data**. It enables the creation of synthetic assets, financial derivatives, and <span style="color:red">prediction markets</span> by using a <span style="color:red">dispute-driven mechanism to verify data</span>, rather than relying on constant, costly on-chain updates.
 
 **Key Aspects of UMA Oracle:**
 
 - **Optimistic Oracle**: Unlike traditional oracles that push data constantly, UMA assumes a data assertion is correct unless disputed within a specific time window.
 - **Data Verification Mechanism (DVM)**: If a dispute occurs, the DVM acts as a decentralized tribunal, where UMA token holders vote on the correct data, ensuring accuracy.
-- **Use Cases**: It is used for decentralized prediction markets (e.g., **Polymarket**), cross-chain bridges, and insurance protocols.
-- **Economic Security**: The system relies on incentives, where actors are rewarded for honest reporting and punished for malicious behavior.
+- **Use Cases**: <span style="color:red">It is used for decentralized prediction markets (e.g., **Polymarket**)</span>, cross-chain bridges, and insurance protocols.
+- **Economic Security**: <span style="color:red">The system relies on incentives, where **actors are rewarded for honest reporting** and **punished for malicious behavior**</span>.
 
 UMA acts as a secure, decentralized bridge for off-chain information to be used in on-chain applications.
 
@@ -2179,7 +2180,7 @@ When you think about a blockchain use case, think about it from the beginning to
 **Just by making a smart contract that's not secure**.
 **When we involve an oracle, you have to make sure that the trust provider is trusted.**
 
-Or we do something like, with this **UMA network** that we say we need some kind of **decentralized trust provider who's providing the result** and if this trust provider is **providing the wrong result, he's punished in a way that is not worth doing it**.
+Or we do something like, with this <span style="color:red">**UMA network**</span> that we say we need some kind of **decentralized trust provider who's providing the result** and if this trust provider is <span style="color:red">**providing the wrong result, he's punished in a way that is not worth doing it**</span>.
 So maybe you have to put in 100 bitcoins or whatever.
 Let's say 100 euros to provide the result about it.
 And this must be much higher than the bet itself.
@@ -2196,9 +2197,9 @@ And **Ethereum** is the blockchain that introduced smart contracts.
 **Vitalik Buterin** invented Ethereum and that's Solidity.
 It's a little bit like JavaScript.
 Similar to JavaScript.
-You will also see then how to do that by, if you like, you can have a look already at **OpenZepelin**.
+You will also see then how to do that by, if you like, you can have a look already at <span style="color:red">**OpenZepelin**</span>.
 OpenZepelin like the flight ship.
-OpenZepelin, there are a lot of **smart contracts** that you can use as **templates**.
+OpenZepelin, there are a lot of **smart contracts** that you can use as <span style="color:red">**templates**</span>.
 So **it's a library**, like Stackoverflow.
 No, Stackoverflow is not a library, but GitHub.
 It's a GitHub for smart contracts.
@@ -2487,16 +2488,17 @@ There is **no log-in** to a blockchain.
 You can't go to "bitcoin.com" and revise your password.
 That's not possible.
 There is **no password** in a blockchain.
+
 Because a blockchain is only storing in a block some addresses.
-So, address number one is, let's say we use Ethereum, they have some kind of smart contract, and in a smart contract, you say "address number one is owning one token".
+So, address number one is, let's say we use Ethereum, they have some kind of smart contract, and in a smart contract, you say *"address number one is owning one token"*.
 Which can be ETH or whatever.
-We do not store "this is *user* number one" or whatever, instead we store "this is *address* number one".
+We do **not** store **"this is *user* number one"** or whatever, instead we store **"this is *address* number one"**.
 
 ## slide: "Public / Private Keys"
 
 And how do we really prove that *we* are user number one or address number one?
 We do that using **public and private key encryption**.
-I think you can cross public and private key encryption.
+I think you came across public and private key encryption.
 Just to remind you, what we do here when we **encrypt** is that we take "Hello Alice"
 and we encrypt it **with Alice' public key**.
 So this becomes encrypted,
@@ -2631,8 +2633,8 @@ And you only have to provide it user ID and password.
 How does that match my argument that you need public and private keys?
 **They store the public and private keys for you.**
 What they do is, they create a wallet for you, they keep the keys and then you log in, then they authenticate you to the wallet and then they do the rest.
-And that's why they call this the **"custodial wallet"**.
-They manage the wallet for you.
+And that's why they call this the <span style="color:red">**"custodial wallet"**</span>.
+<span style="color:red">They manage the wallet for you</span>.
 Which means that if there is some evil guy or evil lady, she just takes your account and gets your money.
 It also means that if you lose your user ID and password, I could log in and then I do the transaction.
 
@@ -2659,7 +2661,7 @@ Because there are so many people using it.
 Therefore, the big **recommendation** is, you can use that (**custodial wallet**), for example, **to get your crypto**.
 But once you get it there, **transfer it** from there to your wallet.
 To your own wallet.
-And that's then the **non-custodial wallet**, Metamask or a stick (= cold wallet) or whatever.
+And that's then the <span style="color:red">**non-custodial wallet**</span>, Metamask or a <span style="color:red">stick (= cold wallet)</span> or whatever.
 
 ## slide: "Not your keys not your crypto!"
 
