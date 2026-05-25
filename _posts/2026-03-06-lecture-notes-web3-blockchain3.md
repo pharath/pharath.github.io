@@ -85,6 +85,7 @@ and I go to Chrome because I think in Chrome
 I don't have a wallet yet.
 So...
 Good.
+
 This one is our **Metamask**.
 Good.
 I just used an empty Chrome here.
@@ -111,8 +112,9 @@ and now it's asking you for a password.
 Why is it doing that?
 It's **just a password to access this particular extension**.
 It's just a password to secure the extension on your laptop.
-You also say **if I lose the password Metamask can't reset it because it has nothing to do with Metamask itself**.
+You also say **if I lose the password, Metamask can't reset it because it has nothing to do with Metamask itself**.
 It's just a password for me.
+
 Since this is...
 I need to get a password now.
 Now we have to get it off for a second.
@@ -126,26 +128,25 @@ Thank you.
 So I just sent it to the password.
 The password is there.
 Now another interesting thing starts.
-What I just created is just a password to access the metamask.
+What I just created is just a **password to access the metamask**.
 So that in case when somebody is just approaching my laptop
 and clicking on the metamask symbol
 that you can't just open the wallet.
-That's the protection of the wallet itself.
-It's nothing to do with probably a private keys on the blockchain.
+That's the **protection of the wallet itself**.
+It's **nothing to do with probably a private keys on the blockchain**.
 These have now been created.
-Since this private and public key is difficult to remember
-and difficult to write down,
+
+Since this **private and public key is difficult to remember and difficult to write down**,
 obviously you can do some kind of paste.
 But obviously this key is just that long.
 And therefore what they do is that they say,
-okay, we represent the key with this secret recovery phrase.
-And the secret recovery phrase is now a collection
-of a lot of different words
+okay, we **represent the (private) key with this secret recovery phrase**.
+And the secret recovery phrase is now a **collection of a lot of different words**
 So if I click on this, you see all the words.
 If somebody would now take a picture,
 that would be dramatic,
 because with this particular picture
-you could just recover my wallet.
+you could just **recover my wallet**.
 So what I would like you to do now is just,
 for example, I take now a screen down by myself
 and then copy it.
@@ -175,26 +176,28 @@ So obviously I would be able to do a lot of money on this wallet.
 But it's the point.
 And now what I can do now is just to get some basic usage to continue.
 And now it's ready.
+
 So now what I can do now is to start getting money.
 And you see that actually I have nothing.
 But now I have an ID for blockchain.
-And this particular ID is somehow my account.
+And this particular ID is somehow my **account**.
 So you see here my account number one.
-And what I can do now is also to get into the details of this particular account.
-It has a private key, which is...
+And what I can do now is also to get into the **details of this particular account**.
+It has a **private key**, which is...
 I can check if I provide the password.
 This is not the password that I use for the app.
 It's not the secret password.
 Okay.
 We'd like to do that.
-I can change the name.
+I can change the **name**.
 So let's go to the next term.
 Okay.
 So now I have the name.
 You see it also provides some kind of symbol, which is automatically created from the address.
 And what about here?
 And then you see what it also interestingly knows.
-What we're going to do is that to find the address itself.
+
+What we're going to do is that to **find the address itself**.
 Okay.
 What were you working for?
 Over here?
@@ -202,17 +205,15 @@ Yeah.
 And then you can copy it.
 Okay.
 Go with that.
-So you see the address is that this particular wallet has on different chains.
-You see it's almost the same for everything except for Zolana and Bitcoin.
+So you see **the addresses that this particular wallet has on different chains**.
+You see **it's almost the same for everything except for Solana and Bitcoin**.
 Ethereum, Inaya, Beys, Alcom, B&B, Chain, ODP, Polygon.
-It's always the same address because the address itself is being built from my public key.
+**It's always the same address because the address itself is being built from my public key**.
 Very often it's being considered as the public key.
-It's not exactly the public key.
-They hash it or do some other kind of operations on the public key to produce the address.
+**It's not exactly the public key. They hash it or do some other kind of operations on the public key to produce the address**.
 And these are...
-They all use the same way to do that.
-Bitcoin uses a different way.
-They produce my address out of the public key and also Zolana.
+**They all use the same way to do that. Bitcoin uses a different way**.
+They produce my address out of the public key and also Solana.
 All these, as far as I know, are Ethereum based.
 So in particular, Polygon, Arbitron, are actually the kind of Ethereum based chains but second layer chains.
 I think we haven't talked about the second layer yet.
@@ -221,7 +222,8 @@ Yeah.
 So they all use the same way to create the address which is now my...
 It's my account number with the bank.
 That's it.
-And if I were to get some money now, I can ask someone of you to send me please some money to this particular address.
+
+And if I were to **get some money now**, I can ask someone of you to send me please some money to this particular address.
 And then I will receive some money from this particular account.
 Even if we have some play...
 Okay.
@@ -230,24 +232,25 @@ I can send you some...
 Yeah, we have some money.
 Okay.
 Yeah.
-Maybe you sent me something on Sepolia.
+Maybe you sent me something on **Sepolia**.
 Let me see.
 There is Sepolia.
 Yeah.
 There is no Sepolia yet.
 If you see, it's not the network.
 You see, there are a lot of different networks.
-Sepolia is a test network of Polygon.
+**Sepolia is a test network of Polygon**.
 Polygon is a Ethereum-like blockchain around here.
 And Sepolia is the test net of that.
 Which means it's a test network where you can play around this.
 And in order to do that, you need tokens.
-And these tokens are called Sepolia.
-And these tokens you get from a so-called facet.
-Which is something like a source for tokens.
-And this is sometimes a website that you just have to visit and then you get a little bit.
+And these **tokens are called Sepolia**.
+And these tokens you get from a so-called **faucet**.
+Which is something like a "source for tokens".
+And this is sometimes **a website that you just have to visit** and then you get a little bit.
 What's become...
 How do we get it to Sepolia at the moment?
+
 Do we have to wait for something or...?
 Okay.
 Because it often changes.
@@ -304,44 +307,43 @@ Sepolia.
 What I'm saying.
 That's what we're doing.
 You see what you also see here is that we get some kind of RPC.
-RPC is the server that provides us access to the network.
+**RPC is the server that provides us access to the network**.
 Yeah.
-So this is Infura.
-Infura is a very prominent provider that is providing access to different nodes.
-It's providing us access to the network.
+So this is **Infura (Infura RPC)**.
+Infura is a **very prominent provider that is providing access to different nodes**.
+It's **providing us access to the network**.
 Yeah.
-If you know the concrete address of one of the blockchain nodes, then you could access
-that one.
-But Infura, somehow, a service provider for that.
+**If you know the concrete address of one of the blockchain nodes, then you could access that one.**
+But **Infura, somehow, a service provider for that**.
 And in order to use that, you can just access this one.
 Yeah.
-So, and it's centralized.
+So, and **it's centralized**.
 It's a C6.
 Okay.
 Yeah.
 Very interesting point.
-It's somehow a centralized system because we access when we go to another network,
-and we see what we see is that.
+It's somehow a centralized system because we access when we go to another network, and we see what we see is that.
 Sepolia here.
 Then let's say you go to another network.
 We go to Fulva.
 We also see Infura.
 So somehow I'm telling you, hey, guys, what we are doing is decentralized stuff.
 We don't want to become dependent on a platform provider.
-And what we do is we will lie on a platform provider, which is in Fulva.
+And what we do is we will lie on a platform provider, which is infura.
 So it's in this fortune.
 We will, I think this will pop up through the whole lecture from time to time that actually
 we are working on a decentralized system.
-But then there are these kinds of access points to this decentralized system that we use.
-And they are somehow centralized.
+But then there are these kinds of **access points to this decentralized system** that we use.
+And they are **somehow centralized**.
 It's always a mixture.
 Yeah.
-And that is what some people also criticize.
+And that is **what some people also criticize**.
 Yeah.
 Okay.
 So, so even if you think if you said something, then.
+
 So what I will do now is the following.
-Yeah, I can show you the key.
+Yeah, I can **show you the key**.
 We use it on your mobile.
 Okay.
 So what I will do now is that I provide the.
@@ -354,7 +356,7 @@ And we use.
 Yeah, we don't have it here.
 It should be something.
 Okay.
-So that's now my address.
+So that's now **my address**.
 What is not doing even scanning the address.
 And that is not secret at all.
 No, just my bank account.
@@ -370,17 +372,17 @@ Yeah.
 But with the center last x.
 To the blockchain.
 For example.
-If I am a minor and have a version of the blockchain on my own device, right.
+If I am a miner and have a version of the blockchain on my own device, right.
 And then if I find a block, I send it to everyone else.
 And this then get updates at wherever.
 So it's pointing to some where some location where there's also a version of the blockchain.
-It's pointing to a minor.
+It's pointing to a miner.
 Yeah.
-Maybe they also run a minor.
+Maybe they also run a miner.
 Yeah.
 So it's local.
-And this minor has the copy has the same copy of the blockchain.
-And this minor has the copy has the same copy of the chain as all the other ones.
+And this miner has the copy has the same copy of the blockchain.
+And this miner has the copy has the same copy of the chain as all the other ones.
 Okay.
 Yeah.
 So because that all the miners have the same status.
@@ -420,98 +422,100 @@ Yeah.
 So.
 So.
 It's really the last time I used it,
-it was just as a pop-up window that changed it.
+it was just as a **pop-up window** that changed it.
 So, okay, so, but we now have to pull the R.
 Zero point one, zero point one, zero point one.
 It's, it's worth nothing because it's test-copy.
-You could, and this is now, it's in my wallet.
+You could, and **this is now, it's in my wallet**.
+
 If I want to send it to someone else,
 I want to send it back to Ivan,
 then then, ah, it should, ah, the interesting point now
-is how do I see from whom I got it?
+is how do I **see from whom I got it**?
 Back, there should be something activity,
 I don't know, activities yet,
 and notice there should be something
-to see the transactions that I got.
+to **see the transactions that I got**.
 And because of what I wanted to show you now
 is the transaction on the,
 I send it and then comes the teams.
+
 So, here we see now,
 and I wonder I should be able to see from whom I got it.
 They changed the interface, I can see it on my,
 yeah, so Ivan has now sent me via Teams,
-the transaction, you know, and you see the address,
-I'm looking at the Zipodia.meta.io.
-And this is now our view into all the transactions
-on the Zipodia blockchain.
-Very similar to mempool.space, where we looked at last time.
-And what we see now is that we have a transaction here
-that is in block number 9,760,000.
-It came from this address, which is the last address,
-and it went to this address, which is mine.
-You remember it was 3DF31, and it was 0.1B,
-and the transaction fee was 0. something.
-And the gas price for doing it was 1.5B.
+the transaction, you know, and **you see the address**,
+I'm looking at **the [https://sepolia.etherscan.io/](https://sepolia.etherscan.io/)**.
+And this is now **our view into all the transactions on the Sepolia blockchain**.
+Very **similar to [mempool.space](mempool.space)**, where we looked at last time.
+And what we see now is that **we have a transaction** here
+that is in **block number 9,760,000**.
+It came **from this address**, which is the last address,
+and it **went to this address**, which is **mine**.
+You remember it was `3DF31`, and it was 0.1B,
+and the **transaction fee** was 0. something.
+
+And the **gas price** for doing it was 1.5B.
 The gas price is somehow priced,
 they have to pay for the execution of this transaction.
 They were, let me see some more details over there.
 So you see it on there.
-The blue is the gas price, the miner.
-But that would be the transaction fee, also the miner?
-They also go to the miner.
+The blue is the **gas price** for **the miner**.
+
+But that would be the **transaction fee**, also the miner?
+**They (the transaction fees) also go to the miner**.
+
 I wonder that they also have, because it's a simple transaction,
 there is not much of a contract behind it,
 that they also charge some gas price for that.
 So that's something we probably have to do.
 That's what we do.
-The gas price is just a value, and that moment of time,
-it's like when you go to the petrol station,
+The **gas price** is just a value, and that moment of time,
+it's **like when you go to the petrol station**,
 there is a price of 15 million euros,
 this is gas price, so this is how much you put paid,
 and that moment of time,
-and the transaction fee is basically the consumption you do,
-and the gas price.
-The gas price costs per byte?
-Yes, per byte.
+and the **transaction fee** is **basically the consumption you do**,
+and the gas price...
+
+The gas price costs **per byte?**
+**Yes, per byte**.
 Cost per byte per retribution, of course.
 You can talk about this in the next lecture,
 but there is no transaction,
-and it costs a certain amount of operations,
-and this operation gets a certain moment, 0.1.5 per operation.
+and it **costs** a certain **amount of operations**,
+and this operation gets a certain moment, **0.1-0.5 per operation**.
 So when you multiply the amount of operations
 on that price, then that's when the transaction fees.
+
 So it's actually something when we,
 I have a simple application by the creator, some NFTs,
-for that one, you can ask the miner with a test statement.
-You say, I would like to perform that particular transaction,
-how much will it cost?
-And then it will tell you,
-based on the complexity of the operation
-that you want to perform.
+for that one, **you can ask the miner with a test statement**.
+**You say, I would like to perform that particular transaction, how much will it cost?**
+And then it will tell you, **based on the complexity of the operation that you want to perform**.
 So for example, storing a lot of data on the blockchain,
 a little lot of computation,
 this will cost you the following,
 and this is then multiplied by the complexity
 of operation multiplied by the gas price.
-So it's like the gas price, as Iman said,
-it's like the amount that you have to pay per kilometer
-is your car, and the kilometer is computed by the business
-that you have to do, and that is the transaction fee.
+So it's like the **gas price**, as Ivan said,
+it's **like the amount that you have to pay per kilometer** is your car, and the **kilometer is computed by the business that you have to do, and that is the transaction fee**.
 You will see that when we talk about smart contracts,
 and you will see how to compute that.
 So we have an application that creates some kind of NFTs
 and checks the integrity of files, for example,
 and for that we compute the price.
+
 Okay, so, okay, now I know where it's coming from,
 and now I just copy the address,
 and then I go back to my wallet,
-and now I send some money to this particular wallet,
+and **now I send some money to this particular wallet**,
 this particular address, and max,
 yeah, so this is what I have,
 you see he said the 0.01,
 so it's putting a little bit less
 because we have to pay transaction fees.
-So let's send back to Iman, now less,
+So **let's send back to Ivan**, now less,
 let's make some,
 in here,
 five,
@@ -527,59 +531,60 @@ and now I send it to him.
 Okay, now it's being waiting,
 because it has not yet been included,
 again somehow,
-I can't accelerate it by providing some more fees,
-but to make it faster,
-and now it's being confirmed,
+I **can accelerate it by providing some more fees**,
+but **to make it faster**,
+and **now it's being confirmed**,
 and which means now that,
-I just send 0.05 to the R,
-see, yeah, are there miners on the test net?
+I just send 0.05 Sepolia to ...
+
+see, yeah, **are there miners on the test net?**
 Yeah,
 there are miners on the test net,
 and I think I'm not sure if,
 well, it's interesting question,
 there are some good ideas for some exercises,
 for you, I would assume that these are sometimes just miners,
-which are being organized by the whole,
-a PuliGuard organization,
-but those people who organize PuliGuard network,
+which are being organized by the whole Polygon organization,
+but those people who organize **Polygon network**,
 they just run some tests,
 for those people to do.
-We make the experience that for a long time,
+We made the experience that for a long time,
 we developed smart contracts,
-and we first tested them on Zepunia,
+and we first tested them on Sepolia,
 but then on Stratus,
-even if it was not on that,
-but the point is that the whole test net,
-it's sometimes not very reliable,
-and sometimes you have very long transactions,
+Ivan did a lot on that,
+but the point is that the whole **test net**,
+it's sometimes **not very reliable**,
+and sometimes you have **very long transactions**,
 and for that reason,
 what we do nowadays,
 as soon as the application is really up and running,
-we move it to PuliGuard.
-They have to pay with real tokens
+**we move it (the app) to Polygon**.
+**There you have to pay with real tokens**
 that you have to pay for,
-but it's much faster, it's more reliable.
-It's happened at several occasions
+**but it's much faster, it's more reliable**.
+It happened at several occasions
 that we had some nice demos where we created NFTs,
 or we put some kind of technical data
 on the blockchain or things like that,
 and then, for example,
 when it's around four to five o'clock here in Germany,
 it seems that then the US people wake up
-and start using NFTs,
+and start using the network,
 very often the transactions fail.
 They just took very long,
 so we got timeouts and things like that,
-and therefore just pay.
-All together, how much did we spend?
-Five to six years, I think,
+and therefore just pay...
+I mean, all together, how much did we spend?
+Five to six Euros, I think,
 was all the tests that we had.
-Not the quality of the question.
-I sense you're a little bit of a real MTH.
-Yeah.
+A question.
+
+student: I have sent you a little bit of a real ETH.
+prof: Yeah.
 It should go up.
 Can you see?
-Can I go back to the same very word, Sepulia?
+Can I go back to the same very word, Sepolia?
 I thought you were changing the code.
 Down?
 Down.
@@ -612,7 +617,7 @@ Swapping Ethereum,
 like, that is valuable three dollars.
 Yeah, then what you would need to do is,
 you would need to convince the people in the store
-that they accept E,
+that they accept ETH,
 if they don't do your loss.
 It's the same as if you go to London,
 and you want to give them some euros.
@@ -621,12 +626,12 @@ But if you go to another country,
 they say, no, we are not taking euros.
 Sorry, go to the exchange somewhere else on the street.
 This is what you can also do here,
-so you can swap this.
+so **you can swap this**.
 Then you see, you should be possible here,
 but then you go there,
 and then I can say swap.
 And now, I can swap it to US dollar,
-to USDC, here USDC, link to whatever,
+to **USDC**, here USDC, link to whatever,
 you like, sushi, whatever.
 This means, this is exchange now.
 So you need to swap the tokens.
@@ -641,34 +646,35 @@ and so on.
 I think in the end, I paid a lot of fees over there,
 because they all want to get money for the new exchange.
 But that's possible.
+
 So what you see here now is that,
 so you see here,
 that's not true.
 Somehow, real one.
-And there you see that there was $100 on this one,
+And there you see that there was 100 dollars on this one,
 and you see also that I have some kind of euro.
 So this is 1.70 on euro,
 so it seems that I have euro in my wallet.
 Looks quite convincing, isn't it?
-Actually, this is a token that Ivan created for our lab,
-and it's somehow a stable coin.
+Actually, this is **a token that Ivan created** for our lab,
+and it's somehow **a stable coin**.
 So in order to get that,
 I go to Ivan and give him 10 euros,
 he puts it somewhere in a box in our office,
 and then he produces 10 euros for me,
 with a particular token.
 So we implemented our own token on,
-and this is on Pollygon,
-and this is something that we use,
-for example, to pay for coffee.
+and this is **on Polygon**,
+and this is something that **we use**,
+for example, **to pay for coffee**.
 So if you come to our lab,
 then you will see there is a coffee machine,
-and a coffee machine, there's a QR code,
+and a coffee machine, there's a **QR code**,
 and when I scan the QR code,
 then I automatically get a transaction of 0.25 cents,
-that's being sent to a smart contract
-that is managing the coffee.
-So by that, we just implemented our own currency,
+that's being sent to a **smart contract**
+that is **managing the coffee**.
+So by that, we just implemented **"our own currency"**,
 and we could do that also,
 maybe we can do something similar as an exercise,
 that we develop our own currency for our course here.
@@ -681,8 +687,9 @@ because I could also call it USDC or whatever,
 it's somehow misleading,
 and therefore it's very important
 that when you deal with all these tokens,
-we need to see that you get them from the right source,
+**we need to see that you get them from the right source**,
 and the right origin.
+
 So you see there are also, there should be some,
 should be some USDC coin,
 yeah, there's USD coins, yeah, USDC,
@@ -690,7 +697,7 @@ that's the real USDC coin,
 which is worth 8.7 dollars, yeah.
 And then there are some other tokens, there we go.
 So what we need to do now is also to go back
-and to send you the money back, let's try to see.
+and to **send you the money back**, let's try to see.
 The coin is now really interesting on the,
 I don't want to swap,
 but I just want to send it back,
@@ -701,7 +708,7 @@ Ethereum chains showing with different exchange rates?
 Yeah, this is linear, it's a Ethereum
 on my other team, I think it's in...
 So that's also the point,
-you can have the same currency on different chains.
+you **can have the same currency on different chains**.
 That's also possible,
 that you have dollars in different banks.
 Yeah, but what we'd like to see now is,
@@ -725,8 +732,8 @@ That's a six, yeah.
 So you see, sending ETH around is expensive.
 They'll be trying to receive USDC or Bitcoin,
 they'll be paying 0.0 cents or so.
-But sending ETH around is expensive,
-because here we are on a layer long chain.
+But **sending ETH around is expensive**,
+because here we are on a **layer one chain**.
 So it's somehow a big bank loan.
 And they are operating on it.
 Okay, so here we go.
@@ -746,18 +753,19 @@ and therefore it calculated how much it can send,
 and then the actual transaction fees were less.
 That is then still denied.
 Okay.
+
 So how does this shopping of tokens work,
 and like the custom created,
 you know what you showed,
 like could you also like shop tokens,
-like what is the use of it?
+like **what is the use of it?**
+
 And to create some new tokens,
-just for example, to create a new currency
-within the particular community.
+just for example, **to create a new currency within the particular community.**
 So an example could be that you,
 last Saturday, yeah, last Saturday,
 I'm living in a small town south of Cologne,
-we had a Christmas market organized
+we had a **Christmas market** organized
 by the local football club,
 when you want to drink some blue wine,
 or when you want to get a sausage,
@@ -772,16 +780,13 @@ and that then frees all the people
 who really need to deal with cash.
 Now you have only one point
 where you exchange cash against these local currency.
-So we could now create a particular token
-just for our lecture.
-And we use that token, for example,
-whenever someone of you is asking a question,
-you get a token.
+
+So we could now **create a particular token just for our lecture**.
+And we use that token, for example, **whenever someone of you is asking a question, you get a token**.
 Yeah, when somebody's answering a question,
 you get two tokens.
 And at the end, you count the tokens you got.
-This token has no value at all,
-but it's just for us,
+This **token has no value at all, but it's just for us**,
 it's some kind of digital asset that we can move around.
 Actually, when we are moving around here,
 I just digital assets with which we associate value.
@@ -800,24 +805,25 @@ No, this one, no.
 No, here with the euro,
 this is worth 1.17 euro.
 Nobody will give me 1.17 euro for that.
-Even, maybe even, because I exchanged it with him,
+Ivan, maybe Ivan, because I exchanged it with him,
 but he's the only trust person there.
-Why does USD coin doesn't have the same value as US?
+
+**Why does USD coin doesn't have the same value as US?**
+
 It's actually interesting.
 I also stumbled about it,
 and I thought hopefully nobody's asking.
 I don't know, it's really interesting.
 It seems to be, you see, it's 8.74 dollar,
 which is 8.62 USDC.
-Actually, it should be the same,
-because it's a stable coin.
+Actually, **it should be the same, because it's a stable coin**.
 But even that stable coin is somehow fluctuating.
 Now, you see, it's not always a one-to-one mapping.
-But there is somehow some guarantee
-that it's not getting down to 50%.
+But **there is somehow some guarantee that it's not getting down to 50%**.
 Okay, yeah.
+
 Maybe there's two technicals,
-but how would you get the information?
+but **how would you get the information (the current exchange rate)?**
 So, right now for euro, for something,
 there's no...
 I think because we didn't provide something,
@@ -827,38 +833,38 @@ Oh, okay.
 I'm not sure if you can do it for your local token.
 I don't know.
 I think you can.
-You can see the liquidity pool in a certain number of USDC.
+You can see the **liquidity pool** in a certain number of USDC.
 Then it would be working,
 but that would really require that you see the liquidity pool,
 that you could money into the liquidity pool,
 that allows you to exchange that,
 and then if you look up,
-the current exchange rate is in the liquidity pool.
+the **current exchange rate is in the liquidity pool**.
 Another lecture.
 The liquidity pool at DeFi is another lecture.
 Okay, so, yeah.
 That's it somehow.
+
 And now you can add also these kind of wallets
 here on your smartphone.
 So, I also have a metal mask here on my phone,
 and there I see somehow the same.
 Let's try another.
 I'm sorry, I don't have any left to get it from USDC to HMI,
-but you see it says here are $430,
+but you see it says here are 430 dollars,
 which are on this particular wallet.
 I can look it up.
 So, the same part is now also,
 I don't have just this particular wallet,
-I also have coinbase.
-You know, so the coinbase wallet,
+I also have **Coinbase**.
+You know, so the **Coinbase wallet**,
 which starts like that.
 And this coinbase wallet after some time,
 is then also showing this,
 and this is now putting it in euros,
 or it's 97 euros,
 which I've been told for on this particular wallet.
-The wallet itself is just a storage
-for your public and private keys, nothing else.
+The **wallet itself is just a storage for your public and private keys**, nothing else.
 That's it.
 And if I want to swap now,
 to another software,
@@ -866,25 +872,24 @@ because coinbase or metamask is just a different software,
 which I need to trust.
 I trust metamask that they are not leaking my keys,
 and also just coinbase that they are not leaking my keys.
-And the point is metamask is open source,
-it's a community driven software.
-Coinbase is coming from a company.
+And the point is **Metamask is open source, it's a community driven software**.
+**Coinbase is coming from a company**.
 So, it's the decision whom you trust, actually, for that.
-So, but how did I get,
-yeah, my information from metamask to coinbase,
-I just took the private key,
-while nobody was looking at me,
-I just copied it from one app to the other,
+
+So, but **how did I get my information from metamask to coinbase?**
+
+I just **took the private key**, while nobody was looking at me, I **just copied it from one app to the other**,
 and then the other app knew the private key,
 and then from then on,
-it can show me all the information.
+**it can show me all the information**.
+
 Something else that you should know is the following,
 and you go back here to our wallet,
 is that, currently, this is a wallet,
 and this wallet is secured by private key,
 and now it's sourced, the private key,
 and the public key of that.
-So, what I can do now is also to create another account.
+So, what I can do now is also to **create another account**.
 This is now account number two, yeah?
 And I can also change it,
 and then so this is now an extra two, okay?
@@ -901,8 +906,7 @@ So what I'm doing now is that,
 I say zero, no, it's not possible,
 you have not enough, because it's just easy,
 after all, take one, you see,
-I can just send tokens between different accounts
-within the same wallet.
+I **can just send tokens between different accounts within the same wallet**.
 So it's something like, I now created somehow
 the account at the bank,
 and the bank gave me the second account number.
@@ -911,11 +915,13 @@ So if I like, I can also create a third one.
 Here's my lecture, so I'll add you, and the third one.
 Thank you, and the fourth one, and the fifth one,
 as much as I like, yeah?
-So this lecture now have the private key, right?
+
+student: So this lecture now have the private key, right?
 And now with this private key,
 I get to do this wallet, yes.
 But the other two accounts have other private keys, right?
-No, that's why I want to show,
+
+prof: No, that's why I want to show,
 and I said yes, but it didn't work.
 I get into this wallet with the password
 that I've chosen at the beginning.
@@ -928,21 +934,19 @@ you can have a different password for Coinbase,
 because it's just an application, nothing else.
 The wallet has a private key now.
 And with this private key,
-I can create the various number of accounts,
-which are all derived from the private key.
+I can create the various number of **accounts, which are all derived from the private key**.
 The concrete algorithm is something,
 that's probably also something for an exercise
-that we somehow investigate out in this being done,
-because this is a deterministic algorithm.
+that we somehow investigate how this being done,
+because this is **a deterministic algorithm**.
 With my private key, I first created the lecture account.
 When I create a new one, I get another account,
 three, four, five, six, seven, eight, as much as I like.
-But they all depend on the same private key.
+But **they (the accounts) all depend on the same private key**.
 And what is happening now,
 and this happened when I went from MetaMask to Coinbase,
 and had the same question, I said,
-okay, now I have three different accounts
-in the MetaMask wallet, but I only have one private key.
+okay, now **I have three different accounts in the MetaMask wallet, but I only have one private key**.
 So I took the private key and moved it
 to the Coinbase account, and there was only one account.
 So hey, where's all the other accounts from?
@@ -957,15 +961,15 @@ But then when in Coinbase, I said, create a new account.
 It created, in the same deterministic way
 the other accounts, and suddenly,
 I saw all the other tokens.
-So the private key just determines the first account,
-and the other accounts are created in a deterministic way
-as much as possible.
-But they all have another address.
+So **the private key just determines the first account**,
+and **the other accounts are created in a deterministic way** as much as possible.
+
+But they all have another address?
+
 No.
-I was just gonna say you have one master private key,
+I was just gonna say **you have one master private key**,
 and from there it derives an entire tree of child private
-and then each account is a child private key
-that has its own public key,
+and then **each account is a child private key that has its own public key**,
 and then that public key is hashed with the address.
 So you have one master private key,
 which is different from each individual private key
@@ -979,9 +983,9 @@ So I don't have any tokens.
 I'm not talking at all, but I just have NFTs there.
 And you see, that's a token here,
 and which belongs to a particular contract,
-and I can check on the Porygon scan
+and I can check on the Polygonscan
 what kind of contract that is,
-this particular contract that even created,
+this particular contract that Ivan created,
 and then which we just saw some kind of NFTs.
 So you see, it's all, actually,
 these are just interfaces to the information
@@ -993,16 +997,16 @@ and you see that here on lecture one,
 I have all these different tokens here.
 And then I created the address for that one.
 There was no communication between my wallet
-and all the different notchanks.
+and all the different blockchains.
 So there was no kind of, hey, there is a new user,
 and this new user is now having this particular address
 or this particular password.
 Nothing happened.
 We just created this wallet locally on our computer,
 and it was the first transaction
-that even sent me the first money,
+that Ivan sent me the first money,
 and when you sent me the first currencies,
-then on Ethereum and on Zepolia,
+then on Ethereum and on Sepolia,
 now there is an entry in the blockchain
 which contains my address.
 So that's somehow my first appearance on the blockchain.
@@ -1023,7 +1027,7 @@ play around a little bit, was it?
 Yeah, and if you'd like,
 you can also send it to somebody.
 Fulia, both of them are just from this Fuli,
-this is on FuliGon, it's Matic,
+this is on Polygon, it's Matic,
 and the Matics are very, I mean, they are quite cheap.
 That's just something you can play around with.
 And then you can send money around.
@@ -1056,9 +1060,8 @@ So what they actually do is they keep somehow a database
 of everything in this particular address.
 So coinbase, in this respect, it's much more comfortable,
 but you rely on a company that's providing you the work.
-One question, when you move your wallet
-from MetaMask to Coinbase,
-what happens to the one in the MetaMask?
+
+student: One question, **when you move your wallet from MetaMask to Coinbase, what happens to the one in the MetaMask?**
 So still there.
 Okay, but when you also move there,
 then you meant that the accounts will be gone at first,
@@ -1067,8 +1070,9 @@ only then one can see the NFTs and the values there.
 But what is the use of it if someone has
 like two multiple accounts, multiple money's there,
 one has to manually add accounts there to get.
-It's just that you just need to do it
-because you only need to transfer your master private key,
+
+prof: It's just that you just need to do it
+because you only need to transfer your **master private key**,
 you are not transferring the other,
 you write about my private key,
 you only move that one from one wallet to the other,
@@ -1098,15 +1102,15 @@ Okay, so yeah, so much about this.
 It's just really important you have to keep this
 somehow secure.
 Yeah, I mean, the whole security about this
-is my passport for that.
-If I lose the passport for MetaMask,
-or if I tell you by accident the passport for MetaMask,
+is my password for that.
+If I lose the password for MetaMask,
+or if I tell you by accident the password for MetaMask,
 you can just open my MetaMask
 and then you can start the transaction.
 So an attack would be,
-you would just try to get my passport for MetaMask,
+you would just try to get my password for MetaMask,
 you open it, now it's even open.
-See, it's open, it's not asking for the passport,
+See, it's open, it's not asking for the password,
 you get there and you say,
 ah, this particular NFT, send it
 because this is worth a million,
@@ -1123,7 +1127,7 @@ I know Ivan's address and I know his address.
 This is a thing now to check how rich they are
 in order to check what is the,
 in order to check this particular address.
-I take Ivan's bouquet, but I take your address also.
+I take Ivan's budget, but I take your address also.
 Make it Tonya and Sepholen.
 It's this one here, yeah, it was from, yeah,
 that was yours then.
@@ -1132,10 +1136,8 @@ and all the transactions that you did.
 So that was 0.5 visa, visa that you sent me, yeah,
 and he was also playing around with someone's
 as much as this particular address.
-So I see this complete history on the blockchain
-because I know his address.
-And the clever thing then is to do,
-is really to use a lot of different accounts.
+So **I see this complete history on the blockchain because I know his address**.
+And the **clever thing then is to do, is really to use a lot of different accounts**.
 So for example, clever thing,
 and that you probably did it for him was first
 to take one of his one million E-Cloud IT loans,
@@ -1144,7 +1146,7 @@ and then from there sending it to me.
 Because what I could do now is to look up this transaction,
 then to look up where this transaction came from
 and then I see this address.
-So even it's probably even good to have different wallets.
+So **even it's probably even good to have different wallets**.
 Yeah, which are more independent from each other.
 But if you send money between this,
 you can always put that.
@@ -1153,14 +1155,13 @@ where a lot of people send money in
 and then it sends to a lot of accounts back out
 and then it's for native money.
 Just to make it look like it's legal.
-It's money laundering.
+It's **money laundering**.
 Because with today's location,
-you can't really determine
-where the money came from.
+you **can't really determine where the money came from**.
 The native cash is something like the following.
 We could put our box here in the middle
 and then you all put money in, 10 euros, 20 euros,
-and in exchange, you just get some kind of vouchers.
+and in exchange, you just get some kind of **vouchers**.
 Now you get vouchers out of that.
 And then I pay you with a voucher.
 And you use the voucher then to go to the box in the middle
@@ -1178,12 +1179,12 @@ and therefore to native cash is legal.
 I don't think so.
 And they also have an appointment,
 which is...
-What's the method called?
-What's the method that...
+
+student: What's the method called?
+
 The method is the smart contract
 that has been used in this particular transaction.
-So here we use the transfer.
-The transfer, here you use submit proposal, submit vote.
+So here we use the `transfer`, here you use `submitProposal`, `submitVote`.
 So he was doing different things
 with this particular account.
 So he was using different kind of smart contracts.
@@ -1199,10 +1200,12 @@ on this particular smart contract.
 And that was the method that he used.
 This has no, the method has no clear name,
 but it just has an address.
-So that's a smart contract.
-Yeah, it's a smart contract with this particular letter.
+
+student: So that's a smart contract...?
+
+Yeah, it's a smart contract with this particular method.
 Yeah, so you have a smart contract
-and that has a particular letter.
+and that has a particular method.
 You go back here, let's check it out.
 So you see that one here, the contract,
 that's the smart contract.
@@ -1213,13 +1216,19 @@ and you can see what kind of method it owns to read
 within the smart contract.
 You can see these are the read operations I can do
 on the smart contract and these are the write operations
-I can do with this.
-Thanks professor.
-We review what exactly Jim and
-we
-Yes, yes, that's right, yeah.
-Can you tell me a little bit about the money you were making?
-Money or? I don't know what money was actually doing.
+I can do with this smart contract.
+
+student: Thanks professor.
+
+prof: Later on we preview what exactly...
+
+student2: ...
+
+prof: Yes, yes, that's right, yeah.
+
+student2: ... Can you tell me a little bit about the money you were making? ...
+
+prof: Money or? I don't know what money was actually doing.
 The first thing was that you said, well, I made this comparison with a bank account.
 If you did something really wrong on a bank account, you can call the bank and tell them, hey, I did something wrong.
 Can you please reverse it? It's not that easy.
@@ -1232,31 +1241,41 @@ That's the reason why, you saw, I was double checking, is that really your accou
 Is that really your account?
 Mistaking something there and the money is gone.
 It's just on an address and somebody feels happy about it, but you re-attempt it.
-So this is the contract of the NFT?
+
+student: So this is the contract of the NFT?
 Yes, the NFT will be here or this is actually the NFT.
-That's the contract of the NFT and another NFT can use it as well.
-It's the contract, it's a smart contract that is owned by us, in particular by Eva,
+
+prof: That's the contract of the NFT...
+
+student: and another NFT can use it as well?
+
+prof: It's the contract, it's a smart contract that is owned by us, in particular by Ivan,
 because he put it on the blockchain, so he's the owner of that one,
 so it's associated with his particular address and he is able to access all of these functions.
-Some functions can be accessed by everybody, so I can say balance off,
-so I can ask for a smart contract, balance off, and I can say purely.
+Some functions can be accessed by everybody, so I can say `balance_of`,
+so I can ask for a smart contract, `balance_of`, and I can say purely.
 You can put your address.
-Ah, it's the balance off, it's the balance off a particular user.
+Ah, it's the `balance_of`, it's the balance off a particular user.
 What can I do?
-I own a rough, total supply.
-So I can ask this smart contract, total supply, which means tell me how many NFTs you own,
+I own a rough, `total_supply`.
+So I can ask this smart contract, `total_supply`, which means tell me how many NFTs you own,
 and then it tells me 244.
 So this smart contract is counter-starring 244 NFTs.
 We have all the NFTs around, and some of the NFTs are owned by me,
-some of the NFTs are owned by Eva and by other people and things like that.
+some of the NFTs are owned by Ivan and by other people and things like that.
 So when we talk about NFTs, we can create some NFTs,
 and then normally we create it with this account, that's why it has 244.
 So we use it as our own master for that.
 So in order to do that, it's something you could copy the smart contract,
 deploy it for yourself, and then you have an NFTs.
-You can do 256, is it just one and it's 56?
-No, it's more than two.
-But this is something we have to be careful about.
+
+student: ...
+
+prof: You can do 256, is it just 256?
+
+multiple students: No, it's more than two.
+
+prof: But this is something we have to be careful about.
 So in blockchain, I mean Ivan will tell you about this when you discuss the smart contract,
 in blockchain you are very careful about data, and about the amount of data.
 When you can use a small int, use a small int, because it all costs money.
