@@ -1483,7 +1483,7 @@ If you want, I can also explain **why Ethereum burns most of the slashed ETH ins
 
 ### ChatGPT: Follow-up: "Yes"
 
-Good question—this is where the **game theory** behind **Ethereum Proof-of-Stake gets interesting.
+Good question—this is where the **game theory** behind Ethereum Proof-of-Stake gets interesting.
 
 #### Why Ethereum doesn’t give the slashed ETH to other validators
 
@@ -1599,6 +1599,7 @@ First, we probably would like to check him.
 Is he trusted or not?
 So this is very much **for not open networks**.
 It's for a network that we operate as a test for our supply chain or something else.
+
 **The more we come down here, the more open we can be.**
 Here the miners can really come from, North Korea or Russia or whatever.
 With **proof of work** it works.
@@ -1606,7 +1607,7 @@ But further we come down here, it's not working.
 
 On the other hand, here we have **good performance**.
 It's just he is doing the mining and running like hell.
-Here we have proof of work, which takes time.
+Here we have **proof of work, which takes time**.
 
 That's what it's really, kind of, **a design decision** that we need to make.
 
