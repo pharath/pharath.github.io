@@ -286,15 +286,16 @@ about blockchain and bitcoin in general.
     - So foundations is more IT stuff, and then use cases before we discuss some more application stuff,
   - some kind of **blockchain implementations**,
     - because there is not "the" blockchain, there are a lot of different blockchains.
-  - And very interesting at the moment are **second level chains**,
-    - so chains that are built upon other chains. So we have a hierarchy of blockchains in the meantime, which makes it extremely scalable, cheap to use, often saying, well, blockchain doesn't cost anymore anything.
+  - And very interesting at the moment are <span style="color:red">**second level chains**</span>,
+    - so **chains that are built upon other chains**. So we have a hierarchy of blockchains in the meantime, which makes it extremely **scalable**, cheap to use, often saying, well, **"blockchain doesn't cost anymore anything"**.
   - We talk about **Web3 applications**
   - and also the **economy of things**.
-    - And when we talk about the economy of things, we talk about **weather stations**, we talk about **LoRaWAN (a network protocol, long range wide-area networking) stations** and just the approach to earn money by just operating a weather station. And this is going back, you said, really spreading the benefit of something equally. And this comes back to that. That you own something, you own a device, and this device is producing data and you are being paid by sharing this data with other people. And that delivers tokens to you, which are extra kind of data.
+    - And when we talk about the economy of things, we talk about **weather stations**, we talk about <span style="color:red">**LoRaWAN (a network protocol, long range wide-area networking) stations**</span> and just the approach to **earn money by just operating a weather station**.
+    - And this is going back, you said, really **"spreading the benefit of something equally"**. And this comes back to that. That you own something, you own a device, and this device is producing data and you are being paid by sharing this data with other people. And that delivers tokens to you, which are extra kind of data.
 
 ## POAPs
 
-- Okay, so now you can get your first **token**. This is something which is a so-called **POAP**, POAP stands for **"proof of attendance protocol"**. Proof of attendance protocol means that you can **prove that you have been here**.
+- Okay, so now you can get your first **token**. This is something which is a so-called <span style="color:red">**POAP**</span>, POAP stands for <span style="color:red">**"proof of attendance protocol"**</span>. Proof of attendance protocol means that you can **prove that you have been here**.
 
 ...
 
