@@ -1,5 +1,5 @@
 ---
-title: "Web3 and Distributed Ledger Technology - Blockchain Basics"
+title: "Web3 and Distributed Ledger Technology - Blockchain Basics (Part 1)"
 read_time: false
 excerpt: "For studying \"Web3 and Distributed Ledger Technology\"; content mostly from \"RWTH lecture Web3 and Distributed Ledger Technology\" by Wolfgang Prinz."
 toc: true
