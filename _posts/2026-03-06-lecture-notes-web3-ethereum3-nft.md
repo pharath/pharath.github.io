@@ -1648,7 +1648,7 @@ So all together 0.03 dollars to do this.
 
 ---
 
-Wikipedia: "Polygon (blockchain)"
+#### Wikipedia: "Polygon (blockchain)"
 
 **Polygon** (formerly **Matic Network**) is a blockchain platform which aims to create a multi-chain blockchain system compatible with Ethereum. As with Ethereum, it uses a proof-of-stake consensus mechanism for processing transactions on-chain. Polygon's native token is **POL**, an ERC-20 token which allows for compatibility with other Ethereum cryptocurrencies. It is operated by **Polygon Labs**.
 
